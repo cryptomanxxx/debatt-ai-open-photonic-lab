@@ -1,0 +1,36 @@
+name: OPA Meep FDTD smoke v001
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/meep-smoke.yml"
+      - "simulations/meep/**"
+  pull_request:
+    paths:
+      - ".github/workflows/meep-smoke.yml"
+      - "simulations/meep/**"
+
+permissions:
+  contents: read
+
+jobs:
+  meep-fdtd:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Meep
+        run: python -m pip install pymeep
+      - name: Run OPA-FDTD-001
+        run: python simulations/meep/smoke_test_v001.py
+      - name: Save results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opa-meep-smoke-v001
+          path: results/meep-smoke-v001/
+          if-no-files-found: warn

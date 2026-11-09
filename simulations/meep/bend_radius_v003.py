@@ -58,9 +58,15 @@ def simulation(radius=None):
         resolution=RESOLUTION,
         boundary_layers=[mp.PML(1.0)],
         geometry=geometry,
-        sources=[mp.Source(mp.GaussianSource(FREQ, fwidth=BANDWIDTH),
-                           component=mp.Ez, center=SOURCE,
-                           size=mp.Vector3(WIDTH, 0))],
+        sources=[mp.EigenModeSource(
+            src=mp.GaussianSource(FREQ, fwidth=BANDWIDTH),
+            center=SOURCE,
+            size=mp.Vector3(2.0, 0),
+            direction=mp.Y,
+            eig_band=1,
+            eig_parity=mp.ODD_Z,
+            eig_match_freq=True,
+        )],
     )
 
 

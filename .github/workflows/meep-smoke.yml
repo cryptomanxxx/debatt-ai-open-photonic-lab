@@ -28,13 +28,13 @@ jobs:
         with:
           environment-name: opa-fdtd
           create-args: >-
-            -c conda-forge
-            python=3.11
-            pymeep
-      - name: Export exact resolved package URLs for lockfile
-        run: micromamba list -n opa-fdtd --explicit
-      - name: Run OPA-FDTD-001
+            --file simulations/meep/opa-fdtd-linux-64.lock.txt
+       - name: Run OPA-FDTD-001
         run: python simulations/meep/smoke_test_v001.py
+      - name: Save exact environment provenance
+        run: |
+          cp simulations/meep/opa-fdtd-linux-64.lock.txt results/meep-smoke-v001/environment-lock.txt
+          micromamba list -n opa-fdtd --json > results/meep-smoke-v001/installed-packages.json
       - name: Save results
         if: always()
         uses: actions/upload-artifact@v4

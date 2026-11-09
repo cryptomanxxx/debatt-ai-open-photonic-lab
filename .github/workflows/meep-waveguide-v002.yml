@@ -8,7 +8,7 @@ on:
       - "simulations/meep/**"
   pull_request:
     paths:
-      - ".github/workflows/meep-smoke.yml"
+      - ".github/workflows/meep-waveguide-v002.yml"
       - "simulations/meep/**"
 
 permissions:
@@ -29,12 +29,13 @@ jobs:
           environment-name: opa-fdtd
           create-args: >-
             --file simulations/meep/opa-fdtd-linux-64.lock.txt
-      - name: Run OPA-FDTD-002
-        run: python simulations/meep/waveguide_scattering_v002.py
       - name: Save exact environment provenance
         run: |
+          mkdir -p results/opa-fdtd-002
           cp simulations/meep/opa-fdtd-linux-64.lock.txt results/opa-fdtd-002/environment-lock.txt
           micromamba list -n opa-fdtd --json > results/opa-fdtd-002/installed-packages.json
+      - name: Run OPA-FDTD-002
+        run: python simulations/meep/waveguide_scattering_v002.py
       - name: Save results
         if: always()
         uses: actions/upload-artifact@v4

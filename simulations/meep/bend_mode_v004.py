@@ -84,19 +84,23 @@ def run_reference(duration):
     sim.run(until=duration)
     forward, backward = modal_powers(sim, input_monitor)
     aperture = float(mp.get_fluxes(input_monitor)[0])
+    reference_fields = sim.get_flux_data(input_monitor)
     sim.reset_meep()
     if not math.isfinite(forward) or forward <= 0:
         raise ValueError("Invalid forward input modal reference")
     return {"guided_forward": forward, "guided_backward": backward,
-            "aperture_flux": aperture}
+            "aperture_flux": aperture}, reference_fields
 
 
-def run_bend(radius, duration, reference):
+def run_bend(radius, duration, reference, reference_fields):
     sim = simulation(radius)
     input_monitor = sim.add_flux(FREQ, 0, 1, IN_REGION)
+    reflection_monitor = sim.add_flux(FREQ, 0, 1, IN_REGION)
     output_monitor = sim.add_flux(FREQ, 0, 1, OUT_REGION)
+    sim.load_minus_flux_data(reflection_monitor, reference_fields)
     sim.run(until=duration)
-    incident_mode, reflected_mode = modal_powers(sim, input_monitor)
+    incident_mode, raw_backward_mode = modal_powers(sim, input_monitor)
+    _, reflected_mode = modal_powers(sim, reflection_monitor)
     transmitted_mode, output_backward_mode = modal_powers(sim, output_monitor)
     output_aperture = float(mp.get_fluxes(output_monitor)[0])
     sim.reset_meep()
@@ -104,6 +108,7 @@ def run_bend(radius, duration, reference):
     metrics = {
         "input_forward_guided_ratio": incident_mode / den,
         "input_backward_guided_ratio": reflected_mode / den,
+        "input_backward_total_fields_ratio": raw_backward_mode / den,
         "output_forward_guided_ratio": transmitted_mode / den,
         "output_backward_guided_ratio": output_backward_mode / den,
         "output_aperture_flux_ratio": output_aperture / den,
@@ -115,19 +120,24 @@ def run_bend(radius, duration, reference):
         "duration_meep_units": duration,
         "modal_reference_power": den,
         "modal_ratios": metrics,
-        "guided_power_unaccounted_fraction": 1.0 -
+        "reference_based_guided_remainder": 1.0 -
             metrics["input_backward_guided_ratio"] -
             metrics["output_forward_guided_ratio"],
+        "net_directional_guided_balance":
+            metrics["input_forward_guided_ratio"] -
+            metrics["input_backward_guided_ratio"] -
+            metrics["output_forward_guided_ratio"] +
+            metrics["output_backward_guided_ratio"],
     }
 
 
 references = {}
 results = {}
 for duration in DURATIONS:
-    reference = run_reference(duration)
+    reference, reference_fields = run_reference(duration)
     references[str(duration)] = reference
     results[str(duration)] = {
-        str(radius): run_bend(radius, duration, reference)
+        str(radius): run_bend(radius, duration, reference, reference_fields)
         for radius in RADII
     }
 
@@ -159,7 +169,8 @@ report = {
     "temporal_convergence_absolute_change": changes,
     "limitations": [
         "Power ratios refer to one guided mode, not total optical transmission",
-        "Unaccounted guided power mixes radiation, other modes, boundary losses and numeric error; it is not independently measured radiation",
+        "Reference-based guided remainder and net directional guided balance are algebraic diagnostics, not independently measured radiation",
+        "Input reflection uses complex reference-field subtraction before modal decomposition; total-field backward power retained as a diagnostic",
         "Only temporal convergence tested; spatial resolution and PML sensitivity untested",
         "Illustrative 2D scalar-like model, not validated LNOI bend-loss prediction",
     ],

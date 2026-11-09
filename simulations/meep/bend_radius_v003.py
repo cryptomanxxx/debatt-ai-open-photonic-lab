@@ -26,13 +26,13 @@ OUT_REGION = mp.FluxRegion(center=mp.Vector3(2.6, 0), size=mp.Vector3(0, 2), dir
 
 
 def curved_polygon(radius):
-    """Polygonal constant-width centerline with vertical and horizontal leads."""
-    centerline = [(0.0, -3.3), (0.0, -radius)]
+    """Polygonal constant-width centerline; both leads extend through the PML."""
+    centerline = [(0.0, -4.6), (0.0, -radius)]
     for step in range(1, 33):
         theta = math.pi - (math.pi / 2) * step / 32
         centerline.append((radius + radius * math.cos(theta),
                            -radius + radius * math.sin(theta)))
-    centerline.append((3.3, 0.0))
+    centerline.append((4.6, 0.0))
     left, right = [], []
     for i, (x, y) in enumerate(centerline):
         ax, ay = centerline[max(0, i - 1)]

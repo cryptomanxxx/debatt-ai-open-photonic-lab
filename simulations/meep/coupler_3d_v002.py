@@ -96,7 +96,12 @@ def run_case(length, res):
     m_thru = sim.add_mode_monitor(f, 0, 1, region(x1 - xc + 0.8, y_top))
     m_cross = sim.add_mode_monitor(f, 0, 1, region(x1 - xc + 0.8, y_bot))
     start = time.time()
-    sim.run(until_after_sources=mp.stop_when_dft_decayed(1e-5, 20, 500))
+    # The DFT-decay test alone can stop before the pulse reaches the outputs (their
+    # fields are still zero, which looks "decayed"); a first 24 px/um run of the
+    # 42 um cell stopped at t = 130. Require at least ~1.2 transit times first
+    # (group index ~4.2, so 5 time units per um of cell length).
+    sim.run(until_after_sources=mp.stop_when_dft_decayed(
+        1e-5, minimum_run_time=5 * cell.x, maximum_run_time=800))
 
     def forward(monitor):
         return float(abs(sim.get_eigenmode_coefficients(
@@ -113,6 +118,10 @@ def run_case(length, res):
         "peak_rss_mb": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024,
         "meep_version": str(getattr(mp, "__version__", "unknown")),
     }
+    if result["through"] + result["cross"] < 0.9:
+        raise SystemExit(f"Case L={length:g} res={res}: only "
+                         f"{result['through'] + result['cross']:.3f} of the input reached "
+                         f"the outputs; the run is incomplete or broken")
     OUT.mkdir(parents=True, exist_ok=True)
     case_path(length, res).write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2))

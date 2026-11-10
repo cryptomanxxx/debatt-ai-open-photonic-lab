@@ -9,7 +9,10 @@ on:
       - "layout/mzi_2x2_ubc_v00*.py"
       - "layout/requirements-lock-ubc.txt"
       - "layout/requirements-drc.txt"
+      - "layout/requirements-verify.txt"
+      - "layout/port_check.py"
       - "tools/siepic_drc.py"
+      - "tools/siepic_verify.py"
   pull_request:
     paths:
       - ".github/workflows/layout-ubc.yml"
@@ -20,6 +23,11 @@ on:
       - "results/opa-layout-003/**"
       - "tools/siepic_drc.py"
       - "tools/test_siepic_drc.py"
+      - "layout/requirements-verify.txt"
+      - "layout/port_check.py"
+      - "layout/test_port_check.py"
+      - "tools/siepic_verify.py"
+      - "tools/test_siepic_verify.py"
 
 permissions:
   contents: read
@@ -55,15 +63,28 @@ jobs:
           QT_QPA_PLATFORM=offscreen klayout -v
       - name: DRC tool finds known violations
         run: python tools/test_siepic_drc.py
+      - name: Port check finds broken optical connections
+        env:
+          MPLBACKEND: Agg
+        run: python layout/test_port_check.py
       - name: Generate layout and run checks
         env:
           MPLBACKEND: Agg
         run: python ${{ matrix.script }}
-      - name: Committed GDS and datasheet match the generated ones
+      - name: SiEPIC functional verification (separate locked environment)
         env:
           GDS: ${{ matrix.gds }}
           ID: ${{ matrix.id }}
-        run: git diff --exit-code -- "$GDS" "results/$ID/design.json"
+        run: |
+          python -m venv "$RUNNER_TEMP/verify"
+          "$RUNNER_TEMP/verify/bin/pip" install -q -r layout/requirements-verify.txt
+          "$RUNNER_TEMP/verify/bin/python" tools/test_siepic_verify.py
+          "$RUNNER_TEMP/verify/bin/python" tools/siepic_verify.py "$GDS" --json "results/$ID/siepic_verification.json"
+      - name: Committed GDS, datasheet and verification report match the generated ones
+        env:
+          GDS: ${{ matrix.gds }}
+          ID: ${{ matrix.id }}
+        run: git diff --exit-code -- "$GDS" "results/$ID/design.json" "results/$ID/siepic_verification.json"
       - name: Upload layout
         if: always()
         uses: actions/upload-artifact@v4

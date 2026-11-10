@@ -35,8 +35,8 @@
     "environment": "layout/requirements-lock-ubc.txt"
   },
   "checks": {
-    "passed": 8,
-    "total": 8
+    "passed": 9,
+    "total": 9
   },
   "key_results": [
     {
@@ -63,10 +63,15 @@
       "name": "SiEPIC EBeam DRC",
       "value": "0 violations of 13 rules (KLayout 0.28.16)",
       "source": "tools/siepic_drc.py"
+    },
+    {
+      "name": "Optical connectivity",
+      "value": "104 instance ports, all connected",
+      "source": "layout/port_check.py"
     }
   ],
   "limitations": [
-    "SiEPIC functional verification not run",
+    "SiEPIC connectivity check covers no nets (gdsfactory waveguides have no SiEPIC pins)",
     "broadband coupler not verified",
     "theta only (no phi, a, b)",
     "not submitted"

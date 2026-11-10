@@ -1,0 +1,31 @@
+{
+  "siepic": "0.5.31",
+  "pdk": "siepic_ebeam_pdk 0.4.53",
+  "components": 56,
+  "pins": 16,
+  "nets": 0,
+  "connectivity_covered": false,
+  "errors": 0,
+  "errors_by_category": {},
+  "rules": [
+    "Component.No components found",
+    "Component.Shapes outside component",
+    "Component.Flattened component",
+    "Component.Overlapping component",
+    "Component.Invalid Pin",
+    "Waveguide.Path",
+    "Waveguide.Radius",
+    "Waveguide.Bend points",
+    "Waveguide.Manhattan",
+    "Connectivity.Disconnected pin",
+    "Connectivity.Mismatched pin",
+    "Design for test.opt_in label: same",
+    "Design for test.opt_in label: missing",
+    "Design for test.opt_in label: too far away",
+    "Design for test.opt_in label: wavelength",
+    "Design for test.opt_in label: polarization",
+    "Design for test.Grating coupler orientation",
+    "Design for test.Fibre array configuration",
+    "Design for test.Grating coupler: minimum spacing"
+  ]
+}

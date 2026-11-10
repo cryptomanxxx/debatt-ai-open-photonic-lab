@@ -7,8 +7,8 @@ Every chip layout in the lab, generated from the `design.json` datasheet that ea
 | Preview | Design | Function | PDK | λ (µm) | Footprint (µm) | Ports | Controls | Status | Checks |
 |---------|--------|----------|-----|--------|----------------|-------|----------|--------|--------|
 | [<img src="../results/opa-layout-001/programmable_mzi_2x2.png" width="220">](../results/opa-layout-001/programmable_mzi_2x2.png) | **[OPA-LAYOUT-001](../results/opa-layout-001/)**<br>Programmable 2x2 MZI with balanced dummy heaters | programmable 2x2 MZI (any 2x2 unitary with phi, theta, a, b) | gdsfactory generic PDK | 1.55 (1.54–1.56) | 537.8 × 71 | 2 in / 2 out | 4 heaters, 2 dummy heaters | exploratory | 10/10 |
-| [<img src="../results/opa-layout-002/mzi_2x2_siepic.png" width="220">](../results/opa-layout-002/mzi_2x2_siepic.png) | **[OPA-LAYOUT-002](../results/opa-layout-002/)**<br>2x2 MZI with broadband couplers, fiber array and pads (SiEPIC EBeam) | tunable 2x2 MZI switch / splitter (theta only) | SiEPIC EBeam (ubcpdk) | 1.55 | 277.969 × 432.5 | 2 in / 2 out | 1 heaters, 2 bond pads | drc-clean | 8/8 |
-| [<img src="../results/opa-layout-003/mzi_2x2_siepic_full.png" width="220">](../results/opa-layout-003/mzi_2x2_siepic_full.png) | **[OPA-LAYOUT-003](../results/opa-layout-003/)**<br>Fully programmable 2x2 MZI with fiber array and eight pads (SiEPIC EBeam) | programmable 2x2 MZI (theta, phi, a, b: any 2x2 unitary) | SiEPIC EBeam (ubcpdk) | 1.55 | 483.519 × 1058.3 | 2 in / 2 out | 4 heaters, 8 bond pads | drc-clean | 11/11 |
+| [<img src="../results/opa-layout-002/mzi_2x2_siepic.png" width="220">](../results/opa-layout-002/mzi_2x2_siepic.png) | **[OPA-LAYOUT-002](../results/opa-layout-002/)**<br>2x2 MZI with broadband couplers, fiber array and pads (SiEPIC EBeam) | tunable 2x2 MZI switch / splitter (theta only) | SiEPIC EBeam (ubcpdk) | 1.55 | 277.969 × 432.5 | 2 in / 2 out | 1 heaters, 2 bond pads | drc-clean | 9/9 |
+| [<img src="../results/opa-layout-003/mzi_2x2_siepic_full.png" width="220">](../results/opa-layout-003/mzi_2x2_siepic_full.png) | **[OPA-LAYOUT-003](../results/opa-layout-003/)**<br>Fully programmable 2x2 MZI with fiber array and eight pads (SiEPIC EBeam) | programmable 2x2 MZI (theta, phi, a, b: any 2x2 unitary) | SiEPIC EBeam (ubcpdk) | 1.55 | 483.519 × 1058.3 | 2 in / 2 out | 4 heaters, 8 bond pads | drc-clean | 12/12 |
 
 ## Key results
 
@@ -33,8 +33,9 @@ Tags: `mzi`, `2x2`, `phase-shifter`, `broadband-coupler`, `grating-coupler`, `bo
 - **Arm balance:** arms 270.548 / 270.548 um (OPA-LAYOUT-002)
 - **Grating coupler:** PDK placeholder model: 6 dB, 35 nm bandwidth (not measured) (ubcpdk.models.gc_te1550)
 - **SiEPIC EBeam DRC:** 0 violations of 13 rules (KLayout 0.28.16) (tools/siepic_drc.py)
+- **Optical connectivity:** 104 instance ports, all connected (layout/port_check.py)
 
-Limitations: SiEPIC functional verification not run; broadband coupler not verified; theta only (no phi, a, b); not submitted
+Limitations: SiEPIC connectivity check covers no nets (gdsfactory waveguides have no SiEPIC pins); broadband coupler not verified; theta only (no phi, a, b); not submitted
 
 ### OPA-LAYOUT-003: Fully programmable 2x2 MZI with fiber array and eight pads (SiEPIC EBeam)
 
@@ -44,5 +45,6 @@ Tags: `mzi`, `2x2`, `programmable`, `phase-shifter`, `broadband-coupler`, `grati
 - **Electrical:** 8 independent pads, each wired to one heater terminal; no shorts (OPA-LAYOUT-003 heater_isolation)
 - **Fiber I/O:** 4 TE grating couplers at 127 um pitch (OPA-LAYOUT-003)
 - **SiEPIC EBeam DRC:** 0 violations of 13 rules (KLayout 0.28.16) (tools/siepic_drc.py)
+- **Optical connectivity:** 132 instance ports, all connected (layout/port_check.py)
 
-Limitations: thermal crosstalk not modelled; SiEPIC functional verification not run; broadband coupler not verified; not submitted
+Limitations: thermal crosstalk not modelled; SiEPIC connectivity check covers no nets (gdsfactory waveguides have no SiEPIC pins); broadband coupler not verified; not submitted

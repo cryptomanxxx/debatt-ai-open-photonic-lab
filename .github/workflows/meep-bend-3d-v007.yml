@@ -1,0 +1,42 @@
+name: OPA Meep 3D bend v007
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/meep-bend-3d-v007.yml"
+      - "simulations/meep/bend_3d_v007.py"
+      - "simulations/meep/opa-fdtd-linux-64.lock.txt"
+
+permissions:
+  contents: read
+
+jobs:
+  bend-3d:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: micromamba-shell {0}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install locked Meep
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-name: opa-fdtd
+          create-args: >-
+            --file simulations/meep/opa-fdtd-linux-64.lock.txt
+      - name: Save environment provenance
+        run: |
+          mkdir -p results/opa-fdtd-007
+          cp simulations/meep/opa-fdtd-linux-64.lock.txt results/opa-fdtd-007/environment-lock.txt
+          micromamba list -n opa-fdtd --json > results/opa-fdtd-007/installed-packages.json
+      - name: Run 3D bend comparison
+        run: python simulations/meep/bend_3d_v007.py
+      - name: Upload experimental results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opa-meep-bend-3d-v007
+          path: results/opa-fdtd-007/
+          if-no-files-found: warn

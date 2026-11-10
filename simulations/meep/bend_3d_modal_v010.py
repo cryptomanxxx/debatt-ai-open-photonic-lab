@@ -85,7 +85,7 @@ def run_case(radius):
     sim.run(until=RUN_UNTIL)
     incident = float(mp.get_fluxes(incident_monitor)[0])
     outgoing = float(mp.get_fluxes(output_monitor)[0])
-    bands = [1, 2, 3, 4]
+    bands = [1]
     input_coefficients = sim.get_eigenmode_coefficients(
         incident_monitor, bands, eig_parity=mp.ODD_Z
     ).alpha[:, 0, :]
@@ -159,7 +159,7 @@ report = {
     "modal_normalization_valid": normalization_valid,
     "bend_cases": cases,
     "limitations": [
-        "Finite-size Ez source excites an unknown mix within the odd-Z sector; bands 1-4 are diagnostic candidates only",
+        "Finite-size Ez source excites an unknown mix within the odd-Z sector; band 1 is a diagnostic candidate only",
         "Aperture flux includes radiation; selected band is not independently classified as guided",
         "Reference input flux does not correct source back-action in bends",
         "Previous temporal/spatial tests covered aperture flux only, not modal power convergence",
@@ -170,4 +170,4 @@ report = {
 print(json.dumps(report, indent=2))
 
 if not normalization_valid:
-    print("WARNING: no sufficiently populated incident band among 1-4; modal transmission ratios intentionally omitted")
+    print("WARNING: no sufficiently populated incident band in the selected odd-Z band; modal transmission ratios intentionally omitted")

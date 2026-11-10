@@ -1,11 +1,11 @@
-name: OPA Meep 3D bend guided-mode v010
+name: OPA Meep 3D bend launched-mode v011
 
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - ".github/workflows/meep-bend-modal-v010.yml"
-      - "simulations/meep/bend_3d_modal_v010.py"
+      - ".github/workflows/meep-bend-launched-mode-v011.yml"
+      - "simulations/meep/bend_3d_launched_mode_v011.py"
       - "simulations/meep/opa_common.py"
       - "simulations/meep/opa-fdtd-linux-64.lock.txt"
 
@@ -29,15 +29,15 @@ jobs:
             --file simulations/meep/opa-fdtd-linux-64.lock.txt
       - name: Archive environment provenance
         run: |
-          mkdir -p results/opa-fdtd-010
-          cp simulations/meep/opa-fdtd-linux-64.lock.txt results/opa-fdtd-010/environment-lock.txt
-          micromamba list -n opa-fdtd --json > results/opa-fdtd-010/installed-packages.json
+          mkdir -p results/opa-fdtd-011
+          cp simulations/meep/opa-fdtd-linux-64.lock.txt results/opa-fdtd-011/environment-lock.txt
+          micromamba list -n opa-fdtd --json > results/opa-fdtd-011/installed-packages.json
       - name: Run guided-mode bend experiment
-        run: python simulations/meep/bend_3d_modal_v010.py
+        run: python simulations/meep/bend_3d_launched_mode_v011.py
       - name: Upload measurement results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: opa-meep-bend-modal-v010
-          path: results/opa-fdtd-010/
+          name: opa-meep-bend-launched-mode-v011
+          path: results/opa-fdtd-011/
           if-no-files-found: warn

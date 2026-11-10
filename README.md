@@ -38,7 +38,7 @@ reproducible so that anyone can learn from it and build on it.
 | Phase | Goal | Status |
 |-------|------|--------|
 | 1 | FDTD fundamentals: reproducible Meep pipeline, convergence and normalization practice | **Done** (001–009) |
-| 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010) |
+| 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010–011) |
 | 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | Planned |
 | 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | Planned |
 | 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | Planned |
@@ -67,9 +67,10 @@ default), so key numbers are also recorded below.
 | 007 | First 3D dielectric waveguide bend comparison (aperture flux) |
 | 008 | Temporal convergence of the 3D bend simulations |
 | 009 | Grid-resolution sensitivity of the 3D bend simulations |
-| 010 | 3D **guided-mode** bend transmission with eigenmode source and decomposition |
+| 010 | 3D modal decomposition (odd-Z band 1) of bend ports, still with a finite-size Ez source |
+| 011 | 3D **guided-mode** bend transmission: launched TE-like eigenmode, decomposed at both ports, validated by a straight reference |
 
-### OPA-FDTD-010 results
+### OPA-FDTD-011 results
 
 Fundamental TE-like mode, index-1.8 core (0.8 × 0.4) in air, vacuum
 wavelength 1.25 (Meep units), 90° bend:
@@ -84,7 +85,7 @@ What this shows:
 
 - The straight waveguide transmits 99.98 % in the guided mode, which
   validates the measurement method.
-- The aperture flux used in 007–009 **overestimates** guided transmission,
+- The aperture flux used in 007–010 **overestimates** guided transmission,
   by about 50 % (relative) at radius 1.0, because it also counts radiated light that
   passes through the output aperture.
 - The low index contrast (1.8 vs 1.0) makes tight bends very lossy. Real
@@ -92,8 +93,9 @@ What this shows:
 - Changing the resolution from 12 to 16 changes transmission by less than 0.02,
   but two resolutions do not prove convergence.
 
-Numbers come from a local run with the same locked environment; the CI
-artifact `opa-meep-bend-modal-v010` contains the same report.
+Numbers come from a local run with the same locked environment; the full report is
+[`results/opa-fdtd-011/result.json`](results/opa-fdtd-011/result.json), and the CI
+artifact `opa-meep-bend-launched-mode-v011` contains the same report.
 
 ## Running locally
 
@@ -101,7 +103,7 @@ artifact `opa-meep-bend-modal-v010` contains the same report.
 # Requires micromamba (or conda/mamba) on linux-64
 micromamba create -n opa-fdtd --file simulations/meep/opa-fdtd-linux-64.lock.txt
 micromamba activate opa-fdtd
-python simulations/meep/bend_3d_modal_v010.py   # writes results/opa-fdtd-010/result.json
+python simulations/meep/bend_3d_launched_mode_v011.py   # writes results/opa-fdtd-011/result.json
 ```
 
 New experiments should import shared geometry and measurement helpers from

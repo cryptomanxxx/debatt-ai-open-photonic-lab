@@ -1,5 +1,5 @@
 {
-  "experiment": "OPA-FDTD-010",
+  "experiment": "OPA-FDTD-011",
   "goal": "Guided-mode (TE-like band 1) transmission of 3D 90-degree bends",
   "meep_version": "1.35.1",
   "parameters": {

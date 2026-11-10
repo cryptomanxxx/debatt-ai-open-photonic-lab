@@ -58,5 +58,39 @@ class PortCheckTest(unittest.TestCase):
         self.assertEqual(len(problems), 2, problems)
 
 
+    def test_identical_cells_meeting_on_same_port_name(self):
+        c = gf.Component("pc_same_name")
+        a = c << gf.components.straight(length=10, cross_section=XS)
+        b = c << gf.components.straight(length=10, cross_section=XS)
+        b.connect("o2", a.ports["o2"])          # o2 meets o2, b turned around
+        c.add_port("o1", port=a.ports["o1"])
+        c.add_port("o2", port=b.ports["o1"])
+        checked, problems = optical_port_check(c)
+        self.assertEqual(checked, 4)
+        self.assertEqual(problems, [])
+
+    def test_duplicate_coincident_instances(self):
+        c = gf.Component("pc_duplicate")
+        a = c << gf.components.straight(length=10, cross_section=XS)
+        c << gf.components.straight(length=10, cross_section=XS)
+        c.add_port("o1", port=a.ports["o1"])
+        c.add_port("o2", port=a.ports["o2"])
+        _, problems = optical_port_check(c)
+        self.assertTrue(problems)
+
+    def test_export_moved_off_the_junction(self):
+        child = gf.Component("pc_child_tap")
+        a = child << gf.components.straight(length=10, cross_section=XS)
+        b = child << gf.components.straight(length=10, cross_section=XS)
+        b.connect("o1", a.ports["o2"])
+        child.add_port("o1", port=a.ports["o1"])
+        child.add_port("o2", port=b.ports["o2"])
+        tap = a.ports["o2"].copy()
+        tap.dcenter = (tap.dcenter[0] + 0.001, tap.dcenter[1])
+        child.add_port("tap", port=tap)
+        _, problems = optical_port_check(child)
+        self.assertTrue(any("not backed" in p for p in problems), problems)
+
+
 if __name__ == "__main__":
     unittest.main()

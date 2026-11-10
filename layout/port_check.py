@@ -23,28 +23,44 @@ def optical_port_check(top, port_types=("optical",)):
     cells = [top] + [top.kcl[ci] for ci in top.called_cells()]
     for cell in cells:
         inst_ports = collections.defaultdict(list)
-        cell_ports = collections.defaultdict(list)
-        for inst in cell.insts:
+        cell_ports = []
+        # each instance port gets a unique key (instance index, port name); the label
+        # with the cell name is only for messages
+        for k, inst in enumerate(cell.insts):
             for p in inst.ports:
                 if p.port_type in port_types:
-                    inst_ports[(p.x, p.y)].append((p.angle, p.width, f"{inst.cell.name}.{p.name}"))
+                    inst_ports[(p.x, p.y)].append(
+                        ((k, p.name), p.angle, p.width, f"{inst.cell.name}#{k}.{p.name}"))
         for p in cell.ports:
             if p.port_type in port_types:
-                cell_ports[(p.x, p.y)].append((p.angle, p.width, f"{cell.name}<{p.name}>"))
+                cell_ports.append(((p.x, p.y), p.angle, p.width, f"{cell.name}<{p.name}>"))
+        exports = collections.defaultdict(list)
+        for pos, angle, width, label in cell_ports:
+            exports[pos].append((angle, width, label))
         for pos, here in inst_ports.items():
-            for angle, width, label in here:
+            for key, angle, width, label in here:
                 checked += 1
-                partners = [q for q in here if q[2] != label]
+                partners = [q for q in here if q[0] != key]
                 if len(partners) == 1:
-                    o_angle, o_width, o_label = partners[0]
+                    _, o_angle, o_width, o_label = partners[0]
                     if o_angle != (angle + 2) % 4 or o_width != width:
                         problems.append(f"{cell.name}: {label} meets {o_label} with direction "
                                         f"{angle}/{o_angle} and width {width}/{o_width} (dbu)")
                 elif not partners:
-                    exported = [q for q in cell_ports.get(pos, []) if q[0] == angle and q[1] == width]
+                    exported = [q for q in exports.get(pos, []) if q[0] == angle and q[1] == width]
                     if len(exported) != 1:
                         problems.append(f"{cell.name}: {label} is not connected (no partner, "
                                         f"not exported)")
                 else:
                     problems.append(f"{cell.name}: {label} meets {len(partners)} instance ports")
+        # a cell built from port-bearing instances may only export a port where one
+        # of them has a port pointing the same way with the same width; a cell whose
+        # children have no optical ports (a leaf, or a PDK fixed cell) defines its
+        # ports on its own shapes
+        if inst_ports:
+            for pos, angle, width, label in cell_ports:
+                backing = [q for q in inst_ports.get(pos, []) if q[1] == angle and q[2] == width]
+                if not backing:
+                    problems.append(f"{cell.name}: exported port {label} is not backed by an "
+                                    f"instance port at the same position, direction and width")
     return checked, problems

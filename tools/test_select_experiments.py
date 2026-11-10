@@ -53,6 +53,10 @@ class SelectTest(unittest.TestCase):
                          ["a", "b", "c"])
         self.assertEqual(ids(se.select_changed(REG, [".github/workflows/experiments.yml"])),
                          ["a", "c"])
+        # a machinery change must not hide a heavy experiment whose own files changed
+        self.assertEqual(ids(se.select_changed(REG, [".github/workflows/experiments.yml",
+                                                     "simulations/meep/b_v001.py"])),
+                         ["a", "b", "c"])
 
     def test_ids(self):
         self.assertEqual(ids(se.select_ids(REG, "all")), ["a", "b", "c"])

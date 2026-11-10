@@ -43,11 +43,13 @@ def matches(path, patterns):
 
 def select_changed(reg, changed):
     changed = [c.replace("\\", "/") for c in changed]
-    if any(matches(c, reg["machinery"]) for c in changed):
-        return [e for e in reg["experiments"] if not e.get("heavy")]
+    machinery = any(matches(c, reg["machinery"]) for c in changed)
     shared = any(matches(c, reg["shared"]) for c in changed)
+    # union: a machinery change adds every non-heavy experiment, but never hides
+    # an experiment (heavy or not) whose own script, deps or shared files changed
     return [e for e in reg["experiments"]
-            if shared or any(matches(c, [e["script"]] + e["deps"]) for c in changed)]
+            if shared or (machinery and not e.get("heavy"))
+            or any(matches(c, [e["script"]] + e["deps"]) for c in changed)]
 
 
 def select_ids(reg, ids):

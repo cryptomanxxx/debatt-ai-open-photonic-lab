@@ -32,6 +32,11 @@ on:
 permissions:
   contents: read
 
+# a new push to a pull request cancels its previous, now outdated, run
+concurrency:
+  group: experiments-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   select:
     runs-on: ubuntu-24.04

@@ -1,0 +1,92 @@
+{
+  "designs": [
+    {
+      "id": "OPA-LAYOUT-001",
+      "title": "Programmable 2x2 MZI with balanced dummy heaters",
+      "function": "programmable 2x2 MZI (any 2x2 unitary with phi, theta, a, b)",
+      "status": "exploratory",
+      "pdk": {
+        "name": "gdsfactory generic PDK",
+        "version": "9.51.0",
+        "open_source": true,
+        "platform": "Si 500 x 220 nm in SiO2 (assumed)"
+      },
+      "wavelength_um": {
+        "design": 1.55,
+        "band": [
+          1.54,
+          1.56
+        ]
+      },
+      "footprint_um": [
+        537.8,
+        71.0
+      ],
+      "optical_ports": {
+        "inputs": 2,
+        "outputs": 2,
+        "type": "waveguide",
+        "pitch_um": 60.0
+      },
+      "controls": {
+        "heaters": 4,
+        "dummy heaters": 2
+      },
+      "files": {
+        "gds": "programmable_mzi_2x2.gds",
+        "preview": "programmable_mzi_2x2.png"
+      },
+      "generator": {
+        "script": "layout/mzi_2x2_layout_v001.py",
+        "environment": "layout/requirements-lock.txt"
+      },
+      "checks": {
+        "passed": 10,
+        "total": 10
+      },
+      "key_results": [
+        {
+          "name": "Coupler",
+          "value": "236 nm gap, 23 um straight section, 50:50 at 1.55 um",
+          "source": "OPA-COUPLER-002"
+        },
+        {
+          "name": "Coupling length",
+          "value": "52.0 um (MPB); 3D FDTD agrees within 0.4 %",
+          "source": "OPA-COUPLER-001/002"
+        },
+        {
+          "name": "Band within 5 % of 50:50",
+          "value": "1.54-1.56 um",
+          "source": "OPA-COUPLER-003"
+        },
+        {
+          "name": "Etch bias +-10 nm",
+          "value": "split 49.9%-50.2%",
+          "source": "OPA-COUPLER-003"
+        },
+        {
+          "name": "Programmability",
+          "value": "any 2x2 unitary, error < 1e-14 (ideal model)",
+          "source": "OPA-MZI-001"
+        }
+      ],
+      "limitations": [
+        "generic example PDK, not a foundry process",
+        "no DRC",
+        "no fiber couplers or bond pads",
+        "narrowband couplers"
+      ],
+      "tags": [
+        "mzi",
+        "2x2",
+        "phase-shifter",
+        "directional-coupler",
+        "generic-pdk",
+        "silicon",
+        "programmable"
+      ],
+      "folder": "results/opa-layout-001"
+    }
+  ]
+}

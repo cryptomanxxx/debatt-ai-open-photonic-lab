@@ -391,6 +391,15 @@ Layers, design rules and heaters are placeholders. The 23.0 µm length is
 is robust to etch bias. A real chip still needs calibration. No
 foundry DRC has been run, and there are no bond pads or fiber couplers yet.
 
+## Design catalog
+
+[`catalog/README.md`](catalog/README.md) lists every chip layout with a preview,
+function, PDK, wavelength band, footprint, ports, controls, status and key
+results, so nobody has to open a GDS file to see what it is. Each layout script
+writes a `design.json` datasheet next to its GDS ([schema](catalog/SCHEMA.md)),
+and `python tools/build_catalog.py` builds the catalog from them. CI fails if a
+datasheet is invalid or the catalog is out of date.
+
 ## GDS archive
 
 Released chip layouts, meaning files sent to a foundry, a review programme or a

@@ -8,6 +8,7 @@ on:
       - ".github/workflows/layout-mzi-v001.yml"
       - "layout/**"
       - "results/opa-coupler-002/result.json"
+      - "results/opa-coupler-003/result.json"
   pull_request:
     paths:
       - ".github/workflows/layout-mzi-v001.yml"
@@ -15,6 +16,7 @@ on:
       - "results/opa-layout-001/**"
       - "simulations/meep/geometry/**"
       - "results/opa-coupler-002/result.json"
+      - "results/opa-coupler-003/result.json"
 
 permissions:
   contents: read
@@ -38,8 +40,8 @@ jobs:
         env:
           MPLBACKEND: Agg
         run: python layout/mzi_2x2_layout_v001.py
-      - name: Committed GDS matches the generated GDS
-        run: git diff --exit-code -- results/opa-layout-001/programmable_mzi_2x2.gds
+      - name: Committed GDS and datasheet match the generated ones
+        run: git diff --exit-code -- results/opa-layout-001/programmable_mzi_2x2.gds results/opa-layout-001/design.json
       - name: Coupler geometry for Meep matches the layout (OPA-COUPLER-002)
         run: |
           python layout/export_coupler_geometry.py

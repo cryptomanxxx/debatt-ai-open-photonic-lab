@@ -1,0 +1,46 @@
+name: OPA layout MZI 2x2 v001
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/layout-mzi-v001.yml"
+      - "layout/**"
+  pull_request:
+    paths:
+      - ".github/workflows/layout-mzi-v001.yml"
+      - "layout/**"
+      - "results/opa-layout-001/**"
+
+permissions:
+  contents: read
+
+jobs:
+  mzi-layout:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install locked layout environment
+        run: pip install -r layout/requirements-lock.txt
+      - name: Archive environment provenance
+        run: |
+          mkdir -p results/opa-layout-001
+          pip freeze > results/opa-layout-001/installed-packages.txt
+      - name: Generate layout and run checks
+        env:
+          MPLBACKEND: Agg
+        run: python layout/mzi_2x2_layout_v001.py
+      - name: Committed GDS matches the generated GDS
+        run: git diff --exit-code -- results/opa-layout-001/programmable_mzi_2x2.gds
+      - name: Upload layout
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opa-layout-001
+          path: results/opa-layout-001/
+          if-no-files-found: warn

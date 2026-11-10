@@ -1,0 +1,114 @@
+name: Experiments
+
+# One workflow for every registered experiment (simulations/experiments.json).
+# `select` works out which experiments a change affects with
+# tools/select_experiments.py; `run` runs each of them in the locked Meep
+# environment, archives the environment and uploads the result folder.
+#
+# A new experiment needs one entry in simulations/experiments.json, not a new
+# workflow file. The registry check fails if an experiment script has no entry
+# or uses a module or file that is not in its deps.
+
+on:
+  workflow_dispatch:
+    inputs:
+      experiments:
+        description: "Comma-separated experiment ids (e.g. opa-fdtd-005), or 'all'"
+        required: true
+        type: string
+      args:
+        description: "Optional ARGS for experiments that read it (opa-fdtd-005: small, medium or large)"
+        required: false
+        type: string
+        default: ""
+  pull_request:
+    paths:
+      - "simulations/**"
+      - "results/**/result.json"
+      - ".github/workflows/experiments.yml"
+      - "tools/select_experiments.py"
+      - "tools/test_select_experiments.py"
+
+permissions:
+  contents: read
+
+jobs:
+  select:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      matrix: ${{ steps.select.outputs.matrix }}
+      any: ${{ steps.select.outputs.any }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Selector tests
+        run: python tools/test_select_experiments.py
+      - name: Registry is complete and consistent
+        run: python tools/select_experiments.py --check
+      - name: Select experiments
+        id: select
+        env:
+          EVENT: ${{ github.event_name }}
+          IDS: ${{ inputs.experiments }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [ "$EVENT" = "workflow_dispatch" ]; then
+            python tools/select_experiments.py --ids "$IDS" --github-output
+          else
+            git diff --name-only "$BASE_SHA"...HEAD > "$RUNNER_TEMP/changed.txt"
+            cat "$RUNNER_TEMP/changed.txt"
+            python tools/select_experiments.py --changed-from "$RUNNER_TEMP/changed.txt" --github-output
+          fi
+
+  run:
+    needs: select
+    if: needs.select.outputs.any == 'true'
+    name: ${{ matrix.id }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: ${{ matrix.timeout }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.select.outputs.matrix) }}
+    defaults:
+      run:
+        shell: micromamba-shell {0}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install locked Meep
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-name: opa-fdtd
+          create-args: >-
+            --file simulations/meep/opa-fdtd-linux-64.lock.txt
+      - name: Archive environment provenance
+        env:
+          RESULT_DIR: ${{ matrix.result_dir }}
+        run: |
+          mkdir -p "$RESULT_DIR"
+          cp simulations/meep/opa-fdtd-linux-64.lock.txt "$RESULT_DIR/environment-lock.txt"
+          micromamba list -n opa-fdtd --json > "$RESULT_DIR/installed-packages.json"
+      - name: Run ${{ matrix.name }}
+        env:
+          RUN: ${{ matrix.run }}
+          ARGS: ${{ inputs.args }}
+        run: |
+          set -e
+          eval "$RUN"
+      - name: Print result
+        if: always()
+        env:
+          RESULT_DIR: ${{ matrix.result_dir }}
+        run: |
+          if [ -f "$RESULT_DIR/result.json" ]; then cat "$RESULT_DIR/result.json"; fi
+      - name: Upload measurement results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: ${{ matrix.result_dir }}/
+          if-no-files-found: warn

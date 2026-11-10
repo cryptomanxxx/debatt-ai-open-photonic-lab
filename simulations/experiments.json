@@ -1,0 +1,201 @@
+{
+  "_doc": "Experiments run by .github/workflows/experiments.yml. See tools/select_experiments.py. Every simulations/*/ *_vNNN.py script must have an entry; deps lists the other repository files the script reads or imports (the script itself and the shared files are implied).",
+  "shared": [
+    "simulations/meep/opa-fdtd-linux-64.lock.txt"
+  ],
+  "machinery": [
+    ".github/workflows/experiments.yml",
+    "simulations/experiments.json",
+    "tools/select_experiments.py"
+  ],
+  "experiments": [
+    {
+      "id": "opa-fdtd-001",
+      "name": "Meep FDTD smoke test",
+      "script": "simulations/meep/smoke_test_v001.py",
+      "result_dir": "results/meep-smoke-v001",
+      "artifact": "opa-meep-smoke-v001",
+      "timeout_minutes": 30,
+      "deps": []
+    },
+    {
+      "id": "opa-fdtd-002",
+      "name": "Meep waveguide scattering",
+      "script": "simulations/meep/waveguide_scattering_v002.py",
+      "result_dir": "results/opa-fdtd-002",
+      "artifact": "opa-meep-waveguide-v002",
+      "timeout_minutes": 30,
+      "deps": []
+    },
+    {
+      "id": "opa-fdtd-003",
+      "name": "Meep bend radius",
+      "script": "simulations/meep/bend_radius_v003.py",
+      "result_dir": "results/opa-fdtd-003",
+      "artifact": "opa-meep-bend-v003",
+      "timeout_minutes": 30,
+      "deps": []
+    },
+    {
+      "id": "opa-fdtd-004",
+      "name": "Meep guided mode",
+      "script": "simulations/meep/bend_mode_v004.py",
+      "result_dir": "results/opa-fdtd-004",
+      "artifact": "opa-meep-mode-v004",
+      "timeout_minutes": 30,
+      "deps": []
+    },
+    {
+      "id": "opa-fdtd-005",
+      "name": "Meep 3D capacity benchmark",
+      "script": "simulations/meep/capacity_3d_v005.py",
+      "result_dir": "results/opa-fdtd-005",
+      "artifact": "opa-meep-capacity-v005",
+      "timeout_minutes": 20,
+      "deps": [],
+      "run": "python simulations/meep/capacity_3d_v005.py --profile \"${ARGS:-small}\""
+    },
+    {
+      "id": "opa-fdtd-007",
+      "name": "Meep 3D bend",
+      "script": "simulations/meep/bend_3d_v007.py",
+      "result_dir": "results/opa-fdtd-007",
+      "artifact": "opa-meep-bend-3d-v007",
+      "timeout_minutes": 25,
+      "deps": []
+    },
+    {
+      "id": "opa-fdtd-008",
+      "name": "Meep 3D bend time convergence",
+      "script": "simulations/meep/bend_3d_time_v008.py",
+      "result_dir": "results/opa-fdtd-008",
+      "artifact": "opa-meep-bend-3d-v008",
+      "timeout_minutes": 25,
+      "deps": []
+    },
+    {
+      "id": "opa-fdtd-009",
+      "name": "Meep 3D bend resolution",
+      "script": "simulations/meep/bend_3d_resolution_v009.py",
+      "result_dir": "results/opa-fdtd-009",
+      "artifact": "opa-meep-bend-resolution-v009",
+      "timeout_minutes": 25,
+      "deps": []
+    },
+    {
+      "id": "opa-fdtd-010",
+      "name": "Meep 3D modal bend",
+      "script": "simulations/meep/bend_3d_modal_v010.py",
+      "result_dir": "results/opa-fdtd-010",
+      "artifact": "opa-meep-3d-modal-v010",
+      "timeout_minutes": 30,
+      "deps": []
+    },
+    {
+      "id": "opa-fdtd-011",
+      "name": "Meep 3D bend, launched mode",
+      "script": "simulations/meep/bend_3d_launched_mode_v011.py",
+      "result_dir": "results/opa-fdtd-011",
+      "artifact": "opa-meep-bend-launched-mode-v011",
+      "timeout_minutes": 25,
+      "deps": [
+        "simulations/meep/opa_common.py"
+      ]
+    },
+    {
+      "id": "opa-coupler-001",
+      "name": "Directional coupler supermodes",
+      "script": "simulations/meep/directional_coupler_v001.py",
+      "result_dir": "results/opa-coupler-001",
+      "artifact": "opa-coupler-001",
+      "timeout_minutes": 30,
+      "deps": []
+    },
+    {
+      "id": "opa-coupler-002",
+      "name": "Coupler 3D FDTD (five cases in parallel)",
+      "script": "simulations/meep/coupler_3d_v002.py",
+      "result_dir": "results/opa-coupler-002",
+      "artifact": "opa-coupler-002",
+      "timeout_minutes": 180,
+      "deps": [
+        "simulations/meep/geometry/coupler_gap0.236.json",
+        "results/opa-coupler-001/result.json"
+      ],
+      "run": "pids=\"\"\nfor c in \"16 24\" \"0 24\" \"16 16\" \"8 16\" \"0 16\"; do\n  set -- $c\n  python simulations/meep/coupler_3d_v002.py case $1 $2 > results/opa-coupler-002/log_L$1_res$2.txt 2>&1 &\n  pids=\"$pids $!\"\ndone\nstatus=0\nfor p in $pids; do wait $p || status=1; done\ntest $status -eq 0\npython simulations/meep/coupler_3d_v002.py aggregate",
+      "heavy": true
+    },
+    {
+      "id": "opa-coupler-003",
+      "name": "Coupler wavelength and fabrication sensitivity",
+      "script": "simulations/meep/coupler_sensitivity_v003.py",
+      "result_dir": "results/opa-coupler-003",
+      "artifact": "opa-coupler-003",
+      "timeout_minutes": 30,
+      "deps": [
+        "simulations/meep/geometry/coupler_gap0.236.json",
+        "results/opa-coupler-002/result.json"
+      ]
+    },
+    {
+      "id": "opa-mzi-001",
+      "name": "Circuit: ideal 2x2 MZI",
+      "script": "simulations/circuit/mzi_2x2_v001.py",
+      "result_dir": "results/opa-mzi-001",
+      "artifact": "opa-mzi-001",
+      "timeout_minutes": 10,
+      "deps": [
+        "simulations/circuit/mzi.py"
+      ]
+    },
+    {
+      "id": "opa-mzi-002",
+      "name": "Circuit: MZI imperfections",
+      "script": "simulations/circuit/mzi_imperfect_v002.py",
+      "result_dir": "results/opa-mzi-002",
+      "artifact": "opa-mzi-002",
+      "timeout_minutes": 10,
+      "deps": [
+        "simulations/circuit/mzi.py"
+      ]
+    },
+    {
+      "id": "opa-mzi-003",
+      "name": "Circuit: Clements mesh",
+      "script": "simulations/circuit/mesh_clements_v003.py",
+      "result_dir": "results/opa-mzi-003",
+      "artifact": "opa-mzi-003",
+      "timeout_minutes": 10,
+      "deps": [
+        "simulations/circuit/mzi.py",
+        "simulations/circuit/mesh.py"
+      ]
+    },
+    {
+      "id": "opa-eo-001",
+      "name": "Pockels vs thermo-optic phase shifters",
+      "script": "simulations/meep/eo_vs_thermal_v001.py",
+      "result_dir": "results/opa-eo-001",
+      "artifact": "opa-eo-001",
+      "timeout_minutes": 30,
+      "deps": [
+        "simulations/circuit/mzi.py",
+        "simulations/circuit/mesh.py"
+      ]
+    },
+    {
+      "id": "opa-eo-002",
+      "name": "Shorter Pockels phase shifters",
+      "script": "simulations/meep/eo_shorter_v002.py",
+      "result_dir": "results/opa-eo-002",
+      "artifact": "opa-eo-002",
+      "timeout_minutes": 45,
+      "deps": [
+        "simulations/meep/eo_common.py",
+        "simulations/circuit/mzi.py",
+        "simulations/circuit/mesh.py",
+        "results/opa-eo-001/result.json"
+      ]
+    }
+  ]
+}

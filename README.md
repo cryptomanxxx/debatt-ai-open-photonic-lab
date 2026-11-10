@@ -51,8 +51,16 @@ designs share one wafer.
 
 ## Experiments
 
-All experiments live in [`simulations/meep/`](simulations/meep/) and each has
-its own workflow in [`.github/workflows/`](.github/workflows/). Workflow
+Every experiment is a script in [`simulations/`](simulations/) with an entry in
+[`simulations/experiments.json`](simulations/experiments.json). The entry gives
+its result folder, its time limit and the files it depends on. One workflow,
+[`experiments.yml`](.github/workflows/experiments.yml), runs the experiments
+that a pull request affects in the locked environment: an experiment runs when
+its script or one of its dependencies changes, and every experiment runs when
+the locked environment changes. CI fails if an experiment script has no entry,
+or imports or reads a repository file that its entry does not list. Any
+experiment can also be run by hand from the Actions tab (*Experiments* →
+*Run workflow*, with ids such as `opa-fdtd-005` or `all`). Workflow
 artifacts expire after 90 days, so every result report is also kept in
 [`results/`](results/), with a `provenance.json` that names the CI run and
 commit it came from. [`results/README.md`](results/README.md) lists the key
@@ -636,8 +644,10 @@ New experiments should import shared geometry and measurement helpers from
 
 ## Contributing
 
-Contributions are welcome. Add a new numbered experiment (`OPA-FDTD-NNN`)
-with its own workflow, state its limitations in the result report, add a
+Contributions are welcome. Add a new numbered experiment script
+(`*_vNNN.py`) with an entry in
+[`simulations/experiments.json`](simulations/experiments.json) (no new workflow
+file is needed), state its limitations in the result report, add a
 row to the experiment table above, and archive the report in
 [`results/`](results/README.md#adding-a-result).
 

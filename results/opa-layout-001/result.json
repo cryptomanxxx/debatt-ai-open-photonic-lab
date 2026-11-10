@@ -132,7 +132,7 @@
   "failures": [],
   "limitations": [
     "Generic example PDK: layers, design rules and heater geometry are not a foundry's",
-    "The 23.0 um coupler length is 50:50 for a 500 x 220 nm silicon wire in SiO2 at 1.55 um only (OPA-COUPLER-002, bends included). Its wavelength and fabrication sensitivity have not been simulated for this geometry. Indicative figures from the straight-only model of OPA-COUPLER-001: a 236 nm-gap coupler tuned to 50:50 splits 34:66 to 70:30 across 1.50-1.60 um, and for a 200 nm gap +-10 nm width or gap errors give 44-59 %",
+    "The 23.0 um coupler length is 50:50 for a 500 x 220 nm silicon wire in SiO2 at 1.55 um only (OPA-COUPLER-002, bends included). For this geometry (OPA-COUPLER-003) it splits 33:67 to 70:30 across 1.50-1.60 um and stays within 5 % of 50:50 only for 1.54-1.56 um; +-10 nm width-only or gap-only errors give 43-57 %, while an etch bias that widens the guides and narrows the gap together leaves it at 50 +- 0.2 %",
     "No foundry DRC deck has been run; checks are geometric sanity checks only",
     "No electrical routing to bond pads and no grating or edge couplers yet",
     "Heater phase per milliwatt and thermal crosstalk are not modelled"

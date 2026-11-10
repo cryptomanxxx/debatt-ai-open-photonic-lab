@@ -14,8 +14,8 @@ import time
 import meep as mp
 
 PROFILES = {
-    "small": {"cell_um": (8.0, 8.0, 3.0), "resolution_per_um": 10, "duration_meep": 12},
-    "medium": {"cell_um": (20.0, 20.0, 4.0), "resolution_per_um": 10, "duration_meep": 12},
+    "small": {"cell_um": (8.0, 8.0, 3.0), "resolution_per_um": 10, "duration_meep": 35},
+    "medium": {"cell_um": (20.0, 20.0, 4.0), "resolution_per_um": 10, "duration_meep": 35},
 }
 MAX_GRID_CELLS = 2_000_000
 MAX_THEORETICAL_BYTES = 96 * MAX_GRID_CELLS

@@ -1,22 +1,23 @@
-name: OPA layout MZI SiEPIC v002
+name: OPA layout SiEPIC EBeam
 
 on:
   workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - ".github/workflows/layout-ubc-v002.yml"
-      - "layout/mzi_2x2_ubc_v002.py"
+      - ".github/workflows/layout-ubc.yml"
+      - "layout/mzi_2x2_ubc_v00*.py"
       - "layout/requirements-lock-ubc.txt"
       - "layout/requirements-drc.txt"
       - "tools/siepic_drc.py"
   pull_request:
     paths:
-      - ".github/workflows/layout-ubc-v002.yml"
-      - "layout/mzi_2x2_ubc_v002.py"
+      - ".github/workflows/layout-ubc.yml"
+      - "layout/mzi_2x2_ubc_v00*.py"
       - "layout/requirements-lock-ubc.txt"
-      - "results/opa-layout-002/**"
       - "layout/requirements-drc.txt"
+      - "results/opa-layout-002/**"
+      - "results/opa-layout-003/**"
       - "tools/siepic_drc.py"
       - "tools/test_siepic_drc.py"
 
@@ -24,9 +25,20 @@ permissions:
   contents: read
 
 jobs:
-  mzi-siepic:
+  layout:
+    name: ${{ matrix.id }}
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: opa-layout-002
+            script: layout/mzi_2x2_ubc_v002.py
+            gds: results/opa-layout-002/mzi_2x2_siepic.gds
+          - id: opa-layout-003
+            script: layout/mzi_2x2_ubc_v003.py
+            gds: results/opa-layout-003/mzi_2x2_siepic_full.gds
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -46,13 +58,16 @@ jobs:
       - name: Generate layout and run checks
         env:
           MPLBACKEND: Agg
-        run: python layout/mzi_2x2_ubc_v002.py
+        run: python ${{ matrix.script }}
       - name: Committed GDS and datasheet match the generated ones
-        run: git diff --exit-code -- results/opa-layout-002/mzi_2x2_siepic.gds results/opa-layout-002/design.json
+        env:
+          GDS: ${{ matrix.gds }}
+          ID: ${{ matrix.id }}
+        run: git diff --exit-code -- "$GDS" "results/$ID/design.json"
       - name: Upload layout
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: opa-layout-002
-          path: results/opa-layout-002/
+          name: ${{ matrix.id }}
+          path: results/${{ matrix.id }}/
           if-no-files-found: warn

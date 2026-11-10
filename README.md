@@ -39,7 +39,7 @@ reproducible so that anyone can learn from it and build on it.
 |-------|------|--------|
 | 1 | FDTD fundamentals: reproducible Meep pipeline, convergence and normalization practice | **Done** (001–009) |
 | 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010–011) |
-| 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | **Started** (COUPLER-001, Si 220 nm) |
+| 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | **Started** (COUPLER-001, Si 220 nm; EO-001, X-cut TFLN) |
 | 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001 generic PDK; LAYOUT-002 SiEPIC EBeam open PDK) |
 | 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001–003) |
 | 6 | Design-rule-checked GDS ready for an MPW run (includes a 32 px/µm FDTD convergence run of the coupler, see OPA-COUPLER-002) | Planned |
@@ -347,6 +347,68 @@ Limits: coupled-mode theory with straight-pair supermodes; uniform errors
 across the coupler; thickness, sidewall angle and index variation are not
 included.
 
+### OPA-EO-001: Pockels (TFLN) versus thermo-optic (Si) phase shifters
+
+A heater holds a phase by dissipating power for as long as the phase is held.
+A Pockels phase shifter in lithium niobate holds it with a voltage and almost
+no current. This experiment puts numbers on that trade-off for the phases of
+an MZI mesh.
+
+Both cross-sections use the same chain: optical mode from MPB, static field or
+temperature from a 2D finite-volume solve, and first-order perturbation of
+n_eff with the group index from MPB.
+
+- **Pockels:** X-cut LN rib (600 nm film, 300 nm etch, 1.2 µm top width),
+  air above, gold electrodes with a 5 µm gap, r33 = 30.9 pm/V.
+- **Thermo-optic:** 500 × 220 nm Si strip with the TiN heater (2.5 µm wide)
+  and layer stack of the ubcpdk SiEPIC PDK used in OPA-LAYOUT-002.
+
+**Method checks (blocking, all pass):**
+- the finite-volume solver reproduces a two-layer capacitor exactly;
+- perturbation theory matches a direct MPB solve to 0.5 % (Pockels) and 0.3 % (thermal);
+- MPB, electrostatic and thermal grids converge within 1 %.
+
+| | Pockels, X-cut TFLN | Heater, Si (ubcpdk stack) |
+|---|---|---|
+| Efficiency | V_π·L = 4.8 V·cm one arm, **2.4 V·cm push-pull** | **P_π = 14.0 mW**, independent of heater length |
+| Length for π | 4.8 mm at ±10 V, 24 mm at ±2 V (one arm) | 200 µm heater (19 K rise in the waveguide) |
+| Holding a phase | Capacitive: no current, leakage not modelled | Continuous power |
+| Changing a phase | C·V², 0.069 pF/mm | Not modelled (thermal time constant of µs) |
+
+**Literature checks (pre-registered, made non-blocking after the first run):**
+- The push-pull V_π·L of 2.4 V·cm lies within the pre-registered 1.8–3.5 V·cm;
+  published X-cut TFLN modulators report 2.2–2.8 V·cm.
+- P_π = 14.0 mW **fails** the pre-registered 15–35 mW range. The ubcpdk layer
+  stack puts the heater 1.1 µm above the waveguide on a 3 µm buried oxide. The
+  Applied Nanotools process that SiEPIC designs are made in has a 2 µm buried
+  oxide and 2.2 µm of cladding under the heater. A post-hoc run with that stack
+  gives **20.3 mW**, inside the 19–25 mW published for oxide-clad heaters.
+
+**Mesh level** (Haar-random unitaries, Clements decomposition, θ, φ and the
+output phases as separate shifters):
+
+| N | Phase shifters | Heater holding power | Heater mesh length | Pockels mesh length at ±10 V / ±2 V | Pockels energy to program |
+|---|----|----|----|----|----|
+| 4 | 16 | 0.18–0.26 W | 2 mm | 39 mm / 192 mm | 0.15 nJ / 0.03 nJ |
+| 16 | 256 | 2.4–3.4 W | 8 mm | 155 mm / 768 mm | 1.9 nJ / 0.4 nJ |
+| 64 | 4096 | **34–49 W** | 32 mm | **620 mm / 3.1 m** | 25 nJ / 5 nJ |
+
+The power range is the ubcpdk stack and the ANT stack. **The trade-off is power
+against length.** Heaters for a 64×64 mesh draw tens of watts just to hold the
+weights, while Pockels shifters hold them for nothing and reprogram for tens
+of nanojoules. However, Pockels shifters in a straight mesh are centimetres
+long, so a 64×64 mesh is far longer than a chip. Large TFLN meshes need higher
+voltage, push-pull (halves the length), folded or resonant phase shifters, or
+a higher-r material such as BTO.
+
+Limits:
+- Single wavelength.
+- Vertical sidewalls; electrode absorption is ignored in the optical mode.
+- The 2D heat model has no heat flow along the waveguide or into the metal
+  leads, and no thermal crosstalk.
+- Pockels leakage, DC drift and photorefraction are not modelled.
+- The mesh length uses a rough 100 µm per column for the couplers.
+
 ## Layout
 
 Chip layouts live in [`layout/`](layout/) and use
@@ -456,6 +518,7 @@ micromamba create -n opa-fdtd --file simulations/meep/opa-fdtd-linux-64.lock.txt
 micromamba activate opa-fdtd
 python simulations/meep/bend_3d_launched_mode_v011.py   # writes results/opa-fdtd-011/result.json
 python simulations/meep/directional_coupler_v001.py     # writes results/opa-coupler-001/result.json, ~4 min
+python simulations/meep/eo_vs_thermal_v001.py           # writes results/opa-eo-001/result.json, ~20 s
 for c in "0 16" "8 16" "16 16" "0 24" "16 24"; do        # OPA-COUPLER-002: 3D FDTD, up to ~1.5 h per case
   python simulations/meep/coupler_3d_v002.py case $c &
 done; wait; python simulations/meep/coupler_3d_v002.py aggregate

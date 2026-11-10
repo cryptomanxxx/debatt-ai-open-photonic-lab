@@ -1,0 +1,82 @@
+{
+  "id": "OPA-LAYOUT-003",
+  "title": "Fully programmable 2x2 MZI with fiber array and eight pads (SiEPIC EBeam)",
+  "function": "programmable 2x2 MZI (theta, phi, a, b: any 2x2 unitary)",
+  "status": "drc-clean",
+  "pdk": {
+    "name": "SiEPIC EBeam (ubcpdk)",
+    "version": "3.3.0",
+    "open_source": true,
+    "platform": "Si 220 nm SOI, electron-beam lithography"
+  },
+  "wavelength_um": {
+    "design": 1.55
+  },
+  "footprint_um": [
+    483.519,
+    1058.3
+  ],
+  "optical_ports": {
+    "inputs": 2,
+    "outputs": 2,
+    "type": "TE grating coupler",
+    "pitch_um": 127.0
+  },
+  "controls": {
+    "heaters": 4,
+    "bond pads": 8
+  },
+  "files": {
+    "gds": "mzi_2x2_siepic_full.gds",
+    "preview": "mzi_2x2_siepic_full.png"
+  },
+  "generator": {
+    "script": "layout/mzi_2x2_ubc_v003.py",
+    "environment": "layout/requirements-lock-ubc.txt"
+  },
+  "checks": {
+    "passed": 11,
+    "total": 11
+  },
+  "key_results": [
+    {
+      "name": "Phase shifters",
+      "value": "theta, phi, a, b (four 200 um TiN heaters, 50 um apart)",
+      "source": "OPA-LAYOUT-003"
+    },
+    {
+      "name": "Electrical",
+      "value": "8 independent pads, each wired to one heater terminal; no shorts",
+      "source": "OPA-LAYOUT-003 heater_isolation"
+    },
+    {
+      "name": "Fiber I/O",
+      "value": "4 TE grating couplers at 127 um pitch",
+      "source": "OPA-LAYOUT-003"
+    },
+    {
+      "name": "SiEPIC EBeam DRC",
+      "value": "0 violations of 13 rules (KLayout 0.28.16)",
+      "source": "tools/siepic_drc.py"
+    }
+  ],
+  "limitations": [
+    "thermal crosstalk not modelled",
+    "SiEPIC functional verification not run",
+    "broadband coupler not verified",
+    "not submitted"
+  ],
+  "tags": [
+    "mzi",
+    "2x2",
+    "programmable",
+    "phase-shifter",
+    "broadband-coupler",
+    "grating-coupler",
+    "bond-pads",
+    "siepic",
+    "ebeam",
+    "silicon",
+    "open-pdk"
+  ]
+}

@@ -40,9 +40,9 @@ reproducible so that anyone can learn from it and build on it.
 | 1 | FDTD fundamentals: reproducible Meep pipeline, convergence and normalization practice | **Done** (001–009) |
 | 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010–011) |
 | 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | **Started** (COUPLER-001, Si 220 nm; EO-001–002, X-cut TFLN) |
-| 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001 generic PDK; LAYOUT-002 SiEPIC EBeam open PDK) |
+| 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001 generic PDK; LAYOUT-002–003 SiEPIC EBeam open PDK) |
 | 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001–003) |
-| 6 | Design-rule-checked GDS ready for an MPW run (includes a 32 px/µm FDTD convergence run of the coupler, see OPA-COUPLER-002) | **Started** (LAYOUT-002 passes the official SiEPIC EBeam DRC) |
+| 6 | Design-rule-checked GDS ready for an MPW run (includes a 32 px/µm FDTD convergence run of the coupler, see OPA-COUPLER-002) | **Started** (LAYOUT-002 and LAYOUT-003 pass the official SiEPIC EBeam DRC) |
 | 7 | Measurement plan and published measurement data | Planned |
 
 Fabricating photonic chips requires a foundry. The realistic open path is to
@@ -614,6 +614,58 @@ Two problems were found and fixed earlier:
 DRC covers geometry only. The PDK's grating-coupler model is a placeholder (6 dB, 35 nm), not
 measured data.
 
+### OPA-LAYOUT-003: fully programmable 2×2 MZI in SiEPIC EBeam
+
+![Programmable 2×2 MZI in SiEPIC EBeam](results/opa-layout-003/mzi_2x2_siepic_full.png)
+
+OPA-LAYOUT-002 can only tune θ. This version has all four phases of the lab's
+MZI convention, U = diag(e^{ia}, e^{ib}) · coupler · phase(θ) · coupler ·
+phase(φ), so it can realize any 2×2 unitary, like OPA-LAYOUT-001 but in an
+open foundry PDK:
+
+- **φ:** a 200 µm heater on the top input arm, with an unheated straight of the
+  same length on the bottom input arm;
+- **θ:** the PDK's heater inside the MZI (as in LAYOUT-002);
+- **a, b:** 200 µm heaters on both output arms.
+
+Outside the MZI, the arms fan out to ±25 µm with S-bends, so neighbouring
+heaters sit 50 µm apart. Every heater terminal has its own 90 µm pad, eight in
+all, connected by a straight, widening lead. The pads for φ, θ and a sit on one
+side, the two for b on the other, so no lead crosses a heater. The chip is
+484 × 1058 µm, floorplan included.
+
+All 11 checks pass:
+- four fiber ports at a 127 µm pitch, and eight pads;
+- the expected PDK cells (2 broadband couplers, 4 grating couplers, 4 heaters);
+- equal optical length in the two MZI arms (270.548 µm), and in the two input
+  and the two output arms (265.596 µm each);
+- the measurement labels;
+- only PDK layers;
+- **electrical isolation:** eight separate M2 nets, each reaching exactly one
+  heater terminal, and every heater reached by exactly two nets (no shorts, no
+  open heaters);
+- heaters at least 40 µm apart, and no silicon under a pad opening;
+- a byte-reproducible GDS;
+- **0 violations of the official SiEPIC EBeam DRC.**
+
+Two design details came out of the DRC:
+- **Floorplan and contact extensions:** as in LAYOUT-002, a floorplan is
+  needed, and the M2 must extend 3 µm beyond the M1 at every contact.
+- **Where the leads start:** a lead that starts at the contact itself and
+  widens leaves a narrow notch with the extension, which breaks the 8 µm M2
+  spacing rule. Filling the shape to its convex hull instead puts an angled M2
+  edge across the heater, which breaks the overlap rule. Each lead therefore
+  starts at the outer edge of the extension, at the same width.
+
+**Not done yet:**
+- thermal crosstalk between the heaters;
+- SiEPIC's functional verification;
+- verification of the broadband coupler;
+- any foundry review.
+
+The fiber-array routes have different lengths, which adds a fixed phase
+between the inputs that φ removes on calibration.
+
 ## Design catalog
 
 [`catalog/README.md`](catalog/README.md) lists every chip layout with a preview,
@@ -665,6 +717,7 @@ python3.12 -m venv .venv-ubc && . .venv-ubc/bin/activate
 pip install -r layout/requirements-lock-ubc.txt
 sudo apt-get install klayout=0.28.16-0ubuntu0.24.04.1     # DRC engine (Ubuntu 24.04)
 python layout/mzi_2x2_ubc_v002.py                        # writes results/opa-layout-002/, runs the DRC
+python layout/mzi_2x2_ubc_v003.py                        # writes results/opa-layout-003/, runs the DRC
 python tools/build_catalog.py                            # refreshes catalog/
 ```
 

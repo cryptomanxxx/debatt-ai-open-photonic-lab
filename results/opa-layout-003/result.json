@@ -1,0 +1,187 @@
+{
+  "experiment": "OPA-LAYOUT-003",
+  "goal": "Fully programmable 2x2 MZI (theta, phi, a, b) with broadband couplers, grating couplers and eight bond pads in the open SiEPIC EBeam PDK",
+  "pdk": "ubcpdk 3.3.0 (SiEPIC EBeam, MIT licence)",
+  "gdsfactory_version": "9.23.0",
+  "python_version": "3.12.3",
+  "gds_file": "mzi_2x2_siepic_full.gds",
+  "gds_sha256": "655636cbbdd25396b1230105ce574f270521d961aaea92b3dfca6d30134b60ab",
+  "footprint_um": [
+    483.519,
+    1058.3
+  ],
+  "phase_shifters": {
+    "phi": "heater on the top input arm",
+    "theta": "PDK heater on the top MZI arm",
+    "a": "heater on the top output arm",
+    "b": "heater on the bottom output arm"
+  },
+  "heater_length_um": 200.0,
+  "pads": {
+    "pad1": "phi terminal 1",
+    "pad2": "phi terminal 2",
+    "pad3": "theta terminal 1",
+    "pad4": "theta terminal 2",
+    "pad5": "a terminal 1",
+    "pad6": "a terminal 2",
+    "pad7": "b terminal 1",
+    "pad8": "b terminal 2"
+  },
+  "mzi_arms": {
+    "cp1,o3": {
+      "length_um": 270.548,
+      "instances": [
+        "b1",
+        "sytl",
+        "b2",
+        "sxt",
+        "b3",
+        "sytr",
+        "b4"
+      ]
+    },
+    "cp1,o4": {
+      "length_um": 270.548,
+      "instances": [
+        "b5",
+        "syl",
+        "b6",
+        "sxb",
+        "b7",
+        "sybr",
+        "b8"
+      ]
+    }
+  },
+  "outer_arms_um": {
+    "input_top (phi)": 265.596,
+    "input_bottom": 265.596,
+    "output_top (a)": 265.596,
+    "output_bottom (b)": 265.596
+  },
+  "cell_counts": {
+    "ebeam_bdc_te1550": 2,
+    "ebeam_gc_te1550": 4,
+    "straight_heater_metal": 4
+  },
+  "layers": [
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      10,
+      0
+    ],
+    [
+      11,
+      0
+    ],
+    [
+      12,
+      0
+    ],
+    [
+      13,
+      0
+    ],
+    [
+      68,
+      0
+    ],
+    [
+      81,
+      0
+    ],
+    [
+      99,
+      0
+    ],
+    [
+      998,
+      0
+    ]
+  ],
+  "drc": {
+    "klayout": "KLayout 0.28.16",
+    "deck": "siepic_ebeam_pdk/drc/SiEPIC_EBeam_DRC.lydrc",
+    "deck_sha256": "341bdbd7c2aa3d67643e1f549a1c6162fdf153ed4831fe2437078b653ccab38b",
+    "pdk_wheel": "siepic_ebeam_pdk-0.4.53-py3-none-any.whl",
+    "rules": [
+      "Boundary",
+      "DT_Metal_separation",
+      "M1_space",
+      "M1_width",
+      "M2_M1_overlap",
+      "M2_space",
+      "M2_width",
+      "MLOpen_space",
+      "MLOpen_width",
+      "SiN_space",
+      "SiN_width",
+      "Si_space",
+      "Si_width"
+    ],
+    "violations": {},
+    "total_violations": 0
+  },
+  "checks": {
+    "four_fiber_ports": {
+      "passed": true,
+      "detail": "4 optical ports, pitches [127.0, 127.0, 127.0] um (expected 4 at 127.0 um)"
+    },
+    "eight_pads": {
+      "passed": true,
+      "detail": "8 pad openings; pads: {'pad1': 'phi terminal 1', 'pad2': 'phi terminal 2', 'pad3': 'theta terminal 1', 'pad4': 'theta terminal 2', 'pad5': 'a terminal 1', 'pad6': 'a terminal 2', 'pad7': 'b terminal 1', 'pad8': 'b terminal 2'}"
+    },
+    "pdk_cells": {
+      "passed": true,
+      "detail": "2 ebeam_bdc_te1550, 4 ebeam_gc_te1550, 4 heaters (expected 2, 4, 4)"
+    },
+    "balanced_mzi_arms": {
+      "passed": true,
+      "detail": "MZI arm lengths [270.548, 270.548] um"
+    },
+    "balanced_input_output_arms": {
+      "passed": true,
+      "detail": "arm lengths {'input_top (phi)': 265.596, 'input_bottom': 265.596, 'output_top (a)': 265.596, 'output_bottom (b)': 265.596} um"
+    },
+    "lab_measurement_label": {
+      "passed": true,
+      "detail": "labels: ['opt_in_TE_1550_device_DebattAIOPA-OPA.LAYOUT.003', 'elec_DebattAIOPA-OPA_LAYOUT_003_G']"
+    },
+    "only_pdk_layers": {
+      "passed": true,
+      "detail": "layers used [(1, 0), (1, 10), (10, 0), (11, 0), (12, 0), (13, 0), (68, 0), (81, 0), (99, 0), (998, 0)]; unexplained: []"
+    },
+    "heater_isolation": {
+      "passed": true,
+      "detail": "8 M2 nets, M1 pieces per net [1, 1, 1, 1, 1, 1, 1, 1], pads per net [1, 1, 1, 1, 1, 1, 1, 1]; 4 heaters, nets per heater [2, 2, 2, 2]"
+    },
+    "layout_hygiene": {
+      "passed": true,
+      "detail": "0 heater pairs closer than 40.0 um; 0 silicon shapes under pad openings"
+    },
+    "gds_reproducible": {
+      "passed": true,
+      "detail": "a fresh Python process regenerates a byte-identical GDS file"
+    },
+    "siepic_ebeam_drc_clean": {
+      "passed": true,
+      "detail": "0 violations of 13 rules (KLayout 0.28.16, siepic_ebeam_pdk-0.4.53-py3-none-any.whl): {}"
+    }
+  },
+  "failures": [],
+  "limitations": [
+    "Thermal crosstalk between heaters is not modelled (50 um centre spacing)",
+    "The fiber-array routes to the four grating couplers have different lengths; the resulting fixed phase between the inputs is absorbed by phi on calibration",
+    "DRC covers geometry only; SiEPIC's functional verification has not been run",
+    "The broadband coupler's split has not been verified; ubcpdk has no compact model for it",
+    "The grating-coupler model in ubcpdk is a generic placeholder (6 dB, 35 nm), not measured data",
+    "Not submitted to or checked by the foundry"
+  ]
+}

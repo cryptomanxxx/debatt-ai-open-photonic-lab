@@ -20,7 +20,7 @@ The script writes the GDS file, a PNG preview and a JSON report, and checks:
   6. the GDS file is byte-for-byte reproducible.
 
 The generic PDK is gdsfactory's example technology, not a foundry process:
-layer numbers, the coupler gap and the heater are placeholders until a real
+layer numbers and the heater are placeholders until a real
 PDK (for example an open silicon-photonics PDK) is chosen.
 """
 import hashlib
@@ -34,7 +34,8 @@ import gdsfactory as gf
 OUT = Path("results/opa-layout-001")
 HEATER_LENGTH = 100.0      # um
 COUPLER_GAP = 0.236        # um, generic-PDK default
-COUPLER_LENGTH = 20.0      # um; the 50:50 length must come from simulation
+COUPLER_LENGTH = 23.0      # um; 50:50 for Si 500 x 220 nm at 1.55 um, from OPA-COUPLER-002
+COUPLER_002 = Path("results/opa-coupler-002/result.json")
 FANOUT = (40.0, 28.0)      # (dx, dy) of the S-bends that separate the heaters
 LENGTH_TOLERANCE = 1e-3    # um
 
@@ -185,6 +186,11 @@ def main():
     n_heaters = sum(name.startswith("straight_heater") for name in cells)
     check("building_blocks", n_couplers == 2 and n_heaters == 6,
           f"2 directional couplers and 6 heaters (found {n_couplers} and {n_heaters})")
+    recommended = json.loads(COUPLER_002.read_text())["layout"]["recommended_straight_length_um"]
+    check("coupler_length_from_simulation", abs(COUPLER_LENGTH - recommended) < 0.1,
+          f"coupler straight length {COUPLER_LENGTH} um matches the 50:50 length "
+          f"{recommended:.2f} um from OPA-COUPLER-002 (3D FDTD bend phase, MPB L_c) within 0.1 um")
+
     heater_cells = {name for name in cells if name.startswith("straight_heater")}
     check("identical_heaters", len(heater_cells) == 1,
           "all six heaters are the same cell, so powered and dummy heaters add the same loss")
@@ -258,8 +264,9 @@ def main():
         "failures": failures,
         "limitations": [
             "Generic example PDK: layers, design rules and heater geometry are not a foundry's",
-            "The coupler length is a placeholder; the 50:50 length for a real stack must "
-            "come from simulation (next step: Meep or a mode solver)",
+            "The 23.0 um coupler length is 50:50 for a 500 x 220 nm silicon wire in SiO2 at "
+            "1.55 um (OPA-COUPLER-002); it splits about 35:65 to 68:32 across 1.50-1.60 um "
+            "and +-10 nm fabrication errors move it to roughly 44-59 % (OPA-COUPLER-001)",
             "No foundry DRC deck has been run; checks are geometric sanity checks only",
             "No electrical routing to bond pads and no grating or edge couplers yet",
             "Heater phase per milliwatt and thermal crosstalk are not modelled",

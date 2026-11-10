@@ -6,15 +6,15 @@
   "python_version": "3.13.18",
   "platform": "x86_64",
   "gds_file": "programmable_mzi_2x2.gds",
-  "gds_sha256": "7da746f5c82e2e034539b7882f5d151fbedbf12a3a77931b6015a06f90d5957a",
+  "gds_sha256": "a62885cd010a7c03c0ec08f8619ba244f169482e4d74f2a4fb76c1cba45835c3",
   "footprint_um": [
-    531.8,
+    537.8,
     71.0
   ],
   "parameters": {
     "heater_length_um": 100.0,
     "coupler_gap_um": 0.236,
-    "coupler_length_um": 20.0,
+    "coupler_length_um": 23.0,
     "fanout_um": [
       40.0,
       28.0
@@ -34,13 +34,13 @@
       "width_um": 0.5
     },
     "out_top": {
-      "x_um": 350.0,
+      "x_um": 356.0,
       "y_um": 30.368000000000002,
       "orientation_deg": 0.0,
       "width_um": 0.5
     },
     "out_bot": {
-      "x_um": 350.0,
+      "x_um": 356.0,
       "y_um": -29.632,
       "orientation_deg": 0.0,
       "width_um": 0.5
@@ -100,6 +100,10 @@
       "passed": true,
       "detail": "2 directional couplers and 6 heaters (found 2 and 6)"
     },
+    "coupler_length_from_simulation": {
+      "passed": true,
+      "detail": "coupler straight length 23.0 um matches the 50:50 length 22.98 um from OPA-COUPLER-002 (3D FDTD bend phase, MPB L_c) within 0.1 um"
+    },
     "identical_heaters": {
       "passed": true,
       "detail": "all six heaters are the same cell, so powered and dummy heaters add the same loss"
@@ -128,7 +132,7 @@
   "failures": [],
   "limitations": [
     "Generic example PDK: layers, design rules and heater geometry are not a foundry's",
-    "The coupler length is a placeholder; the 50:50 length for a real stack must come from simulation (next step: Meep or a mode solver)",
+    "The 23.0 um coupler length is 50:50 for a 500 x 220 nm silicon wire in SiO2 at 1.55 um (OPA-COUPLER-002); it splits about 35:65 to 68:32 across 1.50-1.60 um and +-10 nm fabrication errors move it to roughly 44-59 % (OPA-COUPLER-001)",
     "No foundry DRC deck has been run; checks are geometric sanity checks only",
     "No electrical routing to bond pads and no grating or edge couplers yet",
     "Heater phase per milliwatt and thermal crosstalk are not modelled"

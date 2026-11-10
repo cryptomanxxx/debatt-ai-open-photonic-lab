@@ -47,9 +47,15 @@ checks it in CI (workflow `gds-archive.yml`).
 |-------|---------|
 | `status` | One of `exploratory`, `drc-clean`, `submitted`, `fabricated`. Only use `drc-clean` once the foundry's own DRC deck has passed. |
 | `pdk` | The process design kit the layout targets. |
-| `generator` | The script, commit and locked environment that produce the file, so the release can be regenerated. A release without a generator in this repository is not reproducible and should say so in `notes`. |
+| `generator` | Either non-empty `script`, `commit` and `environment` (the script, commit and locked environment that produce the file), or, for a file made outside this repository, a non-empty `external` explaining where it came from and why it cannot be regenerated here. |
 | `released_to` | Who received it, for example a foundry, a review programme or a collaborator. |
-| `files` | The SHA-256 checksum of every GDS file in the folder. CI fails if a file is changed, added without a checksum, or missing. |
+| `files` | The SHA-256 checksum of every GDS file in the folder. CI fails if a file is added without a checksum, is missing, or does not match. |
+
+CI also compares the archive with the base branch (pull requests) or the
+previous commit (pushes): any file in an existing release folder that is
+modified or deleted fails the check, **even if its checksum was updated**. New
+release folders and edits to this README are allowed. To supersede a release,
+add a new folder with a new version.
 
 ## Releases
 

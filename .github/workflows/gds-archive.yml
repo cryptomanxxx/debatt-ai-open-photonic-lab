@@ -23,8 +23,26 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - name: Check provenance and checksums of released GDS files
-        run: python tools/check_gds_archive.py
+      - name: Check provenance, checksums and that existing releases are unchanged
+        env:
+          EVENT: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ "$EVENT" = "pull_request" ]; then
+            base="origin/$BASE_REF"
+          elif [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ]; then
+            base="$BEFORE"
+          else
+            base=""
+          fi
+          if [ -n "$base" ]; then
+            python tools/check_gds_archive.py --base "$base"
+          else
+            python tools/check_gds_archive.py
+          fi

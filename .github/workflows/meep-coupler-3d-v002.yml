@@ -1,0 +1,55 @@
+name: OPA coupler 3D FDTD v002
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/meep-coupler-3d-v002.yml"
+      - "simulations/meep/coupler_3d_v002.py"
+      - "simulations/meep/geometry/coupler_gap0.236.json"
+      - "simulations/meep/opa-fdtd-linux-64.lock.txt"
+
+permissions:
+  contents: read
+
+jobs:
+  coupler-3d:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    defaults:
+      run:
+        shell: micromamba-shell {0}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install locked Meep
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-name: opa-fdtd
+          create-args: >-
+            --file simulations/meep/opa-fdtd-linux-64.lock.txt
+      - name: Archive environment provenance
+        run: |
+          mkdir -p results/opa-coupler-002
+          cp simulations/meep/opa-fdtd-linux-64.lock.txt results/opa-coupler-002/environment-lock.txt
+          micromamba list -n opa-fdtd --json > results/opa-coupler-002/installed-packages.json
+      - name: Run the four FDTD cases in parallel (one per core)
+        run: |
+          set -e
+          pids=""
+          for c in "0 16" "8 16" "16 16" "0 24"; do
+            set -- $c
+            python simulations/meep/coupler_3d_v002.py case $1 $2 > results/opa-coupler-002/log_L$1_res$2.txt 2>&1 &
+            pids="$pids $!"
+          done
+          status=0
+          for p in $pids; do wait $p || status=1; done
+          exit $status
+      - name: Fit and check
+        run: python simulations/meep/coupler_3d_v002.py aggregate
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opa-coupler-002
+          path: results/opa-coupler-002/
+          if-no-files-found: warn

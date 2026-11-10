@@ -12,6 +12,7 @@ on:
       - ".github/workflows/layout-mzi-v001.yml"
       - "layout/**"
       - "results/opa-layout-001/**"
+      - "simulations/meep/geometry/**"
 
 permissions:
   contents: read
@@ -37,6 +38,10 @@ jobs:
         run: python layout/mzi_2x2_layout_v001.py
       - name: Committed GDS matches the generated GDS
         run: git diff --exit-code -- results/opa-layout-001/programmable_mzi_2x2.gds
+      - name: Coupler geometry for Meep matches the layout (OPA-COUPLER-002)
+        run: |
+          python layout/export_coupler_geometry.py
+          git diff --exit-code -- simulations/meep/geometry/coupler_gap0.236.json
       - name: Upload layout
         if: always()
         uses: actions/upload-artifact@v4

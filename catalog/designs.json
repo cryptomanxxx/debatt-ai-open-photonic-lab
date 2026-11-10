@@ -267,6 +267,86 @@
         "open-pdk"
       ],
       "folder": "results/opa-layout-003"
+    },
+    {
+      "id": "OPA-LAYOUT-004",
+      "title": "Passive 2x2 MZI with edge couplers on a 10 x 5 mm die (Luxtelligence lnoi400)",
+      "function": "passive 2x2 Mach-Zehnder interferometer (fixed splitting)",
+      "status": "exploratory",
+      "pdk": {
+        "name": "Luxtelligence lnoi400 (lxt_pdk_gf)",
+        "version": "2.0 @ d16db6a",
+        "open_source": true,
+        "platform": "X-cut thin-film lithium niobate on insulator"
+      },
+      "wavelength_um": {
+        "design": 1.55
+      },
+      "footprint_um": [
+        10000.0,
+        4950.0
+      ],
+      "optical_ports": {
+        "inputs": 2,
+        "outputs": 2,
+        "type": "edge coupler (inverse taper)",
+        "pitch_um": 127.0
+      },
+      "controls": {},
+      "files": {
+        "gds": "mzi_2x2_lnoi400.gds",
+        "preview": "mzi_2x2_lnoi400.png"
+      },
+      "generator": {
+        "script": "layout/mzi_2x2_lnoi400_v004.py",
+        "environment": "layout/requirements-lock-lnoi400.txt"
+      },
+      "checks": {
+        "passed": 8,
+        "total": 8
+      },
+      "key_results": [
+        {
+          "name": "Couplers",
+          "value": "2 x mmi2x2_optimized1550 (PDK)",
+          "source": "OPA-LAYOUT-004"
+        },
+        {
+          "name": "Fiber I/O",
+          "value": "4 double linear inverse tapers, 127 um pitch on two facets 10 mm apart",
+          "source": "OPA-LAYOUT-004"
+        },
+        {
+          "name": "Optical connectivity",
+          "value": "28 instance ports, all connected",
+          "source": "layout/port_check.py"
+        },
+        {
+          "name": "Relation to OPA 0.24",
+          "value": "identical outside the MZI (XOR 0); bias arms inside differ",
+          "source": "gds/opa-p-passive-mzi-v0.24-eurocdp"
+        }
+      ],
+      "limitations": [
+        "lnoi400 DRC not run (runset on request)",
+        "passive",
+        "input and output routes unequal in length",
+        "not simulated"
+      ],
+      "tags": [
+        "mzi",
+        "2x2",
+        "passive",
+        "mmi",
+        "edge-coupler",
+        "lnoi400",
+        "tfln",
+        "lithium-niobate",
+        "luxtelligence",
+        "eurocdp",
+        "open-pdk"
+      ],
+      "folder": "results/opa-layout-004"
     }
   ]
 }

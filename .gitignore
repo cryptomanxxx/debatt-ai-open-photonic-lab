@@ -222,3 +222,5 @@ __marimo__/
 # Local layout environment (see README)
 .venv-layout/
 .venv-ubc/
+.venv-lnoi400/
+.lxt_pdk_gf/

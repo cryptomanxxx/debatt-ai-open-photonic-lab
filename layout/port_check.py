@@ -13,11 +13,16 @@ instance must
 
 Anything else is a problem: a dangling port (no partner, not exported), more
 than one partner, or a partner with the wrong direction or width.
+
+ignore_ports names ports that a PDK cell exposes as reference markers inside
+the cell rather than as waveguide ends (for example the lnoi400 MZI's
+"upper_taper_start", where electrodes are placed); the caller lists them
+explicitly.
 """
 import collections
 
 
-def optical_port_check(top, port_types=("optical",)):
+def optical_port_check(top, port_types=("optical",), ignore_ports=()):
     """Return (number of instance ports checked, list of problems)."""
     problems, checked = [], 0
     cells = [top] + [top.kcl[ci] for ci in top.called_cells()]
@@ -28,11 +33,11 @@ def optical_port_check(top, port_types=("optical",)):
         # with the cell name is only for messages
         for k, inst in enumerate(cell.insts):
             for p in inst.ports:
-                if p.port_type in port_types:
+                if p.port_type in port_types and p.name not in ignore_ports:
                     inst_ports[(p.x, p.y)].append(
                         ((k, p.name), p.angle, p.width, f"{inst.cell.name}#{k}.{p.name}"))
         for p in cell.ports:
-            if p.port_type in port_types:
+            if p.port_type in port_types and p.name not in ignore_ports:
                 cell_ports.append(((p.x, p.y), p.angle, p.width, f"{cell.name}<{p.name}>"))
         exports = collections.defaultdict(list)
         for pos, angle, width, label in cell_ports:

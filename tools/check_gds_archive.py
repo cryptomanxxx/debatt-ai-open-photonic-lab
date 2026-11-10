@@ -69,6 +69,15 @@ def check_release(folder):
     for gds in sorted(folder.glob("*.gds")) + sorted(folder.glob("*.oas")):
         if gds.name not in listed:
             errors.append(f"{folder.name}: {gds.name} has no checksum in provenance.json")
+    for name in list(listed):
+        # Only plain file names: the released bytes must live in this folder.
+        if (not isinstance(name, str) or name != Path(name).name or name in ("", ".", "..")
+                or name.startswith(".") or "\\" in name):
+            errors.append(f"{folder.name}: '{name}' in 'files' must be a plain file name "
+                          f"inside the release folder (no paths, no '..')")
+            del listed[name]
+    if listed and not any(Path(n).suffix.lower() in (".gds", ".oas") for n in listed):
+        errors.append(f"{folder.name}: 'files' must include at least one .gds or .oas file")
     for name, expected in listed.items():
         path = folder / name
         if not path.is_file():

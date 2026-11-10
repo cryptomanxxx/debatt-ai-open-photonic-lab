@@ -65,6 +65,14 @@ degenerate = {
     "anti_diagonal_phases": phase_screen(2.1, 0.4) @ np.array([[0, 1], [1, 0]]),
     "hadamard": np.array([[1, 1], [1, -1]], dtype=complex) / np.sqrt(2),
 }
+# Targets a tiny angle away from the bar and cross states, where theta must be
+# recovered without losing the small matrix entries to rounding.
+near_edge = {}
+for eps in (1e-12, 1e-8, 1e-6, 1e-4):
+    c, s_ = np.cos(eps), np.sin(eps)
+    near_edge[f"near_bar_rotation_{eps:g}"] = np.array([[c, -s_], [s_, c]], dtype=complex)
+    near_edge[f"near_cross_{eps:g}"] = np.array([[s_, c], [c, -s_]], dtype=complex)
+degenerate.update(near_edge)
 targets += list(degenerate.values())
 program_errors, settings = [], []
 for u in targets:
@@ -74,8 +82,11 @@ for u in targets:
 checks["programming_max_abs_error"] = float(max(program_errors))
 examples = {
     name: dict(zip(("theta", "phi", "a", "b"), program_unitary(u)))
-    for name, u in degenerate.items()
+    for name, u in degenerate.items() if name not in near_edge
 }
+checks["near_edge_programming_max_abs_error"] = float(max(
+    np.abs(programmed_matrix(*program_unitary(u)) - u).max()
+    for u in near_edge.values()))
 
 # 4. Matrix-vector multiplication with programmed circuits.
 mvm_errors = []

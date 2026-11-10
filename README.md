@@ -134,9 +134,10 @@ accelerators.
 | Transfer matrix equals the closed form | 4e-16 |
 | Unitarity (lossless) | 7e-16 |
 | Power splitting follows sin²(θ/2) | 7e-16 |
-| 1000 random unitaries + bar/cross/Hadamard programmed exactly | 7e-15 |
-| Programmed circuit multiplies input vectors correctly | 7e-15 (relative) |
-| Real 30° rotation weight applied to real inputs | 3e-16 |
+| 1000 random unitaries + bar/cross/Hadamard programmed exactly | 2e-15 |
+| Targets 1e-12 to 1e-4 rad from the bar and cross states | 7e-16 |
+| Programmed circuit multiplies input vectors correctly | 2e-15 (relative) |
+| Real 30° rotation weight applied to real inputs | 5e-16 |
 
 All errors are at floating-point rounding level. As a sensitivity check, the same
 settings on hardware with 48:52 instead of 50:50 couplers give errors of 0.04,

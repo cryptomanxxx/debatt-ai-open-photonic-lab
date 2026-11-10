@@ -24,8 +24,6 @@ Clements meshes used for optical matrix multiplication.
 """
 import numpy as np
 
-TOL_DEGENERATE = 1e-12
-
 
 def coupler(split=0.5):
     """Directional coupler; split is the fraction of power that stays in its arm."""
@@ -60,27 +58,34 @@ def mzi_analytic(theta, phi):
 def program_unitary(u):
     """Find (theta, phi, a, b) so that phase_screen(a, b) @ mzi(theta, phi) == u.
 
-    u must be a 2x2 unitary. theta is in [0, pi]. When theta is 0 or pi the
-    external phase phi is not uniquely defined; it is then set to 0 and the
-    output phases absorb the difference.
+    u must be a 2x2 unitary. theta is in [0, pi]. At exactly theta = 0 or pi
+    the external phase phi is not uniquely defined (the output phases absorb
+    it); it is then set to 0.
+
+    With g the global phase of mzi_analytic, s = sin(theta/2), c = cos(theta/2):
+        u00 = e^{i(a+g+phi)} s     u01 = e^{i(a+g)} c
+        u10 = e^{i(b+g+phi)} c     u11 = e^{i(b+g)} (-s)
+    No step divides by, or takes the phase of, an entry that may be tiny
+    unless that entry's own size bounds the resulting error.
     """
     u = np.asarray(u, dtype=complex)
-    s = np.clip(abs(u[0, 0]), 0.0, 1.0)
-    theta = 2 * np.arcsin(s)
+    # arctan2 of both magnitudes stays accurate near the bar (theta = pi) and
+    # cross (theta = 0) states, where arcsin or arccos of one magnitude loses
+    # the small entry to rounding.
+    theta = 2 * np.arctan2(abs(u[0, 0]), abs(u[0, 1]))
     s, c = np.sin(theta / 2), np.cos(theta / 2)
     g = np.angle(1j * np.exp(1j * theta / 2))      # global phase of mzi_analytic
-    if c > TOL_DEGENERATE and s > TOL_DEGENERATE:
-        phi = np.angle(u[0, 0]) - np.angle(u[0, 1])
+    # Both rows give e^{i phi} * s * c; summing them keeps phi well defined
+    # whenever it matters, and an error in phi only scales with min(s, c).
+    z = u[0, 0] * np.conj(u[0, 1]) - u[1, 0] * np.conj(u[1, 1])
+    phi = np.angle(z) if abs(z) > 0 else 0.0
+    # Take each output phase from the larger entry of its row.
+    if c >= s:
         a = np.angle(u[0, 1]) - g
-        b = np.angle(u[1, 1]) - (g + np.pi)          # u11 = e^{ib} * (-s) * e^{ig}
-    elif s <= TOL_DEGENERATE:                       # theta = 0: cross state
-        phi = 0.0
-        a = np.angle(u[0, 1]) - g
-        b = np.angle(u[1, 0]) - g
-    else:                                           # theta = pi: bar state
-        phi = 0.0
-        a = np.angle(u[0, 0]) - g
-        b = np.angle(u[1, 1]) - (g + np.pi)
+        b = np.angle(u[1, 0]) - g - phi
+    else:
+        a = np.angle(u[0, 0]) - g - phi
+        b = np.angle(u[1, 1]) - g - np.pi
     wrap = lambda x: float(np.mod(x, 2 * np.pi))
     return float(theta), wrap(phi), wrap(a), wrap(b)
 

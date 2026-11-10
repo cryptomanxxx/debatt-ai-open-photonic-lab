@@ -1,0 +1,46 @@
+name: OPA layout MZI SiEPIC v002
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/layout-ubc-v002.yml"
+      - "layout/mzi_2x2_ubc_v002.py"
+      - "layout/requirements-lock-ubc.txt"
+  pull_request:
+    paths:
+      - ".github/workflows/layout-ubc-v002.yml"
+      - "layout/mzi_2x2_ubc_v002.py"
+      - "layout/requirements-lock-ubc.txt"
+      - "results/opa-layout-002/**"
+
+permissions:
+  contents: read
+
+jobs:
+  mzi-siepic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install locked SiEPIC layout environment (no proprietary packages)
+        run: |
+          pip install -r layout/requirements-lock-ubc.txt
+          if pip show gdsfactoryplus >/dev/null 2>&1; then echo "gdsfactoryplus must not be installed"; exit 1; fi
+      - name: Generate layout and run checks
+        env:
+          MPLBACKEND: Agg
+        run: python layout/mzi_2x2_ubc_v002.py
+      - name: Committed GDS and datasheet match the generated ones
+        run: git diff --exit-code -- results/opa-layout-002/mzi_2x2_siepic.gds results/opa-layout-002/design.json
+      - name: Upload layout
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opa-layout-002
+          path: results/opa-layout-002/
+          if-no-files-found: warn

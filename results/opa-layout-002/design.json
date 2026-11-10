@@ -1,0 +1,81 @@
+{
+  "id": "OPA-LAYOUT-002",
+  "title": "2x2 MZI with broadband couplers, fiber array and pads (SiEPIC EBeam)",
+  "function": "tunable 2x2 MZI switch / splitter (theta only)",
+  "status": "exploratory",
+  "pdk": {
+    "name": "SiEPIC EBeam (ubcpdk)",
+    "version": "3.3.0",
+    "open_source": true,
+    "platform": "Si 220 nm SOI, electron-beam lithography"
+  },
+  "wavelength_um": {
+    "design": 1.55
+  },
+  "footprint_um": [
+    267.969,
+    422.5
+  ],
+  "optical_ports": {
+    "inputs": 2,
+    "outputs": 2,
+    "type": "TE grating coupler",
+    "pitch_um": 127.0
+  },
+  "controls": {
+    "heaters": 1,
+    "bond pads": 2
+  },
+  "files": {
+    "gds": "mzi_2x2_siepic.gds",
+    "preview": "mzi_2x2_siepic.png"
+  },
+  "generator": {
+    "script": "layout/mzi_2x2_ubc_v002.py",
+    "environment": "layout/requirements-lock-ubc.txt"
+  },
+  "checks": {
+    "passed": 7,
+    "total": 7
+  },
+  "key_results": [
+    {
+      "name": "Splitters",
+      "value": "2 x ebeam_bdc_te1550 broadband directional coupler (PDK fixed cell, not verified here)",
+      "source": "OPA-LAYOUT-002"
+    },
+    {
+      "name": "Fiber I/O",
+      "value": "4 TE grating couplers at 127 um pitch",
+      "source": "OPA-LAYOUT-002"
+    },
+    {
+      "name": "Arm balance",
+      "value": "arms 270.548 / 270.548 um",
+      "source": "OPA-LAYOUT-002"
+    },
+    {
+      "name": "Grating coupler",
+      "value": "PDK placeholder model: 6 dB, 35 nm bandwidth (not measured)",
+      "source": "ubcpdk.models.gc_te1550"
+    }
+  ],
+  "limitations": [
+    "full EBeam DRC not run",
+    "broadband coupler not verified",
+    "theta only (no phi, a, b)",
+    "not submitted"
+  ],
+  "tags": [
+    "mzi",
+    "2x2",
+    "phase-shifter",
+    "broadband-coupler",
+    "grating-coupler",
+    "bond-pads",
+    "siepic",
+    "ebeam",
+    "silicon",
+    "open-pdk"
+  ]
+}

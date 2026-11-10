@@ -40,7 +40,7 @@ reproducible so that anyone can learn from it and build on it.
 | 1 | FDTD fundamentals: reproducible Meep pipeline, convergence and normalization practice | **Done** (001–009) |
 | 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010–011) |
 | 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | **Started** (COUPLER-001, Si 220 nm) |
-| 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001, generic PDK) |
+| 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001 generic PDK; LAYOUT-002 SiEPIC EBeam open PDK) |
 | 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001–003) |
 | 6 | Design-rule-checked GDS ready for an MPW run (includes a 32 px/µm FDTD convergence run of the coupler, see OPA-COUPLER-002) | Planned |
 | 7 | Measurement plan and published measurement data | Planned |
@@ -391,6 +391,45 @@ Layers, design rules and heaters are placeholders. The 23.0 µm length is
 is robust to etch bias. A real chip still needs calibration. No
 foundry DRC has been run, and there are no bond pads or fiber couplers yet.
 
+### OPA-LAYOUT-002: 2×2 MZI in the open SiEPIC EBeam PDK
+
+![2×2 MZI in SiEPIC EBeam](results/opa-layout-002/mzi_2x2_siepic.png)
+
+The same circuit idea built from the cells of an open foundry PDK:
+[ubcpdk](https://github.com/gdsfactory/ubc) 3.3.0, the gdsfactory version of
+the SiEPIC EBeam PDK (MIT licence) for electron-beam silicon photonics. It is
+the first lab design with real fiber I/O and bond pads, at 268 × 423 µm.
+
+- **Two broadband directional couplers** (`ebeam_bdc_te1550`), the PDK's answer
+  to the narrow 1.54–1.56 µm band of a plain coupler (OPA-COUPLER-003).
+- **A balanced MZI** (arms 270.548 µm each) with a metal heater on one arm.
+- **Four TE grating couplers** at the standard 127 µm fiber-array pitch, and two
+  bond pads for the heater.
+
+All 7 checks pass:
+- four fiber ports at a 127 µm pitch, and two heater pads;
+- the expected PDK cells (2 broadband couplers, 4 grating couplers, 1 heater);
+- balanced arms;
+- measurement labels carrying the lab name;
+- only PDK layers;
+- a GDS that a fresh process regenerates byte for byte.
+
+Two problems were found and fixed on the way:
+- The PDK writes a developer's personal username into the measurement labels
+  unless `CONF.username` is set before import.
+- Two layers outside the PDK layer map turned out to come from the PDK's own
+  grating-coupler cell.
+
+**Environment:** newer ubcpdk releases (≥ 3.3.3) depend on the proprietary
+`gdsfactoryplus`, so this layout pins 3.3.0 in its own Python 3.12 environment
+([`requirements-lock-ubc.txt`](layout/requirements-lock-ubc.txt)). CI fails if
+`gdsfactoryplus` is installed.
+
+**Not done yet:** the full SiEPIC EBeam DRC, verification of the broadband
+coupler, phase shifters for φ, a and b (only θ is tunable), and any foundry
+review. The PDK's grating-coupler model is a placeholder (6 dB, 35 nm), not
+measured data.
+
 ## Design catalog
 
 [`catalog/README.md`](catalog/README.md) lists every chip layout with a preview,
@@ -431,6 +470,15 @@ Layouts need Python 3.13 and their own environment:
 python3.13 -m venv .venv-layout && . .venv-layout/bin/activate
 pip install -r layout/requirements-lock.txt
 python layout/mzi_2x2_layout_v001.py                     # writes the GDS, PNG and report to results/opa-layout-001/
+```
+
+The SiEPIC layout needs Python 3.12 and its own environment:
+
+```bash
+python3.12 -m venv .venv-ubc && . .venv-ubc/bin/activate
+pip install -r layout/requirements-lock-ubc.txt
+python layout/mzi_2x2_ubc_v002.py                        # writes results/opa-layout-002/
+python tools/build_catalog.py                            # refreshes catalog/
 ```
 
 New experiments should import shared geometry and measurement helpers from

@@ -42,7 +42,7 @@ reproducible so that anyone can learn from it and build on it.
 | 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | **Started** (COUPLER-001, Si 220 nm) |
 | 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001, generic PDK) |
 | 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001–003) |
-| 6 | Design-rule-checked GDS ready for an MPW run | Planned |
+| 6 | Design-rule-checked GDS ready for an MPW run (includes a 32 px/µm FDTD convergence run of the coupler, see OPA-COUPLER-002) | Planned |
 | 7 | Measurement plan and published measurement data | Planned |
 
 Fabricating photonic chips requires a foundry. The realistic open path is to
@@ -324,8 +324,10 @@ Python 3.13 environment ([`layout/requirements-lock.txt`](layout/requirements-lo
 
 The same circuit as OPA-MZI-001, drawn as a GDS file
 ([`programmable_mzi_2x2.gds`](results/opa-layout-001/programmable_mzi_2x2.gds),
-532 × 71 µm). From left to right: phase shifter φ, then two 2×2 directional
-couplers with heater θ between them, then output phase shifters a and b. Every
+538 × 71 µm). From left to right: phase shifter φ, then two 2×2 directional
+couplers with heater θ between them, then output phase shifters a and b. The
+couplers have a 23.0 µm straight section, which gives 50:50 for a 500 × 220 nm
+silicon wire at 1.55 µm according to OPA-COUPLER-002. Every
 powered heater has an identical unpowered heater on the other waveguide, so both
 paths see the same heater loss, which was the lesson from OPA-MZI-002.
 
@@ -333,6 +335,7 @@ paths see the same heater loss, which was the lesson from OPA-MZI-002.
 |-------|--------|
 | 4 optical ports, inputs west and outputs east, 0.5 µm wide; top port = waveguide 0 of the circuit model | pass |
 | 2 directional couplers and 6 identical heaters | pass |
+| Coupler length matches the 50:50 length from OPA-COUPLER-002 (within 0.1 µm) | pass, 23.0 µm (fails for the old 20 µm) |
 | Internal arms equal length (170.548 µm each) | pass, difference 0 |
 | Input and output paths equal length on both waveguides | pass |
 | Fan-out S-bends do not cross; heater footprints do not overlap | pass |
@@ -342,14 +345,18 @@ The crossing check caught a real bug during development: the input S-bends
 were mirrored, so the top input ended up at the bottom and the two input
 waveguides crossed.
 
-**Known issue:** for a silicon 500 × 220 nm wire with a 236 nm gap, the 20 µm
-couplers split about 41:59 including the S-bends (OPA-COUPLER-002). The
-straight section should be 23.0 µm for 50:50.
+The first version used 20 µm couplers, which split only about 41:59. The
+length now comes from simulation, and the layout check fails if it drifts from
+the OPA-COUPLER-002 result.
 
 **Limits:** this uses gdsfactory's *generic* example PDK, not a foundry process.
-Layers, design rules and heaters are placeholders, and the coupler length is
-not yet tuned to 50:50. No foundry DRC has been run, and there are no bond pads
-or fiber couplers yet.
+Layers, design rules and heaters are placeholders. The 23.0 µm length is
+50:50 at 1.55 µm only. Its wavelength and fabrication sensitivity have not been
+simulated for this exact coupler (236 nm gap, bends included). Indicative figures
+from the straight-only model of OPA-COUPLER-001: a 236 nm-gap coupler splits
+34:66 to 70:30 across 1.50–1.60 µm, and for a 200 nm gap ±10 nm errors give
+44–59 %. Either way, a real chip still needs calibration. No
+foundry DRC has been run, and there are no bond pads or fiber couplers yet.
 
 ## Running locally
 

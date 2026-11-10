@@ -7,12 +7,14 @@ on:
     paths:
       - ".github/workflows/layout-mzi-v001.yml"
       - "layout/**"
+      - "results/opa-coupler-002/result.json"
   pull_request:
     paths:
       - ".github/workflows/layout-mzi-v001.yml"
       - "layout/**"
       - "results/opa-layout-001/**"
       - "simulations/meep/geometry/**"
+      - "results/opa-coupler-002/result.json"
 
 permissions:
   contents: read

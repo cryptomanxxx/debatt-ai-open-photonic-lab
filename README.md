@@ -350,9 +350,12 @@ length now comes from simulation, and the layout check fails if it drifts from
 the OPA-COUPLER-002 result.
 
 **Limits:** this uses gdsfactory's *generic* example PDK, not a foundry process.
-Layers, design rules and heaters are placeholders. The 50:50 split only holds
-near 1.55 µm (35:65 to 68:32 across 1.50–1.60 µm), and ±10 nm fabrication
-errors move it to about 44–59 %, so a real chip still needs calibration. No
+Layers, design rules and heaters are placeholders. The 23.0 µm length is
+50:50 at 1.55 µm only. Its wavelength and fabrication sensitivity have not been
+simulated for this exact coupler (236 nm gap, bends included). Indicative figures
+from the straight-only model of OPA-COUPLER-001: a 236 nm-gap coupler splits
+34:66 to 70:30 across 1.50–1.60 µm, and for a 200 nm gap ±10 nm errors give
+44–59 %. Either way, a real chip still needs calibration. No
 foundry DRC has been run, and there are no bond pads or fiber couplers yet.
 
 ## Running locally

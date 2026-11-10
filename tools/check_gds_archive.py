@@ -88,8 +88,9 @@ def git(*args):
 def check_immutable(base):
     """Files under release folders at `base` must be unchanged in the working tree."""
     errors = []
-    listing = git("ls-tree", "-r", "--name-only", base, "--", "gds/").decode().split("\n")
-    for path in filter(None, listing):
+    # -z: NUL-separated, unquoted paths (default output quotes non-ASCII names).
+    listing = git("ls-tree", "-r", "-z", "--name-only", base, "--", "gds/").split(b"\0")
+    for path in (p.decode("utf-8") for p in listing if p):
         parts = Path(path).parts
         if len(parts) < 3:            # gds/README.md and other top-level files
             continue

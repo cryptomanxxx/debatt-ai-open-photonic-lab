@@ -41,7 +41,7 @@ reproducible so that anyone can learn from it and build on it.
 | 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010–011) |
 | 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | Planned |
 | 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | Planned |
-| 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001–002) |
+| 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001–003) |
 | 6 | Design-rule-checked GDS ready for an MPW run | Planned |
 | 7 | Measurement plan and published measurement data | Planned |
 
@@ -120,6 +120,7 @@ the same locked environment, and run in seconds.
 |----|---------------------|
 | MZI-001 | An ideal 2×2 MZI plus an output phase screen is a programmable 2×2 unitary matrix multiplier |
 | MZI-002 | How coupler errors, arm loss, phase noise and phase resolution limit that multiplier, and what calibration can recover |
+| MZI-003 | A Clements mesh realizes any N×N unitary; two meshes plus attenuators run a 4×4 neural-network layer |
 
 ### OPA-MZI-001 results
 
@@ -195,6 +196,49 @@ the main design lesson.
 Assumes exact knowledge of the hardware for calibration, a single wavelength,
 and no thermal crosstalk or drift.
 
+### OPA-MZI-003 results
+
+A **Clements mesh** arranges N(N−1)/2 MZIs in N columns, so every path crosses
+the same number of MZIs. It can realize any N×N unitary matrix. A general weight
+matrix W is realized through its singular value decomposition W = U·Σ·V†: one
+mesh for V†, a column of attenuators for Σ, and one mesh for U.
+
+| Check | Result |
+|-------|--------|
+| Random unitaries, N = 2, 3, 4, 8, 16 | reconstructed to ≤ 3e-15; 1, 3, 6, 28, 120 MZIs; N columns |
+| 200 random real 4×4 weight matrices as mesh–attenuators–mesh | ≤ 1e-14 relative error |
+
+**Error grows with mesh size** (mean error):
+
+| N | MZIs | Coupler spread 1 %, naive | Same, calibrated | Phase noise 0.01 rad |
+|---|------|---------------------------|------------------|----------------------|
+| 2 | 1 | 0.013 | 2e-16 | 0.013 |
+| 4 | 6 | 0.023 | 2e-5 | 0.019 |
+| 8 | 28 | 0.035 | 5e-16 | 0.028 |
+
+Errors grow roughly as √N, because light crosses N MZIs and their errors add
+randomly. Global calibration, which re-optimizes all phases of the whole mesh
+for the measured hardware, removes coupler errors almost completely. Phase noise
+cannot be calibrated away.
+
+**Toy neural-network layer.** A linear 4-class classifier, trained digitally on
+synthetic 4-feature data, runs on the photonic layer:
+
+| | Test accuracy | Weight error | Effective bits |
+|---|---|---|---|
+| Digital | 86.8 % | – | – |
+| Ideal photonic layer | 86.8 % (identical predictions) | 1e-14 | – |
+| 20 imperfect chips, naive | 86.8 % (86.1–86.9 %) | 5.4 % | 4.2 |
+| 20 imperfect chips, calibrated | 86.8 % (86.1–86.9 %) | 4.1 % | 4.6 |
+| Ideal optics, power-only readout | 63.1 % | – | – |
+
+The imperfect chips use the MZI-002 assumptions (1 % coupler spread, 0.2 dB
+phase-shifter loss, 10-bit DAC, 0.005 rad noise) in all 12 MZIs. On this easy
+task, 4–5 % weight error does not change the accuracy. Harder tasks and deeper
+networks will be more sensitive. The power-only result shows that the phase of
+the output matters: either coherent detection or an encoding that keeps outputs
+positive is needed.
+
 ## Running locally
 
 ```bash
@@ -204,6 +248,7 @@ micromamba activate opa-fdtd
 python simulations/meep/bend_3d_launched_mode_v011.py   # writes results/opa-fdtd-011/result.json
 python simulations/circuit/mzi_2x2_v001.py               # writes results/opa-mzi-001/result.json, < 1 s
 python simulations/circuit/mzi_imperfect_v002.py         # writes results/opa-mzi-002/result.json, ~1 min
+python simulations/circuit/mesh_clements_v003.py         # writes results/opa-mzi-003/result.json, ~15 s
 ```
 
 New experiments should import shared geometry and measurement helpers from

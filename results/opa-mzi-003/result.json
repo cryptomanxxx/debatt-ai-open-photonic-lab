@@ -1,0 +1,371 @@
+{
+  "experiment": "OPA-MZI-003",
+  "goal": "Realize N x N unitaries and a 4x4 neural-network weight matrix with Clements MZI meshes, and measure how errors scale with mesh size",
+  "model": "Transfer-matrix circuit model; single wavelength; coherent input encoding and coherent detection",
+  "numpy_version": "2.4.6",
+  "scipy_version": "1.17.1",
+  "python_version": "3.11.18",
+  "seed": 20261112,
+  "checks": {
+    "decomposition_exact": {
+      "passed": true,
+      "detail": "every Haar-random unitary for N = 2..16 is reconstructed to 1e-12"
+    },
+    "decomposition_mzi_count": {
+      "passed": true,
+      "detail": "each N x N mesh uses exactly N(N-1)/2 MZIs"
+    },
+    "decomposition_rectangular": {
+      "passed": true,
+      "detail": "each mesh fits in N columns (Clements rectangular layout)"
+    },
+    "svd_layer_exact": {
+      "passed": true,
+      "detail": "200 random real 4x4 weight matrices realized as mesh-attenuators-mesh to 1e-12"
+    },
+    "calibration_never_worse_mesh": {
+      "passed": true,
+      "detail": "global calibration never increases the error of any mesh"
+    },
+    "naive_error_grows_with_n": {
+      "passed": true,
+      "detail": "with 1 % coupler spread, naive error increases from N = 2 to 4 to 8"
+    },
+    "phase_noise_error_grows_with_n": {
+      "passed": true,
+      "detail": "with 0.01 rad phase noise, error increases from N = 2 to 4 to 8"
+    },
+    "classifier_task_meaningful": {
+      "passed": true,
+      "detail": "the digital classifier reaches more than 80 % test accuracy"
+    },
+    "ideal_optics_matches_digital": {
+      "passed": true,
+      "detail": "ideal photonic layer gives exactly the digital predictions"
+    },
+    "calibration_helps_classifier": {
+      "passed": true,
+      "detail": "calibration lowers the median weight error of the imperfect layer"
+    }
+  },
+  "failures": [],
+  "A_decomposition": [
+    {
+      "n": 2,
+      "targets": 100,
+      "max_abs_error": 6.206335383118183e-16,
+      "mzi_count": [
+        1
+      ],
+      "columns": [
+        1
+      ]
+    },
+    {
+      "n": 3,
+      "targets": 100,
+      "max_abs_error": 1.336885555457667e-15,
+      "mzi_count": [
+        3
+      ],
+      "columns": [
+        3
+      ]
+    },
+    {
+      "n": 4,
+      "targets": 100,
+      "max_abs_error": 1.5607740065184754e-15,
+      "mzi_count": [
+        6
+      ],
+      "columns": [
+        4
+      ]
+    },
+    {
+      "n": 8,
+      "targets": 50,
+      "max_abs_error": 1.848613018811863e-15,
+      "mzi_count": [
+        28
+      ],
+      "columns": [
+        8
+      ]
+    },
+    {
+      "n": 16,
+      "targets": 10,
+      "max_abs_error": 2.806608891980462e-15,
+      "mzi_count": [
+        120
+      ],
+      "columns": [
+        16
+      ]
+    }
+  ],
+  "B_svd_layer_max_relative_error": 1.0126022513207357e-14,
+  "C_error_scaling": [
+    {
+      "n": 2,
+      "mzis": 1,
+      "error_source": "coupler_split",
+      "sigma": 0.005,
+      "naive_error": {
+        "mean": 0.005932150710919978,
+        "median": 0.004770058498638415,
+        "p95": 0.013249133246752708,
+        "max": 0.014372221099085484
+      },
+      "calibrated_error": {
+        "mean": 2.1741764355487624e-16,
+        "median": 2.0710069553070935e-16,
+        "p95": 3.6111370118277874e-16,
+        "max": 4.284450931267721e-16
+      },
+      "calibrated_never_worse": true
+    },
+    {
+      "n": 2,
+      "mzis": 1,
+      "error_source": "coupler_split",
+      "sigma": 0.01,
+      "naive_error": {
+        "mean": 0.013029503158148856,
+        "median": 0.011650517035483669,
+        "p95": 0.025387218392158555,
+        "max": 0.0384335710238284
+      },
+      "calibrated_error": {
+        "mean": 2.1230566085497367e-16,
+        "median": 1.8782664939531642e-16,
+        "p95": 3.673490698678015e-16,
+        "max": 4.872072101741998e-16
+      },
+      "calibrated_never_worse": true
+    },
+    {
+      "n": 2,
+      "mzis": 1,
+      "error_source": "coupler_split",
+      "sigma": 0.02,
+      "naive_error": {
+        "mean": 0.02552018930827789,
+        "median": 0.02162222268129011,
+        "p95": 0.046039271520439476,
+        "max": 0.07238947971295237
+      },
+      "calibrated_error": {
+        "mean": 1.997402575470362e-16,
+        "median": 1.8587423945523492e-16,
+        "p95": 3.047864188762702e-16,
+        "max": 4.0077744118387634e-16
+      },
+      "calibrated_never_worse": true
+    },
+    {
+      "n": 2,
+      "mzis": 1,
+      "error_source": "phase_noise",
+      "sigma": 0.01,
+      "error": {
+        "mean": 0.012733099293901115,
+        "median": 0.011703125368773788,
+        "p95": 0.02427817323590815,
+        "max": 0.03283530360492437
+      }
+    },
+    {
+      "n": 4,
+      "mzis": 6,
+      "error_source": "coupler_split",
+      "sigma": 0.005,
+      "naive_error": {
+        "mean": 0.012230927808960767,
+        "median": 0.012683591047867232,
+        "p95": 0.017196948349150257,
+        "max": 0.018970666936177924
+      },
+      "calibrated_error": {
+        "mean": 3.534651808896222e-16,
+        "median": 3.4956756315311473e-16,
+        "p95": 4.883995494712488e-16,
+        "max": 5.131615814814057e-16
+      },
+      "calibrated_never_worse": true
+    },
+    {
+      "n": 4,
+      "mzis": 6,
+      "error_source": "coupler_split",
+      "sigma": 0.01,
+      "naive_error": {
+        "mean": 0.02290627372140559,
+        "median": 0.022782426276679237,
+        "p95": 0.035586512500574985,
+        "max": 0.03786016037163305
+      },
+      "calibrated_error": {
+        "mean": 2.275847492109808e-05,
+        "median": 3.5030804156514355e-16,
+        "p95": 4.782649732289248e-16,
+        "max": 0.000910338996830305
+      },
+      "calibrated_never_worse": true
+    },
+    {
+      "n": 4,
+      "mzis": 6,
+      "error_source": "coupler_split",
+      "sigma": 0.02,
+      "naive_error": {
+        "mean": 0.049265526630087306,
+        "median": 0.04965438024288838,
+        "p95": 0.061837296817654416,
+        "max": 0.0770559959715967
+      },
+      "calibrated_error": {
+        "mean": 0.0013547288668233081,
+        "median": 3.332196777031081e-16,
+        "p95": 0.010267765770462253,
+        "max": 0.024690254428489503
+      },
+      "calibrated_never_worse": true
+    },
+    {
+      "n": 4,
+      "mzis": 6,
+      "error_source": "phase_noise",
+      "sigma": 0.01,
+      "error": {
+        "mean": 0.01928147488427102,
+        "median": 0.018619309403807415,
+        "p95": 0.029042418349600575,
+        "max": 0.038519216220577746
+      }
+    },
+    {
+      "n": 8,
+      "mzis": 28,
+      "error_source": "coupler_split",
+      "sigma": 0.005,
+      "naive_error": {
+        "mean": 0.019257029620943146,
+        "median": 0.019580814427619234,
+        "p95": 0.021571138241689658,
+        "max": 0.024026593226829752
+      },
+      "calibrated_error": {
+        "mean": 5.141094109045612e-16,
+        "median": 5.088178532816204e-16,
+        "p95": 5.908166729554949e-16,
+        "max": 6.343638096681714e-16
+      },
+      "calibrated_never_worse": true
+    },
+    {
+      "n": 8,
+      "mzis": 28,
+      "error_source": "coupler_split",
+      "sigma": 0.01,
+      "naive_error": {
+        "mean": 0.0350665163012296,
+        "median": 0.03641654212622962,
+        "p95": 0.04216116997109902,
+        "max": 0.04682432070463798
+      },
+      "calibrated_error": {
+        "mean": 5.16308031103283e-16,
+        "median": 5.041298246351079e-16,
+        "p95": 6.075310664065031e-16,
+        "max": 6.100103367200772e-16
+      },
+      "calibrated_never_worse": true
+    },
+    {
+      "n": 8,
+      "mzis": 28,
+      "error_source": "coupler_split",
+      "sigma": 0.02,
+      "naive_error": {
+        "mean": 0.07255455904185017,
+        "median": 0.07243501071004793,
+        "p95": 0.08874532511452883,
+        "max": 0.08984930890126473
+      },
+      "calibrated_error": {
+        "mean": 2.487011116431157e-05,
+        "median": 5.220627879208807e-16,
+        "p95": 2.4870111164406392e-05,
+        "max": 0.000497402223276395
+      },
+      "calibrated_never_worse": true
+    },
+    {
+      "n": 8,
+      "mzis": 28,
+      "error_source": "phase_noise",
+      "sigma": 0.01,
+      "error": {
+        "mean": 0.027809721557045704,
+        "median": 0.026861970776514296,
+        "p95": 0.03552827980025976,
+        "max": 0.04123518289700407
+      }
+    }
+  ],
+  "D_classifier": {
+    "task": "4 Gaussian classes in 4 dimensions (centers at radius 2, sigma 0.8), 800 training and 1000 test points; linear least-squares classifier",
+    "digital_accuracy": 0.868,
+    "ideal_optical_accuracy": 0.868,
+    "ideal_optical_predictions_identical": true,
+    "power_readout_accuracy_ideal_optics": 0.631,
+    "hardware_assumptions": {
+      "coupler_split_sigma": 0.01,
+      "top_arm_loss_db": 0.2,
+      "phase_noise_sigma_rad": 0.005,
+      "dac_bits": 10,
+      "chips": 20,
+      "attenuators": "ideal"
+    },
+    "naive": {
+      "accuracy": {
+        "mean": 0.8676,
+        "median": 0.868,
+        "p95": 0.869,
+        "max": 0.869
+      },
+      "weight_error": {
+        "mean": 0.05652055621072257,
+        "median": 0.05358691604404888,
+        "p95": 0.06916730262563893,
+        "max": 0.07085610968993483
+      },
+      "effective_bits_median": 4.221975399215007
+    },
+    "calibrated": {
+      "accuracy": {
+        "mean": 0.8676,
+        "median": 0.868,
+        "p95": 0.869,
+        "max": 0.869
+      },
+      "weight_error": {
+        "mean": 0.039773534578035535,
+        "median": 0.04088950657274427,
+        "p95": 0.043163133744249564,
+        "max": 0.04569179713520357
+      },
+      "effective_bits_median": 4.6121255362856
+    }
+  },
+  "limitations": [
+    "Global calibration assumes every coupler and loss is known exactly; real meshes are calibrated from measurements",
+    "Attenuators for the singular values are ideal",
+    "Coherent input encoding and coherent (field) detection are assumed; a power-only readout changes the decisions (see power_readout_accuracy)",
+    "Single wavelength, no thermal crosstalk, no drift, no detector noise",
+    "Toy synthetic task; it shows the mechanism, not real-world accuracy"
+  ]
+}

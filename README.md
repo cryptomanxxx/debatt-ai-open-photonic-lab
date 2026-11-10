@@ -722,8 +722,13 @@ status, recipient and the SHA-256 of every GDS file, and CI fails if a released
 file changes. Working layouts stay in [`layout/`](layout/) and
 [`results/`](results/).
 
-First release: [`opa-layout-003-v1`](gds/opa-layout-003-v1/), the fully
-programmable 2×2 MZI in SiEPIC EBeam (`drc-clean`, not yet sent anywhere).
+Releases:
+- [`opa-p-passive-mzi-v0.24-eurocdp`](gds/opa-p-passive-mzi-v0.24-eurocdp/): the
+  passive 2×2 MZI in Luxtelligence **lnoi400** (thin-film lithium niobate)
+  that was sent to EuroCDP on 2026-11-09. It is `exploratory`: it was made
+  outside this repository, and the lnoi400 DRC is not open.
+- [`opa-layout-003-v1`](gds/opa-layout-003-v1/): the fully programmable 2×2 MZI
+  in SiEPIC EBeam. It is `drc-clean` and has not been sent anywhere.
 
 ## Running locally
 

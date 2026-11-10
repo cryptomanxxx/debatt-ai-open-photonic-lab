@@ -1,0 +1,50 @@
+{
+  "status": "PRE_REVIEW_ONLY_NOT_DRC_OR_TAPEOUT",
+  "zip": "OPA_P_pre_review_package_v030.zip",
+  "archive_sha256": "b3c9bd01a5f781769c63b159ea4dd43a010c60ff80ce3abf1b3e176a3778d44c",
+  "archive_bytes": 92927,
+  "files": [
+    {
+      "name": "opa_p_four_facet_ports_exploratory.gds",
+      "size": 138372,
+      "sha256": "b68285eafd60db661145b1b76f1c4905fd3caef59f945f4bf361c2b991572f90"
+    },
+    {
+      "name": "opa_p_four_facet_ports_manifest.json",
+      "size": 1357,
+      "sha256": "8cf7617b675d0f08b28e9a7654b3e5d3b40a8d581c3d07fadeae4e18248ecdc7"
+    },
+    {
+      "name": "opa_p_route_audit_v026.json",
+      "size": 3091,
+      "sha256": "f297e7eeb3db4fa990fa58e34505ff2dc0511d246132a094b10b3ea7cd404d57"
+    },
+    {
+      "name": "opa_p_internal_arm_audit_v027.json",
+      "size": 3225,
+      "sha256": "90e5c8b0b7ed0eed0447f7a4583fee1aa2ae2971ed8e394e1baa82c81bf85696"
+    },
+    {
+      "name": "opa_p_full_phase_chain_v028.json",
+      "size": 20271,
+      "sha256": "679eb064dfe5d66345664946d764d513cddb0e8641b9abe58e28917e57b61ebb"
+    },
+    {
+      "name": "opa_p_mpw_readiness_v029.json",
+      "size": 4170,
+      "sha256": "b499168cab75f6b32d6575125e68b776661c868478bc1ae9381ef6b755bae00c"
+    },
+    {
+      "name": "opa_p_supplier_questions_v029.txt",
+      "size": 2234,
+      "sha256": "9837193ac13486031f9c17cbfc973429b09084eccd84ab4c6e5d54c4037f2a77"
+    },
+    {
+      "name": "OPA_P_pre_review_README_v030.txt",
+      "size": 2842,
+      "sha256": "fdeda7a6f23c6d71b95fcba661df012eb39b213e8c7348bbf6b3a2e12b4254f1"
+    }
+  ],
+  "verified": true,
+  "no_order_or_transmission": true
+}

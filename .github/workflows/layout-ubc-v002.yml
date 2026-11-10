@@ -8,12 +8,17 @@ on:
       - ".github/workflows/layout-ubc-v002.yml"
       - "layout/mzi_2x2_ubc_v002.py"
       - "layout/requirements-lock-ubc.txt"
+      - "layout/requirements-drc.txt"
+      - "tools/siepic_drc.py"
   pull_request:
     paths:
       - ".github/workflows/layout-ubc-v002.yml"
       - "layout/mzi_2x2_ubc_v002.py"
       - "layout/requirements-lock-ubc.txt"
       - "results/opa-layout-002/**"
+      - "layout/requirements-drc.txt"
+      - "tools/siepic_drc.py"
+      - "tools/test_siepic_drc.py"
 
 permissions:
   contents: read
@@ -21,7 +26,7 @@ permissions:
 jobs:
   mzi-siepic:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -31,6 +36,13 @@ jobs:
         run: |
           pip install -r layout/requirements-lock-ubc.txt
           if pip show gdsfactoryplus >/dev/null 2>&1; then echo "gdsfactoryplus must not be installed"; exit 1; fi
+      - name: Install KLayout 0.28.16 (DRC engine)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends klayout=0.28.16-0ubuntu0.24.04.1
+          QT_QPA_PLATFORM=offscreen klayout -v
+      - name: DRC tool finds known violations
+        run: python tools/test_siepic_drc.py
       - name: Generate layout and run checks
         env:
           MPLBACKEND: Agg

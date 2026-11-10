@@ -7,7 +7,7 @@ Every chip layout in the lab, generated from the `design.json` datasheet that ea
 | Preview | Design | Function | PDK | λ (µm) | Footprint (µm) | Ports | Controls | Status | Checks |
 |---------|--------|----------|-----|--------|----------------|-------|----------|--------|--------|
 | [<img src="../results/opa-layout-001/programmable_mzi_2x2.png" width="220">](../results/opa-layout-001/programmable_mzi_2x2.png) | **[OPA-LAYOUT-001](../results/opa-layout-001/)**<br>Programmable 2x2 MZI with balanced dummy heaters | programmable 2x2 MZI (any 2x2 unitary with phi, theta, a, b) | gdsfactory generic PDK | 1.55 (1.54–1.56) | 537.8 × 71 | 2 in / 2 out | 4 heaters, 2 dummy heaters | exploratory | 10/10 |
-| [<img src="../results/opa-layout-002/mzi_2x2_siepic.png" width="220">](../results/opa-layout-002/mzi_2x2_siepic.png) | **[OPA-LAYOUT-002](../results/opa-layout-002/)**<br>2x2 MZI with broadband couplers, fiber array and pads (SiEPIC EBeam) | tunable 2x2 MZI switch / splitter (theta only) | SiEPIC EBeam (ubcpdk) | 1.55 | 267.969 × 422.5 | 2 in / 2 out | 1 heaters, 2 bond pads | exploratory | 7/7 |
+| [<img src="../results/opa-layout-002/mzi_2x2_siepic.png" width="220">](../results/opa-layout-002/mzi_2x2_siepic.png) | **[OPA-LAYOUT-002](../results/opa-layout-002/)**<br>2x2 MZI with broadband couplers, fiber array and pads (SiEPIC EBeam) | tunable 2x2 MZI switch / splitter (theta only) | SiEPIC EBeam (ubcpdk) | 1.55 | 277.969 × 432.5 | 2 in / 2 out | 1 heaters, 2 bond pads | drc-clean | 8/8 |
 
 ## Key results
 
@@ -31,5 +31,6 @@ Tags: `mzi`, `2x2`, `phase-shifter`, `broadband-coupler`, `grating-coupler`, `bo
 - **Fiber I/O:** 4 TE grating couplers at 127 um pitch (OPA-LAYOUT-002)
 - **Arm balance:** arms 270.548 / 270.548 um (OPA-LAYOUT-002)
 - **Grating coupler:** PDK placeholder model: 6 dB, 35 nm bandwidth (not measured) (ubcpdk.models.gc_te1550)
+- **SiEPIC EBeam DRC:** 0 violations of 13 rules (KLayout 0.28.16) (tools/siepic_drc.py)
 
-Limitations: full EBeam DRC not run; broadband coupler not verified; theta only (no phi, a, b); not submitted
+Limitations: SiEPIC functional verification not run; broadband coupler not verified; theta only (no phi, a, b); not submitted

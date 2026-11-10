@@ -22,11 +22,19 @@ Checks:
   5. a measurement label with the lab's name (the PDK default is a developer's
      personal username),
   6. only layers defined by the PDK,
-  7. a byte-for-byte reproducible GDS.
+  7. a byte-for-byte reproducible GDS,
+  8. no violations of the official SiEPIC EBeam DRC deck (tools/siepic_drc.py,
+     KLayout 0.28.16, siepic_ebeam_pdk 0.4.53 pinned by hash).
 
-Not done: the full SiEPIC EBeam DRC (only heater and doping decks ship with
-ubcpdk, and they need the KLayout application), verification of the
-broadband coupler, and any measurement.
+Two additions to the PDK-generated layout make it DRC-clean:
+  - a floorplan (FLOORPLAN, 99/0) around the chip; the deck requires every
+    silicon shape to lie inside one,
+  - M2 extensions over the two heater contacts. The PDK's tapered route leaves
+    each 10 x 20 um contact at an angle exactly at the edge of the M1 heater,
+    which the deck's 3 um M2-over-M1 overlap rule flags. Each contact's M2 is
+    extended 3 um beyond the M1 on every side.
+
+Not done: verification of the broadband coupler, and any measurement.
 """
 import hashlib
 import json
@@ -50,6 +58,10 @@ import yaml  # noqa: E402
 OUT = Path("results/opa-layout-002")
 FIBER_PITCH = 127.0
 TOL = 1e-3
+TOP_NAME = "OPA_LAYOUT_002"
+M1, M2, FLOORPLAN = (11, 0), (12, 0), (99, 0)
+M2_EXTENSION = 3.0          # um, the deck's minimum M2-over-M1 overlap
+FLOORPLAN_MARGIN = 5.0      # um around the chip
 
 PDK.activate()
 
@@ -59,8 +71,25 @@ def core_mzi():
                                 combiner="ebeam_bdc_te1550")
 
 
-def chip():
+def pdk_chip():
     return cells.add_fiber_array_pads_rf(core_mzi(), orientation=90, username=LAB_USERNAME)
+
+
+def chip():
+    """The PDK-generated chip plus the two DRC additions (floorplan, M2 extensions)."""
+    inner = pdk_chip()
+    c = gf.Component(TOP_NAME)
+    ref = c << inner
+    c.add_ports(ref.ports)
+    m1 = kdb.Region(inner.begin_shapes_rec(inner.kcl.layer(*M1)))
+    m2 = kdb.Region(inner.begin_shapes_rec(inner.kcl.layer(*M2)))
+    dbu = inner.kcl.dbu
+    ext = round(M2_EXTENSION / dbu)
+    for contact in (m1 & m2).merged().each():
+        c.shapes(c.kcl.layer(*M2)).insert(contact.bbox().enlarged(ext, ext))
+    box = c.dbbox().enlarged(FLOORPLAN_MARGIN, FLOORPLAN_MARGIN)       # um
+    c.shapes(c.kcl.layer(*FLOORPLAN)).insert(box)
+    return c
 
 
 def count_cells(component):
@@ -202,6 +231,17 @@ def main():
     check("gds_reproducible", same,
           "a fresh Python process regenerates a byte-identical GDS file")
 
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+    import siepic_drc
+    drc = siepic_drc.run(gds)
+    check("siepic_ebeam_drc_clean",
+          drc["total_violations"] == 0 and drc["klayout"] == siepic_drc.EXPECTED_KLAYOUT,
+          f"{drc['total_violations']} violations of {len(drc['rules'])} rules "
+          f"({drc['klayout']}, {drc['pdk_wheel']}): "
+          f"{ {k: v['count'] for k, v in drc['violations'].items()} }")
+    m2_added = [[round(v * c.kcl.dbu, 3) for v in (b.left, b.bottom, b.right, b.top)]
+                for b in (p.bbox() for p in kdb.Region(c.shapes(c.kcl.layer(*M2))).each())]
+
     report = {
         "experiment": "OPA-LAYOUT-002",
         "goal": "Programmable 2x2 MZI with broadband couplers, grating couplers and bond "
@@ -218,11 +258,19 @@ def main():
                         "straight_heater_metal": n_heater},
         "labels": texts,
         "layers": sorted(layers),
+        "drc": drc,
+        "drc_additions": {
+            "floorplan_um": [round(c.dxsize, 3), round(c.dysize, 3)],
+            "m2_extensions": m2_added,
+            "why": "floorplan: the deck requires all Si inside FLOORPLAN; M2 extensions: the "
+                   "PDK route leaves each heater contact at an angle at the M1 edge, which "
+                   "fails the 3 um M2-over-M1 overlap rule",
+        },
         "checks": checks,
         "failures": failures,
         "limitations": [
-            "The full SiEPIC EBeam DRC has not been run (ubcpdk ships only heater and doping "
-            "decks, which need the KLayout application)",
+            "DRC covers the SiEPIC EBeam deck's geometric rules only; SiEPIC's functional "
+            "verification (waveguide connectivity, pins, component models) has not been run",
             "The broadband coupler's split has not been verified; ubcpdk has no compact "
             "model for it",
             "Only one arm has a heater, so only theta is tunable; there are no phi, a or b "
@@ -237,7 +285,7 @@ def main():
         "id": "OPA-LAYOUT-002",
         "title": "2x2 MZI with broadband couplers, fiber array and pads (SiEPIC EBeam)",
         "function": "tunable 2x2 MZI switch / splitter (theta only)",
-        "status": "exploratory",
+        "status": "drc-clean" if not failures else "exploratory",
         "pdk": {"name": "SiEPIC EBeam (ubcpdk)", "version": ubcpdk.__version__,
                 "open_source": True, "platform": "Si 220 nm SOI, electron-beam lithography"},
         "wavelength_um": {"design": 1.55},
@@ -258,8 +306,10 @@ def main():
              f"{round(lengths[1], 3)} um", "source": "OPA-LAYOUT-002"},
             {"name": "Grating coupler", "value": "PDK placeholder model: 6 dB, 35 nm "
              "bandwidth (not measured)", "source": "ubcpdk.models.gc_te1550"},
+            {"name": "SiEPIC EBeam DRC", "value": f"{drc['total_violations']} violations of "
+             f"{len(drc['rules'])} rules ({drc['klayout']})", "source": "tools/siepic_drc.py"},
         ],
-        "limitations": ["full EBeam DRC not run", "broadband coupler not verified",
+        "limitations": ["SiEPIC functional verification not run", "broadband coupler not verified",
                         "theta only (no phi, a, b)", "not submitted"],
         "tags": ["mzi", "2x2", "phase-shifter", "broadband-coupler", "grating-coupler",
                  "bond-pads", "siepic", "ebeam", "silicon", "open-pdk"],

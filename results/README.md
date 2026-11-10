@@ -34,6 +34,7 @@ Circuit (MZI) experiments use numpy from the same environment.
 | MZI-001 | [result.json](opa-mzi-001/result.json) | Ideal 2×2 MZI programs 1000 random unitaries and near-bar/near-cross targets with max error 2e-15; 48:52 couplers raise the error to 0.04 | Ideal lossless model, single wavelength |
 | MZI-002 | [result.json](opa-mzi-002/result.json) | Naive error ≈ 1.3 × coupler error; calibration recovers every reachable target exactly; 1 dB arm-loss imbalance gives 5.7 % error that calibration cannot remove; combined chip scenario reaches 6.2 effective bits | Hardware assumed known exactly for calibration; single wavelength |
 | MZI-003 | [result.json](opa-mzi-003/result.json) | Clements mesh exact for N = 2–16 (N(N−1)/2 MZIs, N columns); error grows about √N (1 % couplers: 0.013 → 0.035 from N = 2 to 8); a 4×4 classifier keeps 86.8 % accuracy on imperfect chips; power-only readout drops it to 63 % | Coherent detection and ideal attenuators assumed; toy task |
+| LAYOUT-001 | [result.json](opa-layout-001/result.json), [GDS](opa-layout-001/programmable_mzi_2x2.gds), [PNG](opa-layout-001/programmable_mzi_2x2.png) | Programmable 2×2 MZI with balanced dummy heaters, 532 × 71 µm; 9 geometric checks pass; GDS reproducible byte for byte | gdsfactory generic PDK, not a foundry process; coupler not tuned to 50:50 |
 
 The 3D results from 007–010 and from 011 describe different polarizations
 (TM-like versus TE-like) and are normalized differently, so they should not be

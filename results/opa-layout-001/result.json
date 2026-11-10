@@ -1,0 +1,136 @@
+{
+  "experiment": "OPA-LAYOUT-001",
+  "goal": "GDS layout of the programmable 2x2 MZI modelled in OPA-MZI-001, with balanced dummy heaters following OPA-MZI-002",
+  "pdk": "gdsfactory generic PDK (example technology, not a foundry process)",
+  "gdsfactory_version": "9.51.0",
+  "python_version": "3.13.18",
+  "platform": "x86_64",
+  "gds_file": "programmable_mzi_2x2.gds",
+  "gds_sha256": "7da746f5c82e2e034539b7882f5d151fbedbf12a3a77931b6015a06f90d5957a",
+  "footprint_um": [
+    531.8,
+    71.0
+  ],
+  "parameters": {
+    "heater_length_um": 100.0,
+    "coupler_gap_um": 0.236,
+    "coupler_length_um": 20.0,
+    "fanout_um": [
+      40.0,
+      28.0
+    ]
+  },
+  "optical_ports": {
+    "in_top": {
+      "x_um": -150.0,
+      "y_um": 30.368000000000002,
+      "orientation_deg": 180.0,
+      "width_um": 0.5
+    },
+    "in_bot": {
+      "x_um": -150.0,
+      "y_um": -29.632,
+      "orientation_deg": 180.0,
+      "width_um": 0.5
+    },
+    "out_top": {
+      "x_um": 350.0,
+      "y_um": 30.368000000000002,
+      "orientation_deg": 0.0,
+      "width_um": 0.5
+    },
+    "out_bot": {
+      "x_um": 350.0,
+      "y_um": -29.632,
+      "orientation_deg": 0.0,
+      "width_um": 0.5
+    }
+  },
+  "circuit_model_mapping": {
+    "waveguide_0": "in_top / out_top",
+    "waveguide_1": "in_bot / out_bot",
+    "phi": "heater_phi on in_top",
+    "theta": "top internal-arm heater of the core MZI",
+    "a": "heater_a on out_top",
+    "b": "heater_b on out_bot",
+    "dummies": "heater_dummy_in and the bottom internal-arm heater are unpowered and balance the heater loss"
+  },
+  "internal_arms": {
+    "top": {
+      "length_um": 170.548,
+      "instances": [
+        "b1",
+        "sytl",
+        "b2",
+        "sxt",
+        "b3",
+        "sytr",
+        "b4"
+      ]
+    },
+    "bottom": {
+      "length_um": 170.548,
+      "instances": [
+        "b5",
+        "syl",
+        "b6",
+        "sxb",
+        "b7",
+        "sybr",
+        "b8"
+      ]
+    }
+  },
+  "input_output_path_lengths_um": {
+    "in_top": 151.13400000000001,
+    "in_bot": 151.13400000000001,
+    "out_top": 151.13400000000001,
+    "out_bot": 151.13400000000001
+  },
+  "checks": {
+    "four_optical_ports": {
+      "passed": true,
+      "detail": "inputs face west, outputs face east, all 0.5 um wide"
+    },
+    "port_order_matches_model": {
+      "passed": true,
+      "detail": "in_top/out_top are waveguide 0 of the circuit model (phi and a act on it)"
+    },
+    "building_blocks": {
+      "passed": true,
+      "detail": "2 directional couplers and 6 heaters (found 2 and 6)"
+    },
+    "identical_heaters": {
+      "passed": true,
+      "detail": "all six heaters are the same cell, so powered and dummy heaters add the same loss"
+    },
+    "balanced_internal_arms": {
+      "passed": true,
+      "detail": "top and bottom arms differ by 0.00e+00 um (tolerance 0.001 um)"
+    },
+    "balanced_input_output_paths": {
+      "passed": true,
+      "detail": "heater plus fan-out length is equal on both inputs and on both outputs"
+    },
+    "fanouts_do_not_cross": {
+      "passed": true,
+      "detail": "the four fan-out S-bends do not overlap or cross (overlaps: [])"
+    },
+    "heaters_do_not_overlap": {
+      "passed": true,
+      "detail": "no overlapping heater footprints among 6 heaters"
+    },
+    "gds_reproducible": {
+      "passed": true,
+      "detail": "regenerating the cell gives an identical GDS file"
+    }
+  },
+  "failures": [],
+  "limitations": [
+    "Generic example PDK: layers, design rules and heater geometry are not a foundry's",
+    "The coupler length is a placeholder; the 50:50 length for a real stack must come from simulation (next step: Meep or a mode solver)",
+    "No foundry DRC deck has been run; checks are geometric sanity checks only",
+    "No electrical routing to bond pads and no grating or edge couplers yet",
+    "Heater phase per milliwatt and thermal crosstalk are not modelled"
+  ]
+}

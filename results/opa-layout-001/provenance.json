@@ -1,0 +1,8 @@
+{
+  "entries": [
+    {
+      "files": ["result.json", "programmable_mzi_2x2.gds", "programmable_mzi_2x2.png"],
+      "source": "Local run of layout/mzi_2x2_layout_v001.py with layout/requirements-lock.txt (gdsfactory 9.51.0, kfactory 3.0.4, klayout 0.30.13, Python 3.13); a fresh install from the lockfile reproduced the GDS byte for byte, and the CI workflow layout-mzi-v001.yml fails if the committed GDS differs from the regenerated one"
+    }
+  ]
+}

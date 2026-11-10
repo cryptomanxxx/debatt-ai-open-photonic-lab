@@ -40,7 +40,7 @@ reproducible so that anyone can learn from it and build on it.
 | 1 | FDTD fundamentals: reproducible Meep pipeline, convergence and normalization practice | **Done** (001–009) |
 | 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010–011) |
 | 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | Planned |
-| 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | Planned |
+| 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001, generic PDK) |
 | 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001–003) |
 | 6 | Design-rule-checked GDS ready for an MPW run | Planned |
 | 7 | Measurement plan and published measurement data | Planned |
@@ -239,6 +239,41 @@ networks will be more sensitive. The power-only result shows that the phase of
 the output matters: either coherent detection or an encoding that keeps outputs
 positive is needed.
 
+## Layout
+
+Chip layouts live in [`layout/`](layout/) and use
+[gdsfactory](https://github.com/gdsfactory/gdsfactory) in their own locked
+Python 3.13 environment ([`layout/requirements-lock.txt`](layout/requirements-lock.txt)).
+
+### OPA-LAYOUT-001: programmable 2×2 MZI
+
+![Programmable 2×2 MZI layout](results/opa-layout-001/programmable_mzi_2x2.png)
+
+The same circuit as OPA-MZI-001, drawn as a GDS file
+([`programmable_mzi_2x2.gds`](results/opa-layout-001/programmable_mzi_2x2.gds),
+532 × 71 µm). From left to right: phase shifter φ, then two 2×2 directional
+couplers with heater θ between them, then output phase shifters a and b. Every
+powered heater has an identical unpowered heater on the other waveguide, so both
+paths see the same heater loss, which was the lesson from OPA-MZI-002.
+
+| Check | Result |
+|-------|--------|
+| 4 optical ports, inputs west and outputs east, 0.5 µm wide; top port = waveguide 0 of the circuit model | pass |
+| 2 directional couplers and 6 identical heaters | pass |
+| Internal arms equal length (170.548 µm each) | pass, difference 0 |
+| Input and output paths equal length on both waveguides | pass |
+| Fan-out S-bends do not cross; heater footprints do not overlap | pass |
+| GDS byte-for-byte reproducible, also from a fresh lockfile install | pass |
+
+The crossing check caught a real bug during development: the input S-bends
+were mirrored, so the top input ended up at the bottom and the two input
+waveguides crossed.
+
+**Limits:** this uses gdsfactory's *generic* example PDK, not a foundry process.
+Layers, design rules and heaters are placeholders, and the coupler length is
+not yet tuned to 50:50. No foundry DRC has been run, and there are no bond pads
+or fiber couplers yet.
+
 ## Running locally
 
 ```bash
@@ -249,6 +284,14 @@ python simulations/meep/bend_3d_launched_mode_v011.py   # writes results/opa-fdt
 python simulations/circuit/mzi_2x2_v001.py               # writes results/opa-mzi-001/result.json, < 1 s
 python simulations/circuit/mzi_imperfect_v002.py         # writes results/opa-mzi-002/result.json, ~1 min
 python simulations/circuit/mesh_clements_v003.py         # writes results/opa-mzi-003/result.json, ~15 s
+```
+
+Layouts need Python 3.13 and their own environment:
+
+```bash
+python3.13 -m venv .venv-layout && . .venv-layout/bin/activate
+pip install -r layout/requirements-lock.txt
+python layout/mzi_2x2_layout_v001.py                     # writes the GDS, PNG and report to results/opa-layout-001/
 ```
 
 New experiments should import shared geometry and measurement helpers from

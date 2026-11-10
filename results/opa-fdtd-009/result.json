@@ -1,0 +1,96 @@
+{
+  "experiment": "OPA-FDTD-009",
+  "goal": "Measure spatial-resolution sensitivity of 3D bend aperture ratios",
+  "resolutions": [
+    12,
+    16
+  ],
+  "cell_meep_units": [
+    10.0,
+    10.0,
+    4.0
+  ],
+  "duration_meep_units": 80,
+  "meep_version": "1.35.1",
+  "measurements": {
+    "12": {
+      "straight": {
+        "radius_meep_units": null,
+        "resolution": 12,
+        "input_aperture_flux": 0.10422215328616447,
+        "output_aperture_flux": 0.00014318666901090481,
+        "wall_seconds": 26.663823535999995,
+        "process_peak_rss_bytes": 229679104
+      },
+      "bends": {
+        "1.0": {
+          "radius_meep_units": 1.0,
+          "resolution": 12,
+          "input_aperture_flux": 0.10414868599398423,
+          "output_aperture_flux": 0.022567476117482926,
+          "wall_seconds": 45.37819504800001,
+          "process_peak_rss_bytes": 234156032
+        },
+        "2.0": {
+          "radius_meep_units": 2.0,
+          "resolution": 12,
+          "input_aperture_flux": 0.10418993112952263,
+          "output_aperture_flux": 0.050388433842607765,
+          "wall_seconds": 45.617215261,
+          "process_peak_rss_bytes": 234156032
+        }
+      }
+    },
+    "16": {
+      "straight": {
+        "radius_meep_units": null,
+        "resolution": 16,
+        "input_aperture_flux": 0.09726983517595403,
+        "output_aperture_flux": 0.0001343359611720044,
+        "wall_seconds": 73.736067996,
+        "process_peak_rss_bytes": 361459712
+      },
+      "bends": {
+        "1.0": {
+          "radius_meep_units": 1.0,
+          "resolution": 16,
+          "input_aperture_flux": 0.09726740017224789,
+          "output_aperture_flux": 0.021203750823303204,
+          "wall_seconds": 115.33763105599999,
+          "process_peak_rss_bytes": 371687424
+        },
+        "2.0": {
+          "radius_meep_units": 2.0,
+          "resolution": 16,
+          "input_aperture_flux": 0.09726958536210846,
+          "output_aperture_flux": 0.047398209718026336,
+          "wall_seconds": 115.880423227,
+          "process_peak_rss_bytes": 371732480
+        }
+      }
+    }
+  },
+  "aperture_relative_output_ratios": {
+    "12": {
+      "1.0": 0.21653243006329986,
+      "2.0": 0.48347143341258186
+    },
+    "16": {
+      "1.0": 0.217988966311572,
+      "2.0": 0.48728580275978095
+    }
+  },
+  "absolute_ratio_changes": {
+    "1.0": 0.0014565362482721333,
+    "2.0": 0.003814369347199087
+  },
+  "target_absolute_change": 0.02,
+  "within_target": true,
+  "limitations": [
+    "Two resolutions do not prove spatial convergence or permit extrapolation to infinite resolution",
+    "Ratios are aperture-relative, not guided-mode-specific bend transmission",
+    "A fixed-duration run was tested for temporal stability previously at resolution 12 only",
+    "No PML-thickness, monitor-position, or source-backaction study",
+    "No calibrated LNOI geometry or measured material parameters"
+  ]
+}

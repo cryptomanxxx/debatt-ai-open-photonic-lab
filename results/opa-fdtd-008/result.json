@@ -1,0 +1,87 @@
+{
+  "experiment": "OPA-FDTD-008",
+  "goal": "Check temporal stability of 3D aperture-relative bend flux",
+  "durations_meep_units": [
+    80,
+    120
+  ],
+  "cell_meep_units": [
+    10.0,
+    10.0,
+    4.0
+  ],
+  "resolution": 12,
+  "meep_version": "1.35.1",
+  "straight_reference": {
+    "radius_meep_units": null,
+    "snapshots": {
+      "80": {
+        "input_aperture_flux": 0.10422215328616447,
+        "output_aperture_flux": 0.00014318666901090481,
+        "elapsed_wall_seconds": 27.396980147000004
+      },
+      "120": {
+        "input_aperture_flux": 0.10422215316584786,
+        "output_aperture_flux": 0.0001431866690540428,
+        "elapsed_wall_seconds": 39.520486812
+      }
+    },
+    "process_peak_rss_bytes": 229687296
+  },
+  "bend_cases": {
+    "1.0": {
+      "radius_meep_units": 1.0,
+      "snapshots": {
+        "80": {
+          "input_aperture_flux": 0.10414868599398423,
+          "output_aperture_flux": 0.022567476117482926,
+          "elapsed_wall_seconds": 45.741161397
+        },
+        "120": {
+          "input_aperture_flux": 0.10414868588883727,
+          "output_aperture_flux": 0.022567476109185747,
+          "elapsed_wall_seconds": 58.043240665
+        }
+      },
+      "process_peak_rss_bytes": 233955328
+    },
+    "2.0": {
+      "radius_meep_units": 2.0,
+      "snapshots": {
+        "80": {
+          "input_aperture_flux": 0.10418993112952263,
+          "output_aperture_flux": 0.050388433842607765,
+          "elapsed_wall_seconds": 46.010659454999995
+        },
+        "120": {
+          "input_aperture_flux": 0.10418993083781167,
+          "output_aperture_flux": 0.05038843388130304,
+          "elapsed_wall_seconds": 58.31851683100001
+        }
+      },
+      "process_peak_rss_bytes": 233955328
+    }
+  },
+  "aperture_relative_output_ratios": {
+    "80": {
+      "1.0": 0.21653243006329986,
+      "2.0": 0.48347143341258186
+    },
+    "120": {
+      "1.0": 0.2165324302336597,
+      "2.0": 0.48347143434199
+    }
+  },
+  "absolute_ratio_changes": {
+    "1.0": 1.7035983734814408e-10,
+    "2.0": 9.294081615429661e-10
+  },
+  "temporal_convergence_tolerance": 0.02,
+  "limitations": [
+    "Temporal stability alone is not physical or spatial convergence",
+    "Aperture flux is not mode-resolved guided transmission",
+    "Same simple finite source as v007; source back-action is not corrected",
+    "No PML, resolution or monitor-position sensitivity study",
+    "No fabrication or material stack validation"
+  ]
+}

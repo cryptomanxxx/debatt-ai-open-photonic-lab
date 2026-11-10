@@ -1,0 +1,47 @@
+{
+  "experiment": "OPA-FDTD-007",
+  "model": "Illustrative 3D dielectric slab in air; not an LNOI stack",
+  "cell_meep_units": [
+    10.0,
+    10.0,
+    4.0
+  ],
+  "resolution": 12,
+  "core_width_meep_units": 0.8,
+  "core_thickness_meep_units": 0.4,
+  "core_refractive_index": 1.8,
+  "run_until_meep_units": 80,
+  "meep_version": "1.35.1",
+  "straight_reference": {
+    "radius_meep_units": null,
+    "input_aperture_flux": 0.10422215328616447,
+    "output_aperture_flux": 0.00014318666901090481,
+    "elapsed_wall_seconds": 25.724213417999998,
+    "process_peak_rss_bytes": 229396480
+  },
+  "bend_cases": {
+    "1.0": {
+      "radius_meep_units": 1.0,
+      "input_aperture_flux": 0.10414868599398423,
+      "output_aperture_flux": 0.022567476117482926,
+      "elapsed_wall_seconds": 41.240525969,
+      "process_peak_rss_bytes": 233779200,
+      "output_flux_over_straight_input": 0.21653243006329986
+    },
+    "2.0": {
+      "radius_meep_units": 2.0,
+      "input_aperture_flux": 0.10418993112952263,
+      "output_aperture_flux": 0.050388433842607765,
+      "elapsed_wall_seconds": 41.364829199,
+      "process_peak_rss_bytes": 233779200,
+      "output_flux_over_straight_input": 0.48347143341258186
+    }
+  },
+  "limitations": [
+    "Not an eigenmode source; launched mode mixture is uncharacterized",
+    "Aperture flux includes radiation and possibly other modes",
+    "Reference input flux does not correct source back-action in bends",
+    "No spatial, temporal, PML, or monitor-position convergence",
+    "Output ratio is not a physical bend-loss or energy-efficiency measurement"
+  ]
+}

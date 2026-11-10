@@ -52,9 +52,11 @@ designs share one wafer.
 ## Experiments
 
 All experiments live in [`simulations/meep/`](simulations/meep/) and each has
-its own workflow in [`.github/workflows/`](.github/workflows/). Results are
-uploaded as workflow artifacts (GitHub deletes these after 90 days by
-default), so key numbers are also recorded below.
+its own workflow in [`.github/workflows/`](.github/workflows/). Workflow
+artifacts expire after 90 days, so every result report is also kept in
+[`results/`](results/), with a `provenance.json` that names the CI run and
+commit it came from. [`results/README.md`](results/README.md) lists the key
+numbers for every experiment.
 
 | ID | What it establishes |
 |----|---------------------|
@@ -85,9 +87,11 @@ What this shows:
 
 - The straight waveguide transmits 99.98 % in the guided mode, which
   validates the measurement method.
-- The aperture flux used in 007–010 **overestimates** guided transmission,
-  by about 50 % (relative) at radius 1.0, because it also counts radiated light that
-  passes through the output aperture.
+- Within this experiment, aperture flux **overestimates** guided
+  transmission (0.472 vs 0.315 at radius 1.0) because it also counts radiated
+  light that passes through the output aperture. The 007–010 numbers are not
+  directly comparable: they use an Ez current, which excites the TM-like
+  (odd-Z) polarization, and normalize to the straight input aperture flux.
 - Guided reflection is about 0.00001 for both bends, measured after
   subtracting the straight-reference fields. Without that subtraction, leakage
   of the incident field into the discretized backward mode reads about 10–20×
@@ -97,9 +101,9 @@ What this shows:
 - Changing the resolution from 12 to 16 changes transmission by less than 0.02,
   but two resolutions do not prove convergence.
 
-Numbers come from a local run with the same locked environment; the full report is
-[`results/opa-fdtd-011/result.json`](results/opa-fdtd-011/result.json), and the CI
-artifact `opa-meep-bend-launched-mode-v011` contains the same report.
+The full CI report is
+[`results/opa-fdtd-011/result.json`](results/opa-fdtd-011/result.json); a local
+run with the same locked environment agreed to within 2e-9.
 
 ## Running locally
 
@@ -116,8 +120,9 @@ New experiments should import shared geometry and measurement helpers from
 ## Contributing
 
 Contributions are welcome. Add a new numbered experiment (`OPA-FDTD-NNN`)
-with its own workflow, state its limitations in the result report, and add a
-row to the experiment table above.
+with its own workflow, state its limitations in the result report, add a
+row to the experiment table above, and archive the report in
+[`results/`](results/README.md#adding-a-result).
 
 ## License
 

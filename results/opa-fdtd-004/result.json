@@ -1,0 +1,111 @@
+{
+  "experiment": "OPA-FDTD-004",
+  "model": "illustrative 2D index-guided slab bend, not LNOI",
+  "meep_version": "1.35.1",
+  "resolution": 18,
+  "radii_meep_units": [
+    1.0,
+    2.0
+  ],
+  "durations_meep_units": [
+    160,
+    220
+  ],
+  "input_references": {
+    "160": {
+      "guided_forward": 25.57220221100208,
+      "guided_backward": 0.006032569557852659,
+      "aperture_flux": 25.570182256322877
+    },
+    "220": {
+      "guided_forward": 25.572202231498327,
+      "guided_backward": 0.006032569899551545,
+      "aperture_flux": 25.570182276386944
+    }
+  },
+  "results": {
+    "160": {
+      "1.0": {
+        "radius_meep_units": 1.0,
+        "duration_meep_units": 160,
+        "modal_reference_power": 25.57220221100208,
+        "modal_ratios": {
+          "input_forward_guided_ratio": 0.9996907612533661,
+          "input_backward_guided_ratio": 2.3054191248110945e-05,
+          "input_backward_total_fields_ratio": 0.0003834560739074261,
+          "output_forward_guided_ratio": 0.4204355090315949,
+          "output_backward_guided_ratio": 9.802256785997431e-05,
+          "output_aperture_flux_ratio": 0.6733845768259319
+        },
+        "reference_based_guided_remainder": 0.579541436777157,
+        "net_directional_guided_balance": 0.579330220598383
+      },
+      "2.0": {
+        "radius_meep_units": 2.0,
+        "duration_meep_units": 160,
+        "modal_reference_power": 25.57220221100208,
+        "modal_ratios": {
+          "input_forward_guided_ratio": 0.9993429444703279,
+          "input_backward_guided_ratio": 0.00018253264257899344,
+          "input_backward_total_fields_ratio": 0.00014986489491205796,
+          "output_forward_guided_ratio": 0.9493182864448595,
+          "output_backward_guided_ratio": 0.00021977359913993814,
+          "output_aperture_flux_ratio": 0.9563987159558702
+        },
+        "reference_based_guided_remainder": 0.05049918091256156,
+        "net_directional_guided_balance": 0.050061898982029396
+      }
+    },
+    "220": {
+      "1.0": {
+        "radius_meep_units": 1.0,
+        "duration_meep_units": 220,
+        "modal_reference_power": 25.572202231498327,
+        "modal_ratios": {
+          "input_forward_guided_ratio": 0.99969076131537,
+          "input_backward_guided_ratio": 2.305418937585812e-05,
+          "input_backward_total_fields_ratio": 0.00038345608383774584,
+          "output_forward_guided_ratio": 0.420435508683408,
+          "output_backward_guided_ratio": 9.802256759111172e-05,
+          "output_aperture_flux_ratio": 0.673384576269664
+        },
+        "reference_based_guided_remainder": 0.5795414371272161,
+        "net_directional_guided_balance": 0.5793302210101772
+      },
+      "2.0": {
+        "radius_meep_units": 2.0,
+        "duration_meep_units": 220,
+        "modal_reference_power": 25.572202231498327,
+        "modal_ratios": {
+          "input_forward_guided_ratio": 0.9993429452859872,
+          "input_backward_guided_ratio": 0.00018253262820194875,
+          "input_backward_total_fields_ratio": 0.0001498648911486223,
+          "output_forward_guided_ratio": 0.9493182856091203,
+          "output_backward_guided_ratio": 0.00021977359833829453,
+          "output_aperture_flux_ratio": 0.9563987151172002
+        },
+        "reference_based_guided_remainder": 0.05049918176267765,
+        "net_directional_guided_balance": 0.05006190064700316
+      }
+    }
+  },
+  "temporal_convergence_absolute_change": {
+    "1.0": {
+      "input_backward_guided_ratio": 1.872252824102567e-12,
+      "output_forward_guided_ratio": 3.481868682264633e-10,
+      "output_aperture_flux_ratio": 5.562679206150278e-10
+    },
+    "2.0": {
+      "input_backward_guided_ratio": 1.4377044693647534e-11,
+      "output_forward_guided_ratio": 8.357391445557028e-10,
+      "output_aperture_flux_ratio": 8.386700223184107e-10
+    }
+  },
+  "limitations": [
+    "Power ratios refer to one guided mode, not total optical transmission",
+    "Reference-based guided remainder and net directional guided balance are algebraic diagnostics, not independently measured radiation",
+    "Input reflection uses complex reference-field subtraction before modal decomposition; total-field backward power retained as a diagnostic",
+    "Only temporal convergence tested; spatial resolution and PML sensitivity untested",
+    "Illustrative 2D scalar-like model, not validated LNOI bend-loss prediction"
+  ]
+}

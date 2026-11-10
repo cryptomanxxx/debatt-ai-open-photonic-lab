@@ -1,0 +1,8 @@
+{
+  "entries": [
+    {
+      "file": "result.json",
+      "source": "Local run with the locked environment (pymeep 1.35.1 with MPB, opa-fdtd-linux-64.lock.txt); the CI workflow meep-coupler-v001.yml re-runs it on every change"
+    }
+  ]
+}

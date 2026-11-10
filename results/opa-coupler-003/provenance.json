@@ -1,0 +1,8 @@
+{
+  "entries": [
+    {
+      "file": "result.json",
+      "source": "Local run with the locked environment (pymeep 1.35.1 with MPB, opa-fdtd-linux-64.lock.txt), about 8 minutes; the CI workflow meep-coupler-sensitivity-v003.yml re-runs it on every change"
+    }
+  ]
+}

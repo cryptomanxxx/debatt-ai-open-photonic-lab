@@ -1,0 +1,193 @@
+{
+  "experiment": "OPA-COUPLER-003",
+  "goal": "Wavelength and fabrication sensitivity of the OPA-LAYOUT-001 coupler (236 nm gap, 23.0 um straight section, S-bends included)",
+  "method": "Local supermode (coupled-mode) theory: straight L_c from MPB at 100 px/um; bend phase integrated over the layout gap profile and anchored to the 3D FDTD bend phase at 1.55 um",
+  "meep_version": "1.35.1",
+  "python_version": "3.11.18",
+  "geometry": "simulations/meep/geometry/coupler_gap0.236.json",
+  "straight_length_um": 23.0,
+  "gap_grid_um": [
+    0.216,
+    0.236,
+    0.256,
+    0.3,
+    0.35,
+    0.45,
+    0.6,
+    0.8
+  ],
+  "bend_phase_1550": {
+    "model_rad": 0.08210975366883902,
+    "fdtd_rad": 0.09057319497989244,
+    "model_over_fdtd": 0.9065568868037356
+  },
+  "nominal_cross_fraction_1550": 0.5005794191862367,
+  "wavelength_response": [
+    {
+      "wavelength_um": 1.5,
+      "coupling_length_um": 66.08268770533653,
+      "bend_phase_rad": 0.06931484678740606,
+      "cross_fraction": 0.33385095189835845,
+      "split_error": 0.16614904810164155
+    },
+    {
+      "wavelength_um": 1.51,
+      "coupling_length_um": 62.928720935537775,
+      "bend_phase_rad": 0.07317754496077068,
+      "cross_fraction": 0.36364366021225913,
+      "split_error": 0.13635633978774087
+    },
+    {
+      "wavelength_um": 1.52,
+      "coupling_length_um": 59.94927501773812,
+      "bend_phase_rad": 0.07722707888970913,
+      "cross_fraction": 0.39525859309428624,
+      "split_error": 0.10474140690571376
+    },
+    {
+      "wavelength_um": 1.53,
+      "coupling_length_um": 57.133461406374906,
+      "bend_phase_rad": 0.08147089152256135,
+      "cross_fraction": 0.42866645358405453,
+      "split_error": 0.07133354641594547
+    },
+    {
+      "wavelength_um": 1.54,
+      "coupling_length_um": 54.47116049035909,
+      "bend_phase_rad": 0.08591688844889807,
+      "cross_fraction": 0.46380625256437086,
+      "split_error": 0.03619374743562914
+    },
+    {
+      "wavelength_um": 1.55,
+      "coupling_length_um": 51.95295881585562,
+      "bend_phase_rad": 0.09057319497989244,
+      "cross_fraction": 0.5005794191862367,
+      "split_error": 0.0005794191862367182
+    },
+    {
+      "wavelength_um": 1.56,
+      "coupling_length_um": 49.570096964382536,
+      "bend_phase_rad": 0.09544812035121922,
+      "cross_fraction": 0.5388436377054279,
+      "split_error": 0.03884363770542787
+    },
+    {
+      "wavelength_um": 1.57,
+      "coupling_length_um": 47.314416578011446,
+      "bend_phase_rad": 0.10055022353425701,
+      "cross_fraction": 0.5784065464802115,
+      "split_error": 0.0784065464802115
+    },
+    {
+      "wavelength_um": 1.58,
+      "coupling_length_um": 45.17831140533403,
+      "bend_phase_rad": 0.10588839920825374,
+      "cross_fraction": 0.6190193168288259,
+      "split_error": 0.11901931682882594
+    },
+    {
+      "wavelength_um": 1.59,
+      "coupling_length_um": 43.15469984805323,
+      "bend_phase_rad": 0.11147170833119363,
+      "cross_fraction": 0.6603697111837892,
+      "split_error": 0.16036971118378918
+    },
+    {
+      "wavelength_um": 1.6,
+      "coupling_length_um": 41.23695257709603,
+      "bend_phase_rad": 0.11730923526631667,
+      "cross_fraction": 0.7020763327853647,
+      "split_error": 0.20207633278536474
+    }
+  ],
+  "wavelengths_within_5pct_of_50_50_um": [
+    1.54,
+    1.55,
+    1.56
+  ],
+  "fabrication_1550": [
+    {
+      "scenario": "width -10 nm",
+      "width_um": 0.49,
+      "gap_shift_um": 0.0,
+      "coupling_length_um": 47.71937262678554,
+      "bend_phase_rad": 0.09826343348567873,
+      "cross_fraction": 0.569736720903954,
+      "split_error": 0.069736720903954,
+      "mzi_naive_matrix_error_estimate": 0.0906577371751402
+    },
+    {
+      "scenario": "width +10 nm",
+      "width_um": 0.51,
+      "gap_shift_um": 0.0,
+      "coupling_length_um": 56.635963773225875,
+      "bend_phase_rad": 0.08210125846444652,
+      "cross_fraction": 0.43479349365383374,
+      "split_error": 0.06520650634616626,
+      "mzi_naive_matrix_error_estimate": 0.08476845825001614
+    },
+    {
+      "scenario": "gap -10 nm",
+      "width_um": 0.5,
+      "gap_shift_um": -0.01,
+      "coupling_length_um": 47.56843958702514,
+      "bend_phase_rad": 0.09873522235314836,
+      "cross_fraction": 0.5725815017324224,
+      "split_error": 0.0725815017324224,
+      "mzi_naive_matrix_error_estimate": 0.09435595225214911
+    },
+    {
+      "scenario": "gap +10 nm",
+      "width_um": 0.5,
+      "gap_shift_um": 0.01,
+      "coupling_length_um": 56.706894708455835,
+      "bend_phase_rad": 0.08311299853446223,
+      "cross_fraction": 0.43500550109625763,
+      "split_error": 0.06499449890374237,
+      "mzi_naive_matrix_error_estimate": 0.08449284857486508
+    },
+    {
+      "scenario": "etch bias +10 nm (wider, smaller gap)",
+      "width_um": 0.51,
+      "gap_shift_um": -0.01,
+      "coupling_length_um": 51.809064039931236,
+      "bend_phase_rad": 0.0896511245948218,
+      "cross_fraction": 0.5015887661816569,
+      "split_error": 0.001588766181656931,
+      "mzi_naive_matrix_error_estimate": 0.0020653960361540105
+    },
+    {
+      "scenario": "etch bias -10 nm (narrower, larger gap)",
+      "width_um": 0.49,
+      "gap_shift_um": 0.01,
+      "coupling_length_um": 52.05364653433543,
+      "bend_phase_rad": 0.09014820030367302,
+      "cross_fraction": 0.49880930038230537,
+      "split_error": 0.001190699617694635,
+      "mzi_naive_matrix_error_estimate": 0.0015479095030030254
+    }
+  ],
+  "checks": {
+    "bend_model_matches_fdtd": {
+      "passed": true,
+      "detail": "modelled bend phase 0.0821 rad vs 3D FDTD 0.0906 rad (9.3%; limit 20%, fixed before the first run)"
+    },
+    "nominal_is_fifty_fifty": {
+      "passed": true,
+      "detail": "23.0 um coupler at 1.55 um splits 0.5006 (limit 0.5 +- 0.01)"
+    },
+    "cross_fraction_monotonic_in_wavelength": {
+      "passed": true,
+      "detail": "coupling strengthens with wavelength, so the cross fraction rises across the band"
+    }
+  },
+  "failures": [],
+  "runtime_seconds": 465.6573624610901,
+  "limitations": [
+    "Coupled-mode theory with local straight-pair supermodes; bend curvature and mode mismatch in the S-bends are ignored apart from the FDTD anchoring",
+    "Fabrication changes are uniform (whole coupler); real wafers vary across the die",
+    "Thickness, sidewall angle and refractive-index variation are not included",
+    "MZI matrix error uses the OPA-MZI-002 rule of thumb (about 1.3 x split error, without calibration)"
+  ]
+}

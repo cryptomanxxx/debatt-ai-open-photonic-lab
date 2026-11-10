@@ -312,6 +312,41 @@ second-order Richardson extrapolation from 16 and 24 px/µm gives 55.6 µm (7 %,
 limit 5 %). At 3.5–5.3 pixels across the silicon the second-order assumption
 does not hold. Confirming this needs a 32 px/µm run (several hours).
 
+### OPA-COUPLER-003: how sensitive is the layout coupler?
+
+The exact layout coupler (236 nm gap, 23.0 µm straight section, S-bends)
+across wavelength and fabrication errors. The method is local supermode
+(coupled-mode) theory: the straight-section L_c comes from MPB at 100 px/µm,
+and the bend coupling is integrated over the gap profile read from the layout
+polygons.
+
+**Validation, fixed before the run:** the modelled bend phase at 1.55 µm is
+0.082 rad against 0.091 rad from 3D FDTD (OPA-COUPLER-002), a difference of
+9 % with a limit of 20 %. The sweeps are anchored to the FDTD value.
+
+| Wavelength | 1.50 | 1.52 | 1.54 | **1.55** | 1.56 | 1.58 | 1.60 µm |
+|------------|------|------|------|----------|------|------|---------|
+| Cross fraction | 33 % | 40 % | 46 % | **50 %** | 54 % | 62 % | 70 % |
+
+The coupler stays within 5 % of 50:50 only between 1.54 and 1.56 µm.
+
+| Fabrication error at 1.55 µm (±10 nm) | Cross fraction | MZI matrix error, uncalibrated |
+|---------------------------------------|----------------|--------------------------------|
+| Width only | 57 % / 43.5 % | ≈ 9 % |
+| Gap only | 57 % / 43.5 % | ≈ 9 % |
+| **Etch bias** (wider guides and smaller gap together, same centre spacing) | **50.2 % / 49.9 %** | **≈ 0.2 %** |
+
+Etch bias is the most common systematic fabrication error, and this coupler is
+almost immune to it: wider waveguides confine light more and couple less,
+while the smaller gap couples more, and the two cancel. Independent width and
+gap errors, as well as wavelength, still shift the split by around 7 %, so a
+real accelerator needs either calibration (OPA-MZI-002) or a broadband
+splitter (MMI or adiabatic coupler).
+
+Limits: coupled-mode theory with straight-pair supermodes; uniform errors
+across the coupler; thickness, sidewall angle and index variation are not
+included.
+
 ## Layout
 
 Chip layouts live in [`layout/`](layout/) and use
@@ -351,11 +386,9 @@ the OPA-COUPLER-002 result.
 
 **Limits:** this uses gdsfactory's *generic* example PDK, not a foundry process.
 Layers, design rules and heaters are placeholders. The 23.0 µm length is
-50:50 at 1.55 µm only. Its wavelength and fabrication sensitivity have not been
-simulated for this exact coupler (236 nm gap, bends included). Indicative figures
-from the straight-only model of OPA-COUPLER-001: a 236 nm-gap coupler splits
-34:66 to 70:30 across 1.50–1.60 µm, and for a 200 nm gap ±10 nm errors give
-44–59 %. Either way, a real chip still needs calibration. No
+50:50 at 1.55 µm only: OPA-COUPLER-003 shows 33:67 to 70:30 across
+1.50–1.60 µm, and 43–57 % for ±10 nm width-only or gap-only errors, although it
+is robust to etch bias. A real chip still needs calibration. No
 foundry DRC has been run, and there are no bond pads or fiber couplers yet.
 
 ## GDS archive

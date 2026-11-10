@@ -1,0 +1,246 @@
+{
+  "experiment": "OPA-MZI-001",
+  "goal": "Show that an ideal 2x2 MZI with an output phase screen is a programmable 2x2 unitary matrix multiplier",
+  "model": "Transfer-matrix circuit model; ideal lossless 50:50 couplers; single wavelength",
+  "numpy_version": "2.4.6",
+  "python_version": "3.11.18",
+  "seed": 20261110,
+  "random_targets": 1000,
+  "tolerance": 1e-12,
+  "checks": {
+    "closed_form_max_abs_error": 4.335559509131367e-16,
+    "unitarity_max_abs_error": 6.666846686768104e-16,
+    "splitting_max_abs_error": 6.661338147750939e-16,
+    "splitting_max_power_conservation_error": 6.661338147750939e-16,
+    "programming_max_abs_error": 6.773867501289488e-15,
+    "matrix_vector_max_relative_error": 6.974694203046112e-15,
+    "real_weight_max_abs_error": 5.461218374936065e-16
+  },
+  "failures": [],
+  "sensitivity_48_52_coupler_max_abs_error": 0.039989565282708896,
+  "splitting_sweep": [
+    {
+      "theta_rad": 0.0,
+      "power_top": 1.8202353171583768e-33,
+      "power_bottom": 1.0000000000000004,
+      "expected_power_top": 0.0
+    },
+    {
+      "theta_rad": 0.2617993877991494,
+      "power_top": 0.017037086855465858,
+      "power_bottom": 0.9829629131445343,
+      "expected_power_top": 0.01703708685546585
+    },
+    {
+      "theta_rad": 0.5235987755982988,
+      "power_top": 0.06698729810778066,
+      "power_bottom": 0.9330127018922196,
+      "expected_power_top": 0.06698729810778066
+    },
+    {
+      "theta_rad": 0.7853981633974483,
+      "power_top": 0.1464466094067263,
+      "power_bottom": 0.8535533905932742,
+      "expected_power_top": 0.14644660940672624
+    },
+    {
+      "theta_rad": 1.0471975511965976,
+      "power_top": 0.2500000000000001,
+      "power_bottom": 0.7500000000000004,
+      "expected_power_top": 0.24999999999999994
+    },
+    {
+      "theta_rad": 1.308996938995747,
+      "power_top": 0.37059047744873963,
+      "power_bottom": 0.6294095225512607,
+      "expected_power_top": 0.3705904774487395
+    },
+    {
+      "theta_rad": 1.5707963267948966,
+      "power_top": 0.5000000000000001,
+      "power_bottom": 0.5000000000000002,
+      "expected_power_top": 0.4999999999999999
+    },
+    {
+      "theta_rad": 1.832595714594046,
+      "power_top": 0.6294095225512604,
+      "power_bottom": 0.3705904774487398,
+      "expected_power_top": 0.6294095225512604
+    },
+    {
+      "theta_rad": 2.0943951023931953,
+      "power_top": 0.7500000000000003,
+      "power_bottom": 0.2500000000000001,
+      "expected_power_top": 0.7499999999999999
+    },
+    {
+      "theta_rad": 2.356194490192345,
+      "power_top": 0.853553390593274,
+      "power_bottom": 0.14644660940672632,
+      "expected_power_top": 0.8535533905932737
+    },
+    {
+      "theta_rad": 2.617993877991494,
+      "power_top": 0.9330127018922199,
+      "power_bottom": 0.06698729810778078,
+      "expected_power_top": 0.9330127018922192
+    },
+    {
+      "theta_rad": 2.8797932657906435,
+      "power_top": 0.9829629131445341,
+      "power_bottom": 0.017037086855465896,
+      "expected_power_top": 0.9829629131445341
+    },
+    {
+      "theta_rad": 3.141592653589793,
+      "power_top": 1.0000000000000004,
+      "power_bottom": 5.5696347738130235e-33,
+      "expected_power_top": 1.0
+    }
+  ],
+  "degenerate_case_settings": {
+    "identity": {
+      "theta": 3.141592653589793,
+      "phi": 0.0,
+      "a": 3.141592653589793,
+      "b": 0.0
+    },
+    "swap": {
+      "theta": 0.0,
+      "phi": 0.0,
+      "a": 4.71238898038469,
+      "b": 4.71238898038469
+    },
+    "diagonal_phases": {
+      "theta": 3.141592653589793,
+      "phi": 0.0,
+      "a": 3.8415926535897933,
+      "b": 4.383185307179586
+    },
+    "anti_diagonal_phases": {
+      "theta": 0.0,
+      "phi": 0.0,
+      "a": 0.5292036732051035,
+      "b": 5.11238898038469
+    },
+    "hadamard": {
+      "theta": 1.5707963267948966,
+      "phi": 0.0,
+      "a": 3.9269908169872414,
+      "b": 3.9269908169872414
+    }
+  },
+  "rotation_30deg": {
+    "settings": {
+      "theta": 2.0943951023931957,
+      "phi": 3.141592653589793,
+      "a": 0.5235987755982987,
+      "b": 0.5235987755982983
+    },
+    "samples": [
+      {
+        "input": [
+          1.0,
+          0.0
+        ],
+        "output_field": [
+          [
+            0.8660254037844388,
+            -1.0076901215276144e-16
+          ],
+          [
+            0.4999999999999999,
+            -3.1274841584358674e-16
+          ]
+        ],
+        "expected": [
+          0.8660254037844387,
+          0.49999999999999994
+        ],
+        "detected_power": [
+          0.7500000000000003,
+          0.2499999999999999
+        ]
+      },
+      {
+        "input": [
+          0.0,
+          1.0
+        ],
+        "output_field": [
+          [
+            -0.4999999999999999,
+            1.487416814333745e-17
+          ],
+          [
+            0.8660254037844388,
+            -4.338359195403084e-16
+          ]
+        ],
+        "expected": [
+          -0.49999999999999994,
+          0.8660254037844387
+        ],
+        "detected_power": [
+          0.2499999999999999,
+          0.7500000000000003
+        ]
+      },
+      {
+        "input": [
+          0.6,
+          0.8
+        ],
+        "output_field": [
+          [
+            0.11961524227066334,
+            -4.85620727769869e-17
+          ],
+          [
+            0.9928203230275511,
+            -5.347177851383988e-16
+          ]
+        ],
+        "expected": [
+          0.11961524227066328,
+          0.992820323027551
+        ],
+        "detected_power": [
+          0.014307806183469485,
+          0.9856921938165308
+        ]
+      },
+      {
+        "input": [
+          -0.3,
+          0.5
+        ],
+        "output_field": [
+          [
+            -0.5098076211353315,
+            3.7667787717497156e-17
+          ],
+          [
+            0.28301270189221944,
+            -1.2309343501707817e-16
+          ]
+        ],
+        "expected": [
+          -0.5098076211353316,
+          0.2830127018922194
+        ],
+        "detected_power": [
+          0.2599038105676657,
+          0.08009618943233426
+        ]
+      }
+    ]
+  },
+  "limitations": [
+    "Ideal 50:50 couplers, lossless phase shifters and waveguides",
+    "Single wavelength; no dispersion",
+    "One MZI realizes only 2x2 unitary matrices; general NxN matrices need a mesh (Reck/Clements) and, for non-unitary weights, an SVD with attenuators",
+    "Photodetectors measure power |y|^2, not the complex field; reading signed outputs needs coherent detection or an encoding scheme",
+    "No fabrication errors, thermal crosstalk or phase-shifter calibration"
+  ]
+}

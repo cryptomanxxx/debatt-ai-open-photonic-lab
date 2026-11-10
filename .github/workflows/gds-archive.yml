@@ -1,0 +1,30 @@
+name: GDS archive
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/gds-archive.yml"
+      - "gds/**"
+      - "tools/check_gds_archive.py"
+  pull_request:
+    paths:
+      - ".github/workflows/gds-archive.yml"
+      - "gds/**"
+      - "tools/check_gds_archive.py"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Check provenance and checksums of released GDS files
+        run: python tools/check_gds_archive.py

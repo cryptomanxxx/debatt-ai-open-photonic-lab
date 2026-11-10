@@ -170,6 +170,10 @@
       "passed": true,
       "detail": "a fresh Python process regenerates a byte-identical GDS file"
     },
+    "optical_ports_connected": {
+      "passed": true,
+      "detail": "132 optical instance ports checked in every cell; problems: none (layout/port_check.py)"
+    },
     "siepic_ebeam_drc_clean": {
       "passed": true,
       "detail": "0 violations of 13 rules (KLayout 0.28.16, siepic_ebeam_pdk-0.4.53-py3-none-any.whl): {}"
@@ -179,7 +183,7 @@
   "limitations": [
     "Thermal crosstalk between heaters is not modelled (50 um centre spacing)",
     "The fiber-array routes to the four grating couplers have different lengths; the resulting fixed phase between the inputs is absorbed by phi on calibration",
-    "DRC covers geometry only; SiEPIC's functional verification has not been run",
+    "SiEPIC's connectivity check finds no nets on this gdsfactory layout (its waveguides have no SiEPIC pins); optical connectivity is checked with layout/port_check.py instead",
     "The broadband coupler's split has not been verified; ubcpdk has no compact model for it",
     "The grating-coupler model in ubcpdk is a generic placeholder (6 dB, 35 nm), not measured data",
     "Not submitted to or checked by the foundry"

@@ -34,10 +34,12 @@ Checks:
   9. layout hygiene: heaters at least 40 um apart, and no silicon under a pad
      opening,
  10. a byte-for-byte reproducible GDS,
- 11. no violations of the official SiEPIC EBeam DRC deck (tools/siepic_drc.py).
+ 11. every optical port of every instance connected (layout/port_check.py),
+ 12. no violations of the official SiEPIC EBeam DRC deck (tools/siepic_drc.py).
 
 Not done: thermal crosstalk between heaters, verification of the broadband
-coupler, SiEPIC's functional verification, and any measurement.
+coupler, and any measurement. SiEPIC-Tools' own connectivity check finds no
+nets on this layout (see tools/siepic_verify.py); check 11 replaces it.
 """
 import hashlib
 import json
@@ -277,6 +279,12 @@ def main():
     regenerated.unlink()
     check("gds_reproducible", same, "a fresh Python process regenerates a byte-identical GDS file")
 
+    from port_check import optical_port_check
+    n_ports, port_problems = optical_port_check(c)
+    check("optical_ports_connected", n_ports > 0 and not port_problems,
+          f"{n_ports} optical instance ports checked in every cell; problems: "
+          f"{port_problems or 'none'} (layout/port_check.py)")
+
     import siepic_drc
     drc = siepic_drc.run(gds)
     check("siepic_ebeam_drc_clean",
@@ -312,7 +320,9 @@ def main():
             "Thermal crosstalk between heaters is not modelled (50 um centre spacing)",
             "The fiber-array routes to the four grating couplers have different lengths; the "
             "resulting fixed phase between the inputs is absorbed by phi on calibration",
-            "DRC covers geometry only; SiEPIC's functional verification has not been run",
+            "SiEPIC's connectivity check finds no nets on this gdsfactory layout (its "
+            "waveguides have no SiEPIC pins); optical connectivity is checked with "
+            "layout/port_check.py instead",
             "The broadband coupler's split has not been verified; ubcpdk has no compact "
             "model for it",
             "The grating-coupler model in ubcpdk is a generic placeholder (6 dB, 35 nm), "
@@ -346,9 +356,11 @@ def main():
              "source": "OPA-LAYOUT-003"},
             {"name": "SiEPIC EBeam DRC", "value": f"{drc['total_violations']} violations of "
              f"{len(drc['rules'])} rules ({drc['klayout']})", "source": "tools/siepic_drc.py"},
+            {"name": "Optical connectivity", "value": f"{n_ports} instance ports, all connected",
+             "source": "layout/port_check.py"},
         ],
-        "limitations": ["thermal crosstalk not modelled", "SiEPIC functional verification not "
-                        "run", "broadband coupler not verified", "not submitted"],
+        "limitations": ["thermal crosstalk not modelled", "SiEPIC connectivity check covers "
+                        "no nets (gdsfactory waveguides have no SiEPIC pins)", "broadband coupler not verified", "not submitted"],
         "tags": ["mzi", "2x2", "programmable", "phase-shifter", "broadband-coupler",
                  "grating-coupler", "bond-pads", "siepic", "ebeam", "silicon", "open-pdk"],
     }

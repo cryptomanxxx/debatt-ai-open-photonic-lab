@@ -25,6 +25,7 @@ Checks:
   7. a byte-for-byte reproducible GDS,
   8. no violations of the official SiEPIC EBeam DRC deck (tools/siepic_drc.py,
      KLayout 0.28.16, siepic_ebeam_pdk 0.4.53 pinned by hash).
+  9. every optical port of every instance connected (layout/port_check.py).
 
 Two additions to the PDK-generated layout make it DRC-clean:
   - a floorplan (FLOORPLAN, 99/0) around the chip; the deck requires every
@@ -231,6 +232,12 @@ def main():
     check("gds_reproducible", same,
           "a fresh Python process regenerates a byte-identical GDS file")
 
+    from port_check import optical_port_check
+    n_ports, port_problems = optical_port_check(c)
+    check("optical_ports_connected", n_ports > 0 and not port_problems,
+          f"{n_ports} optical instance ports checked in every cell; problems: "
+          f"{port_problems or 'none'} (layout/port_check.py)")
+
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
     import siepic_drc
     drc = siepic_drc.run(gds)
@@ -269,8 +276,9 @@ def main():
         "checks": checks,
         "failures": failures,
         "limitations": [
-            "DRC covers the SiEPIC EBeam deck's geometric rules only; SiEPIC's functional "
-            "verification (waveguide connectivity, pins, component models) has not been run",
+            "SiEPIC's connectivity check finds no nets on this gdsfactory layout (its "
+            "waveguides have no SiEPIC pins); optical connectivity is checked with "
+            "layout/port_check.py instead",
             "The broadband coupler's split has not been verified; ubcpdk has no compact "
             "model for it",
             "Only one arm has a heater, so only theta is tunable; there are no phi, a or b "
@@ -308,8 +316,11 @@ def main():
              "bandwidth (not measured)", "source": "ubcpdk.models.gc_te1550"},
             {"name": "SiEPIC EBeam DRC", "value": f"{drc['total_violations']} violations of "
              f"{len(drc['rules'])} rules ({drc['klayout']})", "source": "tools/siepic_drc.py"},
+            {"name": "Optical connectivity", "value": f"{n_ports} instance ports, all connected",
+             "source": "layout/port_check.py"},
         ],
-        "limitations": ["SiEPIC functional verification not run", "broadband coupler not verified",
+        "limitations": ["SiEPIC connectivity check covers no nets (gdsfactory waveguides "
+                        "have no SiEPIC pins)", "broadband coupler not verified",
                         "theta only (no phi, a, b)", "not submitted"],
         "tags": ["mzi", "2x2", "phase-shifter", "broadband-coupler", "grating-coupler",
                  "bond-pads", "siepic", "ebeam", "silicon", "open-pdk"],

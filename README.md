@@ -563,13 +563,15 @@ the first lab design with real fiber I/O and bond pads, at 278 × 433 µm
 - **Four TE grating couplers** at the standard 127 µm fiber-array pitch, and two
   bond pads for the heater.
 
-All 8 checks pass:
+All 9 checks pass:
 - four fiber ports at a 127 µm pitch, and two heater pads;
 - the expected PDK cells (2 broadband couplers, 4 grating couplers, 1 heater);
 - balanced arms;
 - measurement labels carrying the lab name;
 - only PDK layers;
 - a GDS that a fresh process regenerates byte for byte;
+- every optical port connected (104 ports, see *Functional verification*
+  below);
 - **no violations of the official SiEPIC EBeam DRC.** The design's status is
   therefore `drc-clean`.
 
@@ -606,12 +608,9 @@ Two problems were found and fixed earlier:
 `gdsfactoryplus` is installed.
 
 **Not done yet:**
-- SiEPIC's functional verification (waveguide connectivity, pins, models);
 - verification of the broadband coupler;
 - phase shifters for φ, a and b (only θ is tunable);
-- any foundry review.
-
-DRC covers geometry only. The PDK's grating-coupler model is a placeholder (6 dB, 35 nm), not
+- any foundry review. The PDK's grating-coupler model is a placeholder (6 dB, 35 nm), not
 measured data.
 
 ### OPA-LAYOUT-003: fully programmable 2×2 MZI in SiEPIC EBeam
@@ -634,7 +633,7 @@ all, connected by a straight, widening lead. The pads for φ, θ and a sit on on
 side, the two for b on the other, so no lead crosses a heater. The chip is
 484 × 1058 µm, floorplan included.
 
-All 11 checks pass:
+All 12 checks pass:
 - four fiber ports at a 127 µm pitch, and eight pads;
 - the expected PDK cells (2 broadband couplers, 4 grating couplers, 4 heaters);
 - equal optical length in the two MZI arms (270.548 µm), and in the two input
@@ -646,6 +645,7 @@ All 11 checks pass:
   open heaters);
 - heaters at least 40 µm apart, and no silicon under a pad opening;
 - a byte-reproducible GDS;
+- every optical port connected (132 ports);
 - **0 violations of the official SiEPIC EBeam DRC.**
 
 Two design details came out of the DRC:
@@ -659,12 +659,50 @@ Two design details came out of the DRC:
 
 **Not done yet:**
 - thermal crosstalk between the heaters;
-- SiEPIC's functional verification;
 - verification of the broadband coupler;
 - any foundry review.
 
 The fiber-array routes have different lengths, which adds a fixed phase
 between the inputs that φ removes on calibration.
+
+### Functional verification of the SiEPIC layouts
+
+DRC checks shapes; functional verification checks that the circuit is wired
+correctly. Two tools are used, and both run in CI for LAYOUT-002 and
+LAYOUT-003.
+
+**SiEPIC-Tools** ([`tools/siepic_verify.py`](tools/siepic_verify.py), SiEPIC
+0.5.31 with the EBeam design-for-test rules, in its own locked environment
+[`requirements-verify.txt`](layout/requirements-verify.txt)) reports **0
+errors** on both layouts. But it builds its netlist from SiEPIC pins, and in a
+gdsfactory layout only the PDK's fixed cells have them. It finds 56 components
+and 16 pins in LAYOUT-003, but **0 nets**, so its connectivity checks
+(disconnected and mismatched pins) cover nothing. Its report says so
+(`connectivity_covered: false`), and its "opt_in label missing" check also
+depends on the nets. What it does check on these layouts:
+- component overlaps;
+- waveguide paths;
+- grating-coupler orientation and pitch;
+- where the measurement label sits.
+
+A test turns one grating coupler around and confirms that SiEPIC reports it.
+
+**Port check** ([`layout/port_check.py`](layout/port_check.py)) therefore checks
+optical connectivity on the gdsfactory ports themselves. In every cell of the
+hierarchy, each optical port of each component must either:
+- meet exactly one other port at the same position (in database units),
+  pointing the opposite way and with the same width; or
+- be exported by the cell, so that it is connected one level up.
+
+A dangling port, a second partner, or a direction or width mismatch fails.
+Tests confirm that it catches a 1 nm gap, a width mismatch, a missing
+waveguide and unexported ends. Result: **132 ports in LAYOUT-003 and 104 in
+LAYOUT-002, all connected.**
+
+kfactory's built-in `connectivity_check` was tried as well. It does not report
+dangling ports, and on these layouts its 21 reports are all one known quirk:
+the fiber array exports the chip ports at the grating-coupler junctions, so
+three ports overlap there.
 
 ## Design catalog
 

@@ -151,9 +151,11 @@ def svd_layer(w):
     """
     u, s, vh = np.linalg.svd(np.asarray(w, dtype=complex))
     scale = float(s.max())
+    # A zero matrix has no largest singular value to normalize by: block all light.
+    attenuation = s / scale if scale > 0 else np.zeros_like(s)
     return {
         "in_mesh": clements_decompose(vh),
-        "attenuation": s / scale,
+        "attenuation": attenuation,
         "out_mesh": clements_decompose(u),
         "scale": scale,
     }

@@ -85,6 +85,13 @@ for _ in range(200):
     svd_errors.append(np.abs(layer_matrix(svd_layer(w)) - w).max() / np.abs(w).max())
 check("svd_layer_exact", max(svd_errors) < EXACT,
       "200 random real 4x4 weight matrices realized as mesh-attenuators-mesh to 1e-12")
+edge_weights = {"zero": np.zeros((4, 4)), "rank_one": np.outer([1, 2, 0, -1], [0.5, 0, 1, 1]),
+                "identity": np.eye(4), "diagonal": np.diag([3.0, -1.0, 0.0, 0.25])}
+edge_errors = {name: float(np.abs(layer_matrix(svd_layer(w)) - w).max())
+               for name, w in edge_weights.items()}
+check("svd_layer_edge_cases",
+      all(np.isfinite(e) and e < EXACT for e in edge_errors.values()),
+      "zero, rank-one, identity and diagonal weight matrices are realized to 1e-12")
 
 # C. Error scaling with mesh size ----------------------------------------------
 scaling = []
@@ -225,6 +232,7 @@ report = {
     "failures": failures,
     "A_decomposition": decomposition,
     "B_svd_layer_max_relative_error": float(max(svd_errors)),
+    "B_svd_layer_edge_case_max_abs_error": edge_errors,
     "C_error_scaling": scaling,
     "D_classifier": classifier,
     "limitations": [

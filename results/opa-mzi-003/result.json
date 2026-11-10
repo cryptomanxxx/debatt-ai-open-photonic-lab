@@ -23,6 +23,10 @@
       "passed": true,
       "detail": "200 random real 4x4 weight matrices realized as mesh-attenuators-mesh to 1e-12"
     },
+    "svd_layer_edge_cases": {
+      "passed": true,
+      "detail": "zero, rank-one, identity and diagonal weight matrices are realized to 1e-12"
+    },
     "calibration_never_worse_mesh": {
       "passed": true,
       "detail": "global calibration never increases the error of any mesh"
@@ -107,6 +111,12 @@
     }
   ],
   "B_svd_layer_max_relative_error": 1.0126022513207357e-14,
+  "B_svd_layer_edge_case_max_abs_error": {
+    "zero": 0.0,
+    "rank_one": 3.2076000242703438e-15,
+    "identity": 2.266691351874238e-15,
+    "diagonal": 4.884981308350689e-15
+  },
   "C_error_scaling": [
     {
       "n": 2,

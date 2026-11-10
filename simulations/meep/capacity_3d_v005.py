@@ -16,8 +16,9 @@ import meep as mp
 PROFILES = {
     "small": {"cell_um": (8.0, 8.0, 3.0), "resolution_per_um": 10, "duration_meep": 35},
     "medium": {"cell_um": (20.0, 20.0, 4.0), "resolution_per_um": 10, "duration_meep": 35},
+    "large": {"cell_um": (40.0, 40.0, 4.0), "resolution_per_um": 10, "duration_meep": 95},
 }
-MAX_GRID_CELLS = 2_000_000
+MAX_GRID_CELLS = 7_000_000
 MAX_THEORETICAL_BYTES = 96 * MAX_GRID_CELLS
 OUTPUT = Path("results/opa-fdtd-005")
 
@@ -81,6 +82,7 @@ def main():
         "theoretical_lower_bound_memory_bytes": estimated_min_bytes,
         "measured_peak_process_rss_bytes": peak_rss_kb * 1024,
         "measured_wall_seconds": elapsed,
+        "configured_duration_meep": config["duration_meep"],
         "output_monitor_z_span_um": detector_z_span,
         "measured_output_aperture_flux": flux,
         "meep_version": str(getattr(mp, "__version__", "unknown")),
@@ -90,6 +92,7 @@ def main():
             "Meep theoretical memory is a lower bound; observed memory is profile-specific",
             "Only a short run, not convergence, physical loss, or maximum capacity proof",
             "Longer runs and physical 3D component calculations may require much more compute",
+            "Profiles have different simulation durations; wall time must not be interpreted as pure spatial scaling",
         ],
     }
     output_path = OUTPUT / f"benchmark-{args.profile}.json"

@@ -40,7 +40,7 @@ reproducible so that anyone can learn from it and build on it.
 | 1 | FDTD fundamentals: reproducible Meep pipeline, convergence and normalization practice | **Done** (001–009) |
 | 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010–011) |
 | 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | **Started** (COUPLER-001, Si 220 nm; EO-001–002, X-cut TFLN) |
-| 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001 generic PDK; LAYOUT-002–003 SiEPIC EBeam; LAYOUT-004 Luxtelligence lnoi400) |
+| 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001 generic PDK; LAYOUT-002–003 SiEPIC EBeam; LAYOUT-004–005 Luxtelligence lnoi400) |
 | 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001–003) |
 | 6 | Design-rule-checked GDS ready for an MPW run (includes a 32 px/µm FDTD convergence run of the coupler, see OPA-COUPLER-002) | **Started** (LAYOUT-002 and LAYOUT-003 pass the official SiEPIC EBeam DRC) |
 | 7 | Measurement plan and published measurement data | Planned |
@@ -716,6 +716,50 @@ Python 3.12 environment
 - The two inputs and the two outputs have routes of different length, which
   adds a fixed phase that a passive MZI cannot remove.
 
+### OPA-LAYOUT-005: electro-optic 2×2 MZI in lnoi400
+
+![Electro-optic 2×2 MZI in lnoi400](results/opa-layout-005/mzi_2x2_lnoi400_eo.png)
+
+This version supersedes OPA-LAYOUT-004 (`"supersedes"` in its datasheet; the
+catalog shows the chain). It makes the lnoi400 MZI active and fixes the
+unequal routes of 0.24:
+
+- **Pockels phase:** the PDK's push-pull Mach–Zehnder modulator
+  (`mzm_unbalanced`) with 2×2 MMIs, balanced arms, and a 5 mm
+  ground-signal-ground travelling-wave electrode (4 µm gap) with RF pads at
+  both ends.
+- **Thermal bias:** a heater on one arm with two DC pads. This avoids the DC
+  drift of lithium niobate.
+- **Equal routes:** the modulator sits midway between the facet pairs, so the
+  two inputs and the two outputs reach it through mirror-image S-bends. All
+  four routes are 1438.219 µm.
+- **Chip frame and labels:** a 10 × 5 mm chip frame, edge couplers at a 127 µm
+  pitch, and labels on all eight ports (four optical, two RF, two DC).
+
+**V_π = 6.6 V** (V_π·L = 3.3 V·cm), from the PDK's own compact model of the
+push-pull modulator, run with sax in the check. OPA-EO-002 gave 1.86 V·cm at a
+4 µm gap, but it modelled a different stack (a 600 nm film and a 1.2 µm rib),
+so the two numbers do not describe the same device.
+
+All 10 checks pass:
+- facet ports and their pitch;
+- the expected PDK cells;
+- every optical port connected (32);
+- all lithium niobate inside the frame, and all metal inside the chip contour;
+- only lnoi400 layers;
+- labels on all ports;
+- equal routes;
+- electrodes: three separate GSG conductors and one heater, with no shared
+  metal;
+- V_π from the PDK model;
+- a byte-reproducible GDS.
+
+**Not done yet:**
+- the lnoi400 DRC (the runset is on request);
+- RF design (impedance, velocity matching, termination);
+- simulation of the chip;
+- phase shifters for φ, a and b (only θ is tunable).
+
 ### Functional verification of the SiEPIC layouts
 
 DRC checks shapes; functional verification checks that the circuit is wired
@@ -826,6 +870,7 @@ git clone https://github.com/Luxtelligence/lxt_pdk_gf .lxt_pdk_gf
 git -C .lxt_pdk_gf checkout d16db6a4882657feb1ce696c16c604ff6cb7ccfa
 pip install --no-deps -e .lxt_pdk_gf
 python layout/mzi_2x2_lnoi400_v004.py                     # writes results/opa-layout-004/
+python layout/mzi_2x2_lnoi400_v005.py                     # writes results/opa-layout-005/
 python tools/build_catalog.py                            # refreshes catalog/
 ```
 

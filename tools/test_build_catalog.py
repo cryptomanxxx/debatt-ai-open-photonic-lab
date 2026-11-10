@@ -75,6 +75,32 @@ class ValidateTest(unittest.TestCase):
                 self.assertNotEqual(self.errors(**{key: value}), [])
 
 
+class SupersedesTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        folder = Path(self.tmp.name)
+        (folder / "chip.gds").write_bytes(b"x")
+        (folder / "chip.png").write_bytes(b"x")
+        self.path = folder / "design.json"
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_supersedes_must_be_text(self):
+        sheet = copy.deepcopy(GOOD) | {"supersedes": ""}
+        self.assertTrue(bc.validate(self.path, sheet))
+        sheet["supersedes"] = "TEST-000"
+        self.assertEqual(bc.validate(self.path, sheet), [])
+
+    def test_lineage_rendered_both_ways(self):
+        old = copy.deepcopy(GOOD) | {"_folder": "results/old"}
+        new = copy.deepcopy(GOOD) | {"_folder": "results/new", "id": "TEST-002",
+                                      "supersedes": "TEST-001"}
+        md = bc.render_markdown([old, new])
+        self.assertIn("Supersedes: TEST-001", md)
+        self.assertIn("Superseded by: TEST-002", md)
+
+
 class RenderTest(unittest.TestCase):
     def test_pipes_and_newlines_stay_in_one_cell(self):
         sheet = copy.deepcopy(GOOD) | {"_folder": "results/test"}

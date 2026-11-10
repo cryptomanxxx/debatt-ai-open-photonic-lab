@@ -16,6 +16,8 @@ on:
       - "layout/port_check.py"
       - "layout/requirements-lock-lnoi400.txt"
       - "results/opa-layout-004/**"
+      - "results/opa-layout-005/**"
+      - "results/opa-eo-002/result.json"
       - "gds/opa-p-passive-mzi-v0.24-eurocdp/**"
 
 permissions:
@@ -26,9 +28,19 @@ env:
 
 jobs:
   layout:
-    name: opa-layout-004
+    name: ${{ matrix.id }}
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: opa-layout-004
+            script: layout/mzi_2x2_lnoi400_v004.py
+            gds: results/opa-layout-004/mzi_2x2_lnoi400.gds
+          - id: opa-layout-005
+            script: layout/mzi_2x2_lnoi400_v005.py
+            gds: results/opa-layout-005/mzi_2x2_lnoi400_eo.gds
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -45,13 +57,16 @@ jobs:
       - name: Generate layout and run checks
         env:
           MPLBACKEND: Agg
-        run: python layout/mzi_2x2_lnoi400_v004.py
+        run: python ${{ matrix.script }}
       - name: Committed GDS and datasheet match the generated ones
-        run: git diff --exit-code -- results/opa-layout-004/mzi_2x2_lnoi400.gds results/opa-layout-004/design.json
+        env:
+          GDS: ${{ matrix.gds }}
+          ID: ${{ matrix.id }}
+        run: git diff --exit-code -- "$GDS" "results/$ID/design.json"
       - name: Upload layout
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: opa-layout-004
-          path: results/opa-layout-004/
+          name: ${{ matrix.id }}
+          path: results/${{ matrix.id }}/
           if-no-files-found: warn

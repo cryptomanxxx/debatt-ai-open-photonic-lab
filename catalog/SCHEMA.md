@@ -25,6 +25,7 @@ The datasheet answers "what is this chip?" without opening the GDS file.
 | `key_results` | list | Measured or simulated properties: each item has `name`, `value` and `source` (the experiment or file it comes from) |
 | `limitations` | list of strings | What the design does not do or has not been checked for |
 | `tags` | list of strings | Free keywords for filtering, for example `mzi`, `phase-shifter`, `generic-pdk` |
+| `supersedes` | string, optional | Id of the design this one replaces, for example `OPA-LAYOUT-004`; the catalog shows the chain in both directions and fails if the id is unknown |
 
 Released, frozen copies of a design go to [`gds/`](../gds/README.md); the
 catalog describes the working designs.

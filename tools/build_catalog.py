@@ -80,6 +80,8 @@ def validate(path, sheet):
     for key in ("id", "title", "function"):
         if not _text(sheet[key]):
             errors.append(f"{path}: '{key}' must be a non-empty string")
+    if "supersedes" in sheet and not _text(sheet["supersedes"]):
+        errors.append(f"{path}: 'supersedes' must be a non-empty design id")
     for key in ("limitations", "tags"):
         if not all(_text(v) for v in sheet[key]):
             errors.append(f"{path}: every item in '{key}' must be a non-empty string")
@@ -114,6 +116,12 @@ def collect():
             sheets.append(sheet)
     ids = [s["id"] for s in sheets]
     errors += [f"duplicate design id '{i}'" for i in sorted({i for i in ids if ids.count(i) > 1})]
+    for s in sheets:
+        old = s.get("supersedes")
+        if old is not None and old not in ids:
+            errors.append(f"{s['id']}: supersedes unknown design id '{old}'")
+        elif old == s["id"]:
+            errors.append(f"{s['id']}: a design cannot supersede itself")
     return sorted(sheets, key=lambda s: s["id"]), errors
 
 
@@ -154,6 +162,15 @@ def render_markdown(sheets):
     for s in sheets:
         lines.append(f"### {cell(s['id'])}: {cell(s['title'])}")
         lines.append("")
+        lineage = []
+        if s.get("supersedes"):
+            lineage.append(f"Supersedes: {cell(s['supersedes'])}")
+        newer = [t["id"] for t in sheets if t.get("supersedes") == s["id"]]
+        if newer:
+            lineage.append("Superseded by: " + ", ".join(cell(n) for n in newer))
+        if lineage:
+            lines.append(" · ".join(lineage))
+            lines.append("")
         lines.append("Tags: " + ", ".join(f"`{cell(t)}`" for t in s["tags"]))
         lines.append("")
         for r in s["key_results"]:

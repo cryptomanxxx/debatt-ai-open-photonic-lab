@@ -1,0 +1,87 @@
+{
+  "id": "OPA-LAYOUT-005",
+  "title": "Electro-optic 2x2 MZI with GSG electrodes and thermal bias (Luxtelligence lnoi400)",
+  "function": "push-pull electro-optic 2x2 MZI (theta), thermal bias",
+  "status": "exploratory",
+  "supersedes": "OPA-LAYOUT-004",
+  "pdk": {
+    "name": "Luxtelligence lnoi400 (lxt_pdk_gf)",
+    "version": "2.0 @ d16db6a",
+    "open_source": true,
+    "platform": "X-cut thin-film lithium niobate on insulator"
+  },
+  "wavelength_um": {
+    "design": 1.55
+  },
+  "footprint_um": [
+    10000.0,
+    4950.0
+  ],
+  "optical_ports": {
+    "inputs": 2,
+    "outputs": 2,
+    "type": "edge coupler (inverse taper)",
+    "pitch_um": 127.0
+  },
+  "controls": {
+    "GSG electrodes": 1,
+    "RF pads": 2,
+    "heaters": 1,
+    "DC pads": 2
+  },
+  "files": {
+    "gds": "mzi_2x2_lnoi400_eo.gds",
+    "preview": "mzi_2x2_lnoi400_eo.png"
+  },
+  "generator": {
+    "script": "layout/mzi_2x2_lnoi400_v005.py",
+    "environment": "layout/requirements-lock-lnoi400.txt"
+  },
+  "checks": {
+    "passed": 10,
+    "total": 10
+  },
+  "key_results": [
+    {
+      "name": "Modulator",
+      "value": "PDK push-pull MZM, 2x2 MMIs, 5 mm GSG electrode (4 um gap)",
+      "source": "OPA-LAYOUT-005"
+    },
+    {
+      "name": "V_pi",
+      "value": "6.6 V (V_pi*L 3.3 V cm, PDK compact model)",
+      "source": "lnoi400 models.mzm_unbalanced"
+    },
+    {
+      "name": "Routes",
+      "value": "inputs 1438.219 / 1438.219 um, outputs 1438.219 / 1438.219 um",
+      "source": "OPA-LAYOUT-005"
+    },
+    {
+      "name": "Optical connectivity",
+      "value": "32 instance ports, all connected",
+      "source": "layout/port_check.py"
+    }
+  ],
+  "limitations": [
+    "lnoi400 DRC not run (runset on request)",
+    "no RF design or simulation",
+    "V_pi from the PDK model",
+    "theta only"
+  ],
+  "tags": [
+    "mzi",
+    "2x2",
+    "electro-optic",
+    "pockels",
+    "push-pull",
+    "mmi",
+    "edge-coupler",
+    "heater",
+    "lnoi400",
+    "tfln",
+    "lithium-niobate",
+    "luxtelligence",
+    "open-pdk"
+  ]
+}

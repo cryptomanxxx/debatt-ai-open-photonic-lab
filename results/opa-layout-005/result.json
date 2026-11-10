@@ -1,0 +1,181 @@
+{
+  "experiment": "OPA-LAYOUT-005",
+  "goal": "Electro-optic 2x2 MZI in Luxtelligence lnoi400 with balanced routes, superseding the passive OPA-LAYOUT-004",
+  "supersedes": "OPA-LAYOUT-004",
+  "pdk": "lxt_pdk_gf 2.0 at commit d16db6a4882657feb1ce696c16c604ff6cb7ccfa (MIT)",
+  "gdsfactory_version": "9.51.0",
+  "python_version": "3.12.3",
+  "gds_file": "mzi_2x2_lnoi400_eo.gds",
+  "gds_sha256": "e5e0e14acef22d67f17b75dcfa0bef54c5947a929cda4300d2850f9e471e9cb3",
+  "chip_frame_um": [
+    10000.0,
+    4950.0
+  ],
+  "modulator": {
+    "modulation_length": 5000.0,
+    "length_imbalance": 0.0,
+    "splitter": "mmi2x2_optimized1550",
+    "with_heater": true,
+    "rf_gap_um": 4.0,
+    "rf_central_conductor_width_um": 10.0,
+    "rf_ground_planes_width_um": 180.0
+  },
+  "ports": {
+    "heater_1": {
+      "type": "electrical",
+      "center_um": [
+        7534.025,
+        2676.8
+      ]
+    },
+    "heater_2": {
+      "type": "electrical",
+      "center_um": [
+        8234.025,
+        2676.8
+      ]
+    },
+    "in1": {
+      "type": "optical",
+      "center_um": [
+        0.0,
+        2436.5
+      ]
+    },
+    "in2": {
+      "type": "optical",
+      "center_um": [
+        0.0,
+        2563.5
+      ]
+    },
+    "out1": {
+      "type": "optical",
+      "center_um": [
+        10000.0,
+        2436.5
+      ]
+    },
+    "out2": {
+      "type": "optical",
+      "center_um": [
+        10000.0,
+        2563.5
+      ]
+    },
+    "rf_in": {
+      "type": "electrical",
+      "center_um": [
+        1775.525,
+        2500.0
+      ]
+    },
+    "rf_out": {
+      "type": "electrical",
+      "center_um": [
+        7375.525,
+        2500.0
+      ]
+    }
+  },
+  "route_lengths_um": {
+    "in1": 1438.219,
+    "in2": 1438.219,
+    "out1": 1438.219,
+    "out2": 1438.219
+  },
+  "vpi": {
+    "pdk_model_V": 6.6,
+    "pdk_vpi_L_push_pull_V_cm": 3.3,
+    "opa_eo_002_vpi_L_push_pull_V_cm_at_4um_gap": 1.863,
+    "note": "OPA-EO-002 modelled a 600 nm film with a 300 nm etch and a 1.2 um rib; lnoi400 has its own stack and a 2.5 um modulator rib, so the two numbers are not the same device"
+  },
+  "cell_counts": {
+    "double_linear_inverse_taper": 4,
+    "mzm_unbalanced": 1
+  },
+  "layers": [
+    [
+      2,
+      0
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      6,
+      0
+    ],
+    [
+      6,
+      1
+    ],
+    [
+      21,
+      0
+    ],
+    [
+      21,
+      1
+    ]
+  ],
+  "checks": {
+    "facet_ports": {
+      "passed": true,
+      "detail": "optical ports [('in1', [0.0, 2436.5]), ('in2', [0.0, 2563.5]), ('out1', [10000.0, 2436.5]), ('out2', [10000.0, 2563.5])]"
+    },
+    "pdk_cells": {
+      "passed": true,
+      "detail": "4 double_linear_inverse_taper, 1 mzm_unbalanced (expected 4, 1)"
+    },
+    "optical_ports_connected": {
+      "passed": true,
+      "detail": "32 optical instance ports checked in every cell (ignoring the MZI's marker ports ['upper_taper_start', 'short_bias_branch_start', 'long_bias_branch_start']); problems: none"
+    },
+    "inside_chip_frame": {
+      "passed": true,
+      "detail": "LN outside the frame 0.000 um2; non-edge-coupler LN in the exclusion zone 0.000 um2; metal outside the contour 0.000 um2"
+    },
+    "only_lnoi400_layers": {
+      "passed": true,
+      "detail": "layers used [(2, 0), (3, 0), (3, 1), (4, 0), (6, 0), (6, 1), (21, 0), (21, 1)]; unknown []"
+    },
+    "port_labels": {
+      "passed": true,
+      "detail": "labels ['heater_1', 'heater_2', 'in1', 'in2', 'out1', 'out2', 'rf_in', 'rf_out']"
+    },
+    "balanced_routes": {
+      "passed": true,
+      "detail": "route lengths facet to modulator (um): {'in1': 1438.219, 'in2': 1438.219, 'out1': 1438.219, 'out2': 1438.219}"
+    },
+    "electrodes": {
+      "passed": true,
+      "detail": "3 GSG conductors (TL), 1 heater (HT), shared metal 0.000 um2, electrical ports ['heater_1', 'heater_2', 'rf_in', 'rf_out'], RF pads on TL: True"
+    },
+    "vpi_from_pdk_model": {
+      "passed": true,
+      "detail": "push-pull V_pi = 6.60 V from the PDK's sax model (transmission 0.933 -> 6.10e-24); formula 6.60 V, i.e. V_pi*L = 3.3 V cm"
+    },
+    "gds_reproducible": {
+      "passed": true,
+      "detail": "a fresh Python process regenerates a byte-identical GDS file"
+    }
+  },
+  "failures": [],
+  "limitations": [
+    "Not checked against the lnoi400 DRC; Luxtelligence distributes the runset on request",
+    "No RF design: impedance, velocity matching and termination are the PDK defaults and have not been simulated",
+    "V_pi is the PDK's compact model, not a measurement or a simulation of this chip",
+    "Only theta is tunable (Pockels and thermal bias); no phi, a or b phase shifters",
+    "No optical simulation of the chip"
+  ]
+}

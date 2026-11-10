@@ -684,6 +684,9 @@ status, recipient and the SHA-256 of every GDS file, and CI fails if a released
 file changes. Working layouts stay in [`layout/`](layout/) and
 [`results/`](results/).
 
+First release: [`opa-layout-003-v1`](gds/opa-layout-003-v1/), the fully
+programmable 2×2 MZI in SiEPIC EBeam (`drc-clean`, not yet sent anywhere).
+
 ## Running locally
 
 ```bash

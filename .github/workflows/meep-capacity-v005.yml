@@ -1,0 +1,53 @@
+name: OPA Meep 3D capacity v005
+
+on:
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: "Bounded benchmark size; medium is manual only"
+        required: true
+        type: choice
+        default: small
+        options:
+          - small
+          - medium
+  pull_request:
+    paths:
+      - ".github/workflows/meep-capacity-v005.yml"
+      - "simulations/meep/capacity_3d_v005.py"
+      - "simulations/meep/opa-fdtd-linux-64.lock.txt"
+
+permissions:
+  contents: read
+
+jobs:
+  capacity-benchmark:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: micromamba-shell {0}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install locked Meep environment
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-name: opa-fdtd
+          create-args: >-
+            --file simulations/meep/opa-fdtd-linux-64.lock.txt
+      - name: Record exact environment
+        run: |
+          mkdir -p results/opa-fdtd-005
+          cp simulations/meep/opa-fdtd-linux-64.lock.txt results/opa-fdtd-005/environment-lock.txt
+          micromamba list -n opa-fdtd --json > results/opa-fdtd-005/installed-packages.json
+      - name: Run bounded 3D benchmark
+        env:
+          SELECTED_PROFILE: ${{ inputs.profile || 'small' }}
+        run: python simulations/meep/capacity_3d_v005.py --profile "$SELECTED_PROFILE"
+      - name: Upload benchmark data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opa-meep-capacity-v005
+          path: results/opa-fdtd-005/
+          if-no-files-found: warn

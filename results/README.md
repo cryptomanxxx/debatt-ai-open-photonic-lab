@@ -32,6 +32,7 @@ Circuit (MZI) experiments use numpy from the same environment.
 | 010 | [result.json](opa-fdtd-010/result.json) | 93 % of straight input aperture flux is in odd-Z band 1; band-1 output ratio 0.173 (R = 1.0), 0.468 (R = 2.0) | Ez source excites an unknown mode mix |
 | 011 | [result.json](opa-fdtd-011/result.json) | TE-like guided-mode transmission at res 16: 0.315 / −5.0 dB (R = 1.0), 0.743 / −1.3 dB (R = 2.0); reflection about 1e-5; straight 0.9998 | Generic material; two resolutions |
 | MZI-001 | [result.json](opa-mzi-001/result.json) | Ideal 2×2 MZI programs 1000 random unitaries and near-bar/near-cross targets with max error 2e-15; 48:52 couplers raise the error to 0.04 | Ideal lossless model, single wavelength |
+| MZI-002 | [result.json](opa-mzi-002/result.json) | Naive error ≈ 1.3 × coupler error; calibration recovers every reachable target exactly; 1 dB arm-loss imbalance gives 5.7 % error that calibration cannot remove; combined chip scenario reaches 6.2 effective bits | Hardware assumed known exactly for calibration; single wavelength |
 
 The 3D results from 007–010 and from 011 describe different polarizations
 (TM-like versus TE-like) and are normalized differently, so they should not be

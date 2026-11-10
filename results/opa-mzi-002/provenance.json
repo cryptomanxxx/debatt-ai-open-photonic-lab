@@ -1,0 +1,8 @@
+{
+  "entries": [
+    {
+      "file": "result.json",
+      "source": "Local run with the locked environment (numpy 2.4.6, scipy 1.17.1, Python 3.11.18 from opa-fdtd-linux-64.lock.txt); the seeded model is deterministic and the CI workflow circuit-mzi-v002.yml re-runs it on every change"
+    }
+  ]
+}

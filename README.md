@@ -41,7 +41,7 @@ reproducible so that anyone can learn from it and build on it.
 | 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010–011) |
 | 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | Planned |
 | 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | Planned |
-| 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001) |
+| 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001–002) |
 | 6 | Design-rule-checked GDS ready for an MPW run | Planned |
 | 7 | Measurement plan and published measurement data | Planned |
 
@@ -119,6 +119,7 @@ the same locked environment, and run in seconds.
 | ID | What it establishes |
 |----|---------------------|
 | MZI-001 | An ideal 2×2 MZI plus an output phase screen is a programmable 2×2 unitary matrix multiplier |
+| MZI-002 | How coupler errors, arm loss, phase noise and phase resolution limit that multiplier, and what calibration can recover |
 
 ### OPA-MZI-001 results
 
@@ -146,6 +147,54 @@ which shows why fabrication tolerance (OPA-MZI-002) matters.
 Not included: loss, fabrication errors, wavelength dependence, and detection.
 Photodetectors measure power |y|², not the complex field.
 
+### OPA-MZI-002 results
+
+Two ways of setting the phases are compared on imperfect hardware: **naive**
+(settings computed for ideal hardware) and **calibrated** (settings computed for
+the measured hardware). Error is the relative matrix error after removing a
+common gain; effective bits = log₂(1/error).
+
+**Coupler splitting errors** (300 random targets):
+
+| Coupler split | Naive mean error | Calibrated mean error | Exactly reachable targets |
+|---------------|------------------|-----------------------|---------------------------|
+| 50.5 / 50.5 % | 0.0064 | 4e-16 | 100 % |
+| 51 / 51 % | 0.013 | 4e-16 | 100 % |
+| 52 / 52 % | 0.026 | 4e-16 | 100 % (theory 99.8 %) |
+| 55 / 55 % | 0.064 | 4e-16 | 100 % (theory 99.0 %) |
+| 55 / 45 % | 0.070 | 3e-4 | 99.3 % (theory 99.0 %) |
+
+Without calibration, the error is roughly 1.3 × the coupler error. With
+calibration, every target inside the analytic reachable range is realized
+exactly. Coupler errors shrink that range: equal errors in both couplers prevent
+full extinction (for example a 20 dB limit at 55 %), and opposite errors prevent
+full transmission.
+
+**Loss in one internal arm** cannot be calibrated away, because the circuit is no
+longer unitary: 0.1 dB → 0.6 % error, 1 dB → 5.7 %, 3 dB → 17 %. The same
+loss in both arms costs only power (shape error 4e-16). Phase shifters should
+therefore have matched dummy loss in the other arm.
+
+**Phase precision:**
+
+| Phase noise σ | Mean error | Effective bits | | DAC bits | Mean error | Effective bits |
+|---------------|------------|----------------|-|----------|------------|----------------|
+| 0.001 rad | 0.0013 | 9.7 | | 6 | 0.038 | 4.8 |
+| 0.01 rad | 0.013 | 6.4 | | 8 | 0.0092 | 6.8 |
+| 0.1 rad | 0.13 | 3.0 | | 10 | 0.0024 | 8.8 |
+
+The error is about 1.28 × σ, and each extra DAC bit gives about one more
+effective bit.
+
+**Combined fabrication scenario** (200 chips; coupler split σ = 1 %, 0.2 dB
+phase-shifter loss, 10-bit DAC, 0.005 rad phase noise): median error 0.018
+(5.8 effective bits) without calibration and 0.013 (6.2 bits) with calibration.
+The remaining error is dominated by the unbalanced 0.2 dB arm loss, which is
+the main design lesson.
+
+Assumes exact knowledge of the hardware for calibration, a single wavelength,
+and no thermal crosstalk or drift.
+
 ## Running locally
 
 ```bash
@@ -154,6 +203,7 @@ micromamba create -n opa-fdtd --file simulations/meep/opa-fdtd-linux-64.lock.txt
 micromamba activate opa-fdtd
 python simulations/meep/bend_3d_launched_mode_v011.py   # writes results/opa-fdtd-011/result.json
 python simulations/circuit/mzi_2x2_v001.py               # writes results/opa-mzi-001/result.json, < 1 s
+python simulations/circuit/mzi_imperfect_v002.py         # writes results/opa-mzi-002/result.json, ~1 min
 ```
 
 New experiments should import shared geometry and measurement helpers from

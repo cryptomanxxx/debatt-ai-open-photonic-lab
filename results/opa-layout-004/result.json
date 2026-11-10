@@ -1,0 +1,123 @@
+{
+  "experiment": "OPA-LAYOUT-004",
+  "goal": "Passive 2x2 MZI in Luxtelligence lnoi400, rebuilt from the PDK so that the chip sent to EuroCDP as OPA 0.24 can be regenerated and checked",
+  "pdk": "lxt_pdk_gf 2.0 at commit d16db6a4882657feb1ce696c16c604ff6cb7ccfa (MIT)",
+  "gdsfactory_version": "9.51.0",
+  "python_version": "3.12.3",
+  "gds_file": "mzi_2x2_lnoi400.gds",
+  "gds_sha256": "c562e55b2b54c97779619d1537349dee82a8ee1e576d8258f1baa360ee75f6b5",
+  "chip_frame_um": [
+    10000.0,
+    4950.0
+  ],
+  "mzi": {
+    "splitter": "mmi2x2_optimized1550",
+    "taper_length": 100.0,
+    "rib_core_width_modulator": 2.5,
+    "modulation_length": 450.0,
+    "length_imbalance": 0.0
+  },
+  "facet_ports_um": {
+    "in1": [
+      0.0,
+      1750.0
+    ],
+    "in2": [
+      0.0,
+      1877.0
+    ],
+    "out1": [
+      10000.0,
+      1750.0
+    ],
+    "out2": [
+      10000.0,
+      1877.0
+    ]
+  },
+  "cell_counts": {
+    "double_linear_inverse_taper": 4,
+    "_mzm_interferometer": 1
+  },
+  "layers": [
+    [
+      2,
+      0
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      6,
+      0
+    ],
+    [
+      6,
+      1
+    ]
+  ],
+  "comparison_with_v024": {
+    "xor_outside_mzi_um2": {
+      "2/0": 0.0,
+      "3/0": 0.0,
+      "3/1": 0.0
+    },
+    "xor_inside_mzi_um2": {
+      "2/0": 5628.116,
+      "3/0": 38113.09,
+      "3/1": 0.0
+    },
+    "reference": "gds/opa-p-passive-mzi-v0.24-eurocdp/opa_p_four_facet_ports_exploratory.gds"
+  },
+  "checks": {
+    "facet_ports": {
+      "passed": true,
+      "detail": "ports [('in1', [0.0, 1750.0]), ('in2', [0.0, 1877.0]), ('out1', [10000.0, 1750.0]), ('out2', [10000.0, 1877.0])]; chip contour x 0.0..10000.0 um"
+    },
+    "pdk_cells": {
+      "passed": true,
+      "detail": "4 double_linear_inverse_taper, 1 _mzm_interferometer (expected 4, 1)"
+    },
+    "optical_ports_connected": {
+      "passed": true,
+      "detail": "28 optical instance ports checked in every cell (ignoring the MZI's marker ports ['upper_taper_start', 'short_bias_branch_start', 'long_bias_branch_start']); problems: none (layout/port_check.py)"
+    },
+    "inside_chip_frame": {
+      "passed": true,
+      "detail": "LN area outside the frame 0.000 um2; non-edge-coupler LN area in the exclusion zone 0.000 um2"
+    },
+    "only_lnoi400_layers": {
+      "passed": true,
+      "detail": "layers used [(2, 0), (3, 0), (3, 1), (4, 0), (6, 0), (6, 1)]; unknown []"
+    },
+    "port_labels": {
+      "passed": true,
+      "detail": "labels {'in1': (0.0, 1750.0), 'out1': (10000.0, 1750.0), 'in2': (0.0, 1877.0), 'out2': (10000.0, 1877.0)}"
+    },
+    "matches_v024_outside_mzi": {
+      "passed": true,
+      "detail": "XOR area outside the MZI (um2) {'2/0': 0.0, '3/0': 0.0, '3/1': 0.0}; inside the MZI {'2/0': 5628.116, '3/0': 38113.09, '3/1': 0.0}"
+    },
+    "gds_reproducible": {
+      "passed": true,
+      "detail": "a fresh Python process regenerates a byte-identical GDS file"
+    }
+  },
+  "failures": [],
+  "limitations": [
+    "Not checked against the lnoi400 DRC; Luxtelligence distributes the runset on request",
+    "Inside the MZI the bias arms differ from OPA 0.24 by about 10 um; 0.24 used a non-default MZI parameter that its GDS does not record",
+    "The two input routes and the two output routes differ in length (S-bends of different offsets), which adds a fixed phase that a passive MZI cannot remove",
+    "Passive: no electrodes or heaters",
+    "No optical simulation of the chip; the MMI and edge-coupler performance is the PDK's"
+  ]
+}

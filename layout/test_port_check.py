@@ -92,5 +92,15 @@ class PortCheckTest(unittest.TestCase):
         self.assertTrue(any("not backed" in p for p in problems), problems)
 
 
+    def test_ignored_marker_port(self):
+        c = gf.Component("pc_marker")
+        a = c << gf.components.straight(length=10, cross_section=XS)
+        c.add_port("o1", port=a.ports["o1"])
+        _, problems = optical_port_check(c)
+        self.assertEqual(len(problems), 1)                  # o2 dangles
+        _, problems = optical_port_check(c, ignore_ports=("o2",))
+        self.assertEqual(problems, [])
+
+
 if __name__ == "__main__":
     unittest.main()

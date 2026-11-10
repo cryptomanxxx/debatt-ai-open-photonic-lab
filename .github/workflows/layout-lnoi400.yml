@@ -1,0 +1,57 @@
+name: OPA layout lnoi400
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/layout-lnoi400.yml"
+      - "layout/mzi_2x2_lnoi400_v*.py"
+      - "layout/port_check.py"
+      - "layout/requirements-lock-lnoi400.txt"
+  pull_request:
+    paths:
+      - ".github/workflows/layout-lnoi400.yml"
+      - "layout/mzi_2x2_lnoi400_v*.py"
+      - "layout/port_check.py"
+      - "layout/requirements-lock-lnoi400.txt"
+      - "results/opa-layout-004/**"
+      - "gds/opa-p-passive-mzi-v0.24-eurocdp/**"
+
+permissions:
+  contents: read
+
+env:
+  LXT_PDK_COMMIT: d16db6a4882657feb1ce696c16c604ff6cb7ccfa
+
+jobs:
+  layout:
+    name: opa-layout-004
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the locked lnoi400 environment and the pinned PDK (no proprietary packages)
+        run: |
+          pip install -r layout/requirements-lock-lnoi400.txt
+          git clone --quiet https://github.com/Luxtelligence/lxt_pdk_gf "$RUNNER_TEMP/lxt_pdk_gf"
+          git -C "$RUNNER_TEMP/lxt_pdk_gf" checkout --quiet "$LXT_PDK_COMMIT"
+          test "$(git -C "$RUNNER_TEMP/lxt_pdk_gf" rev-parse HEAD)" = "$LXT_PDK_COMMIT"
+          pip install --no-deps -e "$RUNNER_TEMP/lxt_pdk_gf"
+          if pip show gdsfactoryplus >/dev/null 2>&1; then echo "gdsfactoryplus must not be installed"; exit 1; fi
+      - name: Generate layout and run checks
+        env:
+          MPLBACKEND: Agg
+        run: python layout/mzi_2x2_lnoi400_v004.py
+      - name: Committed GDS and datasheet match the generated ones
+        run: git diff --exit-code -- results/opa-layout-004/mzi_2x2_lnoi400.gds results/opa-layout-004/design.json
+      - name: Upload layout
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opa-layout-004
+          path: results/opa-layout-004/
+          if-no-files-found: warn

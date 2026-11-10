@@ -40,7 +40,7 @@ reproducible so that anyone can learn from it and build on it.
 | 1 | FDTD fundamentals: reproducible Meep pipeline, convergence and normalization practice | **Done** (001–009) |
 | 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010–011) |
 | 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | **Started** (COUPLER-001, Si 220 nm; EO-001–002, X-cut TFLN) |
-| 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001 generic PDK; LAYOUT-002–003 SiEPIC EBeam open PDK) |
+| 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001 generic PDK; LAYOUT-002–003 SiEPIC EBeam; LAYOUT-004 Luxtelligence lnoi400) |
 | 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001–003) |
 | 6 | Design-rule-checked GDS ready for an MPW run (includes a 32 px/µm FDTD convergence run of the coupler, see OPA-COUPLER-002) | **Started** (LAYOUT-002 and LAYOUT-003 pass the official SiEPIC EBeam DRC) |
 | 7 | Measurement plan and published measurement data | Planned |
@@ -665,6 +665,57 @@ Two design details came out of the DRC:
 The fiber-array routes have different lengths, which adds a fixed phase
 between the inputs that φ removes on calibration.
 
+### OPA-LAYOUT-004: passive 2×2 MZI in Luxtelligence lnoi400
+
+![Passive 2×2 MZI in lnoi400](results/opa-layout-004/mzi_2x2_lnoi400.png)
+
+The chip the lab sent to EuroCDP as OPA 0.24
+([`gds/opa-p-passive-mzi-v0.24-eurocdp`](gds/opa-p-passive-mzi-v0.24-eurocdp/)),
+rebuilt from the open lnoi400 PDK
+([lxt_pdk_gf](https://github.com/Luxtelligence/lxt_pdk_gf), MIT; thin-film
+lithium niobate). The script means it can now be regenerated and checked here.
+
+The chip is passive:
+- the PDK's MZI with two `mmi2x2_optimized1550` couplers, 450 µm arms and no
+  electrodes;
+- 1.2 mm S-bends;
+- four inverse-taper edge couplers on two facets 10 mm apart, 127 µm apart on
+  each facet.
+
+Compared with 0.24 it adds the PDK's chip frame (10 × 5 mm die contour and
+edge exclusion zone) and port labels.
+
+All 8 checks pass:
+- the facet ports sit on the chip edges, 127 µm apart;
+- the PDK cells are as expected (4 edge couplers, 1 MZI);
+- every optical port is connected;
+- all lithium-niobate shapes lie inside the chip frame, with only the edge
+  couplers in the exclusion zone;
+- only lnoi400 layers are used;
+- each port has a label;
+- the GDS is byte-reproducible, also from a fresh install.
+
+**Relation to 0.24:** an XOR on every layer shows the two chips are
+**identical outside the MZI**. Inside it, 0.24's two bias arms sit about 10 µm
+closer to the axis. Every PDK release since v1.3.0, and gdsfactory 9.34 and
+9.51 alike, give this repository's version, so 0.24 must have used a
+non-default MZI parameter that its GDS does not record.
+
+**Environment:** the PDK is not on PyPI, and its wheel leaves out its data
+files (`layers.yaml`, models, KLayout tech) because of a packaging error. It
+is therefore installed from a clone pinned to commit `d16db6a`, in its own
+Python 3.12 environment
+([`requirements-lock-lnoi400.txt`](layout/requirements-lock-lnoi400.txt), no
+`gdsfactoryplus`).
+
+**Not done yet:**
+- **The lnoi400 DRC.** Luxtelligence distributes the runset on request
+  (resources.luxtelligence.ai), so the design stays `exploratory` until it has
+  been run.
+- Optical simulation of the chip.
+- The two inputs and the two outputs have routes of different length, which
+  adds a fixed phase that a passive MZI cannot remove.
+
 ### Functional verification of the SiEPIC layouts
 
 DRC checks shapes; functional verification checks that the circuit is wired
@@ -764,6 +815,17 @@ pip install -r layout/requirements-lock-ubc.txt
 sudo apt-get install klayout=0.28.16-0ubuntu0.24.04.1     # DRC engine (Ubuntu 24.04)
 python layout/mzi_2x2_ubc_v002.py                        # writes results/opa-layout-002/, runs the DRC
 python layout/mzi_2x2_ubc_v003.py                        # writes results/opa-layout-003/, runs the DRC
+```
+
+The lnoi400 layout needs Python 3.12 and the PDK installed from a pinned clone:
+
+```bash
+python3.12 -m venv .venv-lnoi400 && . .venv-lnoi400/bin/activate
+pip install -r layout/requirements-lock-lnoi400.txt
+git clone https://github.com/Luxtelligence/lxt_pdk_gf .lxt_pdk_gf
+git -C .lxt_pdk_gf checkout d16db6a4882657feb1ce696c16c604ff6cb7ccfa
+pip install --no-deps -e .lxt_pdk_gf
+python layout/mzi_2x2_lnoi400_v004.py                     # writes results/opa-layout-004/
 python tools/build_catalog.py                            # refreshes catalog/
 ```
 

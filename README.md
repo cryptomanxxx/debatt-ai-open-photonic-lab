@@ -228,8 +228,8 @@ synthetic 4-feature data, runs on the photonic layer:
 |---|---|---|---|
 | Digital | 86.8 % | – | – |
 | Ideal photonic layer | 86.8 % (identical predictions) | 1e-14 | – |
-| 20 imperfect chips, naive | 86.8 % (86.1–86.9 %) | 5.4 % | 4.2 |
-| 20 imperfect chips, calibrated | 86.8 % (86.1–86.9 %) | 4.1 % | 4.6 |
+| 20 imperfect chips, naive | 86.8 % (range 86.6–86.9 %) | 5.4 % | 4.2 |
+| 20 imperfect chips, calibrated | 86.8 % (range 86.5–86.9 %) | 4.1 % | 4.6 |
 | Ideal optics, power-only readout | 63.1 % | – | – |
 
 The imperfect chips use the MZI-002 assumptions (1 % coupler spread, 0.2 dB

@@ -43,7 +43,7 @@ def check(name, ok, detail):
 
 def stats(values):
     v = np.asarray(values, dtype=float)
-    return {"mean": float(v.mean()), "median": float(np.median(v)),
+    return {"mean": float(v.mean()), "median": float(np.median(v)), "min": float(v.min()),
             "p95": float(np.percentile(v, 95)), "max": float(v.max())}
 
 

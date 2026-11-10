@@ -39,7 +39,7 @@ reproducible so that anyone can learn from it and build on it.
 |-------|------|--------|
 | 1 | FDTD fundamentals: reproducible Meep pipeline, convergence and normalization practice | **Done** (001–009) |
 | 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010–011) |
-| 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | Planned |
+| 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | **Started** (COUPLER-001, Si 220 nm) |
 | 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001, generic PDK) |
 | 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001–003) |
 | 6 | Design-rule-checked GDS ready for an MPW run | Planned |
@@ -239,6 +239,48 @@ networks will be more sensitive. The power-only result shows that the phase of
 the output matters: either coherent detection or an encoding that keeps outputs
 positive is needed.
 
+## Component simulations
+
+### OPA-COUPLER-001: silicon directional coupler
+
+A directional coupler is two waveguides close enough that light leaks from one
+to the other. It is the 50:50 splitter inside every MZI. For a standard silicon
+wire (500 × 220 nm, silicon dioxide cladding, TE polarization) the two
+supermodes of the pair are computed with MPB, the mode solver inside Meep. The
+coupling length is L_c = λ / (2·Δn), and the coupler splits 50:50 at L_c / 2.
+
+**Validation first** (the checks requested for OPA-FDTD-011):
+
+| Check | Result |
+|-------|--------|
+| Resolution convergence | L_c varies 0.31 % across 100, 150 and 200 px/µm. At 16–64 px/µm it was *not* converged (27–39 µm) because the gap and width were off the grid. |
+| Cell size (mode confinement) | 0.00 % change from a 6×3 to an 8×4 µm cell; a 4×2 µm cell is too small |
+| Single-wire n_eff | 2.444 (MPB) vs 2.492 from the effective-index method, which is known to overestimate |
+| Group index | 4.18, matching the commonly quoted ≈ 4.2 for this wire |
+
+**Results at 1.55 µm:**
+
+| Gap | Coupling length L_c | 50:50 length |
+|-----|---------------------|--------------|
+| 150 nm | 23.7 µm | 11.9 µm |
+| 200 nm | 37.9 µm | 19.0 µm |
+| 236 nm (LAYOUT-001) | 52.0 µm | 26.0 µm |
+| 300 nm | 91.2 µm | 45.6 µm |
+
+- **Strong wavelength dependence:** a coupler that is 50:50 at 1.55 µm splits
+  35:65 at 1.50 µm and 68:32 at 1.60 µm. Within ±10 nm the error is about
+  ±3.5 %.
+- **Fabrication sensitivity:** ±10 nm in width or gap changes the split to between
+  44 % and 59 %. Through OPA-MZI-002 that is up to about 11 % matrix error
+  without calibration.
+- **The LAYOUT-001 coupler is too short:** with a 236 nm gap, its 20 µm straight
+  section gives only about 32:68 (ignoring the extra coupling in the S-bends).
+  The layout needs to be retuned to about 26 µm, minus the bend contribution.
+
+Limits: this is two-mode theory for the straight section only, with nominal
+indices, and no sidewall angle or roughness. A full 3D FDTD of the complete
+coupler including the bends is the next check.
+
 ## Layout
 
 Chip layouts live in [`layout/`](layout/) and use
@@ -269,6 +311,10 @@ The crossing check caught a real bug during development: the input S-bends
 were mirrored, so the top input ended up at the bottom and the two input
 waveguides crossed.
 
+**Known issue:** OPA-COUPLER-001 shows that the 20 µm couplers split only
+about 32:68 for a silicon 500 × 220 nm wire with a 236 nm gap. They need to be
+lengthened to about 26 µm, minus the coupling that the S-bends add.
+
 **Limits:** this uses gdsfactory's *generic* example PDK, not a foundry process.
 Layers, design rules and heaters are placeholders, and the coupler length is
 not yet tuned to 50:50. No foundry DRC has been run, and there are no bond pads
@@ -281,6 +327,7 @@ or fiber couplers yet.
 micromamba create -n opa-fdtd --file simulations/meep/opa-fdtd-linux-64.lock.txt
 micromamba activate opa-fdtd
 python simulations/meep/bend_3d_launched_mode_v011.py   # writes results/opa-fdtd-011/result.json
+python simulations/meep/directional_coupler_v001.py     # writes results/opa-coupler-001/result.json, ~4 min
 python simulations/circuit/mzi_2x2_v001.py               # writes results/opa-mzi-001/result.json, < 1 s
 python simulations/circuit/mzi_imperfect_v002.py         # writes results/opa-mzi-002/result.json, ~1 min
 python simulations/circuit/mesh_clements_v003.py         # writes results/opa-mzi-003/result.json, ~15 s

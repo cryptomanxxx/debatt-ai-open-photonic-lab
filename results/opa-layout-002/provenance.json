@@ -1,0 +1,8 @@
+{
+  "entries": [
+    {
+      "files": ["result.json", "design.json", "mzi_2x2_siepic.gds", "mzi_2x2_siepic.png"],
+      "source": "Local run of layout/mzi_2x2_ubc_v002.py with layout/requirements-lock-ubc.txt (ubcpdk 3.3.0, gdsfactory 9.23.0, Python 3.12, no gdsfactoryplus); the CI workflow layout-ubc-v002.yml regenerates them and fails if the GDS or datasheet differs"
+    }
+  ]
+}

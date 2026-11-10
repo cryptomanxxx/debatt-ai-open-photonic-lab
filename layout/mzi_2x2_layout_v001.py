@@ -151,6 +151,51 @@ def overlapping_heaters(component):
     return overlaps, [name for name, _ in boxes]
 
 
+COUPLER_003 = Path("results/opa-coupler-003/result.json")
+
+
+def write_datasheet(footprint, ports, checks, failures):
+    """design.json for the catalog (catalog/SCHEMA.md); numbers come from the result files."""
+    c2 = json.loads(COUPLER_002.read_text())
+    c3 = json.loads(COUPLER_003.read_text())
+    band = c3["wavelengths_within_5pct_of_50_50_um"]
+    bias = [r["cross_fraction"] for r in c3["fabrication_1550"] if "etch bias" in r["scenario"]]
+    sheet = {
+        "id": "OPA-LAYOUT-001",
+        "title": "Programmable 2x2 MZI with balanced dummy heaters",
+        "function": "programmable 2x2 MZI (any 2x2 unitary with phi, theta, a, b)",
+        "status": "exploratory",
+        "pdk": {"name": "gdsfactory generic PDK", "version": gf.__version__,
+                "open_source": True, "platform": "Si 500 x 220 nm in SiO2 (assumed)"},
+        "wavelength_um": {"design": 1.55, "band": [min(band), max(band)]},
+        "footprint_um": footprint,
+        "optical_ports": {"inputs": 2, "outputs": 2, "type": "waveguide",
+                          "pitch_um": round(ports["in_top"]["y_um"] - ports["in_bot"]["y_um"], 3)},
+        "controls": {"heaters": 4, "dummy heaters": 2},
+        "files": {"gds": "programmable_mzi_2x2.gds", "preview": "programmable_mzi_2x2.png"},
+        "generator": {"script": "layout/mzi_2x2_layout_v001.py",
+                      "environment": "layout/requirements-lock.txt"},
+        "checks": {"passed": len(checks) - len(failures), "total": len(checks)},
+        "key_results": [
+            {"name": "Coupler", "value": f"236 nm gap, {COUPLER_LENGTH:g} um straight section, "
+             f"50:50 at 1.55 um", "source": "OPA-COUPLER-002"},
+            {"name": "Coupling length", "value": f"{c2['layout']['converged_coupling_length_um']:.1f} um "
+             f"(MPB); 3D FDTD agrees within 0.4 %", "source": "OPA-COUPLER-001/002"},
+            {"name": "Band within 5 % of 50:50", "value": f"{min(band)}-{max(band)} um",
+             "source": "OPA-COUPLER-003"},
+            {"name": "Etch bias +-10 nm", "value": f"split {min(bias):.1%}-{max(bias):.1%}",
+             "source": "OPA-COUPLER-003"},
+            {"name": "Programmability", "value": "any 2x2 unitary, error < 1e-14 (ideal model)",
+             "source": "OPA-MZI-001"},
+        ],
+        "limitations": ["generic example PDK, not a foundry process", "no DRC",
+                        "no fiber couplers or bond pads", "narrowband couplers"],
+        "tags": ["mzi", "2x2", "phase-shifter", "directional-coupler", "generic-pdk",
+                 "silicon", "programmable"],
+    }
+    (OUT / "design.json").write_text(json.dumps(sheet, indent=2) + "\n", encoding="utf-8")
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     c = programmable_mzi_2x2()
@@ -276,6 +321,7 @@ def main():
         ],
     }
     (OUT / "result.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    write_datasheet(footprint, ports, checks, failures)
     print(json.dumps(report, indent=2))
     if failures:
         raise SystemExit("OPA-LAYOUT-001 failed checks: " + ", ".join(failures))

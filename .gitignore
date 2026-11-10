@@ -221,3 +221,4 @@ __marimo__/
 
 # Local layout environment (see README)
 .venv-layout/
+.venv-ubc/

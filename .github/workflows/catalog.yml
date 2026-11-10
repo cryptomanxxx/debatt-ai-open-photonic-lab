@@ -1,0 +1,36 @@
+name: Design catalog
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/catalog.yml"
+      - "results/**"
+      - "catalog/**"
+      - "tools/build_catalog.py"
+      - "tools/test_build_catalog.py"
+  pull_request:
+    paths:
+      - ".github/workflows/catalog.yml"
+      - "results/**"
+      - "catalog/**"
+      - "tools/build_catalog.py"
+      - "tools/test_build_catalog.py"
+
+permissions:
+  contents: read
+
+jobs:
+  catalog:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Catalog builder tests
+        run: python tools/test_build_catalog.py
+      - name: Datasheets are valid and the catalog is up to date
+        run: python tools/build_catalog.py --check

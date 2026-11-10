@@ -1,0 +1,375 @@
+{
+  "experiment": "OPA-EO-001",
+  "goal": "Pockels (X-cut TFLN) versus thermo-optic (Si, ubcpdk heater) phase shifters for holding and changing the phases of an MZI mesh",
+  "versions": {
+    "meep": "1.35.1",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "wavelength_um": 1.55,
+  "pockels": {
+    "geometry": {
+      "film_um": 0.6,
+      "etch_um": 0.3,
+      "rib_top_width_um": 1.2,
+      "electrode_gap_um": 5.0,
+      "electrode_thickness_um": 0.8,
+      "box_um": 4.7,
+      "cladding": "air",
+      "sidewalls": "vertical (model)"
+    },
+    "materials": {
+      "n_o": 2.2111,
+      "n_e": 2.1376,
+      "r33_pm_per_V": 30.9,
+      "eps_static_z": 28.0,
+      "eps_static_x": 44.0
+    },
+    "mode": {
+      "n_eff": 1.8919147994715502,
+      "n_g": 2.2443651400228126,
+      "te_fraction": 0.947535320496104,
+      "mpb_grid_agreement": 1.0
+    },
+    "dneff_per_V": 1.6168786548037186e-05,
+    "overlap_gamma_vs_V_over_gap": 0.5357221781533835,
+    "field_at_rib_centre_V_per_um_at_1V": -0.10698793543821597,
+    "vpi_L_single_arm_V_cm": 4.793185918420583,
+    "vpi_L_push_pull_V_cm": 2.3965929592102917,
+    "capacitance_pF_per_mm": 0.0690755905540269
+  },
+  "thermo_optic": {
+    "geometry": {
+      "waveguide_um": [
+        0.5,
+        0.22
+      ],
+      "box_um": 3.0,
+      "substrate_um": 725.0,
+      "heater": {
+        "material": "TiN",
+        "width_um": 2.5,
+        "z_um": [
+          1.1,
+          1.85
+        ]
+      },
+      "source": "ubcpdk 3.3.0 tech.py layer stack and heater width"
+    },
+    "materials": {
+      "dn_dT_si": 0.000186,
+      "dn_dT_sio2": 9.5e-06,
+      "kappa_W_per_mK": {
+        "si": 148.0,
+        "sio2": 1.38,
+        "tin": 20.0,
+        "air": 0.0
+      }
+    },
+    "mode": {
+      "n_eff": 2.439626633641371,
+      "n_g": 4.0469734962935435,
+      "te_fraction": 0.7516537718163258,
+      "mpb_grid_agreement": 0.9993489583333334
+    },
+    "dneff_per_K_uniform": 0.0002007270867835421,
+    "waveguide_temperature_rise_K_per_W_per_m": 0.27515563473446525,
+    "dneff_per_W_per_m": 5.5230159227635313e-05,
+    "P_pi_mW": 14.032188406442545,
+    "heater_length_um": 200.0,
+    "waveguide_temperature_rise_at_pi_K": 19.305178538441517,
+    "post_hoc_stack_sensitivity": {
+      "note": "Added after the first run; not pre-registered. Heater width 2.5 um in all cases.",
+      "stacks": {
+        "ubcpdk_3.3.0_nominal": {
+          "box_um": 3.0,
+          "heater_z0_um": 1.1,
+          "heater_t_um": 0.75,
+          "P_pi_mW": 14.032188406442545
+        },
+        "ant_nanosoi_2um_box_2.2um_clad": {
+          "box_um": 2.0,
+          "heater_z0_um": 2.2,
+          "heater_t_um": 0.2,
+          "P_pi_mW": 20.271938893945794
+        },
+        "ant_box_with_ubcpdk_heater_height": {
+          "box_um": 2.0,
+          "heater_z0_um": 1.1,
+          "heater_t_um": 0.75,
+          "P_pi_mW": 17.563644439859807
+        },
+        "ubcpdk_box_with_ant_heater_height": {
+          "box_um": 3.0,
+          "heater_z0_um": 2.2,
+          "heater_t_um": 0.2,
+          "P_pi_mW": 16.027826416671317
+        }
+      }
+    }
+  },
+  "system": {
+    "assumptions": [
+      "Haar-random unitaries, Clements decomposition, theta + phi per MZI and N output phases, all as separate single-arm shifters",
+      "heater: P = P_pi * phase / pi with phase in [0, 2 pi), no thermal crosstalk; P_pi from the ubcpdk stack, and scaled to the post-hoc ANT stack in heater_hold_power_W_ant_stack",
+      "Pockels: bipolar +-V_max, one arm, V_pi = V_max; leakage current not modelled, so holding power is set to zero",
+      "mesh length: N columns of two shifters plus 100 um for couplers"
+    ],
+    "meshes": [
+      {
+        "N": 4,
+        "mzis": 6,
+        "phase_shifters": 16,
+        "samples": 20,
+        "heater_hold_power_W": 0.17786113443960044,
+        "heater_hold_power_W_ant_stack": 0.2569513709858711,
+        "heater_mesh_length_mm": 2.0,
+        "pockels_hold_power_W": 0.0,
+        "pockels": {
+          "2V": {
+            "shifter_length_mm": 23.965929592102917,
+            "capacitance_pF": 1.6554607397507382,
+            "mesh_length_mm": 192.1274367368233,
+            "program_energy_nJ": 0.03062531482273807
+          },
+          "5V": {
+            "shifter_length_mm": 9.586371836841165,
+            "capacitance_pF": 0.6621842959002952,
+            "mesh_length_mm": 77.09097469472933,
+            "program_energy_nJ": 0.07656328705684515
+          },
+          "10V": {
+            "shifter_length_mm": 4.7931859184205825,
+            "capacitance_pF": 0.3310921479501476,
+            "mesh_length_mm": 38.745487347364666,
+            "program_energy_nJ": 0.1531265741136903
+          }
+        }
+      },
+      {
+        "N": 8,
+        "mzis": 28,
+        "phase_shifters": 64,
+        "samples": 20,
+        "heater_hold_power_W": 0.6468306585666356,
+        "heater_hold_power_W_ant_stack": 0.9344594873863905,
+        "heater_mesh_length_mm": 4.0,
+        "pockels_hold_power_W": 0.0,
+        "pockels": {
+          "2V": {
+            "shifter_length_mm": 23.965929592102917,
+            "capacitance_pF": 1.6554607397507382,
+            "mesh_length_mm": 384.2548734736466,
+            "program_energy_nJ": 0.10667577723825057
+          },
+          "5V": {
+            "shifter_length_mm": 9.586371836841165,
+            "capacitance_pF": 0.6621842959002952,
+            "mesh_length_mm": 154.18194938945865,
+            "program_energy_nJ": 0.26668944309562637
+          },
+          "10V": {
+            "shifter_length_mm": 4.7931859184205825,
+            "capacitance_pF": 0.3310921479501476,
+            "mesh_length_mm": 77.49097469472933,
+            "program_energy_nJ": 0.5333788861912527
+          }
+        }
+      },
+      {
+        "N": 16,
+        "mzis": 120,
+        "phase_shifters": 256,
+        "samples": 20,
+        "heater_hold_power_W": 2.375375545583662,
+        "heater_hold_power_W_ant_stack": 3.431643483929893,
+        "heater_mesh_length_mm": 8.0,
+        "pockels_hold_power_W": 0.0,
+        "pockels": {
+          "2V": {
+            "shifter_length_mm": 23.965929592102917,
+            "capacitance_pF": 1.6554607397507382,
+            "mesh_length_mm": 768.5097469472933,
+            "program_energy_nJ": 0.3862406722303913
+          },
+          "5V": {
+            "shifter_length_mm": 9.586371836841165,
+            "capacitance_pF": 0.6621842959002952,
+            "mesh_length_mm": 308.3638987789173,
+            "program_energy_nJ": 0.965601680575978
+          },
+          "10V": {
+            "shifter_length_mm": 4.7931859184205825,
+            "capacitance_pF": 0.3310921479501476,
+            "mesh_length_mm": 154.98194938945866,
+            "program_energy_nJ": 1.931203361151956
+          }
+        }
+      },
+      {
+        "N": 32,
+        "mzis": 496,
+        "phase_shifters": 1024,
+        "samples": 5,
+        "heater_hold_power_W": 8.888588965664331,
+        "heater_hold_power_W_ant_stack": 12.841114097542956,
+        "heater_mesh_length_mm": 16.0,
+        "pockels_hold_power_W": 0.0,
+        "pockels": {
+          "2V": {
+            "shifter_length_mm": 23.965929592102917,
+            "capacitance_pF": 1.6554607397507382,
+            "mesh_length_mm": 1537.0194938945865,
+            "program_energy_nJ": 1.3780592953987696
+          },
+          "5V": {
+            "shifter_length_mm": 9.586371836841165,
+            "capacitance_pF": 0.6621842959002952,
+            "mesh_length_mm": 616.7277975578346,
+            "program_energy_nJ": 3.445148238496923
+          },
+          "10V": {
+            "shifter_length_mm": 4.7931859184205825,
+            "capacitance_pF": 0.3310921479501476,
+            "mesh_length_mm": 309.9638987789173,
+            "program_energy_nJ": 6.890296476993846
+          }
+        }
+      },
+      {
+        "N": 64,
+        "mzis": 2016,
+        "phase_shifters": 4096,
+        "samples": 2,
+        "heater_hold_power_W": 33.98957205361886,
+        "heater_hold_power_W_ant_stack": 49.10385377850082,
+        "heater_mesh_length_mm": 32.0,
+        "pockels_hold_power_W": 0.0,
+        "pockels": {
+          "2V": {
+            "shifter_length_mm": 23.965929592102917,
+            "capacitance_pF": 1.6554607397507382,
+            "mesh_length_mm": 3074.038987789173,
+            "program_energy_nJ": 5.089213197147654
+          },
+          "5V": {
+            "shifter_length_mm": 9.586371836841165,
+            "capacitance_pF": 0.6621842959002952,
+            "mesh_length_mm": 1233.4555951156692,
+            "program_energy_nJ": 12.723032992869133
+          },
+          "10V": {
+            "shifter_length_mm": 4.7931859184205825,
+            "capacitance_pF": 0.3310921479501476,
+            "mesh_length_mm": 619.9277975578347,
+            "program_energy_nJ": 25.446065985738265
+          }
+        }
+      }
+    ]
+  },
+  "checks": {
+    "laplace_solver_exact": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "numerical": 3.2197046592000004e-11,
+        "analytic": 3.2197046592e-11,
+        "relative_error": 2.220446049250313e-16
+      }
+    },
+    "eo_perturbation_matches_mpb": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "direct": -0.00143064968698714,
+        "perturbation": -0.0014242196899674953,
+        "ratio": 0.9955055405399865
+      }
+    },
+    "electrostatics_converged": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "dneff_per_V_40nm": 1.619270107401754e-05,
+        "dneff_per_V_20nm": 1.6168786548037186e-05,
+        "nodes": [
+          22776,
+          58500
+        ]
+      }
+    },
+    "eo_mpb_converged": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "dneff_per_V_32": 1.6048919457665983e-05,
+        "dneff_per_V_48": 1.6168786548037186e-05
+      }
+    },
+    "tfln_vpil_in_literature_range": {
+      "passed": true,
+      "blocking": false,
+      "detail": {
+        "push_pull_V_cm": 2.3965929592102917,
+        "range": [
+          1.8,
+          3.5
+        ]
+      }
+    },
+    "to_perturbation_matches_mpb": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "direct_per_K": 0.00020006758972623828,
+        "perturbation_per_K": 0.0002007270867835421,
+        "ratio": 1.0032963712823564
+      }
+    },
+    "to_mpb_converged": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "dneff_per_K_32": 0.0002002420530320478,
+        "dneff_per_K_48": 0.0002007270867835421
+      }
+    },
+    "heat_converged": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "P_pi_mW_40nm": 14.036102622681975,
+        "P_pi_mW_20nm": 14.032188406442545,
+        "nodes": [
+          37878,
+          105190
+        ]
+      }
+    },
+    "heater_ppi_in_literature_range": {
+      "passed": false,
+      "blocking": false,
+      "detail": {
+        "P_pi_mW": 14.032188406442545,
+        "range_mW": [
+          15,
+          35
+        ]
+      }
+    },
+    "mesh_decomposition_exact": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "max_abs_error": 5.8907245196148375e-15
+      }
+    }
+  },
+  "passed_all_preregistered": false,
+  "passed_blocking": true,
+  "non_blocking_failures": [
+    "heater_ppi_in_literature_range"
+  ],
+  "runtime_s": 16.8
+}

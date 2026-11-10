@@ -1,0 +1,9 @@
+{
+  "entries": [
+    {
+      "file": "result.json",
+      "source": "GitHub Actions workflow 'OPA Pockels vs thermo-optic v001' (eo-vs-thermal-v001.yml), run 42797077437, job 129764871936, commit e03d01559c8c45565efa2ac90051c82c2bc3ba20 on pull request #25; recovered from the JSON the job prints to its log, which is the file it uploads as the opa-eo-001 artifact",
+      "environment": "pymeep 1.35.1 with MPB, numpy 2.4.6, scipy 1.17.1 (opa-fdtd-linux-64.lock.txt) on ubuntu-24.04"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "test_id": "OPA-FDTD-001",
+  "purpose": "Meep free-space solver and flux-monitor smoke test",
+  "meep_version": "1.35.1",
+  "resolution_pixels_per_meep_unit": 15,
+  "flux": 0.8675525069743545,
+  "scope": "No LNOI, MMI, GDSII, reflection or loss validation performed"
+}

@@ -1,0 +1,78 @@
+{
+  "experiment": "OPA-FDTD-010",
+  "model": "Illustrative 3D dielectric slab in air; not an LNOI stack",
+  "cell_meep_units": [
+    10.0,
+    10.0,
+    4.0
+  ],
+  "resolution": 12,
+  "core_width_meep_units": 0.8,
+  "core_thickness_meep_units": 0.4,
+  "core_refractive_index": 1.8,
+  "run_until_meep_units": 80,
+  "meep_version": "1.35.1",
+  "straight_reference": {
+    "radius_meep_units": null,
+    "input_aperture_flux": 0.10422215328616447,
+    "output_aperture_flux": 0.00014318666901090481,
+    "band_powers": {
+      "1": {
+        "input_forward": 0.09721709803737125,
+        "input_backward_raw": 4.444217388766514e-05,
+        "output_forward": 8.612966483900431e-07,
+        "output_backward": 6.696202177790552e-09
+      }
+    },
+    "elapsed_wall_seconds": 21.702162401000002,
+    "process_peak_rss_bytes": 234405888
+  },
+  "eigenmode_parity": "ODD_Z (source-compatible Ez polarization)",
+  "most_excited_reference_band": 1,
+  "most_excited_band_input_fraction_of_aperture": 0.9327872719194419,
+  "minimum_acceptable_reference_modal_fraction": 0.01,
+  "modal_normalization_valid": true,
+  "bend_cases": {
+    "1.0": {
+      "radius_meep_units": 1.0,
+      "input_aperture_flux": 0.10414868599398423,
+      "output_aperture_flux": 0.022567476117482926,
+      "band_powers": {
+        "1": {
+          "input_forward": 0.09710396347972679,
+          "input_backward_raw": 3.743431304207945e-05,
+          "output_forward": 0.016866308986458495,
+          "output_backward": 5.843691880666976e-06
+        }
+      },
+      "elapsed_wall_seconds": 33.218119868,
+      "process_peak_rss_bytes": 238809088,
+      "output_flux_over_straight_input": 0.21653243006329986,
+      "output_selected_band_over_straight_selected_band": 0.1734911792982641
+    },
+    "2.0": {
+      "radius_meep_units": 2.0,
+      "input_aperture_flux": 0.10418993112952263,
+      "output_aperture_flux": 0.050388433842607765,
+      "band_powers": {
+        "1": {
+          "input_forward": 0.09715263300299179,
+          "input_backward_raw": 5.7363303871526594e-05,
+          "output_forward": 0.04553991951861775,
+          "output_backward": 1.366631393346014e-05
+        }
+      },
+      "elapsed_wall_seconds": 33.48500513299999,
+      "process_peak_rss_bytes": 238841856,
+      "output_flux_over_straight_input": 0.48347143341258186,
+      "output_selected_band_over_straight_selected_band": 0.46843529006710055
+    }
+  },
+  "limitations": [
+    "Finite-size Ez source excites an unknown mix within the odd-Z sector; band 1 is a diagnostic candidate only",
+    "Aperture flux includes radiation; selected band is not independently classified as guided",
+    "Reference input flux does not correct source back-action in bends",
+    "Previous temporal/spatial tests covered aperture flux only, not modal power convergence",
+    "Output ratio is not a physical bend-loss or energy-efficiency measurement"
+  ]
+}

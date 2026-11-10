@@ -1,0 +1,28 @@
+{
+  "experiment": "OPA-FDTD-005",
+  "profile": "large",
+  "geometry": "3D illustrative index-guided waveguide, no bend",
+  "interpretation_of_length_unit": "micrometre, illustrative only",
+  "cell_um": [
+    40.0,
+    40.0,
+    4.0
+  ],
+  "resolution_pixels_per_um": 10,
+  "estimated_grid_cells": 6400000,
+  "theoretical_lower_bound_memory_bytes": 614400000,
+  "measured_peak_process_rss_bytes": 987607040,
+  "measured_wall_seconds": 234.78785874800002,
+  "configured_duration_meep": 95,
+  "output_monitor_z_span_um": 1.2,
+  "measured_output_aperture_flux": 0.006960638500461808,
+  "meep_version": "1.35.1",
+  "runner_cpu_count": 4,
+  "limitations": [
+    "Peak RSS includes Python process but not all runner system processes",
+    "Meep theoretical memory is a lower bound; observed memory is profile-specific",
+    "Only a short run, not convergence, physical loss, or maximum capacity proof",
+    "Longer runs and physical 3D component calculations may require much more compute",
+    "Profiles have different simulation durations; wall time must not be interpreted as pure spatial scaling"
+  ]
+}

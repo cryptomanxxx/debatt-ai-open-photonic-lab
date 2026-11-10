@@ -30,56 +30,56 @@
   "summary": {
     "12": {
       "straight": {
-        "guided_transmission": 0.9995782223466918,
-        "guided_transmission_dB": -0.0018321434799739883,
-        "total_field_backward_ratio": 0.000766473812923632,
-        "output_aperture_flux_ratio": 0.9998846692268516
+        "guided_transmission": 0.9995782223444499,
+        "guided_transmission_dB": -0.001832143489714429,
+        "total_field_backward_ratio": 0.0007664738128423782,
+        "output_aperture_flux_ratio": 0.9998846692280096
       },
       "1.0": {
-        "guided_transmission": 0.3325243337723861,
-        "guided_transmission_dB": -4.781765679958135,
-        "total_field_backward_ratio": 0.0008983553767901598,
-        "output_aperture_flux_ratio": 0.4906665849841566,
-        "guided_reflection": 8.57572856857633e-06,
-        "radiated_or_other_modes": 0.6674670904990453
+        "guided_transmission": 0.33252433376024376,
+        "guided_transmission_dB": -4.78176568011672,
+        "total_field_backward_ratio": 0.0008983553768557344,
+        "output_aperture_flux_ratio": 0.49066658497812676,
+        "guided_reflection": 8.575728570189164e-06,
+        "radiated_or_other_modes": 0.6674670905111861
       },
       "2.0": {
-        "guided_transmission": 0.7619585286481259,
-        "guided_transmission_dB": -1.1806866549689061,
-        "total_field_backward_ratio": 0.0008005015629907704,
-        "output_aperture_flux_ratio": 0.8335324353991075,
-        "guided_reflection": 1.2738944987280613e-05,
-        "radiated_or_other_modes": 0.23802873240688688
+        "guided_transmission": 0.7619585286545117,
+        "guided_transmission_dB": -1.1806866549325086,
+        "total_field_backward_ratio": 0.0008005015629253955,
+        "output_aperture_flux_ratio": 0.8335324354028617,
+        "guided_reflection": 1.2738944987094996e-05,
+        "radiated_or_other_modes": 0.23802873240050115
       }
     },
     "16": {
       "straight": {
-        "guided_transmission": 0.9998404626046674,
-        "guided_transmission_dB": -0.0006929173790883286,
-        "total_field_backward_ratio": 0.0002117066463074118,
-        "output_aperture_flux_ratio": 1.0000589499459385
+        "guided_transmission": 0.999840462639368,
+        "guided_transmission_dB": -0.0006929172283615965,
+        "total_field_backward_ratio": 0.00021170664435418327,
+        "output_aperture_flux_ratio": 1.0000589499062338
       },
       "1.0": {
-        "guided_transmission": 0.31494669951320575,
-        "guided_transmission_dB": -5.017629384832239,
-        "total_field_backward_ratio": 0.0002283536835624802,
-        "output_aperture_flux_ratio": 0.4720751008006777,
-        "guided_reflection": 6.38274258281246e-06,
-        "radiated_or_other_modes": 0.6850469177442114
+        "guided_transmission": 0.31494669949455895,
+        "guided_transmission_dB": -5.017629385089368,
+        "total_field_backward_ratio": 0.00022835368389211494,
+        "output_aperture_flux_ratio": 0.47207510077274106,
+        "guided_reflection": 6.382742586916778e-06,
+        "radiated_or_other_modes": 0.6850469177628542
       },
       "2.0": {
-        "guided_transmission": 0.7433172931376613,
-        "guided_transmission_dB": -1.2882576329970448,
-        "total_field_backward_ratio": 0.00012588685869037626,
-        "output_aperture_flux_ratio": 0.8192101461413924,
-        "guided_reflection": 1.937703584284852e-05,
-        "radiated_or_other_modes": 0.25666332982649587
+        "guided_transmission": 0.7433172934304868,
+        "guided_transmission_dB": -1.2882576312861669,
+        "total_field_backward_ratio": 0.0001258868583785141,
+        "output_aperture_flux_ratio": 0.8192101465159627,
+        "guided_reflection": 1.937703585128253e-05,
+        "radiated_or_other_modes": 0.2566633295336619
       }
     }
   },
   "resolution_transmission_changes": {
-    "1.0": 0.017577634259180352,
-    "2.0": 0.018641235510464593
+    "1.0": 0.017577634265684816,
+    "2.0": 0.018641235224024943
   },
   "resolution_target_absolute_change": 0.02,
   "resolution_within_target": true,
@@ -89,48 +89,48 @@
       "straight": {
         "radius_meep_units": null,
         "resolution": 12,
-        "input_forward_modal_power": 16.336191155717252,
-        "input_backward_total_field_modal_power": 0.012521262723771916,
+        "input_forward_modal_power": 16.336191155687263,
+        "input_backward_total_field_modal_power": 0.012521262722421553,
         "reflected_modal_power_reference_subtracted": null,
-        "output_forward_modal_power": 16.3293009153476,
-        "output_backward_modal_power": 0.012151263756699747,
-        "output_aperture_flux": 16.334307090160962,
-        "input_n_eff": 1.3589226396244851,
-        "output_n_eff": 1.3589226396244887,
+        "output_forward_modal_power": 16.329300915281,
+        "output_backward_modal_power": 0.012151263751906692,
+        "output_aperture_flux": 16.334307090149895,
+        "input_n_eff": 1.358922639624483,
+        "output_n_eff": 1.358922639624487,
         "simulated_meep_time": 59.45833333333333,
-        "wall_seconds": 13.710042891000057,
-        "process_peak_rss_bytes": 185729024
+        "wall_seconds": 9.137344101,
+        "process_peak_rss_bytes": 186241024
       },
       "bends": {
         "1.0": {
           "radius_meep_units": 1.0,
           "resolution": 12,
-          "input_forward_modal_power": 16.33836453673958,
-          "input_backward_total_field_modal_power": 0.014675705161010449,
-          "reflected_modal_power_reference_subtracted": 0.00014009474119580843,
-          "output_forward_modal_power": 5.432181080433225,
-          "output_backward_modal_power": 0.004204648075986251,
-          "output_aperture_flux": 8.015623126024167,
+          "input_forward_modal_power": 16.33836453719829,
+          "input_backward_total_field_modal_power": 0.014675705162054747,
+          "reflected_modal_power_reference_subtracted": 0.0001400947412218988,
+          "output_forward_modal_power": 5.432181080224894,
+          "output_backward_modal_power": 0.004204648074069368,
+          "output_aperture_flux": 8.015623125910947,
           "input_n_eff": 1.35900556208943,
-          "output_n_eff": 1.3590053047010788,
+          "output_n_eff": 1.3590053047010775,
           "simulated_meep_time": 56.875,
-          "wall_seconds": 22.66294596900002,
-          "process_peak_rss_bytes": 188874752
+          "wall_seconds": 17.585448813999996,
+          "process_peak_rss_bytes": 189648896
         },
         "2.0": {
           "radius_meep_units": 2.0,
           "resolution": 12,
-          "input_forward_modal_power": 16.336662549906553,
-          "input_backward_total_field_modal_power": 0.01307714655346766,
-          "reflected_modal_power_reference_subtracted": 0.00020810584043438218,
-          "output_forward_modal_power": 12.447500176724844,
-          "output_backward_modal_power": 0.009197800346907103,
-          "output_aperture_flux": 13.616745199170362,
-          "input_n_eff": 1.359005549885755,
-          "output_n_eff": 1.3590053047010768,
+          "input_forward_modal_power": 16.336662549860698,
+          "input_backward_total_field_modal_power": 0.013077146552375678,
+          "reflected_modal_power_reference_subtracted": 0.0002081058404309679,
+          "output_forward_modal_power": 12.447500176806315,
+          "output_backward_modal_power": 0.009197800349724422,
+          "output_aperture_flux": 13.616745199206695,
+          "input_n_eff": 1.3590055498857558,
+          "output_n_eff": 1.3590053047010775,
           "simulated_meep_time": 50.416666666666664,
-          "wall_seconds": 20.329052273000002,
-          "process_peak_rss_bytes": 188874752
+          "wall_seconds": 16.863931854999997,
+          "process_peak_rss_bytes": 189648896
         }
       }
     },
@@ -138,48 +138,48 @@
       "straight": {
         "radius_meep_units": null,
         "resolution": 16,
-        "input_forward_modal_power": 16.18427766143784,
-        "input_backward_total_field_modal_power": 0.0034263191466109666,
+        "input_forward_modal_power": 16.184277662395928,
+        "input_backward_total_field_modal_power": 0.0034263191152022073,
         "reflected_modal_power_reference_subtracted": null,
-        "output_forward_modal_power": 16.181695663934395,
-        "output_backward_modal_power": 0.0033635631701163697,
-        "output_aperture_flux": 16.185231723731036,
-        "input_n_eff": 1.3685892190991948,
-        "output_n_eff": 1.3685892190991948,
+        "output_forward_modal_power": 16.181695665453933,
+        "output_backward_modal_power": 0.003363563140892617,
+        "output_aperture_flux": 16.185231724046588,
+        "input_n_eff": 1.368589219099184,
+        "output_n_eff": 1.368589219099184,
         "simulated_meep_time": 55.125,
-        "wall_seconds": 35.307011450000005,
-        "process_peak_rss_bytes": 256516096
+        "wall_seconds": 23.47295387700001,
+        "process_peak_rss_bytes": 257110016
       },
       "bends": {
         "1.0": {
           "radius_meep_units": 1.0,
           "resolution": 16,
-          "input_forward_modal_power": 16.184371791073616,
-          "input_backward_total_field_modal_power": 0.0036957394197872934,
-          "reflected_modal_power_reference_subtracted": 0.00010330007820171976,
-          "output_forward_modal_power": 5.0971848334751515,
-          "output_backward_modal_power": 0.0011124156665514228,
-          "output_aperture_flux": 7.640194508409425,
-          "input_n_eff": 1.3685892181171473,
-          "output_n_eff": 1.3685893776838076,
+          "input_forward_modal_power": 16.18437179101588,
+          "input_backward_total_field_modal_power": 0.003695739425340977,
+          "reflected_modal_power_reference_subtracted": 0.00010330007827426041,
+          "output_forward_modal_power": 5.097184833475113,
+          "output_backward_modal_power": 0.0011124156665501528,
+          "output_aperture_flux": 7.64019450840958,
+          "input_n_eff": 1.3685892181171462,
+          "output_n_eff": 1.368589377683806,
           "simulated_meep_time": 53.84375,
-          "wall_seconds": 54.67846052599987,
-          "process_peak_rss_bytes": 263393280
+          "wall_seconds": 40.39875665000001,
+          "process_peak_rss_bytes": 264040448
         },
         "2.0": {
           "radius_meep_units": 2.0,
           "resolution": 16,
-          "input_forward_modal_power": 16.182640304395544,
-          "input_backward_total_field_modal_power": 0.0020373878749712386,
-          "reflected_modal_power_reference_subtracted": 0.0003136033283362936,
-          "output_forward_modal_power": 12.030053462688294,
-          "output_backward_modal_power": 0.002453174358942169,
-          "output_aperture_flux": 13.258324468219365,
-          "input_n_eff": 1.36858921043668,
-          "output_n_eff": 1.3685893776838043,
+          "input_forward_modal_power": 16.182640304702502,
+          "input_backward_total_field_modal_power": 0.0020373878700445853,
+          "reflected_modal_power_reference_subtracted": 0.0003136033284913569,
+          "output_forward_modal_power": 12.030053468139627,
+          "output_backward_modal_power": 0.0024531743669792636,
+          "output_aperture_flux": 13.25832447506639,
+          "input_n_eff": 1.3685892104366784,
+          "output_n_eff": 1.368589377683806,
           "simulated_meep_time": 51.28125,
-          "wall_seconds": 54.354527104,
-          "process_peak_rss_bytes": 263393280
+          "wall_seconds": 39.230343438999995,
+          "process_peak_rss_bytes": 264040448
         }
       }
     }

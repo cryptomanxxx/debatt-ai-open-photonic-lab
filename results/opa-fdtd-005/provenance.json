@@ -1,0 +1,25 @@
+{
+  "entries": [
+    {
+      "file": "benchmark-small.json",
+      "workflow_run_id": 42727265597,
+      "job_id": 129535975626,
+      "run_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/42727265597/job/129535975626",
+      "commit": "d87ef3748800cedd780d78951e982cc7d20ed756",
+      "trigger": "pull_request (final head of PR #7)",
+      "completed_at": "2026-11-10T00:18:33Z",
+      "source": "JSON report printed to stdout in the GitHub Actions job log; identical to the result file uploaded as a workflow artifact"
+    },
+    {
+      "file": "benchmark-medium.json",
+      "workflow_run_id": 42728145168,
+      "job_id": 129539001787,
+      "run_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/42728145168/job/129539001787",
+      "commit": "a9b66f81f8b4c1a15fadbe6b8905c2119a2c6749",
+      "trigger": "workflow_dispatch on main, profile medium",
+      "completed_at": "2026-11-10T00:25:49Z",
+      "source": "JSON report printed to stdout in the GitHub Actions job log; identical to the result file uploaded as a workflow artifact"
+    }
+  ],
+  "note": "Small and medium ran before OPA-FDTD-006 added the large profile; that change did not alter the small or medium profiles."
+}

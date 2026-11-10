@@ -1,0 +1,15 @@
+{
+  "entries": [
+    {
+      "file": "benchmark-large.json",
+      "workflow_run_id": 42729784931,
+      "job_id": 129544604193,
+      "run_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/42729784931/job/129544604193",
+      "commit": "19c0525e329eecc9fd185a9319ff38ed5ec73cf2",
+      "trigger": "workflow_dispatch on main, profile large",
+      "completed_at": "2026-11-10T00:42:14Z",
+      "source": "JSON report printed to stdout in the GitHub Actions job log; identical to the result file uploaded as a workflow artifact"
+    }
+  ],
+  "note": "OPA-FDTD-006 is the large profile of capacity_3d_v005.py, so the report itself is labelled OPA-FDTD-005."
+}

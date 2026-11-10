@@ -1,0 +1,15 @@
+{
+  "entries": [
+    {
+      "file": "result.json",
+      "workflow_run_id": 42731057395,
+      "job_id": 129548867168,
+      "run_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/42731057395/job/129548867168",
+      "commit": "24bee26324b09b07e6531fb052ec1a0e3a90d106",
+      "trigger": "pull_request (final head of PR #9)",
+      "completed_at": "2026-11-10T00:50:05Z",
+      "source": "JSON report printed to stdout in the GitHub Actions job log; identical to the result file uploaded as a workflow artifact"
+    }
+  ],
+  "note": "The script at this commit is byte-identical to the merged version on main."
+}

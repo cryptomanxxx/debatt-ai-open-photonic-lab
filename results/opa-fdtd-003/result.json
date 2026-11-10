@@ -1,0 +1,77 @@
+{
+  "experiment": "OPA-FDTD-003",
+  "model": "2D illustrative index-guided 90-degree bends",
+  "is_lnoi400_model": false,
+  "frequency_meep_units": 0.8,
+  "core_index": 1.8,
+  "waveguide_width_meep_units": 0.8,
+  "resolution": 18,
+  "radii_meep_units": [
+    1.0,
+    2.0
+  ],
+  "durations_meep_units": [
+    160,
+    220
+  ],
+  "results": {
+    "160": {
+      "1.0": {
+        "radius_meep_units": 1.0,
+        "duration_meep_units": 160,
+        "incident_reference_flux": 25.57018225632373,
+        "scattered_reflection_flux": 0.01044466807429276,
+        "output_aperture_flux": 17.219926564362787,
+        "aperture_relative_reflection_ratio": -0.00040847061509347287,
+        "aperture_relative_transmission_ratio": 0.673437771844749
+      },
+      "2.0": {
+        "radius_meep_units": 2.0,
+        "duration_meep_units": 160,
+        "incident_reference_flux": 25.57018225632373,
+        "scattered_reflection_flux": 0.0048735956731781075,
+        "output_aperture_flux": 24.457221358766255,
+        "aperture_relative_reflection_ratio": -0.00019059682971062222,
+        "aperture_relative_transmission_ratio": 0.9564742680986472
+      }
+    },
+    "220": {
+      "1.0": {
+        "radius_meep_units": 1.0,
+        "duration_meep_units": 220,
+        "incident_reference_flux": 25.570182276387794,
+        "scattered_reflection_flux": 0.010444668212545647,
+        "output_aperture_flux": 17.21992656393965,
+        "aperture_relative_reflection_ratio": -0.00040847062017976065,
+        "aperture_relative_transmission_ratio": 0.6734377712997769
+      },
+      "2.0": {
+        "radius_meep_units": 2.0,
+        "duration_meep_units": 220,
+        "incident_reference_flux": 25.570182276387794,
+        "scattered_reflection_flux": 0.004873596014659407,
+        "output_aperture_flux": 24.457221356922204,
+        "aperture_relative_reflection_ratio": -0.00019059684291573546,
+        "aperture_relative_transmission_ratio": 0.9564742672760167
+      }
+    }
+  },
+  "absolute_convergence_changes": {
+    "1.0": {
+      "aperture_relative_reflection_ratio": 5.086287782011395e-12,
+      "aperture_relative_transmission_ratio": 5.449720674732816e-10
+    },
+    "2.0": {
+      "aperture_relative_reflection_ratio": 1.3205113245278247e-11,
+      "aperture_relative_transmission_ratio": 8.226305192593486e-10
+    }
+  },
+  "temporal_convergence_tolerance": 0.02,
+  "meep_version": "1.35.1",
+  "limitations": [
+    "2D illustrative effective-index model; no LNOI material stack or PDK bend",
+    "Aperture flux includes radiated power and is not guided-mode-specific",
+    "No spatial-resolution convergence or fabricated bend-loss prediction",
+    "Two bend radii alone do not establish an optimal radius"
+  ]
+}

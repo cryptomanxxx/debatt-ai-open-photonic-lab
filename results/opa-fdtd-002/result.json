@@ -1,0 +1,40 @@
+{
+  "experiment": "OPA-FDTD-002",
+  "model": "2D illustrative index-guided slab with central air gap",
+  "is_lnoi400_model": false,
+  "frequency_meep_units": 0.8,
+  "bandwidth_meep_units": 0.2,
+  "core_index": 1.8,
+  "waveguide_width_meep_units": 0.8,
+  "air_gap_length_meep_units": 0.45,
+  "resolution": 20,
+  "short_run": {
+    "duration_meep_units": 140,
+    "incident_power_reflection_plane": 0.678181596476812,
+    "reference_transmission_plane_flux": 0.6773807245624335,
+    "gap_reflection_scattered_flux": -0.18037994766459173,
+    "gap_transmission_plane_flux": 0.40255024111465704,
+    "aperture_relative_reflection_ratio": 0.2659758810939058,
+    "aperture_relative_transmission_ratio": 0.5935729356354199
+  },
+  "long_run": {
+    "duration_meep_units": 200,
+    "incident_power_reflection_plane": 0.6781815971528443,
+    "reference_transmission_plane_flux": 0.6773807249052253,
+    "gap_reflection_scattered_flux": -0.1803799474518256,
+    "gap_transmission_plane_flux": 0.4025502410652694,
+    "aperture_relative_reflection_ratio": 0.26597588051504245,
+    "aperture_relative_transmission_ratio": 0.5935729349709045
+  },
+  "absolute_change_reflection_ratio": 5.788633461456527e-10,
+  "absolute_change_transmission_ratio": 6.645154426720978e-10,
+  "convergence_absolute_tolerance": 0.02,
+  "meep_version": "1.35.1",
+  "limitations": [
+    "2D illustrative slab, not calibrated to Luxtelligence lnoi400",
+    "Ratios are aperture-relative flux measurements; not guided-mode S-parameters",
+    "Radiation may leave the flux apertures; R+T is not a validated energy budget",
+    "Convergence tested by extending both simulations; spatial resolution not converged",
+    "No claim of fabrication readiness, propagation-loss dB/cm or energy efficiency"
+  ]
+}

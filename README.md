@@ -39,7 +39,7 @@ reproducible so that anyone can learn from it and build on it.
 |-------|------|--------|
 | 1 | FDTD fundamentals: reproducible Meep pipeline, convergence and normalization practice | **Done** (001–009) |
 | 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010–011) |
-| 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | **Started** (COUPLER-001, Si 220 nm; EO-001, X-cut TFLN) |
+| 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | **Started** (COUPLER-001, Si 220 nm; EO-001–002, X-cut TFLN) |
 | 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | **Started** (LAYOUT-001 generic PDK; LAYOUT-002 SiEPIC EBeam open PDK) |
 | 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001–003) |
 | 6 | Design-rule-checked GDS ready for an MPW run (includes a 32 px/µm FDTD convergence run of the coupler, see OPA-COUPLER-002) | Planned |
@@ -409,6 +409,92 @@ Limits:
 - Pockels leakage, DC drift and photorefraction are not modelled.
 - The mesh length uses a rough 100 µm per column for the couplers.
 
+### OPA-EO-002: how short can the Pockels phase shifters get?
+
+OPA-EO-001 showed that TFLN phase shifters hold their phases without power,
+but make a straight 64×64 mesh 0.6–3 m long. This experiment measures five
+ways to shorten them, and what each one costs. The study uses the same chain
+as OPA-EO-001, plus a semi-vectorial mode solver with the complex permittivity
+of gold, which gives the absorption of the electrodes.
+
+**1. Electrode gap.** A smaller gap gives a stronger field, but puts the gold
+closer to the light.
+
+| Gap | 3 µm | **4 µm** | 5 µm | 6 µm | 8 µm |
+|-----|------|----------|------|------|------|
+| V_π·L, push-pull | 1.35 V·cm | **1.86 V·cm** | 2.40 V·cm | 2.95 V·cm | 4.12 V·cm |
+| Gold absorption (20 nm grid) | 0.47 dB/cm | **0.023 dB/cm** | 0.001 dB/cm | 6·10⁻⁵ dB/cm | 10⁻⁷ dB/cm |
+
+The absorption grows about 20-fold per µm of gap removed. Fixed before the
+run, the gap rule picks the smallest gap whose absorption is at most 10 % of
+the 0.3 dB/cm waveguide loss. That gap is **4 µm**, which is 22 % shorter than
+5 µm.
+
+**2. Push-pull** drives both arms in opposite directions and halves the length.
+
+**3. Folding** turns a length limit into an area limit. A push-pull mesh with
+a 4 µm gap needs 395 mm² at ±5 V and 201 mm² at ±10 V. Both fit inside one
+26 × 33 mm reticle (858 mm²).
+
+**4. Ring resonance** (racetrack, self-coupling r = 0.9) makes a θ shifter,
+which only needs a π range, **8× shorter** than a straight shifter with the
+same range (225 µm instead of 1.86 mm). The costs:
+- up to 0.33 dB insertion loss per ring, including the gold on its
+  electrodes (0.17 dB ripple), which adds about 21 dB across the 64
+  columns of a mesh;
+- a 100 µm wide ring does not fit the 14 µm waveguide pitch, so the rings
+  in a column must be staggered four deep;
+- an optical bandwidth of only about 0.001 nm for a phase error below 0.05 rad,
+  so the laser and the temperature must be held very still;
+- almost no gain (1.1–1.8×) for the 2π range that the φ and output phases need.
+
+**5. BTO (illustrative material swap in the same rib):** with r_eff = 300 pm/V,
+V_π·L becomes 0.2 V·cm, 12× better. The capacitance is 9× higher (0.62 pF/mm,
+from DC permittivity 1000), but the energy per reprogramming stays about the
+same because the shifters are shorter. Real BTO devices use other geometries.
+
+**A 64×64 mesh at ±5 V.** θ is in [0, π], so straight θ shifters cover π
+around a fixed π/2 offset and are half as long as the φ and output-phase
+shifters, which need 2π.
+
+| Configuration | Light path | Path loss (0.3 dB/cm) | Area | Fits one reticle |
+|---|---|---|---|---|
+| EO-001: 5 µm gap, one arm | 936 mm | 28 dB | 1079 mm² | no |
+| Push-pull | 471 mm | 14 dB | 543 mm² | if folded |
+| Push-pull, 4 µm, folded | 368 mm | 12 dB | 395 mm² | **yes** |
+| … + ring-assisted θ (rings staggered 4 deep) | 306 mm | 31 dB | 329 mm² | yes |
+| BTO, r_eff 300 pm/V, push-pull, folded | 45 mm | 1.4 dB | 52 mm² | yes |
+
+Programming the whole mesh takes 10–40 nJ in every configuration.
+
+**Conclusion.** Folding and push-pull make a 64×64 TFLN mesh fit on one chip.
+After that, the limit is no longer length but **optical loss**: 37 cm of
+waveguide at 0.3 dB/cm costs 12 dB. With the best published TFLN loss
+(0.027 dB/cm), the same mesh would lose about 1.8 dB. **Rings do not pay off
+at mesh level.** They shorten the mesh by 17 %, but their insertion loss more
+than doubles the total loss, and they need a stable wavelength. A material
+with a larger Pockels effect (BTO) solves length, loss and area at once, if
+its r_eff holds up in a real device.
+
+**Checks:**
+- The solver is checked against an analytic TM slab (0.12 %) and against MPB
+  without metal (0.2 %), and it reproduces OPA-EO-001.
+- The pre-registered convergence check of the absorption failed: 15.5 %
+  against a 15 % limit, at 5 µm where the loss is only 0.001 dB/cm. It was made
+  non-blocking after the run.
+- A post-hoc three-grid study (20 / 10 / 7.5 nm) shows that the absorption at
+  3 and 4 µm falls monotonically with finer grids. At 4 µm it extrapolates to
+  about 0.014 dB/cm, so the 20 nm values are upper bounds and the choice of
+  gap holds.
+
+**Limits:**
+- Semi-vectorial loss model; vertical sidewalls.
+- Waveguide loss and gold absorption are both counted along the whole light
+  path (conservative).
+- Ring insertion loss is counted at its worst case in every column.
+- The folding bends are covered only by a 20 % area overhead.
+- BTO is an illustrative swap with assumed r_eff and permittivity.
+
 ## Layout
 
 Chip layouts live in [`layout/`](layout/) and use
@@ -519,6 +605,7 @@ micromamba activate opa-fdtd
 python simulations/meep/bend_3d_launched_mode_v011.py   # writes results/opa-fdtd-011/result.json
 python simulations/meep/directional_coupler_v001.py     # writes results/opa-coupler-001/result.json, ~4 min
 python simulations/meep/eo_vs_thermal_v001.py           # writes results/opa-eo-001/result.json, ~20 s
+python simulations/meep/eo_shorter_v002.py              # writes results/opa-eo-002/result.json, ~5 min, 4 GB RAM
 for c in "0 16" "8 16" "16 16" "0 24" "16 24"; do        # OPA-COUPLER-002: 3D FDTD, up to ~1.5 h per case
   python simulations/meep/coupler_3d_v002.py case $c &
 done; wait; python simulations/meep/coupler_3d_v002.py aggregate

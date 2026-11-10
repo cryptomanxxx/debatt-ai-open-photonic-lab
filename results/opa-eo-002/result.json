@@ -1,0 +1,522 @@
+{
+  "experiment": "OPA-EO-002",
+  "goal": "Ways to shorten Pockels phase shifters in an MZI mesh, and their costs",
+  "versions": {
+    "meep": "1.35.1",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "assumptions": {
+    "waveguide_loss_dB_per_cm": 0.3,
+    "gold_eps": [
+      -95.923619,
+      10.967580000000002
+    ],
+    "pitch": "gap + 10 um",
+    "area_overhead": 1.2,
+    "coupler_overhead_um_per_column": 100.0,
+    "ring_bend_radius_um": 50.0,
+    "reticle_mm2": 858,
+    "gap_rule": "smallest gap with metal loss <= 0.03 dB/cm"
+  },
+  "gap_sweep": {
+    "rows": [
+      {
+        "gap_um": 3.0,
+        "dneff_per_V": 2.878210134249017e-05,
+        "vpi_L_single_V_cm": 2.692645650774255,
+        "vpi_L_push_pull_V_cm": 1.3463228253871276,
+        "metal_loss_dB_per_cm": 0.46867646229234344,
+        "fom_push_pull_V_dB": 0.6309898189058714,
+        "capacitance_pF_per_mm": 0.08692509156448312,
+        "rib_power_fraction": 0.894012679063003
+      },
+      {
+        "gap_um": 4.0,
+        "dneff_per_V": 2.0803716096641698e-05,
+        "vpi_L_single_V_cm": 3.7252959826975656,
+        "vpi_L_push_pull_V_cm": 1.8626479913487828,
+        "metal_loss_dB_per_cm": 0.02303406467696976,
+        "fom_push_pull_V_dB": 0.04290435430315567,
+        "capacitance_pF_per_mm": 0.07596861733474027,
+        "rib_power_fraction": 0.8936766083784927
+      },
+      {
+        "gap_um": 5.0,
+        "dneff_per_V": 1.6168707447433563e-05,
+        "vpi_L_single_V_cm": 4.79320936766046,
+        "vpi_L_push_pull_V_cm": 2.39660468383023,
+        "metal_loss_dB_per_cm": 0.0011502806598641592,
+        "fom_push_pull_V_dB": 0.0027567680171497718,
+        "capacitance_pF_per_mm": 0.06907559055402655,
+        "rib_power_fraction": 0.8936518173435941
+      },
+      {
+        "gap_um": 6.0,
+        "dneff_per_V": 1.3137058592604279e-05,
+        "vpi_L_single_V_cm": 5.899341884920106,
+        "vpi_L_push_pull_V_cm": 2.949670942460053,
+        "metal_loss_dB_per_cm": 5.760932899168226e-05,
+        "fom_push_pull_V_dB": 0.00016992856374138668,
+        "capacitance_pF_per_mm": 0.06422700996051534,
+        "rib_power_fraction": 0.8936501803641741
+      },
+      {
+        "gap_um": 7.0,
+        "dneff_per_V": 1.0999985834215701e-05,
+        "vpi_L_single_V_cm": 7.045463618592537,
+        "vpi_L_push_pull_V_cm": 3.5227318092962685,
+        "metal_loss_dB_per_cm": 2.887017125360366e-06,
+        "fom_push_pull_V_dB": 1.0170187061490034e-05,
+        "capacitance_pF_per_mm": 0.060606926702262844,
+        "rib_power_fraction": 0.8936500786557592
+      },
+      {
+        "gap_um": 8.0,
+        "dneff_per_V": 9.412023073222353e-06,
+        "vpi_L_single_V_cm": 8.23414896001383,
+        "vpi_L_push_pull_V_cm": 4.117074480006915,
+        "metal_loss_dB_per_cm": 1.4470101467023712e-07,
+        "fom_push_pull_V_dB": 5.957448547299395e-07,
+        "capacitance_pF_per_mm": 0.05769530661164114,
+        "rib_power_fraction": 0.8936500725740368
+      }
+    ],
+    "loss_5um_10nm_grid": 0.0009956328425254246,
+    "chosen_gap_um": 4.0,
+    "post_hoc_loss_convergence": {
+      "note": "Added after the first run; not pre-registered.",
+      "gaps": {
+        "3um": {
+          "loss_dB_per_cm": {
+            "20nm": 0.4686764622921938,
+            "10nm": 0.40270496846965187,
+            "7.5nm": 0.3883274422598462
+          },
+          "monotonic": true,
+          "first_order_extrapolation": 0.3451948636304293
+        },
+        "4um": {
+          "loss_dB_per_cm": {
+            "20nm": 0.02303406467629066,
+            "10nm": 0.019872685090478952,
+            "7.5nm": 0.018424743172578056
+          },
+          "monotonic": true,
+          "first_order_extrapolation": 0.01408091741887537
+        },
+        "5um": {
+          "loss_dB_per_cm": {
+            "20nm": 0.0011502806596696909,
+            "10nm": 0.0009956328425254246,
+            "7.5nm": 0.001084669910971757
+          },
+          "monotonic": false,
+          "first_order_extrapolation": null
+        }
+      }
+    }
+  },
+  "ring": {
+    "vmax_V": 5.0,
+    "gap_um": 4.0,
+    "cases": {
+      "r0.8_pi": {
+        "electrode_length_per_straight_um": 262.41005833750353,
+        "round_trip_um": 838.9793820339864,
+        "detuning_window_rad": 0.44258789250526254,
+        "amplitude_ripple_dB": 0.11724399154233975,
+        "insertion_loss_max_dB": 0.2374188981390156,
+        "round_trip_field_transmission": 0.9969676978471489,
+        "fsr_nm": 1.2759019186463492,
+        "bandwidth_nm_for_0.05rad": 0.0011279369832603177,
+        "footprint_um": [
+          362.41005833750353,
+          100.0
+        ],
+        "straight_push_pull_length_um_same_range": 1862.6479913487829,
+        "footprint_length_reduction": 5.139614501576953
+      },
+      "r0.8_2pi_minus_0.1": {
+        "electrode_length_per_straight_um": 3200.2398689999263,
+        "round_trip_um": 6714.639003358832,
+        "detuning_window_rad": 5.397611421968147,
+        "amplitude_ripple_dB": 1.9285142249614609,
+        "insertion_loss_max_dB": 1.9537341256122251,
+        "round_trip_field_transmission": 0.975418293181269,
+        "fsr_nm": 0.15942113979715408,
+        "bandwidth_nm_for_0.05rad": 0.00013921458105655408,
+        "footprint_um": [
+          3300.2398689999263,
+          100.0
+        ],
+        "straight_push_pull_length_um_same_range": 3666.006055684896,
+        "footprint_length_reduction": 1.110830182412107
+      },
+      "r0.9_pi": {
+        "electrode_length_per_straight_um": 124.68314922381708,
+        "round_trip_um": 563.5255638066135,
+        "detuning_window_rad": 0.21029387389394386,
+        "amplitude_ripple_dB": 0.16562168635538552,
+        "insertion_loss_max_dB": 0.33216338076210805,
+        "round_trip_field_transmission": 0.9979895460148258,
+        "fsr_nm": 1.8995684880930133,
+        "bandwidth_nm_for_0.05rad": 0.0007953040530572749,
+        "footprint_um": [
+          224.68314922381708,
+          100.0
+        ],
+        "straight_push_pull_length_um_same_range": 1862.6479913487829,
+        "footprint_length_reduction": 8.290109862637339
+      },
+      "r0.9_2pi_minus_0.1": {
+        "electrode_length_per_straight_um": 2673.3002183583617,
+        "round_trip_um": 5660.759702075703,
+        "detuning_window_rad": 4.508860715605258,
+        "amplitude_ripple_dB": 3.4956505228558172,
+        "insertion_loss_max_dB": 3.5073930542995106,
+        "round_trip_field_transmission": 0.9792488963307596,
+        "fsr_nm": 0.18910101463048754,
+        "bandwidth_nm_for_0.05rad": 7.607001151443308e-05,
+        "footprint_um": [
+          2773.3002183583617,
+          100.0
+        ],
+        "straight_push_pull_length_um_same_range": 3666.006055684896,
+        "footprint_length_reduction": 1.3218929675976323
+      },
+      "r0.95_pi": {
+        "electrode_length_per_straight_um": 60.76977214002913,
+        "round_trip_um": 435.69880963903756,
+        "detuning_window_rad": 0.1024955829619871,
+        "amplitude_ripple_dB": 0.26024971355822346,
+        "insertion_loss_max_dB": 0.5208417583122322,
+        "round_trip_field_transmission": 0.9984640993210957,
+        "fsr_nm": 2.456870157916496,
+        "bandwidth_nm_for_0.05rad": 0.0005008615437198675,
+        "footprint_um": [
+          160.76977214002915,
+          100.0
+        ],
+        "straight_push_pull_length_um_same_range": 1862.6479913487829,
+        "footprint_length_reduction": 11.585809736213545
+      },
+      "r0.95_2pi_minus_0.1": {
+        "electrode_length_per_straight_um": 1892.28686701058,
+        "round_trip_um": 4098.7329993801395,
+        "detuning_window_rad": 3.191582405611178,
+        "amplitude_ripple_dB": 5.286777418047964,
+        "insertion_loss_max_dB": 5.293360953021069,
+        "round_trip_field_transmission": 0.9849541852201135,
+        "fsr_nm": 0.2611673908507285,
+        "bandwidth_nm_for_0.05rad": 4.864160660005466e-05,
+        "footprint_um": [
+          1992.28686701058,
+          100.0
+        ],
+        "straight_push_pull_length_um_same_range": 3666.006055684896,
+        "footprint_length_reduction": 1.8400994938975463
+      }
+    }
+  },
+  "bto_swap": {
+    "note": "Same rib with BaTiO3 optical index 2.28 and DC permittivity 1000; r_eff is a parameter. Illustrative only: published BTO devices use other geometries.",
+    "n_eff": 2.0317509411085464,
+    "capacitance_pF_per_mm": 0.6173186174573752,
+    "cases": {
+      "r100pm_per_V": {
+        "vpi_L_push_pull_V_cm": 0.5996931020421328
+      },
+      "r300pm_per_V": {
+        "vpi_L_push_pull_V_cm": 0.199897700680711
+      },
+      "r923pm_per_V": {
+        "vpi_L_push_pull_V_cm": 0.06497216706848677
+      }
+    }
+  },
+  "mesh": {
+    "N": 64,
+    "phase_shifters": 4096,
+    "notes": [
+      "path: N columns of a theta and a phi shifter plus 100 um, plus the output phases",
+      "theta in [0, pi]: straight theta shifters cover pi around a fixed pi/2 offset and are half as long as phi shifters",
+      "ring: worst-case insertion loss (waveguide and electrode loss in the round trip) counted once per column; theta voltages from the inverted ring phase response; energy from the ring's own electrodes; rings staggered along the column so they fit the waveguide pitch",
+      "single-arm shifters need an equal dummy arm, so the area uses the same pitch"
+    ],
+    "configs": [
+      {
+        "config": "EO-001 baseline (5 um gap, one arm)",
+        "gap_um": 5.0,
+        "push_pull": false,
+        "vmax_V": 5.0,
+        "folded": false,
+        "phi_shifter_length_mm": 9.586418735320922,
+        "theta_shifter_length_mm": 4.793209367660461,
+        "path_length_mm": 936.2826173261294,
+        "path_loss_dB": 28.19617729847161,
+        "ring_insertion_loss_per_column_dB": 0.0,
+        "ring_stagger": null,
+        "area_mm2": 1078.5975751597011,
+        "fits_one_reticle": false,
+        "program_energy_nJ": 20.317586096689006
+      },
+      {
+        "config": "push-pull",
+        "gap_um": 5.0,
+        "push_pull": true,
+        "vmax_V": 5.0,
+        "folded": false,
+        "phi_shifter_length_mm": 4.793209367660461,
+        "theta_shifter_length_mm": 2.3966046838302306,
+        "path_length_mm": 471.34130866306475,
+        "path_loss_dB": 14.194456739046961,
+        "ring_insertion_loss_per_column_dB": 0.0,
+        "ring_stagger": null,
+        "area_mm2": 542.9851875798505,
+        "fits_one_reticle": false,
+        "program_energy_nJ": 20.317586096689006
+      },
+      {
+        "config": "push-pull, 4 um gap",
+        "gap_um": 4.0,
+        "push_pull": true,
+        "vmax_V": 5.0,
+        "folded": false,
+        "phi_shifter_length_mm": 3.7252959826975656,
+        "theta_shifter_length_mm": 1.8626479913487828,
+        "path_length_mm": 367.7537103216639,
+        "path_loss_dB": 11.879697584524399,
+        "ring_insertion_loss_per_column_dB": 0.0,
+        "ring_stagger": null,
+        "area_mm2": 395.40878933785297,
+        "fits_one_reticle": false,
+        "program_energy_nJ": 17.366652287136045
+      },
+      {
+        "config": "push-pull, 4 um gap, folded",
+        "gap_um": 4.0,
+        "push_pull": true,
+        "vmax_V": 5.0,
+        "folded": true,
+        "phi_shifter_length_mm": 3.7252959826975656,
+        "theta_shifter_length_mm": 1.8626479913487828,
+        "path_length_mm": 367.7537103216639,
+        "path_loss_dB": 11.879697584524399,
+        "ring_insertion_loss_per_column_dB": 0.0,
+        "ring_stagger": null,
+        "area_mm2": 395.40878933785297,
+        "fits_one_reticle": true,
+        "program_energy_nJ": 17.366652287136045
+      },
+      {
+        "config": "push-pull, 4 um gap, folded, ring-assisted theta (r = 0.9)",
+        "gap_um": 4.0,
+        "push_pull": true,
+        "vmax_V": 5.0,
+        "folded": true,
+        "phi_shifter_length_mm": 3.7252959826975656,
+        "theta_shifter_length_mm": 0.8987325968952683,
+        "path_length_mm": 306.0631250766389,
+        "path_loss_dB": 31.01284852840837,
+        "ring_insertion_loss_per_column_dB": 0.33216338076210805,
+        "ring_stagger": 4,
+        "area_mm2": 329.07907208240215,
+        "fits_one_reticle": true,
+        "program_energy_nJ": 10.314661723894124
+      },
+      {
+        "config": "BTO swap, r_eff 300 pm/V, push-pull, folded (illustrative)",
+        "gap_um": 5.0,
+        "push_pull": true,
+        "vmax_V": 5.0,
+        "folded": true,
+        "phi_shifter_length_mm": 0.399795401361422,
+        "theta_shifter_length_mm": 0.199897700680711,
+        "path_length_mm": 45.180153932057934,
+        "path_loss_dB": 1.3606016036895112,
+        "ring_insertion_loss_per_column_dB": 0.0,
+        "ring_stagger": null,
+        "area_mm2": 52.04753732973074,
+        "fits_one_reticle": true,
+        "program_energy_nJ": 15.144964930421828
+      },
+      {
+        "config": "EO-001 baseline (5 um gap, one arm)",
+        "gap_um": 5.0,
+        "push_pull": false,
+        "vmax_V": 10.0,
+        "folded": false,
+        "phi_shifter_length_mm": 4.793209367660461,
+        "theta_shifter_length_mm": 2.3966046838302306,
+        "path_length_mm": 471.34130866306475,
+        "path_loss_dB": 14.194456739046961,
+        "ring_insertion_loss_per_column_dB": 0.0,
+        "ring_stagger": null,
+        "area_mm2": 542.9851875798505,
+        "fits_one_reticle": false,
+        "program_energy_nJ": 40.63517219337801
+      },
+      {
+        "config": "push-pull",
+        "gap_um": 5.0,
+        "push_pull": true,
+        "vmax_V": 10.0,
+        "folded": false,
+        "phi_shifter_length_mm": 2.3966046838302306,
+        "theta_shifter_length_mm": 1.1983023419151153,
+        "path_length_mm": 238.87065433153236,
+        "path_loss_dB": 7.193596459334637,
+        "ring_insertion_loss_per_column_dB": 0.0,
+        "ring_stagger": null,
+        "area_mm2": 275.1789937899253,
+        "fits_one_reticle": false,
+        "program_energy_nJ": 40.63517219337801
+      },
+      {
+        "config": "push-pull, 4 um gap",
+        "gap_um": 4.0,
+        "push_pull": true,
+        "vmax_V": 10.0,
+        "folded": false,
+        "phi_shifter_length_mm": 1.8626479913487828,
+        "theta_shifter_length_mm": 0.9313239956743914,
+        "path_length_mm": 187.07685516083194,
+        "path_loss_dB": 6.0432196929588295,
+        "ring_insertion_loss_per_column_dB": 0.0,
+        "ring_stagger": null,
+        "area_mm2": 201.1450346689265,
+        "fits_one_reticle": false,
+        "program_energy_nJ": 34.73330457427209
+      },
+      {
+        "config": "push-pull, 4 um gap, folded",
+        "gap_um": 4.0,
+        "push_pull": true,
+        "vmax_V": 10.0,
+        "folded": true,
+        "phi_shifter_length_mm": 1.8626479913487828,
+        "theta_shifter_length_mm": 0.9313239956743914,
+        "path_length_mm": 187.07685516083194,
+        "path_loss_dB": 6.0432196929588295,
+        "ring_insertion_loss_per_column_dB": 0.0,
+        "ring_stagger": null,
+        "area_mm2": 201.1450346689265,
+        "fits_one_reticle": true,
+        "program_energy_nJ": 34.73330457427209
+      },
+      {
+        "config": "BTO swap, r_eff 300 pm/V, push-pull, folded (illustrative)",
+        "gap_um": 5.0,
+        "push_pull": true,
+        "vmax_V": 10.0,
+        "folded": true,
+        "phi_shifter_length_mm": 0.199897700680711,
+        "theta_shifter_length_mm": 0.0999488503403555,
+        "path_length_mm": 25.790076966028966,
+        "path_loss_dB": 0.776668891655912,
+        "ring_insertion_loss_per_column_dB": 0.0,
+        "ring_stagger": null,
+        "area_mm2": 29.710168664865368,
+        "fits_one_reticle": true,
+        "program_energy_nJ": 30.289929860843657
+      }
+    ]
+  },
+  "checks": {
+    "sv_solver_tm_slab": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "semi_vectorial": 1.9495993114331764,
+        "analytic": 1.9472162938097015
+      }
+    },
+    "sv_matches_mpb_no_metal": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "semi_vectorial": 1.888265465608821,
+        "mpb": 1.891914799477992,
+        "rib_power_fraction": 0.8936500721984865
+      }
+    },
+    "eo001_reproduced": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "this_run": 1.6168707447433563e-05,
+        "opa_eo_001": 1.6168786548037186e-05
+      }
+    },
+    "metal_loss_converged": {
+      "passed": false,
+      "blocking": false,
+      "detail": {
+        "loss_20nm": 0.0011502806598641592,
+        "loss_10nm": 0.0009956328425254246
+      }
+    },
+    "metal_loss_decreases_with_gap": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "loss_dB_per_cm": [
+          0.46867646229234344,
+          0.02303406467696976,
+          0.0011502806598641592,
+          5.760932899168226e-05,
+          2.887017125360366e-06,
+          1.4470101467023712e-07
+        ]
+      }
+    },
+    "vpil_increases_with_gap": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "vpi_L_V_cm": [
+          2.692645650774255,
+          3.7252959826975656,
+          4.79320936766046,
+          5.899341884920106,
+          7.045463618592537,
+          8.23414896001383
+        ]
+      }
+    },
+    "metal_loss_literature_range": {
+      "passed": false,
+      "blocking": false,
+      "detail": {
+        "loss_dB_per_cm_at_5um": 0.0009956328425254246,
+        "range": [
+          0.001,
+          0.1
+        ]
+      }
+    },
+    "ring_model_lossless": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "max_abs_t_minus_1": 1.2212453270876722e-15,
+        "phase_span_per_fsr": 6.283185307179586
+      }
+    },
+    "mesh_decomposition_exact": {
+      "passed": true,
+      "blocking": true,
+      "detail": {
+        "max_abs_error": 6.214832246223315e-15
+      }
+    }
+  },
+  "passed_all_preregistered": false,
+  "passed_blocking": true,
+  "non_blocking_failures": [
+    "metal_loss_converged",
+    "metal_loss_literature_range"
+  ],
+  "runtime_s": 258.2
+}

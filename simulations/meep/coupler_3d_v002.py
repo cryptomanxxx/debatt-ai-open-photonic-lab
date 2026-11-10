@@ -12,14 +12,15 @@ Two-mode theory with an extra bend phase phi_b predicts
 
     kappa^2(L) = sin^2(phi_b + pi * L / (2 * L_c)),
 
-where L is the straight length. Fitting three lengths (0, 8, 16 um) gives L_c
-and phi_b, and tests whether the model holds (two parameters, three points).
+where L is the straight length. Fitting three lengths (0, 8, 16 um) at 16 px/um
+gives L_c and phi_b and tests whether the model holds (two parameters, three
+points). L = 0 and 16 um are repeated at 24 px/um to check convergence.
 
 Usage:
     python coupler_3d_v002.py case LENGTH RESOLUTION   # one simulation
     python coupler_3d_v002.py aggregate                # fit, checks, report
 
-CI runs the four cases in parallel (one per CPU core), then aggregates.
+CI runs the five cases in parallel on four cores, then aggregates.
 """
 import json
 import math
@@ -38,8 +39,11 @@ PML = 1.0
 LEAD = 2.0              # straight waveguide beyond each coupler port, um
 MARGIN_Y = 1.0
 MARGIN_Z = 0.8
-CASES = [(0.0, 16), (8.0, 16), (16.0, 16), (0.0, 24)]
-MPB_SAME_RESOLUTION = {16: 56.361, 24: 54.052}   # L_c from MPB at the FDTD grid (gap 0.236)
+CASES = [(0.0, 16), (8.0, 16), (16.0, 16), (0.0, 24), (16.0, 24)]
+# L_c from MPB at the FDTD resolutions (gap 0.236). Kept for information: Meep and
+# MPB smooth the material interfaces differently, so equal resolution does NOT mean
+# equal discretization error (FDTD is ~8 % short and MPB ~8 % long at 16 px/um).
+MPB_SAME_RESOLUTION = {16: 56.361, 24: 54.052}
 
 
 def n_si(wl):
@@ -139,10 +143,6 @@ def aggregate():
     check("two_mode_model_fits", max_residual < 0.01,
           f"sin^2(phi_b + pi L / 2 L_c) fits the three lengths with max residual "
           f"{max_residual:.4f} (limit 0.01)")
-    rel = abs(lc_fdtd - MPB_SAME_RESOLUTION[16]) / MPB_SAME_RESOLUTION[16]
-    check("fdtd_matches_mpb_same_grid", rel < 0.05,
-          f"FDTD L_c = {lc_fdtd:.2f} um vs MPB {MPB_SAME_RESOLUTION[16]:.2f} um at "
-          f"16 px/um ({rel:.1%}, limit 5 %)")
     losses = [c["excess_loss"] for c in cases.values()]
     check("low_excess_loss", max(losses) < 0.05,
           f"excess loss at most {max(losses):.2%} (limit 5 %)")
@@ -154,10 +154,26 @@ def aggregate():
           f"bend phase {phi_b[16]:.4f} rad at 16 px/um vs {phi_b[24]:.4f} rad at 24 px/um "
           f"({phi_change:.1%}, limit 20 %)")
 
-    # Layout recommendation: converged L_c from OPA-COUPLER-001, bend phase from FDTD
+    # Converged L_c from OPA-COUPLER-001 (MPB, 100 px/um)
     c001 = json.loads(COUPLER_001.read_text())
     lc_conv = next(r for r in c001["D_gap_sweep"] if abs(r["gap_um"] - 0.236) < 1e-9)[
         "coupling_length_um"]
+
+    # FDTD L_c at 24 px/um from L = 0 and L = 16 (two points, two unknowns)
+    phase16_24 = math.asin(math.sqrt(cases[(16.0, 24)]["kappa2"]))
+    lc_fdtd24 = math.pi * 16.0 / (2 * (phase16_24 - phi_b[24]))
+    err16, err24 = abs(lc_fdtd - lc_conv), abs(lc_fdtd24 - lc_conv)
+    check("fdtd_converges_toward_mpb", err24 < err16,
+          f"FDTD L_c {lc_fdtd:.2f} um (16 px/um) -> {lc_fdtd24:.2f} um (24 px/um); distance "
+          f"to the converged MPB value {lc_conv:.2f} um shrinks from {err16:.2f} to {err24:.2f} um")
+    # Richardson extrapolation assuming second-order convergence in grid spacing
+    lc_extrap = lc_fdtd24 + (lc_fdtd24 - lc_fdtd) / ((24 / 16) ** 2 - 1)
+    rel = abs(lc_extrap - lc_conv) / lc_conv
+    check("fdtd_extrapolated_matches_mpb", rel < 0.05,
+          f"second-order Richardson estimate of the FDTD L_c is {lc_extrap:.2f} um vs MPB "
+          f"{lc_conv:.2f} um ({rel:.1%}, limit 5 %, set before the 24 px/um L=16 run)")
+
+    # Layout recommendation: converged L_c from MPB, bend phase from FDTD
     phi = phi_b[24]
     recommended = (math.pi / 4 - phi) * 2 * lc_conv / math.pi
     layout_now = math.sin(phi + math.pi * 20.0 / (2 * lc_conv)) ** 2
@@ -176,6 +192,13 @@ def aggregate():
         "cases": [cases[k] for k in CASES],
         "fit_16px": {"coupling_length_um": lc_fdtd, "bend_phase_rad": phi_b16,
                      "max_residual": max_residual},
+        "fdtd_coupling_length_um": {"16": lc_fdtd, "24": lc_fdtd24,
+                                    "richardson_estimate": lc_extrap,
+                                    "mpb_converged": lc_conv},
+        "lesson": "A first version compared FDTD and MPB at the same resolution and failed "
+                  "(47.9 vs 56.4 um at 16 px/um). The two codes treat interfaces differently, "
+                  "so equal resolution does not give equal error; FDTD is now checked for "
+                  "convergence on its own and compared with the converged MPB value.",
         "mpb_same_resolution_coupling_length_um": MPB_SAME_RESOLUTION,
         "bend_phase_from_L0_rad": {str(k): v for k, v in phi_b.items()},
         "bend_equivalent_straight_length_um": 2 * lc_conv * phi / math.pi,
@@ -190,8 +213,8 @@ def aggregate():
         "checks": checks,
         "failures": failures,
         "limitations": [
-            "FDTD at 16 and 24 px/um only (3D cost); absolute L_c is therefore taken from "
-            "the converged MPB result, and FDTD is compared with MPB on the same grid",
+            "FDTD at 16 and 24 px/um only (3D cost); the absolute L_c is therefore taken "
+            "from the converged MPB result, and the FDTD L_c is a convergence check",
             "Single wavelength (1.55 um) and TE-like polarization",
             "Generic-PDK S-bend shape; a foundry PDK coupler will have different bends",
             "No sidewall angle, roughness or fabrication variation",

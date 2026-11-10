@@ -46,8 +46,26 @@ def check_generator(name, gen):
     return []
 
 
-def check_release(folder):
+UNLISTED_OK = {"provenance.json", "README.md"}
+
+
+def check_contents(folder):
+    """A release folder may contain only regular files: no symlinks, no subfolders."""
     errors = []
+    for entry in sorted(folder.iterdir()):
+        if entry.is_symlink():
+            errors.append(f"{folder.name}: {entry.name} is a symbolic link; releases must "
+                          f"contain frozen copies, not links")
+        elif not entry.is_file():
+            errors.append(f"{folder.name}: {entry.name} is not a regular file "
+                          f"(subfolders are not allowed in a release)")
+    return errors
+
+
+def check_release(folder):
+    if folder.is_symlink():
+        return [f"{folder.name}: the release folder is a symbolic link"]
+    errors = check_contents(folder)
     prov_path = folder / "provenance.json"
     if not prov_path.is_file():
         return [f"{folder.name}: missing provenance.json"]
@@ -66,9 +84,11 @@ def check_release(folder):
     if not isinstance(listed, dict) or not listed:
         errors.append(f"{folder.name}: 'files' must list at least one file and its sha256")
         listed = {}
-    for gds in sorted(folder.glob("*.gds")) + sorted(folder.glob("*.oas")):
-        if gds.name not in listed:
-            errors.append(f"{folder.name}: {gds.name} has no checksum in provenance.json")
+    # Every file except provenance.json and README.md needs a checksum, whatever
+    # its extension or letter case.
+    for entry in sorted(folder.iterdir()):
+        if entry.name not in UNLISTED_OK and entry.name not in listed:
+            errors.append(f"{folder.name}: {entry.name} has no checksum in provenance.json")
     for name in list(listed):
         # Only plain file names: the released bytes must live in this folder.
         if (not isinstance(name, str) or name != Path(name).name or name in ("", ".", "..")
@@ -80,7 +100,7 @@ def check_release(folder):
         errors.append(f"{folder.name}: 'files' must include at least one .gds or .oas file")
     for name, expected in listed.items():
         path = folder / name
-        if not path.is_file():
+        if path.is_symlink() or not path.is_file():
             errors.append(f"{folder.name}: listed file {name} is missing")
             continue
         actual = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -98,13 +118,19 @@ def check_immutable(base):
     """Files under release folders at `base` must be unchanged in the working tree."""
     errors = []
     # -z: NUL-separated, unquoted paths (default output quotes non-ASCII names).
-    listing = git("ls-tree", "-r", "-z", "--name-only", base, "--", "gds/").split(b"\0")
-    for path in (p.decode("utf-8") for p in listing if p):
+    # Each entry is "<mode> <type> <object>\t<path>".
+    listing = git("ls-tree", "-r", "-z", base, "--", "gds/").split(b"\0")
+    for entry in filter(None, listing):
+        meta, raw_path = entry.split(b"\t", 1)
+        path = raw_path.decode("utf-8")
         parts = Path(path).parts
         if len(parts) < 3:            # gds/README.md and other top-level files
             continue
+        if meta.split()[0] == b"120000":
+            errors.append(f"{path}: is a symbolic link at {base}; releases must be copies")
+            continue
         current = REPO / path
-        if not current.is_file():
+        if current.is_symlink() or not current.is_file():
             errors.append(f"{path}: released file was deleted (releases are frozen)")
             continue
         if current.read_bytes() != git("show", f"{base}:{path}"):

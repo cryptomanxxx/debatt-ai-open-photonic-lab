@@ -8,11 +8,13 @@ on:
       - ".github/workflows/gds-archive.yml"
       - "gds/**"
       - "tools/check_gds_archive.py"
+      - "tools/test_check_gds_archive.py"
   pull_request:
     paths:
       - ".github/workflows/gds-archive.yml"
       - "gds/**"
       - "tools/check_gds_archive.py"
+      - "tools/test_check_gds_archive.py"
 
 permissions:
   contents: read
@@ -28,6 +30,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+      - name: Regression tests for the archive checker
+        run: python tools/test_check_gds_archive.py
       - name: Check provenance, checksums and that existing releases are unchanged
         env:
           EVENT: ${{ github.event_name }}

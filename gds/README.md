@@ -49,7 +49,10 @@ checks it in CI (workflow `gds-archive.yml`).
 | `pdk` | The process design kit the layout targets. |
 | `generator` | Either non-empty `script`, `commit` and `environment` (the script, commit and locked environment that produce the file), or, for a file made outside this repository, a non-empty `external` explaining where it came from and why it cannot be regenerated here. |
 | `released_to` | Who received it, for example a foundry, a review programme or a collaborator. |
-| `files` | Plain file names in the release folder (no paths, no `..`) mapped to their SHA-256 checksums, including at least one `.gds` or `.oas` file. Every GDS file in the folder must be listed. CI fails if a file is added without a checksum, is missing, or does not match. |
+| `files` | Plain file names in the release folder (no paths, no `..`) mapped to their SHA-256 checksums, including at least one `.gds` or `.oas` file (any letter case). **Every** file in the folder except `provenance.json` and `README.md` must be listed. CI fails if a file is added without a checksum, is missing, or does not match. |
+
+A release folder may contain only regular files: no symbolic links and no
+subfolders, so it always holds frozen copies.
 
 CI also compares the archive with the base branch (pull requests) or the
 previous commit (pushes): any file in an existing release folder that is

@@ -41,7 +41,7 @@ reproducible so that anyone can learn from it and build on it.
 | 2 | Guided-mode metrics in 3D (eigenmode source and decomposition) | **Started** (010–011) |
 | 3 | Real material platforms (e.g. Si/SiO₂ 220 nm, SiN, LNOI) and spectral response | Planned |
 | 4 | GDSFactory components in an open PDK: waveguide, bend, directional coupler, MMI, phase shifter, single 2×2 MZI | Planned |
-| 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | Planned |
+| 5 | MZI mesh (2×2 → 4×4) as an optical matrix multiplier, with a link to the MZI learning simulation | **Started** (MZI-001) |
 | 6 | Design-rule-checked GDS ready for an MPW run | Planned |
 | 7 | Measurement plan and published measurement data | Planned |
 
@@ -100,10 +100,51 @@ What this shows:
   platforms such as silicon (index ≈ 3.48) allow much tighter bends.
 - Changing the resolution from 12 to 16 changes transmission by less than 0.02,
   but two resolutions do not prove convergence.
+- Not yet checked: sensitivity to port-monitor size and PML thickness (mode
+  confinement), more resolutions, and an independent mode-solver comparison of
+  the effective index (n_eff ≈ 1.359). Until then these numbers are
+  preliminary.
 
 The full CI report is
 [`results/opa-fdtd-011/result.json`](results/opa-fdtd-011/result.json); a local
 run with the same locked environment agreed to within 2e-9.
+
+## Circuit experiments
+
+FDTD shows how light behaves inside one component. Circuit experiments treat
+each component as a small complex matrix and ask what a whole circuit computes.
+They live in [`simulations/circuit/`](simulations/circuit/), use only numpy from
+the same locked environment, and run in seconds.
+
+| ID | What it establishes |
+|----|---------------------|
+| MZI-001 | An ideal 2×2 MZI plus an output phase screen is a programmable 2×2 unitary matrix multiplier |
+
+### OPA-MZI-001 results
+
+A 2×2 MZI is two 50:50 couplers with an internal phase shifter θ between them
+and an external phase shifter φ on one input. θ sets how power is split
+(top-port output power = sin²(θ/2)) and φ sets the relative phase. With two
+more phase shifters on the outputs, the circuit can realize **any** 2×2 unitary
+matrix, which is the building block of the meshes used in optical AI
+accelerators.
+
+| Check | Max error |
+|-------|-----------|
+| Transfer matrix equals the closed form | 4e-16 |
+| Unitarity (lossless) | 7e-16 |
+| Power splitting follows sin²(θ/2) | 7e-16 |
+| 1000 random unitaries + bar/cross/Hadamard programmed exactly | 2e-15 |
+| Targets 1e-12 to 1e-4 rad from the bar and cross states | 7e-16 |
+| Programmed circuit multiplies input vectors correctly | 2e-15 (relative) |
+| Real 30° rotation weight applied to real inputs | 5e-16 |
+
+All errors are at floating-point rounding level. As a sensitivity check, the same
+settings on hardware with 48:52 instead of 50:50 couplers give errors of 0.04,
+which shows why fabrication tolerance (OPA-MZI-002) matters.
+
+Not included: loss, fabrication errors, wavelength dependence, and detection.
+Photodetectors measure power |y|², not the complex field.
 
 ## Running locally
 
@@ -112,6 +153,7 @@ run with the same locked environment agreed to within 2e-9.
 micromamba create -n opa-fdtd --file simulations/meep/opa-fdtd-linux-64.lock.txt
 micromamba activate opa-fdtd
 python simulations/meep/bend_3d_launched_mode_v011.py   # writes results/opa-fdtd-011/result.json
+python simulations/circuit/mzi_2x2_v001.py               # writes results/opa-mzi-001/result.json, < 1 s
 ```
 
 New experiments should import shared geometry and measurement helpers from

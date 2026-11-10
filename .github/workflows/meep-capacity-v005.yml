@@ -4,13 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       profile:
-        description: "Bounded benchmark size; medium is manual only"
+        description: "Bounded 3D benchmark; medium and large are manual only"
         required: true
         type: choice
         default: small
         options:
           - small
           - medium
+          - large
   pull_request:
     paths:
       - ".github/workflows/meep-capacity-v005.yml"

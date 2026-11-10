@@ -433,13 +433,14 @@ the 0.3 dB/cm waveguide loss. That gap is **4 µm**, which is 22 % shorter than
 **2. Push-pull** drives both arms in opposite directions and halves the length.
 
 **3. Folding** turns a length limit into an area limit. A push-pull mesh with
-a 4 µm gap needs 524 mm² at ±5 V and 265 mm² at ±10 V. Both fit inside one
+a 4 µm gap needs 395 mm² at ±5 V and 201 mm² at ±10 V. Both fit inside one
 26 × 33 mm reticle (858 mm²).
 
 **4. Ring resonance** (racetrack, self-coupling r = 0.9) makes a θ shifter,
-which only needs a π range, **8× shorter** (225 µm instead of 1.86 mm). The
-costs:
-- 0.16 dB amplitude ripple;
+which only needs a π range, **8× shorter** than a straight shifter with the
+same range (225 µm instead of 1.86 mm). The costs:
+- up to 0.32 dB insertion loss per ring (0.16 dB ripple), which adds about
+  20 dB across the 64 columns of a mesh;
 - an optical bandwidth of only about 0.001 nm for a phase error below 0.05 rad,
   so the laser and the temperature must be held very still;
 - almost no gain (1.1–1.8×) for the 2π range that the φ and output phases need.
@@ -449,23 +450,28 @@ V_π·L becomes 0.2 V·cm, 12× better. The capacitance is 9× higher (0.62 pF/m
 from DC permittivity 1000), but the energy per reprogramming stays about the
 same because the shifters are shorter. Real BTO devices use other geometries.
 
-**A 64×64 mesh at ±5 V:**
+**A 64×64 mesh at ±5 V.** θ is in [0, π], so straight θ shifters cover π
+around a fixed π/2 offset and are half as long as the φ and output-phase
+shifters, which need 2π.
 
 | Configuration | Light path | Path loss (0.3 dB/cm) | Area | Fits one reticle |
 |---|---|---|---|---|
-| EO-001: 5 µm gap, one arm | 1243 mm | 37 dB | 1432 mm² | no |
-| Push-pull | 625 mm | 19 dB | 720 mm² | if folded |
-| Push-pull, 4 µm, folded | 487 mm | 16 dB | 524 mm² | **yes** |
-| … + ring-assisted θ | 263 mm | 19 dB | 283 mm² | yes |
-| BTO, r_eff 300 pm/V, push-pull, folded | 58 mm | 1.7 dB | 67 mm² | yes |
+| EO-001: 5 µm gap, one arm | 936 mm | 28 dB | 1079 mm² | no |
+| Push-pull | 471 mm | 14 dB | 543 mm² | if folded |
+| Push-pull, 4 µm, folded | 368 mm | 12 dB | 395 mm² | **yes** |
+| … + ring-assisted θ | 263 mm | 29 dB | 283 mm² | yes |
+| BTO, r_eff 300 pm/V, push-pull, folded | 45 mm | 1.4 dB | 52 mm² | yes |
+
+Programming the whole mesh takes 10–40 nJ in every configuration.
 
 **Conclusion.** Folding and push-pull make a 64×64 TFLN mesh fit on one chip.
-After that, the limit is no longer length but **optical loss**: half a metre
-of waveguide at 0.3 dB/cm costs 16 dB. With the best published TFLN loss
-(0.027 dB/cm), the same mesh would lose about 2.4 dB. Rings shorten the mesh
-but add their own ripple loss and need a stable wavelength. A material with a
-larger Pockels effect (BTO) solves length, loss and area at once, if its
-r_eff holds up in a real device.
+After that, the limit is no longer length but **optical loss**: 37 cm of
+waveguide at 0.3 dB/cm costs 12 dB. With the best published TFLN loss
+(0.027 dB/cm), the same mesh would lose about 1.8 dB. **Rings do not pay off
+at mesh level.** They shorten the mesh by 30 %, but their insertion loss more
+than doubles the total loss, and they need a stable wavelength. A material
+with a larger Pockels effect (BTO) solves length, loss and area at once, if
+its r_eff holds up in a real device.
 
 **Checks:**
 - The solver is checked against an analytic TM slab (0.12 %) and against MPB
@@ -482,7 +488,7 @@ r_eff holds up in a real device.
 - Semi-vectorial loss model; vertical sidewalls.
 - Waveguide loss and gold absorption are both counted along the whole light
   path (conservative).
-- Ring ripple is counted as loss in every column.
+- Ring insertion loss is counted at its worst case in every column.
 - The folding bends are covered only by a 20 % area overhead.
 - BTO is an illustrative swap with assumed r_eff and permittivity.
 

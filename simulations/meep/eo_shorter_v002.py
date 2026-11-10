@@ -168,7 +168,8 @@ def ring_t(theta, r, a):
 
 def ring_window(r, a, target):
     """Smallest symmetric round-trip detuning window around resonance whose
-    phase response spans `target`; returns (window, ripple_dB, slope_max)."""
+    phase response spans `target`; returns (window, ripple_dB, slope_max,
+    worst-case insertion loss in dB)."""
     def span(w):
         th = np.linspace(-w / 2, w / 2, 4001)
         ph = np.unwrap(np.angle(ring_t(th, r, a)))
@@ -183,7 +184,18 @@ def ring_window(r, a, target):
     p = np.abs(ring_t(th, r, a)) ** 2
     ph = np.unwrap(np.angle(ring_t(th, r, a)))
     slope = float(np.max(np.abs(np.gradient(ph, th))))
-    return hi, float(10 * np.log10(p.max() / p.min())), slope
+    return hi, float(10 * np.log10(p.max() / p.min())), slope, float(-10 * np.log10(p.min()))
+
+
+def ring_theta_voltages(r, a, window, theta, vmax):
+    """Drive voltages that set MZI phases theta in [0, pi] with a ring whose
+    detuning window [-window/2, window/2] spans pi: invert the phase response."""
+    det = np.linspace(-window / 2, window / 2, 4001)
+    ph = np.unwrap(np.angle(ring_t(det, r, a)))
+    ph = (ph - ph.min()) if ph[-1] > ph[0] else (ph.max() - ph)
+    order = np.argsort(ph)
+    d = np.interp(np.clip(theta, 0, ph.max()), ph[order], det[order])
+    return d / (window / 2) * vmax
 
 
 def ring_shifter(r, target, a_eo, vmax, ng):
@@ -196,7 +208,7 @@ def ring_shifter(r, target, a_eo, vmax, ng):
         res = ring_window(r, a, target)
         if res is None:
             return None
-        window, ripple, slope = res
+        window, ripple, slope, insertion = res
         # +-vmax over both straights gives a round-trip detuning of window
         ls_new = window * WL / (2 * math.pi * a_eo * 2 * vmax * 2) * 1.0
         if abs(ls_new - ls) < 1e-3:
@@ -207,6 +219,7 @@ def ring_shifter(r, target, a_eo, vmax, ng):
     bw_nm = 0.05 / (slope * 2 * math.pi * ng * l_rt / WL ** 2) * 1e3   # 0.05 rad error
     return {"electrode_length_per_straight_um": ls, "round_trip_um": l_rt,
             "detuning_window_rad": window, "amplitude_ripple_dB": ripple,
+            "insertion_loss_max_dB": insertion, "round_trip_field_transmission": a,
             "fsr_nm": fsr_nm, "bandwidth_nm_for_0.05rad": bw_nm,
             "footprint_um": [ls + 2 * BEND_R, 2 * BEND_R]}
 
@@ -324,37 +337,56 @@ print(json.dumps(result["bto_swap"]), flush=True)
 
 # ---- mesh level --------------------------------------------------------------
 rng = np.random.default_rng(2026)
-fracs, worst, thetas = [], 0.0, []
-for _ in range(2):
+# theta (internal MZI phase) lies in [0, pi]: a straight theta shifter needs only a
+# pi range, built around a fixed pi/2 offset, so it is half as long as the phi and
+# output-phase shifters, which need the full 2 pi (+-pi with +-V_max).
+SAMPLES = 2
+thetas, others, worst = [], [], 0.0
+for _ in range(SAMPLES):
     u = haar_unitary(N_MESH, rng)
     ops, out = clements_decompose(u)
     worst = max(worst, float(np.max(np.abs(mesh_matrix(ops, out) - u))))
-    ph = np.array([p for _, t, f in ops for p in (t, f)] + list(out))
-    fracs.append(np.abs(np.angle(np.exp(1j * ph))) / np.pi)
+    thetas.append(np.array([t for _, t, _ in ops]))
+    others.append(np.array([f for _, _, f in ops] + list(out)))
 check("mesh_decomposition_exact", worst < 1e-9, {"max_abs_error": worst})
-frac = np.concatenate(fracs)
-n_shifters = len(frac) // 2
+theta_all = np.concatenate(thetas)
+other_frac = np.abs(np.angle(np.exp(1j * np.concatenate(others)))) / np.pi
+n_shifters = (len(theta_all) + len(other_frac)) // SAMPLES
 
 
-def mesh_config(name, gap_row, push_pull, vmax, folded, theta_len_um=None, ring_loss_db=0.0,
-                film_cap=None, a=None):
+def mesh_config(name, gap_row, push_pull, vmax, folded, ring_case=None, film_cap=None, a=None):
     a = a or gap_row["dneff_per_V"]
-    straight = WL / (2 * a * vmax) / (2 if push_pull else 1)          # um for +-pi
-    l_theta = theta_len_um if theta_len_um is not None else straight
-    path_um = N_MESH * (l_theta + straight + COUPLER_OVERHEAD) + straight
+    arms = 2 if push_pull else 1
+    straight = WL / (2 * a * vmax) / arms              # um: +-pi with +-vmax (phi, outputs)
+    cap = (film_cap or gap_row["capacitance_pF_per_mm"]) * 1e-12 / 1e-3   # F/m
+    # phi and output phases: V = |phase| / pi * vmax on a full-length shifter
+    energy = np.sum(cap * straight * 1e-6 * arms * (other_frac * vmax) ** 2)
+    if ring_case is None:
+        l_theta = straight / 2                         # pi range around a pi/2 offset
+        v_theta = (theta_all - math.pi / 2) / (math.pi / 2) * vmax
+        energy += np.sum(cap * l_theta * 1e-6 * arms * v_theta ** 2)
+        ring_loss = 0.0
+        footprint_theta = l_theta
+    else:
+        rc = ring_case
+        v_theta = ring_theta_voltages(rc["r"], rc["round_trip_field_transmission"],
+                                      rc["detuning_window_rad"], theta_all, vmax)
+        electrode = 2 * rc["electrode_length_per_straight_um"]   # both straights, one ring
+        energy += np.sum(cap * electrode * 1e-6 * v_theta ** 2)
+        ring_loss = rc["insertion_loss_max_dB"]
+        footprint_theta = rc["footprint_um"][0]
+    energy /= SAMPLES
+    path_um = N_MESH * (footprint_theta + straight + COUPLER_OVERHEAD) + straight
     alpha = ALPHA_WG + gap_row["metal_loss_dB_per_cm"]
-    loss_db = path_um * 1e-4 * alpha + N_MESH * ring_loss_db
+    loss_db = path_um * 1e-4 * alpha + N_MESH * ring_loss
     pitch = gap_row["gap_um"] + ec.ELECTRODE_W
     area = N_MESH * pitch * path_um * 1e-6 * AREA_OVERHEAD                 # mm^2
-    cap = (film_cap or gap_row["capacitance_pF_per_mm"]) * 1e-12 / 1e-3   # F/m
-    arms = 2 if push_pull else 1
-    energy = float(np.sum(cap * straight * 1e-6 * arms * (frac * vmax) ** 2) / len(fracs))
     return {"config": name, "gap_um": gap_row["gap_um"], "push_pull": push_pull, "vmax_V": vmax,
-            "folded": folded, "shifter_length_mm": straight / 1e3,
-            "theta_shifter_length_mm": l_theta / 1e3, "path_length_mm": path_um / 1e3,
-            "path_loss_dB": loss_db, "area_mm2": area,
-            "fits_one_reticle": bool(folded and area <= RETICLE_MM2),
-            "straight_mesh_length_mm": path_um / 1e3, "program_energy_nJ": energy * 1e9}
+            "folded": folded, "phi_shifter_length_mm": straight / 1e3,
+            "theta_shifter_length_mm": footprint_theta / 1e3, "path_length_mm": path_um / 1e3,
+            "path_loss_dB": float(loss_db), "ring_insertion_loss_per_column_dB": ring_loss,
+            "area_mm2": area, "fits_one_reticle": bool(folded and area <= RETICLE_MM2),
+            "program_energy_nJ": float(energy) * 1e9}
 
 
 configs = []
@@ -368,8 +400,7 @@ for vmax in V_MAX:
     if rc and vmax == 5.0:
         configs.append(mesh_config(
             f"push-pull, {chosen['gap_um']:g} um gap, folded, ring-assisted theta (r = 0.9)",
-            chosen, True, vmax, True, theta_len_um=rc["footprint_um"][0],
-            ring_loss_db=rc["amplitude_ripple_dB"]))
+            chosen, True, vmax, True, ring_case=rc | {"r": 0.9}))
     bto = result["bto_swap"]["cases"]["r300pm_per_V"]["vpi_L_push_pull_V_cm"]
     a_bto = WL * 1e-6 / (2 * bto * 2 / 100)
     configs.append(mesh_config("BTO swap, r_eff 300 pm/V, push-pull, folded (illustrative)",
@@ -380,9 +411,14 @@ for c in configs:
     print(json.dumps(c), flush=True)
 result["mesh"] = {"N": N_MESH, "phase_shifters": n_shifters,
                   "notes": ["path: N columns of a theta and a phi shifter plus 100 um, plus the "
-                            "output phases", "ring ripple counted once per column as worst-case "
-                            "excess loss", "single-arm shifters need an equal dummy arm, so the "
-                            "area uses the same pitch"],
+                            "output phases",
+                            "theta in [0, pi]: straight theta shifters cover pi around a fixed "
+                            "pi/2 offset and are half as long as phi shifters",
+                            "ring: worst-case insertion loss counted once per column; theta "
+                            "voltages from the inverted ring phase response; energy from the "
+                            "ring's own electrodes",
+                            "single-arm shifters need an equal dummy arm, so the area uses the "
+                            "same pitch"],
                   "configs": configs}
 
 blocking = [f for f in failures if f not in NON_BLOCKING]

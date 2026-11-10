@@ -1,0 +1,25 @@
+{
+  "design": "OPA-LAYOUT-003: fully programmable 2x2 MZI (theta, phi, a, b)",
+  "version": "1",
+  "date": "2026-11-10",
+  "status": "drc-clean",
+  "pdk": "SiEPIC EBeam via ubcpdk 3.3.0 (MIT); Si 220 nm SOI, electron-beam lithography (Applied Nanotools process)",
+  "generator": {
+    "script": "layout/mzi_2x2_ubc_v003.py",
+    "commit": "d002fa1dcfedc844108644a04152cd3f2dc27ebe",
+    "environment": "layout/requirements-lock-ubc.txt"
+  },
+  "released_to": "nobody yet (milestone release; candidate for a EuroCDP submission once their process is confirmed)",
+  "files": {
+    "LICENSE-ubcpdk.txt": "35635ffe7af81469ec149b50cc42f7b2cb3add27008530336b2901a34896ec9c",
+    "design.json": "4f6d9bf59668f84f9ee1b27413fc8ca64f6549b77c032293c6edf5be782de516",
+    "mzi_2x2_siepic_full.gds": "655636cbbdd25396b1230105ce574f270521d961aaea92b3dfca6d30134b60ab",
+    "mzi_2x2_siepic_full.png": "2ffd32766fef04078cfd35401b795e93684d76e42341aa681a360fda37a7e26e"
+  },
+  "checks": {
+    "layout_checks": "11/11 passed (results/opa-layout-003/result.json at the commit above)",
+    "drc": "0 violations of the 13 rules in SiEPIC_EBeam_DRC.lydrc from siepic_ebeam_pdk 0.4.53 (deck sha256 341bdbd7...), KLayout 0.28.16, tools/siepic_drc.py",
+    "reproducible": "the CI job for the commit above regenerated a byte-identical GDS"
+  },
+  "notes": "drc-clean means the PDK's own DRC deck passes; SiEPIC functional verification, thermal crosstalk and the broadband coupler are not checked, and no foundry has reviewed the layout. Contains PDK fixed cells (ebeam_gc_te1550, ebeam_bdc_te1550) distributed under the MIT licence in LICENSE-ubcpdk.txt."
+}

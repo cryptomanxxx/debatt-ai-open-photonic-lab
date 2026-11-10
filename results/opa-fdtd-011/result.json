@@ -31,53 +31,55 @@
     "12": {
       "straight": {
         "guided_transmission": 0.9995782223466918,
-        "guided_reflection": 0.000766473812923632,
-        "radiated_or_other_modes": -0.0003446961596154346,
         "guided_transmission_dB": -0.0018321434799739883,
+        "total_field_backward_ratio": 0.000766473812923632,
         "output_aperture_flux_ratio": 0.9998846692268516
       },
       "1.0": {
-        "guided_transmission": 0.3325242795577421,
-        "guided_reflection": 0.000898333216126665,
-        "radiated_or_other_modes": 0.6665773872261312,
-        "guided_transmission_dB": -4.781766388030305,
-        "output_aperture_flux_ratio": 0.4906665096286469
+        "guided_transmission": 0.3325243337723861,
+        "guided_transmission_dB": -4.781765679958135,
+        "total_field_backward_ratio": 0.0008983553767901598,
+        "output_aperture_flux_ratio": 0.4906665849841566,
+        "guided_reflection": 8.57572856857633e-06,
+        "radiated_or_other_modes": 0.6674670904990453
       },
       "2.0": {
-        "guided_transmission": 0.7619580350502302,
-        "guided_reflection": 0.0008013669189850239,
-        "radiated_or_other_modes": 0.2372405980307848,
-        "guided_transmission_dB": -1.1806894683360876,
-        "output_aperture_flux_ratio": 0.8335318283297674
+        "guided_transmission": 0.7619585286481259,
+        "guided_transmission_dB": -1.1806866549689061,
+        "total_field_backward_ratio": 0.0008005015629907704,
+        "output_aperture_flux_ratio": 0.8335324353991075,
+        "guided_reflection": 1.2738944987280613e-05,
+        "radiated_or_other_modes": 0.23802873240688688
       }
     },
     "16": {
       "straight": {
-        "guided_transmission": 0.9998404624845343,
-        "guided_reflection": 0.0002117066463074118,
-        "radiated_or_other_modes": -5.216913084169877e-05,
-        "guided_transmission_dB": -0.0006929179009031134,
+        "guided_transmission": 0.9998404626046674,
+        "guided_transmission_dB": -0.0006929173790883286,
+        "total_field_backward_ratio": 0.0002117066463074118,
         "output_aperture_flux_ratio": 1.0000589499459385
       },
       "1.0": {
-        "guided_transmission": 0.31494671039514294,
-        "guided_reflection": 0.00022834635246939862,
-        "radiated_or_other_modes": 0.6848249432523877,
-        "guided_transmission_dB": -5.017629234776208,
-        "output_aperture_flux_ratio": 0.47207511311036077
+        "guided_transmission": 0.31494669951320575,
+        "guided_transmission_dB": -5.017629384832239,
+        "total_field_backward_ratio": 0.0002283536835624802,
+        "output_aperture_flux_ratio": 0.4720751008006777,
+        "guided_reflection": 6.38274258281246e-06,
+        "radiated_or_other_modes": 0.6850469177442114
       },
       "2.0": {
-        "guided_transmission": 0.7433177167513689,
-        "guided_reflection": 0.00012595228210757775,
-        "radiated_or_other_modes": 0.25655633096652347,
-        "guided_transmission_dB": -1.2882551579699602,
-        "output_aperture_flux_ratio": 0.8192105348877957
+        "guided_transmission": 0.7433172931376613,
+        "guided_transmission_dB": -1.2882576329970448,
+        "total_field_backward_ratio": 0.00012588685869037626,
+        "output_aperture_flux_ratio": 0.8192101461413924,
+        "guided_reflection": 1.937703584284852e-05,
+        "radiated_or_other_modes": 0.25666332982649587
       }
     }
   },
   "resolution_transmission_changes": {
-    "1.0": 0.01757756916259917,
-    "2.0": 0.018640318298861258
+    "1.0": 0.017577634259180352,
+    "2.0": 0.018641235510464593
   },
   "resolution_target_absolute_change": 0.02,
   "resolution_within_target": true,
@@ -88,44 +90,47 @@
         "radius_meep_units": null,
         "resolution": 12,
         "input_forward_modal_power": 16.336191155717252,
-        "input_backward_modal_power": 0.012521262723771916,
+        "input_backward_total_field_modal_power": 0.012521262723771916,
+        "reflected_modal_power_reference_subtracted": null,
         "output_forward_modal_power": 16.3293009153476,
         "output_backward_modal_power": 0.012151263756699747,
         "output_aperture_flux": 16.334307090160962,
         "input_n_eff": 1.3589226396244851,
         "output_n_eff": 1.3589226396244887,
         "simulated_meep_time": 59.45833333333333,
-        "wall_seconds": 14.56669382199999,
-        "process_peak_rss_bytes": 185438208
+        "wall_seconds": 13.710042891000057,
+        "process_peak_rss_bytes": 185729024
       },
       "bends": {
         "1.0": {
           "radius_meep_units": 1.0,
           "resolution": 12,
-          "input_forward_modal_power": 16.338365779274707,
-          "input_backward_modal_power": 0.01467534314017546,
-          "output_forward_modal_power": 5.432180194772438,
-          "output_backward_modal_power": 0.004204647495959796,
-          "output_aperture_flux": 8.015621895002155,
+          "input_forward_modal_power": 16.33836453673958,
+          "input_backward_total_field_modal_power": 0.014675705161010449,
+          "reflected_modal_power_reference_subtracted": 0.00014009474119580843,
+          "output_forward_modal_power": 5.432181080433225,
+          "output_backward_modal_power": 0.004204648075986251,
+          "output_aperture_flux": 8.015623126024167,
           "input_n_eff": 1.35900556208943,
           "output_n_eff": 1.3590053047010788,
-          "simulated_meep_time": 59.45833333333333,
-          "wall_seconds": 24.068011176000027,
-          "process_peak_rss_bytes": 187953152
+          "simulated_meep_time": 56.875,
+          "wall_seconds": 22.66294596900002,
+          "process_peak_rss_bytes": 188874752
         },
         "2.0": {
           "radius_meep_units": 2.0,
           "resolution": 12,
-          "input_forward_modal_power": 16.336674651463547,
-          "input_backward_modal_power": 0.01309128317440753,
-          "output_forward_modal_power": 12.447492113215267,
-          "output_backward_modal_power": 0.009197752744276175,
-          "output_aperture_flux": 13.616735281969577,
+          "input_forward_modal_power": 16.336662549906553,
+          "input_backward_total_field_modal_power": 0.01307714655346766,
+          "reflected_modal_power_reference_subtracted": 0.00020810584043438218,
+          "output_forward_modal_power": 12.447500176724844,
+          "output_backward_modal_power": 0.009197800346907103,
+          "output_aperture_flux": 13.616745199170362,
           "input_n_eff": 1.359005549885755,
           "output_n_eff": 1.3590053047010768,
-          "simulated_meep_time": 58.166666666666664,
-          "wall_seconds": 23.299477164999985,
-          "process_peak_rss_bytes": 187961344
+          "simulated_meep_time": 50.416666666666664,
+          "wall_seconds": 20.329052273000002,
+          "process_peak_rss_bytes": 188874752
         }
       }
     },
@@ -134,44 +139,47 @@
         "radius_meep_units": null,
         "resolution": 16,
         "input_forward_modal_power": 16.18427766143784,
-        "input_backward_modal_power": 0.0034263191466109666,
-        "output_forward_modal_power": 16.181695661990126,
-        "output_backward_modal_power": 0.0033635632204159723,
+        "input_backward_total_field_modal_power": 0.0034263191466109666,
+        "reflected_modal_power_reference_subtracted": null,
+        "output_forward_modal_power": 16.181695663934395,
+        "output_backward_modal_power": 0.0033635631701163697,
         "output_aperture_flux": 16.185231723731036,
         "input_n_eff": 1.3685892190991948,
-        "output_n_eff": 1.3685892190992157,
+        "output_n_eff": 1.3685892190991948,
         "simulated_meep_time": 55.125,
-        "wall_seconds": 43.35856222000007,
-        "process_peak_rss_bytes": 256045056
+        "wall_seconds": 35.307011450000005,
+        "process_peak_rss_bytes": 256516096
       },
       "bends": {
         "1.0": {
           "radius_meep_units": 1.0,
           "resolution": 16,
-          "input_forward_modal_power": 16.184372839396126,
-          "input_backward_modal_power": 0.0036956207713412996,
-          "output_forward_modal_power": 5.097185009591445,
-          "output_backward_modal_power": 0.001112415498029192,
-          "output_aperture_flux": 7.640194707632753,
+          "input_forward_modal_power": 16.184371791073616,
+          "input_backward_total_field_modal_power": 0.0036957394197872934,
+          "reflected_modal_power_reference_subtracted": 0.00010330007820171976,
+          "output_forward_modal_power": 5.0971848334751515,
+          "output_backward_modal_power": 0.0011124156665514228,
+          "output_aperture_flux": 7.640194508409425,
           "input_n_eff": 1.3685892181171473,
           "output_n_eff": 1.3685893776838076,
-          "simulated_meep_time": 55.125,
-          "wall_seconds": 63.440059722,
-          "process_peak_rss_bytes": 261812224
+          "simulated_meep_time": 53.84375,
+          "wall_seconds": 54.67846052599987,
+          "process_peak_rss_bytes": 263393280
         },
         "2.0": {
           "radius_meep_units": 2.0,
           "resolution": 16,
-          "input_forward_modal_power": 16.182643256108967,
-          "input_backward_modal_power": 0.0020384467057207875,
-          "output_forward_modal_power": 12.03006031857016,
-          "output_backward_modal_power": 0.002453171266715078,
-          "output_aperture_flux": 13.258330759799096,
+          "input_forward_modal_power": 16.182640304395544,
+          "input_backward_total_field_modal_power": 0.0020373878749712386,
+          "reflected_modal_power_reference_subtracted": 0.0003136033283362936,
+          "output_forward_modal_power": 12.030053462688294,
+          "output_backward_modal_power": 0.002453174358942169,
+          "output_aperture_flux": 13.258324468219365,
           "input_n_eff": 1.36858921043668,
           "output_n_eff": 1.3685893776838043,
-          "simulated_meep_time": 55.125,
-          "wall_seconds": 57.793519457,
-          "process_peak_rss_bytes": 261844992
+          "simulated_meep_time": 51.28125,
+          "wall_seconds": 54.354527104,
+          "process_peak_rss_bytes": 263393280
         }
       }
     }
@@ -180,6 +188,7 @@
     "Generic index-1.8 core in air in Meep units; not a calibrated foundry platform",
     "Single frequency; no spectral response",
     "Two resolutions do not prove spatial convergence",
+    "Straight-reference total_field_backward_ratio is the leakage floor of the discretized mode decomposition, not a physical reflection",
     "Only the fundamental TE-like mode is decomposed; TM-like and higher-order mode content is lumped into radiated_or_other_modes",
     "No PML-thickness or port-size sensitivity study"
   ]

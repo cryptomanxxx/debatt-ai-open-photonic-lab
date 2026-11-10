@@ -83,11 +83,22 @@ def build(radius, resolution):
     )
 
 
-def run_case(radius, resolution):
+def run_case(radius, resolution, reference_fields=None):
+    """Run one case.
+
+    The straight reference (radius None) returns its complex input-port
+    fields. Bend runs subtract them in a separate reflection monitor before
+    mode decomposition, so the reflected coefficient is not contaminated by
+    the incident field leaking into the discretized backward mode.
+    """
     start = time.perf_counter()
     sim = build(radius, resolution)
-    input_monitor = sim.add_mode_monitor(
-        FREQ, 0, 1, port(mp.Vector3(0, -PORT_OFFSET, 0), mp.Y))
+    input_region = port(mp.Vector3(0, -PORT_OFFSET, 0), mp.Y)
+    input_monitor = sim.add_mode_monitor(FREQ, 0, 1, input_region)
+    reflection_monitor = None
+    if reference_fields is not None:
+        reflection_monitor = sim.add_mode_monitor(FREQ, 0, 1, input_region)
+        sim.load_minus_flux_data(reflection_monitor, reference_fields)
     if radius is None:
         output_region = port(mp.Vector3(0, PORT_OFFSET, 0), mp.Y)
     else:
@@ -96,18 +107,25 @@ def run_case(radius, resolution):
     sim.run(until_after_sources=mp.stop_when_dft_decayed(
         DFT_TOLERANCE, MIN_TIME, MAX_TIME))
     in_fwd, in_bwd, in_neff = modal_powers(sim, input_monitor, PARITY)
+    if reflection_monitor is not None:
+        _, reflected, _ = modal_powers(sim, reflection_monitor, PARITY)
+    else:
+        reflected = None
     out_fwd, out_bwd, out_neff = modal_powers(sim, output_monitor, PARITY)
     out_aperture = float(mp.get_fluxes(output_monitor)[0])
+    fields = sim.get_flux_data(input_monitor) if radius is None else None
     meep_time = float(sim.meep_time())
     sim.reset_meep()
-    values = (in_fwd, in_bwd, out_fwd, out_bwd, out_aperture)
+    values = (in_fwd, in_bwd, out_fwd, out_bwd, out_aperture,
+              0.0 if reflected is None else reflected)
     if not all(map(math.isfinite, values)):
         raise ValueError(f"Non-finite result, radius={radius}, res={resolution}")
     return {
         "radius_meep_units": radius,
         "resolution": resolution,
         "input_forward_modal_power": in_fwd,
-        "input_backward_modal_power": in_bwd,
+        "input_backward_total_field_modal_power": in_bwd,
+        "reflected_modal_power_reference_subtracted": reflected,
         "output_forward_modal_power": out_fwd,
         "output_backward_modal_power": out_bwd,
         "output_aperture_flux": out_aperture,
@@ -116,26 +134,30 @@ def run_case(radius, resolution):
         "simulated_meep_time": meep_time,
         "wall_seconds": time.perf_counter() - start,
         "process_peak_rss_bytes": peak_rss_bytes(),
-    }
+    }, fields
 
 
 def ratios(case, reference_power):
     transmission = case["output_forward_modal_power"] / reference_power
-    reflection = case["input_backward_modal_power"] / reference_power
-    return {
+    row = {
         "guided_transmission": transmission,
-        "guided_reflection": reflection,
-        "radiated_or_other_modes": 1.0 - transmission - reflection,
         "guided_transmission_dB": 10 * math.log10(transmission)
         if transmission > 0 else None,
+        "total_field_backward_ratio":
+            case["input_backward_total_field_modal_power"] / reference_power,
         "output_aperture_flux_ratio": case["output_aperture_flux"] / reference_power,
     }
+    reflected = case["reflected_modal_power_reference_subtracted"]
+    if reflected is not None:
+        row["guided_reflection"] = reflected / reference_power
+        row["radiated_or_other_modes"] = 1.0 - transmission - row["guided_reflection"]
+    return row
 
 
 measurements, summary, failures = {}, {}, []
 for resolution in RESOLUTIONS:
     key = str(resolution)
-    straight = run_case(None, resolution)
+    straight, reference_fields = run_case(None, resolution)
     reference = straight["input_forward_modal_power"]
     if reference <= 0:
         raise ValueError("Non-positive straight reference at resolution " + key)
@@ -143,7 +165,7 @@ for resolution in RESOLUTIONS:
     if abs(straight_ratios["guided_transmission"] - 1) > STRAIGHT_TOLERANCE:
         failures.append(f"straight waveguide transmission off by more than "
                         f"{STRAIGHT_TOLERANCE} at resolution {key}")
-    bends = {str(r): run_case(r, resolution) for r in RADII}
+    bends = {str(r): run_case(r, resolution, reference_fields)[0] for r in RADII}
     measurements[key] = {"straight": straight, "bends": bends}
     summary[key] = {"straight": straight_ratios,
                     **{str(r): ratios(bends[str(r)], reference) for r in RADII}}
@@ -188,6 +210,8 @@ report = {
         "Generic index-1.8 core in air in Meep units; not a calibrated foundry platform",
         "Single frequency; no spectral response",
         "Two resolutions do not prove spatial convergence",
+        "Straight-reference total_field_backward_ratio is the leakage floor of the "
+        "discretized mode decomposition, not a physical reflection",
         "Only the fundamental TE-like mode is decomposed; TM-like and higher-order "
         "mode content is lumped into radiated_or_other_modes",
         "No PML-thickness or port-size sensitivity study",

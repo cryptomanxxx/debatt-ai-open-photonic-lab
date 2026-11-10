@@ -88,6 +88,10 @@ What this shows:
 - The aperture flux used in 007–010 **overestimates** guided transmission,
   by about 50 % (relative) at radius 1.0, because it also counts radiated light that
   passes through the output aperture.
+- Guided reflection is about 0.00001 for both bends, measured after
+  subtracting the straight-reference fields. Without that subtraction, leakage
+  of the incident field into the discretized backward mode reads about 10–20×
+  higher, comparable to the straight waveguide's own leakage floor.
 - The low index contrast (1.8 vs 1.0) makes tight bends very lossy. Real
   platforms such as silicon (index ≈ 3.48) allow much tighter bends.
 - Changing the resolution from 12 to 16 changes transmission by less than 0.02,

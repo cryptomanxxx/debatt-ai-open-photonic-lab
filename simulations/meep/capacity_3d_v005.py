@@ -53,11 +53,15 @@ def main():
             size=mp.Vector3(0, 0.55, 0.25),
         )],
     )
+    # Keep the full monitor aperture inside the non-PML interior, with a 0.1-unit margin.
+    detector_z_span = min(1.2, sz - 2.0 - 0.2)
+    if detector_z_span <= 0:
+        raise ValueError("No valid non-PML monitor aperture")
     detector = sim.add_flux(
         0.8, 0, 1,
         mp.FluxRegion(
             center=mp.Vector3(detector_x, 0, 0),
-            size=mp.Vector3(0, 1.2, 1.2),
+            size=mp.Vector3(0, 1.2, detector_z_span),
             direction=mp.X,
         ),
     )
@@ -77,6 +81,7 @@ def main():
         "theoretical_lower_bound_memory_bytes": estimated_min_bytes,
         "measured_peak_process_rss_bytes": peak_rss_kb * 1024,
         "measured_wall_seconds": elapsed,
+        "output_monitor_z_span_um": detector_z_span,
         "measured_output_aperture_flux": flux,
         "meep_version": str(getattr(mp, "__version__", "unknown")),
         "runner_cpu_count": os.cpu_count(),

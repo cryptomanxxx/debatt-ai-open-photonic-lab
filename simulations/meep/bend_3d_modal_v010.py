@@ -87,10 +87,10 @@ def run_case(radius):
     outgoing = float(mp.get_fluxes(output_monitor)[0])
     bands = [1, 2, 3, 4]
     input_coefficients = sim.get_eigenmode_coefficients(
-        incident_monitor, bands, eig_parity=mp.NO_PARITY
+        incident_monitor, bands, eig_parity=mp.ODD_Z
     ).alpha[:, 0, :]
     output_coefficients = sim.get_eigenmode_coefficients(
-        output_monitor, bands, eig_parity=mp.NO_PARITY
+        output_monitor, bands, eig_parity=mp.ODD_Z
     ).alpha[:, 0, :]
     band_powers = {
         str(band): {
@@ -152,13 +152,14 @@ report = {
     "run_until_meep_units": RUN_UNTIL,
     "meep_version": str(getattr(mp, "__version__", "unknown")),
     "straight_reference": reference,
+    "eigenmode_parity": "ODD_Z (source-compatible Ez polarization)",
     "most_excited_reference_band": int(candidate),
     "most_excited_band_input_fraction_of_aperture": incident_modal_fraction,
     "minimum_acceptable_reference_modal_fraction": minimum_fraction,
     "modal_normalization_valid": normalization_valid,
     "bend_cases": cases,
     "limitations": [
-        "Finite-size source excites an unknown mix of modes; bands 1-4 are diagnostic candidates only",
+        "Finite-size Ez source excites an unknown mix within the odd-Z sector; bands 1-4 are diagnostic candidates only",
         "Aperture flux includes radiation; selected band is not independently classified as guided",
         "Reference input flux does not correct source back-action in bends",
         "Previous temporal/spatial tests covered aperture flux only, not modal power convergence",

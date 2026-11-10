@@ -358,6 +358,15 @@ from the straight-only model of OPA-COUPLER-001: a 236 nm-gap coupler splits
 44–59 %. Either way, a real chip still needs calibration. No
 foundry DRC has been run, and there are no bond pads or fiber couplers yet.
 
+## GDS archive
+
+Released chip layouts, meaning files sent to a foundry, a review programme or a
+collaborator, are frozen in [`gds/`](gds/README.md), one folder per release.
+Each release has a `provenance.json` with its generator script, commit, PDK,
+status, recipient and the SHA-256 of every GDS file, and CI fails if a released
+file changes. Working layouts stay in [`layout/`](layout/) and
+[`results/`](results/).
+
 ## Running locally
 
 ```bash

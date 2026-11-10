@@ -1,0 +1,575 @@
+{
+  "experiment": "OPA-MZI-002",
+  "goal": "Quantify how coupler errors, arm loss, phase noise and phase resolution limit a 2x2 MZI matrix multiplier, with and without calibration",
+  "model": "Transfer-matrix circuit model; single wavelength",
+  "error_metric": "Relative Frobenius error ||g*M - U|| / ||U|| after removing the best common real gain g; effective bits = log2(1/error)",
+  "numpy_version": "2.4.6",
+  "scipy_version": "1.17.1",
+  "python_version": "3.11.18",
+  "seed": 20261111,
+  "targets": 300,
+  "checks": {
+    "ideal_hardware_exact": {
+      "passed": true,
+      "detail": "naive and calibrated errors on ideal couplers are below 1e-9"
+    },
+    "calibration_never_worse": {
+      "passed": true,
+      "detail": "calibrated error <= naive error for every target and coupler error"
+    },
+    "in_range_targets_exact": {
+      "passed": true,
+      "detail": "every target inside the analytic reachable range is realized to 1e-9"
+    },
+    "reachable_fraction_matches_theory": {
+      "passed": true,
+      "detail": "observed fraction of exactly realized targets is within 3 sigma of the analytic reachable range (|u00|^2 is uniform for Haar targets)"
+    },
+    "naive_error_grows_with_delta_same": {
+      "passed": true,
+      "detail": "mean naive error increases with coupler error (same sign)"
+    },
+    "naive_error_grows_with_delta_opposite": {
+      "passed": true,
+      "detail": "mean naive error increases with coupler error (opposite sign)"
+    },
+    "no_loss_exact": {
+      "passed": true,
+      "detail": "0 dB arm loss leaves the matrix exact"
+    },
+    "balanced_loss_exact": {
+      "passed": true,
+      "detail": "equal loss in both arms only reduces power; shape error stays below 1e-9"
+    },
+    "imbalanced_loss_error_grows": {
+      "passed": true,
+      "detail": "shape error increases with arm-loss imbalance"
+    },
+    "phase_noise_linear_regime": {
+      "passed": true,
+      "detail": "mean error / sigma is constant within 10 % for sigma <= 0.01 rad"
+    },
+    "dac_error_quarters_per_two_bits": {
+      "passed": true,
+      "detail": "each 2 extra DAC bits reduce mean error by about 4x (between 2.5x and 6x)"
+    },
+    "calibration_helps_combined": {
+      "passed": true,
+      "detail": "calibration lowers the median error in the combined scenario"
+    }
+  },
+  "failures": [],
+  "A_coupler_errors": [
+    {
+      "delta": 0.0,
+      "pattern": "same",
+      "hardware": {
+        "split1": 0.5,
+        "split2": 0.5
+      },
+      "reachable_top_power": [
+        0.0,
+        1.0
+      ],
+      "top_port_extinction_ratio_db": null,
+      "predicted_reachable_fraction": 1.0,
+      "observed_exact_fraction": 1.0,
+      "naive_error": {
+        "mean": 4.55684243479247e-16,
+        "median": 4.116371259161682e-16,
+        "p95": 8.014191073178335e-16,
+        "max": 1.2898506047054109e-15
+      },
+      "calibrated_error": {
+        "mean": 3.7518508445309135e-16,
+        "median": 3.4912406552579305e-16,
+        "p95": 6.818560874139341e-16,
+        "max": 1.052701329912913e-15
+      },
+      "calibrated_in_range_max_error": 1.052701329912913e-15,
+      "calibrated_never_worse": true
+    },
+    {
+      "delta": 0.005,
+      "pattern": "same",
+      "hardware": {
+        "split1": 0.505,
+        "split2": 0.505
+      },
+      "reachable_top_power": [
+        9.999999999998899e-05,
+        1.0
+      ],
+      "top_port_extinction_ratio_db": 40.00000000000048,
+      "predicted_reachable_fraction": 0.9999,
+      "observed_exact_fraction": 1.0,
+      "naive_error": {
+        "mean": 0.006396101597713409,
+        "median": 0.006779129739580834,
+        "p95": 0.009595148475628564,
+        "max": 0.009939122696590693
+      },
+      "calibrated_error": {
+        "mean": 3.8273513484744783e-16,
+        "median": 3.516999374363963e-16,
+        "p95": 7.079696955677757e-16,
+        "max": 9.282569994989802e-16
+      },
+      "calibrated_in_range_max_error": 9.282569994989802e-16,
+      "calibrated_never_worse": true
+    },
+    {
+      "delta": 0.005,
+      "pattern": "opposite",
+      "hardware": {
+        "split1": 0.505,
+        "split2": 0.495
+      },
+      "reachable_top_power": [
+        0.0,
+        0.9999
+      ],
+      "top_port_extinction_ratio_db": null,
+      "predicted_reachable_fraction": 0.9999,
+      "observed_exact_fraction": 1.0,
+      "naive_error": {
+        "mean": 0.006989476475578347,
+        "median": 0.007351503785691561,
+        "p95": 0.009728010408123919,
+        "max": 0.009983553726242675
+      },
+      "calibrated_error": {
+        "mean": 3.904275878927045e-16,
+        "median": 3.582109406872969e-16,
+        "p95": 7.177712714177133e-16,
+        "max": 9.58251075338698e-16
+      },
+      "calibrated_in_range_max_error": 9.58251075338698e-16,
+      "calibrated_never_worse": true
+    },
+    {
+      "delta": 0.01,
+      "pattern": "same",
+      "hardware": {
+        "split1": 0.51,
+        "split2": 0.51
+      },
+      "reachable_top_power": [
+        0.00039999999999995595,
+        1.0
+      ],
+      "top_port_extinction_ratio_db": 33.97940008672086,
+      "predicted_reachable_fraction": 0.9996,
+      "observed_exact_fraction": 1.0,
+      "naive_error": {
+        "mean": 0.012792413674890755,
+        "median": 0.013558534319667527,
+        "p95": 0.01919035404325874,
+        "max": 0.019878254444041645
+      },
+      "calibrated_error": {
+        "mean": 3.7294666245393623e-16,
+        "median": 3.47075433121241e-16,
+        "p95": 6.525893988141983e-16,
+        "max": 8.959506687427606e-16
+      },
+      "calibrated_in_range_max_error": 8.959506687427606e-16,
+      "calibrated_never_worse": true
+    },
+    {
+      "delta": 0.01,
+      "pattern": "opposite",
+      "hardware": {
+        "split1": 0.51,
+        "split2": 0.49
+      },
+      "reachable_top_power": [
+        0.0,
+        0.9996
+      ],
+      "top_port_extinction_ratio_db": null,
+      "predicted_reachable_fraction": 0.9996,
+      "observed_exact_fraction": 1.0,
+      "naive_error": {
+        "mean": 0.013979149088950536,
+        "median": 0.01470326101374465,
+        "p95": 0.019456059975850374,
+        "max": 0.01996710991402054
+      },
+      "calibrated_error": {
+        "mean": 3.9002467790377783e-16,
+        "median": 3.6480363139370646e-16,
+        "p95": 7.1307052528533185e-16,
+        "max": 1.032240641387578e-15
+      },
+      "calibrated_in_range_max_error": 1.032240641387578e-15,
+      "calibrated_never_worse": true
+    },
+    {
+      "delta": 0.02,
+      "pattern": "same",
+      "hardware": {
+        "split1": 0.52,
+        "split2": 0.52
+      },
+      "reachable_top_power": [
+        0.0015999999999999903,
+        1.0
+      ],
+      "top_port_extinction_ratio_db": 27.95880017344078,
+      "predicted_reachable_fraction": 0.9984,
+      "observed_exact_fraction": 1.0,
+      "naive_error": {
+        "mean": 0.025586512355229404,
+        "median": 0.02711926890261156,
+        "p95": 0.03838116516203154,
+        "max": 0.03975658134924457
+      },
+      "calibrated_error": {
+        "mean": 3.8618426596000656e-16,
+        "median": 3.547328660976635e-16,
+        "p95": 6.975857906200504e-16,
+        "max": 8.315108866802567e-16
+      },
+      "calibrated_in_range_max_error": 8.315108866802567e-16,
+      "calibrated_never_worse": true
+    },
+    {
+      "delta": 0.02,
+      "pattern": "opposite",
+      "hardware": {
+        "split1": 0.52,
+        "split2": 0.48
+      },
+      "reachable_top_power": [
+        0.0,
+        0.9984
+      ],
+      "top_port_extinction_ratio_db": null,
+      "predicted_reachable_fraction": 0.9984,
+      "observed_exact_fraction": 1.0,
+      "naive_error": {
+        "mean": 0.027959868378280354,
+        "median": 0.02940855100116535,
+        "p95": 0.03891243346214802,
+        "max": 0.03993423953509968
+      },
+      "calibrated_error": {
+        "mean": 3.8515198048049133e-16,
+        "median": 3.640767970871872e-16,
+        "p95": 7.039926771348438e-16,
+        "max": 9.565737769261086e-16
+      },
+      "calibrated_in_range_max_error": 9.565737769261086e-16,
+      "calibrated_never_worse": true
+    },
+    {
+      "delta": 0.05,
+      "pattern": "same",
+      "hardware": {
+        "split1": 0.55,
+        "split2": 0.55
+      },
+      "reachable_top_power": [
+        0.010000000000000064,
+        1.0
+      ],
+      "top_port_extinction_ratio_db": 19.99999999999997,
+      "predicted_reachable_fraction": 0.99,
+      "observed_exact_fraction": 1.0,
+      "naive_error": {
+        "mean": 0.0639959002798288,
+        "median": 0.06783685029373632,
+        "p95": 0.0959609499864408,
+        "max": 0.09939272756068993
+      },
+      "calibrated_error": {
+        "mean": 3.802402207013651e-16,
+        "median": 3.5720541422462623e-16,
+        "p95": 6.583077787943567e-16,
+        "max": 9.78359434134744e-16
+      },
+      "calibrated_in_range_max_error": 9.78359434134744e-16,
+      "calibrated_never_worse": true
+    },
+    {
+      "delta": 0.05,
+      "pattern": "opposite",
+      "hardware": {
+        "split1": 0.55,
+        "split2": 0.45
+      },
+      "reachable_top_power": [
+        0.0,
+        0.99
+      ],
+      "top_port_extinction_ratio_db": null,
+      "predicted_reachable_fraction": 0.99,
+      "observed_exact_fraction": 0.9933333333333333,
+      "naive_error": {
+        "mean": 0.06992727317172419,
+        "median": 0.0735570462087369,
+        "p95": 0.09728659641707044,
+        "max": 0.09983594537681709
+      },
+      "calibrated_error": {
+        "mean": 0.00028069071944215586,
+        "median": 3.459011118402945e-16,
+        "p95": 6.668127567970825e-16,
+        "max": 0.04279374555230634
+      },
+      "calibrated_in_range_max_error": 9.976575541032722e-16,
+      "calibrated_never_worse": true
+    }
+  ],
+  "B_arm_loss": [
+    {
+      "loss_top_db": 0.0,
+      "loss_bottom_db": 0.0,
+      "naive_error": {
+        "mean": 4.122436679548647e-16,
+        "median": 3.592140297260116e-16,
+        "p95": 7.501963693693496e-16,
+        "max": 1.2898506047054109e-15
+      },
+      "calibrated_error": {
+        "mean": 3.721502126081242e-16,
+        "median": 3.45173299430051e-16,
+        "p95": 6.558031159228172e-16,
+        "max": 1.01222266839565e-15
+      },
+      "mean_insertion_loss_db": -1.272912255850339e-15
+    },
+    {
+      "loss_top_db": 0.1,
+      "loss_bottom_db": 0.0,
+      "naive_error": {
+        "mean": 0.005756303779593364,
+        "median": 0.005756303779593363,
+        "p95": 0.005756303779593442,
+        "max": 0.005756303779593465
+      },
+      "calibrated_error": {
+        "mean": 0.005756303779593306,
+        "median": 0.0057563037795933004,
+        "p95": 0.005756303779593375,
+        "max": 0.005756303779593434
+      },
+      "mean_insertion_loss_db": 0.049712183221520316
+    },
+    {
+      "loss_top_db": 0.3,
+      "loss_bottom_db": 0.0,
+      "naive_error": {
+        "mean": 0.017265097845454845,
+        "median": 0.01726509784545485,
+        "p95": 0.017265097845454918,
+        "max": 0.017265097845454967
+      },
+      "calibrated_error": {
+        "mean": 0.01726509784545479,
+        "median": 0.017265097845454786,
+        "p95": 0.01726509784545488,
+        "max": 0.0172650978454549
+      },
+      "mean_insertion_loss_db": 0.14741010663462095
+    },
+    {
+      "loss_top_db": 1.0,
+      "loss_bottom_db": 0.0,
+      "naive_error": {
+        "mean": 0.057406302585223085,
+        "median": 0.05740630258522309,
+        "p95": 0.05740630258522317,
+        "max": 0.05740630258522321
+      },
+      "calibrated_error": {
+        "mean": 0.057406302585223064,
+        "median": 0.057406302585223064,
+        "p95": 0.05740630258522317,
+        "max": 0.0574063025852232
+      },
+      "mean_insertion_loss_db": 0.4712810462011386
+    },
+    {
+      "loss_top_db": 3.0,
+      "loss_bottom_db": 0.0,
+      "naive_error": {
+        "mean": 0.16855089010237642,
+        "median": 0.16855089010237637,
+        "p95": 0.16855089010237648,
+        "max": 0.1685508901023765
+      },
+      "calibrated_error": {
+        "mean": 0.16855089010237642,
+        "median": 0.1685508901023764,
+        "p95": 0.16855089010237648,
+        "max": 0.16855089010237653
+      },
+      "mean_insertion_loss_db": 1.2459513322749574
+    },
+    {
+      "loss_top_db": 1.0,
+      "loss_bottom_db": 1.0,
+      "naive_error": {
+        "mean": 4.1167982179992164e-16,
+        "median": 3.6509447148634437e-16,
+        "p95": 8.001348522748804e-16,
+        "max": 1.2732823045912383e-15
+      },
+      "calibrated_error": {
+        "mean": 3.5700679441220746e-16,
+        "median": 3.168423052444482e-16,
+        "p95": 6.304536917223595e-16,
+        "max": 8.669453043861065e-16
+      },
+      "mean_insertion_loss_db": 0.9999999999999989
+    }
+  ],
+  "C_phase_noise": [
+    {
+      "sigma_rad": 0.001,
+      "error": {
+        "mean": 0.0012920463554196482,
+        "median": 0.0012091853416286336,
+        "p95": 0.002389671863604011,
+        "max": 0.00460963043533722
+      },
+      "error_over_sigma": 1.2920463554196482,
+      "effective_bits_median": 9.69174888957478
+    },
+    {
+      "sigma_rad": 0.003,
+      "error": {
+        "mean": 0.003850336171764142,
+        "median": 0.003565761106277903,
+        "p95": 0.007184351511155584,
+        "max": 0.012807153933937535
+      },
+      "error_over_sigma": 1.2834453905880474,
+      "effective_bits_median": 8.131574234064047
+    },
+    {
+      "sigma_rad": 0.01,
+      "error": {
+        "mean": 0.012825545687057795,
+        "median": 0.012075343464668086,
+        "p95": 0.023445543926833037,
+        "max": 0.03811068525511605
+      },
+      "error_over_sigma": 1.2825545687057796,
+      "effective_bits_median": 6.371791964877136
+    },
+    {
+      "sigma_rad": 0.03,
+      "error": {
+        "mean": 0.03814759585784251,
+        "median": 0.03575253881903988,
+        "p95": 0.07043638434174704,
+        "max": 0.12176471450694794
+      },
+      "error_over_sigma": 1.2715865285947505,
+      "effective_bits_median": 4.805810497209901
+    },
+    {
+      "sigma_rad": 0.1,
+      "error": {
+        "mean": 0.1283444737797896,
+        "median": 0.12090136965812244,
+        "p95": 0.2344621692818688,
+        "max": 0.41209513292116345
+      },
+      "error_over_sigma": 1.283444737797896,
+      "effective_bits_median": 3.048097506315312
+    }
+  ],
+  "D_dac_resolution": [
+    {
+      "dac_bits": 4,
+      "step_rad": 0.39269908169872414,
+      "error": {
+        "mean": 0.14950416316196916,
+        "median": 0.1407628067654767,
+        "p95": 0.25564924181810644,
+        "max": 0.34208264803487065
+      },
+      "effective_bits_median": 2.828661908521312
+    },
+    {
+      "dac_bits": 6,
+      "step_rad": 0.09817477042468103,
+      "error": {
+        "mean": 0.03769376949196298,
+        "median": 0.03543643170774641,
+        "p95": 0.06384140703064724,
+        "max": 0.08427671521389332
+      },
+      "effective_bits_median": 4.818622851590549
+    },
+    {
+      "dac_bits": 8,
+      "step_rad": 0.02454369260617026,
+      "error": {
+        "mean": 0.00921897287798615,
+        "median": 0.009027301056333741,
+        "p95": 0.0144338903215795,
+        "max": 0.01953524461194236
+      },
+      "effective_bits_median": 6.79148956325204
+    },
+    {
+      "dac_bits": 10,
+      "step_rad": 0.006135923151542565,
+      "error": {
+        "mean": 0.0023728712335113968,
+        "median": 0.0022257319567447376,
+        "p95": 0.004180164199204477,
+        "max": 0.005211354040008844
+      },
+      "effective_bits_median": 8.811504424219166
+    },
+    {
+      "dac_bits": 12,
+      "step_rad": 0.0015339807878856412,
+      "error": {
+        "mean": 0.0006041168709808721,
+        "median": 0.000581470266069426,
+        "p95": 0.0010334441810418886,
+        "max": 0.0011956694101926517
+      },
+      "effective_bits_median": 10.748006959288535
+    }
+  ],
+  "E_combined": {
+    "assumptions": {
+      "coupler_split_sigma": 0.01,
+      "top_arm_loss_db": 0.2,
+      "phase_noise_sigma_rad": 0.005,
+      "dac_bits": 10,
+      "chips": 200,
+      "calibration": "hardware characterized exactly before programming"
+    },
+    "naive_error": {
+      "mean": 0.019170240593833168,
+      "median": 0.0182315994515784,
+      "p95": 0.029966622146330914,
+      "max": 0.0381022639151089
+    },
+    "calibrated_error": {
+      "mean": 0.013554323277652873,
+      "median": 0.013186864941162628,
+      "p95": 0.016235226748524272,
+      "max": 0.018611083219577575
+    },
+    "naive_effective_bits_median": 5.777415055735124,
+    "calibrated_effective_bits_median": 6.2447545722238145
+  },
+  "limitations": [
+    "Single 2x2 MZI; errors in meshes accumulate and can partly be corrected by other MZIs (OPA-MZI-003)",
+    "Calibration assumes the coupler splits and losses are known exactly; real calibration estimates them from measurements and has its own error",
+    "Single wavelength; coupler splitting and phase both depend on wavelength",
+    "No thermal crosstalk between phase shifters, no drift over time",
+    "Detection noise and the power-only readout of photodetectors are not modelled",
+    "Effective bits is a rough guide; it is not the same as quantized-weight precision in a trained network"
+  ]
+}

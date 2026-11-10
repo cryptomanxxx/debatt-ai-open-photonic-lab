@@ -101,3 +101,96 @@ def haar_unitary(n, rng):
     q, r = np.linalg.qr(z)
     d = np.diag(r)
     return q * (d / abs(d))
+
+
+# --- Non-ideal hardware (OPA-MZI-002) ---------------------------------------
+#
+# A hardware description is a dict with any of:
+#   split1, split2      power fraction that stays in its arm, first/second coupler
+#   loss_top_db         extra loss in the top internal arm (e.g. the phase shifter)
+#   loss_bottom_db      extra loss in the bottom internal arm
+
+IDEAL_HW = {"split1": 0.5, "split2": 0.5, "loss_top_db": 0.0, "loss_bottom_db": 0.0}
+
+
+def mzi_hw(theta, phi, hw=None):
+    """MZI with unequal couplers and internal-arm loss."""
+    hw = {**IDEAL_HW, **(hw or {})}
+    arm = np.diag([np.exp(1j * theta) * 10 ** (-hw["loss_top_db"] / 20),
+                   10 ** (-hw["loss_bottom_db"] / 20)])
+    return coupler(hw["split2"]) @ arm @ coupler(hw["split1"]) @ phase(phi)
+
+
+def programmed_matrix_hw(params, hw=None):
+    """Transfer matrix of a programmed MZI plus output phase screen on given hardware."""
+    theta, phi, a, b = params
+    return phase_screen(a, b) @ mzi_hw(theta, phi, hw)
+
+
+def shape_error(m, u):
+    """Relative Frobenius error after removing the best common real gain.
+
+    A common gain (uniform loss) only scales every output and is removed by
+    detector calibration, so it is reported separately as insertion loss.
+    """
+    norm = np.vdot(m, m).real
+    gain = np.vdot(m, u).real / norm if norm > 0 else 0.0
+    return float(np.linalg.norm(gain * m - u) / np.linalg.norm(u))
+
+
+def reachable_top_power_range(split1, split2):
+    """Range of |T00|^2 a lossless MZI with these couplers can reach over theta.
+
+    |T00|^2 = r1 r2 + (1-r1)(1-r2) - 2 sqrt(r1 r2 (1-r1)(1-r2)) cos(theta)
+    """
+    a = split1 * split2 + (1 - split1) * (1 - split2)
+    b = 2 * np.sqrt(split1 * split2 * (1 - split1) * (1 - split2))
+    return float(a - b), float(a + b)
+
+
+def _phases_for(m0, u):
+    """Output phases a, b and external phase phi that best map m0 = T(theta, 0) to u."""
+    z = (u[0, 0] * np.conj(u[0, 1]) * np.conj(m0[0, 0]) * m0[0, 1]
+         + u[1, 0] * np.conj(u[1, 1]) * np.conj(m0[1, 0]) * m0[1, 1])
+    phi = np.angle(z) if abs(z) > 0 else 0.0
+    if abs(m0[0, 1]) >= abs(m0[0, 0]):
+        a = np.angle(u[0, 1]) - np.angle(m0[0, 1])
+    else:
+        a = np.angle(u[0, 0]) - np.angle(m0[0, 0]) - phi
+    if abs(m0[1, 0]) >= abs(m0[1, 1]):
+        b = np.angle(u[1, 0]) - np.angle(m0[1, 0]) - phi
+    else:
+        b = np.angle(u[1, 1]) - np.angle(m0[1, 1])
+    return phi, a, b
+
+
+def program_unitary_hw(u, hw=None, grid=360):
+    """Hardware-aware programming: settings that best realize u on known hardware.
+
+    Searches theta on a grid with analytically fitted phases, then refines all
+    four settings with least squares on the shape error. On ideal hardware it
+    reproduces program_unitary to rounding error. Targets outside the
+    hardware's reachable set get the closest achievable matrix.
+    """
+    from scipy.optimize import least_squares
+
+    u = np.asarray(u, dtype=complex)
+    best = None
+    for theta in np.linspace(0, 2 * np.pi, grid, endpoint=False):
+        m0 = mzi_hw(theta, 0.0, hw)
+        phi, a, b = _phases_for(m0, u)
+        err = shape_error(programmed_matrix_hw((theta, phi, a, b), hw), u)
+        if best is None or err < best[0]:
+            best = (err, (theta, phi, a, b))
+
+    def residual(p):
+        m = programmed_matrix_hw(p, hw)
+        gain = np.vdot(m, u).real / np.vdot(m, m).real
+        d = (gain * m - u).ravel()
+        return np.concatenate([d.real, d.imag])
+
+    fit = least_squares(residual, np.array(best[1]), xtol=1e-15, ftol=1e-15,
+                        gtol=1e-15, method="lm")
+    params = fit.x if (shape_error(programmed_matrix_hw(fit.x, hw), u)
+                       <= best[0]) else np.array(best[1])
+    return tuple(float(np.mod(p, 2 * np.pi)) for p in params)

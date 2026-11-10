@@ -5,10 +5,10 @@
   "gdsfactory_version": "9.23.0",
   "python_version": "3.12.3",
   "gds_file": "mzi_2x2_siepic.gds",
-  "gds_sha256": "90ea32254f9332c54ed0386a46660cc2f6d7d93758b2ca4753b44de0e0eccc7a",
+  "gds_sha256": "9554b95790cdc2a185d1abe16032c93c22a6093241c3cd11052f855d1e14e008",
   "footprint_um": [
-    267.969,
-    422.5
+    277.969,
+    432.5
   ],
   "fiber_ports_um": [
     [
@@ -137,10 +137,58 @@
       0
     ],
     [
+      99,
+      0
+    ],
+    [
       998,
       0
     ]
   ],
+  "drc": {
+    "klayout": "KLayout 0.28.16",
+    "deck": "siepic_ebeam_pdk/drc/SiEPIC_EBeam_DRC.lydrc",
+    "deck_sha256": "341bdbd7c2aa3d67643e1f549a1c6162fdf153ed4831fe2437078b653ccab38b",
+    "pdk_wheel": "siepic_ebeam_pdk-0.4.53-py3-none-any.whl",
+    "rules": [
+      "Boundary",
+      "DT_Metal_separation",
+      "M1_space",
+      "M1_width",
+      "M2_M1_overlap",
+      "M2_space",
+      "M2_width",
+      "MLOpen_space",
+      "MLOpen_width",
+      "SiN_space",
+      "SiN_width",
+      "Si_space",
+      "Si_width"
+    ],
+    "violations": {},
+    "total_violations": 0
+  },
+  "drc_additions": {
+    "floorplan_um": [
+      277.969,
+      432.5
+    ],
+    "m2_extensions": [
+      [
+        16.35,
+        -283.2,
+        32.35,
+        -257.2
+      ],
+      [
+        16.35,
+        -53.4,
+        32.35,
+        -27.4
+      ]
+    ],
+    "why": "floorplan: the deck requires all Si inside FLOORPLAN; M2 extensions: the PDK route leaves each heater contact at an angle at the M1 edge, which fails the 3 um M2-over-M1 overlap rule"
+  },
   "checks": {
     "four_fiber_ports": {
       "passed": true,
@@ -164,16 +212,20 @@
     },
     "only_pdk_layers": {
       "passed": true,
-      "detail": "layers used [(1, 0), (1, 10), (10, 0), (11, 0), (12, 0), (13, 0), (68, 0), (81, 0), (998, 0)]; outside the PDK layer map but inside the PDK's own fixed cells: [(81, 0), (998, 0)]; unexplained: []"
+      "detail": "layers used [(1, 0), (1, 10), (10, 0), (11, 0), (12, 0), (13, 0), (68, 0), (81, 0), (99, 0), (998, 0)]; outside the PDK layer map but inside the PDK's own fixed cells: [(81, 0), (998, 0)]; unexplained: []"
     },
     "gds_reproducible": {
       "passed": true,
       "detail": "a fresh Python process regenerates a byte-identical GDS file"
+    },
+    "siepic_ebeam_drc_clean": {
+      "passed": true,
+      "detail": "0 violations of 13 rules (KLayout 0.28.16, siepic_ebeam_pdk-0.4.53-py3-none-any.whl): {}"
     }
   },
   "failures": [],
   "limitations": [
-    "The full SiEPIC EBeam DRC has not been run (ubcpdk ships only heater and doping decks, which need the KLayout application)",
+    "DRC covers the SiEPIC EBeam deck's geometric rules only; SiEPIC's functional verification (waveguide connectivity, pins, component models) has not been run",
     "The broadband coupler's split has not been verified; ubcpdk has no compact model for it",
     "Only one arm has a heater, so only theta is tunable; there are no phi, a or b phase shifters as in OPA-LAYOUT-001",
     "The grating-coupler model in ubcpdk is a generic placeholder (6 dB, 35 nm), not measured data",

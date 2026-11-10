@@ -92,7 +92,7 @@
       "id": "OPA-LAYOUT-002",
       "title": "2x2 MZI with broadband couplers, fiber array and pads (SiEPIC EBeam)",
       "function": "tunable 2x2 MZI switch / splitter (theta only)",
-      "status": "exploratory",
+      "status": "drc-clean",
       "pdk": {
         "name": "SiEPIC EBeam (ubcpdk)",
         "version": "3.3.0",
@@ -103,8 +103,8 @@
         "design": 1.55
       },
       "footprint_um": [
-        267.969,
-        422.5
+        277.969,
+        432.5
       ],
       "optical_ports": {
         "inputs": 2,
@@ -125,8 +125,8 @@
         "environment": "layout/requirements-lock-ubc.txt"
       },
       "checks": {
-        "passed": 7,
-        "total": 7
+        "passed": 8,
+        "total": 8
       },
       "key_results": [
         {
@@ -148,10 +148,15 @@
           "name": "Grating coupler",
           "value": "PDK placeholder model: 6 dB, 35 nm bandwidth (not measured)",
           "source": "ubcpdk.models.gc_te1550"
+        },
+        {
+          "name": "SiEPIC EBeam DRC",
+          "value": "0 violations of 13 rules (KLayout 0.28.16)",
+          "source": "tools/siepic_drc.py"
         }
       ],
       "limitations": [
-        "full EBeam DRC not run",
+        "SiEPIC functional verification not run",
         "broadband coupler not verified",
         "theta only (no phi, a, b)",
         "not submitted"

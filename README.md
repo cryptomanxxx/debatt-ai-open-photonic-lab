@@ -439,8 +439,11 @@ a 4 µm gap needs 395 mm² at ±5 V and 201 mm² at ±10 V. Both fit inside one
 **4. Ring resonance** (racetrack, self-coupling r = 0.9) makes a θ shifter,
 which only needs a π range, **8× shorter** than a straight shifter with the
 same range (225 µm instead of 1.86 mm). The costs:
-- up to 0.32 dB insertion loss per ring (0.16 dB ripple), which adds about
-  20 dB across the 64 columns of a mesh;
+- up to 0.33 dB insertion loss per ring, including the gold on its
+  electrodes (0.17 dB ripple), which adds about 21 dB across the 64
+  columns of a mesh;
+- a 100 µm wide ring does not fit the 14 µm waveguide pitch, so the rings
+  in a column must be staggered four deep;
 - an optical bandwidth of only about 0.001 nm for a phase error below 0.05 rad,
   so the laser and the temperature must be held very still;
 - almost no gain (1.1–1.8×) for the 2π range that the φ and output phases need.
@@ -459,7 +462,7 @@ shifters, which need 2π.
 | EO-001: 5 µm gap, one arm | 936 mm | 28 dB | 1079 mm² | no |
 | Push-pull | 471 mm | 14 dB | 543 mm² | if folded |
 | Push-pull, 4 µm, folded | 368 mm | 12 dB | 395 mm² | **yes** |
-| … + ring-assisted θ | 263 mm | 29 dB | 283 mm² | yes |
+| … + ring-assisted θ (rings staggered 4 deep) | 306 mm | 31 dB | 329 mm² | yes |
 | BTO, r_eff 300 pm/V, push-pull, folded | 45 mm | 1.4 dB | 52 mm² | yes |
 
 Programming the whole mesh takes 10–40 nJ in every configuration.
@@ -468,7 +471,7 @@ Programming the whole mesh takes 10–40 nJ in every configuration.
 After that, the limit is no longer length but **optical loss**: 37 cm of
 waveguide at 0.3 dB/cm costs 12 dB. With the best published TFLN loss
 (0.027 dB/cm), the same mesh would lose about 1.8 dB. **Rings do not pay off
-at mesh level.** They shorten the mesh by 30 %, but their insertion loss more
+at mesh level.** They shorten the mesh by 17 %, but their insertion loss more
 than doubles the total loss, and they need a stable wavelength. A material
 with a larger Pockels effect (BTO) solves length, loss and area at once, if
 its r_eff holds up in a real device.

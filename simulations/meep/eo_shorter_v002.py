@@ -198,13 +198,15 @@ def ring_theta_voltages(r, a, window, theta, vmax):
     return d / (window / 2) * vmax
 
 
-def ring_shifter(r, target, a_eo, vmax, ng):
+def ring_shifter(r, target, a_eo, vmax, ng, metal_loss):
     """Electrode length on a racetrack (both straights) that reaches `target`
-    phase range with +-vmax, iterating on the round-trip loss."""
+    phase range with +-vmax, iterating on the round-trip loss (waveguide loss
+    over the whole round trip, gold absorption over the electroded straights)."""
     ls = 1000.0                                   # um, start
     for _ in range(30):
         l_rt = 2 * ls + 2 * math.pi * BEND_R
-        a = 10 ** (-ALPHA_WG * l_rt * 1e-4 / 20)  # field round-trip transmission
+        loss_rt = ALPHA_WG * l_rt * 1e-4 + metal_loss * 2 * ls * 1e-4      # dB
+        a = 10 ** (-loss_rt / 20)                 # field round-trip transmission
         res = ring_window(r, a, target)
         if res is None:
             return None
@@ -312,7 +314,7 @@ a_c = chosen["dneff_per_V"]
 ring = {}
 for r in RING_R:
     for name, target in (("pi", math.pi), ("2pi_minus_0.1", 2 * math.pi - 0.1)):
-        res = ring_shifter(r, target, a_c, 5.0, mode.ng)
+        res = ring_shifter(r, target, a_c, 5.0, mode.ng, chosen["metal_loss_dB_per_cm"])
         if res:
             # straight push-pull shifter with the same range and drive: +-V gives +-pi
             # over L_pi = lambda / (2 a V), push-pull halves it
@@ -374,17 +376,29 @@ def mesh_config(name, gap_row, push_pull, vmax, folded, ring_case=None, film_cap
         electrode = 2 * rc["electrode_length_per_straight_um"]   # both straights, one ring
         energy += np.sum(cap * electrode * 1e-6 * v_theta ** 2)
         ring_loss = rc["insertion_loss_max_dB"]
-        footprint_theta = rc["footprint_um"][0]
+        # rings are wider than two waveguide pitches: stagger them along the
+        # column so that neighbouring rings do not overlap
+        pair_pitch = 2 * (gap_row["gap_um"] + ec.ELECTRODE_W)
+        stagger = math.ceil(rc["footprint_um"][1] / pair_pitch)
+        footprint_theta = stagger * rc["footprint_um"][0]
     energy /= SAMPLES
     path_um = N_MESH * (footprint_theta + straight + COUPLER_OVERHEAD) + straight
     alpha = ALPHA_WG + gap_row["metal_loss_dB_per_cm"]
-    loss_db = path_um * 1e-4 * alpha + N_MESH * ring_loss
+    if ring_case is None:
+        loss_db = path_um * 1e-4 * alpha
+    else:
+        # the bus past a ring has no electrodes: waveguide loss only there; the
+        # ring's own loss (electrodes included) is in its insertion loss
+        theta_um = N_MESH * footprint_theta
+        loss_db = (path_um - theta_um) * 1e-4 * alpha + theta_um * 1e-4 * ALPHA_WG \
+            + N_MESH * ring_loss
     pitch = gap_row["gap_um"] + ec.ELECTRODE_W
     area = N_MESH * pitch * path_um * 1e-6 * AREA_OVERHEAD                 # mm^2
     return {"config": name, "gap_um": gap_row["gap_um"], "push_pull": push_pull, "vmax_V": vmax,
             "folded": folded, "phi_shifter_length_mm": straight / 1e3,
             "theta_shifter_length_mm": footprint_theta / 1e3, "path_length_mm": path_um / 1e3,
             "path_loss_dB": float(loss_db), "ring_insertion_loss_per_column_dB": ring_loss,
+            "ring_stagger": stagger if ring_case is not None else None,
             "area_mm2": area, "fits_one_reticle": bool(folded and area <= RETICLE_MM2),
             "program_energy_nJ": float(energy) * 1e9}
 
@@ -414,9 +428,11 @@ result["mesh"] = {"N": N_MESH, "phase_shifters": n_shifters,
                             "output phases",
                             "theta in [0, pi]: straight theta shifters cover pi around a fixed "
                             "pi/2 offset and are half as long as phi shifters",
-                            "ring: worst-case insertion loss counted once per column; theta "
-                            "voltages from the inverted ring phase response; energy from the "
-                            "ring's own electrodes",
+                            "ring: worst-case insertion loss (waveguide and electrode loss in "
+                            "the round trip) counted once per column; theta voltages from the "
+                            "inverted ring phase response; energy from the ring's own "
+                            "electrodes; rings staggered along the column so they fit the "
+                            "waveguide pitch",
                             "single-arm shifters need an equal dummy arm, so the area uses the "
                             "same pitch"],
                   "configs": configs}

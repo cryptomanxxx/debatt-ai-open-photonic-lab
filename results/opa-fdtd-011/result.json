@@ -1,0 +1,195 @@
+{
+  "experiment": "OPA-FDTD-011",
+  "goal": "Guided-mode (TE-like band 1) transmission of 3D 90-degree bends",
+  "meep_version": "1.35.1",
+  "parameters": {
+    "cell_meep_units": [
+      10.0,
+      10.0,
+      4.0
+    ],
+    "pml": 1.0,
+    "resolutions": [
+      12,
+      16
+    ],
+    "radii": [
+      1.0,
+      2.0
+    ],
+    "core_index": 1.8,
+    "cladding_index": 1.0,
+    "width": 0.8,
+    "thickness": 0.4,
+    "frequency": 0.8,
+    "vacuum_wavelength": 1.25,
+    "parity": "EVEN_Z (TE-like)",
+    "z_mirror_symmetry": true,
+    "dft_decay_tolerance": 1e-06
+  },
+  "summary": {
+    "12": {
+      "straight": {
+        "guided_transmission": 0.9995782223466918,
+        "guided_transmission_dB": -0.0018321434799739883,
+        "total_field_backward_ratio": 0.000766473812923632,
+        "output_aperture_flux_ratio": 0.9998846692268516
+      },
+      "1.0": {
+        "guided_transmission": 0.3325243337723861,
+        "guided_transmission_dB": -4.781765679958135,
+        "total_field_backward_ratio": 0.0008983553767901598,
+        "output_aperture_flux_ratio": 0.4906665849841566,
+        "guided_reflection": 8.57572856857633e-06,
+        "radiated_or_other_modes": 0.6674670904990453
+      },
+      "2.0": {
+        "guided_transmission": 0.7619585286481259,
+        "guided_transmission_dB": -1.1806866549689061,
+        "total_field_backward_ratio": 0.0008005015629907704,
+        "output_aperture_flux_ratio": 0.8335324353991075,
+        "guided_reflection": 1.2738944987280613e-05,
+        "radiated_or_other_modes": 0.23802873240688688
+      }
+    },
+    "16": {
+      "straight": {
+        "guided_transmission": 0.9998404626046674,
+        "guided_transmission_dB": -0.0006929173790883286,
+        "total_field_backward_ratio": 0.0002117066463074118,
+        "output_aperture_flux_ratio": 1.0000589499459385
+      },
+      "1.0": {
+        "guided_transmission": 0.31494669951320575,
+        "guided_transmission_dB": -5.017629384832239,
+        "total_field_backward_ratio": 0.0002283536835624802,
+        "output_aperture_flux_ratio": 0.4720751008006777,
+        "guided_reflection": 6.38274258281246e-06,
+        "radiated_or_other_modes": 0.6850469177442114
+      },
+      "2.0": {
+        "guided_transmission": 0.7433172931376613,
+        "guided_transmission_dB": -1.2882576329970448,
+        "total_field_backward_ratio": 0.00012588685869037626,
+        "output_aperture_flux_ratio": 0.8192101461413924,
+        "guided_reflection": 1.937703584284852e-05,
+        "radiated_or_other_modes": 0.25666332982649587
+      }
+    }
+  },
+  "resolution_transmission_changes": {
+    "1.0": 0.017577634259180352,
+    "2.0": 0.018641235510464593
+  },
+  "resolution_target_absolute_change": 0.02,
+  "resolution_within_target": true,
+  "failures": [],
+  "measurements": {
+    "12": {
+      "straight": {
+        "radius_meep_units": null,
+        "resolution": 12,
+        "input_forward_modal_power": 16.336191155717252,
+        "input_backward_total_field_modal_power": 0.012521262723771916,
+        "reflected_modal_power_reference_subtracted": null,
+        "output_forward_modal_power": 16.3293009153476,
+        "output_backward_modal_power": 0.012151263756699747,
+        "output_aperture_flux": 16.334307090160962,
+        "input_n_eff": 1.3589226396244851,
+        "output_n_eff": 1.3589226396244887,
+        "simulated_meep_time": 59.45833333333333,
+        "wall_seconds": 13.710042891000057,
+        "process_peak_rss_bytes": 185729024
+      },
+      "bends": {
+        "1.0": {
+          "radius_meep_units": 1.0,
+          "resolution": 12,
+          "input_forward_modal_power": 16.33836453673958,
+          "input_backward_total_field_modal_power": 0.014675705161010449,
+          "reflected_modal_power_reference_subtracted": 0.00014009474119580843,
+          "output_forward_modal_power": 5.432181080433225,
+          "output_backward_modal_power": 0.004204648075986251,
+          "output_aperture_flux": 8.015623126024167,
+          "input_n_eff": 1.35900556208943,
+          "output_n_eff": 1.3590053047010788,
+          "simulated_meep_time": 56.875,
+          "wall_seconds": 22.66294596900002,
+          "process_peak_rss_bytes": 188874752
+        },
+        "2.0": {
+          "radius_meep_units": 2.0,
+          "resolution": 12,
+          "input_forward_modal_power": 16.336662549906553,
+          "input_backward_total_field_modal_power": 0.01307714655346766,
+          "reflected_modal_power_reference_subtracted": 0.00020810584043438218,
+          "output_forward_modal_power": 12.447500176724844,
+          "output_backward_modal_power": 0.009197800346907103,
+          "output_aperture_flux": 13.616745199170362,
+          "input_n_eff": 1.359005549885755,
+          "output_n_eff": 1.3590053047010768,
+          "simulated_meep_time": 50.416666666666664,
+          "wall_seconds": 20.329052273000002,
+          "process_peak_rss_bytes": 188874752
+        }
+      }
+    },
+    "16": {
+      "straight": {
+        "radius_meep_units": null,
+        "resolution": 16,
+        "input_forward_modal_power": 16.18427766143784,
+        "input_backward_total_field_modal_power": 0.0034263191466109666,
+        "reflected_modal_power_reference_subtracted": null,
+        "output_forward_modal_power": 16.181695663934395,
+        "output_backward_modal_power": 0.0033635631701163697,
+        "output_aperture_flux": 16.185231723731036,
+        "input_n_eff": 1.3685892190991948,
+        "output_n_eff": 1.3685892190991948,
+        "simulated_meep_time": 55.125,
+        "wall_seconds": 35.307011450000005,
+        "process_peak_rss_bytes": 256516096
+      },
+      "bends": {
+        "1.0": {
+          "radius_meep_units": 1.0,
+          "resolution": 16,
+          "input_forward_modal_power": 16.184371791073616,
+          "input_backward_total_field_modal_power": 0.0036957394197872934,
+          "reflected_modal_power_reference_subtracted": 0.00010330007820171976,
+          "output_forward_modal_power": 5.0971848334751515,
+          "output_backward_modal_power": 0.0011124156665514228,
+          "output_aperture_flux": 7.640194508409425,
+          "input_n_eff": 1.3685892181171473,
+          "output_n_eff": 1.3685893776838076,
+          "simulated_meep_time": 53.84375,
+          "wall_seconds": 54.67846052599987,
+          "process_peak_rss_bytes": 263393280
+        },
+        "2.0": {
+          "radius_meep_units": 2.0,
+          "resolution": 16,
+          "input_forward_modal_power": 16.182640304395544,
+          "input_backward_total_field_modal_power": 0.0020373878749712386,
+          "reflected_modal_power_reference_subtracted": 0.0003136033283362936,
+          "output_forward_modal_power": 12.030053462688294,
+          "output_backward_modal_power": 0.002453174358942169,
+          "output_aperture_flux": 13.258324468219365,
+          "input_n_eff": 1.36858921043668,
+          "output_n_eff": 1.3685893776838043,
+          "simulated_meep_time": 51.28125,
+          "wall_seconds": 54.354527104,
+          "process_peak_rss_bytes": 263393280
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Generic index-1.8 core in air in Meep units; not a calibrated foundry platform",
+    "Single frequency; no spectral response",
+    "Two resolutions do not prove spatial convergence",
+    "Straight-reference total_field_backward_ratio is the leakage floor of the discretized mode decomposition, not a physical reflection",
+    "Only the fundamental TE-like mode is decomposed; TM-like and higher-order mode content is lumped into radiated_or_other_modes",
+    "No PML-thickness or port-size sensitivity study"
+  ]
+}

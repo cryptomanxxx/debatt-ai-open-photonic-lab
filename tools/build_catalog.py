@@ -29,6 +29,20 @@ REQUIRED = {
 }
 
 
+def _text(v):
+    return isinstance(v, str) and v.strip() != ""
+
+
+def _number(v):
+    return isinstance(v, (int, float)) and not isinstance(v, bool)
+
+
+def cell(value):
+    """Datasheet text made safe for one Markdown table cell or list line."""
+    text = " ".join(str(value).split())
+    return text.replace("\\", "\\\\").replace("|", "\\|")
+
+
 def validate(path, sheet):
     errors = []
     for key, kind in REQUIRED.items():
@@ -40,9 +54,35 @@ def validate(path, sheet):
         return errors
     if sheet["status"] not in STATUSES:
         errors.append(f"{path}: status must be one of {STATUSES}")
-    for key in ("name", "open_source"):
-        if key not in sheet["pdk"]:
-            errors.append(f"{path}: pdk.{key} is required")
+    if not _text(sheet["pdk"].get("name")):
+        errors.append(f"{path}: pdk.name must be a non-empty string")
+    if not isinstance(sheet["pdk"].get("open_source"), bool):
+        errors.append(f"{path}: pdk.open_source must be true or false")
+    if not _number(sheet["wavelength_um"].get("design")):
+        errors.append(f"{path}: wavelength_um.design must be a number")
+    band = sheet["wavelength_um"].get("band")
+    if band is not None and not (isinstance(band, list) and len(band) == 2
+                                 and all(_number(b) for b in band)):
+        errors.append(f"{path}: wavelength_um.band must be [min, max]")
+    fp = sheet["footprint_um"]
+    if len(fp) != 2 or not all(_number(v) for v in fp):
+        errors.append(f"{path}: footprint_um must be two numbers [x, y]")
+    for key in ("inputs", "outputs"):
+        v = sheet["optical_ports"].get(key)
+        if not isinstance(v, int) or isinstance(v, bool) or v < 0:
+            errors.append(f"{path}: optical_ports.{key} must be a non-negative integer")
+    for key, v in sheet["controls"].items():
+        if not isinstance(v, int) or isinstance(v, bool) or v < 0:
+            errors.append(f"{path}: controls.{key} must be a non-negative integer")
+    for key in ("script", "environment"):
+        if not _text(sheet["generator"].get(key)):
+            errors.append(f"{path}: generator.{key} must be a non-empty string")
+    for key in ("id", "title", "function"):
+        if not _text(sheet[key]):
+            errors.append(f"{path}: '{key}' must be a non-empty string")
+    for key in ("limitations", "tags"):
+        if not all(_text(v) for v in sheet[key]):
+            errors.append(f"{path}: every item in '{key}' must be a non-empty string")
     for key in ("gds", "preview"):
         rel = sheet["files"].get(key)
         if not rel:
@@ -50,10 +90,11 @@ def validate(path, sheet):
         elif not (path.parent / rel).is_file():
             errors.append(f"{path}: files.{key} '{rel}' does not exist")
     for key in ("passed", "total"):
-        if not isinstance(sheet["checks"].get(key), int):
+        v = sheet["checks"].get(key)
+        if not isinstance(v, int) or isinstance(v, bool):
             errors.append(f"{path}: checks.{key} must be an integer")
     for i, item in enumerate(sheet["key_results"]):
-        if not all(k in item for k in ("name", "value", "source")):
+        if not isinstance(item, dict) or not all(k in item for k in ("name", "value", "source")):
             errors.append(f"{path}: key_results[{i}] needs name, value and source")
     return errors
 
@@ -100,25 +141,25 @@ def render_markdown(sheets):
     for s in sheets:
         folder = s["_folder"]
         preview = f"[<img src=\"../{folder}/{s['files']['preview']}\" width=\"220\">](../{folder}/{s['files']['preview']})"
-        name = f"**[{s['id']}](../{folder}/)**<br>{s['title']}"
-        pdk = s["pdk"]["name"] + ("" if s["pdk"]["open_source"] else " (closed)")
-        ports = f"{s['optical_ports'].get('inputs', '?')} in / {s['optical_ports'].get('outputs', '?')} out"
-        controls = ", ".join(f"{v} {k}" for k, v in s["controls"].items()) or "–"
+        name = f"**[{cell(s['id'])}](../{folder}/)**<br>{cell(s['title'])}"
+        pdk = cell(s["pdk"]["name"]) + ("" if s["pdk"]["open_source"] else " (closed)")
+        ports = f"{s['optical_ports']['inputs']} in / {s['optical_ports']['outputs']} out"
+        controls = ", ".join(f"{v} {cell(k)}" for k, v in s["controls"].items()) or "–"
         size = " × ".join(f"{v:g}" for v in s["footprint_um"])
         checks = f"{s['checks']['passed']}/{s['checks']['total']}"
-        lines.append(f"| {preview} | {name} | {s['function']} | {pdk} | "
+        lines.append(f"| {preview} | {name} | {cell(s['function'])} | {pdk} | "
                      f"{fmt_wavelength(s['wavelength_um'])} | {size} | {ports} | {controls} | "
-                     f"{s['status']} | {checks} |")
+                     f"{cell(s['status'])} | {checks} |")
     lines += ["", "## Key results", ""]
     for s in sheets:
-        lines.append(f"### {s['id']}: {s['title']}")
+        lines.append(f"### {cell(s['id'])}: {cell(s['title'])}")
         lines.append("")
-        lines.append("Tags: " + ", ".join(f"`{t}`" for t in s["tags"]))
+        lines.append("Tags: " + ", ".join(f"`{cell(t)}`" for t in s["tags"]))
         lines.append("")
         for r in s["key_results"]:
-            lines.append(f"- **{r['name']}:** {r['value']} ({r['source']})")
+            lines.append(f"- **{cell(r['name'])}:** {cell(r['value'])} ({cell(r['source'])})")
         lines.append("")
-        lines.append("Limitations: " + "; ".join(s["limitations"]))
+        lines.append("Limitations: " + "; ".join(cell(x) for x in s["limitations"]))
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 

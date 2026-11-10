@@ -6,15 +6,17 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/catalog.yml"
-      - "results/*/design.json"
+      - "results/**"
       - "catalog/**"
       - "tools/build_catalog.py"
+      - "tools/test_build_catalog.py"
   pull_request:
     paths:
       - ".github/workflows/catalog.yml"
-      - "results/*/design.json"
+      - "results/**"
       - "catalog/**"
       - "tools/build_catalog.py"
+      - "tools/test_build_catalog.py"
 
 permissions:
   contents: read
@@ -28,5 +30,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+      - name: Catalog builder tests
+        run: python tools/test_build_catalog.py
       - name: Datasheets are valid and the catalog is up to date
         run: python tools/build_catalog.py --check

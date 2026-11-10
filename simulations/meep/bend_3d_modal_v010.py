@@ -85,47 +85,59 @@ def run_case(radius):
     sim.run(until=RUN_UNTIL)
     incident = float(mp.get_fluxes(incident_monitor)[0])
     outgoing = float(mp.get_fluxes(output_monitor)[0])
+    bands = [1, 2, 3, 4]
     input_coefficients = sim.get_eigenmode_coefficients(
-        incident_monitor, [1], eig_parity=mp.NO_PARITY
-    ).alpha[0, 0]
+        incident_monitor, bands, eig_parity=mp.NO_PARITY
+    ).alpha[:, 0, :]
     output_coefficients = sim.get_eigenmode_coefficients(
-        output_monitor, [1], eig_parity=mp.NO_PARITY
-    ).alpha[0, 0]
-    input_forward_guided = float(abs(input_coefficients[0]) ** 2)
-    input_backward_guided = float(abs(input_coefficients[1]) ** 2)
-    output_forward_guided = float(abs(output_coefficients[0]) ** 2)
-    output_backward_guided = float(abs(output_coefficients[1]) ** 2)
+        output_monitor, bands, eig_parity=mp.NO_PARITY
+    ).alpha[:, 0, :]
+    band_powers = {
+        str(band): {
+            "input_forward": float(abs(input_coefficients[i, 0]) ** 2),
+            "input_backward_raw": float(abs(input_coefficients[i, 1]) ** 2),
+            "output_forward": float(abs(output_coefficients[i, 0]) ** 2),
+            "output_backward": float(abs(output_coefficients[i, 1]) ** 2),
+        }
+        for i, band in enumerate(bands)
+    }
     elapsed = time.perf_counter() - start
     rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024
     sim.reset_meep()
-    if not all(map(math.isfinite, (incident, outgoing, input_forward_guided,
-                                 output_forward_guided, input_backward_guided,
-                                 output_backward_guided))):
-        raise ValueError("Non-finite flux")
+    all_powers = [value for band in band_powers.values() for value in band.values()]
+    if not all(map(math.isfinite, [incident, outgoing, *all_powers])):
+        raise ValueError("Non-finite flux or modal coefficient")
     return {
         "radius_meep_units": radius,
         "input_aperture_flux": incident,
         "output_aperture_flux": outgoing,
-        "input_forward_band1_power": input_forward_guided,
-        "input_backward_band1_power": input_backward_guided,
-        "output_forward_band1_power": output_forward_guided,
-        "output_backward_band1_power": output_backward_guided,
+        "band_powers": band_powers,
         "elapsed_wall_seconds": elapsed,
         "process_peak_rss_bytes": rss,
     }
 
 
 reference = run_case(None)
-if reference["input_aperture_flux"] <= 0 or reference["input_forward_band1_power"] <= 0:
-    raise SystemExit("Straight reference had non-positive incident modal or aperture power")
+if reference["input_aperture_flux"] <= 0:
+    raise SystemExit("Straight reference had non-positive aperture flux")
+
+# A physically meaningful normalization requires a populated incident mode.
+# A tiny band-1 coefficient must NOT be used as a denominator.
+reference_bands = reference["band_powers"]
+candidate = max(reference_bands, key=lambda b: reference_bands[b]["input_forward"])
+candidate_power = reference_bands[candidate]["input_forward"]
+incident_modal_fraction = candidate_power / reference["input_aperture_flux"]
+minimum_fraction = 0.01
+normalization_valid = incident_modal_fraction >= minimum_fraction
 cases = {}
 for radius in RADIUS_SET:
     case = run_case(radius)
     case["output_flux_over_straight_input"] = (
         case["output_aperture_flux"] / reference["input_aperture_flux"]
     )
-    case["output_forward_band1_over_straight_input_band1"] = (
-        case["output_forward_band1_power"] / reference["input_forward_band1_power"]
+    case["output_selected_band_over_straight_selected_band"] = (
+        case["band_powers"][candidate]["output_forward"] / candidate_power
+        if normalization_valid else None
     )
     cases[str(radius)] = case
 
@@ -140,14 +152,21 @@ report = {
     "run_until_meep_units": RUN_UNTIL,
     "meep_version": str(getattr(mp, "__version__", "unknown")),
     "straight_reference": reference,
+    "most_excited_reference_band": int(candidate),
+    "most_excited_band_input_fraction_of_aperture": incident_modal_fraction,
+    "minimum_acceptable_reference_modal_fraction": minimum_fraction,
+    "modal_normalization_valid": normalization_valid,
     "bend_cases": cases,
     "limitations": [
-        "Finite-size source launches an unknown mix of modes, even though band-1 modal coefficients are measured",
-        "Aperture flux includes radiation and possibly other modes; band 1 requires independent guided-mode classification",
+        "Finite-size source excites an unknown mix of modes; bands 1-4 are diagnostic candidates only",
+        "Aperture flux includes radiation; selected band is not independently classified as guided",
         "Reference input flux does not correct source back-action in bends",
-        "Previous temporal/spatial tests covered aperture flux only, not band-1 modal power convergence",
+        "Previous temporal/spatial tests covered aperture flux only, not modal power convergence",
         "Output ratio is not a physical bend-loss or energy-efficiency measurement",
     ],
 }
 (OUT / "result.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
 print(json.dumps(report, indent=2))
+
+if not normalization_valid:
+    print("WARNING: no sufficiently populated incident band among 1-4; modal transmission ratios intentionally omitted")

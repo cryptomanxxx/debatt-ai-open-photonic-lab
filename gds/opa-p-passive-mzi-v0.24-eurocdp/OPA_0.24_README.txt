@@ -1,0 +1,36 @@
+Debatt-AI Open Photonic Accelerator (OPA) 0.24
+Experimental photonic integrated circuit (PIC) design package
+Prepared: 2026-11-09
+
+Included files:
+- opa_p_four_facet_ports_exploratory.gds
+- opa_p_four_facet_ports_manifest.json
+
+Design concept:
+Passive 2x2 Mach-Zehnder interferometer (MZI) based on the Luxtelligence
+lnoi400 photonic process design kit (PDK), with two nominal optical inputs,
+two nominal optical outputs, inverse tapers and waveguide fanout to opposite
+edges of an assumed 10 mm x 5 mm die. A nominal 127 um fiber pitch is used.
+
+Internal checks performed:
+- GDSII export and KLayout readability
+- Four labeled nominal optical facet ports
+- Port coordinates at the two nominal die-edge x positions
+- Two distinct external optical rail regions at eight transverse sections
+
+IMPORTANT FABRICATION STATUS:
+THIS IS NOT A FOUNDRY-APPROVED OR TAPE-OUT-READY DESIGN.
+The GDSII is an actual lithographic layout artifact but has NOT passed the
+fabrication provider's official design rule check (DRC). The fiber pitch,
+coupler positions, chip-edge processing, packaging, optical losses,
+transmission matrix and electrical/system integration are not validated.
+The GDSII must not be submitted to production without provider review.
+
+Purpose of sharing with EuroCDP:
+Evidence of practical independent photonic chip-design activity and a
+specific starting point for requesting technical assessment, access to
+design resources and prototyping advice. No manufacturing order is placed.
+
+Project: https://www.debatt-ai.se/
+Research lab: https://github.com/cryptomanxxx/debatt-ai-qant-research-lab
+Photonic Lab: https://debatt-ai-open-photonic-lab.mr-marcus-sweden.chatgpt.site/

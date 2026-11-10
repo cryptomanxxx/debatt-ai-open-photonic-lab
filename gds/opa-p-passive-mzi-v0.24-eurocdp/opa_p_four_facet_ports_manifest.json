@@ -1,0 +1,66 @@
+{
+  "status": "four_facet_ports_exploratory_not_drc",
+  "fiber_pitch_um_assumed": 127.0,
+  "nominal_die_um": [
+    10000.0,
+    5000.0
+  ],
+  "checks": {
+    "four_facet_ports": true,
+    "two_input_routes": true,
+    "two_output_routes": true,
+    "facets_at_nominal_die_edges": true,
+    "bbox_inside_die_height": true,
+    "two_separate_rails_at_eight_cut_positions": true
+  },
+  "external_rail_regions_by_x_um": {
+    "200": 2,
+    "600": 2,
+    "1000": 2,
+    "1400": 2,
+    "5200": 2,
+    "8000": 2,
+    "9300": 2,
+    "9800": 2
+  },
+  "ports": [
+    {
+      "name": "facet_in1",
+      "orientation_deg": 180.0,
+      "center_um": [
+        0.0,
+        1750.0
+      ]
+    },
+    {
+      "name": "facet_out1",
+      "orientation_deg": 0.0,
+      "center_um": [
+        10000.0,
+        1750.0
+      ]
+    },
+    {
+      "name": "facet_in2",
+      "orientation_deg": 180.0,
+      "center_um": [
+        0.0,
+        1877.0
+      ]
+    },
+    {
+      "name": "facet_out2",
+      "orientation_deg": 0.0,
+      "center_um": [
+        10000.0,
+        1877.0
+      ]
+    }
+  ],
+  "limitations": [
+    "Fiber pitch 127um is an unapproved design assumption",
+    "Foundry dicing/edge coupler placement not confirmed",
+    "Full optical connectivity, mode behavior and S-parameters unmeasured",
+    "Routing and bend DRC not verified with foundry rules"
+  ]
+}

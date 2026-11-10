@@ -64,6 +64,7 @@ add a new folder with a new version.
 
 | Release | Design | PDK | Status | Released to | GDS sha256 |
 |---------|--------|-----|--------|-------------|------------|
+| [opa-p-passive-mzi-v0.24-eurocdp](opa-p-passive-mzi-v0.24-eurocdp/) | Passive 2×2 MZI (2×2 MMIs), inverse-taper edge couplers on two facets 10 mm apart, 127 µm port pitch | Luxtelligence lnoi400 (lxt_pdk_gf) | `exploratory` | EuroCDP, 2026-11-09 | `b68285ea…` |
 | [opa-layout-003-v1](opa-layout-003-v1/) | Fully programmable 2×2 MZI (θ, φ, a, b), 4 heaters, 8 pads, 4 grating couplers; 484 × 1058 µm | SiEPIC EBeam (ubcpdk 3.3.0) | `drc-clean` | nobody yet | `655636cb…` |
 
 The working layouts are regenerated and checked by CI on every change; see the

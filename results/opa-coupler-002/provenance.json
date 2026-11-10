@@ -1,0 +1,8 @@
+{
+  "entries": [
+    {
+      "files": ["case_L0_res16.json", "case_L8_res16.json", "case_L16_res16.json", "case_L0_res24.json", "case_L16_res24.json", "result.json"],
+      "source": "Local runs with the locked environment (pymeep 1.35.1, opa-fdtd-linux-64.lock.txt), five cases in parallel on four cores (about 85 minutes for the longest), after the stopping-rule fix in commit f8d351f; the CI workflow meep-coupler-3d-v002.yml re-runs all five cases and the aggregation"
+    }
+  ]
+}

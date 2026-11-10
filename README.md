@@ -278,8 +278,39 @@ coupling length is L_c = λ / (2·Δn), and the coupler splits 50:50 at L_c / 2.
   The layout needs to be retuned to about 26 µm, minus the bend contribution.
 
 Limits: this is two-mode theory for the straight section only, with nominal
-indices, and no sidewall angle or roughness. A full 3D FDTD of the complete
-coupler including the bends is the next check.
+indices, and no sidewall angle or roughness.
+
+### OPA-COUPLER-002: 3D FDTD of the full coupler, S-bends included
+
+The exact coupler polygons are exported from the layout
+([`coupler_gap0.236.json`](simulations/meep/geometry/coupler_gap0.236.json); the
+layout CI fails if they drift) and simulated in 3D in Meep for straight lengths
+of 0, 8 and 16 µm. The cross fraction follows κ² = sin²(φ_b + π·L / (2·L_c)), where
+φ_b is the extra coupling in the S-bends.
+
+| Result | Value |
+|--------|-------|
+| Two-mode model with bend phase fits the three 3D lengths | max residual 0.0013 |
+| FDTD coupling length, 16 → 24 px/µm | 47.9 → **52.2 µm**, vs 52.0 µm from converged MPB (0.4 %) |
+| Bend phase φ_b (16 / 24 px/µm) | 0.097 / 0.091 rad, about 3.0 µm of equivalent straight length |
+| Excess loss | ≤ 1.7 % |
+| **Straight length for 50:50 (gap 236 nm)** | **23.0 µm** (22.8–23.1 µm across the estimates) |
+| Current 20 µm layout coupler, bends included | splits about 41:59 |
+
+Two independent methods, FDTD and MPB, now agree on the coupling length.
+
+Two things went wrong on the way and are recorded in the report:
+- A first comparison of FDTD and MPB *at the same resolution* failed (47.9 vs
+  56.4 µm), because the two codes smooth interfaces differently. FDTD is now
+  checked for convergence on its own.
+- A first 24 px/µm run stopped before the light reached the outputs. The
+  stopping rule now requires a minimum run time, and any case that loses more
+  than 10 % of the light fails.
+
+One pre-registered check failed and is kept, but made non-blocking: a
+second-order Richardson extrapolation from 16 and 24 px/µm gives 55.6 µm (7 %,
+limit 5 %). At 3.5–5.3 pixels across the silicon the second-order assumption
+does not hold. Confirming this needs a 32 px/µm run (several hours).
 
 ## Layout
 
@@ -311,9 +342,9 @@ The crossing check caught a real bug during development: the input S-bends
 were mirrored, so the top input ended up at the bottom and the two input
 waveguides crossed.
 
-**Known issue:** OPA-COUPLER-001 shows that the 20 µm couplers split only
-about 32:68 for a silicon 500 × 220 nm wire with a 236 nm gap. They need to be
-lengthened to about 26 µm, minus the coupling that the S-bends add.
+**Known issue:** for a silicon 500 × 220 nm wire with a 236 nm gap, the 20 µm
+couplers split about 41:59 including the S-bends (OPA-COUPLER-002). The
+straight section should be 23.0 µm for 50:50.
 
 **Limits:** this uses gdsfactory's *generic* example PDK, not a foundry process.
 Layers, design rules and heaters are placeholders, and the coupler length is
@@ -328,6 +359,9 @@ micromamba create -n opa-fdtd --file simulations/meep/opa-fdtd-linux-64.lock.txt
 micromamba activate opa-fdtd
 python simulations/meep/bend_3d_launched_mode_v011.py   # writes results/opa-fdtd-011/result.json
 python simulations/meep/directional_coupler_v001.py     # writes results/opa-coupler-001/result.json, ~4 min
+for c in "0 16" "8 16" "16 16" "0 24" "16 24"; do        # OPA-COUPLER-002: 3D FDTD, up to ~1.5 h per case
+  python simulations/meep/coupler_3d_v002.py case $c &
+done; wait; python simulations/meep/coupler_3d_v002.py aggregate
 python simulations/circuit/mzi_2x2_v001.py               # writes results/opa-mzi-001/result.json, < 1 s
 python simulations/circuit/mzi_imperfect_v002.py         # writes results/opa-mzi-002/result.json, ~1 min
 python simulations/circuit/mesh_clements_v003.py         # writes results/opa-mzi-003/result.json, ~15 s

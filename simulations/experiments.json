@@ -302,7 +302,8 @@
       "artifact": "opa-id-001",
       "timeout_minutes": 30,
       "deps": [
-        "simulations/meep/opa-id-linux-64.lock.txt"
+        "simulations/meep/opa-id-linux-64.lock.txt",
+        "simulations/meep/upstream_adjoint/*"
       ],
       "lock": "simulations/meep/opa-id-linux-64.lock.txt"
     }

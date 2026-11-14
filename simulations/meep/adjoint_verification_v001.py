@@ -26,9 +26,14 @@ N = NX*NY
 RESOLUTIONS = (30,60)
 EPS = (0.01,0.005)
 REL_TOL = 0.15
+# Meep v1.35.1 normalizes its adjoint Gaussian using the forward run time.
+# Its single-frequency pulse has cutoff=5 and fwidth=0.1*FREQ, hence
+# full duration 2*5/(0.1*FREQ) = 155 Meep time units.
+ADJOINT_PULSE_DURATION = 2*5/(0.1*FREQ)
+MIN_RUN_TIME = 200
 
 
-def evaluate(weights, resolution, gradient=False, objective_kind='mean'):
+def evaluate(weights, resolution, gradient=False, objective_kind='mean', minimum_run_time=MIN_RUN_TIME):
     # Use a nondegenerate 2D MaterialGrid and transverse Ez, following
     # the geometry class exercised by Meep's upstream adjoint DFT tests.
     core = mp.Medium(index=1.8)
@@ -55,7 +60,7 @@ def evaluate(weights, resolution, gradient=False, objective_kind='mean'):
         return npa.mean(npa.abs(field)**2)
     opt = mpa.OptimizationProblem(simulation=sim,objective_functions=[objective],
         objective_arguments=[monitor],design_regions=[region],
-        frequencies=[FREQ],decay_by=1e-10,minimum_run_time=20,
+        frequencies=[FREQ],decay_by=1e-10,minimum_run_time=minimum_run_time,
         decimation_factor=1)
     try:
         value,grad = opt([np.asarray(weights)],need_gradient=gradient)
@@ -106,24 +111,25 @@ def main():
             gradient_norm=float(np.linalg.norm(g)),gradient=g.tolist(),
             candidate_weights=candidate.tolist(),candidate_objective=improved,
             ascent_gain=improved-val))
-    # Diagnostic only: change the objective alone, keep geometry and solver settings.
+    # Diagnostic only: reproduce short forward run versus full normalization window.
     # Preserve the original mean-objective acceptance gate.
     diagnostic = []
     resolution = RESOLUTIONS[-1]
-    for kind in ("sample",):
-        value, g = evaluate(weights,resolution,True,kind)
+    for kind, duration in (("mean",20),("sample",MIN_RUN_TIME)):
+        value, g = evaluate(weights,resolution,True,kind,duration)
         for i,d in enumerate(directions):
             h = EPS[-1]
-            plus,_ = evaluate(weights+h*d,resolution,False,kind)
-            minus,_ = evaluate(weights-h*d,resolution,False,kind)
+            plus,_ = evaluate(weights+h*d,resolution,False,kind,duration)
+            minus,_ = evaluate(weights-h*d,resolution,False,kind,duration)
             fd = (plus-minus)/(2*h)
             adj = float(g@d)
-            diagnostic.append(dict(objective=kind,resolution=resolution,direction=i,
+            diagnostic.append(dict(objective=kind,minimum_run_time=duration,resolution=resolution,direction=i,
                 step=h,adjoint=adj,finite_difference=fd,
                 scaled_error=float(abs(adj-fd)/max(np.linalg.norm(g),1e-30))))
-    print("Single-sample objective diagnostics:",json.dumps(diagnostic),flush=True)
+    print("Objective and normalization-window diagnostics:",json.dumps(diagnostic),flush=True)
     fine = [r for r in records if r["resolution"]==RESOLUTIONS[-1] and r["step"]==EPS[-1]]
     checks = dict(upstream_reference_passes=reference.returncode==0,
+        normalization_window_covers_adjoint_pulse=MIN_RUN_TIME>ADJOINT_PULSE_DURATION,
         all_directions=len(records)==len(RESOLUTIONS)*len(directions)*len(EPS),
         finite=all(np.isfinite(r[k]) for r in records for k in ("adjoint","finite_difference","scaled_error"))
             and all(np.isfinite(r[k]) for r in runs for k in ("objective","gradient_norm","candidate_objective")),
@@ -133,6 +139,7 @@ def main():
     report=dict(experiment="OPA-ID-001",meep_version=mp.__version__,numpy_version=np.__version__,
         config=dict(frequency=FREQ,wavelength=1.55,design_length=DESIGN_LENGTH,
             weights=N,resolutions=RESOLUTIONS,steps=EPS,scaled_error_tolerance=REL_TOL,
+            minimum_run_time=MIN_RUN_TIME,adjoint_pulse_duration=ADJOINT_PULSE_DURATION,
             design_width=DESIGN_WIDTH,design_grid=[NX,NY],monitor_center_x=MONITOR_CENTER_X,
             monitor_length=MONITOR_LENGTH,monitor_width=MONITOR_WIDTH,
             objective="mean_squared_fourier_Ez_over_monitor_samples"),

@@ -1,4 +1,4 @@
-"""OPA-ID-001: verify adjoint sensitivities on a small 1D dielectric stack.
+"""OPA-ID-001: verify adjoint sensitivities on a small 2D dielectric waveguide region.
 
 A numerical capability test, not an optimized or fabricated photonic component.
 """
@@ -15,32 +15,37 @@ import numpy as np
 OUT = Path("results/opa-id-001")
 FREQ = 1/1.55
 DESIGN_LENGTH = 1.2
-MONITOR_CENTER_Z = 1.5
+DESIGN_WIDTH = 1.0
+MONITOR_CENTER_X = 1.5
 MONITOR_LENGTH = 0.2
-N = 13
-RESOLUTIONS = (40,80)
+MONITOR_WIDTH = 0.6
+NX, NY = 13, 11
+N = NX*NY
+RESOLUTIONS = (30,60)
 EPS = (0.01,0.005)
 REL_TOL = 0.15
 
 
 def evaluate(weights, resolution, gradient=False):
-    # 1D normal incidence, transverse Ex, dielectric interpolation.
-    grid = mp.MaterialGrid(mp.Vector3(1,1,N),mp.Medium(index=1.0),
-                           mp.Medium(index=1.8),weights=weights,
+    # Use a nondegenerate 2D MaterialGrid and transverse Ez, following
+    # the geometry class exercised by Meep's upstream adjoint DFT tests.
+    core = mp.Medium(index=1.8)
+    grid = mp.MaterialGrid(mp.Vector3(NX,NY),mp.air,core,
+                           weights=np.asarray(weights).reshape(NX,NY),
                            do_averaging=False)
     region = mpa.DesignRegion(grid,volume=mp.Volume(
-        center=mp.Vector3(),size=mp.Vector3(0,0,DESIGN_LENGTH)))
-    sim = mp.Simulation(cell_size=mp.Vector3(0,0,6),dimensions=1,
-        resolution=resolution,boundary_layers=[mp.PML(1)],
-        geometry=[mp.Block(size=region.size,center=region.center,material=grid)],
-        sources=[mp.Source(mp.GaussianSource(FREQ,fwidth=0.4*FREQ),
-                           component=mp.Ex,center=mp.Vector3(0,0,-1.7))])
-    # FourierFields requires a nonzero spatial extent (Meep v1.35.1).
-    # The interval stays outside the design and PML at both resolutions.
+        center=mp.Vector3(),size=mp.Vector3(DESIGN_LENGTH,DESIGN_WIDTH)))
+    sim = mp.Simulation(cell_size=mp.Vector3(5,4),dimensions=2,
+        resolution=resolution,boundary_layers=[mp.PML(0.8)],
+        geometry=[mp.Block(size=mp.Vector3(mp.inf,0.6,mp.inf),material=core),
+                  mp.Block(size=region.size,center=region.center,material=grid)],
+        sources=[mp.EigenModeSource(mp.GaussianSource(FREQ,fwidth=0.4*FREQ),
+                   center=mp.Vector3(-1.5,0),size=mp.Vector3(0,2.0),
+                   eig_parity=mp.EVEN_Y+mp.ODD_Z)])
     monitor = mpa.FourierFields(sim,volume=mp.Volume(
-        center=mp.Vector3(0,0,MONITOR_CENTER_Z),
-        size=mp.Vector3(0,0,MONITOR_LENGTH)),component=mp.Ex,yee_grid=True,
-        decimation_factor=1)
+        center=mp.Vector3(MONITOR_CENTER_X,0),
+        size=mp.Vector3(MONITOR_LENGTH,MONITOR_WIDTH)),component=mp.Ez,
+        yee_grid=False,decimation_factor=1)
     def objective(field):
         return npa.mean(npa.abs(field)**2)
     opt = mpa.OptimizationProblem(simulation=sim,objective_functions=[objective],
@@ -97,10 +102,11 @@ def main():
     report=dict(experiment="OPA-ID-001",meep_version=mp.__version__,numpy_version=np.__version__,
         config=dict(frequency=FREQ,wavelength=1.55,design_length=DESIGN_LENGTH,
             weights=N,resolutions=RESOLUTIONS,steps=EPS,scaled_error_tolerance=REL_TOL,
-            monitor_center_z=MONITOR_CENTER_Z,monitor_length=MONITOR_LENGTH,
-            objective="mean_squared_fourier_Ex_over_monitor_samples"),
-        assumptions=["1D dielectric stack in air, normal incidence; no foundry model.",
-            "Objective is the unnormalized mean squared Fourier Ex over Yee-grid samples in a 0.2 um interval, not transmission efficiency.",
+            design_width=DESIGN_WIDTH,design_grid=[NX,NY],monitor_center_x=MONITOR_CENTER_X,
+            monitor_length=MONITOR_LENGTH,monitor_width=MONITOR_WIDTH,
+            objective="mean_squared_fourier_Ez_over_monitor_samples"),
+        assumptions=["2D dielectric waveguide with continuous material grid in air; no foundry model.",
+            "Objective is the unnormalized mean squared Fourier Ez over interpolated field samples in a 0.2 x 0.6 um rectangle, not transmission efficiency.",
             "Continuous grayscale material weights; no binary geometry or fabrication claim.",
             "Finite differences use independently rebuilt forward simulations.",
             "Directional error normalized by full adjoint gradient norm; not componentwise relative error."],

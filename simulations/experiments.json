@@ -260,6 +260,22 @@
         "simulations/circuit/modular_power_budget_v002.py"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_energy_v005.py"
+    },
+    {
+      "id": "opa-mod-006",
+      "name": "Circuit: modular hybrid AI training",
+      "script": "simulations/circuit/modular_training_v006.py",
+      "result_dir": "results/opa-mod-006",
+      "artifact": "opa-mod-006",
+      "timeout_minutes": 45,
+      "deps": [
+        "simulations/circuit/mesh.py",
+        "simulations/circuit/mzi.py",
+        "simulations/circuit/modular_power_budget_v002.py",
+        "simulations/circuit/modular_imperfections_v003.py",
+        "simulations/circuit/modular_calibration_v004.py"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_training_v006.py"
     }
   ]
 }

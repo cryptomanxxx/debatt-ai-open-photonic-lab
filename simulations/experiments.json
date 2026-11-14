@@ -196,6 +196,19 @@
         "simulations/circuit/mesh.py",
         "results/opa-eo-001/result.json"
       ]
+    },
+    {
+      "id": "opa-mod-001",
+      "name": "Circuit: ideal modular photonic equivalence",
+      "script": "simulations/circuit/modular_equivalence_v001.py",
+      "result_dir": "results/opa-mod-001",
+      "artifact": "opa-mod-001",
+      "timeout_minutes": 10,
+      "deps": [
+        "simulations/circuit/mesh.py",
+        "simulations/circuit/mzi.py"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_equivalence_v001.py"
     }
   ]
 }

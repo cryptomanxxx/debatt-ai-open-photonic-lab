@@ -28,7 +28,7 @@ EPS = (0.01,0.005)
 REL_TOL = 0.15
 
 
-def evaluate(weights, resolution, gradient=False):
+def evaluate(weights, resolution, gradient=False, objective_kind='mean'):
     # Use a nondegenerate 2D MaterialGrid and transverse Ez, following
     # the geometry class exercised by Meep's upstream adjoint DFT tests.
     core = mp.Medium(index=1.8)
@@ -49,6 +49,9 @@ def evaluate(weights, resolution, gradient=False):
         size=mp.Vector3(MONITOR_LENGTH,MONITOR_WIDTH)),component=mp.Ez,
         yee_grid=False,decimation_factor=1)
     def objective(field):
+        if objective_kind == 'sample':
+            # Upstream DFT test selects one spatial sample, retaining frequency axis.
+            return npa.abs(field[:,field.shape[1]//2,field.shape[2]//2])**2
         return npa.mean(npa.abs(field)**2)
     opt = mpa.OptimizationProblem(simulation=sim,objective_functions=[objective],
         objective_arguments=[monitor],design_regions=[region],
@@ -103,6 +106,22 @@ def main():
             gradient_norm=float(np.linalg.norm(g)),gradient=g.tolist(),
             candidate_weights=candidate.tolist(),candidate_objective=improved,
             ascent_gain=improved-val))
+    # Diagnostic only: change the objective alone, keep geometry and solver settings.
+    # Preserve the original mean-objective acceptance gate.
+    diagnostic = []
+    resolution = RESOLUTIONS[-1]
+    for kind in ("sample",):
+        value, g = evaluate(weights,resolution,True,kind)
+        for i,d in enumerate(directions):
+            h = EPS[-1]
+            plus,_ = evaluate(weights+h*d,resolution,False,kind)
+            minus,_ = evaluate(weights-h*d,resolution,False,kind)
+            fd = (plus-minus)/(2*h)
+            adj = float(g@d)
+            diagnostic.append(dict(objective=kind,resolution=resolution,direction=i,
+                step=h,adjoint=adj,finite_difference=fd,
+                scaled_error=float(abs(adj-fd)/max(np.linalg.norm(g),1e-30))))
+    print("Single-sample objective diagnostics:",json.dumps(diagnostic),flush=True)
     fine = [r for r in records if r["resolution"]==RESOLUTIONS[-1] and r["step"]==EPS[-1]]
     checks = dict(upstream_reference_passes=reference.returncode==0,
         all_directions=len(records)==len(RESOLUTIONS)*len(directions)*len(EPS),
@@ -125,7 +144,7 @@ def main():
         upstream_reference=dict(tag='v1.35.1',test=command[-1],exit_code=reference.returncode,
             log='upstream_reference.log'),
         initial_weights=weights.tolist(),directions=[d.tolist() for d in directions],
-        checks=checks,measurements=records,runs=runs,elapsed_seconds=time.monotonic()-started)
+        checks=checks,measurements=records,runs=runs,objective_diagnostics=diagnostic,elapsed_seconds=time.monotonic()-started)
     OUT.mkdir(parents=True,exist_ok=True)
     (OUT/"result.json").write_text(json.dumps(report,indent=2,allow_nan=False)+"\n")
     with (OUT/"gradient_checks.csv").open("w",newline="") as f:

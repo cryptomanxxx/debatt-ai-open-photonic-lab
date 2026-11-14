@@ -32,6 +32,7 @@ on:
       - "tools/test_select_experiments.py"
       - "tools/bundle_experiments.py"
       - "tools/test_bundle_experiments.py"
+      - "tools/test_parallel_id003.py"
 
 permissions:
   contents: read

@@ -299,6 +299,25 @@ training/test examples but reused across programming events, with new noise.
 This is a synthetic pilot, not a physical chip, all-optical training,
 real-world benchmark or energy measurement.
 
+## OPA-ID-001: inverse-design adjoint solver verification
+
+The first inverse-design capability experiment checks Meep's adjoint solver
+against independently rebuilt central finite-difference forward simulations
+for a one-dimensional continuous dielectric stack. It uses 13 material
+weights, three deterministic directions, two perturbation sizes and two
+FDTD resolutions. A small fixed gradient-ascent step is independently
+evaluated. The objective is unnormalized squared Fourier electric field at
+a point, not transmission efficiency. The fine-resolution acceptance
+threshold is 0.15 times the full gradient norm for directional error.
+
+The experiment uses a separate explicit environment lock extending the
+existing Meep lock with Autograd 1.9.1. Other experiments retain their
+original environment. JSON and CSV record all gradients, finite differences,
+objective values, controls and runtime. This is a capability test only:
+no new component, fabrication-ready geometry or hardware claim.
+
+Reference: [Meep adjoint solver documentation](https://meep.readthedocs.io/en/stable/Python_Tutorials/Adjoint_Solver/).
+
 ## Component simulations
 
 ### OPA-COUPLER-001: silicon directional coupler

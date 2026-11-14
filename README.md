@@ -247,6 +247,29 @@ networks will be more sensitive. The power-only result shows that the phase of
 the output matters: either coherent detection or an encoding that keeps outputs
 positive is needed.
 
+## OPA-MOD-006: hybrid AI training
+
+[Experiment implementation](simulations/circuit/modular_training_v006.py).
+The experiment compares digital training and deployment against hybrid training
+with an explicit modular optical forward pass and a digital straight-through
+backward update. A synthetic 128-dimensional linear teacher, fixed train/test
+and calibration splits, three seeds, 16 updates, and 16/64/128-wide tiles are
+used. Each comparison shares the initial weights, training batches, static
+hardware draws and held-out receiver-noise seed. MOD-003/004 models provide
+two nonideal scenarios and optional local-phase and tile-gain calibration.
+
+The research outcome is the paired held-out MSE difference (hybrid minus
+digital deployment), not a required improvement. CI checks ideal forward
+equivalence, completeness, finite metrics, passivity, digital learning and
+calibration probe accounting. JSON and CSV artifacts include learning curves
+and individual paired comparisons. Results will be archived after CI.
+
+This is a deliberately small linear regression pilot, not a deep network,
+fully optical backpropagation, physical chip measurement or energy benchmark.
+The local phase oracle, exact reprogramming and digital backward update are
+assumptions; calibration probes are counted but hardware programming and
+measurement costs are not modeled.
+
 ## Component simulations
 
 ### OPA-COUPLER-001: silicon directional coupler

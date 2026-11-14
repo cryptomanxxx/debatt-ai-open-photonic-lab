@@ -1,0 +1,36 @@
+{
+  "experiment": "OPA-MOD-006",
+  "source": "GitHub Actions original artifact ZIP, SHA-256 verified; exact result.json archived as two base64-encoded XZ parts",
+  "workflow_run_id": 43552625166,
+  "job_id": 132318355385,
+  "artifact_id": 14096993702,
+  "artifact_digest": "sha256:4c4351661cfe2f47f58da7714c7019f09a6a91b70b938ba803a80e4cebbb80dc",
+  "head_sha": "04626160e3e5343a0906d2b2ea9f75af0544b6ae",
+  "pull_request": 47,
+  "merge_sha": "19003aae0514e845ce02074219e0cb15eb3ef1aa",
+  "run_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/43552625166",
+  "report_bytes": 153652,
+  "report_sha256": "ed87eec3e77b840212d43ed13e4bc4372582326e9e09bff8241071e12c609cd6",
+  "compressed_sha256": "a67ff736e716edb2d3252a4f7623dcb3bdc3890a4f274cae244285bafcbf305d",
+  "report_parts": [
+    {
+      "file": "result.json.xz.b64.part01",
+      "bytes": 6700,
+      "git_blob_sha": "5da61fb14f8aeb3bf842cacbd68d56fa0be55bfa"
+    },
+    {
+      "file": "result.json.xz.b64.part02",
+      "bytes": 6672,
+      "git_blob_sha": "d0dd3448a8fae3c27773202d0eb34ef9fe1dd58c"
+    }
+  ],
+  "artifact_files": {
+    "result.json": "ed87eec3e77b840212d43ed13e4bc4372582326e9e09bff8241071e12c609cd6",
+    "metrics.csv": "273dccd9b463d5bfee8a5eafabf3bfff44bc06e34756e88292cee4f6bdfec594",
+    "learning_curves.csv": "519a97f5c9249032a8007226fc3f719049a0953c277f1329ad28f44162ef6d7d",
+    "comparisons.csv": "57ef8e4ce5735cbbdf2ea7ffcc7097ee6df9e51c1f8b3e894ac45b4ed66ba972",
+    "environment-lock.txt": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c",
+    "installed-packages.json": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6"
+  },
+  "note": "JSON and all three CSV files are exactly recoverable; the two environment files are listed for provenance but not included in this archive. Original report and reconstructed CSVs verified byte-for-byte locally; both stored Git blob SHAs verified."
+}

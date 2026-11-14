@@ -25,7 +25,9 @@ import re
 import sys
 
 REPO = Path(__file__).resolve().parent.parent
-REGISTRY = REPO / "simulations" / "experiments.json"
+REGISTRY_PATH = "simulations/experiments.json"
+REGISTRY = REPO / REGISTRY_PATH
+DEFAULT_LOCK = "simulations/meep/opa-fdtd-linux-64.lock.txt"
 SCRIPT_RE = re.compile(r"^simulations/[^/]+/[^/]+_v\d{3}\.py$")
 IMPORT_RE = re.compile(r"^\s*(?:from|import)\s+([A-Za-z_]\w*)", re.M)
 PATH_RE = re.compile(r"""["']((?:results|simulations|layout)/[^"'\s]+)["']""")
@@ -41,15 +43,39 @@ def matches(path, patterns):
     return any(path == p or fnmatch.fnmatch(path, p) for p in patterns)
 
 
-def select_changed(reg, changed):
+def select_changed(reg, changed, base_reg=None):
     changed = [c.replace("\\", "/") for c in changed]
-    machinery = any(matches(c, reg["machinery"]) for c in changed)
-    shared = any(matches(c, reg["shared"]) for c in changed)
-    # union: a machinery change adds every non-heavy experiment, but never hides
-    # an experiment (heavy or not) whose own script, deps or shared files changed
+    registry_changed = REGISTRY_PATH in changed
+    # Compare semantic entries, not formatting or ordering. Without a trusted
+    # baseline, retain the conservative full non-heavy regression.
+    entry_changes = set()
+    policy_changed = registry_changed and base_reg is None
+    if registry_changed and base_reg is not None:
+        old = {e["id"]: e for e in base_reg["experiments"]}
+        entry_changes = {e["id"] for e in reg["experiments"]
+                         if old.get(e["id"]) != e}
+        removed = set(old) - {e["id"] for e in reg["experiments"]}
+        # Any global policy change or removal triggers conservative regression.
+        # Ignore only the documentation field and the experiment list itself.
+        policy = lambda r: {k: v for k, v in r.items()
+                            if k not in ("experiments", "_doc")}
+        policy_changed = bool(removed) or policy(reg) != policy(base_reg)
+    machinery_patterns = set(reg["machinery"])
+    shared_patterns = set(reg["shared"])
+    if base_reg is not None:
+        machinery_patterns.update(base_reg["machinery"])
+        shared_patterns.update(base_reg["shared"])
+    machinery = policy_changed or any(
+        c != REGISTRY_PATH and matches(c, machinery_patterns) for c in changed)
+    # Preserve generic shared dependencies. The original default lock is
+    # shared only by experiments that actually use it.
+    shared = any(c != DEFAULT_LOCK and matches(c, shared_patterns)
+                 for c in changed)
     return [e for e in reg["experiments"]
             if shared or (machinery and not e.get("heavy"))
-            or any(matches(c, [e["script"]] + e["deps"]) for c in changed)]
+            or e["id"] in entry_changes
+            or any(matches(c, [e["script"], e.get("lock", DEFAULT_LOCK)] + e["deps"])
+                   for c in changed)]
 
 
 def select_ids(reg, ids):
@@ -125,7 +151,7 @@ def matrix(selected):
     return [{"id": e["id"], "name": e["name"], "result_dir": e["result_dir"],
              "artifact": e["artifact"], "timeout": e["timeout_minutes"],
              "run": e.get("run", f"python {e['script']}"),
-             "lock": e.get("lock", "simulations/meep/opa-fdtd-linux-64.lock.txt")} for e in selected]
+             "lock": e.get("lock", DEFAULT_LOCK)} for e in selected]
 
 
 def main(argv=None):
@@ -137,6 +163,7 @@ def main(argv=None):
     group.add_argument("--check", action="store_true")
     parser.add_argument("--github-output", action="store_true")
     parser.add_argument("--registry", default=str(REGISTRY))
+    parser.add_argument("--base-registry", help="Registry at the same merge base as the PR diff")
     args = parser.parse_args(argv)
     reg = load(args.registry)
     if args.check:
@@ -150,7 +177,8 @@ def main(argv=None):
     else:
         changed = args.changed if args.changed is not None else \
             [l for l in Path(args.changed_from).read_text().splitlines() if l.strip()]
-        selected = select_changed(reg, changed)
+        base_reg = load(args.base_registry) if args.base_registry else None
+        selected = select_changed(reg, changed, base_reg)
     m = matrix(selected)
     print("selected:", ", ".join(e["id"] for e in m) or "none")
     if args.github_output:

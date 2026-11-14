@@ -270,6 +270,33 @@ The local phase oracle, exact reprogramming and digital backward update are
 assumptions; calibration probes are counted but hardware programming and
 measurement costs are not modeled.
 
+## OPA-MOD-007: nonlinear multilayer hybrid classification
+
+[Experiment implementation](simulations/circuit/modular_multilayer_v007.py).
+Extends MOD-006 to two or three square 128-channel optical layers with electronic
+tanh hidden activations and a four-class readout. A synthetic nonlinear teacher
+generates independent training and held-out examples. Three seeds, three tile
+sizes (16/64/128), two impairment scenarios and calibrated/uncalibrated
+policies are compared using paired initialization, batches, chip draws and
+evaluation noise seeds. Digital-only training and digital training followed
+by optical deployment are separate baselines. The 32 updates use learning
+rate 0.12 and minibatches of 64.
+
+CI checks the digital gradient by finite differences, runs all digital
+baselines before optical work, checks ideal multilayer equivalence, passivity,
+finite metrics, result counts and calibration-vector accounting. JSON and CSV
+outputs include cross-entropy, accuracy, learning curves, paired differences
+and cumulative activation error at every layer. No required hybrid improvement:
+negative outcomes are valid.
+
+The electronic backward pass uses programmed weights as straight-through
+surrogates; optical derivatives are not calculated. The first four final
+channels are selected electronically; the remaining channels are not used
+for classification. Gaussian calibration probes are independent of the
+training/test examples but reused across programming events, with new noise.
+This is a synthetic pilot, not a physical chip, all-optical training,
+real-world benchmark or energy measurement.
+
 ## Component simulations
 
 ### OPA-COUPLER-001: silicon directional coupler

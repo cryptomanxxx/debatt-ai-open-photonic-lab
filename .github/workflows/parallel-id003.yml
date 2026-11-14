@@ -9,6 +9,9 @@ on:
 permissions:
   contents: read
 
+env:
+  OPA_LOCK: ${{ inputs.lock }}
+
 jobs:
   search:
     name: ID-003 search ${{ matrix.index }}
@@ -108,6 +111,11 @@ jobs:
         shell: micromamba-shell {0}
     steps:
       - uses: actions/checkout@v5
+      - name: Remove archived report before environment setup
+        shell: bash
+        run: |
+          python3 tools/bundle_experiments.py prepare opa-id-003 results/opa-id-003
+          rm -rf results/opa-id-003/shards
       - uses: mamba-org/setup-micromamba@v3
         with:
           environment-name: opa-fdtd
@@ -125,7 +133,6 @@ jobs:
         env:
           LOCK: ${{ inputs.lock }}
         run: |
-          python tools/bundle_experiments.py prepare opa-id-003 results/opa-id-003
           cp "$LOCK" results/opa-id-003/environment-lock.txt
           micromamba list -n opa-fdtd --json > results/opa-id-003/installed-packages.json
       - name: Aggregate complete shards and evaluate scientific checks
@@ -135,7 +142,7 @@ jobs:
         run: |
           if [ -f results/opa-id-003/result.json ]; then cat results/opa-id-003/result.json; fi
       - uses: actions/upload-artifact@v6
-        if: always()
+        if: success() || failure()
         with:
           name: opa-id-003
           path: results/opa-id-003/

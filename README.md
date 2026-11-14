@@ -303,13 +303,19 @@ real-world benchmark or energy measurement.
 
 The first inverse-design capability experiment checks Meep's adjoint solver
 against independently rebuilt central finite-difference forward simulations
-for a one-dimensional continuous dielectric stack. It uses 13 material
+for a two-dimensional continuous dielectric waveguide region. It uses 143 material
 weights, three deterministic directions, two perturbation sizes and two
 FDTD resolutions. A small fixed gradient-ascent step is independently
-evaluated. The objective is the unnormalized mean squared Fourier Ex over
-Yee-grid samples in a 0.2 um interval centered at z=1.5 um, not transmission
+evaluated. The objective is the unnormalized mean squared Fourier Ez over
+interpolated samples in a 0.2 by 0.6 um rectangle centered at x=1.5 um, not transmission
 efficiency. The monitor must sample multiple spatial points. The fine-resolution acceptance
 threshold is 0.15 times the full gradient norm for directional error.
+
+The initial 1D variant ran successfully but failed directional gradient agreement
+(run 43594347361, maximum fine-resolution scaled error 0.23824 versus 0.15).
+The 2D variant follows the geometry class of Meep's upstream adjoint DFT tests;
+acceptance tolerance remains unchanged. This change does not establish the cause
+of the 1D discrepancy or verify the 2D gradients until CI passes.
 
 The experiment uses a separate explicit environment lock extending the
 existing Meep lock with Autograd 1.9.1. Other experiments retain their

@@ -283,7 +283,7 @@
       "script": "simulations/circuit/modular_multilayer_v007.py",
       "result_dir": "results/opa-mod-007",
       "artifact": "opa-mod-007",
-      "timeout_minutes": 60,
+      "timeout_minutes": 120,
       "deps": [
         "simulations/circuit/mesh.py",
         "simulations/circuit/mzi.py",

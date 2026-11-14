@@ -68,6 +68,9 @@ class SelectTest(unittest.TestCase):
         m = se.matrix(REG["experiments"])
         self.assertEqual(m[0]["run"], "python simulations/meep/a_v001.py")
         self.assertEqual(m[1]["run"], "echo b")
+        self.assertEqual(m[0]["lock"], "simulations/meep/opa-fdtd-linux-64.lock.txt")
+        e = dict(REG["experiments"][0], lock="simulations/meep/id.lock.txt")
+        self.assertEqual(se.matrix([e])[0]["lock"], e["lock"])
 
 
 class CheckTest(unittest.TestCase):
@@ -114,6 +117,16 @@ class CheckTest(unittest.TestCase):
         self.assertTrue(any("duplicate id 'a'" in e for e in errs))
         self.assertTrue(any("duplicate result_dir 'results/b'" in e for e in errs))
         self.assertTrue(any("matches no file" in e for e in errs))
+
+    def test_custom_lock_requires_dep(self):
+        reg = copy.deepcopy(REG)
+        e = reg["experiments"][0]
+        e["lock"] = "simulations/meep/id.lock.txt"
+        (self.repo / e["lock"]).write_text("@EXPLICIT\n")
+        self.assertTrue(any("custom lock" in msg for msg in self.errors(reg)))
+        e["deps"].append(e["lock"])
+        self.assertEqual(self.errors(reg), [])
+        self.assertEqual(ids(se.select_changed(reg,[e["lock"]])), ["a"])
 
     def test_real_registry_passes(self):
         self.assertEqual(se.check(se.load()), [])

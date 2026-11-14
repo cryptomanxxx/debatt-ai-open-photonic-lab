@@ -119,7 +119,8 @@ def check(reg, repo=REPO):
 def matrix(selected):
     return [{"id": e["id"], "name": e["name"], "result_dir": e["result_dir"],
              "artifact": e["artifact"], "timeout": e["timeout_minutes"],
-             "run": e.get("run", f"python {e['script']}")} for e in selected]
+             "run": e.get("run", f"python {e['script']}"),
+             "lock": e.get("lock", "simulations/meep/opa-fdtd-linux-64.lock.txt")} for e in selected]
 
 
 def main(argv=None):

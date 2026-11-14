@@ -219,6 +219,20 @@
       "timeout_minutes": 10,
       "deps": [],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_power_budget_v002.py"
+    },
+    {
+      "id": "opa-mod-003",
+      "name": "Circuit: explicit modular mesh imperfections and readout precision",
+      "script": "simulations/circuit/modular_imperfections_v003.py",
+      "result_dir": "results/opa-mod-003",
+      "artifact": "opa-mod-003",
+      "timeout_minutes": 30,
+      "deps": [
+        "simulations/circuit/mesh.py",
+        "simulations/circuit/mzi.py",
+        "simulations/circuit/modular_power_budget_v002.py"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_imperfections_v003.py"
     }
   ]
 }

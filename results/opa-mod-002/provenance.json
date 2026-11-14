@@ -1,0 +1,13 @@
+{
+  "experiment": "OPA-MOD-002",
+  "source": "GitHub Actions job log (identical Run and Print result JSON copies)",
+  "workflow_run_id": 43543088120,
+  "job_id": 132287948469,
+  "artifact_id": 14092389555,
+  "artifact_digest": "sha256:3ce6f102688eb38445cf52dbb44f6aed5ce1040f54081e63913a0c69a2364b96",
+  "head_sha": "c6ab6d587c072e5ac82dbc58dabc8032f3f7b3c6",
+  "pull_request": 39,
+  "merge_sha": "51cc21068b88647c7947647c0b47434c098e0b43",
+  "run_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/43543088120",
+  "note": "JSON recovered from timestamp-stripped job log; artifact ZIP not byte-compared. Hypothetical scalar optical power model, not hardware validation."
+}

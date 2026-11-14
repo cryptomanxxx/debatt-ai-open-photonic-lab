@@ -182,10 +182,16 @@ def main(argv=None):
         base_reg = load(args.base_registry) if args.base_registry else None
         selected = select_changed(reg, changed, base_reg)
     m = matrix(selected)
+    serial = [e for e in m if e["id"] != "opa-id-003"]
+    parallel = [e for e in m if e["id"] == "opa-id-003"]
     print("selected:", ", ".join(e["id"] for e in m) or "none")
     if args.github_output:
         with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
             out.write(f"matrix={json.dumps({'include': m})}\n")
+            out.write(f"serial_matrix={json.dumps({'include': serial})}\n")
+            out.write(f"serial_any={'true' if serial else 'false'}\n")
+            out.write(f"id003_any={'true' if parallel else 'false'}\n")
+            out.write(f"id003_lock={parallel[0]['lock'] if parallel else ''}\n")
             out.write(f"any={'true' if m else 'false'}\n")
     return 0
 

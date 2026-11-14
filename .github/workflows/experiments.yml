@@ -27,10 +27,12 @@ on:
       - "results/**"
       - "layout/**"
       - ".github/workflows/experiments.yml"
+      - ".github/workflows/parallel-id003.yml"
       - "tools/select_experiments.py"
       - "tools/test_select_experiments.py"
       - "tools/bundle_experiments.py"
       - "tools/test_bundle_experiments.py"
+      - "tools/test_parallel_id003.py"
 
 permissions:
   contents: read
@@ -47,6 +49,10 @@ jobs:
     outputs:
       matrix: ${{ steps.select.outputs.matrix }}
       any: ${{ steps.select.outputs.any }}
+      serial_matrix: ${{ steps.select.outputs.serial_matrix }}
+      serial_any: ${{ steps.select.outputs.serial_any }}
+      id003_any: ${{ steps.select.outputs.id003_any }}
+      id003_lock: ${{ steps.select.outputs.id003_lock }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -80,13 +86,13 @@ jobs:
 
   run:
     needs: select
-    if: needs.select.outputs.any == 'true'
+    if: needs.select.outputs.serial_any == 'true'
     name: ${{ matrix.id }}
     runs-on: ubuntu-24.04
     timeout-minutes: ${{ matrix.timeout }}
     strategy:
       fail-fast: false
-      matrix: ${{ fromJSON(needs.select.outputs.matrix) }}
+      matrix: ${{ fromJSON(needs.select.outputs.serial_matrix) }}
     defaults:
       run:
         shell: micromamba-shell {0}
@@ -135,10 +141,17 @@ jobs:
           path: ${{ matrix.result_dir }}/
           if-no-files-found: warn
 
+  parallel-id003:
+    needs: select
+    if: needs.select.outputs.id003_any == 'true'
+    uses: ./.github/workflows/parallel-id003.yml
+    with:
+      lock: ${{ needs.select.outputs.id003_lock }}
+
   bundle:
     # Keep separate artifact directories: result.json and environment files
     # have the same names in every experiment.
-    needs: [select, run]
+    needs: [select, run, parallel-id003]
     if: ${{ always() && !cancelled() && needs.select.result == 'success' && needs.select.outputs.any == 'true' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -151,7 +164,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           EXPECTED: ${{ needs.select.outputs.matrix }}
-          RUN_RESULT: ${{ needs.run.result }}
+          RUN_RESULT: ${{ (needs.run.result == 'success' || needs.run.result == 'skipped') && (needs.parallel-id003.result == 'success' || needs.parallel-id003.result == 'skipped') && 'success' || 'failure' }}
           ARGS: ${{ inputs.args }}
         run: python3 tools/bundle_experiments.py
       - name: Upload combined experiment ZIP
@@ -162,6 +175,6 @@ jobs:
           path: collected/
           if-no-files-found: error
       - name: Require complete bundle for successful runs
-        if: needs.run.result == 'success'
+        if: (needs.run.result == 'success' || needs.run.result == 'skipped') && (needs.parallel-id003.result == 'success' || needs.parallel-id003.result == 'skipped')
         run: |
           python3 -c 'import json; assert json.load(open("collected/bundle-manifest.json"))["all_expected_results_present"], "Missing expected experiment results"'

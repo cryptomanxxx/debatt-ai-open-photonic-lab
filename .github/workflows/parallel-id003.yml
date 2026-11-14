@@ -1,0 +1,152 @@
+name: Parallel OPA-ID-003
+on:
+  workflow_call:
+    inputs:
+      lock:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  OPA_LOCK: ${{ inputs.lock }}
+
+jobs:
+  search:
+    name: ID-003 search ${{ matrix.index }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    defaults:
+      run:
+        shell: micromamba-shell {0}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: opa-fdtd
+          create-args: >-
+            --file ${{ inputs.lock }}
+      - name: Search candidate
+        env:
+          INDEX: ${{ matrix.index }}
+        run: python simulations/meep/robust_coupler_v003.py search --index "$INDEX"
+      - uses: actions/upload-artifact@v6
+        with:
+          name: id003-search-${{ matrix.index }}
+          path: shard/shard.json
+          overwrite: true
+          if-no-files-found: error
+
+  plan:
+    needs: search
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    defaults:
+      run:
+        shell: micromamba-shell {0}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: opa-fdtd
+          create-args: >-
+            --file ${{ inputs.lock }}
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: id003-search-*
+          path: search-shards
+      - name: Shard integrity regression tests
+        run: python tools/test_parallel_id003.py
+      - name: Select winners and plan independent validation
+        id: plan
+        run: python simulations/meep/robust_coupler_v003.py plan
+
+  validation:
+    needs: plan
+    name: ID-003 validation ${{ matrix.index }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    defaults:
+      run:
+        shell: micromamba-shell {0}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: opa-fdtd
+          create-args: >-
+            --file ${{ inputs.lock }}
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: id003-search-*
+          path: search-shards
+      - name: Independently simulate selected geometry and scenario
+        env:
+          INDEX: ${{ matrix.index }}
+        run: python simulations/meep/robust_coupler_v003.py validate --index "$INDEX"
+      - uses: actions/upload-artifact@v6
+        with:
+          name: id003-validation-${{ matrix.index }}
+          path: shard/shard.json
+          overwrite: true
+          if-no-files-found: error
+
+  aggregate:
+    needs: [plan, validation]
+    name: opa-id-003
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: micromamba-shell {0}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Remove archived report before environment setup
+        shell: bash
+        run: |
+          python3 tools/bundle_experiments.py prepare opa-id-003 results/opa-id-003
+          rm -rf results/opa-id-003/shards
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: opa-fdtd
+          create-args: >-
+            --file ${{ inputs.lock }}
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: id003-search-*
+          path: search-shards
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: id003-validation-*
+          path: validation-shards
+      - name: Remove previous report and archive locked environment
+        env:
+          LOCK: ${{ inputs.lock }}
+        run: |
+          cp "$LOCK" results/opa-id-003/environment-lock.txt
+          micromamba list -n opa-fdtd --json > results/opa-id-003/installed-packages.json
+      - name: Aggregate complete shards and evaluate scientific checks
+        run: python simulations/meep/robust_coupler_v003.py aggregate
+      - name: Print report
+        if: always()
+        run: |
+          if [ -f results/opa-id-003/result.json ]; then cat results/opa-id-003/result.json; fi
+      - uses: actions/upload-artifact@v6
+        if: success() || failure()
+        with:
+          name: opa-id-003
+          path: results/opa-id-003/
+          overwrite: true
+          if-no-files-found: error

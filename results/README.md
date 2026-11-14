@@ -47,6 +47,8 @@ Circuit (MZI) experiments use numpy from the same environment.
 
 | MOD-007 | [Report and reconstruction](opa-mod-007/README.md) | Hybrid loss lower in 36/36 uncalibrated and 22/36 calibrated comparisons; 11/11 checks | Synthetic classification, electronic activation and backward, phase oracle; no hardware or energy claim |
 
+| ID-001 | [Report](opa-id-001/README.md), [JSON](opa-id-001/result.json) | 7/7 checks; fine directional error 3.64e-7 vs 0.5701 with short normalization window | 2D continuous dielectric field objective; no transmission or fabrication claim |
+
 The 3D results from 007–010 and from 011 describe different polarizations
 (TM-like versus TE-like) and are normalized differently, so they should not be
 compared number for number.

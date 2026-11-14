@@ -1,0 +1,39 @@
+{
+  "experiment": "OPA-ID-001",
+  "workflow_run_id": 43596583595,
+  "job_id": 132452389643,
+  "artifact_id": 14114842305,
+  "artifact_sha256": "6bcc0996eb6b3c4d06613cbe20ef5c0a4da99d88149701d0d2d70f85d8865d9a",
+  "head_sha": "6fc775b98d4d236666934f77e72284d5ff178e08",
+  "merge_sha": "431016c3af9abbf01c2a6644707e846d2f1562ab",
+  "pull_request": 51,
+  "source_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/43596583595/job/132452389643",
+  "files": {
+    "result.json": {
+      "bytes": 38135,
+      "sha256": "848a964494dabee45ea2a849ee95e590a890f45838c81e3ea719a733b341407d",
+      "archived": true
+    },
+    "gradient_checks.csv": {
+      "bytes": 958,
+      "sha256": "2236701f45b1a2e0f15e5433891a6cf8ca53c3a6b8c31762334ae09c22e50069",
+      "archived": true
+    },
+    "environment-lock.txt": {
+      "bytes": 9596,
+      "sha256": "0c16eed28a615f82016ef367494ec4278745fa18aff859533c253355aac0d1da",
+      "archived": true
+    },
+    "upstream_reference.log": {
+      "bytes": 4010,
+      "sha256": "8f1f9ddf18bfc4ce6fd4056839b0ae92d04fcb3d278cc3a1d02b81f644fe8940",
+      "archived": true
+    },
+    "installed-packages.json": {
+      "bytes": 69143,
+      "sha256": "214529956d0e62a98d1cc089bf291acf6295eb85958868136c0b2aaa0b9d5ec3",
+      "archived": false
+    }
+  },
+  "verification": "Original ZIP SHA-256 checked locally. Four archived files matched original Git blob SHA byte for byte. Installed package inventory recorded by hash only; exact environment lock retained."
+}

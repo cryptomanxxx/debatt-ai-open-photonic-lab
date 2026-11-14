@@ -11,8 +11,8 @@ import numpy as np
 
 from modular_power_budget_v002 import N
 from modular_imperfections_v003 import prepare, SCENARIOS, LOSSES
-from modular_calibration_v004 import hardware
-from modular_training_v006 import optical, CAL_COUNT
+from modular_calibration_v004 import hardware, fields, gain_sets, sum_tiles
+from modular_training_v006 import CAL_COUNT
 
 OUT = Path("results/opa-mod-007")
 SEEDS = (707, 708, 709)
@@ -117,12 +117,65 @@ def train_model(w0, data, multiply, record):
     return w
 
 
+def noise_streams(seed, step, layer):
+    # Domain-separated streams; calibration never advances inference RNG.
+    return tuple(np.random.default_rng(np.random.SeedSequence(
+        [seed,step,layer,stream])) for stream in (0,1))
+
+
+def optical(w, x, b, hw, params, loss, local, probes, inference_rng, calibration_rng):
+    tiles = prepare(w,b)
+    def read(inputs,rng):
+        noise = [rng.normal(size=(b,inputs.shape[1])) for _ in tiles]
+        return fields(tiles,hw,b,inputs,params,loss,local,noise)
+    gains = [1.]*len(tiles)
+    if local:
+        cal,_,_,_,_ = read(probes,calibration_rng)
+        gains = gain_sets(tiles,w,probes,cal,b)["tile"]
+    measured,_,detected,launched,clips = read(x,inference_rng)
+    return sum_tiles(tiles,measured,x,b,gains), {
+        "passive_excess": float(max(0.,np.max(detected-launched))),
+        "mean_detected_power": float(detected.mean()),
+        "clips": int(clips),
+        "calibration_vectors": CAL_COUNT if local else 0,
+    }
+
+
+def noise_pairing_control():
+    # Exercise actual optical path, not just the seed helper: record the
+    # receiver-noise arrays supplied to fields in each policy.
+    from unittest.mock import patch
+    rng = np.random.default_rng(701)
+    w = rng.normal(size=(N,N))/np.sqrt(N)
+    x = rng.normal(size=(N,8))
+    probes = rng.normal(size=(N,CAL_COUNT))
+    b = 16
+    hw = hardware(prepare(w,b),rng)
+    captured = []
+    original_fields = fields
+    def spy(tiles, chip, size, inputs, params, loss, local, noise):
+        captured.append([v.copy() for v in noise])
+        return original_fields(tiles,chip,size,inputs,params,loss,local,noise)
+    with patch(__name__+".fields",side_effect=spy):
+        for local in (False,True):
+            inference_rng,calibration_rng = noise_streams(701,0,0)
+            optical(w,x,b,hw,SCENARIOS["combined_high"],LOSSES["moderate"],
+                    local,probes,inference_rng,calibration_rng)
+    # Uncalibrated inference, calibrated probes, calibrated inference.
+    return (len(captured)==3 and
+            len(captured[0])==len(captured[1])==len(captured[2]) and
+            all(np.array_equal(a,c) for a,c in zip(captured[0],captured[2])) and
+            all(not np.array_equal(a,p[:,:x.shape[1]])
+                for a,p in zip(captured[0],captured[1])))
+
+
 def optical_factory(b, hw, params, local, probes, seed, diag):
     def for_step(step):
         def multiply(layer,w,x):
             # Independent receiver noise by layer and step, paired across policies.
-            rng = np.random.default_rng(np.random.SeedSequence([seed,step,layer]))
-            y,d = optical(w,x,b,hw[layer],params,LOSSES["moderate"],local,probes,rng)
+            inference_rng,calibration_rng = noise_streams(seed,step,layer)
+            y,d = optical(w,x,b,hw[layer],params,LOSSES["moderate"],local,probes,
+                          inference_rng,calibration_rng)
             diag.append(d)
             return y
         return multiply
@@ -157,6 +210,9 @@ def main():
     print("Digital preflight:", [(r["seed"],r["depth"],r["initial_loss"],r["test_loss"],r["test_accuracy"]) for r in rows],flush=True)
     if "--digital-only" in sys.argv:
         return 0
+    noise_paired = noise_pairing_control()
+    if not noise_paired:
+        raise RuntimeError("Receiver noise pairing check failed")
     for seed,depth,data,w0,digital,initial_loss,initial_acc in baselines:
         _,_,test,ytest,probes,_ = data
         for b in SIZES:
@@ -206,6 +262,7 @@ def main():
                         delta_accuracy=pair[1]["test_accuracy"]-pair[0]["test_accuracy"]))
     groups = len(SEEDS)*len(DEPTHS)*len(SIZES)*len(SCENES)
     checks = {
+        "receiver_noise_paired_across_calibration": noise_paired,
         "digital_gradient_finite_difference": grad_error<1e-7,
         "digital_preflight": all(r["test_loss"]<r["initial_loss"] for r in rows if r["method"]=="digital"),
         "ideal_multilayer_forward": max(controls)<TOL,
@@ -230,7 +287,7 @@ def main():
           "Square optical layers, electronic tanh, first four final outputs used as class logits.",
           "Digital straight-through gradients ignore optical programming derivatives.",
           "Fixed independent static errors per layer, hypothetical receiver noise and loss.",
-          "Independent Gaussian calibration probes for each programming event; phase oracle from MOD-004.",
+          "Gaussian calibration probes independent of training/test, reused across programming events; separate probe and inference noise streams; phase oracle from MOD-004.",
           "No optical backward, hardware measurement, latency or energy claim.",
           "Layer errors measure cumulative activation differences, not isolated layer errors."],
         checks=checks,gradient_max_abs_error=grad_error,ideal_max_abs_error=max(controls),

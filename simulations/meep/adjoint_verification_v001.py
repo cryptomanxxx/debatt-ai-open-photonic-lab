@@ -6,6 +6,8 @@ import csv
 import json
 from pathlib import Path
 import time
+import subprocess
+import sys
 
 import autograd.numpy as npa
 import meep as mp
@@ -64,6 +66,15 @@ def evaluate(weights, resolution, gradient=False):
 
 def main():
     started = time.monotonic()
+    OUT.mkdir(parents=True,exist_ok=True)
+    reference_dir = Path(__file__).resolve().parent / 'upstream_adjoint'
+    command = [sys.executable, '-m', 'unittest', '-v',
+               'test_adjoint_solver.TestAdjointSolver.test_DFT_fields']
+    print('Running unmodified upstream Meep DFT adjoint reference test', flush=True)
+    with (OUT/'upstream_reference.log').open('w') as log:
+        reference = subprocess.run(command, cwd=reference_dir, stdout=log,
+                                   stderr=subprocess.STDOUT, timeout=600, check=False)
+    print(f'Upstream reference exit code: {reference.returncode}', flush=True)
     weights = 0.45+0.12*np.sin(np.linspace(0,2*np.pi,N))
     rng = np.random.default_rng(101)
     directions = [np.ones(N), rng.normal(size=N), np.cos(np.linspace(0,2*np.pi,N))]
@@ -93,7 +104,8 @@ def main():
             candidate_weights=candidate.tolist(),candidate_objective=improved,
             ascent_gain=improved-val))
     fine = [r for r in records if r["resolution"]==RESOLUTIONS[-1] and r["step"]==EPS[-1]]
-    checks = dict(all_directions=len(records)==len(RESOLUTIONS)*len(directions)*len(EPS),
+    checks = dict(upstream_reference_passes=reference.returncode==0,
+        all_directions=len(records)==len(RESOLUTIONS)*len(directions)*len(EPS),
         finite=all(np.isfinite(r[k]) for r in records for k in ("adjoint","finite_difference","scaled_error"))
             and all(np.isfinite(r[k]) for r in runs for k in ("objective","gradient_norm","candidate_objective")),
         nonzero_gradient=all(r["gradient_norm"]>1e-10 for r in runs),
@@ -110,6 +122,8 @@ def main():
             "Continuous grayscale material weights; no binary geometry or fabrication claim.",
             "Finite differences use independently rebuilt forward simulations.",
             "Directional error normalized by full adjoint gradient norm; not componentwise relative error."],
+        upstream_reference=dict(tag='v1.35.1',test=command[-1],exit_code=reference.returncode,
+            log='upstream_reference.log'),
         initial_weights=weights.tolist(),directions=[d.tolist() for d in directions],
         checks=checks,measurements=records,runs=runs,elapsed_seconds=time.monotonic()-started)
     OUT.mkdir(parents=True,exist_ok=True)

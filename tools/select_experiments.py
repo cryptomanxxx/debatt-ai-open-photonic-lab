@@ -98,6 +98,11 @@ def check(reg, repo=REPO):
         if not script.is_file():
             errors.append(f"{e['id']}: script '{e['script']}' does not exist")
             continue
+        if "lock" in e:
+            lock = e["lock"]
+            if (not isinstance(lock, str) or lock not in e["deps"]
+                    or not re.fullmatch(r"simulations/meep/[A-Za-z0-9_-]+\.lock\.txt", lock)):
+                errors.append(f"{e['id']}: custom lock must be a simulations/meep lock file listed in deps")
         for d in e["deps"]:
             hit = any(repo.glob(d)) if any(c in d for c in "*?[") else (repo / d).is_file()
             if not hit:

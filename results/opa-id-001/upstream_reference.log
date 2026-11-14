@@ -1,0 +1,97 @@
+test_DFT_fields (test_adjoint_solver.TestAdjointSolver.test_DFT_fields)
+Verifies that the adjoint gradient for an objective function based ... *** TESTING DFT OBJECTIVE ***
+Starting forward run...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000125885 s
+Working in 2D dimensions.
+Computational cell is 5 x 5 x 0 with resolution 30
+     block, center = (0,0,0)
+          size (1e+20,1,1e+20)
+          axes (1,0,0), (0,1,0), (0,0,1)
+          dielectric constant epsilon diagonal = (12,12,12)
+     block, center = (0,0,0)
+          size (1.5,1.5,0)
+          axes (1,0,0), (0,1,0), (0,0,1)
+time for set_epsilon = 0.022012 s
+-----------
+MPB solved for frequency_1(2.2349,0,0) = 0.657635 after 15 iters
+MPB solved for frequency_1(2.19109,0,0) = 0.645164 after 8 iters
+MPB solved for frequency_1(2.19108,0,0) = 0.645161 after 1 iters
+run 0 finished at t = 465.3 (27918 timesteps)
+Starting adjoint run...
+run 1 finished at t = 235.0 (14100 timesteps)
+Calculating gradient...
+Starting forward run...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000135183 s
+Working in 2D dimensions.
+Computational cell is 5 x 5 x 0 with resolution 30
+     block, center = (0,0,0)
+          size (1e+20,1,1e+20)
+          axes (1,0,0), (0,1,0), (0,0,1)
+          dielectric constant epsilon diagonal = (12,12,12)
+     block, center = (0,0,0)
+          size (1.5,1.5,0)
+          axes (1,0,0), (0,1,0), (0,0,1)
+time for set_epsilon = 0.0217922 s
+-----------
+MPB solved for frequency_1(2.2349,0,0) = 0.657635 after 15 iters
+MPB solved for frequency_1(2.19109,0,0) = 0.645164 after 8 iters
+MPB solved for frequency_1(2.19108,0,0) = 0.645161 after 1 iters
+run 0 finished at t = 465.3 (27918 timesteps)
+PASSED: frequencies=[0.6451612903225806], adjoint gradient=[0.00530896], finite difference=[0.00530921]
+Starting forward run...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000132799 s
+Working in 2D dimensions.
+Computational cell is 5 x 5 x 0 with resolution 30
+     block, center = (0,0,0)
+          size (1e+20,1,1e+20)
+          axes (1,0,0), (0,1,0), (0,0,1)
+          dielectric constant epsilon diagonal = (12,12,12)
+     block, center = (0,0,0)
+          size (1.5,1.5,0)
+          axes (1,0,0), (0,1,0), (0,0,1)
+time for set_epsilon = 0.0220602 s
+-----------
+MPB solved for frequency_1(2.2349,0,0) = 0.657635 after 15 iters
+MPB solved for frequency_1(2.19109,0,0) = 0.645164 after 8 iters
+MPB solved for frequency_1(2.19108,0,0) = 0.645161 after 1 iters
+/home/runner/micromamba/envs/opa-fdtd/lib/python3.11/site-packages/meep/adjoint/filter_source.py:187: RuntimeWarning: invalid value encountered in divide
+  l2_err = np.sum(np.abs(H - H_hat.T) ** 2 / np.abs(H) ** 2)
+run 0 finished at t = 344.1166666666667 (20647 timesteps)
+Starting adjoint run...
+on time step 16612 (time=276.867), 0.000240798 s/step
+run 1 finished at t = 567.3166666666666 (34039 timesteps)
+Calculating gradient...
+Starting forward run...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000138998 s
+Working in 2D dimensions.
+Computational cell is 5 x 5 x 0 with resolution 30
+     block, center = (0,0,0)
+          size (1e+20,1,1e+20)
+          axes (1,0,0), (0,1,0), (0,0,1)
+          dielectric constant epsilon diagonal = (12,12,12)
+     block, center = (0,0,0)
+          size (1.5,1.5,0)
+          axes (1,0,0), (0,1,0), (0,0,1)
+time for set_epsilon = 0.021955 s
+-----------
+MPB solved for frequency_1(2.2349,0,0) = 0.657635 after 15 iters
+MPB solved for frequency_1(2.19109,0,0) = 0.645164 after 8 iters
+MPB solved for frequency_1(2.19108,0,0) = 0.645161 after 1 iters
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 21.434s
+
+OK
+run 0 finished at t = 344.1166666666667 (20647 timesteps)
+PASSED: frequencies=[0.642258064516129, 0.6451612903225806, 0.6470967741935484], adjoint gradient=[0.00339752 0.00531011 0.00499641], finite difference=[0.00340386 0.00530921 0.00498934]
+
+Elapsed run time = 21.7157 s

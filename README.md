@@ -253,14 +253,14 @@ positive is needed.
 The experiment compares digital training and deployment against hybrid training
 with an explicit modular optical forward pass and a digital straight-through
 backward update. A synthetic 128-dimensional linear teacher, fixed train/test
-and calibration splits, three seeds, 16 updates, and 16/64/128-wide tiles are
+and calibration splits, three seeds, 16 updates at learning rate 0.15, and 16/64/128-wide tiles are
 used. Each comparison shares the initial weights, training batches, static
 hardware draws and held-out receiver-noise seed. MOD-003/004 models provide
 two nonideal scenarios and optional local-phase and tile-gain calibration.
 
 The research outcome is the paired held-out MSE difference (hybrid minus
 digital deployment), not a required improvement. CI checks ideal forward
-equivalence, completeness, finite metrics, passivity, digital learning and
+equivalence, completeness, finite metrics, passivity, all-seed digital learning preflight before optical work, and
 calibration probe accounting. JSON and CSV artifacts include learning curves
 and individual paired comparisons. Results will be archived after CI.
 

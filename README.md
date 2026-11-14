@@ -317,6 +317,14 @@ The 2D variant follows the geometry class of Meep's upstream adjoint DFT tests;
 acceptance tolerance remains unchanged. This change does not establish the cause
 of the 1D discrepancy or verify the 2D gradients until CI passes.
 
+The official upstream DFT test passed in runs 43595779929 and 43596257206,
+while the local mean and single-sample objectives failed. Meep v1.35.1
+normalizes the adjoint pulse using the forward simulation duration; our
+short forward run ended near t=51, before the adjoint Gaussian duration
+of 155. The minimum simulation time is now 200, with a short-window
+control at the same fine resolution. This is a testable causal hypothesis,
+not a verified fix. The original mean-objective tolerance remains 0.15.
+
 The experiment uses a separate explicit environment lock extending the
 existing Meep lock with Autograd 1.9.1. Other experiments retain their
 original environment. JSON and CSV record all gradients, finite differences,

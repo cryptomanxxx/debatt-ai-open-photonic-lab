@@ -1,0 +1,49 @@
+{
+  "experiment": "OPA-ID-002",
+  "workflow_run_id": 43616022779,
+  "job_id": 132511275395,
+  "artifact_id": 14121614098,
+  "artifact_sha256": "6388e20c3997125a4eda23e198f5e2f5998a63cbf14d3334e9983e14b7c8fd8b",
+  "head_sha": "9acc0e494bdd7bc893354cb94e418a57d22c2ae5",
+  "merge_sha": "f10af53ef0958911db3827322f98dc51d0e8702a",
+  "pull_request": 53,
+  "source_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/43616022779/job/132511275395",
+  "files": {
+    "gradient_checks.csv": {
+      "bytes": 1285,
+      "sha256": "b56b9dfd72f071a0918849b35514523f51e76c796a469250a9e97ae31a93b47c",
+      "archived": true
+    },
+    "installed-packages.json": {
+      "bytes": 69143,
+      "sha256": "214529956d0e62a98d1cc089bf291acf6295eb85958868136c0b2aaa0b9d5ec3",
+      "archived": false
+    },
+    "environment-lock.txt": {
+      "bytes": 9596,
+      "sha256": "0c16eed28a615f82016ef367494ec4278745fa18aff859533c253355aac0d1da",
+      "archived": true
+    },
+    "measurements.csv": {
+      "bytes": 1161,
+      "sha256": "3e042df053f6690d524d827d9e925ab95f493f0be310b4655b268b06e61fef6c",
+      "archived": true
+    },
+    "optimization_history.csv": {
+      "bytes": 418,
+      "sha256": "0414a9a8237926d46e06f0d3c440d08dca950e650334b7bdfcb397da04b7b726",
+      "archived": true
+    },
+    "optimized_density.csv": {
+      "bytes": 15625,
+      "sha256": "f3b30ccfca28713c9100311af1180c8c3b34cc6ef803fc5bffa6ebb1b9c98160",
+      "archived": true
+    },
+    "result.json": {
+      "bytes": 34396,
+      "sha256": "35dcc50e4c775aa6338c4fb478d3032bafbf8608ee558ce5716397cc9580c0c1",
+      "archived": true
+    }
+  },
+  "verification": "Original ZIP SHA-256 verified locally. Six archived files matched original Git blob SHA byte for byte. Installed package inventory recorded by SHA-256 only; exact environment lock retained."
+}

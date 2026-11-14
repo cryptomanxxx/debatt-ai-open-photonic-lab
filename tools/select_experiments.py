@@ -50,6 +50,7 @@ def select_changed(reg, changed, base_reg=None):
     # baseline, retain the conservative full non-heavy regression.
     entry_changes = set()
     policy_changed = registry_changed and base_reg is None
+    shared_policy_changed = False
     if registry_changed and base_reg is not None:
         old = {e["id"]: e for e in base_reg["experiments"]}
         entry_changes = {e["id"] for e in reg["experiments"]
@@ -60,6 +61,7 @@ def select_changed(reg, changed, base_reg=None):
         policy = lambda r: {k: v for k, v in r.items()
                             if k not in ("experiments", "_doc")}
         policy_changed = bool(removed) or policy(reg) != policy(base_reg)
+        shared_policy_changed = reg["shared"] != base_reg["shared"]
     machinery_patterns = set(reg["machinery"])
     shared_patterns = set(reg["shared"])
     if base_reg is not None:
@@ -72,7 +74,7 @@ def select_changed(reg, changed, base_reg=None):
     shared = any(c != DEFAULT_LOCK and matches(c, shared_patterns)
                  for c in changed)
     return [e for e in reg["experiments"]
-            if shared or (machinery and not e.get("heavy"))
+            if shared or shared_policy_changed or (machinery and not e.get("heavy"))
             or e["id"] in entry_changes
             or any(matches(c, [e["script"], e.get("lock", DEFAULT_LOCK)] + e["deps"])
                    for c in changed)]

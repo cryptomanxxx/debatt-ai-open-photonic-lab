@@ -1,0 +1,3572 @@
+5,
+      "delta_accuracy": 0.0234375
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 0.9827333617318182,
+      "hybrid_loss": 0.9751012154142815,
+      "delta_loss": -0.0076321463175367255,
+      "digital_deploy_accuracy": 0.640625,
+      "hybrid_accuracy": 0.625,
+      "delta_accuracy": -0.015625
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "calibration": "uncalibrated",
+      "digital_deploy_loss": 0.9939123416324116,
+      "hybrid_loss": 0.9913564732349475,
+      "delta_loss": -0.002555868397464134,
+      "digital_deploy_accuracy": 0.58203125,
+      "hybrid_accuracy": 0.5859375,
+      "delta_accuracy": 0.00390625
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 0.9897560420533323,
+      "hybrid_loss": 0.9898130700656678,
+      "delta_loss": 5.702801233542498e-05,
+      "digital_deploy_accuracy": 0.58203125,
+      "hybrid_accuracy": 0.58203125,
+      "delta_accuracy": 0.0
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "calibration": "uncalibrated",
+      "digital_deploy_loss": 1.0107576235855404,
+      "hybrid_loss": 0.9977865473928104,
+      "delta_loss": -0.01297107619273008,
+      "digital_deploy_accuracy": 0.5703125,
+      "hybrid_accuracy": 0.58203125,
+      "delta_accuracy": 0.01171875
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 0.9907000196182456,
+      "hybrid_loss": 0.9904420823049733,
+      "delta_loss": -0.00025793731327228286,
+      "digital_deploy_accuracy": 0.58203125,
+      "hybrid_accuracy": 0.57421875,
+      "delta_accuracy": -0.0078125
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "calibration": "uncalibrated",
+      "digital_deploy_loss": 1.0008756712384144,
+      "hybrid_loss": 0.9938747263895312,
+      "delta_loss": -0.007000944848883139,
+      "digital_deploy_accuracy": 0.58203125,
+      "hybrid_accuracy": 0.5859375,
+      "delta_accuracy": 0.00390625
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 0.9894546205951799,
+      "hybrid_loss": 0.9891623004088776,
+      "delta_loss": -0.00029232018630220846,
+      "digital_deploy_accuracy": 0.58203125,
+      "hybrid_accuracy": 0.58203125,
+      "delta_accuracy": 0.0
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "calibration": "uncalibrated",
+      "digital_deploy_loss": 1.0672469915412133,
+      "hybrid_loss": 1.0286693012575485,
+      "delta_loss": -0.038577690283664756,
+      "digital_deploy_accuracy": 0.5859375,
+      "hybrid_accuracy": 0.56640625,
+      "delta_accuracy": -0.01953125
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 0.9885849404621646,
+      "hybrid_loss": 0.988477946030126,
+      "delta_loss": -0.000106994432038654,
+      "digital_deploy_accuracy": 0.57421875,
+      "hybrid_accuracy": 0.5859375,
+      "delta_accuracy": 0.01171875
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "calibration": "uncalibrated",
+      "digital_deploy_loss": 1.0170171858996806,
+      "hybrid_loss": 0.9935693534118462,
+      "delta_loss": -0.02344783248783444,
+      "digital_deploy_accuracy": 0.58203125,
+      "hybrid_accuracy": 0.58984375,
+      "delta_accuracy": 0.0078125
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 0.9890489335443522,
+      "hybrid_loss": 0.9890787986964349,
+      "delta_loss": 2.9865152082697577e-05,
+      "digital_deploy_accuracy": 0.5859375,
+      "hybrid_accuracy": 0.58203125,
+      "delta_accuracy": -0.00390625
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "calibration": "uncalibrated",
+      "digital_deploy_loss": 1.171611053884068,
+      "hybrid_loss": 1.1096078635694213,
+      "delta_loss": -0.06200319031464674,
+      "digital_deploy_accuracy": 0.54296875,
+      "hybrid_accuracy": 0.59765625,
+      "delta_accuracy": 0.0546875
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 0.9959948478136138,
+      "hybrid_loss": 0.9911267825410479,
+      "delta_loss": -0.004868065272565891,
+      "digital_deploy_accuracy": 0.5703125,
+      "hybrid_accuracy": 0.56640625,
+      "delta_accuracy": -0.00390625
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "calibration": "uncalibrated",
+      "digital_deploy_loss": 1.0262983140515463,
+      "hybrid_loss": 1.0217541212753254,
+      "delta_loss": -0.004544192776220868,
+      "digital_deploy_accuracy": 0.5859375,
+      "hybrid_accuracy": 0.58203125,
+      "delta_accuracy": -0.00390625
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 1.0230747750352205,
+      "hybrid_loss": 1.0230602462773544,
+      "delta_loss": -1.4528757866116848e-05,
+      "digital_deploy_accuracy": 0.5859375,
+      "hybrid_accuracy": 0.5859375,
+      "delta_accuracy": 0.0
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "calibration": "uncalibrated",
+      "digital_deploy_loss": 1.042016234796943,
+      "hybrid_loss": 1.016378078976234,
+      "delta_loss": -0.025638155820709052,
+      "digital_deploy_accuracy": 0.578125,
+      "hybrid_accuracy": 0.58984375,
+      "delta_accuracy": 0.01171875
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 1.0215747825630703,
+      "hybrid_loss": 1.0220454538165478,
+      "delta_loss": 0.0004706712534774393,
+      "digital_deploy_accuracy": 0.58203125,
+      "hybrid_accuracy": 0.58984375,
+      "delta_accuracy": 0.0078125
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "calibration": "uncalibrated",
+      "digital_deploy_loss": 1.035899314848654,
+      "hybrid_loss": 1.0224018417260483,
+      "delta_loss": -0.01349747312260563,
+      "digital_deploy_accuracy": 0.58203125,
+      "hybrid_accuracy": 0.578125,
+      "delta_accuracy": -0.00390625
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 1.0228161431938,
+      "hybrid_loss": 1.0226965337468519,
+      "delta_loss": -0.00011960944694822118,
+      "digital_deploy_accuracy": 0.5859375,
+      "hybrid_accuracy": 0.578125,
+      "delta_accuracy": -0.0078125
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "calibration": "uncalibrated",
+      "digital_deploy_loss": 1.127155616563972,
+      "hybrid_loss": 1.04366744747161,
+      "delta_loss": -0.0834881690923619,
+      "digital_deploy_accuracy": 0.57421875,
+      "hybrid_accuracy": 0.6015625,
+      "delta_accuracy": 0.02734375
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 1.0228701048510054,
+      "hybrid_loss": 1.0273039761709484,
+      "delta_loss": 0.004433871319942995,
+      "digital_deploy_accuracy": 0.57421875,
+      "hybrid_accuracy": 0.55859375,
+      "delta_accuracy": -0.015625
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "calibration": "uncalibrated",
+      "digital_deploy_loss": 1.0545880223899655,
+      "hybrid_loss": 1.021486991808283,
+      "delta_loss": -0.03310103058168257,
+      "digital_deploy_accuracy": 0.57421875,
+      "hybrid_accuracy": 0.58203125,
+      "delta_accuracy": 0.0078125
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 1.0226091522148626,
+      "hybrid_loss": 1.0223429047539727,
+      "delta_loss": -0.00026624746088987905,
+      "digital_deploy_accuracy": 0.578125,
+      "hybrid_accuracy": 0.57421875,
+      "delta_accuracy": -0.00390625
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "calibration": "uncalibrated",
+      "digital_deploy_loss": 1.2477168733249506,
+      "hybrid_loss": 1.1649711869521606,
+      "delta_loss": -0.08274568637279,
+      "digital_deploy_accuracy": 0.5546875,
+      "hybrid_accuracy": 0.57421875,
+      "delta_accuracy": 0.01953125
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "calibration": "calibrated",
+      "digital_deploy_loss": 1.0269684435094542,
+      "hybrid_loss": 1.0217273297068843,
+      "delta_loss": -0.005241113802569863,
+      "digital_deploy_accuracy": 0.5703125,
+      "hybrid_accuracy": 0.5859375,
+      "delta_accuracy": 0.015625
+    }
+  ],
+  "layer_errors": [
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.016637712899151436
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.029133234132272392
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.01658767156777809
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.029070429508201805
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.004319163797822726
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.005842989371412827
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.004314589056476351
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.005838853992210905
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07601392335848259
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.13791074883795423
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07616694625548316
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.138000405228876
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.029082427414928693
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.039504173501278314
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.029097589964537544
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.039256542098630366
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.04383085609386969
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.09382546801207652
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.043894959026687025
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.09401994640111641
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.008172864074784039
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.011013886193158502
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.008153669344418274
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.011026281252085556
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.21244841050887292
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.41674093105777404
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.21492568460968395
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.4171755193871677
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.0556777154266301
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07476060031002142
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.05512884866568131
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07415613435025019
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07583356687915965
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.17483266543568915
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07641217463232475
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.1746234112041446
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.012307960627099835
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.016706503103224087
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.012359562689086561
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.016849103220169494
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.3775281744331298
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.6699930808061878
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.37897391648548145
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.6650142713163928
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.1454666970645671
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.197985492477176
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.14586085191312387
+    },
+    {
+      "seed": 707,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.197646255812553
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.016746723286162123
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.025202296598509002
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.03654151663476074
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.01677678943094109
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.025208965534932227
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.03653586211506152
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.004310545394291076
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.005914535018720485
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.007008446305177418
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.004309048378442313
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.00592378200137749
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.006986272265397488
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.0761829036785016
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.11746777850640455
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.17335472800749196
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07658920609165018
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.11637545472598837
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.17200992514739522
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.029016250736348833
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.039772653278563254
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.04705769009239123
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.028858204059690314
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.03972834675709457
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.04670715306780036
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.04375881058155617
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07245857698419413
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.12056093044981857
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.04357270846771811
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07236250214915693
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.12070752726824589
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.007924326348540595
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.011061087001042264
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.013341000735364763
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.007961169102478141
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.011044781681052914
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.013334635269694327
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.211689989817336
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.34721806911723496
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.5159600031388998
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.2128354095900175
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.3430175956445723
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.5117460862490195
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.0553532227179059
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.0764096815355486
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.08959787640543918
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.055269769408944985
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07623672394237205
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.08884648862826813
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07588694321342765
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.1322958438258152
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.22420278695064333
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07638578013454085
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.13229010396248245
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.22439613643139794
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.01232660635080681
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.017163545783089092
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.02018928819658198
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.012335961276342268
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.01710799625439145
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.020154495159319743
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.37735991727537943
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.6010107212035042
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.7869751718610136
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.38368331138051254
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.5927948268728181
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.7759663585938279
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.1453946307855512
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.20012175582762365
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.235012384285061
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.1448440315211455
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.20017067270188435
+    },
+    {
+      "seed": 707,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.23394573538881436
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.01709763305613508
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.02933942982902458
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.01710591397670165
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.029329063591257858
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.004302369054808204
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.005739160938280706
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.004308054016991347
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.005745635898230196
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07765159902368768
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.13883064599681041
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07750902694211685
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.13871802527702043
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.028961153790204756
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.038852560458945265
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.028905362517437517
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.038864975685767425
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.043120217554744544
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.09301449111273417
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.04323229569963104
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.09316831830979608
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.008089594338506232
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.011172082058254693
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.008135885606433114
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.011179514670137239
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.20625646046147791
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.41249618196507326
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.20551071092097156
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.4113408711390502
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.05449744008097916
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07447490921575685
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.05461483134168021
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07446599155134795
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07595008091538588
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.17355162478038128
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07558980504286018
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.17326540378320016
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.012394165004872029
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.016554187075635208
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.012311210714442234
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.016510186003436143
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.37919222216242104
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.6664576895664825
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.38251017645185587
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.6656656003196506
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.1443308804864384
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.19534760885562713
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.14485787475863413
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.19631903754498983
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.016872841543086034
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.025407289468925138
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.03752721928142998
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.01685811880363077
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.025397077479642163
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.03747410537215976
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.004334872531613979
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.006065869580311106
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.00703178233597425
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.004331664820026708
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.006064743639351988
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.0070203376262793485
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07703538197449064
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.11890943926298161
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.17757664906317033
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07687154612735521
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.11820400647821344
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.17637557963287354
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.02902464902921052
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.041192755096719796
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.04810720690866378
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.02897302463426892
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.041123392025845494
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.04785469713005621
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.043581070765470985
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07298392041806591
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.12286435613060902
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.0434799061868062
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07271729064888922
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.12210482219786034
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.008032657142932307
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.01126503102461349
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.013359454856925211
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.008004804236702667
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.01123555437241468
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.01331719735480922
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.20895295809098136
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.3483185759903058
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.52233882585734
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.20827760766020864
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.34349711115705595
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.5146220036901058
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.05445211127503089
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07642273042594938
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.09030690328889308
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.05472260643072748
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07691033140601054
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.09051228957062513
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07603511078765274
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.13385015658663682
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.2255054904741205
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07584227867650407
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.1331194021499484
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.2237697331263392
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.01233066762536909
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.017065350446734923
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.020401639729743754
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.012363124369412243
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.017082830270040473
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.020367794842624035
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.38115548965194995
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.6037440707705527
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.7889719047824364
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.3853506969968864
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.5929802123137022
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.7783897799711639
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.1465971926041419
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.20274579804975496
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.23630290662202091
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.14685104689747383
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.20270575062136312
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.23940124314615108
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.017299160274288364
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.02934783436295361
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.017316841035822546
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.029274778510795855
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.004298185617084099
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.005811090376794578
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.004298674437907094
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.005801280088148054
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07828491067959803
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.13808127691399627
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.0783048198144867
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.13786563958296089
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.0290066678840209
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.03888343827732847
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.02895167971348667
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.03895622592829232
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.04362208711397155
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.0932413547773821
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.04353047372388871
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.09322439494898706
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.008119322474747087
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.010920410212637727
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.008085713322650954
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.010869667450244282
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.20998768763674627
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.41389684679127825
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.20776342423462899
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.41242771871668155
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.055894712043088116
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07426669179762324
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.055934740904214915
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07411607361969594
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07630280350924774
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.1734586420296555
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07581075420156203
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.17333916738672017
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.012382806685310449
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.016751141052707315
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.012423376287182134
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.0167574069044881
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.3803995802085698
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.6647824273358206
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.37965860134478474
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.6639948892265554
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.14719596393290824
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.19428343399968556
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.14763015416381173
+    },
+    {
+      "seed": 709,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.19369536652355088
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.017045053065761043
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.025641974193259146
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.03700306226703604
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.017027649323336093
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.02564251443592963
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.036930667916412
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.0042727641390191366
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.0059042773400810955
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.0069134164351257205
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.004273540163743311
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.005883423722336085
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.0069000564293355505
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07743762027069562
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.11846729533678166
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.17405522654805586
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07758357028967261
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.11800223117581067
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.173529293139675
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.028595017168459885
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.04043927350094467
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.047382089272863734
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.028640178579091586
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.04037836129239994
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.04744927963542966
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.043017905161858334
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07284174617434643
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.12076596905079455
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.04327854466985194
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07320080007777958
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.12077462822499961
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.008292910114600977
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.01148677766733824
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.013794731272803281
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.00830623861365985
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.01149913670449413
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.013781883145867254
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.20705268116437825
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.34731757852146183
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.5163684873110359
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.20782528382228566
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.343676448933579
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.5102440980457263
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.05517254740080072
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07707564872957988
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.09106334961553618
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.055034863595586216
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.07720246654052768
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.0911875164589334
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07596101608280753
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.13317113474107667
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.22565236890748633
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.07554158919629948
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.13241088332467996
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.2250516764453927
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.012371735711478619
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.017363656266833026
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.020319015609749594
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.012414767356766788
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.017344896745793963
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.020390282797751336
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.3773012534740339
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.6018283850177684
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.7875935231052763
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 1,
+      "relative_activation_error": 0.37676219616812
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 2,
+      "relative_activation_error": 0.5899581510930766
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "layer": 3,
+      "relative_activation_error": 0.7803515614476549
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.14354912505413434
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.20170118672518156
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "digital_deploy_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.23656266488347907
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 1,
+      "relative_activation_error": 0.1435099924353204
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 2,
+      "relative_activation_error": 0.20201496711944092
+    },
+    {
+      "seed": 709,
+      "depth": 3,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "layer": 3,
+      "relative_activation_error": 0.2362918258284113
+    }
+  ]
+}

@@ -1,0 +1,4450 @@
+",
+      "method": "hybrid_uncalibrated",
+      "step": 15,
+      "train_loss": 1.0235136258542379
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 16,
+      "train_loss": 1.0115780292589607
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 17,
+      "train_loss": 0.8858171732674001
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 18,
+      "train_loss": 1.003198883612149
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 19,
+      "train_loss": 0.9540924994456026
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 20,
+      "train_loss": 1.011117470953513
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 21,
+      "train_loss": 0.903660403718109
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 22,
+      "train_loss": 0.9580533839849801
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 23,
+      "train_loss": 0.9576838625605093
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 24,
+      "train_loss": 0.8885742202130431
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 25,
+      "train_loss": 0.8626311595337575
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 26,
+      "train_loss": 0.8772953434692518
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 27,
+      "train_loss": 0.9253117576939881
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 28,
+      "train_loss": 0.8640696659477737
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 29,
+      "train_loss": 0.811447931140729
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 30,
+      "train_loss": 0.8114625030723035
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 31,
+      "train_loss": 0.7888650754904369
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 0,
+      "train_loss": 1.3933288929735261
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 1,
+      "train_loss": 1.493435964426923
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 2,
+      "train_loss": 1.4251680012033963
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 3,
+      "train_loss": 1.2877357828569669
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 4,
+      "train_loss": 1.250948891831427
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 5,
+      "train_loss": 1.3088989698913411
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 6,
+      "train_loss": 1.2483789990765881
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 7,
+      "train_loss": 1.2765676925110432
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 8,
+      "train_loss": 1.1843575009711338
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 9,
+      "train_loss": 1.1829633495359555
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 10,
+      "train_loss": 1.0536454027130553
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 11,
+      "train_loss": 1.1814025467264693
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 12,
+      "train_loss": 1.0378049839892864
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 13,
+      "train_loss": 1.051307244471885
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 14,
+      "train_loss": 1.0591117600008755
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 15,
+      "train_loss": 1.0149910745238047
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 16,
+      "train_loss": 0.9921082234007785
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 17,
+      "train_loss": 0.8664654734586997
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 18,
+      "train_loss": 0.981912145782552
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 19,
+      "train_loss": 0.9396713933995906
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 20,
+      "train_loss": 0.9997595428032997
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 21,
+      "train_loss": 0.8889665825586512
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 22,
+      "train_loss": 0.9435401202678289
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 23,
+      "train_loss": 0.9451160749414174
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 24,
+      "train_loss": 0.8711545443563502
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 25,
+      "train_loss": 0.8480924515754744
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 26,
+      "train_loss": 0.8632525991339741
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 27,
+      "train_loss": 0.9150662374853007
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 28,
+      "train_loss": 0.8475911741452645
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 29,
+      "train_loss": 0.7941616109835734
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 30,
+      "train_loss": 0.7924181160521895
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 31,
+      "train_loss": 0.7793137854571149
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 0,
+      "train_loss": 1.3560262031380845
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 1,
+      "train_loss": 1.427321560542408
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 2,
+      "train_loss": 1.3975958678849025
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 3,
+      "train_loss": 1.2949623643707
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 4,
+      "train_loss": 1.2821515361596623
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 5,
+      "train_loss": 1.2983161101323977
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 6,
+      "train_loss": 1.270022109182896
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 7,
+      "train_loss": 1.2662841653601107
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 8,
+      "train_loss": 1.2203284495612237
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 9,
+      "train_loss": 1.2286498240655563
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 10,
+      "train_loss": 1.1338630276509336
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 11,
+      "train_loss": 1.2219117599081692
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 12,
+      "train_loss": 1.112504301529526
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 13,
+      "train_loss": 1.1261730187616301
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 14,
+      "train_loss": 1.1307885325702054
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 15,
+      "train_loss": 1.0917910018078976
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 16,
+      "train_loss": 1.0837347162782593
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 17,
+      "train_loss": 0.9846085521092227
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 18,
+      "train_loss": 1.0587331635856658
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 19,
+      "train_loss": 1.0280823682453764
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 20,
+      "train_loss": 1.075504207491296
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 21,
+      "train_loss": 0.9829320948942487
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 22,
+      "train_loss": 1.0431428210474225
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 23,
+      "train_loss": 1.0268293271102427
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 24,
+      "train_loss": 0.973804838167797
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 25,
+      "train_loss": 0.9368809267338118
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 26,
+      "train_loss": 0.9533653184994129
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 27,
+      "train_loss": 0.9891021062204941
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 28,
+      "train_loss": 0.9410896531134882
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 29,
+      "train_loss": 0.8986405208065797
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 30,
+      "train_loss": 0.89716632121908
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 31,
+      "train_loss": 0.8631425546000783
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 0,
+      "train_loss": 1.3866832574475167
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 1,
+      "train_loss": 1.4829909925568816
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 2,
+      "train_loss": 1.4253987356629265
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 3,
+      "train_loss": 1.3007172257355273
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 4,
+      "train_loss": 1.2434324807195045
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 5,
+      "train_loss": 1.318518054684724
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 6,
+      "train_loss": 1.244985349879225
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 7,
+      "train_loss": 1.2800367564222475
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 8,
+      "train_loss": 1.180406613184098
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 9,
+      "train_loss": 1.1853766856240193
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 10,
+      "train_loss": 1.0543815268270977
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 11,
+      "train_loss": 1.1822516658446882
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 12,
+      "train_loss": 1.0395233717541021
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 13,
+      "train_loss": 1.059446104670609
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 14,
+      "train_loss": 1.068979850471627
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 15,
+      "train_loss": 1.014089983357608
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 16,
+      "train_loss": 0.9981130690890578
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 17,
+      "train_loss": 0.8642597189964056
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 18,
+      "train_loss": 0.9911405638994866
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 19,
+      "train_loss": 0.9421844000823467
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 20,
+      "train_loss": 0.997218450200462
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 21,
+      "train_loss": 0.8903122019847713
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 22,
+      "train_loss": 0.9458481429680224
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 23,
+      "train_loss": 0.9463946084947037
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 24,
+      "train_loss": 0.8706038027418548
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 25,
+      "train_loss": 0.8508878182920229
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 26,
+      "train_loss": 0.8681339041613134
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 27,
+      "train_loss": 0.9059809711071463
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 28,
+      "train_loss": 0.8399089067413291
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 29,
+      "train_loss": 0.7893475974575632
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 30,
+      "train_loss": 0.7865907520436319
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 31,
+      "train_loss": 0.7775425867700285
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 0,
+      "train_loss": 1.3751402007684121
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 1,
+      "train_loss": 1.4695626499188896
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 2,
+      "train_loss": 1.3960814998341948
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 3,
+      "train_loss": 1.288745561585086
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 4,
+      "train_loss": 1.2604823735838495
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 5,
+      "train_loss": 1.2993164064073364
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 6,
+      "train_loss": 1.245694365492105
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 7,
+      "train_loss": 1.2795611734937729
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 8,
+      "train_loss": 1.1978751671920196
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 9,
+      "train_loss": 1.1990041384730086
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 10,
+      "train_loss": 1.085892439070426
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 11,
+      "train_loss": 1.1937409598845439
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 12,
+      "train_loss": 1.0662934739825376
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 13,
+      "train_loss": 1.0790339612957225
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 14,
+      "train_loss": 1.0789261626329059
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 15,
+      "train_loss": 1.0380449069529671
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 16,
+      "train_loss": 1.0271073267687563
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 17,
+      "train_loss": 0.9066766857007733
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 18,
+      "train_loss": 1.0129102432858732
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 19,
+      "train_loss": 0.9730270405082679
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 20,
+      "train_loss": 1.0320185904500363
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 21,
+      "train_loss": 0.9171209269299969
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 22,
+      "train_loss": 0.9757128112735642
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 23,
+      "train_loss": 0.9620139515883785
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 24,
+      "train_loss": 0.9071968824490004
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 25,
+      "train_loss": 0.878909499636559
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 26,
+      "train_loss": 0.8929071947431108
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 27,
+      "train_loss": 0.9440133941049813
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 28,
+      "train_loss": 0.8857655341383941
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 29,
+      "train_loss": 0.8288351837755433
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 30,
+      "train_loss": 0.8231708104278456
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 31,
+      "train_loss": 0.800140042031753
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 0,
+      "train_loss": 1.393253097440804
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 1,
+      "train_loss": 1.4966922689187747
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 2,
+      "train_loss": 1.425243819006587
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 3,
+      "train_loss": 1.2881386820459924
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 4,
+      "train_loss": 1.249349837253059
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 5,
+      "train_loss": 1.3081314583545802
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 6,
+      "train_loss": 1.2467242435972805
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 7,
+      "train_loss": 1.2754074848684964
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 8,
+      "train_loss": 1.1849701867918825
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 9,
+      "train_loss": 1.1827403747946168
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 10,
+      "train_loss": 1.0541693660985962
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 11,
+      "train_loss": 1.1812176083446417
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 12,
+      "train_loss": 1.0380566900105581
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 13,
+      "train_loss": 1.0507053880832666
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 14,
+      "train_loss": 1.0587650596125355
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 15,
+      "train_loss": 1.015448108659276
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 16,
+      "train_loss": 0.9932168262775163
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 17,
+      "train_loss": 0.8652459807513824
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 18,
+      "train_loss": 0.9814460303343568
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 19,
+      "train_loss": 0.9383692482855188
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 20,
+      "train_loss": 1.002662797117359
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 21,
+      "train_loss": 0.8890738697245003
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 22,
+      "train_loss": 0.9442636114637357
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 23,
+      "train_loss": 0.9463781077089115
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 24,
+      "train_loss": 0.8703195765223486
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 25,
+      "train_loss": 0.8470628156786761
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 26,
+      "train_loss": 0.8618739372404653
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 27,
+      "train_loss": 0.9140847323250223
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 28,
+      "train_loss": 0.8462330575182073
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 29,
+      "train_loss": 0.7931281345685322
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 30,
+      "train_loss": 0.7890965657724482
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 31,
+      "train_loss": 0.778636051219542
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 0,
+      "train_loss": 1.3662917815286857
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 1,
+      "train_loss": 1.4073920272150529
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 2,
+      "train_loss": 1.3669963171351265
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 3,
+      "train_loss": 1.3166010103410515
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 4,
+      "train_loss": 1.303890158057946
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 5,
+      "train_loss": 1.311313906120569
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 6,
+      "train_loss": 1.296514733704035
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 7,
+      "train_loss": 1.3142278760861283
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 8,
+      "train_loss": 1.2824453845796766
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 9,
+      "train_loss": 1.2741427624995894
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 10,
+      "train_loss": 1.2286234735798618
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 11,
+      "train_loss": 1.2823684626909353
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 12,
+      "train_loss": 1.2209656675508553
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 13,
+      "train_loss": 1.2127734859548174
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 14,
+      "train_loss": 1.194391794180817
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 15,
+      "train_loss": 1.2013776746808724
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 16,
+      "train_loss": 1.1789714088033285
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 17,
+      "train_loss": 1.1061855330490218
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 18,
+      "train_loss": 1.158910156714202
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 19,
+      "train_loss": 1.1386434085636652
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 20,
+      "train_loss": 1.1718543581851433
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 21,
+      "train_loss": 1.0951924585072148
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 22,
+      "train_loss": 1.1275777969820169
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 23,
+      "train_loss": 1.1077774908099407
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 24,
+      "train_loss": 1.1012403852059507
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 25,
+      "train_loss": 1.0760616221935106
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 26,
+      "train_loss": 1.078154128815188
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 27,
+      "train_loss": 1.1260220574819582
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 28,
+      "train_loss": 1.0638516833369294
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 29,
+      "train_loss": 0.9971420403449684
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 30,
+      "train_loss": 1.0249741253674745
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 31,
+      "train_loss": 0.9840815870973723
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 0,
+      "train_loss": 1.3911831466643811
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 1,
+      "train_loss": 1.5229672183427478
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 2,
+      "train_loss": 1.4190081060428419
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 3,
+      "train_loss": 1.286647018151104
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 4,
+      "train_loss": 1.2352428721196336
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 5,
+      "train_loss": 1.318474090055842
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 6,
+      "train_loss": 1.2525165782942635
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 7,
+      "train_loss": 1.3059838495965759
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 8,
+      "train_loss": 1.190533784078257
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 9,
+      "train_loss": 1.193451087702618
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 10,
+      "train_loss": 1.0603475113400531
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 11,
+      "train_loss": 1.1736470972793671
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 12,
+      "train_loss": 1.0558187838202868
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 13,
+      "train_loss": 1.0437932914885262
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 14,
+      "train_loss": 1.0942097287433918
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 15,
+      "train_loss": 1.0226259076949133
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 16,
+      "train_loss": 1.0165397649998287
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 17,
+      "train_loss": 0.8750149224043893
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 18,
+      "train_loss": 0.9769585473671683
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 19,
+      "train_loss": 0.948534996092335
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 20,
+      "train_loss": 1.0043140379435902
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 21,
+      "train_loss": 0.8994806941744913
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 22,
+      "train_loss": 0.95081764516629
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 23,
+      "train_loss": 0.955193333370568
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 24,
+      "train_loss": 0.878018117764708
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 25,
+      "train_loss": 0.8574673448953207
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 26,
+      "train_loss": 0.8657574180631432
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 27,
+      "train_loss": 0.9175473251773989
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 28,
+      "train_loss": 0.858337460386489
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 29,
+      "train_loss": 0.798989479840893
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 30,
+      "train_loss": 0.7956635185600562
+    },
+    {
+      "seed": 708,
+      "depth": 2,
+      "tile_size": 128,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 31,
+      "train_loss": 0.7809676373481262
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 0,
+      "train_loss": 1.4528776392462326
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 1,
+      "train_loss": 1.4760665830465103
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 2,
+      "train_loss": 1.28836838647304
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 3,
+      "train_loss": 1.3025235192039997
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 4,
+      "train_loss": 1.305467351132337
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 5,
+      "train_loss": 1.2998923778444786
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 6,
+      "train_loss": 1.2855865538198954
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 7,
+      "train_loss": 1.3641813911601715
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 8,
+      "train_loss": 1.2432309023651813
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 9,
+      "train_loss": 1.226880710027313
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 10,
+      "train_loss": 1.2167798271165746
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 11,
+      "train_loss": 1.235155945962576
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 12,
+      "train_loss": 1.1042217009933162
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 13,
+      "train_loss": 1.2143808895806105
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 14,
+      "train_loss": 1.1542907278933872
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 15,
+      "train_loss": 1.0692356484348546
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 16,
+      "train_loss": 1.053495778893172
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 17,
+      "train_loss": 1.032296909615027
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 18,
+      "train_loss": 1.0247177034645363
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 19,
+      "train_loss": 0.9851946416757584
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 20,
+      "train_loss": 1.061364864398984
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 21,
+      "train_loss": 0.9787321060600306
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 22,
+      "train_loss": 0.941176883061243
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 23,
+      "train_loss": 1.0043103812973606
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 24,
+      "train_loss": 0.9683669092060812
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 25,
+      "train_loss": 0.832928565469498
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 26,
+      "train_loss": 0.930264123577216
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 27,
+      "train_loss": 0.9012043255460266
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 28,
+      "train_loss": 0.8993661493648099
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 29,
+      "train_loss": 0.8383153867460789
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 30,
+      "train_loss": 0.8675163085731408
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 31,
+      "train_loss": 0.747532371374388
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 0,
+      "train_loss": 1.4577275903448856
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 1,
+      "train_loss": 1.4829048423530669
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 2,
+      "train_loss": 1.28777536138359
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 3,
+      "train_loss": 1.3033321700512772
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 4,
+      "train_loss": 1.3085033646280446
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 5,
+      "train_loss": 1.3001771707070091
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 6,
+      "train_loss": 1.2855644573560487
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 7,
+      "train_loss": 1.367617233100281
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 8,
+      "train_loss": 1.2425995194324595
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 9,
+      "train_loss": 1.2253751716693895
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 10,
+      "train_loss": 1.2161535870925566
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 11,
+      "train_loss": 1.236308841625834
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 12,
+      "train_loss": 1.1016927526988427
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 13,
+      "train_loss": 1.2135499366584797
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 14,
+      "train_loss": 1.1525113255348445
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 15,
+      "train_loss": 1.0647396899112578
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 16,
+      "train_loss": 1.0491155675618542
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 17,
+      "train_loss": 1.0297701005271178
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 18,
+      "train_loss": 1.0225697177915247
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 19,
+      "train_loss": 0.9803734807415793
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 20,
+      "train_loss": 1.061059054197404
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 21,
+      "train_loss": 0.9753328307118317
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 22,
+      "train_loss": 0.9400292968896267
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 23,
+      "train_loss": 1.0028700550148562
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 24,
+      "train_loss": 0.9683713187517724
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 25,
+      "train_loss": 0.8303398298091067
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 26,
+      "train_loss": 0.9284757209540928
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 27,
+      "train_loss": 0.8995159695126957
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 28,
+      "train_loss": 0.8999842198100777
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 29,
+      "train_loss": 0.8349918398565195
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 30,
+      "train_loss": 0.8670367846704747
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 31,
+      "train_loss": 0.7465331788699502
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 0,
+      "train_loss": 1.440180383303453
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 1,
+      "train_loss": 1.4514261192868072
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 2,
+      "train_loss": 1.2929533832466418
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 3,
+      "train_loss": 1.3029297764704275
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 4,
+      "train_loss": 1.296169813377303
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 5,
+      "train_loss": 1.2996006698386078
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 6,
+      "train_loss": 1.28806648929202
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 7,
+      "train_loss": 1.353077415504531
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 8,
+      "train_loss": 1.2431638306889006
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 9,
+      "train_loss": 1.232169660777691
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 10,
+      "train_loss": 1.2231853878130508
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 11,
+      "train_loss": 1.2326090054438872
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 12,
+      "train_loss": 1.1184018044606736
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 13,
+      "train_loss": 1.21575146024395
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 14,
+      "train_loss": 1.1590374296236696
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 15,
+      "train_loss": 1.082530969894223
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 16,
+      "train_loss": 1.0723399757117953
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 17,
+      "train_loss": 1.0404007937628332
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 18,
+      "train_loss": 1.0353967348070756
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 19,
+      "train_loss": 1.0102295309658524
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 20,
+      "train_loss": 1.0653585166046795
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 21,
+      "train_loss": 0.992311076680949
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 22,
+      "train_loss": 0.9516114915379723
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 23,
+      "train_loss": 1.0136367269449722
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 24,
+      "train_loss": 0.9737866508085484
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 25,
+      "train_loss": 0.8447182772844695
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 26,
+      "train_loss": 0.9371169415537481
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 27,
+      "train_loss": 0.9134393295955545
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 28,
+      "train_loss": 0.9065929799784459
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 29,
+      "train_loss": 0.8570073754104636
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 30,
+      "train_loss": 0.8776200315091515
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 31,
+      "train_loss": 0.7547950897973601
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 0,
+      "train_loss": 1.4605240700122895
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 1,
+      "train_loss": 1.4854433375651692
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 2,
+      "train_loss": 1.281746909123875
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 3,
+      "train_loss": 1.304059618221567
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 4,
+      "train_loss": 1.3089948464869612
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 5,
+      "train_loss": 1.2984519583261165
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 6,
+      "train_loss": 1.2845525380363636
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 7,
+      "train_loss": 1.3641423963503778
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 8,
+      "train_loss": 1.2441846153525828
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 9,
+      "train_loss": 1.2213833356773867
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 10,
+      "train_loss": 1.2169362668578385
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 11,
+      "train_loss": 1.2348453417318725
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 12,
+      "train_loss": 1.1010328287914521
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 13,
+      "train_loss": 1.2122869233846045
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 14,
+      "train_loss": 1.1469711901076165
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 15,
+      "train_loss": 1.0651922115279793
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 16,
+      "train_loss": 1.0481260435270865
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 17,
+      "train_loss": 1.0328897968470394
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 18,
+      "train_loss": 1.0201948504521736
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 19,
+      "train_loss": 0.9784141295003262
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 20,
+      "train_loss": 1.0583083365809376
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 21,
+      "train_loss": 0.9764634117572653
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 22,
+      "train_loss": 0.9383679515083142
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 23,
+      "train_loss": 1.0023311247078708
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 24,
+      "train_loss": 0.9702045694541125
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 25,
+      "train_loss": 0.8264575609726696
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 26,
+      "train_loss": 0.9279816940117854
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 27,
+      "train_loss": 0.9024557106922361
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 28,
+      "train_loss": 0.9008750160853853
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 29,
+      "train_loss": 0.8375106763050577
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 30,
+      "train_loss": 0.8684574519608539
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 16,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 31,
+      "train_loss": 0.7427261948743458
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 0,
+      "train_loss": 1.4401639369924517
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 1,
+      "train_loss": 1.4648572624340783
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 2,
+      "train_loss": 1.293394695478716
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 3,
+      "train_loss": 1.3077504726876912
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 4,
+      "train_loss": 1.3100400103966567
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 5,
+      "train_loss": 1.300987082813433
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 6,
+      "train_loss": 1.2865209713264383
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 7,
+      "train_loss": 1.3590291459090966
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 8,
+      "train_loss": 1.2476883498326619
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 9,
+      "train_loss": 1.233748115508477
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 10,
+      "train_loss": 1.2231109448699131
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 11,
+      "train_loss": 1.2366511118259502
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 12,
+      "train_loss": 1.1126220284506836
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 13,
+      "train_loss": 1.214167386710923
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 14,
+      "train_loss": 1.1600375148527011
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 15,
+      "train_loss": 1.0801463285236077
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 16,
+      "train_loss": 1.0577559199593152
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 17,
+      "train_loss": 1.0378936900058862
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 18,
+      "train_loss": 1.034228408247199
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 19,
+      "train_loss": 0.9919763512276876
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 20,
+      "train_loss": 1.0693451919701387
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 21,
+      "train_loss": 0.9811878363728993
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 22,
+      "train_loss": 0.9469755903750303
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 23,
+      "train_loss": 1.0130334954569817
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 24,
+      "train_loss": 0.9746418002915773
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 25,
+      "train_loss": 0.8407717275856534
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 26,
+      "train_loss": 0.9321809959104089
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 27,
+      "train_loss": 0.9076188871965821
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 28,
+      "train_loss": 0.9053037357190357
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 29,
+      "train_loss": 0.8487893311174559
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 30,
+      "train_loss": 0.8738750211282758
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_uncalibrated",
+      "step": 31,
+      "train_loss": 0.7524959054701954
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 0,
+      "train_loss": 1.4581393871646324
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 1,
+      "train_loss": 1.4833957672166356
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 2,
+      "train_loss": 1.2879632872854239
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 3,
+      "train_loss": 1.30297722772155
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 4,
+      "train_loss": 1.3082222972954685
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 5,
+      "train_loss": 1.2994119559611863
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 6,
+      "train_loss": 1.2858184366181669
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 7,
+      "train_loss": 1.3679729666695928
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 8,
+      "train_loss": 1.2425134346270625
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 9,
+      "train_loss": 1.2262978019342676
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 10,
+      "train_loss": 1.215359780701148
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 11,
+      "train_loss": 1.2363776027443765
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 12,
+      "train_loss": 1.1013560146379162
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 13,
+      "train_loss": 1.2125006269277396
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 14,
+      "train_loss": 1.1532261884832589
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 15,
+      "train_loss": 1.0648206363285548
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 16,
+      "train_loss": 1.049123895831031
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 17,
+      "train_loss": 1.03061791936733
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 18,
+      "train_loss": 1.0225768478700705
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 19,
+      "train_loss": 0.9797549076070491
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 20,
+      "train_loss": 1.0606314792098825
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 21,
+      "train_loss": 0.9754643692673135
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 22,
+      "train_loss": 0.9400621245339857
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 23,
+      "train_loss": 1.0023029930373504
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 24,
+      "train_loss": 0.9681264994602126
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 25,
+      "train_loss": 0.8295400527227916
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 26,
+      "train_loss": 0.9283691373414795
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 27,
+      "train_loss": 0.8992851962620567
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 28,
+      "train_loss": 0.8998213451566247
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 29,
+      "train_loss": 0.8348810187491897
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 30,
+      "train_loss": 0.8674339976900316
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_low",
+      "method": "hybrid_calibrated",
+      "step": 31,
+      "train_loss": 0.747782969882979
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 0,
+      "train_loss": 1.3962707799098364
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 1,
+      "train_loss": 1.4200381200653203
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 2,
+      "train_loss": 1.3192539272005872
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 3,
+      "train_loss": 1.3300118061658917
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 4,
+      "train_loss": 1.3281414410846382
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 5,
+      "train_loss": 1.3115586619331014
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 6,
+      "train_loss": 1.313065125809458
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 7,
+      "train_loss": 1.3481899936219737
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 8,
+      "train_loss": 1.2785247595810203
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 9,
+      "train_loss": 1.2781213532769642
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 10,
+      "train_loss": 1.261581875303289
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 11,
+      "train_loss": 1.2637440651835903
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 12,
+      "train_loss": 1.1846421440410793
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 13,
+      "train_loss": 1.2298943895670154
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 14,
+      "train_loss": 1.2060343942733365
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 15,
+      "train_loss": 1.1533471976711267
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 16,
+      "train_loss": 1.1286362507222996
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 17,
+      "train_loss": 1.108127663705886
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 18,
+      "train_loss": 1.116793778369124
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 19,
+      "train_loss": 1.0791202183698598
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 20,
+      "train_loss": 1.1299600113417285
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 21,
+      "train_loss": 1.0426069700814096
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 22,
+      "train_loss": 1.0204844566591436
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 23,
+      "train_loss": 1.0609902651630683
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 24,
+      "train_loss": 1.0332623070032985
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 25,
+      "train_loss": 0.9180955467918769
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 26,
+      "train_loss": 0.9845143903786028
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 27,
+      "train_loss": 0.9843664626287982
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 28,
+      "train_loss": 0.9527043728117339
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 29,
+      "train_loss": 0.9339107459203437
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 30,
+      "train_loss": 0.9349740453939341
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_uncalibrated",
+      "step": 31,
+      "train_loss": 0.8144708124205032
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 0,
+      "train_loss": 1.458823841504981
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 1,
+      "train_loss": 1.4850694107463118
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 2,
+      "train_loss": 1.2927457010150718
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 3,
+      "train_loss": 1.3005939904469468
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 4,
+      "train_loss": 1.3131526873160428
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 5,
+      "train_loss": 1.2925965718172836
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 6,
+      "train_loss": 1.2799910358292628
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 7,
+      "train_loss": 1.3740650991853922
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 8,
+      "train_loss": 1.246967432345254
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 9,
+      "train_loss": 1.2253351920345037
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 10,
+      "train_loss": 1.2172809478742699
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 11,
+      "train_loss": 1.2383054961303168
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 12,
+      "train_loss": 1.106013752481065
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 13,
+      "train_loss": 1.2042953134305194
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 14,
+      "train_loss": 1.1533859919476295
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 15,
+      "train_loss": 1.0631263644280926
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 16,
+      "train_loss": 1.0508081929315143
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 17,
+      "train_loss": 1.0296724012819753
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 18,
+      "train_loss": 1.0237983565142021
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 19,
+      "train_loss": 0.9748496862763547
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 20,
+      "train_loss": 1.0518153348548682
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 21,
+      "train_loss": 0.9757688384296992
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 22,
+      "train_loss": 0.9395852228921201
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 23,
+      "train_loss": 0.9985796116731072
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 24,
+      "train_loss": 0.969862266464502
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 25,
+      "train_loss": 0.8328583693733551
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 26,
+      "train_loss": 0.9334765254941388
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 27,
+      "train_loss": 0.8969461854785333
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 28,
+      "train_loss": 0.8973554479057957
+    },
+    {
+      "seed": 708,
+      "depth": 3,
+      "tile_size": 64,
+      "scenario": "combined_high",
+      "method": "hybrid_calibrated",
+      "step": 29,
+      "train_loss": 0.83835039618430

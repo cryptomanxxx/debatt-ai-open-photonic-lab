@@ -45,6 +45,8 @@ Circuit (MZI) experiments use numpy from the same environment.
 
 | MOD-006 | [Report and reconstruction](opa-mod-006/README.md) | Hybrid wins 18/18 uncalibrated, 5/18 calibrated; high-error uncalibrated 128-wide MSE reduced 29.7%; 8/8 checks | Synthetic linear regression, digital backward, phase oracle; no hardware or energy claim |
 
+| MOD-007 | [Report and reconstruction](opa-mod-007/README.md) | Hybrid loss lower in 36/36 uncalibrated and 22/36 calibrated comparisons; 11/11 checks | Synthetic classification, electronic activation and backward, phase oracle; no hardware or energy claim |
+
 The 3D results from 007–010 and from 011 describe different polarizations
 (TM-like versus TE-like) and are normalized differently, so they should not be
 compared number for number.

@@ -1,0 +1,13 @@
+{
+  "experiment": "OPA-MOD-003",
+  "source": "GitHub Actions Print result job log",
+  "workflow_run_id": 43545319139,
+  "job_id": 132295276684,
+  "artifact_id": 14093841576,
+  "artifact_digest": "sha256:c80e03e660ac280a0ee48f1fa29277accbfcd2af30de96966aa5a5093debd230",
+  "head_sha": "69d3091eec3816531b939223e5d6a0f581682e5c",
+  "pull_request": 41,
+  "merge_sha": "c373df0db8c0bb29e6c6ba7202714d4c01ef3206",
+  "run_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/43545319139",
+  "note": "Full JSON recovered from timestamp-stripped Print result step. Run step prints only summary. Artifact ZIP not byte-compared. Hypothetical component and receiver model, not hardware validation."
+}

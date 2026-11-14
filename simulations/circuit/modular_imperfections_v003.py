@@ -67,19 +67,33 @@ def random_mesh(mesh, rng):
     return rng.standard_normal((len(ops),6)), rng.standard_normal(len(phases))
 
 
-def propagate(mesh, field, draws, phase_sigma, split_sigma, arm_sigma):
+def blocks_for(mesh, draws, phase_sigma, split_sigma, arm_sigma):
     ops, phases = mesh
     z, screen = draws
-    f = np.array(field, dtype=complex, copy=True)
-    for (m,t,p), row in zip(ops,z):
-        # Nonnegative differential arm loss; random arm and magnitude.
-        loss = arm_sigma*row[4]
-        hw = {"split1": float(np.clip(0.5+split_sigma*row[2],0,1)),
-              "split2": float(np.clip(0.5+split_sigma*row[3],0,1)),
-              "loss_top_db": max(0.,loss), "loss_bottom_db": max(0.,-loss)}
-        block = mzi_hw(t+phase_sigma*row[0],p+phase_sigma*row[1],hw)
+    settings = np.asarray(ops, dtype=float).reshape(-1,3)
+    t = settings[:,1]+phase_sigma*z[:,0]
+    p = settings[:,2]+phase_sigma*z[:,1]
+    r1 = np.clip(0.5+split_sigma*z[:,2],0,1)
+    r2 = np.clip(0.5+split_sigma*z[:,3],0,1)
+    loss = arm_sigma*z[:,4]
+    a = np.exp(1j*t)*10**(-np.maximum(loss,0)/20)
+    d = 10**(-np.maximum(-loss,0)/20)
+    c1,s1,c2,s2 = np.sqrt(r1),np.sqrt(1-r1),np.sqrt(r2),np.sqrt(1-r2)
+    ep = np.exp(1j*p)
+    blocks = np.empty((len(ops),2,2),dtype=complex)
+    blocks[:,0,0] = (c2*a*c1-s2*d*s1)*ep
+    blocks[:,0,1] = 1j*(c2*a*s1+s2*d*c1)
+    blocks[:,1,0] = 1j*(s2*a*c1+c2*d*s1)*ep
+    blocks[:,1,1] = -s2*a*s1+c2*d*c1
+    return settings[:,0].astype(int),blocks,np.exp(1j*(phases+phase_sigma*screen))
+
+
+def propagate(mesh, field, draws, phase_sigma, split_sigma, arm_sigma):
+    indices,blocks,screen = blocks_for(mesh,draws,phase_sigma,split_sigma,arm_sigma)
+    f = np.array(field,dtype=complex,copy=True)
+    for m,block in zip(indices,blocks):
         f[m:m+2] = block @ f[m:m+2]
-    return np.exp(1j*(phases+phase_sigma*screen))[:,None]*f
+    return screen[:,None]*f
 
 
 def prepare(w, b):
@@ -174,6 +188,17 @@ def main():
         actual = propagate(mesh,np.eye(n),draws,0,0,0)
         validation.append(max(error(actual,q),
                               error(actual,mesh_matrix(*clements_decompose(q)))))
+    # Nonideal vectorized block formula versus the established component model.
+    mesh = fast_decompose(q)
+    draws = random_mesh(mesh,rng)
+    _, blocks, _ = blocks_for(mesh,draws,0.02,0.01,0.05)
+    component_errors = []
+    for (_,t,p),z,block in zip(mesh[0],draws[0],blocks):
+        loss = 0.05*z[4]
+        hw = {"split1":float(np.clip(0.5+0.01*z[2],0,1)),
+              "split2":float(np.clip(0.5+0.01*z[3],0,1)),
+              "loss_top_db":max(0.,loss),"loss_bottom_db":max(0.,-loss)}
+        component_errors.append(error(block,mzi_hw(t+0.02*z[0],p+0.02*z[1],hw)))
     for name in selected:
         w = cases[name]
         for b in SIZES:
@@ -211,7 +236,8 @@ def main():
         "readout_only_static_ideal": all(r["static_complex_error"]<TOL for r in rows if r["scenario"] in ("read_noise_only","quantization_only")),
         "nonzero_phase_error": any(r["static_complex_error"]>1e-4 for r in rows if r["scenario"]=="phase_only"),
         "zero_weight_gate": zero_test["readout_error"]==0 and zero_test["mean_detected_signal_power"]==0,
-        "no_unreported_clipping": all(r["clipped_samples"]>=0 for r in rows),
+        "vectorized_nonideal_component_matches_reference": max(component_errors)<TOL,
+        "quantizer_clipping_and_endpoints": quantize_real(np.array([-2.,0.,2.]),12)[1]==2 and np.array_equal(quantize_real(np.array([-2.,0.,2.]),12)[0],np.array([-1.,0.,1.])),
     }
     report = {
         "experiment":"OPA-MOD-003","seed":SEED,"workload_seed":101,"n":N,
@@ -220,7 +246,7 @@ def main():
         "scenario_fields":["phase_sigma_rad","coupler_power_fraction_sigma","differential_arm_loss_sigma_db","attenuator_relative_amplitude_sigma","read_noise_sigma_normalized_real_field","adc_bits"],
         "scenarios":SCENARIOS,"loss_fields":["mzi_column_db","waveguide_column_db","splitter_excess_db","modular_link_db","interface_plus_attenuator_db"],
         "losses":LOSSES,"checks":checks,"failures":[k for k,v in checks.items() if not v],
-        "decomposition_validation_errors":validation,"zero_test":zero_test,"summary":groups,"results":rows,
+        "decomposition_validation_errors":validation,"max_component_validation_error":max(component_errors),"zero_test":zero_test,"summary":groups,"results":rows,
         "limitations":[
             "Explicit Clements components at all sizes; ideal settings, no calibration. Static independent Gaussian errors reused across eight inputs and paired scenarios; eight hardware draws are a small sensitivity sample, not yield statistics.",
             "MOD-002 scalar uniform column losses are retained, plus nonnegative differential arm loss as extra loss. No wavelength dependence, thermal correlations or layout-level propagation.",

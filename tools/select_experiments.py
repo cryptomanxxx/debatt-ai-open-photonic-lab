@@ -98,6 +98,11 @@ def check(reg, repo=REPO):
         if not script.is_file():
             errors.append(f"{e['id']}: script '{e['script']}' does not exist")
             continue
+        if "lock" in e:
+            lock = e["lock"]
+            if (not isinstance(lock, str) or lock not in e["deps"]
+                    or not re.fullmatch(r"simulations/meep/[A-Za-z0-9_-]+\.lock\.txt", lock)):
+                errors.append(f"{e['id']}: custom lock must be a simulations/meep lock file listed in deps")
         for d in e["deps"]:
             hit = any(repo.glob(d)) if any(c in d for c in "*?[") else (repo / d).is_file()
             if not hit:
@@ -119,7 +124,8 @@ def check(reg, repo=REPO):
 def matrix(selected):
     return [{"id": e["id"], "name": e["name"], "result_dir": e["result_dir"],
              "artifact": e["artifact"], "timeout": e["timeout_minutes"],
-             "run": e.get("run", f"python {e['script']}")} for e in selected]
+             "run": e.get("run", f"python {e['script']}"),
+             "lock": e.get("lock", "simulations/meep/opa-fdtd-linux-64.lock.txt")} for e in selected]
 
 
 def main(argv=None):

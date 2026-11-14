@@ -293,6 +293,19 @@
         "simulations/circuit/modular_training_v006.py"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_multilayer_v007.py"
+    },
+    {
+      "id": "opa-id-001",
+      "name": "Meep adjoint solver verification",
+      "script": "simulations/meep/adjoint_verification_v001.py",
+      "result_dir": "results/opa-id-001",
+      "artifact": "opa-id-001",
+      "timeout_minutes": 30,
+      "deps": [
+        "simulations/meep/opa-id-linux-64.lock.txt",
+        "simulations/meep/upstream_adjoint/*"
+      ],
+      "lock": "simulations/meep/opa-id-linux-64.lock.txt"
     }
   ]
 }

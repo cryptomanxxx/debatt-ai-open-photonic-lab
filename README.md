@@ -299,6 +299,40 @@ training/test examples but reused across programming events, with new noise.
 This is a synthetic pilot, not a physical chip, all-optical training,
 real-world benchmark or energy measurement.
 
+## OPA-ID-001: inverse-design adjoint solver verification
+
+The first inverse-design capability experiment checks Meep's adjoint solver
+against independently rebuilt central finite-difference forward simulations
+for a two-dimensional continuous dielectric waveguide region. It uses 143 material
+weights, three deterministic directions, two perturbation sizes and two
+FDTD resolutions. A small fixed gradient-ascent step is independently
+evaluated. The objective is the unnormalized mean squared Fourier Ez over
+interpolated samples in a 0.2 by 0.6 um rectangle centered at x=1.5 um, not transmission
+efficiency. The monitor must sample multiple spatial points. The fine-resolution acceptance
+threshold is 0.15 times the full gradient norm for directional error.
+
+The initial 1D variant ran successfully but failed directional gradient agreement
+(run 43594347361, maximum fine-resolution scaled error 0.23824 versus 0.15).
+The 2D variant follows the geometry class of Meep's upstream adjoint DFT tests;
+acceptance tolerance remains unchanged. This change does not establish the cause
+of the 1D discrepancy or verify the 2D gradients until CI passes.
+
+The official upstream DFT test passed in runs 43595779929 and 43596257206,
+while the local mean and single-sample objectives failed. Meep v1.35.1
+normalizes the adjoint pulse using the forward simulation duration; our
+short forward run ended near t=51, before the adjoint Gaussian duration
+of 155. The minimum simulation time is now 200, with a short-window
+control at the same fine resolution. This is a testable causal hypothesis,
+not a verified fix. The original mean-objective tolerance remains 0.15.
+
+The experiment uses a separate explicit environment lock extending the
+existing Meep lock with Autograd 1.9.1. Other experiments retain their
+original environment. JSON and CSV record all gradients, finite differences,
+objective values, controls and runtime. This is a capability test only:
+no new component, fabrication-ready geometry or hardware claim.
+
+Reference: [Meep adjoint solver documentation](https://meep.readthedocs.io/en/stable/Python_Tutorials/Adjoint_Solver/).
+
 ## Component simulations
 
 ### OPA-COUPLER-001: silicon directional coupler

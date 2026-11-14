@@ -321,6 +321,18 @@
         "simulations/meep/opa-id-linux-64.lock.txt"
       ],
       "lock": "simulations/meep/opa-id-linux-64.lock.txt"
+    },
+    {
+      "id": "opa-id-003",
+      "name": "Robust parametric directional coupler inverse design",
+      "script": "simulations/meep/robust_coupler_v003.py",
+      "result_dir": "results/opa-id-003",
+      "artifact": "opa-id-003",
+      "timeout_minutes": 60,
+      "deps": [
+        "simulations/meep/opa-id-linux-64.lock.txt"
+      ],
+      "lock": "simulations/meep/opa-id-linux-64.lock.txt"
     }
   ]
 }

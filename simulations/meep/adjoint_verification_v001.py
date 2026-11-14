@@ -15,6 +15,8 @@ import numpy as np
 OUT = Path("results/opa-id-001")
 FREQ = 1/1.55
 DESIGN_LENGTH = 1.2
+MONITOR_CENTER_Z = 1.5
+MONITOR_LENGTH = 0.2
 N = 13
 RESOLUTIONS = (40,80)
 EPS = (0.01,0.005)
@@ -33,16 +35,22 @@ def evaluate(weights, resolution, gradient=False):
         geometry=[mp.Block(size=region.size,center=region.center,material=grid)],
         sources=[mp.Source(mp.GaussianSource(FREQ,fwidth=0.4*FREQ),
                            component=mp.Ex,center=mp.Vector3(0,0,-1.7))])
+    # FourierFields requires a nonzero spatial extent (Meep v1.35.1).
+    # The interval stays outside the design and PML at both resolutions.
     monitor = mpa.FourierFields(sim,volume=mp.Volume(
-        center=mp.Vector3(0,0,1.5),size=mp.Vector3()),component=mp.Ex,yee_grid=True)
+        center=mp.Vector3(0,0,MONITOR_CENTER_Z),
+        size=mp.Vector3(0,0,MONITOR_LENGTH)),component=mp.Ex,yee_grid=True,
+        decimation_factor=1)
     def objective(field):
-        return npa.sum(npa.abs(field)**2)
+        return npa.mean(npa.abs(field)**2)
     opt = mpa.OptimizationProblem(simulation=sim,objective_functions=[objective],
         objective_arguments=[monitor],design_regions=[region],
         frequencies=[FREQ],decay_by=1e-10,minimum_run_time=20,
         decimation_factor=1)
     try:
         value,grad = opt([np.asarray(weights)],need_gradient=gradient)
+        if np.asarray(monitor._eval).size <= 1:
+            raise RuntimeError("FourierFields monitor must sample multiple spatial points")
         return float(np.asarray(value).item()), (np.asarray(grad).reshape(-1).copy()
                                                 if gradient else None)
     finally:
@@ -88,9 +96,11 @@ def main():
         fine_ascent_improves=runs[-1]["ascent_gain"]>0)
     report=dict(experiment="OPA-ID-001",meep_version=mp.__version__,numpy_version=np.__version__,
         config=dict(frequency=FREQ,wavelength=1.55,design_length=DESIGN_LENGTH,
-            weights=N,resolutions=RESOLUTIONS,steps=EPS,scaled_error_tolerance=REL_TOL),
+            weights=N,resolutions=RESOLUTIONS,steps=EPS,scaled_error_tolerance=REL_TOL,
+            monitor_center_z=MONITOR_CENTER_Z,monitor_length=MONITOR_LENGTH,
+            objective="mean_squared_fourier_Ex_over_monitor_samples"),
         assumptions=["1D dielectric stack in air, normal incidence; no foundry model.",
-            "Objective is unnormalized squared Fourier electric field at a point, not transmission efficiency.",
+            "Objective is the unnormalized mean squared Fourier Ex over Yee-grid samples in a 0.2 um interval, not transmission efficiency.",
             "Continuous grayscale material weights; no binary geometry or fabrication claim.",
             "Finite differences use independently rebuilt forward simulations.",
             "Directional error normalized by full adjoint gradient norm; not componentwise relative error."],

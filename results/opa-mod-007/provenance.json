@@ -1,0 +1,61 @@
+{
+  "experiment": "OPA-MOD-007",
+  "source": "Original GitHub Actions artifact ZIP verified by SHA-256; report recovered from CI log and each Git blob verified against exact original ZIP bytes",
+  "workflow_run_id": 43586842825,
+  "job_id": 132423117107,
+  "artifact_id": 14113131505,
+  "artifact_digest": "sha256:71a6064dce7ff132efcfe97b15651112ecce2417a7a2f264c4cbe3543186bc0a",
+  "head_sha": "63d2ae2c44e615e5d14241e5a38511063b4814e7",
+  "pull_request": 49,
+  "merge_sha": "776dcd378dd3dad1ae7a1c299ab6408486275357",
+  "run_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/43586842825",
+  "report_bytes": 690118,
+  "report_sha256": "f385042f2e172fbe449e7d1ea1f8cfd07fd04cc653639edb34da32eab5a87d68",
+  "report_parts": [
+    {
+      "file": "report.part01",
+      "bytes": 100000,
+      "git_blob_sha": "6ae5c5c1b57b715cb3f9df1d7de52c6aab316428"
+    },
+    {
+      "file": "report.part02",
+      "bytes": 100000,
+      "git_blob_sha": "f2b93cf5c3c1aeda0276ea959b6110609d50c034"
+    },
+    {
+      "file": "report.part03",
+      "bytes": 100000,
+      "git_blob_sha": "988eee5e35b8d90dfab7a8d01e73532ab4aafa38"
+    },
+    {
+      "file": "report.part04",
+      "bytes": 100000,
+      "git_blob_sha": "b8465d3b4a3ea781f0eec61958858a7dc43fb96d"
+    },
+    {
+      "file": "report.part05",
+      "bytes": 100000,
+      "git_blob_sha": "dcef82a958b3075ff7840bf0d897a954e209477b"
+    },
+    {
+      "file": "report.part06",
+      "bytes": 100000,
+      "git_blob_sha": "4be3583c099a01c589aad4ccfb9eef60670edf73"
+    },
+    {
+      "file": "report.part07",
+      "bytes": 90118,
+      "git_blob_sha": "271ea3bde477482e011ba9e03b885fa3cbf8a532"
+    }
+  ],
+  "artifact_files": {
+    "result.json": "f385042f2e172fbe449e7d1ea1f8cfd07fd04cc653639edb34da32eab5a87d68",
+    "comparisons.csv": "07d92791e62d10719c9ccf2940fffbc55b262ecb018edb52156ba7fdc610ffd4",
+    "installed-packages.json": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6",
+    "environment-lock.txt": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c",
+    "layer_errors.csv": "a8b55b9a5c9f5568feb595f814ddf3cc57d546da4d46c44b471198050ccbd7a3",
+    "learning_curves.csv": "bd444e5fe90d651579dbd5f7254f27821237331f099789b2c6ef94bab3727316",
+    "metrics.csv": "6f5bededcb1b8ad4c117349846f745407d957127f5ab1be66ea5abb24655195e"
+  },
+  "note": "Four CSVs reconstructed byte-for-byte from original JSON locally. Environment files listed by hash only; original ZIP contains all seven files."
+}

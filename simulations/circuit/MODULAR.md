@@ -6,8 +6,8 @@ Research question: can tiled photonic processors improve accuracy and optical po
 |---|---|
 | OPA-MOD-001 | Ideal mathematical equivalence |
 | OPA-MOD-002 | Optical loss and power budgets (archived) |
-| OPA-MOD-003 | Component errors and numerical precision (implemented; CI pending) |
-| OPA-MOD-004 | Calibration (planned) |
+| OPA-MOD-003 | Component errors and numerical precision (archived) |
+| OPA-MOD-004 | Calibration and bounded gain compensation (implemented; CI pending) |
 | OPA-MOD-005 | Communication and energy (planned) |
 | OPA-MOD-006 | Training (planned) |
 
@@ -18,3 +18,5 @@ Run from repository root: `OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simul
 MOD-002 uses the same deterministic 128-dimensional workload as MOD-001. It compares fixed total launched optical signal power, with actual normalized singular-value attenuation, ideal fan-out allocation, splitter excess loss, uniform column-equivalent MZI/waveguide loss, interface loss and modular link loss. QR is a separate hybrid scenario with independently encoded electronic R*x inputs. All loss parameters are hypothetical sensitivity assumptions. Aggregate detected signal power is not an equal-SNR or energy-efficiency metric. Electronic gain is ideal and noiseless; real detector, conversion and communication costs are deferred. Run `OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_power_budget_v002.py`.
 
 MOD-003 compares explicit Clements SVD meshes at all five sizes, with an algebraically equivalent row/column optimized decomposition validated against the existing mesh implementation. Four MOD-002 workloads, eight static hardware draws, eight error scenarios and two scalar loss conditions are used. Static phase/coupler/differential-arm/attenuator errors and coherent real-field readout noise/quantization are separated. Equal total launched signal power and fixed detector full-scale are used; only known common loss is compensated. All error and receiver parameters are hypothetical, not calibrated to physical hardware. No QR, calibration, training or energy claim. Run `OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_imperfections_v003.py`.
+
+MOD-004 uses explicit MOD-003 SVD meshes and compares uncalibrated, oracle-assisted local phase correction with 0.001 rad metrology uncertainty, global scalar electronic gain, tile-wise scalar gain, and their combinations. Gains are bounded and fitted on 32 noisy calibration probes; 32 independent held-out probes evaluate generalization. No full electronic residual matrix is used. Coupler and differential loss remain unchanged; local metrology access is hypothetical, not a hardware procedure. Costs count phase offsets and scalar gain measurement/arithmetic, not physical energy or time. Run `OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_calibration_v004.py`.

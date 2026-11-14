@@ -85,7 +85,7 @@ class SelectTest(unittest.TestCase):
         self.assertEqual(ids(se.select_changed(reg, [se.REGISTRY_PATH], REG)), ["a", "c"])
         reg = copy.deepcopy(REG)
         reg["shared"].append("new-shared")
-        self.assertEqual(ids(se.select_changed(reg, [se.REGISTRY_PATH], REG)), ["a", "c"])
+        self.assertEqual(ids(se.select_changed(reg, [se.REGISTRY_PATH], REG)), ["a", "b", "c"])
 
     def test_registry_change_union_with_dependencies_and_machinery(self):
         reg = copy.deepcopy(REG)

@@ -100,13 +100,14 @@ jobs:
         with:
           environment-name: opa-fdtd
           create-args: >-
-            --file simulations/meep/opa-fdtd-linux-64.lock.txt
+            --file ${{ matrix.lock }}
       - name: Archive environment provenance
         env:
+          ENV_LOCK: ${{ matrix.lock }}
           RESULT_DIR: ${{ matrix.result_dir }}
         run: |
           mkdir -p "$RESULT_DIR"
-          cp simulations/meep/opa-fdtd-linux-64.lock.txt "$RESULT_DIR/environment-lock.txt"
+          cp "$ENV_LOCK" "$RESULT_DIR/environment-lock.txt"
           micromamba list -n opa-fdtd --json > "$RESULT_DIR/installed-packages.json"
       - name: Run ${{ matrix.name }}
         env:

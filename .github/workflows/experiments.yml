@@ -45,10 +45,10 @@ jobs:
       matrix: ${{ steps.select.outputs.matrix }}
       any: ${{ steps.select.outputs.any }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
       - name: Selector tests
@@ -83,9 +83,9 @@ jobs:
       run:
         shell: micromamba-shell {0}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install locked Meep
-        uses: mamba-org/setup-micromamba@v2
+        uses: mamba-org/setup-micromamba@v3
         with:
           environment-name: opa-fdtd
           create-args: >-
@@ -112,8 +112,66 @@ jobs:
           if [ -f "$RESULT_DIR/result.json" ]; then cat "$RESULT_DIR/result.json"; fi
       - name: Upload measurement results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.artifact }}
           path: ${{ matrix.result_dir }}/
           if-no-files-found: warn
+
+  bundle:
+    # Keep separate artifact directories: result.json and environment files
+    # have the same names in every experiment.
+    needs: [select, run]
+    if: ${{ always() && !cancelled() && needs.select.result == 'success' && needs.select.outputs.any == 'true' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Download available experiment artifacts
+        uses: actions/download-artifact@v8
+        with:
+          pattern: opa-*
+          path: collected
+          merge-multiple: false
+      - name: Verify bundle and write manifest
+        env:
+          EXPECTED: ${{ needs.select.outputs.matrix }}
+          RUN_RESULT: ${{ needs.run.result }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path("collected")
+          root.mkdir(exist_ok=True)
+          expected = json.loads(os.environ["EXPECTED"])["include"]
+          entries = []
+          for experiment in expected:
+              directory = root / experiment["artifact"]
+              entries.append({
+                  "experiment": experiment["id"],
+                  "artifact": experiment["artifact"],
+                  "artifact_present": directory.is_dir(),
+                  "result_json_present": (directory / "result.json").is_file(),
+              })
+          complete = all(e["artifact_present"] and e["result_json_present"] for e in entries)
+          manifest = {
+              "run_id": os.environ["GITHUB_RUN_ID"],
+              "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"],
+              "workflow_sha": os.environ["GITHUB_SHA"],
+              "experiment_job_result": os.environ["RUN_RESULT"],
+              "all_expected_results_present": complete,
+              "experiments": entries,
+          }
+          (root / "bundle-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+          PY
+      - name: Upload combined experiment ZIP
+        uses: actions/upload-artifact@v6
+        with:
+          name: all-experiment-results
+          path: collected/
+          if-no-files-found: error
+      - name: Require complete bundle for successful runs
+        if: needs.run.result == 'success'
+        run: |
+          python3 -c 'import json; assert json.load(open("collected/bundle-manifest.json"))["all_expected_results_present"], "Missing expected experiment results"'

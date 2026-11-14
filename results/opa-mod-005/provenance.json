@@ -1,0 +1,17 @@
+{
+  "experiment": "OPA-MOD-005",
+  "source": "GitHub Actions artifact ZIP; report reconstructed from CI log and each archived chunk verified against original ZIP bytes",
+  "workflow_run_id": 43550202206,
+  "job_id": 132310716552,
+  "artifact_id": 14096185071,
+  "artifact_digest": "sha256:88f58d2260fccd0b61a5b7833632eab183edaca90bbc4b37134c967b9a99084f",
+  "head_sha": "ce0432225ddbaf432c3837a58d179732b0dbc86a",
+  "pull_request": 45,
+  "merge_sha": "1a7270944756210e1b0cd0f2445616f7ebecfd90",
+  "run_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/43550202206",
+  "report_sha256": "1839498c9b30043b9e928c8884c766330f2935366c0df44df518533c5600aad9",
+  "report_bytes": 8716060,
+  "report_parts": 22,
+  "part_bytes": 400000,
+  "note": "Original artifact ZIP SHA-256 verified; Git blob SHA for every 400000-byte chunk matched corresponding original report bytes. Restore exact result.json using restore_report.py. Hypothetical receiver-noise and energy model only."
+}

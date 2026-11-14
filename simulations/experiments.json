@@ -330,7 +330,9 @@
       "artifact": "opa-id-003",
       "timeout_minutes": 60,
       "deps": [
-        "simulations/meep/opa-id-linux-64.lock.txt"
+        "simulations/meep/opa-id-linux-64.lock.txt",
+        ".github/workflows/parallel-id003.yml",
+        "tools/test_parallel_id003.py"
       ],
       "lock": "simulations/meep/opa-id-linux-64.lock.txt"
     }

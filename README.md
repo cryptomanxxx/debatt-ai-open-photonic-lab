@@ -278,7 +278,9 @@ tanh hidden activations and a four-class readout. A synthetic nonlinear teacher
 generates independent training and held-out examples. Three seeds, three tile
 sizes (16/64/128), two impairment scenarios and calibrated/uncalibrated
 policies are compared using paired initialization, batches, chip draws and
-evaluation noise seeds. Digital-only training and digital training followed
+evaluation noise seeds. Calibration and inference use separate RNG streams;
+CI verifies identical inference-noise draws across calibration policies by
+instrumenting the actual optical forward path. Digital-only training and digital training followed
 by optical deployment are separate baselines. The 32 updates use learning
 rate 0.12 and minibatches of 64.
 

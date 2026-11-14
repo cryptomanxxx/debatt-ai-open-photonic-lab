@@ -120,7 +120,7 @@ def initial_weights():
     y=np.linspace(-W/2,W/2,NY)[None,:]
     center=PORT*(x+L/2)/L
     distance=np.minimum(abs(y-center),abs(y+center))
-    return np.where(distance<WIDTH/2,0.8,0.2).ravel()
+    return symmetric(np.where(distance<WIDTH/2,0.8,0.2).ravel())
 
 
 def gradient_check(w,res,incident):
@@ -161,7 +161,7 @@ def main():
         scale=max(np.max(abs(g)),1e-30)
         accepted=False
         for step in (0.15,0.075,0.0375):
-            candidate=np.clip(w+step*g/scale,0,1)
+            candidate=symmetric(np.clip(w+step*g/scale,0,1))
             score,_=evaluate(candidate,RES[0],incident)
             if score>val+1e-9:
                 w=candidate
@@ -193,7 +193,8 @@ def main():
         straight_reference=all(abs(m["straight_reference"]-1)<0.02 for m in measurements),
         objective_matches_measurement=all(abs(m["total"]-m["adjoint_forward_objective"])<1e-6
                                          for m in measurements),
-        symmetry=bool(np.max(abs(w.reshape(NX,NY)-w.reshape(NX,NY)[:,::-1]))<1e-12),
+        symmetry=all(bool(np.max(abs(v-symmetric(v)))<1e-12)
+                     for v in (initial,w,binary)),
         optimization_improves=any(h["accepted"] for h in history)
             and fine["optimized"]["total"]>fine["initial"]["total"],
         balanced=fine["optimized"]["imbalance"]<0.05,

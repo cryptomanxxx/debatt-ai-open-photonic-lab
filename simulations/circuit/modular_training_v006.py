@@ -19,7 +19,7 @@ SIZES = (16, 64, 128)
 SCENES = ("combined_low", "combined_high")
 STEPS = 16
 BATCH = 32
-LR = 0.5
+LR = 0.15  # Below the independent Gaussian mean-square stability bound.
 CAL_COUNT = 32
 TEST_COUNT = 128
 TOL = 1e-9
@@ -58,6 +58,7 @@ def update(w, x, y, target):
 
 def main():
     rows, curves, controls = [], [], []
+    baselines = []
     for seed in SEEDS:
         rng = np.random.default_rng(seed)
         teacher = rng.normal(size=(N,N))/np.sqrt(N)
@@ -80,6 +81,16 @@ def main():
                          initial_test_mse=initial,test_mse=digital_mse,
                          digital_weight_mse=digital_mse,passive_excess=0.,
                          mean_detected_power=None,clips=0,calibration_vectors=0))
+        baselines.append((seed, teacher, w0, train, test, xcal, batches, target, initial, digital))
+    # Validate every digital baseline before any optical mesh work.
+    if not all(np.isfinite(r["test_mse"]) and r["test_mse"] < r["initial_test_mse"]
+               for r in rows):
+        raise RuntimeError("Digital baseline failed held-out learning preflight")
+    print("Digital preflight:", [(r["seed"], r["initial_test_mse"], r["test_mse"])
+                                 for r in rows], flush=True)
+    if "--digital-only" in sys.argv:
+        return 0
+    for seed, teacher, w0, train, test, xcal, batches, target, initial, digital in baselines:
         for b in SIZES:
             hw = hardware(prepare(w0,b),np.random.default_rng(seed*1000+b))
             # Actual ideal forward control, including scalar loss compensation.

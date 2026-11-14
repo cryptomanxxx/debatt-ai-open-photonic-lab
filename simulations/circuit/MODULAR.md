@@ -5,8 +5,8 @@ Research question: can tiled photonic processors improve accuracy and optical po
 | Experiment | Scope |
 |---|---|
 | OPA-MOD-001 | Ideal mathematical equivalence |
-| OPA-MOD-002 | Optical loss and power budgets (implemented; CI pending) |
-| OPA-MOD-003 | Component errors (planned) |
+| OPA-MOD-002 | Optical loss and power budgets (archived) |
+| OPA-MOD-003 | Component errors and numerical precision (implemented; CI pending) |
 | OPA-MOD-004 | Calibration (planned) |
 | OPA-MOD-005 | Communication and energy (planned) |
 | OPA-MOD-006 | Training (planned) |
@@ -16,3 +16,5 @@ MOD-001 compares a digital reference with SVD and QR factor models for a 128×12
 Run from repository root: `OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_equivalence_v001.py`. CI uses the registered locked environment and publishes the result artifact. This experiment establishes numerical equivalence only, not physical advantage. Results are not archived as CI provenance until an actual run is available.
 
 MOD-002 uses the same deterministic 128-dimensional workload as MOD-001. It compares fixed total launched optical signal power, with actual normalized singular-value attenuation, ideal fan-out allocation, splitter excess loss, uniform column-equivalent MZI/waveguide loss, interface loss and modular link loss. QR is a separate hybrid scenario with independently encoded electronic R*x inputs. All loss parameters are hypothetical sensitivity assumptions. Aggregate detected signal power is not an equal-SNR or energy-efficiency metric. Electronic gain is ideal and noiseless; real detector, conversion and communication costs are deferred. Run `OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_power_budget_v002.py`.
+
+MOD-003 compares explicit Clements SVD meshes at all five sizes, with an algebraically equivalent row/column optimized decomposition validated against the existing mesh implementation. Four MOD-002 workloads, eight static hardware draws, eight error scenarios and two scalar loss conditions are used. Static phase/coupler/differential-arm/attenuator errors and coherent real-field readout noise/quantization are separated. Equal total launched signal power and fixed detector full-scale are used; only known common loss is compensated. All error and receiver parameters are hypothetical, not calibrated to physical hardware. No QR, calibration, training or energy claim. Run `OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_imperfections_v003.py`.

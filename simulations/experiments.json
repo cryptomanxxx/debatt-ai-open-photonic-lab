@@ -306,6 +306,18 @@
         "simulations/meep/upstream_adjoint/*"
       ],
       "lock": "simulations/meep/opa-id-linux-64.lock.txt"
+    },
+    {
+      "id": "opa-id-002",
+      "name": "Inverse designed symmetric photonic splitter",
+      "script": "simulations/meep/inverse_splitter_v002.py",
+      "result_dir": "results/opa-id-002",
+      "artifact": "opa-id-002",
+      "timeout_minutes": 45,
+      "deps": [
+        "simulations/meep/opa-id-linux-64.lock.txt"
+      ],
+      "lock": "simulations/meep/opa-id-linux-64.lock.txt"
     }
   ]
 }

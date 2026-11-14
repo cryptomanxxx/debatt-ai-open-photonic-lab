@@ -41,6 +41,8 @@ Circuit (MZI) experiments use numpy from the same environment.
 | EO-002 | [result.json](opa-eo-002/result.json) | Push-pull V_π·L 1.35–4.12 V·cm for 3–8 µm gaps, with gold absorption 0.47 dB/cm to 1e-7 dB/cm; the gap rule picks 4 µm (1.86 V·cm, 0.023 dB/cm); a folded push-pull 64×64 mesh fits one reticle (395 mm², 368 mm path, 12 dB at 0.3 dB/cm); rings shorten θ 8× but raise the mesh loss to 31 dB; a BTO swap (r_eff 300 pm/V) gives 0.2 V·cm | Metal-loss convergence check failed at 5 µm (non-blocking, post-hoc 3-grid study); semi-vectorial loss model; BTO illustrative |
 | LAYOUT-001 | [result.json](opa-layout-001/result.json), [GDS](opa-layout-001/programmable_mzi_2x2.gds), [PNG](opa-layout-001/programmable_mzi_2x2.png) | Programmable 2×2 MZI with balanced dummy heaters and 23.0 µm couplers (50:50 per COUPLER-002), 538 × 71 µm; 10 checks pass; GDS reproducible byte for byte | gdsfactory generic PDK, not a foundry process; 50:50 only at 1.54–1.56 µm (COUPLER-003) |
 
+| MOD-005 | [Report and reconstruction](opa-mod-005/README.md) | 64×64 lower energy in 19/464 directly comparable cases, best reduction 27.95%; 248 groups only modular feasible | Hypothetical receiver-noise and energy model; exact original archived in verified parts |
+
 The 3D results from 007–010 and from 011 describe different polarizations
 (TM-like versus TE-like) and are normalized differently, so they should not be
 compared number for number.

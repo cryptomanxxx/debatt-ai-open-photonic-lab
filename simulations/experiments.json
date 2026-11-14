@@ -276,6 +276,23 @@
         "simulations/circuit/modular_calibration_v004.py"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_training_v006.py"
+    },
+    {
+      "id": "opa-mod-007",
+      "name": "Circuit: multilayer nonlinear hybrid classification",
+      "script": "simulations/circuit/modular_multilayer_v007.py",
+      "result_dir": "results/opa-mod-007",
+      "artifact": "opa-mod-007",
+      "timeout_minutes": 120,
+      "deps": [
+        "simulations/circuit/mesh.py",
+        "simulations/circuit/mzi.py",
+        "simulations/circuit/modular_power_budget_v002.py",
+        "simulations/circuit/modular_imperfections_v003.py",
+        "simulations/circuit/modular_calibration_v004.py",
+        "simulations/circuit/modular_training_v006.py"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_multilayer_v007.py"
     }
   ]
 }

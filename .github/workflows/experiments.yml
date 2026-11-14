@@ -24,7 +24,8 @@ on:
   pull_request:
     paths:
       - "simulations/**"
-      - "results/**/result.json"
+      - "results/**"
+      - "layout/**"
       - ".github/workflows/experiments.yml"
       - "tools/select_experiments.py"
       - "tools/test_select_experiments.py"
@@ -69,9 +70,12 @@ jobs:
           if [ "$EVENT" = "workflow_dispatch" ]; then
             python tools/select_experiments.py --ids "$IDS" --github-output
           else
-            git diff --name-only "$BASE_SHA"...HEAD > "$RUNNER_TEMP/changed.txt"
+            MERGE_BASE=$(git merge-base "$BASE_SHA" HEAD)
+            git diff --no-renames --name-only "$MERGE_BASE" HEAD > "$RUNNER_TEMP/changed.txt"
             cat "$RUNNER_TEMP/changed.txt"
-            python tools/select_experiments.py --changed-from "$RUNNER_TEMP/changed.txt" --github-output
+            git show "$MERGE_BASE:simulations/experiments.json" > "$RUNNER_TEMP/base-registry.json"
+            python tools/select_experiments.py --changed-from "$RUNNER_TEMP/changed.txt" \
+              --base-registry "$RUNNER_TEMP/base-registry.json" --github-output
           fi
 
   run:

@@ -58,6 +58,51 @@ class SelectTest(unittest.TestCase):
                                                      "simulations/meep/b_v001.py"])),
                          ["a", "b", "c"])
 
+    def test_registry_addition_only_selects_new(self):
+        reg = copy.deepcopy(REG)
+        new = dict(reg["experiments"][0], id="d", script="simulations/meep/d_v001.py",
+                   result_dir="results/d", artifact="d")
+        reg["experiments"].append(new)
+        self.assertEqual(ids(se.select_changed(reg, [se.REGISTRY_PATH, new["script"]], REG)), ["d"])
+
+    def test_registry_changed_heavy_entry_is_selected(self):
+        reg = copy.deepcopy(REG)
+        reg["experiments"][1]["timeout_minutes"] = 120
+        self.assertEqual(ids(se.select_changed(reg, [se.REGISTRY_PATH], REG)), ["b"])
+
+    def test_registry_formatting_and_reordering(self):
+        reg = copy.deepcopy(REG)
+        reg["_doc"] = "Updated documentation"
+        reg["experiments"].reverse()
+        self.assertEqual(ids(se.select_changed(reg, [se.REGISTRY_PATH], REG)), [])
+
+    def test_registry_without_baseline_is_conservative(self):
+        self.assertEqual(ids(se.select_changed(REG, [se.REGISTRY_PATH])), ["a", "c"])
+
+    def test_registry_removal_and_policy_change_are_conservative(self):
+        reg = copy.deepcopy(REG)
+        reg["experiments"].pop(1)
+        self.assertEqual(ids(se.select_changed(reg, [se.REGISTRY_PATH], REG)), ["a", "c"])
+        reg = copy.deepcopy(REG)
+        reg["shared"].append("new-shared")
+        self.assertEqual(ids(se.select_changed(reg, [se.REGISTRY_PATH], REG)), ["a", "c"])
+
+    def test_registry_change_union_with_dependencies_and_machinery(self):
+        reg = copy.deepcopy(REG)
+        reg["experiments"][1]["timeout_minutes"] = 120
+        self.assertEqual(ids(se.select_changed(reg,
+            [se.REGISTRY_PATH, "results/b/result.json"], REG)), ["a", "b"])
+        self.assertEqual(ids(se.select_changed(reg,
+            [se.REGISTRY_PATH, ".github/workflows/experiments.yml"], REG)), ["a", "b", "c"])
+
+    def test_default_and_custom_lock_users(self):
+        reg = copy.deepcopy(REG)
+        reg["shared"] = [se.DEFAULT_LOCK]
+        custom = "simulations/meep/id.lock.txt"
+        reg["experiments"][2].update(lock=custom, deps=[custom])
+        self.assertEqual(ids(se.select_changed(reg, [se.DEFAULT_LOCK])), ["a", "b"])
+        self.assertEqual(ids(se.select_changed(reg, [custom])), ["c"])
+
     def test_ids(self):
         self.assertEqual(ids(se.select_ids(REG, "all")), ["a", "b", "c"])
         self.assertEqual(ids(se.select_ids(REG, "c, a")), ["c", "a"])

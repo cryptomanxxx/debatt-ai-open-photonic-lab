@@ -233,6 +233,21 @@
         "simulations/circuit/modular_power_budget_v002.py"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_imperfections_v003.py"
+    },
+    {
+      "id": "opa-mod-004",
+      "name": "Circuit: modular phase calibration and bounded electronic gain",
+      "script": "simulations/circuit/modular_calibration_v004.py",
+      "result_dir": "results/opa-mod-004",
+      "artifact": "opa-mod-004",
+      "timeout_minutes": 30,
+      "deps": [
+        "simulations/circuit/mesh.py",
+        "simulations/circuit/mzi.py",
+        "simulations/circuit/modular_power_budget_v002.py",
+        "simulations/circuit/modular_imperfections_v003.py"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_calibration_v004.py"
     }
   ]
 }

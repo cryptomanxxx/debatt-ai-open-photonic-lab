@@ -248,6 +248,18 @@
         "simulations/circuit/modular_imperfections_v003.py"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_calibration_v004.py"
+    },
+    {
+      "id": "opa-mod-005",
+      "name": "Circuit: modular communication and conditional energy efficiency",
+      "script": "simulations/circuit/modular_energy_v005.py",
+      "result_dir": "results/opa-mod-005",
+      "artifact": "opa-mod-005",
+      "timeout_minutes": 10,
+      "deps": [
+        "simulations/circuit/modular_power_budget_v002.py"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_energy_v005.py"
     }
   ]
 }

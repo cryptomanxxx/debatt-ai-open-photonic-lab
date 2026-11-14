@@ -28,6 +28,8 @@ on:
       - ".github/workflows/experiments.yml"
       - "tools/select_experiments.py"
       - "tools/test_select_experiments.py"
+      - "tools/bundle_experiments.py"
+      - "tools/test_bundle_experiments.py"
 
 permissions:
   contents: read
@@ -45,14 +47,16 @@ jobs:
       matrix: ${{ steps.select.outputs.matrix }}
       any: ${{ steps.select.outputs.any }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
       - name: Selector tests
         run: python tools/test_select_experiments.py
+      - name: Bundle regression tests
+        run: python tools/test_bundle_experiments.py
       - name: Registry is complete and consistent
         run: python tools/select_experiments.py --check
       - name: Select experiments
@@ -83,9 +87,16 @@ jobs:
       run:
         shell: micromamba-shell {0}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+      - name: Remove archived report before running
+        shell: bash
+        env:
+          EXPERIMENT: ${{ matrix.id }}
+          RESULT_DIR: ${{ matrix.result_dir }}
+          ARGS: ${{ inputs.args }}
+        run: python3 tools/bundle_experiments.py prepare "$EXPERIMENT" "$RESULT_DIR"
       - name: Install locked Meep
-        uses: mamba-org/setup-micromamba@v2
+        uses: mamba-org/setup-micromamba@v3
         with:
           environment-name: opa-fdtd
           create-args: >-
@@ -112,8 +123,40 @@ jobs:
           if [ -f "$RESULT_DIR/result.json" ]; then cat "$RESULT_DIR/result.json"; fi
       - name: Upload measurement results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.artifact }}
+          overwrite: true
           path: ${{ matrix.result_dir }}/
           if-no-files-found: warn
+
+  bundle:
+    # Keep separate artifact directories: result.json and environment files
+    # have the same names in every experiment.
+    needs: [select, run]
+    if: ${{ always() && !cancelled() && needs.select.result == 'success' && needs.select.outputs.any == 'true' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v5
+      - name: Download experiment artifacts and write manifest
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED: ${{ needs.select.outputs.matrix }}
+          RUN_RESULT: ${{ needs.run.result }}
+          ARGS: ${{ inputs.args }}
+        run: python3 tools/bundle_experiments.py
+      - name: Upload combined experiment ZIP
+        uses: actions/upload-artifact@v6
+        with:
+          name: all-experiment-results
+          overwrite: true
+          path: collected/
+          if-no-files-found: error
+      - name: Require complete bundle for successful runs
+        if: needs.run.result == 'success'
+        run: |
+          python3 -c 'import json; assert json.load(open("collected/bundle-manifest.json"))["all_expected_results_present"], "Missing expected experiment results"'

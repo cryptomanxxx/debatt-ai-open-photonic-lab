@@ -209,6 +209,16 @@
         "simulations/circuit/mzi.py"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_equivalence_v001.py"
+    },
+    {
+      "id": "opa-mod-002",
+      "name": "Circuit: modular optical loss and signal power budget",
+      "script": "simulations/circuit/modular_power_budget_v002.py",
+      "result_dir": "results/opa-mod-002",
+      "artifact": "opa-mod-002",
+      "timeout_minutes": 10,
+      "deps": [],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_power_budget_v002.py"
     }
   ]
 }

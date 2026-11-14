@@ -60,7 +60,7 @@ its script or one of its dependencies changes, and every experiment runs when
 the locked environment changes. CI fails if an experiment script has no entry,
 or imports or reads a repository file that its entry does not list. Any
 experiment can also be run by hand from the Actions tab (*Experiments* →
-*Run workflow*, with ids such as `opa-fdtd-005` or `all`). Workflow
+*Run workflow*, with ids such as `opa-fdtd-005` or `all`). Each run also produces an `all-experiment-results.zip` download in its Actions summary, containing all available experiment artifacts in separate directories and a bundle manifest. Failed runs can contain partial results; consult the manifest and job status. Individual downloads remain available. Workflow
 artifacts expire after 90 days, so every result report is also kept in
 [`results/`](results/), with a `provenance.json` that names the CI run and
 commit it came from. [`results/README.md`](results/README.md) lists the key

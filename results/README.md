@@ -51,6 +51,8 @@ Circuit (MZI) experiments use numpy from the same environment.
 
 | ID-002 | [Report](opa-id-002/README.md), [JSON](opa-id-002/result.json) | 98.18% continuous transmission, 0.0555% reflection, balanced outputs; 87.69% thresholded transmission; 10/10 checks and 3/3 targets | Generic 2D single-wavelength model; no fabrication claim |
 
+| ID-003 | [Report](opa-id-003/README.md), [JSON](opa-id-003/result.json) | Robust minimum transmission 73.75% vs 57.72% nominal; 8/8 checks, 5/7 targets; 48 parallel shards | Generic 2D width-bias proxy; transmission and balance targets not met; no fabrication claim |
+
 The 3D results from 007–010 and from 011 describe different polarizations
 (TM-like versus TE-like) and are normalized differently, so they should not be
 compared number for number.

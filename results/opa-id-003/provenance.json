@@ -1,0 +1,234 @@
+{
+  "experiment": "OPA-ID-003",
+  "workflow_run_id": 43639010470,
+  "job_id": 132585749176,
+  "artifact_id": 14131796313,
+  "artifact_sha256": "e26bded44c29ed3fa054fd164b34faba275e412683974faee595abc74e9d9e46",
+  "artifact_bytes": 67500,
+  "head_sha": "d526d3155c02c0642611b4da98c24d3bdf11384c",
+  "workflow_sha": "648af0e20acb167f1f2b1a21718a30ed8a2f93dd",
+  "merge_sha": "4e268ffbbe71b5b29dff6139f6faedf335ff5886",
+  "pull_request": 56,
+  "source_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/43639010470/job/132585749176",
+  "artifact_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/43639010470/artifacts/14131796313",
+  "bundle_artifact_id": 14133675961,
+  "previous_cancelled_run": 43633041220,
+  "verification": "Original ZIP SHA-256 matched GitHub digest; ZIP CRC check passed. All 53 files have the exact Git blob SHA-1 calculated from original bytes. The 36 search and 36 validation rows match the 48 original shards after removing validation design/scenario_set labels.",
+  "files": {
+    "environment-lock.txt": {
+      "git_blob_sha1": "6fcd943bd8bd02d8ec8c734dc31b6abb4e0f96d0",
+      "archived": true
+    },
+    "installed-packages.json": {
+      "git_blob_sha1": "88c110a3f4ef13b8006b9fda426cfd71c01b86e2",
+      "archived": true
+    },
+    "result.json": {
+      "git_blob_sha1": "856380b29ec69c0d1bd7cfec291aa7ec122a5b33",
+      "archived": true
+    },
+    "search.csv": {
+      "git_blob_sha1": "67fdf605978dd4931ae577b027c108eddfa38bfb",
+      "archived": true
+    },
+    "validation.csv": {
+      "git_blob_sha1": "c31c1b87f98f0deb4452a626dcf334dab99a9d34",
+      "archived": true
+    },
+    "shards/search/id003-search-0/shard.json": {
+      "git_blob_sha1": "9d27a719d3e6dfd3f6733133f1dda8c8e56a23e5",
+      "archived": true
+    },
+    "shards/search/id003-search-1/shard.json": {
+      "git_blob_sha1": "854010fcadab1e06a51f4d51afdbcb3dca21ada3",
+      "archived": true
+    },
+    "shards/search/id003-search-2/shard.json": {
+      "git_blob_sha1": "9bd21265647d5409a44def203c8edf81c1fd8acd",
+      "archived": true
+    },
+    "shards/search/id003-search-3/shard.json": {
+      "git_blob_sha1": "7ca15b2dc8663d2c68a7222c4a3ff10bd254e907",
+      "archived": true
+    },
+    "shards/search/id003-search-4/shard.json": {
+      "git_blob_sha1": "c6d47c92ab2ad45dcb21f8f3a348bf1a89fb2753",
+      "archived": true
+    },
+    "shards/search/id003-search-5/shard.json": {
+      "git_blob_sha1": "1abea598760fe90fcf4f885e1b4ce087a6f80ac3",
+      "archived": true
+    },
+    "shards/search/id003-search-6/shard.json": {
+      "git_blob_sha1": "5f7a6f8f332b580096581f8e3f8d6229a786a28c",
+      "archived": true
+    },
+    "shards/search/id003-search-7/shard.json": {
+      "git_blob_sha1": "046696788a3496f5a7e3ed6061e489e66d278f0d",
+      "archived": true
+    },
+    "shards/search/id003-search-8/shard.json": {
+      "git_blob_sha1": "a14f418a339af16c1e0daa9abab0685ab233f2ca",
+      "archived": true
+    },
+    "shards/search/id003-search-9/shard.json": {
+      "git_blob_sha1": "efc4fddc08222a4699594b176a18d7eba458cfa1",
+      "archived": true
+    },
+    "shards/search/id003-search-10/shard.json": {
+      "git_blob_sha1": "bc5ab7e6bb6f9dd07dc2916223893e45d302de7d",
+      "archived": true
+    },
+    "shards/search/id003-search-11/shard.json": {
+      "git_blob_sha1": "3c3ee57c31db553b07f4627d1ca420ad9bccfe99",
+      "archived": true
+    },
+    "shards/validation/id003-validation-0/shard.json": {
+      "git_blob_sha1": "d44e1b42a56922e4c82c1ef4b46fd050e2668cb9",
+      "archived": true
+    },
+    "shards/validation/id003-validation-1/shard.json": {
+      "git_blob_sha1": "620967fcd5b67b14dc81c13958b19c86dc164d87",
+      "archived": true
+    },
+    "shards/validation/id003-validation-2/shard.json": {
+      "git_blob_sha1": "8e6740a42e65b72a561fbbd1020a543808f05d9c",
+      "archived": true
+    },
+    "shards/validation/id003-validation-3/shard.json": {
+      "git_blob_sha1": "25c93cb7d3d6a4901f3f3007fb493a90facb47fc",
+      "archived": true
+    },
+    "shards/validation/id003-validation-4/shard.json": {
+      "git_blob_sha1": "dcf7ad1fe6da8bd94096b308fb74b3e1ef32df04",
+      "archived": true
+    },
+    "shards/validation/id003-validation-5/shard.json": {
+      "git_blob_sha1": "5182b48a65e139da2cd43dd30ea0e7b7859a52ef",
+      "archived": true
+    },
+    "shards/validation/id003-validation-6/shard.json": {
+      "git_blob_sha1": "27d3b90874e70f9b8588b4937c3fc7e3ab111616",
+      "archived": true
+    },
+    "shards/validation/id003-validation-7/shard.json": {
+      "git_blob_sha1": "7521a7244bb06f4d885a1ce580cc97fc22b2eabe",
+      "archived": true
+    },
+    "shards/validation/id003-validation-8/shard.json": {
+      "git_blob_sha1": "cdcab5241f6d1250f7861bf44c05e3c126896478",
+      "archived": true
+    },
+    "shards/validation/id003-validation-9/shard.json": {
+      "git_blob_sha1": "c1c9085e2e0f06377e11a2e179ccd1d03c064245",
+      "archived": true
+    },
+    "shards/validation/id003-validation-10/shard.json": {
+      "git_blob_sha1": "e46b2e6ee66da4c55d7cf71bc210d7a728f3f093",
+      "archived": true
+    },
+    "shards/validation/id003-validation-11/shard.json": {
+      "git_blob_sha1": "503d7ebca6568e4f5ccc9178386a86c28f6cec2f",
+      "archived": true
+    },
+    "shards/validation/id003-validation-12/shard.json": {
+      "git_blob_sha1": "f3d748441a2ff73363d9ce3f11674b53f767b86d",
+      "archived": true
+    },
+    "shards/validation/id003-validation-13/shard.json": {
+      "git_blob_sha1": "7d4dadb26eac7d976a3546fa77b888dfc8ffd855",
+      "archived": true
+    },
+    "shards/validation/id003-validation-14/shard.json": {
+      "git_blob_sha1": "70dd9732241b75a55be2c92534fbf9e34b2c7110",
+      "archived": true
+    },
+    "shards/validation/id003-validation-15/shard.json": {
+      "git_blob_sha1": "3ff1e14e9c303ef48d7d31b50eb82498aa0f005a",
+      "archived": true
+    },
+    "shards/validation/id003-validation-16/shard.json": {
+      "git_blob_sha1": "94bb58f53afce175fee49b3e6082929f7f6b3808",
+      "archived": true
+    },
+    "shards/validation/id003-validation-17/shard.json": {
+      "git_blob_sha1": "6133b303e37957a070d8b53b97bf75afcbab829e",
+      "archived": true
+    },
+    "shards/validation/id003-validation-18/shard.json": {
+      "git_blob_sha1": "be434b5cba5a2101b55c7502ff16949846925fdc",
+      "archived": true
+    },
+    "shards/validation/id003-validation-19/shard.json": {
+      "git_blob_sha1": "ddd6411fbbaa95fa8d73104f3d44678cefddafea",
+      "archived": true
+    },
+    "shards/validation/id003-validation-20/shard.json": {
+      "git_blob_sha1": "3b267128fc3dc7167c2ffe5c564440f659d64c5c",
+      "archived": true
+    },
+    "shards/validation/id003-validation-21/shard.json": {
+      "git_blob_sha1": "1da97e9306314fe49347d30efa4fc1d54edca8c6",
+      "archived": true
+    },
+    "shards/validation/id003-validation-22/shard.json": {
+      "git_blob_sha1": "db4502aa14043bfd6b4509244149d992df09ffd1",
+      "archived": true
+    },
+    "shards/validation/id003-validation-23/shard.json": {
+      "git_blob_sha1": "251628b2ec41440366cdb6ddd1658130aeb0379e",
+      "archived": true
+    },
+    "shards/validation/id003-validation-24/shard.json": {
+      "git_blob_sha1": "7a0317002a42b37788c22e38f06ad2877a3345da",
+      "archived": true
+    },
+    "shards/validation/id003-validation-25/shard.json": {
+      "git_blob_sha1": "c250b6dd60f03c0b7737414d9ad8b8e85e1c0805",
+      "archived": true
+    },
+    "shards/validation/id003-validation-26/shard.json": {
+      "git_blob_sha1": "0881b51455c3b548146a47b1c53d5f570b2ae124",
+      "archived": true
+    },
+    "shards/validation/id003-validation-27/shard.json": {
+      "git_blob_sha1": "80d90eb42b00a8a76de702e8244af53ff53d373c",
+      "archived": true
+    },
+    "shards/validation/id003-validation-28/shard.json": {
+      "git_blob_sha1": "460031931e974b9ffaf53329ffa7aef369c4d028",
+      "archived": true
+    },
+    "shards/validation/id003-validation-29/shard.json": {
+      "git_blob_sha1": "db2d75807c89df3c64d57632ffacc41c9097a213",
+      "archived": true
+    },
+    "shards/validation/id003-validation-30/shard.json": {
+      "git_blob_sha1": "58edaaaf9f564257d6fc7e9012860068299eb14d",
+      "archived": true
+    },
+    "shards/validation/id003-validation-31/shard.json": {
+      "git_blob_sha1": "255315e128ef5f8d217797e2dcde2f6f8b7ab1c5",
+      "archived": true
+    },
+    "shards/validation/id003-validation-32/shard.json": {
+      "git_blob_sha1": "baab1d2da96de41339e8cd02c874dfdc47da5f15",
+      "archived": true
+    },
+    "shards/validation/id003-validation-33/shard.json": {
+      "git_blob_sha1": "4157c52f3d66f17b67a2b3a3a6bef534729b02de",
+      "archived": true
+    },
+    "shards/validation/id003-validation-34/shard.json": {
+      "git_blob_sha1": "ffd1443bc187ca2822ab1cdf307dc4ad4a32463b",
+      "archived": true
+    },
+    "shards/validation/id003-validation-35/shard.json": {
+      "git_blob_sha1": "fb15d0ee3d0d82e8c0e2edb70cb85f1d989a18a1",
+      "archived": true
+    }
+  },
+  "total_uncompressed_bytes": 206899,
+  "shard_compute_seconds_sum": 6457.69181249,
+  "shard_compute_time_note": "Sum of per-shard simulation elapsed times, not wall-clock time or total runner billing."
+}

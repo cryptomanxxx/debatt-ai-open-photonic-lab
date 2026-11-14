@@ -1,0 +1,67 @@
+{
+  "stage": "search",
+  "index": 7,
+  "provenance": {
+    "workflow_sha": "648af0e20acb167f1f2b1a21718a30ed8a2f93dd",
+    "run_id": "43639010470",
+    "meep_version": "1.35.1",
+    "lock_sha256": "0c16eed28a615f82016ef367494ec4278745fa18aff859533c253355aac0d1da"
+  },
+  "elapsed_seconds": 135.962017329,
+  "rows": [
+    {
+      "resolution": 30,
+      "length_um": 6.0,
+      "gap_um": 0.35,
+      "width_bias_um": 0.0,
+      "wavelength_um": 1.55,
+      "straight_reference": 1.0000184139573796,
+      "bar": 0.5310425763978687,
+      "cross": 0.23258349361910916,
+      "total": 0.7636260700169778,
+      "reflection": 8.046183599603776e-05,
+      "reflection_bar": 1.9961500769274844e-05,
+      "reflection_cross": 6.050033522676292e-05,
+      "cross_fraction": 0.3045777282249388,
+      "split_error": 0.19542227177506122,
+      "unaccounted": 0.23629346814702618,
+      "objective_error": 0.2674165063808909
+    },
+    {
+      "resolution": 30,
+      "length_um": 6.0,
+      "gap_um": 0.35,
+      "width_bias_um": -0.02,
+      "wavelength_um": 1.55,
+      "straight_reference": 1.000022314181972,
+      "bar": 0.5245733542345722,
+      "cross": 0.21329417385113036,
+      "total": 0.7378675280857026,
+      "reflection": 4.853358816882337e-06,
+      "reflection_bar": 3.19814181681385e-06,
+      "reflection_cross": 1.6552170000684872e-06,
+      "cross_fraction": 0.2890683838662656,
+      "split_error": 0.2109316161337344,
+      "unaccounted": 0.26212761855548056,
+      "objective_error": 0.28670582614886964
+    },
+    {
+      "resolution": 30,
+      "length_um": 6.0,
+      "gap_um": 0.35,
+      "width_bias_um": 0.02,
+      "wavelength_um": 1.55,
+      "straight_reference": 1.0000135221425472,
+      "bar": 0.526626443931616,
+      "cross": 0.2537909020024879,
+      "total": 0.7804173459341038,
+      "reflection": 9.593388551239002e-05,
+      "reflection_bar": 4.595796523963766e-05,
+      "reflection_cross": 4.997592027275236e-05,
+      "cross_fraction": 0.32519895069569255,
+      "split_error": 0.17480104930430745,
+      "unaccounted": 0.21948672018038376,
+      "objective_error": 0.24620909799751212
+    }
+  ]
+}

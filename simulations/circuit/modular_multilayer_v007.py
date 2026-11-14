@@ -6,6 +6,7 @@ import csv
 import json
 from pathlib import Path
 import sys
+import time
 
 import numpy as np
 
@@ -213,6 +214,10 @@ def main():
     noise_paired = noise_pairing_control()
     if not noise_paired:
         raise RuntimeError("Receiver noise pairing check failed")
+    print('Receiver noise pairing: passed', flush=True)
+    total_groups = len(baselines)*len(SIZES)*len(SCENES)*2
+    completed = 0
+    started = time.monotonic()
     for seed,depth,data,w0,digital,initial_loss,initial_acc in baselines:
         _,_,test,ytest,probes,_ = data
         for b in SIZES:
@@ -226,11 +231,15 @@ def main():
             for scene in SCENES:
                 for local in (False,True):
                     label = "calibrated" if local else "uncalibrated"
+                    group = f"seed={seed} depth={depth} tile={b} scenario={scene} {label}"
+                    print(f"Starting {completed+1}/{total_groups}: {group}", flush=True)
                     diag = []
                     factory = optical_factory(b,hw,SCENARIOS[scene],local,probes,seed,diag)
                     def record(step,loss):
                         curves.append(dict(seed=seed,depth=depth,tile_size=b,scenario=scene,
                                            method="hybrid_"+label,step=step,train_loss=loss))
+                        if (step+1)%8==0:
+                            print(f"  {group}: update {step+1}/{STEPS}, loss={loss:.6g}", flush=True)
                     hybrid = train_model(w0,data,factory,record)
                     train_diag = list(diag)
                     pair = []
@@ -260,6 +269,8 @@ def main():
                         hybrid_loss=pair[1]["test_loss"],delta_loss=pair[1]["test_loss"]-pair[0]["test_loss"],
                         digital_deploy_accuracy=pair[0]["test_accuracy"],hybrid_accuracy=pair[1]["test_accuracy"],
                         delta_accuracy=pair[1]["test_accuracy"]-pair[0]["test_accuracy"]))
+                    completed += 1
+                    print(f"Completed {completed}/{total_groups}: {group}; elapsed={time.monotonic()-started:.1f}s", flush=True)
     groups = len(SEEDS)*len(DEPTHS)*len(SIZES)*len(SCENES)
     checks = {
         "receiver_noise_paired_across_calibration": noise_paired,

@@ -6,7 +6,10 @@
   "machinery": [
     ".github/workflows/experiments.yml",
     "simulations/experiments.json",
-    "tools/select_experiments.py"
+    "tools/select_experiments.py",
+    "tools/test_select_experiments.py",
+    "tools/bundle_experiments.py",
+    "tools/test_bundle_experiments.py"
   ],
   "experiments": [
     {

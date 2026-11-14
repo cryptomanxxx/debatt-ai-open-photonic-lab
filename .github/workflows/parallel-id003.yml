@@ -63,6 +63,8 @@ jobs:
         with:
           pattern: id003-search-*
           path: search-shards
+      - name: Shard integrity regression tests
+        run: python tools/test_parallel_id003.py
       - name: Select winners and plan independent validation
         id: plan
         run: python simulations/meep/robust_coupler_v003.py plan

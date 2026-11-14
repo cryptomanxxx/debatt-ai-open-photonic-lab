@@ -1,5 +1,7 @@
 """OPA-ID-003: robust parametric inverse design of a 2D directional coupler."""
+import argparse
 import csv
+import os
 import json
 from pathlib import Path
 import time
@@ -124,9 +126,7 @@ def design_key(rows, robust):
             rows[0]["length_um"],rows[0]["gap_um"])
 
 
-def main():
-    started=time.monotonic()
-    OUT.mkdir(parents=True,exist_ok=True)
+def evaluator():
     refs={}
     def evaluate(res,length,gap,scenario):
         bias,wl=scenario
@@ -136,14 +136,17 @@ def main():
         row=measure(res,length,gap,bias,wl,refs[key])
         print("measurement",json.dumps(row,allow_nan=False),flush=True)
         return row
+    return evaluate
+
+
+def main():
+    started=time.monotonic()
+    evaluate=evaluator()
     candidates=[]
     for length in LENGTHS:
         for gap in GAPS:
             candidates.append([evaluate(RES[0],length,gap,s) for s in TRAIN])
-    nominal=min(candidates,key=lambda rows:design_key(rows,False))
-    robust=min(candidates,key=lambda rows:design_key(rows,True))
-    designs={label:(rows[0]["length_um"],rows[0]["gap_um"])
-             for label,rows in (("nominal",nominal),("robust",robust))}
+    designs=choose(candidates)
     validation=[]
     cache={}
     for label,(length,gap) in designs.items():
@@ -154,6 +157,21 @@ def main():
                     cache[key]=evaluate(res,length,gap,scenario)
                 validation.append(dict(design=label,
                     scenario_set="training" if scenario in TRAIN else "holdout",**cache[key]))
+    return report_results(candidates,validation,started)
+
+
+def choose(candidates):
+    nominal=min(candidates,key=lambda rows:design_key(rows,False))
+    robust=min(candidates,key=lambda rows:design_key(rows,True))
+    return {label:(rows[0]["length_um"],rows[0]["gap_um"])
+             for label,rows in (("nominal",nominal),("robust",robust))}
+
+
+def report_results(candidates,validation,started,parallel=None):
+    OUT.mkdir(parents=True,exist_ok=True)
+    nominal=min(candidates,key=lambda rows:design_key(rows,False))
+    robust=min(candidates,key=lambda rows:design_key(rows,True))
+    designs=choose(candidates)
     search=[r for rows in candidates for r in rows]
     all_rows=search+validation
     def subset(label,res,group):
@@ -203,6 +221,9 @@ def main():
           "Unaccounted power is not independently measured radiation. No hardware, GDS or novelty claim."],
         checks=checks,research_targets=targets,summary=summary,search=search,
         validation=validation,elapsed_seconds=time.monotonic()-started)
+    if parallel is not None:
+        report["parallel_execution"]=parallel
+        report.pop("elapsed_seconds")  # aggregation time is not experiment runtime
     (OUT/"result.json").write_text(json.dumps(report,indent=2,allow_nan=False)+"\n")
     for name,rows in (("search",search),("validation",validation)):
         with (OUT/(name+".csv")).open("w",newline="") as f:
@@ -213,5 +234,99 @@ def main():
     return 0 if all(checks.values()) else 1
 
 
+def identity(row):
+    return tuple(row[k] for k in ("resolution","length_um","gap_um",
+                                  "width_bias_um","wavelength_um"))
+
+
+def expected_identity(res,length,gap,scenario):
+    return (res,length,gap,*scenario)
+
+
+def write_json(path,value):
+    path=Path(path)
+    path.parent.mkdir(parents=True,exist_ok=True)
+    path.write_text(json.dumps(value,indent=2,allow_nan=False)+"\n")
+
+
+def provenance():
+    return dict(workflow_sha=os.environ.get("GITHUB_SHA","local"),
+                run_id=os.environ.get("GITHUB_RUN_ID","local"),
+                meep_version=mp.__version__)
+
+
+def read_shards(root,stage,specs):
+    """Require exactly one complete shard per planned index, with matching identity."""
+    root=Path(root)
+    paths=sorted(root.glob("*/shard.json"))
+    expected_names={f"id003-{stage}-{i}" for i in range(len(specs))}
+    if {p.parent.name for p in paths}!=expected_names:
+        raise ValueError(f"Missing or unexpected {stage} shards")
+    result=[]
+    for i,expected in enumerate(specs):
+        data=json.loads((root/f"id003-{stage}-{i}"/"shard.json").read_text())
+        if (data["stage"]!=stage or data["index"]!=i
+                or data["provenance"]!=provenance()):
+            raise ValueError(f"Wrong shard identity/provenance: {stage} {i}")
+        rows=data["rows"]
+        if [identity(r) for r in rows]!=expected:
+            raise ValueError(f"Wrong or incomplete measurements: {stage} {i}")
+        result.append(rows)
+    return result
+
+
+def search_specs():
+    return [[expected_identity(RES[0],l,g,s) for s in TRAIN]
+            for l in LENGTHS for g in GAPS]
+
+
+def validation_specs(designs):
+    # Deduplicate identical winners; each scenario/resolution gets its own job.
+    return [[expected_identity(res,l,g,s)] for l,g in sorted(set(designs.values()))
+            for res in RES for s in TRAIN+HOLDOUT]
+
+
+def run_shard(stage,index,specs,path):
+    started=time.monotonic()
+    evaluate=evaluator()
+    rows=[evaluate(res,l,g,(bias,wl)) for res,l,g,bias,wl in specs[index]]
+    write_json(path,dict(stage=stage,index=index,provenance=provenance(),
+                         elapsed_seconds=time.monotonic()-started,rows=rows))
+
+
+def cli():
+    parser=argparse.ArgumentParser()
+    parser.add_argument("stage",nargs="?",default="serial",
+                        choices=("serial","search","plan","validate","aggregate"))
+    parser.add_argument("--index",type=int)
+    parser.add_argument("--search-dir",default="search-shards")
+    parser.add_argument("--validation-dir",default="validation-shards")
+    parser.add_argument("--output",default="shard/shard.json")
+    args=parser.parse_args()
+    if args.stage=="serial":
+        return main()
+    if args.stage=="search":
+        run_shard("search",args.index,search_specs(),args.output)
+        return 0
+    candidates=read_shards(args.search_dir,"search",search_specs())
+    designs=choose(candidates)
+    specs=validation_specs(designs)
+    if args.stage=="plan":
+        with open(os.environ["GITHUB_OUTPUT"],"a") as f:
+            f.write("matrix="+json.dumps({"include":[{"index":i} for i in range(len(specs))]})+"\n")
+        return 0
+    if args.stage=="validate":
+        run_shard("validation",args.index,specs,args.output)
+        return 0
+    rows=read_shards(args.validation_dir,"validation",specs)
+    lookup={identity(r):r for shard in rows for r in shard}
+    validation=[dict(design=label,scenario_set="training" if scenario in TRAIN else "holdout",
+                     **lookup[expected_identity(res,l,g,scenario)])
+                for label,(l,g) in designs.items() for res in RES for scenario in TRAIN+HOLDOUT]
+    return report_results(candidates,validation,time.monotonic(),
+                          parallel=dict(search_shards=len(candidates),validation_shards=len(rows),
+                                        provenance=provenance()))
+
+
 if __name__=="__main__":
-    raise SystemExit(main())
+    raise SystemExit(cli())

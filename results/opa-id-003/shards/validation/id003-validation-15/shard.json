@@ -1,0 +1,31 @@
+{
+  "stage": "validation",
+  "index": 15,
+  "provenance": {
+    "workflow_sha": "648af0e20acb167f1f2b1a21718a30ed8a2f93dd",
+    "run_id": "43639010470",
+    "meep_version": "1.35.1",
+    "lock_sha256": "0c16eed28a615f82016ef367494ec4278745fa18aff859533c253355aac0d1da"
+  },
+  "elapsed_seconds": 249.76773979799998,
+  "rows": [
+    {
+      "resolution": 60,
+      "length_um": 2.0,
+      "gap_um": 0.2,
+      "width_bias_um": 0.03,
+      "wavelength_um": 1.55,
+      "straight_reference": 1.0000130744564149,
+      "bar": 0.1410208370079632,
+      "cross": 0.43622224869514514,
+      "total": 0.5772430857031083,
+      "reflection": 6.124589421001447e-05,
+      "reflection_bar": 3.3363003135183945e-05,
+      "reflection_cross": 2.7882891074830518e-05,
+      "cross_fraction": 0.7556993916415761,
+      "split_error": 0.25569939164157607,
+      "unaccounted": 0.4226956684026817,
+      "objective_error": 0.3589791629920368
+    }
+  ]
+}

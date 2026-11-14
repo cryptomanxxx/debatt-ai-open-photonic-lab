@@ -306,8 +306,9 @@ against independently rebuilt central finite-difference forward simulations
 for a one-dimensional continuous dielectric stack. It uses 13 material
 weights, three deterministic directions, two perturbation sizes and two
 FDTD resolutions. A small fixed gradient-ascent step is independently
-evaluated. The objective is unnormalized squared Fourier electric field at
-a point, not transmission efficiency. The fine-resolution acceptance
+evaluated. The objective is the unnormalized mean squared Fourier Ex over
+Yee-grid samples in a 0.2 um interval centered at z=1.5 um, not transmission
+efficiency. The monitor must sample multiple spatial points. The fine-resolution acceptance
 threshold is 0.15 times the full gradient norm for directional error.
 
 The experiment uses a separate explicit environment lock extending the

@@ -2,6 +2,8 @@
 import argparse
 import csv
 import os
+import hashlib
+import shutil
 import json
 from pathlib import Path
 import time
@@ -252,7 +254,9 @@ def write_json(path,value):
 def provenance():
     return dict(workflow_sha=os.environ.get("GITHUB_SHA","local"),
                 run_id=os.environ.get("GITHUB_RUN_ID","local"),
-                meep_version=mp.__version__)
+                meep_version=mp.__version__,
+                lock_sha256=hashlib.sha256(Path(os.environ.get("OPA_LOCK",
+                    "simulations/meep/opa-id-linux-64.lock.txt")).read_bytes()).hexdigest())
 
 
 def read_shards(root,stage,specs):
@@ -289,6 +293,8 @@ def validation_specs(designs):
 def run_shard(stage,index,specs,path):
     started=time.monotonic()
     evaluate=evaluator()
+    if index is None or not 0<=index<len(specs):
+        raise ValueError("Shard index outside plan")
     rows=[evaluate(res,l,g,(bias,wl)) for res,l,g,bias,wl in specs[index]]
     write_json(path,dict(stage=stage,index=index,provenance=provenance(),
                          elapsed_seconds=time.monotonic()-started,rows=rows))
@@ -323,6 +329,9 @@ def cli():
     validation=[dict(design=label,scenario_set="training" if scenario in TRAIN else "holdout",
                      **lookup[expected_identity(res,l,g,scenario)])
                 for label,(l,g) in designs.items() for res in RES for scenario in TRAIN+HOLDOUT]
+    OUT.mkdir(parents=True,exist_ok=True)
+    for stage,root in (("search",args.search_dir),("validation",args.validation_dir)):
+        shutil.copytree(root,OUT/"shards"/stage,dirs_exist_ok=True)
     return report_results(candidates,validation,time.monotonic(),
                           parallel=dict(search_shards=len(candidates),validation_shards=len(rows),
                                         provenance=provenance()))

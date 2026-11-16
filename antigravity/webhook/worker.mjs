@@ -2,7 +2,7 @@
 const enc = new TextEncoder();
 const experiments = new Set(["AG-INFRA-001","AG-PHOTONIC-001","AG-PHOTONIC-002","AG-PHOTONIC-003"]);
 const response = status => new Response(null,{status});
-export async function handle(request, env, send = fetch, now = Date.now()) {
+export async function handle(request, env, now = Date.now()) {
   if (new URL(request.url).pathname !== "/gemini" || request.method !== "POST") return response(404);
   const id = request.headers.get("webhook-id"), ts = request.headers.get("webhook-timestamp");
   const sig = request.headers.get("webhook-signature") || "";
@@ -44,4 +44,4 @@ export class Delivery {
     });
   }
 }
-export default {fetch:handle};
+export default {fetch(request,env){return handle(request,env);}};

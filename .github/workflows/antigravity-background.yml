@@ -1,0 +1,46 @@
+name: AG-PHOTONIC-001 background
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [retrieve, resume]
+        default: retrieve
+      token_budget:
+        type: number
+        default: 200000
+      confirm_free_project:
+        type: boolean
+        description: I verified Free Tier and billing disabled
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: antigravity-live-probe
+  cancel-in-progress: false
+jobs:
+  background:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_free_project == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s antigravity/tests
+      - name: Submit once or retrieve
+        env:
+          AG_MODE: ${{ inputs.mode }}
+          AG_TOKEN_BUDGET: ${{ inputs.token_budget }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AG_PREVIOUS_INTERACTION_ID: ${{ secrets.AG_PREVIOUS_INTERACTION_ID }}
+          AG_ENVIRONMENT_ID: ${{ secrets.AG_ENVIRONMENT_ID }}
+          AG_RETRIEVE_INTERACTION_ID: ${{ secrets.AG_RETRIEVE_INTERACTION_ID }}
+        run: python3 antigravity/experiments/AG-PHOTONIC-001/background.py --mode "$AG_MODE" --token-budget "$AG_TOKEN_BUDGET" --live --confirm-free-project
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AG-PHOTONIC-001-background
+          path: antigravity/results/background/latest.json
+          retention-days: 7
+          if-no-files-found: warn

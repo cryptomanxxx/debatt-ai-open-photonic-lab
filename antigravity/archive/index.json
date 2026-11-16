@@ -1,4 +1,10 @@
 {
+  "AG-INFRA-001": {
+    "43949586254": {
+      "file": "AG-INFRA-001/ad783dab20c088357c37f7c76e27ce4eb5c0e41012b265750e1fb6fbe6d5abc3.enc",
+      "sha256": "afa65d9b35117ed278c9faaba737fa45ab262d7307f7ad7ca241e83aebe06aea"
+    }
+  },
   "AG-PHOTONIC-001": {
     "43857964113": {
       "file": "AG-PHOTONIC-001/5caba035e1027905c8c175e33368dbe55fcf993e72eed8b02c64bb5eee7a6c03.enc",

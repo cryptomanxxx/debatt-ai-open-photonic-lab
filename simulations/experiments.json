@@ -295,7 +295,8 @@
         "simulations/circuit/modular_calibration_v004.py",
         "simulations/circuit/modular_training_v006.py",
         "simulations/circuit/merge_mod007.py",
-        ".github/workflows/parallel-mod007.yml"
+        ".github/workflows/parallel-mod007.yml",
+        "simulations/circuit/compare_mod007.py"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/modular_multilayer_v007.py"
     },

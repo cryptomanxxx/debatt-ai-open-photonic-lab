@@ -1,0 +1,61 @@
+name: Antigravity webhook control test
+# One minimal plain-model background interaction (no agent, no research) to
+# test whether this Gemini project receives interaction.completed webhooks.
+# static: no webhook_config, uses the registered project webhook (/gemini).
+# dynamic: webhook_config.uris -> /gemini-dynamic (observation only).
+on:
+  pull_request:
+    paths:
+      - 'antigravity/webhook/control.py'
+      - 'antigravity/webhook/test_control.py'
+      - '.github/workflows/antigravity-webhook-control.yml'
+  workflow_dispatch:
+    inputs:
+      variant:
+        type: choice
+        options: [static, dynamic]
+        default: static
+      model:
+        description: "Plain Gemini model ID (not an agent)"
+        type: string
+        default: gemini-3.8-flash
+      confirm_free_project:
+        description: "I have verified the Gemini project has billing disabled"
+        type: boolean
+        default: false
+      confirm_control_call:
+        description: "Send exactly one minimal model request (no retries)"
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: antigravity-webhook-control
+  cancel-in-progress: false
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s antigravity/webhook -p test_control.py
+  control:
+    needs: tests
+    if: >-
+      github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' &&
+      inputs.confirm_free_project == true && inputs.confirm_control_call == true &&
+      github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: python3 antigravity/webhook/control.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CONTROL_VARIANT: ${{ inputs.variant }}
+          CONTROL_MODEL: ${{ inputs.model }}
+          CONFIRM_FREE_PROJECT: ${{ inputs.confirm_free_project }}
+          CONFIRM_CONTROL_CALL: ${{ inputs.confirm_control_call }}

@@ -4,7 +4,7 @@ on:
     inputs:
       mode:
         type: choice
-        options: [inspect, create]
+        options: [inspect, diagnose, create]
         default: inspect
       confirm_free_project:
         type: boolean

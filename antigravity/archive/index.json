@@ -3,6 +3,10 @@
     "43949586254": {
       "file": "AG-INFRA-001/ad783dab20c088357c37f7c76e27ce4eb5c0e41012b265750e1fb6fbe6d5abc3.enc",
       "sha256": "afa65d9b35117ed278c9faaba737fa45ab262d7307f7ad7ca241e83aebe06aea"
+    },
+    "43951828448": {
+      "file": "AG-INFRA-001/9db551176b06d139a513c1781ec36c6108af955f30af486befe6c9c4c8d2885d.enc",
+      "sha256": "004b3537429a698bda9f3930098cf9d9229bbd90f96ae9680d93c37d4f5bfd48"
     }
   },
   "AG-PHOTONIC-001": {

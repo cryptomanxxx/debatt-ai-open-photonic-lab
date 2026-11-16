@@ -30,8 +30,14 @@ confirm new submission. Each operation sends exactly one request; start uses
 background=true and store=true. No automatic POST retries; reruns are blocked.
 If submission times out without a checkpoint, inspect AI Studio before submitting again.
 
-For retrieval select the same experiment and enter the GitHub run ID of a prior
-manager run with an encrypted checkpoint. No Google interaction ID is needed.
+For retrieval select the experiment and leave prior_run_id blank. The manager
+finds the newest completed main-branch manager run with a non-expired,
+experiment-specific checkpoint (including failed jobs that saved a response).
+An explicit prior_run_id overrides discovery for historical retrieval. Legacy
+coupler run 43855012421 is a verified migration fallback; other legacy artifacts
+require explicit selection. The encrypted experiment identity is checked before
+any Google request. No matching checkpoint means stop, never start a new job.
+No Google interaction ID is needed.
 The checkpoint contains the entire response including environment ID and is
 authenticated-encrypted with Fernet using a domain-separated SHA-256 derivation
 from the API key. Public artifacts contain ciphertext only. Keep the original

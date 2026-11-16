@@ -1,0 +1,38 @@
+name: Antigravity cross-validation
+on:
+  pull_request:
+    paths:
+      - 'antigravity/reproduction/**'
+      - '.github/workflows/antigravity-cross-validation.yml'
+      - 'simulations/meep/opa-fdtd-linux-64.lock.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cross-validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: opa-fdtd
+          create-args: --file simulations/meep/opa-fdtd-linux-64.lock.txt
+      - name: Cross-check matched geometry
+        shell: micromamba-shell {0}
+        env:
+          OMP_NUM_THREADS: '1'
+          OPENBLAS_NUM_THREADS: '1'
+        run: |
+          mkdir -p cross-validation
+          cp simulations/meep/opa-fdtd-linux-64.lock.txt cross-validation/environment-lock.txt
+          micromamba list -n opa-fdtd --json > cross-validation/installed-packages.json
+          python antigravity/reproduction/AG-PHOTONIC-001/cross_validate.py cross-validation/result.json
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: AG-PHOTONIC-001-cross-validation
+          path: cross-validation/
+          if-no-files-found: warn

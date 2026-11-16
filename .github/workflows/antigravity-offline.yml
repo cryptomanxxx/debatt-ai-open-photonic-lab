@@ -9,6 +9,7 @@ on:
       - '.github/workflows/antigravity-resume.yml'
       - '.github/workflows/antigravity-background.yml'
       - '.github/workflows/antigravity-manager.yml'
+      - '.github/workflows/antigravity-archive.yml'
   workflow_dispatch:
 permissions:
   contents: read

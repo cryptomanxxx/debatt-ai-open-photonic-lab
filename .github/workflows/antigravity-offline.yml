@@ -11,6 +11,7 @@ on:
       - '.github/workflows/antigravity-manager.yml'
       - '.github/workflows/antigravity-archive.yml'
       - '.github/workflows/antigravity-scientific-export.yml'
+      - '.github/workflows/antigravity-auto-retrieve.yml'
   workflow_dispatch:
 permissions:
   contents: read

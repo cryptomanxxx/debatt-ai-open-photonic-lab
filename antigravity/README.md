@@ -87,3 +87,22 @@ cause export to fail. This is not a guarantee against arbitrary secrets in
 free text; never use this workflow for confidential inputs or research. The
 artifact is public, expires after seven days, and is not independently validated.
 No agent code is executed and no plaintext is committed. Review before reuse.
+
+## Automatic retrieval (scheduled, GET-only)
+Antigravity interactions do not send webhooks: Google rejects `webhook_config`
+with "CreateInteractionEvent.webhook is not supported by Agency", and the static
+project webhook received no completion event (verified in Cloudflare logs,
+16 Nov 2026). The scheduled workflow *Antigravity automatic retrieval* replaces
+the notification. Every 15 minutes it decrypts the newest manager checkpoint per
+experiment; for an active interaction it sends one GET, and once the status is
+terminal it dispatches the manager in retrieve mode bound to the interaction
+hash. The manager's completion triggers the archive workflow; a terminal
+checkpoint missing from the archive index gets an archive dispatch.
+
+It never POSTs to Google or starts research. Interactions still active after
+seven days are left for manual retrieval. Enable it only for a verified
+billing-disabled project by setting the repository variable `AG_AUTO_RETRIEVE`
+to `true` (Settings → Secrets and variables → Actions → Variables); remove the
+variable to stop it. GitHub pauses scheduled workflows after 60 days without
+repository activity. Manual polling (`poll_until_done`) remains the fallback,
+and the static webhook stays registered in case Google adds support for agents.

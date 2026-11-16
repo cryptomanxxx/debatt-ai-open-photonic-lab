@@ -1,0 +1,36 @@
+name: Antigravity automatic retrieval
+# Antigravity interactions do not emit webhooks ("CreateInteractionEvent.webhook
+# is not supported by Agency"), so this scheduled job replaces the notification.
+# Every 15 minutes it decrypts the newest manager checkpoint per experiment and,
+# for an active interaction, sends one GET. When the interaction has finished it
+# dispatches the existing manager in retrieve mode (bound to the interaction
+# hash); the manager's completion triggers the archive workflow. A terminal
+# checkpoint missing from the archive index gets an archive dispatch.
+# Never POSTs to Google, never starts research. Opt-in: set the repository
+# variable AG_AUTO_RETRIEVE to true only for a verified billing-disabled project.
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: antigravity-auto-retrieve
+  cancel-in-progress: false
+jobs:
+  watch:
+    if: github.ref == 'refs/heads/main' && vars.AG_AUTO_RETRIEVE == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install encryption dependency
+        run: sudo apt-get update -qq && sudo apt-get install -y python3-cryptography
+      - run: /usr/bin/python3 antigravity/auto_retrieve.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AG_AUTO_RETRIEVE: ${{ vars.AG_AUTO_RETRIEVE }}

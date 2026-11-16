@@ -2,6 +2,11 @@ name: AG-PHOTONIC-001 resume
 on:
   workflow_dispatch:
     inputs:
+      token_budget:
+        description: 'Requested agent token budget (20000–200000)'
+        required: true
+        type: number
+        default: 200000
       confirm_free_project:
         description: 'I verified Free Tier and billing disabled'
         required: true
@@ -16,7 +21,7 @@ jobs:
   resume:
     if: github.ref == 'refs/heads/main' && inputs.confirm_free_project == true
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,10 +29,11 @@ jobs:
       - run: python3 -m unittest discover -s antigravity/tests
       - name: Resume existing interaction once
         env:
+          AG_TOKEN_BUDGET: ${{ inputs.token_budget }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           AG_PREVIOUS_INTERACTION_ID: ${{ secrets.AG_PREVIOUS_INTERACTION_ID }}
           AG_ENVIRONMENT_ID: ${{ secrets.AG_ENVIRONMENT_ID }}
-        run: python3 antigravity/experiments/AG-PHOTONIC-001/resume.py --live --confirm-free-project
+        run: python3 antigravity/experiments/AG-PHOTONIC-001/resume.py --token-budget "$AG_TOKEN_BUDGET" --live --confirm-free-project
       - uses: actions/upload-artifact@v4
         if: always()
         with:

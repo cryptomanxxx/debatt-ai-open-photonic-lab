@@ -1,0 +1,17 @@
+name: Antigravity webhook offline tests
+on:
+  pull_request:
+    paths: ['antigravity/webhook/**', '.github/workflows/antigravity-webhook-tests.yml']
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - run: node --test antigravity/webhook/worker.test.mjs

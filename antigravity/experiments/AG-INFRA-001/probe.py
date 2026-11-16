@@ -61,6 +61,10 @@ def main(argv=None):
     with tempfile.NamedTemporaryFile(mode="w", dir=directory, prefix="AG-INFRA-001-", suffix=".json", delete=False, encoding="utf-8") as out:
         json.dump(result, out, indent=2)
         print(out.name)
+    status = result.get("status") if isinstance(result, dict) else None
+    if status != "completed":
+        print("Interaction did not complete; response saved for diagnosis.", file=sys.stderr)
+        return 1
     return 0
 
 if __name__ == "__main__":

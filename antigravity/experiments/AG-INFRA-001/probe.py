@@ -29,13 +29,14 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         return None
 
-def main(argv=None):
+def main(argv=None, *, payload=None, result_prefix="AG-INFRA-001"):
+    payload = PAYLOAD if payload is None else payload
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--confirm-free-project", action="store_true")
     args = parser.parse_args(argv)
     if not args.live:
-        print(json.dumps(PAYLOAD, indent=2))
+        print(json.dumps(payload, indent=2))
         return 0
     if not args.confirm_free_project:
         parser.error("Live mode requires verified free project with billing disabled")
@@ -43,7 +44,7 @@ def main(argv=None):
     if not key:
         parser.error("GEMINI_API_KEY is required")
     request = urllib.request.Request(
-        ENDPOINT, data=json.dumps(PAYLOAD).encode(),
+        ENDPOINT, data=json.dumps(payload).encode(),
         headers={"Content-Type": "application/json", "x-goog-api-key": key},
         method="POST",
     )
@@ -59,7 +60,7 @@ def main(argv=None):
     directory = Path(__file__).resolve().parents[2] / "results"
     directory.mkdir(exist_ok=True)
     import tempfile
-    with tempfile.NamedTemporaryFile(mode="w", dir=directory, prefix="AG-INFRA-001-", suffix=".json", delete=False, encoding="utf-8") as out:
+    with tempfile.NamedTemporaryFile(mode="w", dir=directory, prefix=result_prefix + "-", suffix=".json", delete=False, encoding="utf-8") as out:
         json.dump(result, out, indent=2)
         print(out.name)
     status = result.get("status") if isinstance(result, dict) else None

@@ -48,15 +48,36 @@ def run(res,out):
     sim.run(until_after_sources=mp.stop_when_dft_decayed(
         1e-6,minimum_run_time=6*cell.x,maximum_run_time=1000))
     pin=float(mp.get_fluxes(incoming)[0])
-    if not math.isfinite(pin) or pin<=0:
-        raise ValueError("Invalid net input flux")
+    failures=[]
+    valid_input=math.isfinite(pin) and pin>0
+    if not valid_input:
+        failures.append("Invalid net input flux")
     rows=[]
+    def finite_or_none(value):
+        return value if math.isfinite(value) else None
     for x,(a,b) in zip(POSITIONS,monitors):
-        through,cross=(float(mp.get_fluxes(m)[0])/pin for m in (a,b))
+        raw_through,raw_cross=(float(mp.get_fluxes(m)[0]) for m in (a,b))
+        through,cross=(raw_through/pin,raw_cross/pin) if valid_input else (math.nan,math.nan)
         total=through+cross
-        if not all(map(math.isfinite,(through,cross))) or min(through,cross)<0 or not .85<=total<=1.10:
-            raise ValueError(f"Invalid flux at {x}: {through}, {cross}")
-        rows.append(dict(x_um=x,through=through,cross=cross,total=total,fraction=cross/total))
+        valid=all(map(math.isfinite,(through,cross))) and min(through,cross)>=0 and .85<=total<=1.10
+        if not valid:
+            failures.append(f"Invalid flux at {x}: {through}, {cross}")
+        rows.append(dict(x_um=x,raw_through=finite_or_none(raw_through),
+            raw_cross=finite_or_none(raw_cross),through=finite_or_none(through),
+            cross=finite_or_none(cross),total=finite_or_none(total),
+            fraction=finite_or_none(cross/total) if math.isfinite(total) and total>0 else None,
+            flux_check_passed=valid))
+    report=dict(resolution=res,geometry=dict(width_um=WIDTH,height_um=HEIGHT,gap_um=GAP,
+        wavelength_um=WL,n_core=3.48,n_clad=1.44),meep_version=mp.__version__,
+        input_net_flux=finite_or_none(pin),rows=rows,meep_time=float(sim.meep_time()),
+        flux_checks_passed=not failures,failures=failures)
+    def save():
+        Path(out).write_text(json.dumps(report,indent=2,allow_nan=False)+"\n")
+        print(json.dumps(report,allow_nan=False),flush=True)
+    # Persist every plane before any rejection or fit.
+    save()
+    if failures:
+        raise SystemExit("; ".join(failures))
     x=np.array(POSITIONS)
     y=np.array([r["fraction"] for r in rows])
     # Free phase and amplitude allow launch imbalance; offset fixed by symmetry.
@@ -65,13 +86,10 @@ def run(res,out):
         return .5-.5*visibility*np.cos(np.pi*x/lc+2*phase)-y
     fit=least_squares(residual,[2*L50,0,.98],bounds=([15,-.5,0],[40,.5,1]))
     lc,phase,visibility=map(float,fit.x)
-    report=dict(resolution=res,geometry=dict(width_um=WIDTH,height_um=HEIGHT,gap_um=GAP,
-        wavelength_um=WL,n_core=3.48,n_clad=1.44),meep_version=mp.__version__,
-        input_net_flux=pin,rows=rows,L50_um=lc/2,phase_rad=phase,visibility=visibility,
-        fit_max_residual=float(max(abs(fit.fun))),fit_success=bool(fit.success),
-        meep_time=float(sim.meep_time()))
-    Path(out).write_text(json.dumps(report,indent=2)+"\n")
-    print(json.dumps(report),flush=True)
+    report.update(L50_um=lc/2,phase_rad=phase,visibility=visibility,
+        fit_max_residual=float(max(abs(fit.fun))),fit_success=bool(fit.success))
+    save()
+
 
 def aggregate(root,out):
     cases=[json.loads((Path(root)/f"fdtd-{r}"/"result.json").read_text()) for r in RESOLUTIONS]

@@ -1,0 +1,77 @@
+name: Antigravity research archive
+on:
+  workflow_run:
+    workflows: [Antigravity experiment manager]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Manager run to archive (initial migration)
+        type: string
+        default: '43857964113'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: antigravity-permanent-archive
+  cancel-in-progress: false
+jobs:
+  archive:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - name: Validate trusted source and select artifact
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN: ${{ github.event.workflow_run.id || inputs.run_id }}
+        run: |
+          set -euo pipefail
+          [[ "$RUN" =~ ^[0-9]+$ ]]
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" > "$RUNNER_TEMP/run.json"
+          jq -e --arg repo "$GITHUB_REPOSITORY" '.head_repository.full_name == $repo and .head_branch == "main" and .event == "workflow_dispatch" and .status == "completed" and .path == ".github/workflows/antigravity-manager.yml"' "$RUNNER_TEMP/run.json"
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN/artifacts" > "$RUNNER_TEMP/artifacts.json"
+          name=$(jq -er '[.artifacts[] | select(.expired == false and (.name == "antigravity-encrypted-checkpoint-AG-PHOTONIC-001" or .name == "antigravity-encrypted-checkpoint-AG-INFRA-001"))] | if length == 1 then .[0].name else error("Expected one checkpoint") end' "$RUNNER_TEMP/artifacts.json")
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "experiment=${name#antigravity-encrypted-checkpoint-}" >> "$GITHUB_OUTPUT"
+          echo "run=$RUN" >> "$GITHUB_OUTPUT"
+      - uses: actions/download-artifact@v7
+        with:
+          name: ${{ steps.source.outputs.name }}
+          run-id: ${{ steps.source.outputs.run }}
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/archive-input
+      - run: sudo apt-get update -qq && sudo apt-get install -y python3-cryptography
+      - name: Prepare archive branch
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --heads origin antigravity-archive; then
+            git fetch origin refs/heads/antigravity-archive
+            git worktree add --detach "$RUNNER_TEMP/archive-tree" FETCH_HEAD
+          else
+            git worktree add --detach "$RUNNER_TEMP/archive-tree" HEAD
+          fi
+      - name: Authenticate and archive
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AG_ARCHIVE_KEY: ${{ secrets.AG_ARCHIVE_KEY }}
+          EXPERIMENT: ${{ steps.source.outputs.experiment }}
+          RUN: ${{ steps.source.outputs.run }}
+        run: |
+          /usr/bin/python3 antigravity/archive.py archive --root "$RUNNER_TEMP/archive-tree/antigravity/archive" --experiment "$EXPERIMENT" --run "$RUN" --file "$RUNNER_TEMP/archive-input/checkpoint.enc"
+      - name: Commit encrypted archive only
+        working-directory: ${{ runner.temp }}/archive-tree
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- antigravity/archive
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive Antigravity checkpoint"
+            git push origin HEAD:refs/heads/antigravity-archive
+          fi

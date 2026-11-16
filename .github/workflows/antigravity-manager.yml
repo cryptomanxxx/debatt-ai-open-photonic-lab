@@ -4,7 +4,7 @@ on:
     inputs:
       experiment:
         type: choice
-        options: [AG-PHOTONIC-001, AG-INFRA-001]
+        options: [AG-PHOTONIC-001, AG-INFRA-001, AG-PHOTONIC-002]
       mode:
         type: choice
         options: [retrieve, import, start]

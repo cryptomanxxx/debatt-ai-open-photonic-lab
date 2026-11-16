@@ -10,7 +10,7 @@ on:
         options: [retrieve, import, start]
         default: retrieve
       prior_run_id:
-        description: GitHub run ID containing encrypted checkpoint (retrieve only)
+        description: Optional historical run ID; blank selects latest checkpoint
         type: string
       token_budget:
         type: number
@@ -44,7 +44,7 @@ jobs:
           CONFIRM: ${{ inputs.confirm_new_submission }}
         run: |
           if [[ "$MODE" == retrieve ]]; then
-            [[ "$PRIOR" =~ ^[0-9]+$ ]]
+            [[ -z "$PRIOR" || "$PRIOR" =~ ^[0-9]+$ ]]
           else
             [[ -z "$PRIOR" ]]
           fi
@@ -54,11 +54,19 @@ jobs:
       - name: Install encryption dependency
         run: sudo apt-get update -qq && sudo apt-get install -y python3-cryptography
       - run: /usr/bin/python3 -m unittest discover -s antigravity/tests
-      - uses: actions/download-artifact@v4
+      - name: Select checkpoint
+        id: checkpoint
+        if: inputs.mode == 'retrieve'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPERIMENT: ${{ inputs.experiment }}
+          PRIOR: ${{ inputs.prior_run_id }}
+        run: /usr/bin/python3 antigravity/checkpoints.py --experiment "$EXPERIMENT" --prior "$PRIOR"
+      - uses: actions/download-artifact@v5
         if: inputs.mode == 'retrieve'
         with:
-          name: antigravity-encrypted-checkpoint
-          run-id: ${{ inputs.prior_run_id }}
+          name: ${{ steps.checkpoint.outputs.artifact_name }}
+          run-id: ${{ steps.checkpoint.outputs.run_id }}
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/ag-prior
       - name: Execute one operation
@@ -78,10 +86,10 @@ jobs:
             args+=(--allow-submit)
           fi
           /usr/bin/python3 antigravity/manager.py --experiment "$EXPERIMENT" --mode "$MODE" --budget "$BUDGET" --output "$RUNNER_TEMP/ag-output/checkpoint.enc" --confirm-free-project "${args[@]}"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: always()
         with:
-          name: antigravity-encrypted-checkpoint
+          name: antigravity-encrypted-checkpoint-${{ inputs.experiment }}
           path: ${{ runner.temp }}/ag-output/checkpoint.enc
           retention-days: 90
           if-no-files-found: warn

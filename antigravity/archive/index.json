@@ -4,5 +4,11 @@
       "file": "AG-PHOTONIC-001/5caba035e1027905c8c175e33368dbe55fcf993e72eed8b02c64bb5eee7a6c03.enc",
       "sha256": "d849e81d4658839b5f007a3915b6cdec0c3bb645012655b01bc3727377110253"
     }
+  },
+  "AG-PHOTONIC-002": {
+    "43891766600": {
+      "file": "AG-PHOTONIC-002/16a040d3e6bfef9ae87fbed521ac858972182e47529c5468b9e39ab9f3550e99.enc",
+      "sha256": "0e2f810a57434f30d53c57dbdec08cd6badc2fcb8f116a0235311df418a5371f"
+    }
   }
 }

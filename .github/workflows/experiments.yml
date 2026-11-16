@@ -134,7 +134,7 @@ jobs:
           if [ -f "$RESULT_DIR/result.json" ]; then cat "$RESULT_DIR/result.json"; fi
       - name: Upload measurement results
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.artifact }}
           overwrite: true
@@ -168,7 +168,7 @@ jobs:
           ARGS: ${{ inputs.args }}
         run: python3 tools/bundle_experiments.py
       - name: Upload combined experiment ZIP
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: all-experiment-results
           overwrite: true

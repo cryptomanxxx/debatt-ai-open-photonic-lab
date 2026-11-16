@@ -1,0 +1,37 @@
+name: AG-INFRA-001 manual live probe
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_free_project:
+        description: 'I verified the dedicated Google project is Free Tier with billing disabled'
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: antigravity-live-probe
+  cancel-in-progress: false
+jobs:
+  probe:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_free_project == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Offline tests
+        run: python3 -m unittest discover -s antigravity/tests
+      - name: Single live request
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 antigravity/experiments/AG-INFRA-001/probe.py --live --confirm-free-project
+      - name: Preserve diagnostic response
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: AG-INFRA-001-response
+          path: antigravity/results/AG-INFRA-001-*.json
+          if-no-files-found: warn
+          retention-days: 7

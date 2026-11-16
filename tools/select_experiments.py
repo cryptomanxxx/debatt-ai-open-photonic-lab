@@ -193,8 +193,8 @@ def main(argv=None):
             out.write(f"serial_any={'true' if serial else 'false'}\n")
             out.write(f"id003_any={'true' if parallel else 'false'}\n")
             out.write(f"id003_lock={parallel[0]['lock'] if parallel else ''}\n")
-            out.write(f"mod007_any={\'true\' if mod007 else \'false\'}\n")
-            out.write(f"mod007_lock={mod007[0][\'lock\'] if mod007 else \'\'}\n")
+            out.write(f"mod007_any={'true' if mod007 else 'false'}\n")
+            out.write(f"mod007_lock={mod007[0]['lock'] if mod007 else ''}\n")
             out.write(f"any={'true' if m else 'false'}\n")
     return 0
 

@@ -1,0 +1,168 @@
+{
+  "provenance": {
+    "run_id": 43877926958,
+    "head_sha": "0502b46bae447e927f937a09b6a4b5eb604595d5",
+    "source": "cross-validation job JSON log"
+  },
+  "report": {
+    "method": "parity-resolved Python MPB",
+    "meep_version": "1.35.1",
+    "geometry": {
+      "width_um": 0.45,
+      "height_um": 0.22,
+      "wavelength_um": 1.55,
+      "n_core": 3.48,
+      "n_clad": 1.44
+    },
+    "matched": [
+      {
+        "gap_nm": 150,
+        "resolution": 96,
+        "cell_um": [
+          5,
+          3
+        ],
+        "neff_even": 2.384781634292436,
+        "neff_odd": 2.33635005784517,
+        "Lc_um": 16.00195692254294,
+        "L50_um": 8.00097846127147,
+        "reference": {
+          "neff_even": 2.384785,
+          "neff_odd": 2.336364,
+          "L50_um": 8.003
+        },
+        "relative_error": 0.0002525976169598376,
+        "passed": true
+      },
+      {
+        "gap_nm": 200,
+        "resolution": 96,
+        "cell_um": [
+          5,
+          3
+        ],
+        "neff_even": 2.373659617070497,
+        "neff_odd": 2.342069542595206,
+        "Lc_um": 24.533022250586672,
+        "L50_um": 12.266511125293336,
+        "reference": {
+          "neff_even": 2.373663,
+          "neff_odd": 2.342082,
+          "L50_um": 12.27
+        },
+        "relative_error": 0.00028434186688375274,
+        "passed": true
+      },
+      {
+        "gap_nm": 250,
+        "resolution": 96,
+        "cell_um": [
+          5,
+          3
+        ],
+        "neff_even": 2.366693991152431,
+        "neff_odd": 2.34606377994842,
+        "Lc_um": 37.566265916333734,
+        "L50_um": 18.783132958166867,
+        "reference": {
+          "neff_even": 2.366695,
+          "neff_odd": 2.346075,
+          "L50_um": 18.793
+        },
+        "relative_error": 0.0005250381436243678,
+        "passed": true
+      },
+      {
+        "gap_nm": 300,
+        "resolution": 96,
+        "cell_um": [
+          5,
+          3
+        ],
+        "neff_even": 2.363563829521104,
+        "neff_odd": 2.3498830103935378,
+        "Lc_um": 56.64865478985944,
+        "L50_um": 28.32432739492972,
+        "reference": {
+          "neff_even": 2.363566,
+          "neff_odd": 2.349885,
+          "L50_um": 28.324
+        },
+        "relative_error": 0.000011558922811794048,
+        "passed": true
+      },
+      {
+        "gap_nm": 350,
+        "resolution": 96,
+        "cell_um": [
+          5,
+          3
+        ],
+        "neff_even": 2.360330045115931,
+        "neff_odd": 2.351271978097068,
+        "Lc_um": 85.55909316922762,
+        "L50_um": 42.77954658461381,
+        "reference": {
+          "neff_even": 2.360332,
+          "neff_odd": 2.351283,
+          "L50_um": 42.821
+        },
+        "relative_error": 0.0009680627586040602,
+        "passed": true
+      }
+    ],
+    "refinements": [
+      {
+        "gap_nm": 200,
+        "resolution": 100,
+        "cell_um": [
+          5,
+          3
+        ],
+        "neff_even": 2.3718645267821663,
+        "neff_odd": 2.34033249979132,
+        "Lc_um": 24.578185228148524,
+        "L50_um": 12.289092614074262
+      },
+      {
+        "gap_nm": 200,
+        "resolution": 200,
+        "cell_um": [
+          5,
+          3
+        ],
+        "neff_even": 2.3732906599622168,
+        "neff_odd": 2.341743920085001,
+        "Lc_um": 24.566722362323684,
+        "L50_um": 12.283361181161842
+      },
+      {
+        "gap_nm": 200,
+        "resolution": 400,
+        "cell_um": [
+          5,
+          3
+        ],
+        "neff_even": 2.3736394322896506,
+        "neff_odd": 2.342091318649046,
+        "Lc_um": 24.56565260379076,
+        "L50_um": 12.28282630189538
+      }
+    ],
+    "refinement_relative_change": 0.00004354502473502553,
+    "cell_check": {
+      "gap_nm": 200,
+      "resolution": 200,
+      "cell_um": [
+        6,
+        4
+      ],
+      "neff_even": 2.3733027949623735,
+      "neff_odd": 2.341749617084956,
+      "Lc_um": 24.56170985410212,
+      "L50_um": 12.28085492705106
+    },
+    "cell_relative_change": 0.00020403650709432952,
+    "passed": true
+  }
+}

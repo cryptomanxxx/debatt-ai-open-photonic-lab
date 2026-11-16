@@ -1,4 +1,8 @@
 import importlib.util
+import io
+import json
+import urllib.error
+from contextlib import redirect_stderr
 from pathlib import Path
 import tempfile
 import unittest
@@ -75,3 +79,33 @@ class ManagerTests(unittest.TestCase):
                     m.execute("key",experiment,mode,a,budget=budget,allow_submit=allow,dynamic_webhook=True)
             req.assert_not_called()
             self.assertFalse(a.exists())
+
+    def test_safe_http_error(self):
+        secret = "secret-api-key-and-interaction-id"
+        for code, body, expected in [
+            (400, json.dumps({"error":{"status":"INVALID_ARGUMENT","message":secret,"details":[secret]}}).encode(), "INVALID_ARGUMENT"),
+            (429, b'{"error":{"status":"RESOURCE_EXHAUSTED"}}', "RESOURCE_EXHAUSTED"),
+            (403, json.dumps({"error":{"status":secret}}).encode(), "unknown"),
+            (500, b"not json", "unknown"),
+            (503, b"x"*65537, "unknown"),
+            (400, b'{"error":{"status":[]}}', "unknown"),
+        ]:
+            with self.subTest(code=code, expected=expected):
+                stream = io.BytesIO(body)
+                exc = urllib.error.HTTPError("https://example.test/"+secret,code,secret,{},stream)
+                self.assertEqual(m.safe_http_error(exc),f"Google API HTTP status: {code}; canonical status: {expected}")
+                self.assertTrue(stream.closed)
+
+    def test_main_http_error_no_retry(self):
+        with tempfile.TemporaryDirectory() as d:
+            output = Path(d)/"checkpoint.enc"
+            exc = urllib.error.HTTPError("https://example.test/private",400,"private",{},io.BytesIO(b'{"error":{"status":"INVALID_ARGUMENT","message":"private"}}'))
+            argv = ["manager","--experiment","AG-INFRA-001","--mode","start","--output",str(output),"--confirm-free-project","--allow-submit","--dynamic-webhook"]
+            logs = io.StringIO()
+            with patch.object(m.sys,"argv",argv), patch.dict(m.os.environ,{"GEMINI_API_KEY":"secret"}), patch.object(m.background,"request",side_effect=exc) as req, redirect_stderr(logs):
+                self.assertEqual(m.main(),1)
+                req.assert_called_once()
+            self.assertIn("HTTP status: 400; canonical status: INVALID_ARGUMENT",logs.getvalue())
+            self.assertNotIn("private",logs.getvalue())
+            self.assertNotIn("secret",logs.getvalue())
+            self.assertFalse(output.exists())

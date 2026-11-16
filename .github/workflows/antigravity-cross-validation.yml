@@ -2,7 +2,8 @@ name: Antigravity cross-validation
 on:
   pull_request:
     paths:
-      - 'antigravity/reproduction/**'
+      - 'antigravity/reproduction/AG-PHOTONIC-001/cross_validate.py'
+      - 'antigravity/reproduction/AG-PHOTONIC-001/reference.json'
       - '.github/workflows/antigravity-cross-validation.yml'
       - 'simulations/meep/opa-fdtd-linux-64.lock.txt'
   workflow_dispatch:

@@ -29,7 +29,7 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         return None
 
-def main(argv=None, *, payload=None, result_prefix="AG-INFRA-001"):
+def main(argv=None, *, payload=None, result_prefix="AG-INFRA-001", timeout=180):
     payload = PAYLOAD if payload is None else payload
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--live", action="store_true")
@@ -49,7 +49,7 @@ def main(argv=None, *, payload=None, result_prefix="AG-INFRA-001"):
         method="POST",
     )
     try:
-        with urllib.request.build_opener(NoRedirect()).open(request, timeout=180) as response:
+        with urllib.request.build_opener(NoRedirect()).open(request, timeout=timeout) as response:
             raw = response.read(4_000_001)
         if len(raw) > 4_000_000:
             raise ValueError("Response too large")

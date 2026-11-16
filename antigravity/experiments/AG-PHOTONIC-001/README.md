@@ -18,3 +18,16 @@ Run offline: `python antigravity/experiments/AG-PHOTONIC-001/run.py`.
 Live execution is manual only, on main, with a verified billing-disabled project.
 The requested 20,000 token budget is not a guaranteed usage or monetary cap.
 No automatic retry. Raw response is retained for seven days; it may be public.
+
+## Resume an incomplete run
+
+From the saved response JSON, copy the top-level `id` and `environment_id`
+into repository Actions secrets `AG_PREVIOUS_INTERACTION_ID` and
+`AG_ENVIRONMENT_ID`. Do not commit identifiers. Use the same Google project.
+Dispatch AG-PHOTONIC-001 resume on main after verifying billing is disabled.
+Each resume dispatch sends one request with a configurable requested budget of 20,000–200,000 tokens (default 200,000). The HTTP timeout is 30 minutes and the job timeout is 40 minutes; neither guarantees remote cancellation. The project dashboard on 2026-11-16 showed 60 RPM, 100,000 input TPM and 100 RPD on Free Tier. These are rate limits, not an allocation or a guarantee that a 200,000-token interaction succeeds. No automatic retry or paid fallback.
+If incomplete again, update both secrets from the newest response before
+another manually approved continuation. Never automatically restart a missing
+sandbox. Free-tier interaction retention is documented as one day; sandbox
+availability is not guaranteed. Raw response artifacts may contain identifiers.
+See https://ai.google.dev/gemini-api/docs/antigravity-agent.

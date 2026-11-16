@@ -66,6 +66,8 @@ def execute(key, experiment, mode, output, prior=None, legacy_id=None,
     else:
         raise ValueError("Unknown operation")
     seal(key, experiment, result, output)
+    if mode == "start":
+        print("Interaction SHA256: " + hashlib.sha256(result["id"].encode()).hexdigest())
     status = result.get("status")
     if status == "completed":
         print("Completed; scientific validation still required.")

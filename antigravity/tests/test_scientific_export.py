@@ -33,3 +33,35 @@ class ScientificExportTests(unittest.TestCase):
         r["steps"].pop()
         with self.assertRaises(ValueError):
             extract(r, "AG-PHOTONIC-002", "123")
+
+    def test_partial_without_final_report(self):
+        r = self.response()
+        r["status"] = "failed"
+        r["steps"].pop()
+        result = extract(r, "AG-PHOTONIC-003", "123", allow_partial=True)
+        self.assertTrue(result["partial"])
+        self.assertEqual(result["response_status"], "failed")
+        self.assertEqual(result["reports"], [])
+        self.assertEqual(len(result["execution_evidence"]), 2)
+        self.assertNotIn("private", str(result))
+
+    def test_partial_unknown_status_is_not_disclosed(self):
+        r = self.response()
+        r["status"] = "private-unrecognized-value"
+        result = extract(r, "AG-PHOTONIC-003", "123", allow_partial=True)
+        self.assertEqual(result["response_status"], "unknown")
+        self.assertTrue(result["partial"])
+
+    def test_partial_sensitive_nested_id_rejected(self):
+        r = self.response()
+        r["status"] = "incomplete"
+        r["steps"][0]["nested"] = {"id": "nested-private-id"}
+        r["steps"][-1]["content"][0]["text"] = "nested-private-id"
+        with self.assertRaises(ValueError):
+            extract(r, "AG-PHOTONIC-003", "123", allow_partial=True)
+
+    def test_completed_still_requires_report_with_opt_in(self):
+        r = self.response()
+        r["steps"].pop()
+        with self.assertRaises(ValueError):
+            extract(r, "AG-PHOTONIC-003", "123", allow_partial=True)

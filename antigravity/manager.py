@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import sys
+import time
 import urllib.error
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "experiments/AG-PHOTONIC-001"))
@@ -114,6 +115,28 @@ def safe_http_error(exc):
             pass
     return f"Google API HTTP status: {http}; canonical status: {status}"
 
+def poll_existing(key, experiment, output, *, sleep=time.sleep):
+    """At most 12 GETs, five minutes apart; never submit or change interaction."""
+    result = load(key, experiment, output)
+    ident = result["id"]
+    for _ in range(12):
+        if result.get("status") not in background.ACTIVE:
+            break
+        sleep(300)
+        candidate = background.request(key, interaction_id=ident)
+        if candidate.get("id") != ident:
+            raise ValueError("Interaction mismatch")
+        seal(key, experiment, candidate, output)
+        result = candidate
+    if result.get("status") == "completed":
+        print("Polling completed; scientific validation still required.")
+        return 0
+    if result.get("status") in background.ACTIVE:
+        print("Polling limit reached; checkpoint preserved. Retrieve later.")
+        return 0
+    print("Polling stopped; encrypted response preserved.")
+    return 1
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--experiment", choices=EXPERIMENTS, required=True)
@@ -124,14 +147,20 @@ def main():
     p.add_argument("--confirm-free-project", action="store_true")
     p.add_argument("--allow-submit", action="store_true")
     p.add_argument("--dynamic-webhook", action="store_true")
+    p.add_argument("--poll", action="store_true")
     a = p.parse_args()
     key = os.getenv("GEMINI_API_KEY")
     if not key or not a.confirm_free_project:
         p.error("Verified billing-disabled project and API key required")
     try:
-        return execute(key, a.experiment, a.mode, a.output, a.prior,
+        if a.poll and (a.mode not in ("start", "retrieve") or a.dynamic_webhook):
+            raise ValueError("Polling requires start or retrieve without dynamic webhook")
+        code = execute(key, a.experiment, a.mode, a.output, a.prior,
                        os.getenv("AG_RETRIEVE_INTERACTION_ID") if a.mode == "import" else None,
                        a.budget, a.allow_submit, a.dynamic_webhook)
+        if a.poll and code == 0:
+            return poll_existing(key, a.experiment, a.output)
+        return code
     except urllib.error.HTTPError as exc:
         print(safe_http_error(exc), file=sys.stderr)
         print("Request failed; submission outcome not confirmed. No automatic retry.", file=sys.stderr)

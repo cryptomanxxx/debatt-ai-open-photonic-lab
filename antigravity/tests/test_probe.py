@@ -58,3 +58,6 @@ class ProbeTests(unittest.TestCase):
                         self.assertEqual(len(after), 1)
                         self.assertEqual(json.loads(after.pop().read_text()), payload)
                         opener.return_value.open.assert_called_once()
+
+    def test_token_budget(self):
+        self.assertEqual(probe.PAYLOAD["agent_config"], {"type": "antigravity", "max_total_tokens": 20000})

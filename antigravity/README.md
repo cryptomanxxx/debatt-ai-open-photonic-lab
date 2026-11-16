@@ -17,3 +17,6 @@ python antigravity/experiments/AG-INFRA-001/probe.py --live --confirm-free-proje
 Dry run is the default. Live mode makes one POST, no automatic retries or polling. A timeout does not imply remote cancellation. The response is saved locally under antigravity/results/; inspect before sharing. Agent-reported hardware and command output are unverified observations. No installation or heavy simulation in this first probe.
 
 API reference: https://ai.google.dev/gemini-api/docs/antigravity-agent
+
+## Initial token budget
+The initial probe requests a 20,000 total-token limit via `agent_config.max_total_tokens`. This is a conservative experimental choice, not a monetary cap or a guarantee of free eligibility. If the service rejects the limit or returns an incomplete interaction, stop and inspect the response; do not automatically increase the budget or retry. See the [agent budget controls](https://ai.google.dev/gemini-api/docs/antigravity-agent). Confirm free-tier status at https://aistudio.google.com/api-keys before any live call. Never paste the API key into chat or commit it.

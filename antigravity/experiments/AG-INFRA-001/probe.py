@@ -21,6 +21,7 @@ PAYLOAD = {
     "agent": "antigravity-preview-09-2026",
     "input": PROMPT,
     "environment": "remote",
+    "agent_config": {"type": "antigravity", "max_total_tokens": 20000},
     "tools": [{"type": "code_execution"}],
 }
 

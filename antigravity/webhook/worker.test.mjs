@@ -26,3 +26,15 @@ test("verified unmapped completion is observable without dispatch or raw ID",asy
   assert.equal(calls,before);
  } finally {console.log=original;}
 });
+
+test("public health reports only code version, without bindings or dispatch",async()=>{
+ const before=calls;
+ const r=await handle(new Request("https://example.test/health"),{},now);
+ assert.equal(r.status,200);
+ assert.equal(r.headers.get("Cache-Control"),"no-store");
+ assert.deepEqual(await r.json(),{status:"ok",version:"0.2.0"});
+ const configured=await handle(new Request("https://example.test/health"),env,now);
+ assert.deepEqual(await configured.json(),{status:"ok",version:"0.2.0"});
+ assert.equal((await handle(new Request("https://example.test/health",{method:"POST"}),env,now)).status,404);
+ assert.equal(calls,before);
+});

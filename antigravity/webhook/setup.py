@@ -9,7 +9,7 @@ import urllib.error
 NAME = "debatt-ai-open-photonic-lab-antigravity-webhook"
 URI = "https://" + NAME + ".xx8031126.workers.dev/gemini"
 GOOGLE = "https://generativelanguage.googleapis.com/v1beta/webhooks"
-CF_VERIFY = "https://api.cloudflare.com/client/v4/user/tokens/verify"
+CF_VERIFY = "https://api.cloudflare.com/client/v4/accounts/{account}/tokens/verify"
 EVENTS = ["interaction.completed"]
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -71,7 +71,7 @@ def setup(call, google_headers, cf_headers, account, mode):
     if mode == "create" and matches:
         raise SafeError("Registration already exists; do not create duplicates. Recover via secret rotation manually.")
     if mode == "diagnose":
-        verified = stage(call, "Cloudflare verify user token", CF_VERIFY, cf_headers)
+        verified = stage(call, "Cloudflare verify account token", CF_VERIFY.format(account=account), cf_headers)
         result = verified.get("result") if isinstance(verified, dict) else None
         if not isinstance(result, dict) or verified.get("success") is not True:
             raise SafeError("Cloudflare token verification failed; codes: " + str(cf_error_codes(verified)))

@@ -26,8 +26,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
       - name: Install locked layout environment
@@ -48,7 +48,7 @@ jobs:
           git diff --exit-code -- simulations/meep/geometry/coupler_gap0.236.json
       - name: Upload layout
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: opa-layout-001
           path: results/opa-layout-001/

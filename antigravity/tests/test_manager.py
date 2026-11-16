@@ -4,6 +4,9 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+if importlib.util.find_spec("cryptography") is None:
+    raise unittest.SkipTest("Manager encryption dependency not installed; dedicated CI installs it")
+
 spec = importlib.util.spec_from_file_location("ag_manager", Path(__file__).resolve().parents[1] / "manager.py")
 m = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(m)

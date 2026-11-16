@@ -1,0 +1,17 @@
+name: Antigravity offline tests
+on:
+  pull_request:
+    paths:
+      - 'antigravity/**'
+      - '.github/workflows/antigravity-offline.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m unittest discover -s antigravity/tests
+      - run: python3 antigravity/experiments/AG-INFRA-001/probe.py

@@ -1,0 +1,37 @@
+name: AG-PHOTONIC-001 resume
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_free_project:
+        description: 'I verified Free Tier and billing disabled'
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: antigravity-live-probe
+  cancel-in-progress: false
+jobs:
+  resume:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_free_project == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s antigravity/tests
+      - name: Resume existing interaction once
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AG_PREVIOUS_INTERACTION_ID: ${{ secrets.AG_PREVIOUS_INTERACTION_ID }}
+          AG_ENVIRONMENT_ID: ${{ secrets.AG_ENVIRONMENT_ID }}
+        run: python3 antigravity/experiments/AG-PHOTONIC-001/resume.py --live --confirm-free-project
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AG-PHOTONIC-001-continuation
+          path: antigravity/results/AG-PHOTONIC-001-*.json
+          if-no-files-found: warn
+          retention-days: 7

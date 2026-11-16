@@ -62,7 +62,7 @@ jobs:
           EXPERIMENT: ${{ inputs.experiment }}
           PRIOR: ${{ inputs.prior_run_id }}
         run: /usr/bin/python3 antigravity/checkpoints.py --experiment "$EXPERIMENT" --prior "$PRIOR"
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v7
         if: inputs.mode == 'retrieve'
         with:
           name: ${{ steps.checkpoint.outputs.artifact_name }}
@@ -86,7 +86,7 @@ jobs:
             args+=(--allow-submit)
           fi
           /usr/bin/python3 antigravity/manager.py --experiment "$EXPERIMENT" --mode "$MODE" --budget "$BUDGET" --output "$RUNNER_TEMP/ag-output/checkpoint.enc" --confirm-free-project "${args[@]}"
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: antigravity-encrypted-checkpoint-${{ inputs.experiment }}

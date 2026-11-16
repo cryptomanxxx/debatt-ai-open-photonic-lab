@@ -1,0 +1,67 @@
+name: Antigravity 3D FDTD validation
+on:
+  pull_request:
+    paths:
+      - 'antigravity/reproduction/AG-PHOTONIC-001/fdtd_validate.py'
+      - '.github/workflows/antigravity-fdtd-validation.yml'
+      - 'simulations/meep/opa-fdtd-linux-64.lock.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  case:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        resolution: [16, 24, 32]
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: opa-fdtd
+          create-args: --file simulations/meep/opa-fdtd-linux-64.lock.txt
+      - name: Simulate straight pair
+        shell: micromamba-shell {0}
+        env:
+          OMP_NUM_THREADS: '1'
+          OPENBLAS_NUM_THREADS: '1'
+        run: |
+          mkdir -p fdtd-output
+          cp simulations/meep/opa-fdtd-linux-64.lock.txt fdtd-output/environment-lock.txt
+          micromamba list -n opa-fdtd --json > fdtd-output/installed-packages.json
+          python antigravity/reproduction/AG-PHOTONIC-001/fdtd_validate.py case ${{ matrix.resolution }} fdtd-output/result.json
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: fdtd-${{ matrix.resolution }}
+          path: fdtd-output/
+          if-no-files-found: error
+  aggregate:
+    needs: case
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: opa-fdtd
+          create-args: --file simulations/meep/opa-fdtd-linux-64.lock.txt
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: fdtd-*
+          path: cases
+      - name: Validate against converged MPB
+        shell: micromamba-shell {0}
+        run: python antigravity/reproduction/AG-PHOTONIC-001/fdtd_validate.py aggregate cases result.json
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: AG-PHOTONIC-001-fdtd-validation
+          path: result.json
+          if-no-files-found: warn

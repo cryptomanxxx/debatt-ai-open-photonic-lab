@@ -10,13 +10,16 @@ spec = importlib.util.spec_from_file_location("photonic", Path(__file__).with_na
 photonic = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(photonic)
 
-def build_payload(interaction_id, environment_id):
+def build_payload(interaction_id, environment_id, token_budget=200_000):
+    if type(token_budget) is not int or not 20_000 <= token_budget <= 200_000:
+        raise ValueError("Token budget must be 20000–200000")
     if not re.fullmatch(r"[A-Za-z0-9_-]{1,512}", interaction_id or ""):
         raise ValueError("Invalid interaction ID")
     if not re.fullmatch(r"[A-Za-z0-9_-]{1,512}", environment_id or "") or environment_id in ("remote", "local"):
         raise ValueError("Invalid existing environment ID")
     return dict(photonic.PAYLOAD, previous_interaction_id=interaction_id,
                 environment=environment_id,
+                agent_config=dict(photonic.PAYLOAD["agent_config"], max_total_tokens=token_budget),
                 input="Continue the original coupler task in the existing environment. "
                       "Check the existing MPB installation and /tmp/test_mpb.ctl, "
                       "then execute and validate your model. Avoid reinstalling packages "
@@ -26,11 +29,12 @@ def build_payload(interaction_id, environment_id):
 
 def main(argv=None):
     parser = argparse.ArgumentParser()
+    parser.add_argument("--token-budget", type=int, default=200_000)
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--confirm-free-project", action="store_true")
     args = parser.parse_args(argv)
     try:
-        payload = build_payload(os.getenv("AG_PREVIOUS_INTERACTION_ID"), os.getenv("AG_ENVIRONMENT_ID"))
+        payload = build_payload(os.getenv("AG_PREVIOUS_INTERACTION_ID"), os.getenv("AG_ENVIRONMENT_ID"), args.token_budget)
     except ValueError as exc:
         parser.error(str(exc))
     flags = []
@@ -42,7 +46,7 @@ def main(argv=None):
     if not args.live:
         print("Continuation payload validated; no request sent.")
         return 0
-    return photonic.probe.main(flags, payload=payload, result_prefix="AG-PHOTONIC-001")
+    return photonic.probe.main(flags, payload=payload, result_prefix="AG-PHOTONIC-001", timeout=1800)
 
 if __name__ == "__main__":
     sys.exit(main())

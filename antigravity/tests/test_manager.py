@@ -145,3 +145,35 @@ class ManagerTests(unittest.TestCase):
                 self.assertEqual(m.poll_existing("key","AG-INFRA-001",a,sleep=lambda _:None),1)
                 req.assert_called_once()
             self.assertEqual(m.load("key","AG-INFRA-001",a)["status"],"incomplete")
+
+    def test_continue_incomplete(self):
+        with tempfile.TemporaryDirectory() as d:
+            a,b = Path(d)/"a.enc",Path(d)/"b.enc"
+            exp = "AG-PHOTONIC-003"
+            parent = {"id":"parent-id","environment_id":"env-id","status":"incomplete"}
+            m.seal("key",exp,parent,a)
+            with patch.object(m.background,"request",return_value={"id":"child-id","status":"in_progress"}) as req:
+                self.assertEqual(m.execute("key",exp,"continue",b,prior=a,budget=50000,allow_submit=True),0)
+                req.assert_called_once()
+                p = req.call_args.kwargs["payload"]
+                self.assertEqual(p["previous_interaction_id"],"parent-id")
+                self.assertEqual(p["environment"],"env-id")
+                self.assertEqual(p["agent_config"]["max_total_tokens"],50000)
+                self.assertTrue(p["background"])
+                self.assertNotIn("webhook_config",p)
+            self.assertEqual(m.load("key",exp,a),parent)
+            self.assertEqual(m.load("key",exp,b)["id"],"child-id")
+
+    def test_continue_rejects_invalid_parent(self):
+        with tempfile.TemporaryDirectory() as d, patch.object(m.background,"request") as req:
+            a,b = Path(d)/"a.enc",Path(d)/"b.enc"
+            exp = "AG-PHOTONIC-003"
+            for parent in ({"id":"parent-id","status":"incomplete"},
+                           {"id":"parent-id","status":"in_progress","environment_id":"env-id"},
+                           {"id":"parent-id","status":"incomplete","environment_id":"remote"}):
+                m.seal("key",exp,parent,a)
+                with self.assertRaises(ValueError):
+                    m.execute("key",exp,"continue",b,prior=a,allow_submit=True)
+            with self.assertRaises(ValueError):
+                m.execute("key",exp,"continue",b,prior=a)
+            req.assert_not_called()

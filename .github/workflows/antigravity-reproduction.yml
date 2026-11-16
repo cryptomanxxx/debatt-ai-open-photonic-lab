@@ -2,7 +2,9 @@ name: Antigravity independent reproduction
 on:
   pull_request:
     paths:
-      - 'antigravity/reproduction/**'
+      - 'antigravity/reproduction/AG-PHOTONIC-001/reproduce.py'
+      - 'antigravity/reproduction/AG-PHOTONIC-001/reference.json'
+      - 'antigravity/reproduction/AG-PHOTONIC-001/original/coupler.ctl'
       - '.github/workflows/antigravity-reproduction.yml'
   workflow_dispatch:
 permissions:

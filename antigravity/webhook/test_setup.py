@@ -24,3 +24,13 @@ class SetupTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             setup(call, {}, {}, "a"*32, "create")
         self.assertEqual(call.call_count, 2)
+
+    def test_diagnose_existing(self):
+        call = Mock(side_effect=[{"webhooks":[{"uri":URI}]},{"success":True,"result":[{"name":"GITHUB_TOKEN"},{"name":"WEBHOOK_SIGNING_SECRET"}]}])
+        setup(call, {}, {}, "a"*32, "diagnose")
+        self.assertEqual(call.call_count, 2)
+        self.assertTrue(all(len(c.args)==2 for c in call.call_args_list))
+    def test_diagnose_missing_secret(self):
+        call = Mock(side_effect=[{"webhooks":[]},{"success":True,"result":[]}])
+        setup(call, {}, {}, "a"*32, "diagnose")
+        self.assertEqual(call.call_count, 2)

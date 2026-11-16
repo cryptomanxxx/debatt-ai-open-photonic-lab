@@ -60,6 +60,22 @@ def execute(key, experiment, mode, output, prior=None, legacy_id=None,
             payload["webhook_config"] = {"uris": [DYNAMIC_URI]}
             print("Dynamic webhook diagnostic enabled.")
         result = background.request(key, payload=payload)
+    elif mode == "continue":
+        if experiment != "AG-PHOTONIC-003" or not allow_submit or prior is None or legacy_id:
+            raise ValueError("Explicit AG003 continuation and checkpoint required")
+        parent = load(key, experiment, prior)
+        if parent.get("status") != "incomplete":
+            raise ValueError("Continuation requires incomplete parent")
+        environment = background.valid_id(parent.get("environment_id"))
+        if environment == "remote":
+            raise ValueError("Existing environment required")
+        payload = dict(EXPERIMENTS[experiment], background=True, store=True,
+                       previous_interaction_id=parent["id"], environment=environment,
+                       input="Continue the existing AG-PHOTONIC-003 investigation in this workspace. Prioritize a reproducible final report and source files over further broad sweeps. Inspect existing outputs; investigate inconsistent sustained versus peak throughput and failed digital training baseline before interpreting optical training. Preserve negative results and distinguish analytic screening from physical verification. Report limitations and unresolved issues explicitly. Do not invent results.")
+        payload["agent_config"] = dict(payload["agent_config"], max_total_tokens=budget)
+        result = background.request(key, payload=payload)
+        if result.get("id") == parent["id"]:
+            raise ValueError("Expected new continuation interaction")
     elif mode in ("retrieve", "import"):
         if mode == "retrieve":
             if prior is None:
@@ -75,7 +91,7 @@ def execute(key, experiment, mode, output, prior=None, legacy_id=None,
     else:
         raise ValueError("Unknown operation")
     seal(key, experiment, result, output)
-    if mode == "start":
+    if mode in ("start", "continue"):
         print("Interaction SHA256: " + hashlib.sha256(result["id"].encode()).hexdigest())
     status = result.get("status")
     if status == "completed":
@@ -140,7 +156,7 @@ def poll_existing(key, experiment, output, *, sleep=time.sleep):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--experiment", choices=EXPERIMENTS, required=True)
-    p.add_argument("--mode", choices=["start", "retrieve", "import"], required=True)
+    p.add_argument("--mode", choices=["start", "retrieve", "import", "continue"], required=True)
     p.add_argument("--budget", type=int, default=20_000)
     p.add_argument("--prior", type=Path)
     p.add_argument("--output", type=Path, required=True)
@@ -153,7 +169,7 @@ def main():
     if not key or not a.confirm_free_project:
         p.error("Verified billing-disabled project and API key required")
     try:
-        if a.poll and (a.mode not in ("start", "retrieve") or a.dynamic_webhook):
+        if a.poll and (a.mode not in ("start", "retrieve", "continue") or a.dynamic_webhook):
             raise ValueError("Polling requires start or retrieve without dynamic webhook")
         code = execute(key, a.experiment, a.mode, a.output, a.prior,
                        os.getenv("AG_RETRIEVE_INTERACTION_ID") if a.mode == "import" else None,

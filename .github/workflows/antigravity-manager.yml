@@ -1,0 +1,87 @@
+name: Antigravity experiment manager
+on:
+  workflow_dispatch:
+    inputs:
+      experiment:
+        type: choice
+        options: [AG-PHOTONIC-001, AG-INFRA-001]
+      mode:
+        type: choice
+        options: [retrieve, import, start]
+        default: retrieve
+      prior_run_id:
+        description: GitHub run ID containing encrypted checkpoint (retrieve only)
+        type: string
+      token_budget:
+        type: number
+        default: 20000
+      confirm_new_submission:
+        type: boolean
+        default: false
+      confirm_free_project:
+        description: I verified Free Tier and billing disabled
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: antigravity-live-probe
+  cancel-in-progress: false
+jobs:
+  manager:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_free_project == true && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Validate inputs
+        env:
+          MODE: ${{ inputs.mode }}
+          PRIOR: ${{ inputs.prior_run_id }}
+          CONFIRM: ${{ inputs.confirm_new_submission }}
+        run: |
+          if [[ "$MODE" == retrieve ]]; then
+            [[ "$PRIOR" =~ ^[0-9]+$ ]]
+          else
+            [[ -z "$PRIOR" ]]
+          fi
+          if [[ "$MODE" == start ]]; then
+            [[ "$CONFIRM" == true ]]
+          fi
+      - name: Install encryption dependency
+        run: sudo apt-get update -qq && sudo apt-get install -y python3-cryptography
+      - run: /usr/bin/python3 -m unittest discover -s antigravity/tests
+      - uses: actions/download-artifact@v4
+        if: inputs.mode == 'retrieve'
+        with:
+          name: antigravity-encrypted-checkpoint
+          run-id: ${{ inputs.prior_run_id }}
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/ag-prior
+      - name: Execute one operation
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AG_RETRIEVE_INTERACTION_ID: ${{ secrets.AG_RETRIEVE_INTERACTION_ID }}
+          MODE: ${{ inputs.mode }}
+          EXPERIMENT: ${{ inputs.experiment }}
+          BUDGET: ${{ inputs.token_budget }}
+          CONFIRM: ${{ inputs.confirm_new_submission }}
+        run: |
+          args=()
+          if [[ "$MODE" == retrieve ]]; then
+            args+=(--prior "$RUNNER_TEMP/ag-prior/checkpoint.enc")
+          fi
+          if [[ "$CONFIRM" == true ]]; then
+            args+=(--allow-submit)
+          fi
+          /usr/bin/python3 antigravity/manager.py --experiment "$EXPERIMENT" --mode "$MODE" --budget "$BUDGET" --output "$RUNNER_TEMP/ag-output/checkpoint.enc" --confirm-free-project "${args[@]}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: antigravity-encrypted-checkpoint
+          path: ${{ runner.temp }}/ag-output/checkpoint.enc
+          retention-days: 90
+          if-no-files-found: warn

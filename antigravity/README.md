@@ -74,3 +74,16 @@ Archive workflow requires contents write permission and a writable archive
 branch. Check its status; GitHub concurrency may cancel pending archive jobs,
 so manually backfill missed runs before expiration. Git history is not an
 independent backup; retain the archive key and encrypted backups separately.
+
+## Scientific export (public artifact)
+Manually dispatch Antigravity scientific export on main with an experiment and
+its archived manager run ID (AG-PHOTONIC-002: 43893127914). Confirm public export
+only for research intended for public release. No Google request or Gemini API
+key is needed. The archive key authenticates the selected completed checkpoint.
+The export selects model text, execution code/results and file-write evidence;
+thoughts, signatures and structured interaction metadata are omitted. Known
+identifiers, the archive key and common credential patterns in selected text
+cause export to fail. This is not a guarantee against arbitrary secrets in
+free text; never use this workflow for confidential inputs or research. The
+artifact is public, expires after seven days, and is not independently validated.
+No agent code is executed and no plaintext is committed. Review before reuse.

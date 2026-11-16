@@ -1,0 +1,46 @@
+name: Antigravity scientific export
+on:
+  workflow_dispatch:
+    inputs:
+      experiment:
+        type: choice
+        options: [AG-PHOTONIC-001, AG-PHOTONIC-002]
+        default: AG-PHOTONIC-002
+      run_id:
+        description: Archived manager run ID
+        type: string
+        default: '43893127914'
+      confirm_public_export:
+        description: I authorize public release of selected scientific text and code
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  export:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_public_export == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: sudo apt-get update -qq && sudo apt-get install -y python3-cryptography
+      - run: /usr/bin/python3 -m unittest discover -s antigravity/tests
+      - name: Fetch permanent archive
+        run: |
+          git fetch origin refs/heads/antigravity-archive
+          git worktree add --detach "$RUNNER_TEMP/archive-tree" FETCH_HEAD
+      - name: Extract scientific evidence
+        env:
+          AG_ARCHIVE_KEY: ${{ secrets.AG_ARCHIVE_KEY }}
+          EXPERIMENT: ${{ inputs.experiment }}
+          RUN: ${{ inputs.run_id }}
+        run: |
+          /usr/bin/python3 antigravity/scientific_export.py --root "$RUNNER_TEMP/archive-tree/antigravity/archive" --experiment "$EXPERIMENT" --run "$RUN" --output "$RUNNER_TEMP/scientific-export.json"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: scientific-export-${{ inputs.experiment }}
+          path: ${{ runner.temp }}/scientific-export.json
+          retention-days: 7
+          if-no-files-found: error

@@ -10,6 +10,7 @@ on:
       - '.github/workflows/antigravity-background.yml'
       - '.github/workflows/antigravity-manager.yml'
       - '.github/workflows/antigravity-archive.yml'
+      - '.github/workflows/antigravity-scientific-export.yml'
   workflow_dispatch:
 permissions:
   contents: read

@@ -24,6 +24,8 @@ export async function handle(request, env, now = Date.now()) {
   if (event?.type !== "interaction.completed") return response(204);
   if (typeof event.data?.id !== "string" || !event.data.id || event.data.id.length>1024) return response(400);
   const hash=Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",enc.encode(event.data.id))),b=>b.toString(16).padStart(2,"0")).join("");
+  // Log only verified completion metadata; never log payloads, headers or raw IDs.
+  console.log(JSON.stringify({event:"antigravity_verified_completion",interaction_hash:hash}));
   let route;
   try { route=JSON.parse(env.AG_ROUTES || "{}")[hash]; } catch { return response(503); }
   if (!route) return response(204);

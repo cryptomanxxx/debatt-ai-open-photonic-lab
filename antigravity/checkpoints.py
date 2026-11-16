@@ -21,9 +21,9 @@ def select(runs, artifacts, experiment, prior=""):
             continue
         candidates = [a for a in artifacts(run["id"]) if not a.get("expired")
                       and a.get("name") == name]
-        # Old artifacts have no experiment metadata. Only explicit selection
-        # may use them; manager.load authenticates the experiment before GET.
-        if prior and not candidates:
+        # Explicit legacy selection or the verified coupler migration run.
+        # manager.load authenticates the experiment before GET.
+        if not candidates and (prior or (experiment == "AG-PHOTONIC-001" and run["id"] == 43855012421)):
             candidates = [a for a in artifacts(run["id"]) if not a.get("expired")
                           and a.get("name") == LEGACY]
         if len(candidates) == 1:

@@ -28,6 +28,7 @@ on:
       - "layout/**"
       - ".github/workflows/experiments.yml"
       - ".github/workflows/parallel-id003.yml"
+      - ".github/workflows/parallel-mod007.yml"
       - "tools/select_experiments.py"
       - "tools/test_select_experiments.py"
       - "tools/bundle_experiments.py"
@@ -52,6 +53,8 @@ jobs:
       serial_matrix: ${{ steps.select.outputs.serial_matrix }}
       serial_any: ${{ steps.select.outputs.serial_any }}
       id003_any: ${{ steps.select.outputs.id003_any }}
+      mod007_any: ${{ steps.select.outputs.mod007_any }}
+      mod007_lock: ${{ steps.select.outputs.mod007_lock }}
       id003_lock: ${{ steps.select.outputs.id003_lock }}
     steps:
       - uses: actions/checkout@v5
@@ -148,10 +151,17 @@ jobs:
     with:
       lock: ${{ needs.select.outputs.id003_lock }}
 
+  parallel-mod007:
+    needs: select
+    if: needs.select.outputs.mod007_any == 'true'
+    uses: ./.github/workflows/parallel-mod007.yml
+    with:
+      lock: ${{ needs.select.outputs.mod007_lock }}
+
   bundle:
     # Keep separate artifact directories: result.json and environment files
     # have the same names in every experiment.
-    needs: [select, run, parallel-id003]
+    needs: [select, run, parallel-id003, parallel-mod007]
     if: ${{ always() && !cancelled() && needs.select.result == 'success' && needs.select.outputs.any == 'true' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -164,7 +174,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           EXPECTED: ${{ needs.select.outputs.matrix }}
-          RUN_RESULT: ${{ (needs.run.result == 'success' || needs.run.result == 'skipped') && (needs.parallel-id003.result == 'success' || needs.parallel-id003.result == 'skipped') && 'success' || 'failure' }}
+          RUN_RESULT: ${{ (needs.run.result == 'success' || needs.run.result == 'skipped') && (needs.parallel-id003.result == 'success' || needs.parallel-id003.result == 'skipped') && (needs.parallel-mod007.result == 'success' || needs.parallel-mod007.result == 'skipped') && 'success' || 'failure' }}
           ARGS: ${{ inputs.args }}
         run: python3 tools/bundle_experiments.py
       - name: Upload combined experiment ZIP
@@ -175,6 +185,6 @@ jobs:
           path: collected/
           if-no-files-found: error
       - name: Require complete bundle for successful runs
-        if: (needs.run.result == 'success' || needs.run.result == 'skipped') && (needs.parallel-id003.result == 'success' || needs.parallel-id003.result == 'skipped')
+        if: (needs.run.result == 'success' || needs.run.result == 'skipped') && (needs.parallel-id003.result == 'success' || needs.parallel-id003.result == 'skipped') && (needs.parallel-mod007.result == 'success' || needs.parallel-mod007.result == 'skipped')
         run: |
           python3 -c 'import json; assert json.load(open("collected/bundle-manifest.json"))["all_expected_results_present"], "Missing expected experiment results"'

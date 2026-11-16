@@ -1,0 +1,67 @@
+name: Parallel MOD-007
+on:
+  workflow_call:
+    inputs:
+      lock:
+        required: true
+        type: string
+env:
+  OPENBLAS_NUM_THREADS: '1'
+  OMP_NUM_THREADS: '1'
+permissions:
+  contents: read
+jobs:
+  shard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        seed: [707, 708, 709]
+        depth: [2, 3]
+        size: [16, 64, 128]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: opa-fdtd
+          create-args: --file ${{ inputs.lock }}
+      - name: Run paired training shard
+        shell: micromamba-shell {0}
+        run: python simulations/circuit/modular_multilayer_v007.py --shard ${{ matrix.seed }} ${{ matrix.depth }} ${{ matrix.size }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: mod007-${{ matrix.seed }}-${{ matrix.depth }}-${{ matrix.size }}
+          path: shard-output/result.json
+          if-no-files-found: error
+  aggregate:
+    needs: shard
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: opa-fdtd
+          create-args: --file ${{ inputs.lock }}
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: mod007-*
+          path: shards
+      - name: Assemble experiment
+        shell: micromamba-shell {0}
+        env:
+          LOCK: ${{ inputs.lock }}
+        run: |
+          python results/opa-mod-007/restore_report.py --output-dir "$RUNNER_TEMP/serial-reference"
+          python tools/bundle_experiments.py prepare opa-mod-007 results/opa-mod-007
+          python simulations/circuit/merge_mod007.py shards
+          python simulations/circuit/compare_mod007.py "$RUNNER_TEMP/serial-reference/result.json" results/opa-mod-007/result.json
+          cp "$LOCK" results/opa-mod-007/environment-lock.txt
+          micromamba list -n opa-fdtd --json > results/opa-mod-007/installed-packages.json
+      - uses: actions/upload-artifact@v7
+        with:
+          name: opa-mod-007
+          path: results/opa-mod-007/
+          if-no-files-found: error

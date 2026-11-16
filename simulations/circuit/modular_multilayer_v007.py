@@ -184,6 +184,13 @@ def optical_factory(b, hw, params, local, probes, seed, diag):
 
 
 def main():
+    global SEEDS, DEPTHS, SIZES, OUT
+    if len(sys.argv) == 5 and sys.argv[1] == "--shard":
+        seed, depth, size = map(int, sys.argv[2:])
+        if seed not in SEEDS or depth not in DEPTHS or size not in SIZES:
+            raise ValueError("Unknown shard")
+        SEEDS, DEPTHS, SIZES = (seed,), (depth,), (size,)
+        OUT = Path("shard-output")
     rows,curves,comparisons,controls,layer_errors = [],[],[],[],[]
     baselines = []
     grad_error = gradient_control()
@@ -303,6 +310,12 @@ def main():
           "Layer errors measure cumulative activation differences, not isolated layer errors."],
         checks=checks,gradient_max_abs_error=grad_error,ideal_max_abs_error=max(controls),
         rows=rows,curves=curves,comparisons=comparisons,layer_errors=layer_errors)
+    return write_report(report)
+
+
+def write_report(report):
+    rows, curves, comparisons, layer_errors = (report[k] for k in ("rows","curves","comparisons","layer_errors"))
+    checks = report["checks"]
     OUT.mkdir(parents=True,exist_ok=True)
     (OUT/"result.json").write_text(json.dumps(report,indent=2,allow_nan=False)+"\n")
     for name,records in (("metrics",rows),("learning_curves",curves),

@@ -1,0 +1,26 @@
+name: Verify permanent Antigravity restore
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  restore:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: sudo apt-get update -qq && sudo apt-get install -y python3-cryptography
+      - name: Restore and authenticate without API calls
+        env:
+          AG_ARCHIVE_KEY: ${{ secrets.AG_ARCHIVE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          set -euo pipefail
+          git fetch origin refs/heads/antigravity-archive
+          git worktree add --detach "$RUNNER_TEMP/archive-tree" FETCH_HEAD
+          /usr/bin/python3 antigravity/archive.py restore --root "$RUNNER_TEMP/archive-tree/antigravity/archive" --experiment AG-PHOTONIC-001 --file "$RUNNER_TEMP/restored.enc"
+          /usr/bin/python3 -c 'import sys,os; from pathlib import Path; sys.path.insert(0,"antigravity"); import manager; r=manager.load(os.environ["GEMINI_API_KEY"],"AG-PHOTONIC-001",Path(sys.argv[1])); assert r["status"]=="completed"; print("Authenticated completed research restored")' "$RUNNER_TEMP/restored.enc"
+          rm "$RUNNER_TEMP/restored.enc"

@@ -14,6 +14,7 @@ from cryptography.fernet import Fernet
 EXPERIMENTS = {
     "AG-INFRA-001": background.resume.photonic.probe.PAYLOAD,
     "AG-PHOTONIC-001": background.resume.photonic.PAYLOAD,
+    "AG-PHOTONIC-002": dict(background.resume.photonic.PAYLOAD, input=(Path(__file__).resolve().parent / "experiments/AG-PHOTONIC-002/prompt.txt").read_text()),
 }
 
 def cipher(key):

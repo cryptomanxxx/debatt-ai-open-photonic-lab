@@ -9,6 +9,9 @@ import sys
 LEGACY = "antigravity-encrypted-checkpoint"
 EXPERIMENTS = ("AG-PHOTONIC-001", "AG-INFRA-001")
 
+class NoCheckpoint(ValueError):
+    pass
+
 def select(runs, artifacts, experiment, prior=""):
     if experiment not in EXPERIMENTS or (prior and not re.fullmatch(r"[0-9]+", prior)):
         raise ValueError("Invalid selection")
@@ -30,7 +33,7 @@ def select(runs, artifacts, experiment, prior=""):
             return run["id"], candidates[0]["name"]
         if len(candidates) > 1:
             raise ValueError("Ambiguous checkpoint")
-    raise ValueError("No matching checkpoint; specify a legacy run ID once")
+    raise NoCheckpoint("No matching checkpoint")
 
 def api(path, field):
     result = subprocess.run(["gh", "api", "--paginate", "--slurp", path],
@@ -49,7 +52,14 @@ def main():
     runs = api(root + "/workflows/antigravity-manager.yml/runs?branch=main&event=workflow_dispatch&per_page=100", "workflow_runs")
     current = int(os.environ["GITHUB_RUN_ID"])
     runs = [r for r in runs if r["id"] < current]
-    run, name = select(runs, lambda i: api(root + f"/runs/{i}/artifacts?per_page=100", "artifacts"), a.experiment, a.prior)
+    try:
+        run, name = select(runs, lambda i: api(root + f"/runs/{i}/artifacts?per_page=100", "artifacts"), a.experiment, a.prior)
+    except NoCheckpoint:
+        if a.prior:
+            raise
+        with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+            out.write("archive=true\n")
+        return
     with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
         out.write(f"run_id={run}\nartifact_name={name}\n")
     print(f"Selected checkpoint from GitHub run {run}")

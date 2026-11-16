@@ -63,12 +63,22 @@ jobs:
           PRIOR: ${{ inputs.prior_run_id }}
         run: /usr/bin/python3 antigravity/checkpoints.py --experiment "$EXPERIMENT" --prior "$PRIOR"
       - uses: actions/download-artifact@v7
-        if: inputs.mode == 'retrieve'
+        if: inputs.mode == 'retrieve' && steps.checkpoint.outputs.archive != 'true'
         with:
           name: ${{ steps.checkpoint.outputs.artifact_name }}
           run-id: ${{ steps.checkpoint.outputs.run_id }}
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/ag-prior
+      - name: Restore permanent checkpoint
+        if: inputs.mode == 'retrieve' && steps.checkpoint.outputs.archive == 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AG_ARCHIVE_KEY: ${{ secrets.AG_ARCHIVE_KEY }}
+          EXPERIMENT: ${{ inputs.experiment }}
+        run: |
+          git fetch origin refs/heads/antigravity-archive
+          git worktree add --detach "$RUNNER_TEMP/archive-tree" FETCH_HEAD
+          /usr/bin/python3 antigravity/archive.py restore --root "$RUNNER_TEMP/archive-tree/antigravity/archive" --experiment "$EXPERIMENT" --file "$RUNNER_TEMP/ag-prior/checkpoint.enc"
       - name: Execute one operation
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

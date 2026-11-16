@@ -36,7 +36,7 @@ jobs:
           gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" > "$RUNNER_TEMP/run.json"
           jq -e --arg repo "$GITHUB_REPOSITORY" '.head_repository.full_name == $repo and .head_branch == "main" and .event == "workflow_dispatch" and .status == "completed" and .path == ".github/workflows/antigravity-manager.yml"' "$RUNNER_TEMP/run.json"
           gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN/artifacts" > "$RUNNER_TEMP/artifacts.json"
-          name=$(jq -er '[.artifacts[] | select(.expired == false and (.name == "antigravity-encrypted-checkpoint-AG-PHOTONIC-001" or .name == "antigravity-encrypted-checkpoint-AG-INFRA-001"))] | if length == 1 then .[0].name else error("Expected one checkpoint") end' "$RUNNER_TEMP/artifacts.json")
+          name=$(jq -er '[.artifacts[] | select(.expired == false and (.name == "antigravity-encrypted-checkpoint-AG-PHOTONIC-001" or .name == "antigravity-encrypted-checkpoint-AG-INFRA-001" or .name == "antigravity-encrypted-checkpoint-AG-PHOTONIC-002"))] | if length == 1 then .[0].name else error("Expected one checkpoint") end' "$RUNNER_TEMP/artifacts.json")
           echo "name=$name" >> "$GITHUB_OUTPUT"
           echo "experiment=${name#antigravity-encrypted-checkpoint-}" >> "$GITHUB_OUTPUT"
           echo "run=$RUN" >> "$GITHUB_OUTPUT"

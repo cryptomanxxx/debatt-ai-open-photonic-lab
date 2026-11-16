@@ -31,3 +31,19 @@ another manually approved continuation. Never automatically restart a missing
 sandbox. Free-tier interaction retention is documented as one day; sandbox
 availability is not guaranteed. Raw response artifacts may contain identifiers.
 See https://ai.google.dev/gemini-api/docs/antigravity-agent.
+
+## Background execution (preferred for long tasks)
+
+Use AG-PHOTONIC-001 background on main. Default mode retrieve sends GET only;
+set AG_RETRIEVE_INTERACTION_ID to a known interaction ID in Actions secrets.
+Resume mode explicitly submits one new continuation with background=true and
+store=true. Do not resume while an earlier request may still be running.
+The timed-out synchronous request on 2026-11-16 did not return its new ID;
+retrieving the original ID does not necessarily recover that continuation.
+Poll once per minute up to 30 times, saving the latest response after each GET.
+If still active or a GET fails, download the artifact, set the retrieval secret
+from its top-level id, and dispatch retrieve. No automatic POST retry.
+Artifacts may be public and contain identifiers or agent output; do not include
+credentials or sensitive data in prompts. A hard runner cancellation may prevent
+artifact upload. A POST timeout before receipt of an ID remains ambiguous.
+See https://ai.google.dev/gemini-api/docs/background-execution.

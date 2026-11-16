@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import sys
+import urllib.error
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "experiments/AG-PHOTONIC-001"))
 import background
@@ -85,6 +86,34 @@ def execute(key, experiment, mode, output, prior=None, legacy_id=None,
     print("Stopped or unknown status; encrypted response preserved.")
     return 1
 
+# Only fixed enum values and bounded integer HTTP codes may reach public logs.
+GOOGLE_ERROR_STATUSES = frozenset({
+    "CANCELLED", "UNKNOWN", "INVALID_ARGUMENT", "DEADLINE_EXCEEDED",
+    "NOT_FOUND", "ALREADY_EXISTS", "PERMISSION_DENIED", "RESOURCE_EXHAUSTED",
+    "FAILED_PRECONDITION", "ABORTED", "OUT_OF_RANGE", "UNIMPLEMENTED",
+    "INTERNAL", "UNAVAILABLE", "DATA_LOSS", "UNAUTHENTICATED",
+})
+
+def safe_http_error(exc):
+    code = exc.code
+    http = str(code) if type(code) is int and 100 <= code <= 599 else "unknown"
+    status = "unknown"
+    try:
+        raw = exc.read(65537)
+        if len(raw) <= 65536:
+            error = json.loads(raw).get("error", {})
+            candidate = error.get("status")
+            if isinstance(candidate, str) and candidate in GOOGLE_ERROR_STATUSES:
+                status = candidate
+    except Exception:
+        pass
+    finally:
+        try:
+            exc.close()
+        except Exception:
+            pass
+    return f"Google API HTTP status: {http}; canonical status: {status}"
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--experiment", choices=EXPERIMENTS, required=True)
@@ -103,6 +132,10 @@ def main():
         return execute(key, a.experiment, a.mode, a.output, a.prior,
                        os.getenv("AG_RETRIEVE_INTERACTION_ID") if a.mode == "import" else None,
                        a.budget, a.allow_submit, a.dynamic_webhook)
+    except urllib.error.HTTPError as exc:
+        print(safe_http_error(exc), file=sys.stderr)
+        print("Request failed; submission outcome not confirmed. No automatic retry.", file=sys.stderr)
+        return 1
     except Exception as exc:
         print(f"Stopped ({type(exc).__name__}); no automatic retry.", file=sys.stderr)
         return 1

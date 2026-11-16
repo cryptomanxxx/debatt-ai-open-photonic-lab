@@ -1,5 +1,6 @@
+import { observe } from "./dynamic.mjs";
 // Static Gemini webhook pilot. No Google API key or research content here.
-const VERSION = "0.2.0";
+const VERSION = "0.3.0";
 const enc = new TextEncoder();
 const experiments = new Set(["AG-INFRA-001","AG-PHOTONIC-001","AG-PHOTONIC-002","AG-PHOTONIC-003"]);
 const response = status => new Response(null,{status});
@@ -7,6 +8,7 @@ export async function handle(request, env, now = Date.now()) {
   if (new URL(request.url).pathname === "/health" && request.method === "GET") {
     return Response.json({status:"ok",version:VERSION},{headers:{"Cache-Control":"no-store"}});
   }
+  if (new URL(request.url).pathname === "/gemini-dynamic" && request.method === "POST") return observe(request,now);
   if (new URL(request.url).pathname !== "/gemini" || request.method !== "POST") return response(404);
   const id = request.headers.get("webhook-id"), ts = request.headers.get("webhook-timestamp");
   const sig = request.headers.get("webhook-signature") || "";

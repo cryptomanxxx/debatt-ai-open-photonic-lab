@@ -46,3 +46,32 @@ class ManagerTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 m.execute("key","AG-PHOTONIC-001","import",a,legacy_id="expected")
             self.assertFalse(a.exists())
+
+    def test_dynamic_pilot(self):
+        with tempfile.TemporaryDirectory() as d, patch.object(m.background, "request", return_value={"id":"test-id","status":"in_progress"}) as req:
+            a = Path(d)/"a.enc"
+            self.assertEqual(m.execute("key","AG-INFRA-001","start",a,allow_submit=True,dynamic_webhook=True),0)
+            payload = req.call_args.kwargs["payload"]
+            self.assertEqual(payload["webhook_config"], {"uris":[m.DYNAMIC_URI]})
+            self.assertTrue(payload["background"])
+            self.assertTrue(payload["store"])
+            self.assertNotIn("webhook_config",m.EXPERIMENTS["AG-INFRA-001"])
+            self.assertEqual(req.call_count,1)
+            b = Path(d)/"b.enc"
+            m.execute("key","AG-INFRA-001","start",b,allow_submit=True)
+            self.assertNotIn("webhook_config",req.call_args.kwargs["payload"])
+
+    def test_dynamic_restrictions(self):
+        with tempfile.TemporaryDirectory() as d, patch.object(m.background,"request") as req:
+            a = Path(d)/"a.enc"
+            for experiment,mode,budget,allow in [
+                ("AG-INFRA-001","retrieve",20000,True),
+                ("AG-INFRA-001","import",20000,True),
+                ("AG-PHOTONIC-003","start",20000,True),
+                ("AG-INFRA-001","start",40000,True),
+                ("AG-INFRA-001","start",20000,False),
+            ]:
+                with self.subTest(experiment=experiment,mode=mode,budget=budget,allow=allow), self.assertRaises(ValueError):
+                    m.execute("key",experiment,mode,a,budget=budget,allow_submit=allow,dynamic_webhook=True)
+            req.assert_not_called()
+            self.assertFalse(a.exists())

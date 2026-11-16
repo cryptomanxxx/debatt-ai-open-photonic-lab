@@ -6,3 +6,7 @@ bindings = [{name = "DELIVERIES", class_name = "Delivery"}]
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["Delivery"]
+
+[observability]
+enabled = true
+head_sampling_rate = 1

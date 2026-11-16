@@ -14,5 +14,11 @@
       "file": "AG-PHOTONIC-002/a25599450912c284e40e3c6d453bd81189325ae807692469eae2e9dbdabbc80f.enc",
       "sha256": "bff89e1503b803f317fdad583ffcf3c55941ee64b9c8efec1907ec5205476a6f"
     }
+  },
+  "AG-PHOTONIC-003": {
+    "43902309903": {
+      "file": "AG-PHOTONIC-003/1181e8b11a7dba06e461543a46c9104b6bc287523dd5608f29bbba70a95474a5.enc",
+      "sha256": "b72f76964c45f10ab2333de26abd92023aa2642396e65eafc85f9de779828942"
+    }
   }
 }

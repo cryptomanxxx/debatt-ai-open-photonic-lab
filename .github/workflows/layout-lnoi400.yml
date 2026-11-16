@@ -42,8 +42,8 @@ jobs:
             script: layout/mzi_2x2_lnoi400_v005.py
             gds: results/opa-layout-005/mzi_2x2_lnoi400_eo.gds
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Install the locked lnoi400 environment and the pinned PDK (no proprietary packages)
@@ -65,7 +65,7 @@ jobs:
         run: git diff --exit-code -- "$GDS" "results/$ID/design.json"
       - name: Upload layout
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.id }}
           path: results/${{ matrix.id }}/

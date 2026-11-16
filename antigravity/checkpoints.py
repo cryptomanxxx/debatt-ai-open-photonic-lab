@@ -7,7 +7,7 @@ import subprocess
 import sys
 
 LEGACY = "antigravity-encrypted-checkpoint"
-EXPERIMENTS = ("AG-PHOTONIC-001", "AG-INFRA-001")
+EXPERIMENTS = ("AG-PHOTONIC-001", "AG-INFRA-001", "AG-PHOTONIC-002")
 
 class NoCheckpoint(ValueError):
     pass

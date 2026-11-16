@@ -4,7 +4,7 @@ on:
     inputs:
       experiment:
         type: choice
-        options: [AG-PHOTONIC-001, AG-PHOTONIC-002]
+        options: [AG-PHOTONIC-001, AG-PHOTONIC-002, AG-PHOTONIC-003]
         default: AG-PHOTONIC-002
       run_id:
         description: Archived manager run ID

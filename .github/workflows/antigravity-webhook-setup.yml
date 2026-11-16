@@ -1,0 +1,33 @@
+name: Antigravity Webhook Setup
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [inspect, create]
+        default: inspect
+      confirm_free_project:
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: antigravity-webhook-setup
+  cancel-in-progress: false
+jobs:
+  setup:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_free_project
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s antigravity/webhook -p 'test_setup.py'
+      - run: python3 antigravity/webhook/setup.py
+        env:
+          SETUP_MODE: ${{ inputs.mode }}
+          CONFIRM_FREE_PROJECT: ${{ inputs.confirm_free_project }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CF_WEBHOOK_SETUP_TOKEN: ${{ secrets.CF_WEBHOOK_SETUP_TOKEN }}
+          CF_ACCOUNT_ID: ${{ vars.CF_ACCOUNT_ID }}

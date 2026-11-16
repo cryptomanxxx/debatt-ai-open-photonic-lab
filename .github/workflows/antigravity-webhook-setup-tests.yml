@@ -1,0 +1,21 @@
+name: Antigravity Webhook Setup Tests
+on:
+  pull_request:
+    paths:
+      - 'antigravity/webhook/**'
+      - '.github/workflows/antigravity-webhook-setup*.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'antigravity/webhook/**'
+      - '.github/workflows/antigravity-webhook-setup*.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s antigravity/webhook -p 'test_setup.py'

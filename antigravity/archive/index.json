@@ -7,6 +7,10 @@
     "43951828448": {
       "file": "AG-INFRA-001/9db551176b06d139a513c1781ec36c6108af955f30af486befe6c9c4c8d2885d.enc",
       "sha256": "004b3537429a698bda9f3930098cf9d9229bbd90f96ae9680d93c37d4f5bfd48"
+    },
+    "43965813877": {
+      "file": "AG-INFRA-001/b6d8885ba907892bd98e6eb67ee106034336e07b6bbe8264c2af06ad5055cecd.enc",
+      "sha256": "692c0b78d4d35a832dddd4ec592fe9ca44583fe734dbd20a83ee14f3b175db80"
     }
   },
   "AG-PHOTONIC-001": {

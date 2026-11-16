@@ -37,7 +37,7 @@ export class Delivery {
     return this.state.blockConcurrencyWhile(async()=>{
       if(await this.state.storage.get("sent")) return response(204);
       const {hash,route}=await request.json();
-      const r=await fetch("https://api.github.com/repos/cryptomanxxx/debatt-ai-open-photonic-lab/actions/workflows/antigravity-manager.yml/dispatches",{method:"POST",headers:{Authorization:"Bearer "+this.env.GITHUB_TOKEN,"Content-Type":"application/json","User-Agent":"debatt-ai-antigravity-webhook","Accept":"application/vnd.github+json"},body:JSON.stringify({ref:"main",inputs:{experiment:route.experiment,mode:"retrieve",prior_run_id:route.run,expected_interaction_hash:hash,confirm_free_project:true,confirm_new_submission:false}})});
+      const r=await fetch("https://api.github.com/repos/cryptomanxxx/debatt-ai-open-photonic-lab/actions/workflows/antigravity-manager.yml/dispatches",{method:"POST",headers:{Authorization:"Bearer "+this.env.GITHUB_TOKEN,"Content-Type":"application/json","User-Agent":"debatt-ai-open-photonic-lab-antigravity-webhook","Accept":"application/vnd.github+json"},body:JSON.stringify({ref:"main",inputs:{experiment:route.experiment,mode:"retrieve",prior_run_id:route.run,expected_interaction_hash:hash,confirm_free_project:true,confirm_new_submission:false}})});
       if(!r.ok) return response(503);
       await this.state.storage.put("sent",true);
       return response(204);

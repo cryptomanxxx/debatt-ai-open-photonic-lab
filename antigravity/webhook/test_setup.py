@@ -30,6 +30,7 @@ class SetupTests(unittest.TestCase):
         setup(call, {}, {}, "a"*32, "diagnose")
         self.assertEqual(call.call_count, 3)
         self.assertTrue(all(len(c.args)==2 for c in call.call_args_list))
+        self.assertEqual(call.call_args_list[1].args[0], "https://api.cloudflare.com/client/v4/accounts/" + "a"*32 + "/tokens/verify")
     def test_diagnose_missing_secret(self):
         call = Mock(side_effect=[{"webhooks":[]},{"success":True,"result":{"status":"active"}},{"success":True,"result":[]}])
         setup(call, {}, {}, "a"*32, "diagnose")
@@ -40,7 +41,7 @@ class SetupTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "not active"):
             setup(call, {}, {}, "a"*32, "diagnose")
         self.assertEqual(call.call_count, 2)
-        self.assertEqual(call.call_args_list[1].args[0], CF_VERIFY)
+        self.assertEqual(call.call_args_list[1].args[0], CF_VERIFY.format(account="a"*32))
 
     def test_error_codes_only(self):
         self.assertEqual(cf_error_codes({"errors":[{"code":10000,"message":"secret"},{"code":"secret"},{"code":True}]}), [10000])

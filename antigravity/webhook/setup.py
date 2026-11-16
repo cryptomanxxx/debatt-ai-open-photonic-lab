@@ -9,6 +9,7 @@ import urllib.error
 NAME = "debatt-ai-open-photonic-lab-antigravity-webhook"
 URI = "https://" + NAME + ".xx8031126.workers.dev/gemini"
 GOOGLE = "https://generativelanguage.googleapis.com/v1beta/webhooks"
+CF_VERIFY = "https://api.cloudflare.com/client/v4/user/tokens/verify"
 EVENTS = ["interaction.completed"]
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -18,6 +19,13 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 class SafeError(RuntimeError):
     pass
 
+def cf_error_codes(payload):
+    errors = payload.get("errors", []) if isinstance(payload, dict) else []
+    if not isinstance(errors, list):
+        return []
+    return [e["code"] for e in errors[:10] if isinstance(e, dict)
+            and type(e.get("code")) is int and 0 <= e["code"] <= 999999]
+
 def request(url, headers, method="GET", body=None):
     req = urllib.request.Request(url, headers={**headers, "Content-Type": "application/json"},
                                  method=method, data=None if body is None else json.dumps(body).encode())
@@ -25,7 +33,14 @@ def request(url, headers, method="GET", body=None):
         with urllib.request.build_opener(NoRedirect()).open(req, timeout=30) as response:
             return json.loads(response.read(1048577))
     except urllib.error.HTTPError as exc:
-        raise SafeError(f"Remote HTTP status {exc.code}") from None
+        codes = []
+        if url.startswith("https://api.cloudflare.com/"):
+            try:
+                codes = cf_error_codes(json.loads(exc.read(65536)))
+            except Exception:
+                pass
+        suffix = f"; Cloudflare error codes: {codes}" if codes else ""
+        raise SafeError(f"Remote HTTP status {exc.code}" + suffix) from None
     except Exception:
         raise SafeError("Remote request or JSON decoding failed") from None
 
@@ -55,6 +70,17 @@ def setup(call, google_headers, cf_headers, account, mode):
         return
     if mode == "create" and matches:
         raise SafeError("Registration already exists; do not create duplicates. Recover via secret rotation manually.")
+    if mode == "diagnose":
+        verified = stage(call, "Cloudflare verify user token", CF_VERIFY, cf_headers)
+        result = verified.get("result") if isinstance(verified, dict) else None
+        if not isinstance(result, dict) or verified.get("success") is not True:
+            raise SafeError("Cloudflare token verification failed; codes: " + str(cf_error_codes(verified)))
+        status = result.get("status")
+        if status not in ("active", "disabled", "expired"):
+            raise SafeError("Unexpected Cloudflare token status")
+        print("Cloudflare token status: " + status, flush=True)
+        if status != "active":
+            raise SafeError("Cloudflare token is not active")
     current = stage(call, "Cloudflare list secrets", cf, cf_headers)
     if current.get("success") is not True or not isinstance(current.get("result"), list):
         raise SafeError("Cloudflare secret preflight failed")
@@ -88,6 +114,8 @@ def main():
     cf = os.environ.get("CF_WEBHOOK_SETUP_TOKEN", "")
     if not google or (mode != "inspect" and not cf):
         raise SafeError("Required credentials missing")
+    if mode != "inspect" and (cf != cf.strip() or any(ch.isspace() for ch in cf)):
+        raise SafeError("Cloudflare token contains whitespace; replace with raw token only")
     setup(request, {"x-goog-api-key": google}, {"Authorization": "Bearer " + cf},
           os.environ["CF_ACCOUNT_ID"], mode)
 

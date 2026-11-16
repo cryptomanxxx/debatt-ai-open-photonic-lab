@@ -182,8 +182,9 @@ def main(argv=None):
         base_reg = load(args.base_registry) if args.base_registry else None
         selected = select_changed(reg, changed, base_reg)
     m = matrix(selected)
-    serial = [e for e in m if e["id"] != "opa-id-003"]
+    serial = [e for e in m if e["id"] not in ("opa-id-003", "opa-mod-007")]
     parallel = [e for e in m if e["id"] == "opa-id-003"]
+    mod007 = [e for e in m if e["id"] == "opa-mod-007"]
     print("selected:", ", ".join(e["id"] for e in m) or "none")
     if args.github_output:
         with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
@@ -192,6 +193,8 @@ def main(argv=None):
             out.write(f"serial_any={'true' if serial else 'false'}\n")
             out.write(f"id003_any={'true' if parallel else 'false'}\n")
             out.write(f"id003_lock={parallel[0]['lock'] if parallel else ''}\n")
+            out.write(f"mod007_any={\'true\' if mod007 else \'false\'}\n")
+            out.write(f"mod007_lock={mod007[0][\'lock\'] if mod007 else \'\'}\n")
             out.write(f"any={'true' if m else 'false'}\n")
     return 0
 

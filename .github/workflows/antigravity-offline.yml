@@ -5,6 +5,7 @@ on:
       - 'antigravity/**'
       - '.github/workflows/antigravity-offline.yml'
       - '.github/workflows/antigravity-live.yml'
+      - '.github/workflows/antigravity-photonic.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -16,3 +17,5 @@ jobs:
       - uses: actions/checkout@v4
       - run: python3 -m unittest discover -s antigravity/tests
       - run: python3 antigravity/experiments/AG-INFRA-001/probe.py
+
+      - run: python3 antigravity/experiments/AG-PHOTONIC-001/run.py

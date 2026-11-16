@@ -14,3 +14,15 @@ function req(type="interaction.completed",id="synthetic",timestamp=ts,invalid=fa
 test("valid mapped completion only",async()=>{assert.equal((await handle(req(),env,now)).status,204);assert.equal(calls,1);});
 test("invalid, stale, unmapped and other events do not dispatch",async()=>{const before=calls;assert.equal((await handle(req(undefined,undefined,ts,true),env,now)).status,401);assert.equal((await handle(req(undefined,undefined,String(Number(ts)-301)),env,now)).status,401);assert.equal((await handle(req(undefined,"unknown"),env,now)).status,204);assert.equal((await handle(req("interaction.failed"),env,now)).status,204);assert.equal(calls,before);});
 test("billing confirmation required",async()=>{assert.equal((await handle(req(),{...env,CONFIRM_FREE_PROJECT:"false"},now)).status,503);});
+
+test("verified unmapped completion is observable without dispatch or raw ID",async()=>{
+ const original=console.log, logs=[], before=calls;
+ try {
+  console.log=(line)=>logs.push(JSON.parse(line));
+  assert.equal((await handle(req(undefined,"unmapped-pilot"),env,now)).status,204);
+  assert.deepEqual(logs,[{event:"antigravity_verified_completion",interaction_hash:createHash("sha256").update("unmapped-pilot").digest("hex")}]);
+  assert.equal((await handle(req(undefined,"unmapped-pilot",ts,true),env,now)).status,401);
+  assert.equal(logs.length,1);
+  assert.equal(calls,before);
+ } finally {console.log=original;}
+});

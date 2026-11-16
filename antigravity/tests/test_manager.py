@@ -109,3 +109,39 @@ class ManagerTests(unittest.TestCase):
             self.assertNotIn("private",logs.getvalue())
             self.assertNotIn("secret",logs.getvalue())
             self.assertFalse(output.exists())
+
+    def test_poll_completed_and_identity(self):
+        with tempfile.TemporaryDirectory() as d:
+            a = Path(d)/"a.enc"
+            m.seal("key","AG-INFRA-001",{"id":"test-id","status":"in_progress"},a)
+            with patch.object(m.background,"request",side_effect=[
+                {"id":"test-id","status":"in_progress"},
+                {"id":"test-id","status":"completed"}]) as req, patch.object(m.time,"sleep") as wait:
+                self.assertEqual(m.poll_existing("key","AG-INFRA-001",a,sleep=wait),0)
+                self.assertEqual(req.call_count,2)
+                self.assertTrue(all(call.kwargs == {"interaction_id":"test-id"} for call in req.call_args_list))
+                self.assertEqual(wait.call_count,2)
+            self.assertEqual(m.load("key","AG-INFRA-001",a)["status"],"completed")
+            with patch.object(m.background,"request") as req:
+                self.assertEqual(m.poll_existing("key","AG-INFRA-001",a),0)
+                req.assert_not_called()
+
+    def test_poll_limit_and_failure_preserves_checkpoint(self):
+        with tempfile.TemporaryDirectory() as d:
+            a = Path(d)/"a.enc"
+            active = {"id":"test-id","status":"in_progress"}
+            m.seal("key","AG-INFRA-001",active,a)
+            with patch.object(m.background,"request",return_value=active) as req:
+                self.assertEqual(m.poll_existing("key","AG-INFRA-001",a,sleep=lambda _:None),0)
+                self.assertEqual(req.call_count,12)
+            for candidate in ({"id":"wrong","status":"completed"},):
+                with patch.object(m.background,"request",return_value=candidate), self.assertRaises(ValueError):
+                    m.poll_existing("key","AG-INFRA-001",a,sleep=lambda _:None)
+                self.assertEqual(m.load("key","AG-INFRA-001",a),active)
+            with patch.object(m.background,"request",side_effect=TimeoutError), self.assertRaises(TimeoutError):
+                m.poll_existing("key","AG-INFRA-001",a,sleep=lambda _:None)
+            self.assertEqual(m.load("key","AG-INFRA-001",a),active)
+            with patch.object(m.background,"request",return_value={"id":"test-id","status":"incomplete"}) as req:
+                self.assertEqual(m.poll_existing("key","AG-INFRA-001",a,sleep=lambda _:None),1)
+                req.assert_called_once()
+            self.assertEqual(m.load("key","AG-INFRA-001",a)["status"],"incomplete")

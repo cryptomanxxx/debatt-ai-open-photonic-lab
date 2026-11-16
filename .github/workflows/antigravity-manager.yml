@@ -12,6 +12,9 @@ on:
       prior_run_id:
         description: Optional historical run ID; blank selects latest checkpoint
         type: string
+      expected_interaction_hash:
+        description: Optional SHA256 binding for webhook retrieval
+        type: string
       token_budget:
         type: number
         default: 20000
@@ -86,9 +89,14 @@ jobs:
           MODE: ${{ inputs.mode }}
           EXPERIMENT: ${{ inputs.experiment }}
           BUDGET: ${{ inputs.token_budget }}
+          EXPECTED_HASH: ${{ inputs.expected_interaction_hash }}
           CONFIRM: ${{ inputs.confirm_new_submission }}
         run: |
           args=()
+          if [[ -n "$EXPECTED_HASH" ]]; then
+            [[ "$MODE" == retrieve && "$EXPECTED_HASH" =~ ^[a-f0-9]{64}$ ]]
+            /usr/bin/python3 -c 'import sys,os,hashlib; from pathlib import Path; sys.path.insert(0,"antigravity"); import manager; r=manager.load(os.environ["GEMINI_API_KEY"],os.environ["EXPERIMENT"],Path(os.environ["RUNNER_TEMP"])/"ag-prior/checkpoint.enc"); sys.exit(0 if hashlib.sha256(r["id"].encode()).hexdigest()==os.environ["EXPECTED_HASH"] else 1)'
+          fi
           if [[ "$MODE" == retrieve ]]; then
             args+=(--prior "$RUNNER_TEMP/ag-prior/checkpoint.enc")
           fi

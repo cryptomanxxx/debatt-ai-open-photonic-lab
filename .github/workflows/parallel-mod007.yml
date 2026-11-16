@@ -5,6 +5,9 @@ on:
       lock:
         required: true
         type: string
+env:
+  OPENBLAS_NUM_THREADS: '1'
+  OMP_NUM_THREADS: '1'
 permissions:
   contents: read
 jobs:
@@ -51,8 +54,10 @@ jobs:
         env:
           LOCK: ${{ inputs.lock }}
         run: |
+          python results/opa-mod-007/restore_report.py --output-dir "$RUNNER_TEMP/serial-reference"
           python tools/bundle_experiments.py prepare opa-mod-007 results/opa-mod-007
           python simulations/circuit/merge_mod007.py shards
+          python simulations/circuit/compare_mod007.py "$RUNNER_TEMP/serial-reference/result.json" results/opa-mod-007/result.json
           cp "$LOCK" results/opa-mod-007/environment-lock.txt
           micromamba list -n opa-fdtd --json > results/opa-mod-007/installed-packages.json
       - uses: actions/upload-artifact@v7

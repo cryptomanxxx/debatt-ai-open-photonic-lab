@@ -10,6 +10,10 @@ on:
         description: Archived manager run ID
         type: string
         default: '43893127914'
+      allow_partial:
+        description: Include incomplete or stopped agent evidence (not a completed result)
+        type: boolean
+        default: false
       confirm_public_export:
         description: I authorize public release of selected scientific text and code
         type: boolean
@@ -36,8 +40,11 @@ jobs:
           AG_ARCHIVE_KEY: ${{ secrets.AG_ARCHIVE_KEY }}
           EXPERIMENT: ${{ inputs.experiment }}
           RUN: ${{ inputs.run_id }}
+          ALLOW_PARTIAL: ${{ inputs.allow_partial }}
         run: |
-          /usr/bin/python3 antigravity/scientific_export.py --root "$RUNNER_TEMP/archive-tree/antigravity/archive" --experiment "$EXPERIMENT" --run "$RUN" --output "$RUNNER_TEMP/scientific-export.json"
+          args=()
+          if [[ "$ALLOW_PARTIAL" == true ]]; then args+=(--allow-partial); fi
+          /usr/bin/python3 antigravity/scientific_export.py --root "$RUNNER_TEMP/archive-tree/antigravity/archive" --experiment "$EXPERIMENT" --run "$RUN" --output "$RUNNER_TEMP/scientific-export.json" "${args[@]}"
       - uses: actions/upload-artifact@v7
         with:
           name: scientific-export-${{ inputs.experiment }}

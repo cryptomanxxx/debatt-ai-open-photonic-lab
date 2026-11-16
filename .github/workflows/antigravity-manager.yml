@@ -18,6 +18,10 @@ on:
       token_budget:
         type: number
         default: 20000
+      dynamic_webhook:
+        description: Diagnostic callback (AG-INFRA-001 start, 20000 tokens only)
+        type: boolean
+        default: false
       confirm_new_submission:
         type: boolean
         default: false
@@ -89,10 +93,15 @@ jobs:
           MODE: ${{ inputs.mode }}
           EXPERIMENT: ${{ inputs.experiment }}
           BUDGET: ${{ inputs.token_budget }}
+          DYNAMIC_WEBHOOK: ${{ inputs.dynamic_webhook }}
           EXPECTED_HASH: ${{ inputs.expected_interaction_hash }}
           CONFIRM: ${{ inputs.confirm_new_submission }}
         run: |
           args=()
+          if [[ "$DYNAMIC_WEBHOOK" == true ]]; then
+            [[ "$MODE" == start && "$EXPERIMENT" == AG-INFRA-001 && "$BUDGET" == 20000 ]]
+            args+=(--dynamic-webhook)
+          fi
           if [[ -n "$EXPECTED_HASH" ]]; then
             [[ "$MODE" == retrieve && "$EXPECTED_HASH" =~ ^[a-f0-9]{64}$ ]]
             /usr/bin/python3 -c 'import sys,os,hashlib; from pathlib import Path; sys.path.insert(0,"antigravity"); import manager; r=manager.load(os.environ["GEMINI_API_KEY"],os.environ["EXPERIMENT"],Path(os.environ["RUNNER_TEMP"])/"ag-prior/checkpoint.enc"); sys.exit(0 if hashlib.sha256(r["id"].encode()).hexdigest()==os.environ["EXPECTED_HASH"] else 1)'

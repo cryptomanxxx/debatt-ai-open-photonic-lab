@@ -11,6 +11,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / "experiments/AG-PHOTONI
 import background
 from cryptography.fernet import Fernet
 
+DYNAMIC_URI = "https://debatt-ai-open-photonic-lab-antigravity-webhook.xx8031126.workers.dev/gemini-dynamic"
+
 EXPERIMENTS = {
     "AG-INFRA-001": background.resume.photonic.probe.PAYLOAD,
     "AG-PHOTONIC-001": background.resume.photonic.PAYLOAD,
@@ -40,7 +42,9 @@ def load(key, experiment, path):
     return data["response"]
 
 def execute(key, experiment, mode, output, prior=None, legacy_id=None,
-            budget=20_000, allow_submit=False):
+            budget=20_000, allow_submit=False, dynamic_webhook=False):
+    if dynamic_webhook and (mode != "start" or experiment != "AG-INFRA-001" or budget != 20_000):
+        raise ValueError("Dynamic webhook restricted to 20k infrastructure start")
     if experiment not in EXPERIMENTS or not 20_000 <= budget <= 200_000:
         raise ValueError("Invalid experiment or budget")
     if output.exists():
@@ -50,6 +54,9 @@ def execute(key, experiment, mode, output, prior=None, legacy_id=None,
             raise ValueError("Explicit new submission required")
         payload = dict(EXPERIMENTS[experiment], background=True, store=True)
         payload["agent_config"] = dict(payload["agent_config"], max_total_tokens=budget)
+        if dynamic_webhook:
+            payload["webhook_config"] = {"uris": [DYNAMIC_URI]}
+            print("Dynamic webhook diagnostic enabled.")
         result = background.request(key, payload=payload)
     elif mode in ("retrieve", "import"):
         if mode == "retrieve":
@@ -87,6 +94,7 @@ def main():
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--confirm-free-project", action="store_true")
     p.add_argument("--allow-submit", action="store_true")
+    p.add_argument("--dynamic-webhook", action="store_true")
     a = p.parse_args()
     key = os.getenv("GEMINI_API_KEY")
     if not key or not a.confirm_free_project:
@@ -94,7 +102,7 @@ def main():
     try:
         return execute(key, a.experiment, a.mode, a.output, a.prior,
                        os.getenv("AG_RETRIEVE_INTERACTION_ID") if a.mode == "import" else None,
-                       a.budget, a.allow_submit)
+                       a.budget, a.allow_submit, a.dynamic_webhook)
     except Exception as exc:
         print(f"Stopped ({type(exc).__name__}); no automatic retry.", file=sys.stderr)
         return 1

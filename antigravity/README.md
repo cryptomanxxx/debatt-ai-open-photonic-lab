@@ -54,3 +54,23 @@ registry. A green job can mean active, not completed; inspect its status log.
 Distinct manually dispatched start runs can still create distinct interactions.
 Legacy workflows remain available; do not use their raw public artifacts for
 sensitive material. Scientific validation remains separate from API completion.
+
+## Permanent research archive
+Create a repository Actions secret AG_ARCHIVE_KEY with a separately generated
+high-entropy random value (for example openssl rand -hex 32). Keep an offline
+backup; do not publish it. Run Antigravity research archive manually once with
+run ID 43857964113 to migrate the verified coupler checkpoint. Subsequent
+manager completions trigger the archive workflow automatically. It makes no
+Google requests. The archive lives on the dedicated antigravity-archive branch
+in antigravity/archive/, with an index mapping run IDs to ciphertext and SHA-256.
+Identical responses share a ciphertext via a keyed fingerprint. Only encrypted
+originals and non-sensitive index metadata are committed; public scientific
+results require separate review. No automatic key rotation or pruning.
+If no matching temporary artifact exists, manager restores the latest permanent
+checkpoint for the experiment. Explicit historical IDs still require temporary
+artifacts. A new Gemini key can decrypt restored checkpoints after re-encryption,
+but Google may reject retrieval if the key belongs to another project.
+Archive workflow requires contents write permission and a writable archive
+branch. Check its status; GitHub concurrency may cancel pending archive jobs,
+so manually backfill missed runs before expiration. Git history is not an
+independent backup; retain the archive key and encrypted backups separately.

@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 6
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           persist-credentials: false
       - name: Offline tests
@@ -29,7 +29,7 @@ jobs:
         run: python3 antigravity/experiments/AG-INFRA-001/probe.py --live --confirm-free-project
       - name: Preserve diagnostic response
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: AG-INFRA-001-response
           path: antigravity/results/AG-INFRA-001-*.json

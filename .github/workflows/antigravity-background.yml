@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           persist-credentials: false
       - run: python3 -m unittest discover -s antigravity/tests
@@ -37,7 +37,7 @@ jobs:
           AG_ENVIRONMENT_ID: ${{ secrets.AG_ENVIRONMENT_ID }}
           AG_RETRIEVE_INTERACTION_ID: ${{ secrets.AG_RETRIEVE_INTERACTION_ID }}
         run: python3 antigravity/experiments/AG-PHOTONIC-001/background.py --mode "$AG_MODE" --token-budget "$AG_TOKEN_BUDGET" --live --confirm-free-project
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: AG-PHOTONIC-001-background

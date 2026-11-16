@@ -36,7 +36,7 @@ jobs:
         env:
           INDEX: ${{ matrix.index }}
         run: python simulations/meep/robust_coupler_v003.py search --index "$INDEX"
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: id003-search-${{ matrix.index }}
           path: shard/shard.json
@@ -59,7 +59,7 @@ jobs:
           environment-name: opa-fdtd
           create-args: >-
             --file ${{ inputs.lock }}
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v7
         with:
           pattern: id003-search-*
           path: search-shards
@@ -88,7 +88,7 @@ jobs:
           environment-name: opa-fdtd
           create-args: >-
             --file ${{ inputs.lock }}
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v7
         with:
           pattern: id003-search-*
           path: search-shards
@@ -96,7 +96,7 @@ jobs:
         env:
           INDEX: ${{ matrix.index }}
         run: python simulations/meep/robust_coupler_v003.py validate --index "$INDEX"
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: id003-validation-${{ matrix.index }}
           path: shard/shard.json
@@ -123,11 +123,11 @@ jobs:
           environment-name: opa-fdtd
           create-args: >-
             --file ${{ inputs.lock }}
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v7
         with:
           pattern: id003-search-*
           path: search-shards
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v7
         with:
           pattern: id003-validation-*
           path: validation-shards
@@ -143,7 +143,7 @@ jobs:
         if: always()
         run: |
           if [ -f results/opa-id-003/result.json ]; then cat results/opa-id-003/result.json; fi
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: success() || failure()
         with:
           name: opa-id-003

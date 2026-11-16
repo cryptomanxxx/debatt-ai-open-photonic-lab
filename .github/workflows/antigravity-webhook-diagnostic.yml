@@ -1,0 +1,39 @@
+name: Antigravity webhook diagnostic
+on:
+  pull_request:
+    paths:
+      - 'antigravity/webhook/**'
+      - '.github/workflows/antigravity-webhook-diagnostic.yml'
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [inspect, ping]
+        default: inspect
+      confirm_free_project:
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s antigravity/webhook -p test_diagnostic.py
+  diagnostic:
+    needs: tests
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.confirm_free_project == true && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: python3 antigravity/webhook/diagnostic.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DIAGNOSTIC_MODE: ${{ inputs.mode }}
+          CONFIRM_FREE_PROJECT: ${{ inputs.confirm_free_project }}

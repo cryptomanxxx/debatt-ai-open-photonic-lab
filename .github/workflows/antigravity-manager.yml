@@ -18,6 +18,10 @@ on:
       token_budget:
         type: number
         default: 20000
+      poll_until_done:
+        description: Poll existing interaction every 5 minutes for up to 12 checks
+        type: boolean
+        default: false
       dynamic_webhook:
         description: Diagnostic callback (AG-INFRA-001 start, 20000 tokens only)
         type: boolean
@@ -39,7 +43,7 @@ jobs:
   manager:
     if: github.ref == 'refs/heads/main' && inputs.confirm_free_project == true && github.run_attempt == 1
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 85
     steps:
       - uses: actions/checkout@v5
         with:
@@ -93,11 +97,17 @@ jobs:
           MODE: ${{ inputs.mode }}
           EXPERIMENT: ${{ inputs.experiment }}
           BUDGET: ${{ inputs.token_budget }}
+          POLL: ${{ inputs.poll_until_done }}
           DYNAMIC_WEBHOOK: ${{ inputs.dynamic_webhook }}
           EXPECTED_HASH: ${{ inputs.expected_interaction_hash }}
           CONFIRM: ${{ inputs.confirm_new_submission }}
         run: |
           args=()
+          if [[ "$POLL" == true ]]; then
+            [[ "$MODE" == start || "$MODE" == retrieve ]]
+            [[ "$DYNAMIC_WEBHOOK" != true ]]
+            args+=(--poll)
+          fi
           if [[ "$DYNAMIC_WEBHOOK" == true ]]; then
             [[ "$MODE" == start && "$EXPERIMENT" == AG-INFRA-001 && "$BUDGET" == 20000 ]]
             args+=(--dynamic-webhook)

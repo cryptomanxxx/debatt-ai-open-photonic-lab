@@ -5,9 +5,13 @@ webhooks for an ordinary background model interaction? If it does while
 Antigravity interactions stay silent, the gap is agent-specific.
 
 One POST, never retried. Then at most POLLS GETs of the same interaction.
+The interaction ID is sealed right after create in an encrypted checkpoint
+(Fernet, key derived from the API key with a separate domain), so a later
+retrieve run can check the status with GETs only, never a new submission.
 Public logs get only fixed text, enum statuses, HTTP codes, UTC times,
 the interaction SHA-256 (as the manager prints) and yes/no keyword flags.
 """
+import base64
 import hashlib
 import json
 import os
@@ -17,6 +21,7 @@ import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
+from pathlib import Path
 
 ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/interactions"
 API_REVISION = "2026-05-20"  # same header as the Antigravity manager
@@ -43,6 +48,39 @@ class SafeError(RuntimeError):
 class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, *args, **kwargs):
         return None
+
+
+def cipher(key):
+    from cryptography.fernet import Fernet
+    return Fernet(base64.urlsafe_b64encode(hashlib.sha256(
+        b"debatt-ai-webhook-control-v1\0" + key.encode()).digest()))
+
+
+def valid_id(ident):
+    if not isinstance(ident, str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,512}", ident):
+        raise SafeError("Unexpected interaction ID format")
+    return ident
+
+
+def seal(key, record, path):
+    valid_id(record.get("id"))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(".tmp")
+    tmp.write_bytes(cipher(key).encrypt(json.dumps(record).encode()))
+    tmp.replace(path)
+
+
+def unseal(key, path):
+    if path.stat().st_size > 65536:
+        raise SafeError("Checkpoint too large")
+    try:
+        record = json.loads(cipher(key).decrypt(path.read_bytes()))
+    except Exception:
+        raise SafeError("Checkpoint could not be decrypted with this API key") from None
+    if not isinstance(record, dict) or record.get("kind") != "webhook-control":
+        raise SafeError("Not a webhook control checkpoint")
+    valid_id(record.get("id"))
+    return record
 
 
 def utc():
@@ -121,23 +159,8 @@ def request(key, interaction_id=None, payload=None):
     return result
 
 
-def run(key, model, variant, call=request, sleep=time.sleep, clock=utc):
-    payload = build_payload(model, variant)
-    print(f"Variant: {variant}; model: {payload['model']}; submitted at {clock()}", flush=True)
-    try:
-        result = call(key, payload=payload)
-    except SafeError as exc:
-        print(str(exc), flush=True)
-        print("Create rejected; nothing to poll. Submission outcome not confirmed, no retry.")
-        return 1
-    ident = result.get("id")
-    if not isinstance(ident, str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,512}", ident):
-        print("Unexpected interaction ID format; stopping.")
-        return 1
-    print("Interaction SHA256: " + hashlib.sha256(ident.encode()).hexdigest())
-    print("Webhook config echoed: " + str(isinstance(result.get("webhook_config"), dict)))
-    status = status_of(result)
-    print(f"Status at create: {status}", flush=True)
+def follow(key, ident, status, variant, call, sleep, clock):
+    """At most POLLS GETs of the same interaction; never submits."""
     for _ in range(POLLS):
         if status not in ACTIVE:
             break
@@ -159,21 +182,73 @@ def run(key, model, variant, call=request, sleep=time.sleep, clock=utc):
         print("Now check Cloudflare Workers Logs for a POST from Google and " + expected + ".")
         return 0
     if status in ACTIVE:
-        print("Still active after the polling limit; check Cloudflare later.")
+        print("Still active after the polling limit; run retrieve with this run ID later.")
         return 0
     print("Interaction did not complete; only interaction.completed is subscribed, so no webhook is expected.")
     return 1
 
 
+def run(key, model, variant, output, call=request, sleep=time.sleep, clock=utc):
+    payload = build_payload(model, variant)
+    if output.exists():
+        raise SafeError("Output already exists")
+    submitted = clock()
+    print(f"Variant: {variant}; model: {payload['model']}; submitted at {submitted}", flush=True)
+    try:
+        result = call(key, payload=payload)
+    except SafeError as exc:
+        print(str(exc), flush=True)
+        print("Create rejected; nothing to poll. Submission outcome not confirmed, no retry.")
+        return 1
+    try:
+        ident = valid_id(result.get("id"))
+    except SafeError:
+        print("Unexpected interaction ID format; stopping.")
+        return 1
+    print("Interaction SHA256: " + hashlib.sha256(ident.encode()).hexdigest(), flush=True)
+    seal(key, {"kind": "webhook-control", "id": ident, "variant": variant,
+               "model": payload["model"], "submitted": submitted}, output)
+    print("Encrypted checkpoint saved; retrieve later with this run ID.", flush=True)
+    print("Webhook config echoed: " + str(isinstance(result.get("webhook_config"), dict)))
+    status = status_of(result)
+    print(f"Status at create: {status}", flush=True)
+    return follow(key, ident, status, variant, call, sleep, clock)
+
+
+def retrieve(key, prior, call=request, sleep=time.sleep, clock=utc):
+    record = unseal(key, prior)
+    ident = record["id"]
+    print("Interaction SHA256: " + hashlib.sha256(ident.encode()).hexdigest())
+    print(f"Variant: {record.get('variant') if record.get('variant') in ('static', 'dynamic') else 'unknown'}; "
+          f"submitted at {record.get('submitted') if re.fullmatch(r'[0-9TZ:-]{20}', str(record.get('submitted'))) else 'unknown'}")
+    try:
+        result = call(key, interaction_id=ident)
+    except SafeError as exc:
+        print(str(exc), flush=True)
+        print("Retrieve failed; no retry.")
+        return 1
+    if result.get("id") != ident:
+        print("Interaction mismatch; stopping.")
+        return 1
+    status = status_of(result)
+    print(f"Status at retrieve: {status} at {clock()}", flush=True)
+    return follow(key, ident, status, record.get("variant"), call, sleep, clock)
+
+
 def main():
     if os.environ.get("GITHUB_REF") != "refs/heads/main" or os.environ.get("GITHUB_RUN_ATTEMPT") != "1":
         raise SafeError("First attempt on main required")
-    if os.environ.get("CONFIRM_FREE_PROJECT") != "true" or os.environ.get("CONFIRM_CONTROL_CALL") != "true":
-        raise SafeError("Free project and control call confirmations required")
+    if os.environ.get("CONFIRM_FREE_PROJECT") != "true":
+        raise SafeError("Free project confirmation required")
     key = os.environ.get("GEMINI_API_KEY")
     if not key:
         raise SafeError("Missing API key")
-    return run(key, os.environ.get("CONTROL_MODEL") or DEFAULT_MODEL, os.environ.get("CONTROL_VARIANT"))
+    variant = os.environ.get("CONTROL_VARIANT")
+    if variant == "retrieve":
+        return retrieve(key, Path(os.environ["CONTROL_PRIOR"]))
+    if os.environ.get("CONFIRM_CONTROL_CALL") != "true":
+        raise SafeError("Control call confirmation required for a new submission")
+    return run(key, os.environ.get("CONTROL_MODEL") or DEFAULT_MODEL, variant, Path(os.environ["CONTROL_OUTPUT"]))
 
 
 if __name__ == "__main__":

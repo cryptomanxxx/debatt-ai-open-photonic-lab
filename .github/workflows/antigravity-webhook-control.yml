@@ -3,6 +3,8 @@ name: Antigravity webhook control test
 # test whether this Gemini project receives interaction.completed webhooks.
 # static: no webhook_config, uses the registered project webhook (/gemini).
 # dynamic: webhook_config.uris -> /gemini-dynamic (observation only).
+# retrieve: GET-only status check of an earlier static/dynamic run, using its
+#           encrypted checkpoint artifact; never submits anything.
 on:
   pull_request:
     paths:
@@ -13,22 +15,27 @@ on:
     inputs:
       variant:
         type: choice
-        options: [static, dynamic]
+        options: [static, dynamic, retrieve]
         default: static
       model:
-        description: "Plain Gemini model ID (not an agent)"
+        description: "Plain Gemini model ID (not an agent); ignored for retrieve"
         type: string
         default: gemini-3.8-flash
+      prior_run_id:
+        description: "retrieve only: run ID of the earlier static/dynamic control run"
+        type: string
+        default: ""
       confirm_free_project:
         description: "I have verified the Gemini project has billing disabled"
         type: boolean
         default: false
       confirm_control_call:
-        description: "Send exactly one minimal model request (no retries)"
+        description: "static/dynamic only: send exactly one minimal model request (no retries)"
         type: boolean
         default: false
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: antigravity-webhook-control
   cancel-in-progress: false
@@ -39,23 +46,53 @@ jobs:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
-      - run: python3 -m unittest discover -s antigravity/webhook -p test_control.py
+      - name: Install encryption dependency
+        run: sudo apt-get update -qq && sudo apt-get install -y python3-cryptography
+      - run: /usr/bin/python3 -m unittest discover -s antigravity/webhook -p test_control.py
   control:
     needs: tests
     if: >-
       github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' &&
-      inputs.confirm_free_project == true && inputs.confirm_control_call == true &&
-      github.run_attempt == 1
+      inputs.confirm_free_project == true && github.run_attempt == 1 &&
+      (inputs.variant == 'retrieve' || inputs.confirm_control_call == true)
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
-      - run: python3 antigravity/webhook/control.py
+      - name: Validate inputs
+        env:
+          VARIANT: ${{ inputs.variant }}
+          PRIOR: ${{ inputs.prior_run_id }}
+        run: |
+          if [[ "$VARIANT" == retrieve ]]; then
+            [[ "$PRIOR" =~ ^[0-9]{1,20}$ ]]
+          else
+            [[ -z "$PRIOR" ]]
+          fi
+      - name: Install encryption dependency
+        run: sudo apt-get update -qq && sudo apt-get install -y python3-cryptography
+      - uses: actions/download-artifact@v7
+        if: inputs.variant == 'retrieve'
+        with:
+          name: webhook-control-checkpoint
+          run-id: ${{ inputs.prior_run_id }}
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/control-prior
+      - run: /usr/bin/python3 antigravity/webhook/control.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           CONTROL_VARIANT: ${{ inputs.variant }}
           CONTROL_MODEL: ${{ inputs.model }}
+          CONTROL_OUTPUT: ${{ runner.temp }}/control-output/checkpoint.enc
+          CONTROL_PRIOR: ${{ runner.temp }}/control-prior/checkpoint.enc
           CONFIRM_FREE_PROJECT: ${{ inputs.confirm_free_project }}
           CONFIRM_CONTROL_CALL: ${{ inputs.confirm_control_call }}
+      - uses: actions/upload-artifact@v7
+        if: always() && inputs.variant != 'retrieve'
+        with:
+          name: webhook-control-checkpoint
+          path: ${{ runner.temp }}/control-output/checkpoint.enc
+          retention-days: 90
+          if-no-files-found: warn

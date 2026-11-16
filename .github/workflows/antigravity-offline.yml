@@ -6,6 +6,7 @@ on:
       - '.github/workflows/antigravity-offline.yml'
       - '.github/workflows/antigravity-live.yml'
       - '.github/workflows/antigravity-photonic.yml'
+      - '.github/workflows/antigravity-resume.yml'
   workflow_dispatch:
 permissions:
   contents: read

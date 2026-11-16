@@ -1,0 +1,269 @@
+{
+  "provenance": {
+    "run_id": 43880171027,
+    "job_id": 133357814147,
+    "source": "aggregate job JSON log",
+    "head_sha": "e2896f97f2592da7bde008346d30f5865be89981"
+  },
+  "report": {
+    "mpb_L50_um": 12.28282630189538,
+    "cases": [
+      {
+        "resolution": 16,
+        "geometry": {
+          "width_um": 0.45,
+          "height_um": 0.22,
+          "gap_um": 0.2,
+          "wavelength_um": 1.55,
+          "n_core": 3.48,
+          "n_clad": 1.44
+        },
+        "meep_version": "1.35.1",
+        "input_net_flux": 60.340291881758326,
+        "rows": [
+          {
+            "x_um": 3,
+            "raw_through": 57.678840928202135,
+            "raw_cross": 2.5697881581272872,
+            "through": 0.9558926403808004,
+            "cross": 0.04258826197200031,
+            "total": 0.9984809023528006,
+            "fraction": 0.04265305612921206,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 6,
+            "raw_through": 51.48119669908603,
+            "raw_cross": 8.782723697028176,
+            "through": 0.8531811016089811,
+            "cross": 0.1455532186393568,
+            "total": 0.9987343202483379,
+            "fraction": 0.1457376758647531,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 9,
+            "raw_through": 42.2875089253524,
+            "raw_cross": 18.041410398969187,
+            "through": 0.7008171092081918,
+            "cross": 0.2989944171023035,
+            "total": 0.9998115263104954,
+            "fraction": 0.29905078030621707,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 12.28282630189538,
+            "raw_through": 30.004601686660607,
+            "raw_cross": 30.387070770584405,
+            "through": 0.49725648900500924,
+            "cross": 0.5035950245340265,
+            "total": 1.0008515135390357,
+            "fraction": 0.5031665713861011,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 15,
+            "raw_through": 19.478814352854585,
+            "raw_cross": 40.929757383317046,
+            "through": 0.3228160445598257,
+            "cross": 0.678315535223499,
+            "total": 1.0011315797833247,
+            "fraction": 0.6775488346599825,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 18,
+            "raw_through": 9.910332900751396,
+            "raw_cross": 50.564975444327075,
+            "through": 0.16424071862581463,
+            "cross": 0.8379968652358067,
+            "total": 1.0022375838616213,
+            "fraction": 0.836125963274102,
+            "flux_check_passed": true
+          }
+        ],
+        "meep_time": 251.59375,
+        "flux_checks_passed": true,
+        "failures": [],
+        "L50_um": 11.915545475008253,
+        "phase_rad": -0.01934858949896943,
+        "visibility": 0.974779401657493,
+        "fit_max_residual": 0.0022473413426172817,
+        "fit_success": true
+      },
+      {
+        "resolution": 24,
+        "geometry": {
+          "width_um": 0.45,
+          "height_um": 0.22,
+          "gap_um": 0.2,
+          "wavelength_um": 1.55,
+          "n_core": 3.48,
+          "n_clad": 1.44
+        },
+        "meep_version": "1.35.1",
+        "input_net_flux": 60.105643926202404,
+        "rows": [
+          {
+            "x_um": 3,
+            "raw_through": 57.8204986438614,
+            "raw_cross": 2.236899047608516,
+            "through": 0.9619811862402355,
+            "cross": 0.03721612317064561,
+            "total": 0.9991973094108811,
+            "fraction": 0.03724602020054272,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 6,
+            "raw_through": 52.426081401618944,
+            "raw_cross": 7.633603613203483,
+            "through": 0.8722322560255338,
+            "cross": 0.1270031084364724,
+            "total": 0.9992353644620062,
+            "fraction": 0.1271002938380304,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 9,
+            "raw_through": 44.35265001259061,
+            "raw_cross": 15.688830936660157,
+            "through": 0.7379115689542683,
+            "cross": 0.2610209276839771,
+            "total": 0.9989324966382455,
+            "fraction": 0.2612998661695391,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 12.28282630189538,
+            "raw_through": 33.38866661778444,
+            "raw_cross": 26.68006350665886,
+            "through": 0.5554996908240261,
+            "cross": 0.4438861604979491,
+            "total": 0.9993858513219751,
+            "fraction": 0.4441589401238591,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 15,
+            "raw_through": 23.654443614376003,
+            "raw_cross": 36.41607874905008,
+            "through": 0.39354779466997947,
+            "cross": 0.6058678747999384,
+            "total": 0.9994156694699179,
+            "fraction": 0.6062221088861713,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 18,
+            "raw_through": 14.00713809792197,
+            "raw_cross": 46.062988190408646,
+            "through": 0.23304197714144628,
+            "cross": 0.766367102679487,
+            "total": 0.9994090798209333,
+            "fraction": 0.7668202322284274,
+            "flux_check_passed": true
+          }
+        ],
+        "meep_time": 168.77083333333331,
+        "flux_checks_passed": true,
+        "failures": [],
+        "L50_um": 13.068457804086103,
+        "phase_rad": -0.008571610660705687,
+        "visibility": 0.9818823952642519,
+        "fit_max_residual": 0.0014698547240376003,
+        "fit_success": true
+      },
+      {
+        "resolution": 32,
+        "geometry": {
+          "width_um": 0.45,
+          "height_um": 0.22,
+          "gap_um": 0.2,
+          "wavelength_um": 1.55,
+          "n_core": 3.48,
+          "n_clad": 1.44
+        },
+        "meep_version": "1.35.1",
+        "input_net_flux": 60.171104225114846,
+        "rows": [
+          {
+            "x_um": 3,
+            "raw_through": 57.78196118073377,
+            "raw_cross": 2.3476216808414705,
+            "through": 0.9602941798202221,
+            "cross": 0.039015765309183,
+            "total": 0.9993099451294052,
+            "fraction": 0.039042706919253836,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 6,
+            "raw_through": 52.12242719845355,
+            "raw_cross": 8.00718577113435,
+            "through": 0.8662368402522709,
+            "cross": 0.13307360525041234,
+            "total": 0.9993104455026832,
+            "fraction": 0.13316543007160533,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 9,
+            "raw_through": 43.689206737229476,
+            "raw_cross": 16.42165006558826,
+            "through": 0.7260828482352168,
+            "cross": 0.2729158834139198,
+            "total": 0.9989987316491367,
+            "fraction": 0.27318941933328894,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 12.28282630189538,
+            "raw_through": 32.32174269578897,
+            "raw_cross": 27.798340028203015,
+            "through": 0.537163861491812,
+            "cross": 0.46198819825879567,
+            "total": 0.9991520597506076,
+            "fraction": 0.46238026909949,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 15,
+            "raw_through": 22.384329526456753,
+            "raw_cross": 37.73516185723615,
+            "through": 0.3720112804098042,
+            "cross": 0.627130951695014,
+            "total": 0.9991422321048182,
+            "fraction": 0.6276693463090677,
+            "flux_check_passed": true
+          },
+          {
+            "x_um": 18,
+            "raw_through": 12.728525022368176,
+            "raw_cross": 47.378012954535635,
+            "through": 0.2115388305780071,
+            "cross": 0.7873881253247884,
+            "total": 0.9989269559027956,
+            "fraction": 0.7882339350960594,
+            "flux_check_passed": true
+          }
+        ],
+        "meep_time": 164.078125,
+        "flux_checks_passed": true,
+        "failures": [],
+        "L50_um": 12.764409458675164,
+        "phase_rad": -0.007657248534369128,
+        "visibility": 0.9818029906278635,
+        "fit_max_residual": 0.0015636218401655633,
+        "fit_success": true
+      }
+    ],
+    "checks": {
+      "fits": true,
+      "fine_matches_mpb": true,
+      "refinement": true,
+      "near_half": true
+    },
+    "passed": true
+  }
+}

@@ -7,7 +7,7 @@ on:
         options: [AG-PHOTONIC-001, AG-INFRA-001, AG-PHOTONIC-002, AG-PHOTONIC-003]
       mode:
         type: choice
-        options: [retrieve, import, start]
+        options: [retrieve, import, start, continue]
         default: retrieve
       prior_run_id:
         description: Optional historical run ID; blank selects latest checkpoint
@@ -54,12 +54,14 @@ jobs:
           PRIOR: ${{ inputs.prior_run_id }}
           CONFIRM: ${{ inputs.confirm_new_submission }}
         run: |
-          if [[ "$MODE" == retrieve ]]; then
+          if [[ "$MODE" == continue ]]; then
+            [[ "$PRIOR" =~ ^[0-9]+$ ]]
+          elif [[ "$MODE" == retrieve ]]; then
             [[ -z "$PRIOR" || "$PRIOR" =~ ^[0-9]+$ ]]
           else
             [[ -z "$PRIOR" ]]
           fi
-          if [[ "$MODE" == start ]]; then
+          if [[ "$MODE" == start || "$MODE" == continue ]]; then
             [[ "$CONFIRM" == true ]]
           fi
       - name: Install encryption dependency
@@ -67,21 +69,21 @@ jobs:
       - run: /usr/bin/python3 -m unittest discover -s antigravity/tests
       - name: Select checkpoint
         id: checkpoint
-        if: inputs.mode == 'retrieve'
+        if: (inputs.mode == 'retrieve' || inputs.mode == 'continue')
         env:
           GH_TOKEN: ${{ github.token }}
           EXPERIMENT: ${{ inputs.experiment }}
           PRIOR: ${{ inputs.prior_run_id }}
         run: /usr/bin/python3 antigravity/checkpoints.py --experiment "$EXPERIMENT" --prior "$PRIOR"
       - uses: actions/download-artifact@v7
-        if: inputs.mode == 'retrieve' && steps.checkpoint.outputs.archive != 'true'
+        if: (inputs.mode == 'retrieve' || inputs.mode == 'continue') && steps.checkpoint.outputs.archive != 'true'
         with:
           name: ${{ steps.checkpoint.outputs.artifact_name }}
           run-id: ${{ steps.checkpoint.outputs.run_id }}
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/ag-prior
       - name: Restore permanent checkpoint
-        if: inputs.mode == 'retrieve' && steps.checkpoint.outputs.archive == 'true'
+        if: (inputs.mode == 'retrieve' || inputs.mode == 'continue') && steps.checkpoint.outputs.archive == 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           AG_ARCHIVE_KEY: ${{ secrets.AG_ARCHIVE_KEY }}
@@ -104,7 +106,7 @@ jobs:
         run: |
           args=()
           if [[ "$POLL" == true ]]; then
-            [[ "$MODE" == start || "$MODE" == retrieve ]]
+            [[ "$MODE" == start || "$MODE" == retrieve || "$MODE" == continue ]]
             [[ "$DYNAMIC_WEBHOOK" != true ]]
             args+=(--poll)
           fi
@@ -116,7 +118,7 @@ jobs:
             [[ "$MODE" == retrieve && "$EXPECTED_HASH" =~ ^[a-f0-9]{64}$ ]]
             /usr/bin/python3 -c 'import sys,os,hashlib; from pathlib import Path; sys.path.insert(0,"antigravity"); import manager; r=manager.load(os.environ["GEMINI_API_KEY"],os.environ["EXPERIMENT"],Path(os.environ["RUNNER_TEMP"])/"ag-prior/checkpoint.enc"); sys.exit(0 if hashlib.sha256(r["id"].encode()).hexdigest()==os.environ["EXPECTED_HASH"] else 1)'
           fi
-          if [[ "$MODE" == retrieve ]]; then
+          if [[ "$MODE" == retrieve || "$MODE" == continue ]]; then
             args+=(--prior "$RUNNER_TEMP/ag-prior/checkpoint.enc")
           fi
           if [[ "$CONFIRM" == true ]]; then

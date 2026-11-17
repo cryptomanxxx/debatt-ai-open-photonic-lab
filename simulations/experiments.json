@@ -527,6 +527,29 @@
         "results/opa-nl-004/provenance.json"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/nonlinear_activation_v005.py"
+    },
+    {
+      "id": "opa-nl-006",
+      "name": "Circuit: resonantly enhanced activation with all-root stability and port energy balance",
+      "script": "simulations/circuit/nonlinear_activation_v006.py",
+      "result_dir": "results/opa-nl-006",
+      "artifact": "opa-nl-006",
+      "timeout_minutes": 30,
+      "deps": [
+        "simulations/circuit/nonlinear_activation_v001.py",
+        "simulations/circuit/nonlinear_activation_v002.py",
+        "simulations/circuit/nonlinear_activation_v003.py",
+        "simulations/circuit/nonlinear_activation_v004.py",
+        "simulations/circuit/nonlinear_activation_v005.py",
+        "results/opa-nl-003/weights.json",
+        "results/opa-nl-003/result.json",
+        "results/opa-nl-003/provenance.json",
+        "results/opa-nl-005/summary.csv",
+        "results/opa-nl-005/result.json",
+        "results/opa-nl-005/transfer.csv",
+        "results/opa-nl-005/provenance.json"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/nonlinear_activation_v006.py"
     }
   ]
 }

@@ -1,0 +1,70 @@
+name: AG003 archive verified original files
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_archive:
+        description: Archive the seven already public snapshot files on a review branch; no model calls
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: ag003-original-import
+  cancel-in-progress: false
+jobs:
+  archive:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_archive == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      ARCHIVE_BRANCH: research/ag003-original-44074735184
+      ROOT: antigravity/reproduction/AG-PHOTONIC-003
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Verify snapshot provenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/44074735184" |
+            jq -e '.path == ".github/workflows/ag003-direct-snapshot.yml" and .head_branch == "main" and .event == "workflow_dispatch" and .conclusion == "success" and .head_sha == "a9741b161e0547a3ab4e58107ab6091eba6a646b"' >/dev/null
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/14325015236" |
+            jq -e '.name == "ag003-direct-source-unverified" and .expired == false and .workflow_run.id == 44074735184 and .digest == "sha256:ff289ebdc02161598cc4a2655796c8e4ad4df537095b3f84129651f44d88f04d"' >/dev/null
+      - uses: actions/download-artifact@v7
+        with:
+          artifact-ids: 14325015236
+          run-id: 44074735184
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/ag-original-files
+          merge-multiple: true
+      - name: Import exact bytes without executing them
+        run: |
+          python3 "$ROOT/import_snapshot.py" --source "$RUNNER_TEMP/ag-original-files" --output "$ROOT/original"
+      - name: Commit to new review branch only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh auth setup-git
+          if git ls-remote --exit-code --heads origin "refs/heads/$ARCHIVE_BRANCH" >/dev/null; then
+            echo "Archive branch already exists; refusing to overwrite."
+            exit 1
+          else
+            status=$?
+            [[ "$status" == 2 ]]
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$ARCHIVE_BRANCH"
+          git -c core.autocrlf=false add -- "$ROOT/original"
+          # Verify staged Git bytes as well as working tree; no normalization.
+          stage="$RUNNER_TEMP/ag-staged"
+          mkdir "$stage"
+          for file in "$ROOT/original/"*; do
+            git show ":$file" > "$stage/$(basename "$file")"
+          done
+          python3 "$ROOT/import_snapshot.py" --source "$stage"
+          git commit -m "Preserve exact AG003 workspace snapshot files (run 44074735184)"
+          git push origin "HEAD:refs/heads/$ARCHIVE_BRANCH"
+          echo "Review branch: https://github.com/$GITHUB_REPOSITORY/compare/main...$ARCHIVE_BRANCH" >> "$GITHUB_STEP_SUMMARY"

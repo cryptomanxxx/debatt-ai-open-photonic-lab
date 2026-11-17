@@ -37,6 +37,16 @@ Only after a viable compact-model study, pursue component-level simulation with 
 
 ### End-to-end system accounting
 
+**First implementation: OPA-SYS-001 (pending CI).** The existing AG003
+reproduction supplies an archived parameter set and candidate to audit.
+This limited accounting experiment is the bridge between AG003-ENERGY-001
+(the proposed audit) and OPA-SYS-001; no duplicate energy experiment is
+needed. It complements MOD-005 rather than rerunning its tiled inference
+sweep. The priority-1 nonlinear activation track remains a separate planned
+experiment; this audit continues the already active AG003 work.
+
+
+
 Define boundaries separately: optical core, accelerator card, host-inclusive system. Include wall-plug laser efficiency, coupling/splitting/propagation loss, modulators and drivers, DAC/ADC, detection/TIA, gain, tuning/calibration, memory traffic, host and idle overhead; avoid double counting. Report energy per inference or matched operation, throughput, latency, precision, workload shape and batch size; compare at matched accuracy. Sweep uncertain inputs with documented provenance and ranges. Separate assumed, simulated, datasheet and measured values. No CPU simulator runtime is evidence of physical photonic speed or energy.
 
 The transcript's 30 W chip versus 150 W card and its different 50x comparisons (34:53–37:07) illustrate why boundaries and baselines matter; these are unverified reported claims, not OPA parameters.

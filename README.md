@@ -256,6 +256,20 @@ networks will be more sensitive. The power-only result shows that the phase of
 the output matters: either coherent detection or an encoding that keeps outputs
 positive is needed.
 
+## OPA-SYS-001: independent AG003 energy accounting
+
+[Implementation](simulations/circuit/system_energy_audit_v001.py).
+Reconstructs the archived MZI path loss even for a rejected nominal
+configuration, checks unrounded arithmetic using archived rounded launch
+power for CFG-0100, and isolates the duplicated ideal pump fanout factor
+in the original comb formula. Sweeps 45 conditional combinations of loss
+reduction, HBM energy and laser efficiency at fixed workload and throughput.
+Reports component powers, assumed overlap and serial latency, and modeled
+break-even power. CI checks numerical identities, not a required efficiency
+advantage. This is an accounting audit, not a measured or independently
+calibrated receiver, optical gain, scheduling or training model. Results
+pending CI. See [research backlog](PHOTONIC_RESEARCH_ROADMAP.md).
+
 ## OPA-MOD-006: hybrid AI training
 
 [Experiment implementation](simulations/circuit/modular_training_v006.py).

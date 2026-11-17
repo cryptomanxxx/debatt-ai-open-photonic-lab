@@ -69,7 +69,36 @@ def extract(response, experiment, run, secrets=(), allow_partial=False):
                 validation="agent-reported; independent validation required" if complete else "partial agent evidence; not a completed scientific result",
                 reports=reports, execution_evidence=evidence)
 
-def export(root, experiment, run, key, output, allow_partial=False):
+def diagnostics(response, experiment, run):
+    """Only fixed enums and bounded integers; no raw API messages."""
+    def number(value):
+        return value if type(value) is int and 0 <= value <= 10**12 else None
+    def mapping(value):
+        return value if isinstance(value, dict) else {}
+    def enum(value, allowed):
+        return value if isinstance(value, str) and value in allowed else "unknown"
+    usage = mapping(response.get("usage"))
+    config = mapping(response.get("agent_config"))
+    error = mapping(response.get("error"))
+    fields = ("total_tokens", "total_input_tokens", "total_cached_tokens",
+              "total_output_tokens", "total_thought_tokens", "total_tool_use_tokens")
+    return dict(schema_version=1, experiment=experiment, manager_run=run,
+                status=enum(response.get("status"), ("completed", "incomplete", "failed",
+                    "cancelled", "canceled", "expired", "in_progress", "active", "running",
+                    "pending", "queued", "requires_action")),
+                max_total_tokens=number(config.get("max_total_tokens")),
+                usage={field: number(usage.get(field)) for field in fields},
+                error_code=number(error.get("code")),
+                error_status=enum(error.get("status"), ("RESOURCE_EXHAUSTED", "DEADLINE_EXCEEDED",
+                    "INVALID_ARGUMENT", "INTERNAL", "UNAVAILABLE", "CANCELLED",
+                    "FAILED_PRECONDITION", "PERMISSION_DENIED", "UNKNOWN")),
+                incomplete_reason=enum(mapping(response.get("incomplete_details")).get("reason"),
+                    ("max_total_tokens", "max_output_tokens", "token_budget_exceeded",
+                     "rate_limit", "resource_exhausted", "timeout")),
+                note="Missing or unrecognized metadata is not evidence of a cause.")
+
+
+def export(root, experiment, run, key, output, allow_partial=False, diagnostics_only=False):
     if not re.fullmatch(r"[0-9]+", run) or not key:
         raise ValueError("Invalid run or key")
     record = json.loads((root / "index.json").read_text())[experiment][run]
@@ -82,7 +111,7 @@ def export(root, experiment, run, key, output, allow_partial=False):
     if hashlib.sha256(path.read_bytes()).hexdigest() != record["sha256"]:
         raise ValueError("Archive digest mismatch")
     response = manager.load(key, experiment, path)
-    result = extract(response, experiment, run, (key,), allow_partial=allow_partial)
+    result = diagnostics(response, experiment, run) if diagnostics_only else extract(response, experiment, run, (key,), allow_partial=allow_partial)
     output.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")
 
 def main():
@@ -91,9 +120,10 @@ def main():
     p.add_argument("--experiment", choices=manager.EXPERIMENTS, required=True)
     p.add_argument("--run", required=True)
     p.add_argument("--allow-partial", action="store_true")
+    p.add_argument("--diagnostics-only", action="store_true")
     p.add_argument("--output", type=Path, required=True)
     a = p.parse_args()
-    export(a.root, a.experiment, a.run, os.environ["AG_ARCHIVE_KEY"], a.output, allow_partial=a.allow_partial)
+    export(a.root, a.experiment, a.run, os.environ["AG_ARCHIVE_KEY"], a.output, allow_partial=a.allow_partial, diagnostics_only=a.diagnostics_only)
 
 if __name__ == "__main__":
     try:

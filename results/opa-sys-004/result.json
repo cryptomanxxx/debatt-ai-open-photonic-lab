@@ -1,0 +1,2190 @@
+{
+  "experiment": "OPA-SYS-004",
+  "checks": {
+    "grid_count": true,
+    "baseline_exact": true,
+    "archived_counts": true,
+    "archived_candidates": true,
+    "laser_only_non_independent_unchanged": true,
+    "combined_non_independent_equals_receiver": true,
+    "receiver_independent_roots": true,
+    "all_variant_counts": true,
+    "original_immutable": true,
+    "stage1_immutable": true
+  },
+  "failures": [],
+  "configurations": 330960,
+  "variant_evaluations": 1323840,
+  "reference_evaluations": 330960,
+  "stage1_sha256": "f7a2a4a0864ddd83f80d420bc9555432113eeb7e97782a8446dabca69c663a53",
+  "variants": {
+    "baseline": {
+      "counts": {
+        "below_min_throughput": 1341,
+        "optical_link_budget_exceeded": 76391,
+        "rin_limited_snr": 24453,
+        "pcm_endurance_exceeded": 324,
+        "area_exceeds_reticle": 52349,
+        "broadband_mzi_dispersion": 3570,
+        "feasible": 472,
+        "invalid_pump_comb_ratio": 120960,
+        "distributed_comb_lt_tiles": 51100
+      },
+      "feasible_by_arch_bits": [
+        {
+          "architecture": "Hybrid",
+          "bits": 4,
+          "count": 144
+        },
+        {
+          "architecture": "IndepLaser_MZI",
+          "bits": 4,
+          "count": 91
+        },
+        {
+          "architecture": "IndepLaser_MZI",
+          "bits": 6,
+          "count": 30
+        },
+        {
+          "architecture": "MRR",
+          "bits": 4,
+          "count": 119
+        },
+        {
+          "architecture": "MZI",
+          "bits": 4,
+          "count": 83
+        },
+        {
+          "architecture": "SingleWave_MZI",
+          "bits": 4,
+          "count": 5
+        }
+      ],
+      "best_by_arch_bits": {
+        "IndepLaser_MZI:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "IndepLaser_MZI",
+            "source_topo": "distributed",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 32,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 2.0842,
+            "eta_chip_topsw": 7.4989,
+            "pj_per_mac_sys": 0.9596,
+            "j_per_step_sys": 0.0046,
+            "sustained_tops": 488.467,
+            "peak_tops": 527.68,
+            "peak_photonic_tops": 327.68,
+            "step_latency_ms": 0.0198,
+            "chip_area_mm2": 487.04,
+            "p_system_w": 234.369,
+            "p_chip_only_w": 65.139,
+            "total_path_loss_db": 23.38,
+            "p_pump_opt_mw": 103.4,
+            "used_amp": false,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 16.543,
+            "comb_stab": 0.0,
+            "optical_amp": 0.0,
+            "ps_static": 0.002,
+            "ps_dynamic": 0.02,
+            "conv_and_drv": 25.441,
+            "tia": 10.189,
+            "calibration": 0.102,
+            "elec_compute_opt": 26.331,
+            "memory_sram_hbm": 125.17,
+            "cooling_pue": 30.57
+          },
+          "bom": {
+            "pump_lasers": 256,
+            "comb_rings": 0,
+            "weight_rings": 0,
+            "mzis": 2048,
+            "phase_shifters": 4096,
+            "modulators": 2048,
+            "photodiodes": 4096,
+            "dacs": 2048,
+            "adcs": 2048
+          }
+        },
+        "SingleWave_MZI:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "SingleWave_MZI",
+            "source_topo": "central",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 1,
+            "mesh_m": 8,
+            "n_tiles": 16,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.9145,
+            "eta_chip_topsw": 7.4152,
+            "pj_per_mac_sys": 1.0447,
+            "j_per_step_sys": 0.005,
+            "sustained_tops": 30.696,
+            "peak_tops": 220.48,
+            "peak_photonic_tops": 20.48,
+            "step_latency_ms": 0.3148,
+            "chip_area_mm2": 177.47,
+            "p_system_w": 16.033,
+            "p_chip_only_w": 4.14,
+            "total_path_loss_db": 36.27,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 0.212,
+            "comb_stab": 0.1,
+            "optical_amp": 1.817,
+            "ps_static": 0.001,
+            "ps_dynamic": 0.002,
+            "conv_and_drv": 1.599,
+            "tia": 0.64,
+            "calibration": 0.051,
+            "elec_compute_opt": 1.655,
+            "memory_sram_hbm": 7.866,
+            "cooling_pue": 2.091
+          },
+          "bom": {
+            "pump_lasers": 1,
+            "comb_rings": 1,
+            "weight_rings": 0,
+            "mzis": 1024,
+            "phase_shifters": 2048,
+            "modulators": 128,
+            "photodiodes": 256,
+            "dacs": 128,
+            "adcs": 128
+          }
+        },
+        "Hybrid:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "Hybrid",
+            "source_topo": "distributed",
+            "n_pump": 8,
+            "n_comb": 8,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 8,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.6279,
+            "eta_chip_topsw": 7.4874,
+            "pj_per_mac_sys": 1.2286,
+            "j_per_step_sys": 0.0059,
+            "sustained_tops": 122.117,
+            "peak_tops": 281.92,
+            "peak_photonic_tops": 81.92,
+            "step_latency_ms": 0.0791,
+            "chip_area_mm2": 120.05,
+            "p_system_w": 75.016,
+            "p_chip_only_w": 16.31,
+            "total_path_loss_db": 25.88,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 1.695,
+            "comb_stab": 0.8,
+            "optical_amp": 15.898,
+            "ps_static": 0.0,
+            "ps_dynamic": 0.019,
+            "conv_and_drv": 6.36,
+            "tia": 2.547,
+            "calibration": 0.037,
+            "elec_compute_opt": 6.583,
+            "memory_sram_hbm": 31.292,
+            "cooling_pue": 9.785
+          },
+          "bom": {
+            "pump_lasers": 8,
+            "comb_rings": 8,
+            "weight_rings": 512,
+            "mzis": 224,
+            "phase_shifters": 960,
+            "modulators": 512,
+            "photodiodes": 1024,
+            "dacs": 512,
+            "adcs": 512
+          }
+        },
+        "IndepLaser_MZI:6": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "IndepLaser_MZI",
+            "source_topo": "distributed",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 32,
+            "phase_tech": "pockels_tfln",
+            "bits": 6,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.5405,
+            "eta_chip_topsw": 5.962,
+            "pj_per_mac_sys": 1.2983,
+            "j_per_step_sys": 0.0063,
+            "sustained_tops": 488.467,
+            "peak_tops": 527.68,
+            "peak_photonic_tops": 327.68,
+            "step_latency_ms": 0.0198,
+            "chip_area_mm2": 487.04,
+            "p_system_w": 317.085,
+            "p_chip_only_w": 81.93,
+            "total_path_loss_db": 23.38,
+            "p_pump_opt_mw": 447.99,
+            "used_amp": false,
+            "target_snr_db": 41.39,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 71.679,
+            "comb_stab": 0.0,
+            "optical_amp": 0.0,
+            "ps_static": 0.002,
+            "ps_dynamic": 0.02,
+            "conv_and_drv": 40.706,
+            "tia": 10.189,
+            "calibration": 0.102,
+            "elec_compute_opt": 26.331,
+            "memory_sram_hbm": 126.696,
+            "cooling_pue": 41.359
+          },
+          "bom": {
+            "pump_lasers": 256,
+            "comb_rings": 0,
+            "weight_rings": 0,
+            "mzis": 2048,
+            "phase_shifters": 4096,
+            "modulators": 2048,
+            "photodiodes": 4096,
+            "dacs": 2048,
+            "adcs": 2048
+          }
+        },
+        "MZI:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "MZI",
+            "source_topo": "distributed",
+            "n_pump": 8,
+            "n_comb": 8,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 8,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.5329,
+            "eta_chip_topsw": 7.492,
+            "pj_per_mac_sys": 1.3047,
+            "j_per_step_sys": 0.0063,
+            "sustained_tops": 122.117,
+            "peak_tops": 281.92,
+            "peak_photonic_tops": 81.92,
+            "step_latency_ms": 0.0791,
+            "chip_area_mm2": 123.76,
+            "p_system_w": 79.666,
+            "p_chip_only_w": 16.3,
+            "total_path_loss_db": 27.38,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 1.695,
+            "comb_stab": 0.8,
+            "optical_amp": 19.951,
+            "ps_static": 0.001,
+            "ps_dynamic": 0.02,
+            "conv_and_drv": 6.36,
+            "tia": 2.547,
+            "calibration": 0.026,
+            "elec_compute_opt": 6.583,
+            "memory_sram_hbm": 31.292,
+            "cooling_pue": 10.391
+          },
+          "bom": {
+            "pump_lasers": 8,
+            "comb_rings": 8,
+            "weight_rings": 0,
+            "mzis": 512,
+            "phase_shifters": 1024,
+            "modulators": 512,
+            "photodiodes": 1024,
+            "dacs": 512,
+            "adcs": 512
+          }
+        },
+        "MRR:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "MRR",
+            "source_topo": "distributed",
+            "n_pump": 4,
+            "n_comb": 4,
+            "n_lambda": 8,
+            "mesh_m": 16,
+            "n_tiles": 4,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 0.6471,
+            "eta_chip_topsw": 8.1817,
+            "pj_per_mac_sys": 3.0909,
+            "j_per_step_sys": 0.0149,
+            "sustained_tops": 10.235,
+            "peak_tops": 10.24,
+            "peak_photonic_tops": 10.24,
+            "step_latency_ms": 0.9442,
+            "chip_area_mm2": 47.29,
+            "p_system_w": 15.817,
+            "p_chip_only_w": 1.251,
+            "total_path_loss_db": 26.5,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 1.0,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 0.848,
+            "comb_stab": 0.4,
+            "optical_amp": 8.697,
+            "ps_static": 0.0,
+            "ps_dynamic": 0.002,
+            "conv_and_drv": 0.8,
+            "tia": 0.32,
+            "calibration": 0.026,
+            "elec_compute_opt": 0.04,
+            "memory_sram_hbm": 2.623,
+            "cooling_pue": 2.063
+          },
+          "bom": {
+            "pump_lasers": 4,
+            "comb_rings": 4,
+            "weight_rings": 512,
+            "mzis": 0,
+            "phase_shifters": 512,
+            "modulators": 32,
+            "photodiodes": 128,
+            "dacs": 32,
+            "adcs": 64
+          }
+        }
+      },
+      "best_overall": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 32,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 2.0842,
+          "eta_chip_topsw": 7.4989,
+          "pj_per_mac_sys": 0.9596,
+          "j_per_step_sys": 0.0046,
+          "sustained_tops": 488.467,
+          "peak_tops": 527.68,
+          "peak_photonic_tops": 327.68,
+          "step_latency_ms": 0.0198,
+          "chip_area_mm2": 487.04,
+          "p_system_w": 234.369,
+          "p_chip_only_w": 65.139,
+          "total_path_loss_db": 23.38,
+          "p_pump_opt_mw": 103.4,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 16.543,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.002,
+          "ps_dynamic": 0.02,
+          "conv_and_drv": 25.441,
+          "tia": 10.189,
+          "calibration": 0.102,
+          "elec_compute_opt": 26.331,
+          "memory_sram_hbm": 125.17,
+          "cooling_pue": 30.57
+        },
+        "bom": {
+          "pump_lasers": 256,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 2048,
+          "phase_shifters": 4096,
+          "modulators": 2048,
+          "photodiodes": 4096,
+          "dacs": 2048,
+          "adcs": 2048
+        }
+      },
+      "best_comb_ge6": null
+    },
+    "receiver_only": {
+      "counts": {
+        "below_min_throughput": 1658,
+        "optical_link_budget_exceeded": 75909,
+        "rin_limited_snr": 24453,
+        "pcm_endurance_exceeded": 444,
+        "area_exceeds_reticle": 52349,
+        "broadband_mzi_dispersion": 3570,
+        "feasible": 517,
+        "invalid_pump_comb_ratio": 120960,
+        "distributed_comb_lt_tiles": 51100
+      },
+      "feasible_by_arch_bits": [
+        {
+          "architecture": "Hybrid",
+          "bits": 4,
+          "count": 144
+        },
+        {
+          "architecture": "IndepLaser_MZI",
+          "bits": 4,
+          "count": 91
+        },
+        {
+          "architecture": "IndepLaser_MZI",
+          "bits": 6,
+          "count": 30
+        },
+        {
+          "architecture": "MRR",
+          "bits": 4,
+          "count": 164
+        },
+        {
+          "architecture": "MZI",
+          "bits": 4,
+          "count": 83
+        },
+        {
+          "architecture": "SingleWave_MZI",
+          "bits": 4,
+          "count": 5
+        }
+      ],
+      "best_by_arch_bits": {
+        "IndepLaser_MZI:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "IndepLaser_MZI",
+            "source_topo": "distributed",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 32,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 2.0842,
+            "eta_chip_topsw": 7.4989,
+            "pj_per_mac_sys": 0.9596,
+            "j_per_step_sys": 0.0046,
+            "sustained_tops": 488.467,
+            "peak_tops": 527.68,
+            "peak_photonic_tops": 327.68,
+            "step_latency_ms": 0.0198,
+            "chip_area_mm2": 487.04,
+            "p_system_w": 234.369,
+            "p_chip_only_w": 65.139,
+            "total_path_loss_db": 23.38,
+            "p_pump_opt_mw": 103.4,
+            "used_amp": false,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 16.543,
+            "comb_stab": 0.0,
+            "optical_amp": 0.0,
+            "ps_static": 0.002,
+            "ps_dynamic": 0.02,
+            "conv_and_drv": 25.441,
+            "tia": 10.189,
+            "calibration": 0.102,
+            "elec_compute_opt": 26.331,
+            "memory_sram_hbm": 125.17,
+            "cooling_pue": 30.57
+          },
+          "bom": {
+            "pump_lasers": 256,
+            "comb_rings": 0,
+            "weight_rings": 0,
+            "mzis": 2048,
+            "phase_shifters": 4096,
+            "modulators": 2048,
+            "photodiodes": 4096,
+            "dacs": 2048,
+            "adcs": 2048
+          }
+        },
+        "SingleWave_MZI:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "SingleWave_MZI",
+            "source_topo": "central",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 1,
+            "mesh_m": 8,
+            "n_tiles": 16,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.916,
+            "eta_chip_topsw": 7.4152,
+            "pj_per_mac_sys": 1.0438,
+            "j_per_step_sys": 0.005,
+            "sustained_tops": 30.696,
+            "peak_tops": 220.48,
+            "peak_photonic_tops": 20.48,
+            "step_latency_ms": 0.3148,
+            "chip_area_mm2": 177.47,
+            "p_system_w": 16.021,
+            "p_chip_only_w": 4.14,
+            "total_path_loss_db": 36.27,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 0.212,
+            "comb_stab": 0.1,
+            "optical_amp": 1.806,
+            "ps_static": 0.001,
+            "ps_dynamic": 0.002,
+            "conv_and_drv": 1.599,
+            "tia": 0.64,
+            "calibration": 0.051,
+            "elec_compute_opt": 1.655,
+            "memory_sram_hbm": 7.866,
+            "cooling_pue": 2.09
+          },
+          "bom": {
+            "pump_lasers": 1,
+            "comb_rings": 1,
+            "weight_rings": 0,
+            "mzis": 1024,
+            "phase_shifters": 2048,
+            "modulators": 128,
+            "photodiodes": 256,
+            "dacs": 128,
+            "adcs": 128
+          }
+        },
+        "Hybrid:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "Hybrid",
+            "source_topo": "distributed",
+            "n_pump": 8,
+            "n_comb": 8,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 8,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.6749,
+            "eta_chip_topsw": 7.4874,
+            "pj_per_mac_sys": 1.1941,
+            "j_per_step_sys": 0.0058,
+            "sustained_tops": 122.117,
+            "peak_tops": 281.92,
+            "peak_photonic_tops": 81.92,
+            "step_latency_ms": 0.0791,
+            "chip_area_mm2": 120.05,
+            "p_system_w": 72.91,
+            "p_chip_only_w": 16.31,
+            "total_path_loss_db": 25.88,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 1.695,
+            "comb_stab": 0.8,
+            "optical_amp": 14.066,
+            "ps_static": 0.0,
+            "ps_dynamic": 0.019,
+            "conv_and_drv": 6.36,
+            "tia": 2.547,
+            "calibration": 0.037,
+            "elec_compute_opt": 6.583,
+            "memory_sram_hbm": 31.292,
+            "cooling_pue": 9.51
+          },
+          "bom": {
+            "pump_lasers": 8,
+            "comb_rings": 8,
+            "weight_rings": 512,
+            "mzis": 224,
+            "phase_shifters": 960,
+            "modulators": 512,
+            "photodiodes": 1024,
+            "dacs": 512,
+            "adcs": 512
+          }
+        },
+        "MZI:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "MZI",
+            "source_topo": "distributed",
+            "n_pump": 8,
+            "n_comb": 8,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 8,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.5716,
+            "eta_chip_topsw": 7.492,
+            "pj_per_mac_sys": 1.2726,
+            "j_per_step_sys": 0.0061,
+            "sustained_tops": 122.117,
+            "peak_tops": 281.92,
+            "peak_photonic_tops": 81.92,
+            "step_latency_ms": 0.0791,
+            "chip_area_mm2": 123.76,
+            "p_system_w": 77.701,
+            "p_chip_only_w": 16.3,
+            "total_path_loss_db": 27.38,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 1.695,
+            "comb_stab": 0.8,
+            "optical_amp": 18.242,
+            "ps_static": 0.001,
+            "ps_dynamic": 0.02,
+            "conv_and_drv": 6.36,
+            "tia": 2.547,
+            "calibration": 0.026,
+            "elec_compute_opt": 6.583,
+            "memory_sram_hbm": 31.292,
+            "cooling_pue": 10.135
+          },
+          "bom": {
+            "pump_lasers": 8,
+            "comb_rings": 8,
+            "weight_rings": 0,
+            "mzis": 512,
+            "phase_shifters": 1024,
+            "modulators": 512,
+            "photodiodes": 1024,
+            "dacs": 512,
+            "adcs": 512
+          }
+        },
+        "IndepLaser_MZI:6": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "IndepLaser_MZI",
+            "source_topo": "distributed",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 32,
+            "phase_tech": "pockels_tfln",
+            "bits": 6,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.5405,
+            "eta_chip_topsw": 5.962,
+            "pj_per_mac_sys": 1.2983,
+            "j_per_step_sys": 0.0063,
+            "sustained_tops": 488.467,
+            "peak_tops": 527.68,
+            "peak_photonic_tops": 327.68,
+            "step_latency_ms": 0.0198,
+            "chip_area_mm2": 487.04,
+            "p_system_w": 317.085,
+            "p_chip_only_w": 81.93,
+            "total_path_loss_db": 23.38,
+            "p_pump_opt_mw": 447.99,
+            "used_amp": false,
+            "target_snr_db": 41.39,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 71.679,
+            "comb_stab": 0.0,
+            "optical_amp": 0.0,
+            "ps_static": 0.002,
+            "ps_dynamic": 0.02,
+            "conv_and_drv": 40.706,
+            "tia": 10.189,
+            "calibration": 0.102,
+            "elec_compute_opt": 26.331,
+            "memory_sram_hbm": 126.696,
+            "cooling_pue": 41.359
+          },
+          "bom": {
+            "pump_lasers": 256,
+            "comb_rings": 0,
+            "weight_rings": 0,
+            "mzis": 2048,
+            "phase_shifters": 4096,
+            "modulators": 2048,
+            "photodiodes": 4096,
+            "dacs": 2048,
+            "adcs": 2048
+          }
+        },
+        "MRR:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "MRR",
+            "source_topo": "distributed",
+            "n_pump": 8,
+            "n_comb": 8,
+            "n_lambda": 8,
+            "mesh_m": 16,
+            "n_tiles": 8,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 0.6918,
+            "eta_chip_topsw": 8.1872,
+            "pj_per_mac_sys": 2.8911,
+            "j_per_step_sys": 0.014,
+            "sustained_tops": 20.469,
+            "peak_tops": 20.48,
+            "peak_photonic_tops": 20.48,
+            "step_latency_ms": 0.4721,
+            "chip_area_mm2": 94.58,
+            "p_system_w": 29.589,
+            "p_chip_only_w": 2.5,
+            "total_path_loss_db": 26.5,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 1.0,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 1.695,
+            "comb_stab": 0.8,
+            "optical_amp": 15.617,
+            "ps_static": 0.001,
+            "ps_dynamic": 0.002,
+            "conv_and_drv": 1.599,
+            "tia": 0.64,
+            "calibration": 0.051,
+            "elec_compute_opt": 0.08,
+            "memory_sram_hbm": 5.245,
+            "cooling_pue": 3.859
+          },
+          "bom": {
+            "pump_lasers": 8,
+            "comb_rings": 8,
+            "weight_rings": 1024,
+            "mzis": 0,
+            "phase_shifters": 1024,
+            "modulators": 64,
+            "photodiodes": 256,
+            "dacs": 64,
+            "adcs": 128
+          }
+        }
+      },
+      "best_overall": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 32,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 2.0842,
+          "eta_chip_topsw": 7.4989,
+          "pj_per_mac_sys": 0.9596,
+          "j_per_step_sys": 0.0046,
+          "sustained_tops": 488.467,
+          "peak_tops": 527.68,
+          "peak_photonic_tops": 327.68,
+          "step_latency_ms": 0.0198,
+          "chip_area_mm2": 487.04,
+          "p_system_w": 234.369,
+          "p_chip_only_w": 65.139,
+          "total_path_loss_db": 23.38,
+          "p_pump_opt_mw": 103.4,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 16.543,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.002,
+          "ps_dynamic": 0.02,
+          "conv_and_drv": 25.441,
+          "tia": 10.189,
+          "calibration": 0.102,
+          "elec_compute_opt": 26.331,
+          "memory_sram_hbm": 125.17,
+          "cooling_pue": 30.57
+        },
+        "bom": {
+          "pump_lasers": 256,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 2048,
+          "phase_shifters": 4096,
+          "modulators": 2048,
+          "photodiodes": 4096,
+          "dacs": 2048,
+          "adcs": 2048
+        }
+      },
+      "best_comb_ge6": null
+    },
+    "laser_only": {
+      "counts": {
+        "below_min_throughput": 1582,
+        "optical_link_budget_exceeded": 75646,
+        "rin_limited_snr": 24453,
+        "pcm_endurance_exceeded": 459,
+        "area_exceeds_reticle": 52349,
+        "broadband_mzi_dispersion": 3570,
+        "feasible": 841,
+        "invalid_pump_comb_ratio": 120960,
+        "distributed_comb_lt_tiles": 51100
+      },
+      "feasible_by_arch_bits": [
+        {
+          "architecture": "Hybrid",
+          "bits": 4,
+          "count": 144
+        },
+        {
+          "architecture": "IndepLaser_MZI",
+          "bits": 4,
+          "count": 226
+        },
+        {
+          "architecture": "IndepLaser_MZI",
+          "bits": 6,
+          "count": 182
+        },
+        {
+          "architecture": "IndepLaser_MZI",
+          "bits": 8,
+          "count": 82
+        },
+        {
+          "architecture": "MRR",
+          "bits": 4,
+          "count": 119
+        },
+        {
+          "architecture": "MZI",
+          "bits": 4,
+          "count": 83
+        },
+        {
+          "architecture": "SingleWave_MZI",
+          "bits": 4,
+          "count": 5
+        }
+      ],
+      "best_by_arch_bits": {
+        "IndepLaser_MZI:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "IndepLaser_MZI",
+            "source_topo": "distributed",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 8,
+            "mesh_m": 16,
+            "n_tiles": 8,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 2.1361,
+            "eta_chip_topsw": 10.3088,
+            "pj_per_mac_sys": 0.9363,
+            "j_per_step_sys": 0.0045,
+            "sustained_tops": 488.467,
+            "peak_tops": 527.68,
+            "peak_photonic_tops": 327.68,
+            "step_latency_ms": 0.0198,
+            "chip_area_mm2": 399.26,
+            "p_system_w": 228.677,
+            "p_chip_only_w": 47.383,
+            "total_path_loss_db": 31.89,
+            "p_pump_opt_mw": 733.73,
+            "used_amp": false,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 29.349,
+            "comb_stab": 0.0,
+            "optical_amp": 0.0,
+            "ps_static": 0.002,
+            "ps_dynamic": 0.08,
+            "conv_and_drv": 12.72,
+            "tia": 5.095,
+            "calibration": 0.102,
+            "elec_compute_opt": 26.331,
+            "memory_sram_hbm": 125.17,
+            "cooling_pue": 29.827
+          },
+          "bom": {
+            "pump_lasers": 64,
+            "comb_rings": 0,
+            "weight_rings": 0,
+            "mzis": 2048,
+            "phase_shifters": 4096,
+            "modulators": 1024,
+            "photodiodes": 2048,
+            "dacs": 1024,
+            "adcs": 1024
+          }
+        },
+        "SingleWave_MZI:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "SingleWave_MZI",
+            "source_topo": "central",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 1,
+            "mesh_m": 8,
+            "n_tiles": 16,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.9145,
+            "eta_chip_topsw": 7.4152,
+            "pj_per_mac_sys": 1.0447,
+            "j_per_step_sys": 0.005,
+            "sustained_tops": 30.696,
+            "peak_tops": 220.48,
+            "peak_photonic_tops": 20.48,
+            "step_latency_ms": 0.3148,
+            "chip_area_mm2": 177.47,
+            "p_system_w": 16.033,
+            "p_chip_only_w": 4.14,
+            "total_path_loss_db": 36.27,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 0.212,
+            "comb_stab": 0.1,
+            "optical_amp": 1.817,
+            "ps_static": 0.001,
+            "ps_dynamic": 0.002,
+            "conv_and_drv": 1.599,
+            "tia": 0.64,
+            "calibration": 0.051,
+            "elec_compute_opt": 1.655,
+            "memory_sram_hbm": 7.866,
+            "cooling_pue": 2.091
+          },
+          "bom": {
+            "pump_lasers": 1,
+            "comb_rings": 1,
+            "weight_rings": 0,
+            "mzis": 1024,
+            "phase_shifters": 2048,
+            "modulators": 128,
+            "photodiodes": 256,
+            "dacs": 128,
+            "adcs": 128
+          }
+        },
+        "Hybrid:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "Hybrid",
+            "source_topo": "distributed",
+            "n_pump": 8,
+            "n_comb": 8,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 8,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.6279,
+            "eta_chip_topsw": 7.4874,
+            "pj_per_mac_sys": 1.2286,
+            "j_per_step_sys": 0.0059,
+            "sustained_tops": 122.117,
+            "peak_tops": 281.92,
+            "peak_photonic_tops": 81.92,
+            "step_latency_ms": 0.0791,
+            "chip_area_mm2": 120.05,
+            "p_system_w": 75.016,
+            "p_chip_only_w": 16.31,
+            "total_path_loss_db": 25.88,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 1.695,
+            "comb_stab": 0.8,
+            "optical_amp": 15.898,
+            "ps_static": 0.0,
+            "ps_dynamic": 0.019,
+            "conv_and_drv": 6.36,
+            "tia": 2.547,
+            "calibration": 0.037,
+            "elec_compute_opt": 6.583,
+            "memory_sram_hbm": 31.292,
+            "cooling_pue": 9.785
+          },
+          "bom": {
+            "pump_lasers": 8,
+            "comb_rings": 8,
+            "weight_rings": 512,
+            "mzis": 224,
+            "phase_shifters": 960,
+            "modulators": 512,
+            "photodiodes": 1024,
+            "dacs": 512,
+            "adcs": 512
+          }
+        },
+        "IndepLaser_MZI:6": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "IndepLaser_MZI",
+            "source_topo": "distributed",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 32,
+            "phase_tech": "pockels_tfln",
+            "bits": 6,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.5405,
+            "eta_chip_topsw": 5.962,
+            "pj_per_mac_sys": 1.2983,
+            "j_per_step_sys": 0.0063,
+            "sustained_tops": 488.467,
+            "peak_tops": 527.68,
+            "peak_photonic_tops": 327.68,
+            "step_latency_ms": 0.0198,
+            "chip_area_mm2": 487.04,
+            "p_system_w": 317.085,
+            "p_chip_only_w": 81.93,
+            "total_path_loss_db": 23.38,
+            "p_pump_opt_mw": 447.99,
+            "used_amp": false,
+            "target_snr_db": 41.39,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 71.679,
+            "comb_stab": 0.0,
+            "optical_amp": 0.0,
+            "ps_static": 0.002,
+            "ps_dynamic": 0.02,
+            "conv_and_drv": 40.706,
+            "tia": 10.189,
+            "calibration": 0.102,
+            "elec_compute_opt": 26.331,
+            "memory_sram_hbm": 126.696,
+            "cooling_pue": 41.359
+          },
+          "bom": {
+            "pump_lasers": 256,
+            "comb_rings": 0,
+            "weight_rings": 0,
+            "mzis": 2048,
+            "phase_shifters": 4096,
+            "modulators": 2048,
+            "photodiodes": 4096,
+            "dacs": 2048,
+            "adcs": 2048
+          }
+        },
+        "MZI:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "MZI",
+            "source_topo": "distributed",
+            "n_pump": 8,
+            "n_comb": 8,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 8,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.5329,
+            "eta_chip_topsw": 7.492,
+            "pj_per_mac_sys": 1.3047,
+            "j_per_step_sys": 0.0063,
+            "sustained_tops": 122.117,
+            "peak_tops": 281.92,
+            "peak_photonic_tops": 81.92,
+            "step_latency_ms": 0.0791,
+            "chip_area_mm2": 123.76,
+            "p_system_w": 79.666,
+            "p_chip_only_w": 16.3,
+            "total_path_loss_db": 27.38,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 1.695,
+            "comb_stab": 0.8,
+            "optical_amp": 19.951,
+            "ps_static": 0.001,
+            "ps_dynamic": 0.02,
+            "conv_and_drv": 6.36,
+            "tia": 2.547,
+            "calibration": 0.026,
+            "elec_compute_opt": 6.583,
+            "memory_sram_hbm": 31.292,
+            "cooling_pue": 10.391
+          },
+          "bom": {
+            "pump_lasers": 8,
+            "comb_rings": 8,
+            "weight_rings": 0,
+            "mzis": 512,
+            "phase_shifters": 1024,
+            "modulators": 512,
+            "photodiodes": 1024,
+            "dacs": 512,
+            "adcs": 512
+          }
+        },
+        "MRR:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "MRR",
+            "source_topo": "distributed",
+            "n_pump": 4,
+            "n_comb": 4,
+            "n_lambda": 8,
+            "mesh_m": 16,
+            "n_tiles": 4,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 0.6471,
+            "eta_chip_topsw": 8.1817,
+            "pj_per_mac_sys": 3.0909,
+            "j_per_step_sys": 0.0149,
+            "sustained_tops": 10.235,
+            "peak_tops": 10.24,
+            "peak_photonic_tops": 10.24,
+            "step_latency_ms": 0.9442,
+            "chip_area_mm2": 47.29,
+            "p_system_w": 15.817,
+            "p_chip_only_w": 1.251,
+            "total_path_loss_db": 26.5,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 1.0,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 0.848,
+            "comb_stab": 0.4,
+            "optical_amp": 8.697,
+            "ps_static": 0.0,
+            "ps_dynamic": 0.002,
+            "conv_and_drv": 0.8,
+            "tia": 0.32,
+            "calibration": 0.026,
+            "elec_compute_opt": 0.04,
+            "memory_sram_hbm": 2.623,
+            "cooling_pue": 2.063
+          },
+          "bom": {
+            "pump_lasers": 4,
+            "comb_rings": 4,
+            "weight_rings": 512,
+            "mzis": 0,
+            "phase_shifters": 512,
+            "modulators": 32,
+            "photodiodes": 128,
+            "dacs": 32,
+            "adcs": 64
+          }
+        },
+        "IndepLaser_MZI:8": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "IndepLaser_MZI",
+            "source_topo": "distributed",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 16,
+            "phase_tech": "pockels_tfln",
+            "bits": 8,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 0.6359,
+            "eta_chip_topsw": 3.3796,
+            "pj_per_mac_sys": 3.1453,
+            "j_per_step_sys": 0.0152,
+            "sustained_tops": 244.234,
+            "peak_tops": 363.84,
+            "peak_photonic_tops": 163.84,
+            "step_latency_ms": 0.0396,
+            "chip_area_mm2": 243.52,
+            "p_system_w": 384.088,
+            "p_chip_only_w": 72.267,
+            "total_path_loss_db": 23.38,
+            "p_pump_opt_mw": 2508.3,
+            "used_amp": false,
+            "target_snr_db": 53.43,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 200.664,
+            "comb_stab": 0.0,
+            "optical_amp": 0.0,
+            "ps_static": 0.001,
+            "ps_dynamic": 0.02,
+            "conv_and_drv": 50.882,
+            "tia": 5.095,
+            "calibration": 0.051,
+            "elec_compute_opt": 13.166,
+            "memory_sram_hbm": 64.111,
+            "cooling_pue": 50.098
+          },
+          "bom": {
+            "pump_lasers": 128,
+            "comb_rings": 0,
+            "weight_rings": 0,
+            "mzis": 1024,
+            "phase_shifters": 2048,
+            "modulators": 1024,
+            "photodiodes": 2048,
+            "dacs": 1024,
+            "adcs": 1024
+          }
+        }
+      },
+      "best_overall": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 16,
+          "n_tiles": 8,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 2.1361,
+          "eta_chip_topsw": 10.3088,
+          "pj_per_mac_sys": 0.9363,
+          "j_per_step_sys": 0.0045,
+          "sustained_tops": 488.467,
+          "peak_tops": 527.68,
+          "peak_photonic_tops": 327.68,
+          "step_latency_ms": 0.0198,
+          "chip_area_mm2": 399.26,
+          "p_system_w": 228.677,
+          "p_chip_only_w": 47.383,
+          "total_path_loss_db": 31.89,
+          "p_pump_opt_mw": 733.73,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 29.349,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.002,
+          "ps_dynamic": 0.08,
+          "conv_and_drv": 12.72,
+          "tia": 5.095,
+          "calibration": 0.102,
+          "elec_compute_opt": 26.331,
+          "memory_sram_hbm": 125.17,
+          "cooling_pue": 29.827
+        },
+        "bom": {
+          "pump_lasers": 64,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 2048,
+          "phase_shifters": 4096,
+          "modulators": 1024,
+          "photodiodes": 2048,
+          "dacs": 1024,
+          "adcs": 1024
+        }
+      },
+      "best_comb_ge6": null
+    },
+    "combined": {
+      "counts": {
+        "below_min_throughput": 1899,
+        "optical_link_budget_exceeded": 75164,
+        "rin_limited_snr": 24453,
+        "pcm_endurance_exceeded": 579,
+        "area_exceeds_reticle": 52349,
+        "broadband_mzi_dispersion": 3570,
+        "feasible": 886,
+        "invalid_pump_comb_ratio": 120960,
+        "distributed_comb_lt_tiles": 51100
+      },
+      "feasible_by_arch_bits": [
+        {
+          "architecture": "Hybrid",
+          "bits": 4,
+          "count": 144
+        },
+        {
+          "architecture": "IndepLaser_MZI",
+          "bits": 4,
+          "count": 226
+        },
+        {
+          "architecture": "IndepLaser_MZI",
+          "bits": 6,
+          "count": 182
+        },
+        {
+          "architecture": "IndepLaser_MZI",
+          "bits": 8,
+          "count": 82
+        },
+        {
+          "architecture": "MRR",
+          "bits": 4,
+          "count": 164
+        },
+        {
+          "architecture": "MZI",
+          "bits": 4,
+          "count": 83
+        },
+        {
+          "architecture": "SingleWave_MZI",
+          "bits": 4,
+          "count": 5
+        }
+      ],
+      "best_by_arch_bits": {
+        "IndepLaser_MZI:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "IndepLaser_MZI",
+            "source_topo": "distributed",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 8,
+            "mesh_m": 16,
+            "n_tiles": 8,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 2.1361,
+            "eta_chip_topsw": 10.3088,
+            "pj_per_mac_sys": 0.9363,
+            "j_per_step_sys": 0.0045,
+            "sustained_tops": 488.467,
+            "peak_tops": 527.68,
+            "peak_photonic_tops": 327.68,
+            "step_latency_ms": 0.0198,
+            "chip_area_mm2": 399.26,
+            "p_system_w": 228.677,
+            "p_chip_only_w": 47.383,
+            "total_path_loss_db": 31.89,
+            "p_pump_opt_mw": 733.73,
+            "used_amp": false,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 29.349,
+            "comb_stab": 0.0,
+            "optical_amp": 0.0,
+            "ps_static": 0.002,
+            "ps_dynamic": 0.08,
+            "conv_and_drv": 12.72,
+            "tia": 5.095,
+            "calibration": 0.102,
+            "elec_compute_opt": 26.331,
+            "memory_sram_hbm": 125.17,
+            "cooling_pue": 29.827
+          },
+          "bom": {
+            "pump_lasers": 64,
+            "comb_rings": 0,
+            "weight_rings": 0,
+            "mzis": 2048,
+            "phase_shifters": 4096,
+            "modulators": 1024,
+            "photodiodes": 2048,
+            "dacs": 1024,
+            "adcs": 1024
+          }
+        },
+        "SingleWave_MZI:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "SingleWave_MZI",
+            "source_topo": "central",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 1,
+            "mesh_m": 8,
+            "n_tiles": 16,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.916,
+            "eta_chip_topsw": 7.4152,
+            "pj_per_mac_sys": 1.0438,
+            "j_per_step_sys": 0.005,
+            "sustained_tops": 30.696,
+            "peak_tops": 220.48,
+            "peak_photonic_tops": 20.48,
+            "step_latency_ms": 0.3148,
+            "chip_area_mm2": 177.47,
+            "p_system_w": 16.021,
+            "p_chip_only_w": 4.14,
+            "total_path_loss_db": 36.27,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 0.212,
+            "comb_stab": 0.1,
+            "optical_amp": 1.806,
+            "ps_static": 0.001,
+            "ps_dynamic": 0.002,
+            "conv_and_drv": 1.599,
+            "tia": 0.64,
+            "calibration": 0.051,
+            "elec_compute_opt": 1.655,
+            "memory_sram_hbm": 7.866,
+            "cooling_pue": 2.09
+          },
+          "bom": {
+            "pump_lasers": 1,
+            "comb_rings": 1,
+            "weight_rings": 0,
+            "mzis": 1024,
+            "phase_shifters": 2048,
+            "modulators": 128,
+            "photodiodes": 256,
+            "dacs": 128,
+            "adcs": 128
+          }
+        },
+        "Hybrid:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "Hybrid",
+            "source_topo": "distributed",
+            "n_pump": 8,
+            "n_comb": 8,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 8,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.6749,
+            "eta_chip_topsw": 7.4874,
+            "pj_per_mac_sys": 1.1941,
+            "j_per_step_sys": 0.0058,
+            "sustained_tops": 122.117,
+            "peak_tops": 281.92,
+            "peak_photonic_tops": 81.92,
+            "step_latency_ms": 0.0791,
+            "chip_area_mm2": 120.05,
+            "p_system_w": 72.91,
+            "p_chip_only_w": 16.31,
+            "total_path_loss_db": 25.88,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 1.695,
+            "comb_stab": 0.8,
+            "optical_amp": 14.066,
+            "ps_static": 0.0,
+            "ps_dynamic": 0.019,
+            "conv_and_drv": 6.36,
+            "tia": 2.547,
+            "calibration": 0.037,
+            "elec_compute_opt": 6.583,
+            "memory_sram_hbm": 31.292,
+            "cooling_pue": 9.51
+          },
+          "bom": {
+            "pump_lasers": 8,
+            "comb_rings": 8,
+            "weight_rings": 512,
+            "mzis": 224,
+            "phase_shifters": 960,
+            "modulators": 512,
+            "photodiodes": 1024,
+            "dacs": 512,
+            "adcs": 512
+          }
+        },
+        "MZI:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "MZI",
+            "source_topo": "distributed",
+            "n_pump": 8,
+            "n_comb": 8,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 8,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.5716,
+            "eta_chip_topsw": 7.492,
+            "pj_per_mac_sys": 1.2726,
+            "j_per_step_sys": 0.0061,
+            "sustained_tops": 122.117,
+            "peak_tops": 281.92,
+            "peak_photonic_tops": 81.92,
+            "step_latency_ms": 0.0791,
+            "chip_area_mm2": 123.76,
+            "p_system_w": 77.701,
+            "p_chip_only_w": 16.3,
+            "total_path_loss_db": 27.38,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 1.695,
+            "comb_stab": 0.8,
+            "optical_amp": 18.242,
+            "ps_static": 0.001,
+            "ps_dynamic": 0.02,
+            "conv_and_drv": 6.36,
+            "tia": 2.547,
+            "calibration": 0.026,
+            "elec_compute_opt": 6.583,
+            "memory_sram_hbm": 31.292,
+            "cooling_pue": 10.135
+          },
+          "bom": {
+            "pump_lasers": 8,
+            "comb_rings": 8,
+            "weight_rings": 0,
+            "mzis": 512,
+            "phase_shifters": 1024,
+            "modulators": 512,
+            "photodiodes": 1024,
+            "dacs": 512,
+            "adcs": 512
+          }
+        },
+        "IndepLaser_MZI:6": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "IndepLaser_MZI",
+            "source_topo": "distributed",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 32,
+            "phase_tech": "pockels_tfln",
+            "bits": 6,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 1.5405,
+            "eta_chip_topsw": 5.962,
+            "pj_per_mac_sys": 1.2983,
+            "j_per_step_sys": 0.0063,
+            "sustained_tops": 488.467,
+            "peak_tops": 527.68,
+            "peak_photonic_tops": 327.68,
+            "step_latency_ms": 0.0198,
+            "chip_area_mm2": 487.04,
+            "p_system_w": 317.085,
+            "p_chip_only_w": 81.93,
+            "total_path_loss_db": 23.38,
+            "p_pump_opt_mw": 447.99,
+            "used_amp": false,
+            "target_snr_db": 41.39,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 71.679,
+            "comb_stab": 0.0,
+            "optical_amp": 0.0,
+            "ps_static": 0.002,
+            "ps_dynamic": 0.02,
+            "conv_and_drv": 40.706,
+            "tia": 10.189,
+            "calibration": 0.102,
+            "elec_compute_opt": 26.331,
+            "memory_sram_hbm": 126.696,
+            "cooling_pue": 41.359
+          },
+          "bom": {
+            "pump_lasers": 256,
+            "comb_rings": 0,
+            "weight_rings": 0,
+            "mzis": 2048,
+            "phase_shifters": 4096,
+            "modulators": 2048,
+            "photodiodes": 4096,
+            "dacs": 2048,
+            "adcs": 2048
+          }
+        },
+        "MRR:4": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "MRR",
+            "source_topo": "distributed",
+            "n_pump": 8,
+            "n_comb": 8,
+            "n_lambda": 8,
+            "mesh_m": 16,
+            "n_tiles": 8,
+            "phase_tech": "pockels_tfln",
+            "bits": 4,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 0.6918,
+            "eta_chip_topsw": 8.1872,
+            "pj_per_mac_sys": 2.8911,
+            "j_per_step_sys": 0.014,
+            "sustained_tops": 20.469,
+            "peak_tops": 20.48,
+            "peak_photonic_tops": 20.48,
+            "step_latency_ms": 0.4721,
+            "chip_area_mm2": 94.58,
+            "p_system_w": 29.589,
+            "p_chip_only_w": 2.5,
+            "total_path_loss_db": 26.5,
+            "p_pump_opt_mw": 42.38,
+            "used_amp": true,
+            "target_snr_db": 29.35,
+            "photonic_mac_frac": 1.0,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 1.695,
+            "comb_stab": 0.8,
+            "optical_amp": 15.617,
+            "ps_static": 0.001,
+            "ps_dynamic": 0.002,
+            "conv_and_drv": 1.599,
+            "tia": 0.64,
+            "calibration": 0.051,
+            "elec_compute_opt": 0.08,
+            "memory_sram_hbm": 5.245,
+            "cooling_pue": 3.859
+          },
+          "bom": {
+            "pump_lasers": 8,
+            "comb_rings": 8,
+            "weight_rings": 1024,
+            "mzis": 0,
+            "phase_shifters": 1024,
+            "modulators": 64,
+            "photodiodes": 256,
+            "dacs": 64,
+            "adcs": 128
+          }
+        },
+        "IndepLaser_MZI:8": {
+          "feasible": true,
+          "reject_reason": null,
+          "config": {
+            "arch_type": "IndepLaser_MZI",
+            "source_topo": "distributed",
+            "n_pump": 1,
+            "n_comb": 1,
+            "n_lambda": 8,
+            "mesh_m": 8,
+            "n_tiles": 16,
+            "phase_tech": "pockels_tfln",
+            "bits": 8,
+            "cadence_steps": 1
+          },
+          "metrics": {
+            "eta_sys_topsw": 0.6359,
+            "eta_chip_topsw": 3.3796,
+            "pj_per_mac_sys": 3.1453,
+            "j_per_step_sys": 0.0152,
+            "sustained_tops": 244.234,
+            "peak_tops": 363.84,
+            "peak_photonic_tops": 163.84,
+            "step_latency_ms": 0.0396,
+            "chip_area_mm2": 243.52,
+            "p_system_w": 384.088,
+            "p_chip_only_w": 72.267,
+            "total_path_loss_db": 23.38,
+            "p_pump_opt_mw": 2508.3,
+            "used_amp": false,
+            "target_snr_db": 53.43,
+            "photonic_mac_frac": 0.667,
+            "weights_resident": false
+          },
+          "power_breakdown_w": {
+            "laser_wpe": 200.664,
+            "comb_stab": 0.0,
+            "optical_amp": 0.0,
+            "ps_static": 0.001,
+            "ps_dynamic": 0.02,
+            "conv_and_drv": 50.882,
+            "tia": 5.095,
+            "calibration": 0.051,
+            "elec_compute_opt": 13.166,
+            "memory_sram_hbm": 64.111,
+            "cooling_pue": 50.098
+          },
+          "bom": {
+            "pump_lasers": 128,
+            "comb_rings": 0,
+            "weight_rings": 0,
+            "mzis": 1024,
+            "phase_shifters": 2048,
+            "modulators": 1024,
+            "photodiodes": 2048,
+            "dacs": 1024,
+            "adcs": 1024
+          }
+        }
+      },
+      "best_overall": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 16,
+          "n_tiles": 8,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 2.1361,
+          "eta_chip_topsw": 10.3088,
+          "pj_per_mac_sys": 0.9363,
+          "j_per_step_sys": 0.0045,
+          "sustained_tops": 488.467,
+          "peak_tops": 527.68,
+          "peak_photonic_tops": 327.68,
+          "step_latency_ms": 0.0198,
+          "chip_area_mm2": 399.26,
+          "p_system_w": 228.677,
+          "p_chip_only_w": 47.383,
+          "total_path_loss_db": 31.89,
+          "p_pump_opt_mw": 733.73,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 29.349,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.002,
+          "ps_dynamic": 0.08,
+          "conv_and_drv": 12.72,
+          "tia": 5.095,
+          "calibration": 0.102,
+          "elec_compute_opt": 26.331,
+          "memory_sram_hbm": 125.17,
+          "cooling_pue": 29.827
+        },
+        "bom": {
+          "pump_lasers": 64,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 2048,
+          "phase_shifters": 4096,
+          "modulators": 1024,
+          "photodiodes": 2048,
+          "dacs": 1024,
+          "adcs": 1024
+        }
+      },
+      "best_comb_ge6": null
+    }
+  },
+  "transitions": {
+    "receiver_only": [
+      {
+        "baseline": "area_exceeds_reticle",
+        "variant": "area_exceeds_reticle",
+        "count": 52349
+      },
+      {
+        "baseline": "below_min_throughput",
+        "variant": "below_min_throughput",
+        "count": 1341
+      },
+      {
+        "baseline": "broadband_mzi_dispersion",
+        "variant": "broadband_mzi_dispersion",
+        "count": 3570
+      },
+      {
+        "baseline": "distributed_comb_lt_tiles",
+        "variant": "distributed_comb_lt_tiles",
+        "count": 51100
+      },
+      {
+        "baseline": "feasible",
+        "variant": "feasible",
+        "count": 472
+      },
+      {
+        "baseline": "invalid_pump_comb_ratio",
+        "variant": "invalid_pump_comb_ratio",
+        "count": 120960
+      },
+      {
+        "baseline": "optical_link_budget_exceeded",
+        "variant": "below_min_throughput",
+        "count": 317
+      },
+      {
+        "baseline": "optical_link_budget_exceeded",
+        "variant": "feasible",
+        "count": 45
+      },
+      {
+        "baseline": "optical_link_budget_exceeded",
+        "variant": "optical_link_budget_exceeded",
+        "count": 75909
+      },
+      {
+        "baseline": "optical_link_budget_exceeded",
+        "variant": "pcm_endurance_exceeded",
+        "count": 120
+      },
+      {
+        "baseline": "pcm_endurance_exceeded",
+        "variant": "pcm_endurance_exceeded",
+        "count": 324
+      },
+      {
+        "baseline": "rin_limited_snr",
+        "variant": "rin_limited_snr",
+        "count": 24453
+      }
+    ],
+    "laser_only": [
+      {
+        "baseline": "area_exceeds_reticle",
+        "variant": "area_exceeds_reticle",
+        "count": 52349
+      },
+      {
+        "baseline": "below_min_throughput",
+        "variant": "below_min_throughput",
+        "count": 1341
+      },
+      {
+        "baseline": "broadband_mzi_dispersion",
+        "variant": "broadband_mzi_dispersion",
+        "count": 3570
+      },
+      {
+        "baseline": "distributed_comb_lt_tiles",
+        "variant": "distributed_comb_lt_tiles",
+        "count": 51100
+      },
+      {
+        "baseline": "feasible",
+        "variant": "feasible",
+        "count": 472
+      },
+      {
+        "baseline": "invalid_pump_comb_ratio",
+        "variant": "invalid_pump_comb_ratio",
+        "count": 120960
+      },
+      {
+        "baseline": "optical_link_budget_exceeded",
+        "variant": "below_min_throughput",
+        "count": 241
+      },
+      {
+        "baseline": "optical_link_budget_exceeded",
+        "variant": "feasible",
+        "count": 369
+      },
+      {
+        "baseline": "optical_link_budget_exceeded",
+        "variant": "optical_link_budget_exceeded",
+        "count": 75646
+      },
+      {
+        "baseline": "optical_link_budget_exceeded",
+        "variant": "pcm_endurance_exceeded",
+        "count": 135
+      },
+      {
+        "baseline": "pcm_endurance_exceeded",
+        "variant": "pcm_endurance_exceeded",
+        "count": 324
+      },
+      {
+        "baseline": "rin_limited_snr",
+        "variant": "rin_limited_snr",
+        "count": 24453
+      }
+    ],
+    "combined": [
+      {
+        "baseline": "area_exceeds_reticle",
+        "variant": "area_exceeds_reticle",
+        "count": 52349
+      },
+      {
+        "baseline": "below_min_throughput",
+        "variant": "below_min_throughput",
+        "count": 1341
+      },
+      {
+        "baseline": "broadband_mzi_dispersion",
+        "variant": "broadband_mzi_dispersion",
+        "count": 3570
+      },
+      {
+        "baseline": "distributed_comb_lt_tiles",
+        "variant": "distributed_comb_lt_tiles",
+        "count": 51100
+      },
+      {
+        "baseline": "feasible",
+        "variant": "feasible",
+        "count": 472
+      },
+      {
+        "baseline": "invalid_pump_comb_ratio",
+        "variant": "invalid_pump_comb_ratio",
+        "count": 120960
+      },
+      {
+        "baseline": "optical_link_budget_exceeded",
+        "variant": "below_min_throughput",
+        "count": 558
+      },
+      {
+        "baseline": "optical_link_budget_exceeded",
+        "variant": "feasible",
+        "count": 414
+      },
+      {
+        "baseline": "optical_link_budget_exceeded",
+        "variant": "optical_link_budget_exceeded",
+        "count": 75164
+      },
+      {
+        "baseline": "optical_link_budget_exceeded",
+        "variant": "pcm_endurance_exceeded",
+        "count": 255
+      },
+      {
+        "baseline": "pcm_endurance_exceeded",
+        "variant": "pcm_endurance_exceeded",
+        "count": 324
+      },
+      {
+        "baseline": "rin_limited_snr",
+        "variant": "rin_limited_snr",
+        "count": 24453
+      }
+    ]
+  },
+  "limitations": [
+    "Only receiver bandwidth ratio, arbitrary RIN margin and independent laser limit changed.",
+    "Optical bandwidth still assumed equal to channel spacing; receiver model not calibrated.",
+    "Laser limit assumes identical equal-power lasers; bank power and energy accounting unchanged.",
+    "Legacy fixed maximum gain, saturation, source topology, LO omission and scheduling retained.",
+    "No amplifier gain optimization or direct insertion of SYS003 link passes; no hardware or convergence claim.",
+    "TOPS/W uses rounded legacy metrics and assumed system boundaries."
+  ]
+}

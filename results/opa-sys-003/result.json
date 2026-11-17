@@ -1,0 +1,344 @@
+{
+  "experiment": "OPA-SYS-003",
+  "checks": {
+    "legacy_compatibility": true,
+    "independent_snr_roots": true,
+    "row_count": true,
+    "link_count": true,
+    "zero_gain_zero_ase": true,
+    "source_unit_not_above_bank": true,
+    "amp_nonnegative": true,
+    "original_immutable": true,
+    "coherent_root": true
+  },
+  "failures": [],
+  "receiver_cases": 432,
+  "link_cases": 288,
+  "coherent_cases": 12,
+  "nominal_receiver": [
+    {
+      "bits": 4,
+      "rate_ghz": 10.0,
+      "cmrr_db": 20.0,
+      "optical_bandwidth_ghz": 50.0,
+      "ase_uw": 0.0,
+      "target_snr_db": 29.349999999999998,
+      "required_rx_mw": 0.042007522734559266,
+      "legacy_rx_mw": 0.04200752273455926,
+      "rin_ceiling_db": 66.54901959985743,
+      "tia_a2": 1.5749999999999999e-12,
+      "shot_a2": 8.480237393569365e-14,
+      "rin_a2": 3.1640052911600245e-16,
+      "signal_ase_a2": 0.0,
+      "ase_ase_a2": 0.0
+    },
+    {
+      "bits": 4,
+      "rate_ghz": 10.0,
+      "cmrr_db": 20.0,
+      "optical_bandwidth_ghz": 50.0,
+      "ase_uw": 1.0,
+      "target_snr_db": 29.349999999999998,
+      "required_rx_mw": 0.4880768248836636,
+      "legacy_rx_mw": 0.69373760438649,
+      "rin_ceiling_db": 66.54901959985743,
+      "tia_a2": 1.5749999999999999e-12,
+      "shot_a2": 9.873202009349897e-13,
+      "rin_a2": 4.2712936730324305e-14,
+      "signal_ase_a2": 2.2139164776722984e-10,
+      "ase_ase_a2": 1.1339999999999999e-13
+    },
+    {
+      "bits": 4,
+      "rate_ghz": 10.0,
+      "cmrr_db": 20.0,
+      "optical_bandwidth_ghz": 50.0,
+      "ase_uw": 10.0,
+      "target_snr_db": 29.349999999999998,
+      "required_rx_mw": 4.827479089257034,
+      "legacy_rx_mw": 6.894153500775206,
+      "rin_ceiling_db": 66.54901959985743,
+      "tia_a2": 1.5749999999999999e-12,
+      "shot_a2": 9.765624914981739e-12,
+      "rin_a2": 4.178533241080645e-12,
+      "signal_ase_a2": 2.1897445148869912e-08,
+      "ase_ase_a2": 1.1340000000000001e-11
+    },
+    {
+      "bits": 6,
+      "rate_ghz": 10.0,
+      "cmrr_db": 20.0,
+      "optical_bandwidth_ghz": 50.0,
+      "ase_uw": 0.0,
+      "target_snr_db": 41.38999999999999,
+      "required_rx_mw": 0.18200911172102707,
+      "legacy_rx_mw": 0.18200911172102707,
+      "rin_ceiling_db": 66.54901959985743,
+      "tia_a2": 1.5749999999999999e-12,
+      "shot_a2": 3.6742953992790163e-13,
+      "rin_a2": 5.939765768687595e-15,
+      "signal_ase_a2": 0.0,
+      "ase_ase_a2": 0.0
+    },
+    {
+      "bits": 6,
+      "rate_ghz": 10.0,
+      "cmrr_db": 20.0,
+      "optical_bandwidth_ghz": 50.0,
+      "ase_uw": 1.0,
+      "target_snr_db": 41.38999999999999,
+      "required_rx_mw": 7.774093926855198,
+      "legacy_rx_mw": 11.088470255354746,
+      "rin_ceiling_db": 66.54901959985743,
+      "tia_a2": 1.5749999999999999e-12,
+      "shot_a2": 1.5695913009121005e-11,
+      "rin_a2": 1.0836340072572187e-11,
+      "signal_ase_a2": 3.526329005221518e-09,
+      "ase_ase_a2": 1.1339999999999999e-13
+    },
+    {
+      "bits": 6,
+      "rate_ghz": 10.0,
+      "cmrr_db": 20.0,
+      "optical_bandwidth_ghz": 50.0,
+      "ase_uw": 10.0,
+      "target_snr_db": 41.38999999999999,
+      "required_rx_mw": 77.39684643114487,
+      "legacy_rx_mw": 110.55084166323908,
+      "rin_ceiling_db": 66.54901959985743,
+      "tia_a2": 1.5749999999999999e-12,
+      "shot_a2": 1.5626449523614427e-10,
+      "rin_a2": 1.0740625893280471e-09,
+      "signal_ase_a2": 3.510720954116731e-07,
+      "ase_ase_a2": 1.1340000000000001e-11
+    },
+    {
+      "bits": 8,
+      "rate_ghz": 10.0,
+      "cmrr_db": 20.0,
+      "optical_bandwidth_ghz": 50.0,
+      "ase_uw": 0.0,
+      "target_snr_db": 53.42999999999999,
+      "required_rx_mw": 1.0190587688557793,
+      "legacy_rx_mw": 1.019058768855779,
+      "rin_ceiling_db": 66.54901959985743,
+      "tia_a2": 1.5749999999999999e-12,
+      "shot_a2": 2.057217306648256e-12,
+      "rin_a2": 1.8620079017449732e-13,
+      "signal_ase_a2": 0.0,
+      "ase_ase_a2": 0.0
+    },
+    {
+      "bits": 8,
+      "rate_ghz": 10.0,
+      "cmrr_db": 20.0,
+      "optical_bandwidth_ghz": 50.0,
+      "ase_uw": 1.0,
+      "target_snr_db": 53.42999999999999,
+      "required_rx_mw": 130.2688524321921,
+      "legacy_rx_mw": 185.84837508554685,
+      "rin_ceiling_db": 66.54901959985743,
+      "tia_a2": 1.5749999999999999e-12,
+      "shot_a2": 2.629812952386726e-10,
+      "rin_a2": 3.042735725086772e-09,
+      "signal_ase_a2": 5.908995146324233e-08,
+      "ase_ase_a2": 1.1339999999999999e-13
+    },
+    {
+      "bits": 8,
+      "rate_ghz": 10.0,
+      "cmrr_db": 20.0,
+      "optical_bandwidth_ghz": 50.0,
+      "ase_uw": 10.0,
+      "target_snr_db": 53.42999999999999,
+      "required_rx_mw": 1297.459698397052,
+      "legacy_rx_mw": 1853.265167416453,
+      "rin_ceiling_db": 66.54901959985743,
+      "tia_a2": 1.5749999999999999e-12,
+      "shot_a2": 2.6192572989594278e-09,
+      "rin_a2": 3.0183584393158194e-07,
+      "signal_ase_a2": 5.885277191929029e-06,
+      "ase_ase_a2": 1.1340000000000001e-11
+    },
+    {
+      "bits": 12,
+      "rate_ghz": 10.0,
+      "cmrr_db": 20.0,
+      "optical_bandwidth_ghz": 50.0,
+      "ase_uw": 0.0,
+      "target_snr_db": 77.51,
+      "required_rx_mw": null,
+      "legacy_rx_mw": null,
+      "rin_ceiling_db": 66.54901959985743,
+      "tia_a2": null,
+      "shot_a2": null,
+      "rin_a2": null,
+      "signal_ase_a2": null,
+      "ase_ase_a2": null
+    },
+    {
+      "bits": 12,
+      "rate_ghz": 10.0,
+      "cmrr_db": 20.0,
+      "optical_bandwidth_ghz": 50.0,
+      "ase_uw": 1.0,
+      "target_snr_db": 77.51,
+      "required_rx_mw": null,
+      "legacy_rx_mw": null,
+      "rin_ceiling_db": 66.54901959985743,
+      "tia_a2": null,
+      "shot_a2": null,
+      "rin_a2": null,
+      "signal_ase_a2": null,
+      "ase_ase_a2": null
+    },
+    {
+      "bits": 12,
+      "rate_ghz": 10.0,
+      "cmrr_db": 20.0,
+      "optical_bandwidth_ghz": 50.0,
+      "ase_uw": 10.0,
+      "target_snr_db": 77.51,
+      "required_rx_mw": null,
+      "legacy_rx_mw": null,
+      "rin_ceiling_db": 66.54901959985743,
+      "tia_a2": null,
+      "shot_a2": null,
+      "rin_a2": null,
+      "signal_ase_a2": null,
+      "ase_ase_a2": null
+    }
+  ],
+  "ideal_coherent": [
+    {
+      "bits": 4,
+      "lo_mw": 0.1,
+      "signal_mw": 0.004747311891777619,
+      "lo_electric_lower_bound_w": 0.0005,
+      "ideal_only": true
+    },
+    {
+      "bits": 4,
+      "lo_mw": 1.0,
+      "signal_mw": 0.0009555094706056036,
+      "lo_electric_lower_bound_w": 0.005,
+      "ideal_only": true
+    },
+    {
+      "bits": 4,
+      "lo_mw": 10.0,
+      "signal_mw": 0.0005783431387810755,
+      "lo_electric_lower_bound_w": 0.049999999999999996,
+      "ideal_only": true
+    },
+    {
+      "bits": 6,
+      "lo_mw": 0.1,
+      "signal_mw": 0.0826180677027703,
+      "lo_electric_lower_bound_w": 0.0005,
+      "ideal_only": true
+    },
+    {
+      "bits": 6,
+      "lo_mw": 1.0,
+      "signal_mw": 0.015407944230421387,
+      "lo_electric_lower_bound_w": 0.005,
+      "ideal_only": true
+    },
+    {
+      "bits": 6,
+      "lo_mw": 10.0,
+      "signal_mw": 0.009258382417176228,
+      "lo_electric_lower_bound_w": 0.049999999999999996,
+      "ideal_only": true
+    },
+    {
+      "bits": 8,
+      "lo_mw": 0.1,
+      "signal_mw": null,
+      "lo_electric_lower_bound_w": 0.0005,
+      "ideal_only": true
+    },
+    {
+      "bits": 8,
+      "lo_mw": 1.0,
+      "signal_mw": 0.28321792411152785,
+      "lo_electric_lower_bound_w": 0.005,
+      "ideal_only": true
+    },
+    {
+      "bits": 8,
+      "lo_mw": 10.0,
+      "signal_mw": 0.15002533051870556,
+      "lo_electric_lower_bound_w": 0.049999999999999996,
+      "ideal_only": true
+    },
+    {
+      "bits": 12,
+      "lo_mw": 0.1,
+      "signal_mw": null,
+      "lo_electric_lower_bound_w": 0.0005,
+      "ideal_only": true
+    },
+    {
+      "bits": 12,
+      "lo_mw": 1.0,
+      "signal_mw": null,
+      "lo_electric_lower_bound_w": 0.005,
+      "ideal_only": true
+    },
+    {
+      "bits": 12,
+      "lo_mw": 10.0,
+      "signal_mw": null,
+      "lo_electric_lower_bound_w": 0.049999999999999996,
+      "ideal_only": true
+    }
+  ],
+  "link_summary": [
+    {
+      "architecture": "comb",
+      "bits": 4,
+      "feasible": 37,
+      "tested": 64
+    },
+    {
+      "architecture": "comb",
+      "bits": 6,
+      "feasible": 6,
+      "tested": 64
+    },
+    {
+      "architecture": "comb",
+      "bits": 8,
+      "feasible": 0,
+      "tested": 64
+    },
+    {
+      "architecture": "independent",
+      "bits": 4,
+      "feasible": 26,
+      "tested": 32
+    },
+    {
+      "architecture": "independent",
+      "bits": 6,
+      "feasible": 12,
+      "tested": 32
+    },
+    {
+      "architecture": "independent",
+      "bits": 8,
+      "feasible": 6,
+      "tested": 32
+    }
+  ],
+  "limitations": [
+    "Rectangular bandwidth and legacy current convention are conditional assumptions, not a calibrated detector model.",
+    "ASE uses retained approximate noise figure formula, explicit in-band power only.",
+    "Ideal coherent control excludes RIN, imbalance, ASE, saturation, distribution and phase tracking; LO energy lower bound only.",
+    "Fixed downstream loss scenarios are not full configurations; no throughput, architecture ranking or convergence inference.",
+    "Comb threshold excess output and amplifier idle/total spectrum power unknown; amplifier lower bound is not total energy.",
+    "No corrected architecture model deployed; this is a diagnostic audit."
+  ]
+}

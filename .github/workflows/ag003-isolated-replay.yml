@@ -1,0 +1,66 @@
+name: AG003 isolated original replay
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_replay:
+        description: Run reviewed original research code offline in an isolated container
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  replay:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_replay == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      ROOT: antigravity/reproduction/AG-PHOTONIC-003
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Verify original bytes and test comparison
+        run: |
+          python3 "$ROOT/import_snapshot.py" --source "$ROOT/original"
+          python3 -m unittest discover -s antigravity/tests -p test_ag003_replay.py
+      - name: Prepare independent environment (no original code)
+        run: |
+          mkdir -p "$RUNNER_TEMP/ag003-build" "$RUNNER_TEMP/ag003-results" "$RUNNER_TEMP/ag003-workspace"
+          cp "$ROOT/replay.Dockerfile" "$RUNNER_TEMP/ag003-build/Dockerfile"
+          docker build --pull -t ag003-replay:local "$RUNNER_TEMP/ag003-build" 2>&1 | tee "$RUNNER_TEMP/ag003-results/build.log"
+          docker image inspect --format '{{.Id}}' ag003-replay:local > "$RUNNER_TEMP/ag003-results/image-id.txt"
+      - name: Run unchanged source in disposable workspace
+        run: |
+          cp "$ROOT/original/"*.py "$RUNNER_TEMP/ag003-workspace/"
+          chmod 0777 "$RUNNER_TEMP/ag003-workspace"
+          set +e
+          timeout --kill-after=15s 20m docker run --rm --name ag003-offline-replay \
+            --network none --read-only --cap-drop ALL --security-opt no-new-privileges \
+            --user 65534:65534 --pids-limit 128 --memory 6g --cpus 2 \
+            --tmpfs /tmp:rw,noexec,nosuid,size=128m \
+            --mount "type=bind,src=$RUNNER_TEMP/ag003-workspace,dst=/workspace" \
+            --workdir /workspace -e PYTHONDONTWRITEBYTECODE=1 -e OPENBLAS_NUM_THREADS=1 \
+            -e OMP_NUM_THREADS=1 -e MKL_NUM_THREADS=1 \
+            ag003-replay:local python -B run_all.py \
+            > "$RUNNER_TEMP/ag003-results/replay.log" 2>&1
+          status=$?
+          set -e
+          docker rm -f ag003-offline-replay >/dev/null 2>&1 || true
+          printf '%s\n' "$status" > "$RUNNER_TEMP/ag003-results/exit-code.txt"
+          python3 "$ROOT/import_snapshot.py" --source "$ROOT/original"
+          if [[ -f "$RUNNER_TEMP/ag003-workspace/report.json" && ! -L "$RUNNER_TEMP/ag003-workspace/report.json" ]]; then
+            cp "$RUNNER_TEMP/ag003-workspace/report.json" "$RUNNER_TEMP/ag003-results/replay-report.json"
+          fi
+          exit "$status"
+      - name: Compare structured results
+        run: |
+          python3 "$ROOT/compare_replay.py" --original "$ROOT/original/report.json" \
+            --replay "$RUNNER_TEMP/ag003-results/replay-report.json" \
+            --output "$RUNNER_TEMP/ag003-results/comparison.json"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: ag003-isolated-replay
+          path: ${{ runner.temp }}/ag003-results/
+          retention-days: 90
+          if-no-files-found: warn

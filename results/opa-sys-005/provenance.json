@@ -1,0 +1,44 @@
+{
+  "artifact_bytes": 1190343,
+  "artifact_id": 14343438072,
+  "artifact_sha256": "6045ee657ecab9e8045631ec713887e9194393028ba044100aa7803b12b15753",
+  "artifact_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44118436433/artifacts/14343438072",
+  "experiment": "OPA-SYS-005",
+  "files": {
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c"
+    },
+    "fixed_max_feasible.json": {
+      "bytes": 5250237,
+      "sha256": "0513fa6f27163353c2faa7f9cb531573cf683b032400d9ffb998e581bf2d5817"
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6"
+    },
+    "legacy_feasible.json": {
+      "bytes": 1276755,
+      "sha256": "3d93eeccf35e2470e9392214c97ce9df40077e468a5c46717af306c068847a4f"
+    },
+    "optimized_feasible.json": {
+      "bytes": 6046779,
+      "sha256": "2bd63d2dccba1a92d9902cf0e94a0e0c1ad70e2239793e94ddee82a4372d6b07"
+    },
+    "paired_changes.csv": {
+      "bytes": 11538491,
+      "sha256": "8c4bd980489c9f8f2c508eb35f55760ced5bd61cdf46ca65d2b1f6d4eb5ca8d2"
+    },
+    "result.json": {
+      "bytes": 76589,
+      "sha256": "a40fe903f7fdfc95844f04385024ab266692b9ee754969fb0c27fd93aedc28a5"
+    }
+  },
+  "head_sha": "418d7d745e2c903a1e2b85b5c3c501a39be014a4",
+  "job_id": 134162925300,
+  "merge_sha": "1d3a17257d5302043e43fc42f5b69a43e2f1bffa",
+  "pull_request": 120,
+  "source_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44118436433/job/134162925300",
+  "verification": "Original ZIP digest and CRC independently checked before pinning; archive workflow verifies run identity and all seven exact extracted bytes before and after Git staging.",
+  "workflow_run_id": 44118436433
+}

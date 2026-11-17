@@ -114,4 +114,4 @@ as a validated architecture before checking the assumptions and
 accounting. Independent-laser eight-bit candidates merit subsequent
 convergence testing, even if comb candidates remain infeasible.
 
-Next stage: [OPA-SYS-005 gain policy experiment](../stage3/README.md), pending CI.
+Next stage: [OPA-SYS-005 gain policy experiment](../stage3/README.md), CI complete: 2,758 feasible, including 152 six-bit comb candidates; permanent evidence archive pending.

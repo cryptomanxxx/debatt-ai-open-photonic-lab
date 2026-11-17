@@ -30,3 +30,71 @@ Three endpoint pairs (Tlow,Thigh): (.1,.4) selected NL004 reference; (.15,.85) o
 ## Next steps
 
 Analyze whether distributed attenuation invalidates the lumped reference, and sensitivity to competing TPA. Obtain absolute complex transmission and pulse-reference data, then fit device-specific parameters with uncertainty; separately investigate retraining for weak measured nonlinearities. No cavity, time-domain recovery, pulse-shape propagation or actual throughput validation in this experiment. No measured material calibration, fabrication readiness or system energy claim.
+
+## Initial observed results — 17 November 2026
+
+[Experiment run 44173789666](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44173789666),
+job 134359706201, artifact 14368328417. All 15 implementation
+checks passed. Maximum observed 64-to-128-step difference:
+4.17764889349e-9; maximum geometric-midpoint interpolation
+difference: 7.06007106743e-6, both below the preregistered
+limits (1e-6 and 1e-4). These are numerical convergence checks
+in transmission/phase radians, not physical model validation.
+
+| Endpoint pair (Tlow, Thigh) | Low-drive pass/tested | High-drive pass/tested |
+|---|---:|---:|
+| (.1,.4) | 19/45 | 19/45 |
+| (.15,.85) | 26/45 | 22/45 |
+| (.373,.4) | 0/45 | 0/45 |
+| Total | 45/135 | 41/135 |
+
+86 of 270 configurations pass the original screen (31.85%).
+The endpoint pairs refer to transmission limits without competing
+TPA, before the extra 1 dB loss. With TPA, they are not actual
+asymptotic transmission limits. Stronger-depth families contain
+passing distributed propagation configurations at both drives;
+the weak-depth family fails for every tested tuple. The aggregate
+counts do not identify whether individual TPA>0 or phase>0 tuples
+pass, nor whether the same tuple passes at both drives. No continuous
+feasible range or material yield can be inferred. The frozen weights
+were trained on the original lumped behavioral transfer; retraining
+could change these conclusions.
+
+### Paired lumped references on independent test inputs
+
+All 20 reference rows have 100% clean accuracy. Mean receiver
+accuracy, worst seed/repeat, mean pre-receiver output, minimum
+signed real output field and peak modeled diode power:
+
+| Drive mW | Reference | Mean receiver (%) | Worst repeat (%) | Output uW | Min signed field sqrt(mW) | Peak diode mW |
+|---:|---|---:|---:|---:|---:|---:|
+| 0.1 | NL003 | 99.997559 | 99.951172 | 0.605474 | 0.009973 | 0.061623 |
+| 0.1 | NL004 | 100.000000 | 100.000000 | 0.684373 | 0.013409 | 0.061301 |
+| 1 | NL003 | 100.000000 | 100.000000 | 24.696931 | 0.092201 | 0.117148 |
+| 1 | NL004 | 100.000000 | 100.000000 | 6.651222 | 0.039782 | 0.087922 |
+
+NL003 low-drive reference has two incorrect sample/repeat
+outcomes out of 81,920 (seeds 1301 and 1303, one each).
+NL004 low-drive and both high-drive references have zero errors.
+Each drive/reference uses 10,240 held-out inputs with eight
+paired simulated noise repeats, not 81,920 independent
+hardware measurements. These references are lumped transfer
+functions, not distributed candidates or a material fit.
+
+### Archive and remaining work
+
+Exact ZIP metadata: 203,565 bytes, SHA-256
+245f80ef6e95de5a7dcc736811028d1389fd973a6fb5b284039bd1092d758d00.
+The archive helper pins all six science-file hashes emitted
+by CI, verifies raw ZIP identity, CRC, report counts and staged
+bytes, and records environment metadata and provenance.
+Actual ZIP-byte verification awaits manual archive execution.
+Initial analysis uses CI stdout only. Full parameter-level
+analysis of the 1350 metrics, 270 grouped configurations,
+135 convergence rows and 8775 transfer samples follows archival.
+
+Next identify passing TPA/phase combinations, common tuples,
+comparison with the paired lumped references and practical
+transmission curves within the tested power range. No calibrated
+graphene parameters, cavity dynamics, throughput, hardware
+performance or system energy advantage established.

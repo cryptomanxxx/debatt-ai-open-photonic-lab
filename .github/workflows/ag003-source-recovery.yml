@@ -6,6 +6,10 @@ on:
         description: Verified free tier and billing disabled; authorize one source-only follow-up
         type: boolean
         default: false
+      confirm_public_export:
+        description: Authorize public artifact of reviewed-for-known-secret-patterns source files
+        type: boolean
+        default: false
 permissions:
   contents: read
   actions: read
@@ -38,6 +42,19 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           /usr/bin/python3 -c 'import os,sys; from pathlib import Path; sys.path.insert(0,"antigravity"); import manager; p=Path(os.environ["RUNNER_TEMP"])/"ag-output/checkpoint.enc"; sys.exit(manager.poll_existing(os.environ["GEMINI_API_KEY"],"AG-PHOTONIC-003",p))'
+      - name: Validate recovered file manifest
+        if: inputs.confirm_public_export == true
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          /usr/bin/python3 antigravity/reproduction/AG-PHOTONIC-003/extract_workspace.py --checkpoint "$RUNNER_TEMP/ag-output/checkpoint.enc" --output "$RUNNER_TEMP/ag-source"
+      - uses: actions/upload-artifact@v7
+        if: inputs.confirm_public_export == true && success()
+        with:
+          name: ag003-recovered-source-unverified
+          path: ${{ runner.temp }}/ag-source/
+          retention-days: 7
+          if-no-files-found: error
       - uses: actions/upload-artifact@v7
         if: always()
         with:

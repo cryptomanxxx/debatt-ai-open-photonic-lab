@@ -425,6 +425,24 @@
         "results/opa-sys-004/result.json",
         "results/opa-sys-004/combined_feasible.json"
       ]
+    },
+    {
+      "id": "opa-sys-006",
+      "name": "System: AG003 paired training convergence and receiver noise sensitivity",
+      "script": "simulations/circuit/ag003_convergence_v006.py",
+      "result_dir": "results/opa-sys-006",
+      "artifact": "opa-sys-006",
+      "timeout_minutes": 45,
+      "deps": [
+        "antigravity/reproduction/AG-PHOTONIC-003/import_snapshot.py",
+        "antigravity/reproduction/AG-PHOTONIC-003/original/*",
+        "antigravity/reproduction/AG-PHOTONIC-003/corrected/physics_model.py",
+        "antigravity/reproduction/AG-PHOTONIC-003/stage2/physics_model.py",
+        "antigravity/reproduction/AG-PHOTONIC-003/stage3/physics_model.py",
+        "simulations/circuit/ag003_receiver_audit_v003.py",
+        "results/opa-sys-005/*"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/ag003_convergence_v006.py"
     }
   ]
 }

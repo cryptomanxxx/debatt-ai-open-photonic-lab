@@ -3,6 +3,8 @@ import hashlib
 import importlib.util
 from pathlib import Path
 import unittest
+import json
+import tempfile
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1] / "reproduction" / "AG-PHOTONIC-003"
@@ -45,6 +47,50 @@ class RecoveryTest(unittest.TestCase):
     def test_reject_decoded_secret(self):
         with self.assertRaises(ValueError):
             extract.validate(manifest(), ("source",))
+    def test_nested_identifiers_from_both_responses(self):
+        blocked = extract.identifiers({"id": "original-id", "steps": [{"call_id": "nested-call"}]},
+                                      {"previous_interaction_id": "original-id", "steps": [{"signature": "nested-signature"}]})
+        self.assertEqual(blocked, {"original-id", "nested-call", "nested-signature"})
+        m = manifest()
+        item = next(x for x in m["files"] if x["name"] == "report.json")
+        data = b'{"value":"nested-call"}'
+        item.update(base64=base64.b64encode(data).decode(), size_bytes=len(data),
+                    sha256=hashlib.sha256(data).hexdigest())
+        with self.assertRaises(ValueError):
+            extract.validate(m, blocked)
+    def test_metadata_preserves_evidence_and_integrity(self):
+        m = manifest()
+        m.update(dependencies={"numpy": "version"}, required_inputs=["input.csv"],
+                 energy_audit={"previous": "assert x", "final": "assert y"})
+        evidence = json.loads(extract.metadata(m))
+        self.assertEqual(evidence["energy_audit"], m["energy_audit"])
+        self.assertEqual(evidence["dependencies"], m["dependencies"])
+        self.assertEqual(evidence["required_inputs"], m["required_inputs"])
+        self.assertEqual(len(evidence["file_integrity"]), 7)
+        self.assertNotIn("files", evidence)
+        self.assertNotIn("base64", evidence["file_integrity"][0])
+        m["energy_audit"]["final"] = "nested-signature"
+        with self.assertRaises(ValueError):
+            extract.metadata(m, ("nested-signature",))
+    def test_retrieve_only_get_and_preserve_checkpoint(self):
+        parent = {"id": "original", "status": "completed", "environment_id": "env"}
+        current = {"id": "recovery", "status": next(iter(recover.manager.background.ACTIVE)), "environment_id": "env"}
+        final = dict(current, status="completed")
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "out"
+            with patch.object(recover.manager, "load", side_effect=[parent, current]), patch.object(recover.manager, "seal") as seal, patch.object(recover.manager.background, "request", return_value=final) as req:
+                recover.retrieve("key", Path("prior"), Path("recovery"), out, True)
+                req.assert_called_once_with("key", interaction_id="recovery")
+                self.assertEqual(seal.call_count, 2)
+                self.assertEqual(seal.call_args_list[0].args[2], current)
+                self.assertEqual(seal.call_args_list[1].args[2], final)
+    def test_completed_recovery_no_request(self):
+        parent = {"id": "original", "status": "completed", "environment_id": "env"}
+        current = dict(parent, id="recovery")
+        with tempfile.TemporaryDirectory() as tmp:
+            with patch.object(recover.manager, "load", side_effect=[parent, current]), patch.object(recover.manager, "seal"), patch.object(recover.manager.background, "request") as req:
+                recover.retrieve("key", Path("prior"), Path("recovery"), Path(tmp) / "out", True)
+                req.assert_not_called()
     def test_no_confirmation_no_request(self):
         with patch.object(recover.manager.background, "request") as req:
             with self.assertRaises(ValueError):

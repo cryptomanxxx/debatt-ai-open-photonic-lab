@@ -2,6 +2,20 @@
 
 AG-INFRA-001 is a feasibility probe, not a photonic simulation. AG-PHOTONIC-001 will independently reproduce a directional coupler benchmark before comparing against the lab's existing FDTD/MPB results.
 
+## Mandatory retrieval policy: files first
+
+For existing environment files, use the [Google Environments Files API](https://ai.google.dev/gemini-api/docs/agent-environment), not an AI-generated export. The successful AG003 workflow downloaded the directory using `GET /v1beta/environments/{env_id}/files/workspace?alt=media&recursive=true`, without a new agent interaction, model token budget or polling. See [implementation](reproduction/AG-PHOTONIC-003/download_snapshot.py) and [evidence](reproduction/AG-PHOTONIC-003/README.md).
+
+| Method | Observed AG003 outcome |
+|---|---|
+| Agent-mediated export, 100k requested budget | Incomplete, 179322 reported tokens, no complete manifest |
+| Agent-mediated continuation, 1M requested budget | Cancelled, 120225 reported tokens, no complete manifest |
+| Direct Files API, run 44074735184 | Seven expected files, 164850 bytes, all hashes verified |
+
+Use the encrypted checkpoint to obtain the existing environment ID. Keep full snapshots encrypted, review allowlisted files before publication, and preserve exact bytes. A current snapshot is not historical immutability proof. Direct downloads can fail due to permissions, retention or service limits; diagnose these before any model fallback. The zero-cost policy still applies.
+
+The interaction manager and automatic retrieval below remain appropriate for retrieving interaction status and responses, **not for copying workspace files**. Do not increase token budgets or submit an agent solely to export existing files. The older AG003 model-based recovery workflows remain historical evidence, not the default procedure.
+
 ## Zero-cost policy
 Use only a dedicated Gemini API project with billing disabled, after checking the current [pricing](https://ai.google.dev/gemini-api/docs/pricing) and confirming agent free-tier eligibility. Never use a paid project or enable billing to bypass quota errors. The runner cannot verify billing status; its explicit confirmation is an operator assertion, not a spending cap. No live calls in CI. No credentials in the repository. Free-tier data may be subject to Google's terms; send only public/non-sensitive material.
 

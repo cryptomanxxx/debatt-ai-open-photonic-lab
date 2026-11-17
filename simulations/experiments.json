@@ -351,6 +351,17 @@
         "simulations/meep/opa_common.py"
       ],
       "lock": "simulations/meep/opa-id-linux-64.lock.txt"
+    },
+    {
+      "id": "opa-sys-001",
+      "name": "System: independent AG003 loss and energy accounting audit",
+      "script": "simulations/circuit/system_energy_audit_v001.py",
+      "result_dir": "results/opa-sys-001",
+      "artifact": "opa-sys-001",
+      "timeout_minutes": 10,
+      "deps": [
+        "antigravity/reproduction/AG-PHOTONIC-003/original/report.json"
+      ]
     }
   ]
 }

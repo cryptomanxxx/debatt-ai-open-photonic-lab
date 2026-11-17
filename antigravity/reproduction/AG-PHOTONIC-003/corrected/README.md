@@ -35,7 +35,7 @@ roadmap tracks remain deferred until AG003 is completed.
 
 ## Observed results — 2026-11-17
 
-[CI run 44106677587](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44106677587) passed all eight checks. The downloaded original ZIP (218777 bytes) was independently checked against GitHub SHA-256 and ZIP CRC. Its six files are pinned by the archive script; permanent Git archive is pending manual workflow.
+[CI run 44106677587](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44106677587) passed all eight checks. The downloaded original ZIP (218777 bytes) was independently checked against GitHub SHA-256 and ZIP CRC. Its six files are pinned by the archive script; permanent Git archive is complete in [results/opa-sys-002](../../../../results/opa-sys-002/).
 
 | Architecture | Original feasible | Corrected feasible | Best original TOPS/W | Best corrected TOPS/W |
 |---|---:|---:|---:|---:|
@@ -57,3 +57,5 @@ These are analytical feasibility results, not training convergence or measured h
 ## Next correction
 
 Prioritize receiver SNR and source/amp accounting at fixed configuration, including balanced detection and local-oscillator optical/electrical costs, explicit signal versus ASE power and bandwidth, per-laser versus aggregate limits, and pump-threshold floor handling. Verify against independent algebraic tests before further full sweeps. Preserve this stage as an immutable comparison baseline; do not combine unrelated changes without attribution.
+
+Stage 2: [OPA-SYS-003 receiver and source diagnostic](RECEIVER_AUDIT.md), pending CI. This diagnostic does not modify the stage-one physics model.

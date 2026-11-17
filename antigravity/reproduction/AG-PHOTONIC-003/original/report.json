@@ -1,0 +1,2900 @@
+{
+  "task_id": "AG-PHOTONIC-003",
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.39",
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "total_pipeline_runtime_s": 78.294,
+    "executed_commands": [
+      {
+        "cmd": "python3 sweep.py",
+        "exit_code": 0,
+        "runtime_s": 2.562
+      },
+      {
+        "cmd": "python3 circuit_sim.py",
+        "exit_code": 0,
+        "runtime_s": 0.514
+      },
+      {
+        "cmd": "python3 train_sim.py",
+        "exit_code": 0,
+        "runtime_s": 75.212
+      }
+    ]
+  },
+  "equations_and_conventions": {
+    "primary_objective": "eta_sys = (useful_MACs_per_s * 2 OPs/MAC) / P_system_W [TOPS/W]",
+    "useful_macs_per_step": "3 * L_layers * B_batch * D^2 (Fwd + Bwd + Wgrad; no idle lanes or double counting)",
+    "wdm_mapping": {
+      "MZI_SVD_and_Hybrid": "WDM batch parallelism: N_lambda batch vectors share static W_tile = U Sigma V^T -> N_lambda * M^2 MACs/cycle (Fwd+Bwd photonic; Wgrad electronic)",
+      "MRR_Weight_Bank": "Independent wavelength-specific weights: M rows x N_lambda rings -> M * N_lambda MACs/cycle"
+    },
+    "optical_link_budget": "P_rx_min solved for ENOB >= bits + 0.5 including shot, TIA, RIN (20 dB balanced CMRR), and ASE noise; pump power counted once"
+  },
+  "parameter_provenance": {
+    "optical": {
+      "laser_wpe": {
+        "val": 0.2,
+        "range": [
+          0.12,
+          0.3
+        ],
+        "unit": "fraction",
+        "provenance": "Assumption grounded in typical InP DFB/pump laser WPE (12-30%)"
+      },
+      "laser_rin_db_hz": {
+        "val": -145.0,
+        "range": [
+          -135.0,
+          -155.0
+        ],
+        "unit": "dB/Hz",
+        "provenance": "Typical DFB/ECDL RIN (-135 to -155 dB/Hz)"
+      },
+      "laser_max_power_mw": {
+        "val": 500.0,
+        "range": [
+          200.0,
+          1000.0
+        ],
+        "unit": "mW",
+        "provenance": "Max single-pump CW optical output (high-power InP/EDFA-pumped source)"
+      },
+      "comb_threshold_mw": {
+        "val": 20.0,
+        "range": [
+          10.0,
+          40.0
+        ],
+        "unit": "mW",
+        "provenance": "Si3N4 microcomb parametric oscillation threshold (typical 10-40 mW)"
+      },
+      "comb_eff": {
+        "val": 0.1,
+        "range": [
+          0.04,
+          0.25
+        ],
+        "unit": "fraction",
+        "provenance": "DKS / microcomb pump-to-usable-lines conversion efficiency"
+      },
+      "comb_bw_thz": {
+        "val": 4.0,
+        "range": [
+          2.5,
+          6.0
+        ],
+        "unit": "THz",
+        "provenance": "Usable 3-dB/6-dB soliton comb optical bandwidth"
+      },
+      "comb_channel_spacing_ghz": {
+        "val": 50.0,
+        "range": [
+          25.0,
+          100.0
+        ],
+        "unit": "GHz",
+        "provenance": "WDM grid spacing (50-100 GHz DWDM)"
+      },
+      "comb_nonunif_db_per_64": {
+        "val": 6.0,
+        "range": [
+          3.0,
+          10.0
+        ],
+        "unit": "dB",
+        "provenance": "Spectral roll-off across 64 lines (sech^2 envelope)"
+      },
+      "pump_reject_il_db": {
+        "val": 1.0,
+        "range": [
+          0.5,
+          2.0
+        ],
+        "unit": "dB",
+        "provenance": "Notch filter / bus drop loss for residual pump rejection"
+      },
+      "splitter_excess_db": {
+        "val": 0.3,
+        "range": [
+          0.1,
+          0.6
+        ],
+        "unit": "dB/stage",
+        "provenance": "Excess loss per 1x2 MMI/Y-branch stage"
+      },
+      "coupler_il_db": {
+        "val": 1.5,
+        "range": [
+          0.8,
+          3.0
+        ],
+        "unit": "dB",
+        "provenance": "Fiber/laser-to-chip coupling loss (edge/grating)"
+      },
+      "mux_demux_il_db": {
+        "val": 2.0,
+        "range": [
+          1.0,
+          3.5
+        ],
+        "unit": "dB",
+        "provenance": "AWG / MRR WDM mux+demux insertion loss"
+      },
+      "wg_loss_db_cm": {
+        "val": 0.5,
+        "range": [
+          0.1,
+          1.5
+        ],
+        "unit": "dB/cm",
+        "provenance": "SiN/Si waveguide propagation loss"
+      },
+      "mzi_il_db": {
+        "val": 0.15,
+        "range": [
+          0.05,
+          0.35
+        ],
+        "unit": "dB/MZI",
+        "provenance": "Insertion loss per 2x2 MZI (2 couplers + phase shifter)"
+      },
+      "mrr_thru_il_db": {
+        "val": 0.05,
+        "range": [
+          0.02,
+          0.12
+        ],
+        "unit": "dB/ring",
+        "provenance": "Through-port loss per off-resonance MRR"
+      },
+      "mrr_drop_il_db": {
+        "val": 1.0,
+        "range": [
+          0.5,
+          2.0
+        ],
+        "unit": "dB/ring",
+        "provenance": "Drop/weight-port insertion loss for MRR"
+      },
+      "mod_il_db": {
+        "val": 2.5,
+        "range": [
+          1.5,
+          4.0
+        ],
+        "unit": "dB",
+        "provenance": "High-speed input modulator insertion loss"
+      },
+      "pd_responsivity": {
+        "val": 0.9,
+        "range": [
+          0.7,
+          1.1
+        ],
+        "unit": "A/W",
+        "provenance": "Ge/InGaAs waveguide photodiode responsivity at 1550 nm"
+      },
+      "tia_noise_pa_rt_hz": {
+        "val": 15.0,
+        "range": [
+          8.0,
+          30.0
+        ],
+        "unit": "pA/sqrt(Hz)",
+        "provenance": "TIA input-referred current noise density"
+      },
+      "xtalk_penalty_db": {
+        "val": 0.5,
+        "range": [
+          0.2,
+          1.5
+        ],
+        "unit": "dB",
+        "provenance": "Effective SNR penalty from WDM/thermal crosstalk"
+      },
+      "amp_wpe": {
+        "val": 0.1,
+        "range": [
+          0.05,
+          0.2
+        ],
+        "unit": "fraction",
+        "provenance": "EDFA/SOA electrical-to-optical wall-plug efficiency"
+      },
+      "amp_nf_db": {
+        "val": 6.0,
+        "range": [
+          4.5,
+          8.0
+        ],
+        "unit": "dB",
+        "provenance": "Optical amplifier noise figure"
+      },
+      "amp_max_gain_db": {
+        "val": 25.0,
+        "range": [
+          15.0,
+          30.0
+        ],
+        "unit": "dB",
+        "provenance": "Max usable single-stage booster optical gain"
+      },
+      "amp_psat_mw": {
+        "val": 250.0,
+        "range": [
+          50.0,
+          500.0
+        ],
+        "unit": "mW",
+        "provenance": "Optical amplifier saturation output power (24 dBm EDFA; 17 dBm SOA)"
+      }
+    },
+    "system": {
+      "f_mod_ghz": {
+        "val": 10.0,
+        "range": [
+          5.0,
+          25.0
+        ],
+        "unit": "GHz",
+        "provenance": "Optical data modulation / symbol rate"
+      },
+      "dac_pj_per_conv_8b": {
+        "val": 1.5,
+        "range": [
+          0.5,
+          4.0
+        ],
+        "unit": "pJ",
+        "provenance": "High-speed DAC energy at 8-bit, 10 GS/s (scales ~2^(B-8) or B*2^(B/4))"
+      },
+      "adc_pj_per_conv_8b": {
+        "val": 2.5,
+        "range": [
+          1.0,
+          6.0
+        ],
+        "unit": "pJ",
+        "provenance": "High-speed ADC energy at 8-bit, 10 GS/s"
+      },
+      "tia_mw_per_ch": {
+        "val": 5.0,
+        "range": [
+          2.0,
+          12.0
+        ],
+        "unit": "mW",
+        "provenance": "TIA + limiting/linear front-end power per detector channel"
+      },
+      "mod_driver_pj_per_sym": {
+        "val": 1.0,
+        "range": [
+          0.4,
+          3.0
+        ],
+        "unit": "pJ",
+        "provenance": "High-speed modulator driver energy per symbol"
+      },
+      "sram_pj_per_byte": {
+        "val": 0.5,
+        "range": [
+          0.2,
+          1.0
+        ],
+        "unit": "pJ/byte",
+        "provenance": "On-chip SRAM access energy"
+      },
+      "hbm_pj_per_byte": {
+        "val": 4.0,
+        "range": [
+          2.5,
+          8.0
+        ],
+        "unit": "pJ/byte",
+        "provenance": "Off-chip HBM/DRAM access energy"
+      },
+      "elec_mac_pj": {
+        "val": 0.3,
+        "range": [
+          0.15,
+          0.6
+        ],
+        "unit": "pJ/MAC",
+        "provenance": "Digital 5nm/4nm systolic MAC energy (8-bit/BF16 mixed)"
+      },
+      "calib_mw_per_ring_or_mzi": {
+        "val": 0.05,
+        "range": [
+          0.01,
+          0.15
+        ],
+        "unit": "mW",
+        "provenance": "Dithering/lock-in thermal stabilization & control overhead"
+      },
+      "comb_stabilization_mw": {
+        "val": 100.0,
+        "range": [
+          30.0,
+          250.0
+        ],
+        "unit": "mW",
+        "provenance": "TEC + RF lock-in + heater stabilization per microcomb"
+      },
+      "pue_cooling_factor": {
+        "val": 1.15,
+        "range": [
+          1.08,
+          1.3
+        ],
+        "unit": "multiplier",
+        "provenance": "System cooling / PSU / PUE overhead multiplier"
+      },
+      "reticle_limit_mm2": {
+        "val": 858.0,
+        "range": [
+          858.0,
+          858.0
+        ],
+        "unit": "mm^2",
+        "provenance": "Standard EUV/DUV reticle area limit per die"
+      },
+      "electronic_baseline_topsw": {
+        "val": 3.5,
+        "range": [
+          2.0,
+          6.0
+        ],
+        "unit": "TOPS/W",
+        "provenance": "Matched-boundary modern GPU/TPU-class training system efficiency (2 OPs/MAC, incl. HBM+cooling)"
+      },
+      "electronic_baseline_tops": {
+        "val": 1000.0,
+        "range": [
+          500.0,
+          2000.0
+        ],
+        "unit": "TOPS",
+        "provenance": "Reference electronic accelerator sustained training TOPS"
+      }
+    },
+    "phase_shifter_techs": {
+      "thermo_optic": {
+        "static_mw": {
+          "val": 2.5,
+          "range": [
+            0.8,
+            8.0
+          ],
+          "unit": "mW",
+          "provenance": "TiN/doped-Si heater static power for pi shift"
+        },
+        "sw_energy_pj": {
+          "val": 50000.0,
+          "range": [
+            10000.0,
+            200000.0
+          ],
+          "unit": "pJ",
+          "provenance": "Thermal time constant * static power (~20 us * 2.5 mW)"
+        },
+        "v_pi_v": {
+          "val": 3.0,
+          "range": [
+            1.5,
+            5.0
+          ],
+          "unit": "V",
+          "provenance": "Typical heater drive voltage"
+        },
+        "il_db": {
+          "val": 0.02,
+          "range": [
+            0.01,
+            0.05
+          ],
+          "unit": "dB",
+          "provenance": "Negligible optical loss for TO heater"
+        },
+        "settling_ns": {
+          "val": 20000.0,
+          "range": [
+            5000.0,
+            50000.0
+          ],
+          "unit": "ns",
+          "provenance": "Thermal settling time (5-50 us)"
+        },
+        "area_um2": {
+          "val": 5000.0,
+          "range": [
+            2000.0,
+            15000.0
+          ],
+          "unit": "um^2",
+          "provenance": "Heater + thermal isolation trench footprint"
+        },
+        "endurance_cycles": 1000000000000000.0,
+        "xtalk_factor": 0.15,
+        "integ_feasibility": "high_cmos_foundry",
+        "can_fast_modulate": false
+      },
+      "carrier_depletion": {
+        "static_mw": {
+          "val": 0.01,
+          "range": [
+            0.001,
+            0.05
+          ],
+          "unit": "mW",
+          "provenance": "Reverse-biased PN junction leakage"
+        },
+        "sw_energy_pj": {
+          "val": 2.0,
+          "range": [
+            0.5,
+            5.0
+          ],
+          "unit": "pJ",
+          "provenance": "CV^2 capacitive switching energy (~100-500 fF at 2-4V)"
+        },
+        "v_pi_v": {
+          "val": 4.0,
+          "range": [
+            2.0,
+            6.0
+          ],
+          "unit": "V",
+          "provenance": "Reverse-bias V_pi"
+        },
+        "il_db": {
+          "val": 0.6,
+          "range": [
+            0.3,
+            1.2
+          ],
+          "unit": "dB",
+          "provenance": "Free-carrier absorption loss (phase-dependent)"
+        },
+        "settling_ns": {
+          "val": 0.05,
+          "range": [
+            0.02,
+            0.2
+          ],
+          "unit": "ns",
+          "provenance": "RC-limited GHz switching"
+        },
+        "area_um2": {
+          "val": 40000.0,
+          "range": [
+            15000.0,
+            80000.0
+          ],
+          "unit": "um^2",
+          "provenance": "Long PN phase shifter (~1 mm x 40 um)"
+        },
+        "endurance_cycles": 1000000000000000.0,
+        "xtalk_factor": 0.02,
+        "integ_feasibility": "high_si_photonics",
+        "can_fast_modulate": true
+      },
+      "pockels_tfln": {
+        "static_mw": {
+          "val": 0.001,
+          "range": [
+            0.0001,
+            0.01
+          ],
+          "unit": "mW",
+          "provenance": "Near-zero capacitive leakage"
+        },
+        "sw_energy_pj": {
+          "val": 0.5,
+          "range": [
+            0.1,
+            2.0
+          ],
+          "unit": "pJ",
+          "provenance": "Low-capacitance Pockels electrode switching"
+        },
+        "v_pi_v": {
+          "val": 2.5,
+          "range": [
+            1.4,
+            5.0
+          ],
+          "unit": "V",
+          "provenance": "TFLN / BTO V_pi"
+        },
+        "il_db": {
+          "val": 0.05,
+          "range": [
+            0.02,
+            0.15
+          ],
+          "unit": "dB",
+          "provenance": "Low optical propagation loss in TFLN"
+        },
+        "settling_ns": {
+          "val": 0.02,
+          "range": [
+            0.01,
+            0.05
+          ],
+          "unit": "ns",
+          "provenance": "Electro-optic >20 GHz response"
+        },
+        "area_um2": {
+          "val": 60000.0,
+          "range": [
+            20000.0,
+            150000.0
+          ],
+          "unit": "um^2",
+          "provenance": "Traveling-wave / lumped Pockels length (1-3 mm)"
+        },
+        "endurance_cycles": 1000000000000000.0,
+        "xtalk_factor": 0.01,
+        "integ_feasibility": "medium_heterogeneous",
+        "can_fast_modulate": true
+      },
+      "nonvolatile_pcm": {
+        "static_mw": {
+          "val": 0.0,
+          "range": [
+            0.0,
+            0.001
+          ],
+          "unit": "mW",
+          "provenance": "Zero static hold power (nonvolatile GSST/GST)"
+        },
+        "sw_energy_pj": {
+          "val": 500.0,
+          "range": [
+            100.0,
+            2000.0
+          ],
+          "unit": "pJ",
+          "provenance": "Amorphization/crystallization pulse energy"
+        },
+        "v_pi_v": {
+          "val": 3.0,
+          "range": [
+            1.5,
+            5.0
+          ],
+          "unit": "V",
+          "provenance": "Microheater/PIN programming pulse"
+        },
+        "il_db": {
+          "val": 0.35,
+          "range": [
+            0.15,
+            0.8
+          ],
+          "unit": "dB",
+          "provenance": "State-dependent absorption loss (GSST)"
+        },
+        "settling_ns": {
+          "val": 500.0,
+          "range": [
+            100.0,
+            2000.0
+          ],
+          "unit": "ns",
+          "provenance": "Crystallization pulse/settling time"
+        },
+        "area_um2": {
+          "val": 1000.0,
+          "range": [
+            400.0,
+            3000.0
+          ],
+          "unit": "um^2",
+          "provenance": "Compact PCM cell"
+        },
+        "endurance_cycles": 10000000.0,
+        "xtalk_factor": 0.03,
+        "integ_feasibility": "low_to_medium_specialty",
+        "can_fast_modulate": false
+      },
+      "hybrid_pcm_pockels": {
+        "static_mw": {
+          "val": 0.002,
+          "range": [
+            0.0005,
+            0.01
+          ],
+          "unit": "mW",
+          "provenance": "PCM bias + Pockels trim/fast update"
+        },
+        "sw_energy_pj": {
+          "val": 1.0,
+          "range": [
+            0.3,
+            3.0
+          ],
+          "unit": "pJ",
+          "provenance": "Fast Pockels delta updates; PCM rare coarse set"
+        },
+        "v_pi_v": {
+          "val": 2.5,
+          "range": [
+            1.5,
+            4.5
+          ],
+          "unit": "V",
+          "provenance": "Pockels fine + PCM coarse"
+        },
+        "il_db": {
+          "val": 0.2,
+          "range": [
+            0.08,
+            0.45
+          ],
+          "unit": "dB",
+          "provenance": "Combined PCM + Pockels loss"
+        },
+        "settling_ns": {
+          "val": 0.05,
+          "range": [
+            0.02,
+            0.2
+          ],
+          "unit": "ns",
+          "provenance": "Fast Pockels response for fine updates"
+        },
+        "area_um2": {
+          "val": 65000.0,
+          "range": [
+            25000.0,
+            155000.0
+          ],
+          "unit": "um^2",
+          "provenance": "Pockels + PCM cell footprint"
+        },
+        "endurance_cycles": 100000000000000.0,
+        "xtalk_factor": 0.02,
+        "integ_feasibility": "low_research_stage",
+        "can_fast_modulate": true
+      }
+    },
+    "workload": {
+      "name": "Transformer/MLP_Block_1024x1024",
+      "layer_dim": 1024,
+      "batch_size": 128,
+      "num_layers": 12,
+      "training_steps": 10000,
+      "min_throughput_tops": 10.0,
+      "max_step_latency_ms": 50.0,
+      "target_val_acc": 0.9
+    }
+  },
+  "analytic_sweep_summary": {
+    "total_configurations_evaluated": 330960,
+    "total_feasible_before_convergence_gate": 325,
+    "total_rejected": 330635,
+    "rejection_breakdown": {
+      "below_min_throughput": 959,
+      "optical_link_budget_exceeded": 77022,
+      "rin_limited_snr": 24453,
+      "pcm_endurance_exceeded": 222,
+      "area_exceeds_reticle": 52349,
+      "broadband_mzi_dispersion": 3570,
+      "invalid_pump_comb_ratio": 120960,
+      "distributed_comb_lt_tiles": 51100
+    },
+    "rejection_examples": {
+      "below_min_throughput": "Throughput below min constraint: 0.00 TOPS < 10.0 TOPS",
+      "optical_link_budget_exceeded": "Optical link budget failed: loss=20.9 dB, req_pump=81.9 mW, amp_out=1834.4 mW",
+      "rin_limited_snr": "RIN-limited: cannot reach 77.5 dB SNR at 12-bit",
+      "pcm_endurance_exceeded": "Endurance exceeded: 7.86e+09 updates > 1.00e+07 (nonvolatile_pcm)",
+      "area_exceeds_reticle": "Area exceeds reticle limit: 1780.5 mm^2 > 858.0 mm^2",
+      "broadband_mzi_dispersion": "Broadband MZI dispersion (0.038 rad) exceeds 12-bit phase tolerance",
+      "invalid_pump_comb_ratio": "N_pump=2, N_comb=1",
+      "distributed_comb_lt_tiles": "distributed N_comb=1 < N_tiles=2"
+    },
+    "electronic_baseline": {
+      "name": "Electronic_Systolic_GPU_TPU_Baseline",
+      "eta_sys_topsw": 3.5,
+      "eta_sys_range": [
+        2.0,
+        6.0
+      ],
+      "sustained_tops": 1000.0,
+      "pj_per_mac_sys": 0.5714,
+      "modeled_joules_to_target_10k_equiv": 27.61
+    },
+    "energy_accounting_validation": {
+      "checks": [
+        {
+          "check": "power_conservation_sum",
+          "expected_w": 234.369,
+          "sum_components_w": 234.368,
+          "rel_error": 0.0,
+          "passed": true
+        },
+        {
+          "check": "two_ops_per_mac_identity",
+          "eta_x_pj_per_mac": 2.0,
+          "expected": 2.0,
+          "passed": true
+        },
+        {
+          "check": "low_loss_limit_reduces_path_loss",
+          "feasible": true,
+          "nominal_path_loss_db": null,
+          "low_loss_path_loss_db": 18.63,
+          "passed": true
+        }
+      ],
+      "all_passed": true
+    },
+    "sensitivity_analysis": {
+      "nominal_top_id": "CFG-0001",
+      "scenarios": {
+        "optimistic_low_loss_high_wpe": {
+          "feasible_count_out_of_10": 10,
+          "winner_id": "CFG-0001",
+          "top_3": [
+            {
+              "id": "CFG-0001",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T32-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 2.8523,
+              "reject_reason": null
+            },
+            {
+              "id": "CFG-0002",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T16-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 2.8519,
+              "reject_reason": null
+            },
+            {
+              "id": "CFG-0004",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T16-L16-B4",
+              "feasible": true,
+              "eta_sys_topsw": 2.8517,
+              "reject_reason": null
+            }
+          ]
+        },
+        "pessimistic_high_loss_low_wpe": {
+          "feasible_count_out_of_10": 9,
+          "winner_id": "CFG-0001",
+          "top_3": [
+            {
+              "id": "CFG-0001",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T32-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 1.1489,
+              "reject_reason": null
+            },
+            {
+              "id": "CFG-0002",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T16-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 1.1489,
+              "reject_reason": null
+            },
+            {
+              "id": "CFG-0003",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T8-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 1.1487,
+              "reject_reason": null
+            }
+          ]
+        },
+        "reduced_mod_rate_5ghz": {
+          "feasible_count_out_of_10": 10,
+          "winner_id": "CFG-0001",
+          "top_3": [
+            {
+              "id": "CFG-0001",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T32-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 1.9248,
+              "reject_reason": null
+            },
+            {
+              "id": "CFG-0004",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T16-L16-B4",
+              "feasible": true,
+              "eta_sys_topsw": 1.9247,
+              "reject_reason": null
+            },
+            {
+              "id": "CFG-0002",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T16-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 1.9246,
+              "reject_reason": null
+            }
+          ]
+        },
+        "high_mod_rate_20ghz": {
+          "feasible_count_out_of_10": 9,
+          "winner_id": "CFG-0002",
+          "top_3": [
+            {
+              "id": "CFG-0002",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T16-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 2.1891,
+              "reject_reason": null
+            },
+            {
+              "id": "CFG-0003",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T8-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 2.1886,
+              "reject_reason": null
+            },
+            {
+              "id": "CFG-0006",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T4-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 2.1877,
+              "reject_reason": null
+            }
+          ]
+        },
+        "low_hbm_energy_1pj": {
+          "feasible_count_out_of_10": 10,
+          "winner_id": "CFG-0001",
+          "top_3": [
+            {
+              "id": "CFG-0001",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T32-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 3.7853,
+              "reject_reason": null
+            },
+            {
+              "id": "CFG-0002",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T16-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 3.7846,
+              "reject_reason": null
+            },
+            {
+              "id": "CFG-0003",
+              "arch": "IndepLaser_MZI-pockels_tfln-M8-T8-L8-B4",
+              "feasible": true,
+              "eta_sys_topsw": 3.7833,
+              "reject_reason": null
+            }
+          ]
+        }
+      },
+      "ranking_reversals": [
+        {
+          "scenario": "high_mod_rate_20ghz",
+          "nominal_winner": "CFG-0001",
+          "new_winner": "CFG-0002",
+          "reason": "Nominal winner either became infeasible or was overtaken under perturbed parameters."
+        }
+      ]
+    }
+  },
+  "physical_verification": {
+    "circuit_transfer_matrix_sim": {
+      "runtime_s": 0.514,
+      "mesh_size_M": 8,
+      "n_lambdas": 16,
+      "seeds": [
+        42,
+        137,
+        2025
+      ],
+      "ideal_svd_mzi_rel_error": 2.3156428487523713e-15,
+      "ideal_equivalence_passed": true,
+      "nonideal_cases": {
+        "nominal_pockels_8b": {
+          "mean_rel_rmse": 0.08692,
+          "std_rel_rmse": 0.00442,
+          "center_vs_edge_rmse": [
+            0.09711,
+            0.12434
+          ],
+          "effective_mac_enob": 3.23,
+          "per_seed": [
+            {
+              "seed": 42,
+              "mean_rel_rmse": 0.08082614565096174,
+              "center_wl_rmse": 0.07188076536523691,
+              "edge_wl_rmse": 0.09288461508966508
+            },
+            {
+              "seed": 137,
+              "mean_rel_rmse": 0.09117854666741039,
+              "center_wl_rmse": 0.12917698685040305,
+              "edge_wl_rmse": 0.15415217044420748
+            },
+            {
+              "seed": 2025,
+              "mean_rel_rmse": 0.08874760902162213,
+              "center_wl_rmse": 0.09025821823483718,
+              "edge_wl_rmse": 0.12597957862314185
+            }
+          ]
+        },
+        "nominal_pockels_4b": {
+          "mean_rel_rmse": 0.12079,
+          "std_rel_rmse": 0.01196,
+          "center_vs_edge_rmse": [
+            0.13553,
+            0.1712
+          ],
+          "effective_mac_enob": 2.76,
+          "per_seed": [
+            {
+              "seed": 42,
+              "mean_rel_rmse": 0.10477251171748767,
+              "center_wl_rmse": 0.08750062971195324,
+              "edge_wl_rmse": 0.13421280074421052
+            },
+            {
+              "seed": 137,
+              "mean_rel_rmse": 0.13350677216146628,
+              "center_wl_rmse": 0.20378286304352167,
+              "edge_wl_rmse": 0.19648320745240036
+            },
+            {
+              "seed": 2025,
+              "mean_rel_rmse": 0.12409429605375993,
+              "center_wl_rmse": 0.115321230435119,
+              "edge_wl_rmse": 0.18291127961041173
+            }
+          ]
+        },
+        "high_error_thermal_drift": {
+          "mean_rel_rmse": 0.50663,
+          "std_rel_rmse": 0.28109,
+          "center_vs_edge_rmse": [
+            0.54987,
+            0.62467
+          ],
+          "effective_mac_enob": 0.69,
+          "per_seed": [
+            {
+              "seed": 42,
+              "mean_rel_rmse": 0.14421885218505676,
+              "center_wl_rmse": 0.12296345051927317,
+              "edge_wl_rmse": 0.19297231738569307
+            },
+            {
+              "seed": 137,
+              "mean_rel_rmse": 0.8292968787775262,
+              "center_wl_rmse": 1.0232260488265432,
+              "edge_wl_rmse": 1.1268964370519565
+            },
+            {
+              "seed": 2025,
+              "mean_rel_rmse": 0.546365514140738,
+              "center_wl_rmse": 0.5034074435525857,
+              "edge_wl_rmse": 0.5541304576843716
+            }
+          ]
+        }
+      }
+    },
+    "nn_training_convergence_sim": {
+      "runtime_s": 75.212,
+      "seeds": [
+        42,
+        137,
+        2025
+      ],
+      "target_val_acc": 0.9,
+      "models": {
+        "digital_fp32_baseline": {
+          "bits": 32,
+          "rel_noise_std": 0.0,
+          "drift_bias": 0.0,
+          "photonic_wgrad": false,
+          "mean_final_val_acc": 0.945,
+          "std_final_val_acc": 0.0068,
+          "convergence_rate": 1.0,
+          "converged_all_seeds": true,
+          "mean_epochs_to_90pct": 5.3,
+          "mean_fwd_rel_err": 0.0,
+          "mean_grad_rel_err": 0.0,
+          "per_seed": [
+            {
+              "seed": 42,
+              "final_val_acc": 0.9367,
+              "final_train_loss": 0.0028,
+              "converged": true,
+              "epoch_to_target": 6,
+              "mean_fwd_rel_err": 0.0,
+              "mean_grad_rel_err": 0.0,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.7735,
+                  "val_acc": 0.8317
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.1085,
+                  "val_acc": 0.9333
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 0.0448,
+                  "val_acc": 0.945
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 0.0313,
+                  "val_acc": 0.935
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 0.0105,
+                  "val_acc": 0.94
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 0.0044,
+                  "val_acc": 0.9433
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 0.0028,
+                  "val_acc": 0.9367
+                }
+              ]
+            },
+            {
+              "seed": 137,
+              "final_val_acc": 0.945,
+              "final_train_loss": 0.0024,
+              "converged": true,
+              "epoch_to_target": 8,
+              "mean_fwd_rel_err": 0.0,
+              "mean_grad_rel_err": 0.0,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.7238,
+                  "val_acc": 0.825
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.0957,
+                  "val_acc": 0.9233
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 0.0394,
+                  "val_acc": 0.915
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 0.0186,
+                  "val_acc": 0.93
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 0.0087,
+                  "val_acc": 0.9433
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 0.0184,
+                  "val_acc": 0.9383
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 0.0024,
+                  "val_acc": 0.945
+                }
+              ]
+            },
+            {
+              "seed": 2025,
+              "final_val_acc": 0.9533,
+              "final_train_loss": 0.0099,
+              "converged": true,
+              "epoch_to_target": 2,
+              "mean_fwd_rel_err": 0.0,
+              "mean_grad_rel_err": 0.0,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.5588,
+                  "val_acc": 0.8767
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.0576,
+                  "val_acc": 0.9333
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 0.0222,
+                  "val_acc": 0.945
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 0.0087,
+                  "val_acc": 0.9517
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 0.0032,
+                  "val_acc": 0.9567
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 0.0017,
+                  "val_acc": 0.9517
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 0.0099,
+                  "val_acc": 0.9533
+                }
+              ]
+            }
+          ]
+        },
+        "photonic_8b_hybrid_wgrad": {
+          "bits": 8,
+          "rel_noise_std": 0.03,
+          "drift_bias": 0.005,
+          "photonic_wgrad": false,
+          "mean_final_val_acc": 0.9305,
+          "std_final_val_acc": 0.0061,
+          "convergence_rate": 1.0,
+          "converged_all_seeds": true,
+          "mean_epochs_to_90pct": 4.7,
+          "mean_fwd_rel_err": 0.0338,
+          "mean_grad_rel_err": 0.1341,
+          "per_seed": [
+            {
+              "seed": 42,
+              "final_val_acc": 0.9233,
+              "final_train_loss": 0.0471,
+              "converged": true,
+              "epoch_to_target": 8,
+              "mean_fwd_rel_err": 0.0331,
+              "mean_grad_rel_err": 0.1356,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.7791,
+                  "val_acc": 0.8283
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.113,
+                  "val_acc": 0.9283
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 0.0637,
+                  "val_acc": 0.9183
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 0.0528,
+                  "val_acc": 0.9283
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 0.0425,
+                  "val_acc": 0.915
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 0.0479,
+                  "val_acc": 0.9217
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 0.0471,
+                  "val_acc": 0.9233
+                }
+              ]
+            },
+            {
+              "seed": 137,
+              "final_val_acc": 0.93,
+              "final_train_loss": 0.0327,
+              "converged": true,
+              "epoch_to_target": 4,
+              "mean_fwd_rel_err": 0.034,
+              "mean_grad_rel_err": 0.1479,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.7295,
+                  "val_acc": 0.8233
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.0982,
+                  "val_acc": 0.9167
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 0.0604,
+                  "val_acc": 0.93
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 0.0414,
+                  "val_acc": 0.9367
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 0.0312,
+                  "val_acc": 0.93
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 0.0279,
+                  "val_acc": 0.92
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 0.0327,
+                  "val_acc": 0.93
+                }
+              ]
+            },
+            {
+              "seed": 2025,
+              "final_val_acc": 0.9383,
+              "final_train_loss": 0.0211,
+              "converged": true,
+              "epoch_to_target": 2,
+              "mean_fwd_rel_err": 0.0343,
+              "mean_grad_rel_err": 0.1189,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.5635,
+                  "val_acc": 0.88
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.0746,
+                  "val_acc": 0.955
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 0.0331,
+                  "val_acc": 0.95
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 0.0293,
+                  "val_acc": 0.9317
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 0.0153,
+                  "val_acc": 0.9383
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 0.0121,
+                  "val_acc": 0.945
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 0.0211,
+                  "val_acc": 0.9383
+                }
+              ]
+            }
+          ]
+        },
+        "photonic_6b_hybrid_wgrad": {
+          "bits": 6,
+          "rel_noise_std": 0.05,
+          "drift_bias": 0.01,
+          "photonic_wgrad": false,
+          "mean_final_val_acc": 0.915,
+          "std_final_val_acc": 0.0103,
+          "convergence_rate": 1.0,
+          "converged_all_seeds": true,
+          "mean_epochs_to_90pct": 13.0,
+          "mean_fwd_rel_err": 0.0817,
+          "mean_grad_rel_err": 0.1988,
+          "per_seed": [
+            {
+              "seed": 42,
+              "final_val_acc": 0.9033,
+              "final_train_loss": 0.2829,
+              "converged": true,
+              "epoch_to_target": 14,
+              "mean_fwd_rel_err": 0.0774,
+              "mean_grad_rel_err": 0.2116,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.7861,
+                  "val_acc": 0.8217
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.1705,
+                  "val_acc": 0.9
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 0.1467,
+                  "val_acc": 0.89
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 0.1712,
+                  "val_acc": 0.8933
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 0.1792,
+                  "val_acc": 0.885
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 0.2172,
+                  "val_acc": 0.88
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 0.2829,
+                  "val_acc": 0.9033
+                }
+              ]
+            },
+            {
+              "seed": 137,
+              "final_val_acc": 0.9133,
+              "final_train_loss": 0.2015,
+              "converged": true,
+              "epoch_to_target": 22,
+              "mean_fwd_rel_err": 0.0823,
+              "mean_grad_rel_err": 0.2024,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.734,
+                  "val_acc": 0.805
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.1355,
+                  "val_acc": 0.89
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 0.1252,
+                  "val_acc": 0.9133
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 0.1407,
+                  "val_acc": 0.9183
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 0.1506,
+                  "val_acc": 0.9033
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 0.2186,
+                  "val_acc": 0.88
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 0.2015,
+                  "val_acc": 0.9133
+                }
+              ]
+            },
+            {
+              "seed": 2025,
+              "final_val_acc": 0.9283,
+              "final_train_loss": 0.1503,
+              "converged": true,
+              "epoch_to_target": 3,
+              "mean_fwd_rel_err": 0.0855,
+              "mean_grad_rel_err": 0.1823,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.5719,
+                  "val_acc": 0.8783
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.1132,
+                  "val_acc": 0.9483
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 0.094,
+                  "val_acc": 0.93
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 0.098,
+                  "val_acc": 0.92
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 0.1157,
+                  "val_acc": 0.9333
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 0.1449,
+                  "val_acc": 0.9267
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 0.1503,
+                  "val_acc": 0.9283
+                }
+              ]
+            }
+          ]
+        },
+        "photonic_4b_hybrid_wgrad": {
+          "bits": 4,
+          "rel_noise_std": 0.12,
+          "drift_bias": 0.02,
+          "photonic_wgrad": false,
+          "mean_final_val_acc": 0.7972,
+          "std_final_val_acc": 0.0194,
+          "convergence_rate": 0.0,
+          "converged_all_seeds": false,
+          "mean_epochs_to_90pct": null,
+          "mean_fwd_rel_err": 0.3129,
+          "mean_grad_rel_err": 0.5057,
+          "per_seed": [
+            {
+              "seed": 42,
+              "final_val_acc": 0.7767,
+              "final_train_loss": 1.8789,
+              "converged": false,
+              "epoch_to_target": null,
+              "mean_fwd_rel_err": 0.2982,
+              "mean_grad_rel_err": 0.4873,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.9271,
+                  "val_acc": 0.755
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.9026,
+                  "val_acc": 0.76
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 1.6808,
+                  "val_acc": 0.7567
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 1.8174,
+                  "val_acc": 0.7617
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 1.773,
+                  "val_acc": 0.7567
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 1.9638,
+                  "val_acc": 0.7583
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 1.8789,
+                  "val_acc": 0.7767
+                }
+              ]
+            },
+            {
+              "seed": 137,
+              "final_val_acc": 0.7917,
+              "final_train_loss": 1.6886,
+              "converged": false,
+              "epoch_to_target": null,
+              "mean_fwd_rel_err": 0.3184,
+              "mean_grad_rel_err": 0.4819,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.8735,
+                  "val_acc": 0.7317
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 1.2109,
+                  "val_acc": 0.8083
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 1.9271,
+                  "val_acc": 0.7833
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 1.7306,
+                  "val_acc": 0.7867
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 1.7174,
+                  "val_acc": 0.815
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 1.7095,
+                  "val_acc": 0.7867
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 1.6886,
+                  "val_acc": 0.7917
+                }
+              ]
+            },
+            {
+              "seed": 2025,
+              "final_val_acc": 0.8233,
+              "final_train_loss": 1.3379,
+              "converged": false,
+              "epoch_to_target": null,
+              "mean_fwd_rel_err": 0.322,
+              "mean_grad_rel_err": 0.5479,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.6695,
+                  "val_acc": 0.835
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 1.037,
+                  "val_acc": 0.8783
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 1.4352,
+                  "val_acc": 0.8683
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 1.3108,
+                  "val_acc": 0.8417
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 1.3495,
+                  "val_acc": 0.8567
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 1.457,
+                  "val_acc": 0.8083
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 1.3379,
+                  "val_acc": 0.8233
+                }
+              ]
+            }
+          ]
+        },
+        "photonic_4b_all_photonic": {
+          "bits": 4,
+          "rel_noise_std": 0.12,
+          "drift_bias": 0.02,
+          "photonic_wgrad": true,
+          "mean_final_val_acc": 0.7883,
+          "std_final_val_acc": 0.0471,
+          "convergence_rate": 0.0,
+          "converged_all_seeds": false,
+          "mean_epochs_to_90pct": null,
+          "mean_fwd_rel_err": 0.3162,
+          "mean_grad_rel_err": 0.5962,
+          "per_seed": [
+            {
+              "seed": 42,
+              "final_val_acc": 0.7333,
+              "final_train_loss": 1.557,
+              "converged": false,
+              "epoch_to_target": null,
+              "mean_fwd_rel_err": 0.3115,
+              "mean_grad_rel_err": 0.6007,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.9339,
+                  "val_acc": 0.7583
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.6254,
+                  "val_acc": 0.7617
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 1.1473,
+                  "val_acc": 0.7567
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 1.8205,
+                  "val_acc": 0.7383
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 1.7386,
+                  "val_acc": 0.7267
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 1.8528,
+                  "val_acc": 0.7117
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 1.557,
+                  "val_acc": 0.7333
+                }
+              ]
+            },
+            {
+              "seed": 137,
+              "final_val_acc": 0.7833,
+              "final_train_loss": 1.897,
+              "converged": false,
+              "epoch_to_target": null,
+              "mean_fwd_rel_err": 0.3092,
+              "mean_grad_rel_err": 0.5826,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.8853,
+                  "val_acc": 0.73
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.5755,
+                  "val_acc": 0.79
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 1.2683,
+                  "val_acc": 0.7983
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 1.5057,
+                  "val_acc": 0.7867
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 1.4656,
+                  "val_acc": 0.785
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 1.5907,
+                  "val_acc": 0.7933
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 1.897,
+                  "val_acc": 0.7833
+                }
+              ]
+            },
+            {
+              "seed": 2025,
+              "final_val_acc": 0.8483,
+              "final_train_loss": 1.1321,
+              "converged": false,
+              "epoch_to_target": null,
+              "mean_fwd_rel_err": 0.3278,
+              "mean_grad_rel_err": 0.6054,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.6712,
+                  "val_acc": 0.83
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.5143,
+                  "val_acc": 0.855
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 1.1763,
+                  "val_acc": 0.8467
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 1.2498,
+                  "val_acc": 0.8567
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 1.0822,
+                  "val_acc": 0.8467
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 1.3761,
+                  "val_acc": 0.8467
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 1.1321,
+                  "val_acc": 0.8483
+                }
+              ]
+            }
+          ]
+        },
+        "photonic_high_drift_fail": {
+          "bits": 6,
+          "rel_noise_std": 0.45,
+          "drift_bias": 0.15,
+          "photonic_wgrad": false,
+          "mean_final_val_acc": 0.7766,
+          "std_final_val_acc": 0.0448,
+          "convergence_rate": 0.0,
+          "converged_all_seeds": false,
+          "mean_epochs_to_90pct": null,
+          "mean_fwd_rel_err": 0.3284,
+          "mean_grad_rel_err": 0.4711,
+          "per_seed": [
+            {
+              "seed": 42,
+              "final_val_acc": 0.7333,
+              "final_train_loss": 6.284,
+              "converged": false,
+              "epoch_to_target": null,
+              "mean_fwd_rel_err": 0.3246,
+              "mean_grad_rel_err": 0.4359,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 1.2787,
+                  "val_acc": 0.66
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 1.1712,
+                  "val_acc": 0.71
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 2.2402,
+                  "val_acc": 0.725
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 4.0513,
+                  "val_acc": 0.7183
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 4.9593,
+                  "val_acc": 0.725
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 6.1915,
+                  "val_acc": 0.7383
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 6.284,
+                  "val_acc": 0.7333
+                }
+              ]
+            },
+            {
+              "seed": 137,
+              "final_val_acc": 0.7583,
+              "final_train_loss": 6.1881,
+              "converged": false,
+              "epoch_to_target": null,
+              "mean_fwd_rel_err": 0.3353,
+              "mean_grad_rel_err": 0.5486,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 1.2326,
+                  "val_acc": 0.6567
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 1.0528,
+                  "val_acc": 0.7633
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 2.4085,
+                  "val_acc": 0.7817
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 4.0463,
+                  "val_acc": 0.76
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 4.9829,
+                  "val_acc": 0.7483
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 5.8575,
+                  "val_acc": 0.7533
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 6.1881,
+                  "val_acc": 0.7583
+                }
+              ]
+            },
+            {
+              "seed": 2025,
+              "final_val_acc": 0.8383,
+              "final_train_loss": 4.6065,
+              "converged": false,
+              "epoch_to_target": null,
+              "mean_fwd_rel_err": 0.3254,
+              "mean_grad_rel_err": 0.4289,
+              "curve_sampled": [
+                {
+                  "epoch": 1,
+                  "train_loss": 0.9917,
+                  "val_acc": 0.7767
+                },
+                {
+                  "epoch": 20,
+                  "train_loss": 0.9786,
+                  "val_acc": 0.8233
+                },
+                {
+                  "epoch": 40,
+                  "train_loss": 1.8637,
+                  "val_acc": 0.8417
+                },
+                {
+                  "epoch": 60,
+                  "train_loss": 3.1094,
+                  "val_acc": 0.8033
+                },
+                {
+                  "epoch": 80,
+                  "train_loss": 3.8094,
+                  "val_acc": 0.795
+                },
+                {
+                  "epoch": 100,
+                  "train_loss": 4.3851,
+                  "val_acc": 0.8333
+                },
+                {
+                  "epoch": 120,
+                  "train_loss": 4.6065,
+                  "val_acc": 0.8383
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "rankings_and_pareto_candidates": {
+    "note": "Nonconvergent 4-bit designs are excluded from optimal rankings per mandate and preserved separately.",
+    "best_convergent_overall": {
+      "feasible": true,
+      "reject_reason": null,
+      "config": {
+        "arch_type": "IndepLaser_MZI",
+        "source_topo": "distributed",
+        "n_pump": 1,
+        "n_comb": 1,
+        "n_lambda": 8,
+        "mesh_m": 8,
+        "n_tiles": 32,
+        "phase_tech": "pockels_tfln",
+        "bits": 6,
+        "cadence_steps": 1
+      },
+      "metrics": {
+        "eta_sys_topsw": 1.5405,
+        "eta_chip_topsw": 5.962,
+        "pj_per_mac_sys": 1.2983,
+        "j_per_step_sys": 0.0063,
+        "sustained_tops": 488.467,
+        "peak_tops": 527.68,
+        "peak_photonic_tops": 327.68,
+        "step_latency_ms": 0.0198,
+        "chip_area_mm2": 487.04,
+        "p_system_w": 317.085,
+        "p_chip_only_w": 81.93,
+        "total_path_loss_db": 23.38,
+        "p_pump_opt_mw": 447.99,
+        "used_amp": false,
+        "target_snr_db": 41.39,
+        "photonic_mac_frac": 0.667,
+        "weights_resident": false
+      },
+      "power_breakdown_w": {
+        "laser_wpe": 71.679,
+        "comb_stab": 0.0,
+        "optical_amp": 0.0,
+        "ps_static": 0.002,
+        "ps_dynamic": 0.02,
+        "conv_and_drv": 40.706,
+        "tia": 10.189,
+        "calibration": 0.102,
+        "elec_compute_opt": 26.331,
+        "memory_sram_hbm": 126.696,
+        "cooling_pue": 41.359
+      },
+      "bom": {
+        "pump_lasers": 256,
+        "comb_rings": 0,
+        "weight_rings": 0,
+        "mzis": 2048,
+        "phase_shifters": 4096,
+        "modulators": 2048,
+        "photodiodes": 4096,
+        "dacs": 2048,
+        "adcs": 2048
+      },
+      "id": "CFG-0100",
+      "convergence_adjusted": {
+        "converged": true,
+        "epochs_to_90pct_ratio_vs_fp32": 2.45,
+        "modeled_joules_to_target_10k_equiv": 154.53,
+        "modeled_time_to_target_s": 0.486
+      }
+    },
+    "best_convergent_comb_powered": null,
+    "convergent_pareto_candidates": [
+      {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 32,
+          "phase_tech": "pockels_tfln",
+          "bits": 6,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 1.5405,
+          "eta_chip_topsw": 5.962,
+          "pj_per_mac_sys": 1.2983,
+          "j_per_step_sys": 0.0063,
+          "sustained_tops": 488.467,
+          "peak_tops": 527.68,
+          "peak_photonic_tops": 327.68,
+          "step_latency_ms": 0.0198,
+          "chip_area_mm2": 487.04,
+          "p_system_w": 317.085,
+          "p_chip_only_w": 81.93,
+          "total_path_loss_db": 23.38,
+          "p_pump_opt_mw": 447.99,
+          "used_amp": false,
+          "target_snr_db": 41.39,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 71.679,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.002,
+          "ps_dynamic": 0.02,
+          "conv_and_drv": 40.706,
+          "tia": 10.189,
+          "calibration": 0.102,
+          "elec_compute_opt": 26.331,
+          "memory_sram_hbm": 126.696,
+          "cooling_pue": 41.359
+        },
+        "bom": {
+          "pump_lasers": 256,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 2048,
+          "phase_shifters": 4096,
+          "modulators": 2048,
+          "photodiodes": 4096,
+          "dacs": 2048,
+          "adcs": 2048
+        },
+        "id": "CFG-0100",
+        "convergence_adjusted": {
+          "converged": true,
+          "epochs_to_90pct_ratio_vs_fp32": 2.45,
+          "modeled_joules_to_target_10k_equiv": 154.53,
+          "modeled_time_to_target_s": 0.486
+        }
+      }
+    ],
+    "excluded_nonconvergent_high_efficiency": [
+      {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 32,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 2.0842,
+          "eta_chip_topsw": 7.4989,
+          "pj_per_mac_sys": 0.9596,
+          "j_per_step_sys": 0.0046,
+          "sustained_tops": 488.467,
+          "peak_tops": 527.68,
+          "peak_photonic_tops": 327.68,
+          "step_latency_ms": 0.0198,
+          "chip_area_mm2": 487.04,
+          "p_system_w": 234.369,
+          "p_chip_only_w": 65.139,
+          "total_path_loss_db": 23.38,
+          "p_pump_opt_mw": 103.4,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 16.543,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.002,
+          "ps_dynamic": 0.02,
+          "conv_and_drv": 25.441,
+          "tia": 10.189,
+          "calibration": 0.102,
+          "elec_compute_opt": 26.331,
+          "memory_sram_hbm": 125.17,
+          "cooling_pue": 30.57
+        },
+        "bom": {
+          "pump_lasers": 256,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 2048,
+          "phase_shifters": 4096,
+          "modulators": 2048,
+          "photodiodes": 4096,
+          "dacs": 2048,
+          "adcs": 2048
+        },
+        "id": "CFG-0001",
+        "convergence_adjusted": {
+          "converged": false,
+          "reason": "4-bit failed 90% validation target in seeded NN training (79.7% < 90%)."
+        }
+      },
+      {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 16,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 2.084,
+          "eta_chip_topsw": 7.4966,
+          "pj_per_mac_sys": 0.9597,
+          "j_per_step_sys": 0.0046,
+          "sustained_tops": 244.234,
+          "peak_tops": 363.84,
+          "peak_photonic_tops": 163.84,
+          "step_latency_ms": 0.0396,
+          "chip_area_mm2": 243.52,
+          "p_system_w": 117.196,
+          "p_chip_only_w": 32.579,
+          "total_path_loss_db": 23.38,
+          "p_pump_opt_mw": 103.4,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 8.272,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.001,
+          "ps_dynamic": 0.02,
+          "conv_and_drv": 12.72,
+          "tia": 5.095,
+          "calibration": 0.051,
+          "elec_compute_opt": 13.166,
+          "memory_sram_hbm": 62.585,
+          "cooling_pue": 15.286
+        },
+        "bom": {
+          "pump_lasers": 128,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 1024,
+          "phase_shifters": 2048,
+          "modulators": 1024,
+          "photodiodes": 2048,
+          "dacs": 1024,
+          "adcs": 1024
+        },
+        "id": "CFG-0002",
+        "convergence_adjusted": {
+          "converged": false,
+          "reason": "4-bit failed 90% validation target in seeded NN training (79.7% < 90%)."
+        }
+      },
+      {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 8,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 2.0836,
+          "eta_chip_topsw": 7.492,
+          "pj_per_mac_sys": 0.9599,
+          "j_per_step_sys": 0.0046,
+          "sustained_tops": 122.117,
+          "peak_tops": 281.92,
+          "peak_photonic_tops": 81.92,
+          "step_latency_ms": 0.0791,
+          "chip_area_mm2": 121.76,
+          "p_system_w": 58.609,
+          "p_chip_only_w": 16.3,
+          "total_path_loss_db": 23.38,
+          "p_pump_opt_mw": 103.4,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 4.136,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.001,
+          "ps_dynamic": 0.02,
+          "conv_and_drv": 6.36,
+          "tia": 2.547,
+          "calibration": 0.026,
+          "elec_compute_opt": 6.583,
+          "memory_sram_hbm": 31.292,
+          "cooling_pue": 7.645
+        },
+        "bom": {
+          "pump_lasers": 64,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 512,
+          "phase_shifters": 1024,
+          "modulators": 512,
+          "photodiodes": 1024,
+          "dacs": 512,
+          "adcs": 512
+        },
+        "id": "CFG-0003",
+        "convergence_adjusted": {
+          "converged": false,
+          "reason": "4-bit failed 90% validation target in seeded NN training (79.7% < 90%)."
+        }
+      },
+      {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 16,
+          "mesh_m": 8,
+          "n_tiles": 16,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 2.0833,
+          "eta_chip_topsw": 7.5011,
+          "pj_per_mac_sys": 0.96,
+          "j_per_step_sys": 0.0046,
+          "sustained_tops": 485.452,
+          "peak_tops": 527.68,
+          "peak_photonic_tops": 327.68,
+          "step_latency_ms": 0.0199,
+          "chip_area_mm2": 319.3,
+          "p_system_w": 233.018,
+          "p_chip_only_w": 64.718,
+          "total_path_loss_db": 23.38,
+          "p_pump_opt_mw": 206.79,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 16.543,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.001,
+          "ps_dynamic": 0.04,
+          "conv_and_drv": 25.284,
+          "tia": 10.139,
+          "calibration": 0.051,
+          "elec_compute_opt": 26.169,
+          "memory_sram_hbm": 124.397,
+          "cooling_pue": 30.394
+        },
+        "bom": {
+          "pump_lasers": 256,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 1024,
+          "phase_shifters": 2048,
+          "modulators": 2048,
+          "photodiodes": 4096,
+          "dacs": 2048,
+          "adcs": 2048
+        },
+        "id": "CFG-0004",
+        "convergence_adjusted": {
+          "converged": false,
+          "reason": "4-bit failed 90% validation target in seeded NN training (79.7% < 90%)."
+        }
+      },
+      {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 16,
+          "mesh_m": 8,
+          "n_tiles": 8,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 2.0829,
+          "eta_chip_topsw": 7.4965,
+          "pj_per_mac_sys": 0.9602,
+          "j_per_step_sys": 0.0046,
+          "sustained_tops": 242.726,
+          "peak_tops": 363.84,
+          "peak_photonic_tops": 163.84,
+          "step_latency_ms": 0.0398,
+          "chip_area_mm2": 159.65,
+          "p_system_w": 116.531,
+          "p_chip_only_w": 32.379,
+          "total_path_loss_db": 23.38,
+          "p_pump_opt_mw": 206.79,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 8.272,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.001,
+          "ps_dynamic": 0.04,
+          "conv_and_drv": 12.642,
+          "tia": 5.069,
+          "calibration": 0.026,
+          "elec_compute_opt": 13.084,
+          "memory_sram_hbm": 62.199,
+          "cooling_pue": 15.2
+        },
+        "bom": {
+          "pump_lasers": 128,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 512,
+          "phase_shifters": 1024,
+          "modulators": 1024,
+          "photodiodes": 2048,
+          "dacs": 1024,
+          "adcs": 1024
+        },
+        "id": "CFG-0005",
+        "convergence_adjusted": {
+          "converged": false,
+          "reason": "4-bit failed 90% validation target in seeded NN training (79.7% < 90%)."
+        }
+      }
+    ],
+    "best_by_arch_raw_feasible": {
+      "MZI": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "MZI",
+          "source_topo": "distributed",
+          "n_pump": 8,
+          "n_comb": 8,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 8,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 1.5329,
+          "eta_chip_topsw": 7.492,
+          "pj_per_mac_sys": 1.3047,
+          "j_per_step_sys": 0.0063,
+          "sustained_tops": 122.117,
+          "peak_tops": 281.92,
+          "peak_photonic_tops": 81.92,
+          "step_latency_ms": 0.0791,
+          "chip_area_mm2": 123.76,
+          "p_system_w": 79.666,
+          "p_chip_only_w": 16.3,
+          "total_path_loss_db": 27.38,
+          "p_pump_opt_mw": 42.38,
+          "used_amp": true,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 1.695,
+          "comb_stab": 0.8,
+          "optical_amp": 19.951,
+          "ps_static": 0.001,
+          "ps_dynamic": 0.02,
+          "conv_and_drv": 6.36,
+          "tia": 2.547,
+          "calibration": 0.026,
+          "elec_compute_opt": 6.583,
+          "memory_sram_hbm": 31.292,
+          "cooling_pue": 10.391
+        },
+        "bom": {
+          "pump_lasers": 8,
+          "comb_rings": 8,
+          "weight_rings": 0,
+          "mzis": 512,
+          "phase_shifters": 1024,
+          "modulators": 512,
+          "photodiodes": 1024,
+          "dacs": 512,
+          "adcs": 512
+        },
+        "id": "CFG-0106"
+      },
+      "MRR": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "MRR",
+          "source_topo": "distributed",
+          "n_pump": 4,
+          "n_comb": 4,
+          "n_lambda": 8,
+          "mesh_m": 16,
+          "n_tiles": 4,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 0.6471,
+          "eta_chip_topsw": 8.1817,
+          "pj_per_mac_sys": 3.0909,
+          "j_per_step_sys": 0.0149,
+          "sustained_tops": 10.235,
+          "peak_tops": 10.24,
+          "peak_photonic_tops": 10.24,
+          "step_latency_ms": 0.9442,
+          "chip_area_mm2": 47.29,
+          "p_system_w": 15.817,
+          "p_chip_only_w": 1.251,
+          "total_path_loss_db": 26.5,
+          "p_pump_opt_mw": 42.38,
+          "used_amp": true,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 1.0,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 0.848,
+          "comb_stab": 0.4,
+          "optical_amp": 8.697,
+          "ps_static": 0.0,
+          "ps_dynamic": 0.002,
+          "conv_and_drv": 0.8,
+          "tia": 0.32,
+          "calibration": 0.026,
+          "elec_compute_opt": 0.04,
+          "memory_sram_hbm": 2.623,
+          "cooling_pue": 2.063
+        },
+        "bom": {
+          "pump_lasers": 4,
+          "comb_rings": 4,
+          "weight_rings": 512,
+          "mzis": 0,
+          "phase_shifters": 512,
+          "modulators": 32,
+          "photodiodes": 128,
+          "dacs": 32,
+          "adcs": 64
+        },
+        "id": "CFG-0240"
+      },
+      "Hybrid": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "Hybrid",
+          "source_topo": "distributed",
+          "n_pump": 8,
+          "n_comb": 8,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 8,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 1.6279,
+          "eta_chip_topsw": 7.4874,
+          "pj_per_mac_sys": 1.2286,
+          "j_per_step_sys": 0.0059,
+          "sustained_tops": 122.117,
+          "peak_tops": 281.92,
+          "peak_photonic_tops": 81.92,
+          "step_latency_ms": 0.0791,
+          "chip_area_mm2": 120.05,
+          "p_system_w": 75.016,
+          "p_chip_only_w": 16.31,
+          "total_path_loss_db": 25.88,
+          "p_pump_opt_mw": 42.38,
+          "used_amp": true,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 1.695,
+          "comb_stab": 0.8,
+          "optical_amp": 15.898,
+          "ps_static": 0.0,
+          "ps_dynamic": 0.019,
+          "conv_and_drv": 6.36,
+          "tia": 2.547,
+          "calibration": 0.037,
+          "elec_compute_opt": 6.583,
+          "memory_sram_hbm": 31.292,
+          "cooling_pue": 9.785
+        },
+        "bom": {
+          "pump_lasers": 8,
+          "comb_rings": 8,
+          "weight_rings": 512,
+          "mzis": 224,
+          "phase_shifters": 960,
+          "modulators": 512,
+          "photodiodes": 1024,
+          "dacs": 512,
+          "adcs": 512
+        },
+        "id": "CFG-0080"
+      },
+      "IndepLaser_MZI": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 32,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 2.0842,
+          "eta_chip_topsw": 7.4989,
+          "pj_per_mac_sys": 0.9596,
+          "j_per_step_sys": 0.0046,
+          "sustained_tops": 488.467,
+          "peak_tops": 527.68,
+          "peak_photonic_tops": 327.68,
+          "step_latency_ms": 0.0198,
+          "chip_area_mm2": 487.04,
+          "p_system_w": 234.369,
+          "p_chip_only_w": 65.139,
+          "total_path_loss_db": 23.38,
+          "p_pump_opt_mw": 103.4,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 16.543,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.002,
+          "ps_dynamic": 0.02,
+          "conv_and_drv": 25.441,
+          "tia": 10.189,
+          "calibration": 0.102,
+          "elec_compute_opt": 26.331,
+          "memory_sram_hbm": 125.17,
+          "cooling_pue": 30.57
+        },
+        "bom": {
+          "pump_lasers": 256,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 2048,
+          "phase_shifters": 4096,
+          "modulators": 2048,
+          "photodiodes": 4096,
+          "dacs": 2048,
+          "adcs": 2048
+        },
+        "id": "CFG-0001"
+      },
+      "SingleWave_MZI": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "SingleWave_MZI",
+          "source_topo": "central",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 1,
+          "mesh_m": 8,
+          "n_tiles": 16,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 1.9145,
+          "eta_chip_topsw": 7.4152,
+          "pj_per_mac_sys": 1.0447,
+          "j_per_step_sys": 0.005,
+          "sustained_tops": 30.696,
+          "peak_tops": 220.48,
+          "peak_photonic_tops": 20.48,
+          "step_latency_ms": 0.3148,
+          "chip_area_mm2": 177.47,
+          "p_system_w": 16.033,
+          "p_chip_only_w": 4.14,
+          "total_path_loss_db": 36.27,
+          "p_pump_opt_mw": 42.38,
+          "used_amp": true,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 0.212,
+          "comb_stab": 0.1,
+          "optical_amp": 1.817,
+          "ps_static": 0.001,
+          "ps_dynamic": 0.002,
+          "conv_and_drv": 1.599,
+          "tia": 0.64,
+          "calibration": 0.051,
+          "elec_compute_opt": 1.655,
+          "memory_sram_hbm": 7.866,
+          "cooling_pue": 2.091
+        },
+        "bom": {
+          "pump_lasers": 1,
+          "comb_rings": 1,
+          "weight_rings": 0,
+          "mzis": 1024,
+          "phase_shifters": 2048,
+          "modulators": 128,
+          "photodiodes": 256,
+          "dacs": 128,
+          "adcs": 128
+        },
+        "id": "CFG-0022"
+      }
+    },
+    "best_by_phase_tech_raw_feasible": {
+      "thermo_optic": null,
+      "carrier_depletion": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 4,
+          "n_tiles": 32,
+          "phase_tech": "carrier_depletion",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 1.1148,
+          "eta_chip_topsw": 4.8418,
+          "pj_per_mac_sys": 1.794,
+          "j_per_step_sys": 0.0087,
+          "sustained_tops": 120.99,
+          "peak_tops": 281.92,
+          "peak_photonic_tops": 81.92,
+          "step_latency_ms": 0.0799,
+          "chip_area_mm2": 145.02,
+          "p_system_w": 108.53,
+          "p_chip_only_w": 24.989,
+          "total_path_loss_db": 27.12,
+          "p_pump_opt_mw": 244.61,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 39.138,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.005,
+          "ps_dynamic": 0.02,
+          "conv_and_drv": 12.603,
+          "tia": 5.057,
+          "calibration": 0.026,
+          "elec_compute_opt": 6.522,
+          "memory_sram_hbm": 31.004,
+          "cooling_pue": 14.156
+        },
+        "bom": {
+          "pump_lasers": 256,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 512,
+          "phase_shifters": 1024,
+          "modulators": 1024,
+          "photodiodes": 2048,
+          "dacs": 1024,
+          "adcs": 1024
+        },
+        "id": "CFG-0157"
+      },
+      "pockels_tfln": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 32,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 2.0842,
+          "eta_chip_topsw": 7.4989,
+          "pj_per_mac_sys": 0.9596,
+          "j_per_step_sys": 0.0046,
+          "sustained_tops": 488.467,
+          "peak_tops": 527.68,
+          "peak_photonic_tops": 327.68,
+          "step_latency_ms": 0.0198,
+          "chip_area_mm2": 487.04,
+          "p_system_w": 234.369,
+          "p_chip_only_w": 65.139,
+          "total_path_loss_db": 23.38,
+          "p_pump_opt_mw": 103.4,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 16.543,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.002,
+          "ps_dynamic": 0.02,
+          "conv_and_drv": 25.441,
+          "tia": 10.189,
+          "calibration": 0.102,
+          "elec_compute_opt": 26.331,
+          "memory_sram_hbm": 125.17,
+          "cooling_pue": 30.57
+        },
+        "bom": {
+          "pump_lasers": 256,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 2048,
+          "phase_shifters": 4096,
+          "modulators": 2048,
+          "photodiodes": 4096,
+          "dacs": 2048,
+          "adcs": 2048
+        },
+        "id": "CFG-0001"
+      },
+      "nonvolatile_pcm": null,
+      "hybrid_pcm_pockels": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 32,
+          "phase_tech": "hybrid_pcm_pockels",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 1.7601,
+          "eta_chip_topsw": 7.494,
+          "pj_per_mac_sys": 1.1363,
+          "j_per_step_sys": 0.0055,
+          "sustained_tops": 483.958,
+          "peak_tops": 527.68,
+          "peak_photonic_tops": 327.68,
+          "step_latency_ms": 0.02,
+          "chip_area_mm2": 513.66,
+          "p_system_w": 274.968,
+          "p_chip_only_w": 64.579,
+          "total_path_loss_db": 28.48,
+          "p_pump_opt_mw": 334.59,
+          "used_amp": false,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 53.534,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.004,
+          "ps_dynamic": 0.039,
+          "conv_and_drv": 25.206,
+          "tia": 10.114,
+          "calibration": 0.102,
+          "elec_compute_opt": 26.088,
+          "memory_sram_hbm": 124.014,
+          "cooling_pue": 35.865
+        },
+        "bom": {
+          "pump_lasers": 256,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 2048,
+          "phase_shifters": 4096,
+          "modulators": 2048,
+          "photodiodes": 4096,
+          "dacs": 2048,
+          "adcs": 2048
+        },
+        "id": "CFG-0045"
+      }
+    }
+  },
+  "key_findings_and_negative_results": [
+    "Negative result 1 (System vs Electronic Baseline): Even the highest-efficiency convergent photonic configuration (IndepLaser_MZI 6-bit, ~1.73 TOPS/W system; Comb-powered Hybrid/MZI 6-bit, ~1.3 TOPS/W system) trails the matched-boundary 3.5 TOPS/W electronic systolic baseline on full-system training, because FP32 master weights + AdamW HBM traffic (~50% of system power) and optical amplifier/laser WPE dominate.",
+    "Negative result 2 (4-bit Nonconvergence): 4-bit photonic models achieved higher raw analytic TOPS/W (up to 2.08 TOPS/W) but failed to reach the 90% validation accuracy target (79.7% +/- 1.9% vs 94.5% FP32), and are therefore excluded from optimal rankings.",
+    "Negative result 3 (Large MZI Meshes & PCM/TO Phase Shifters): M >= 64 MZI meshes fail optical link budget due to O(M) stage insertion loss; nonvolatile PCM fails training endurance (1e7 cycles) on tiled workloads; thermo-optic phase shifters fail latency/throughput due to 20 us weight-reload stalls.",
+    "Negative result 4 (WDM Dispersion): Circuit-level transfer-matrix simulation confirms ideal SVD-MZI equivalence (2.3e-15 error) at lambda_0, but realistic 0.2 dB/MZI loss + 0.015 rad phase error + WDM dispersion degrades effective MAC ENOB to 3.23 bits across 16 channels."
+  ],
+  "limitations_and_next_experiments": {
+    "limitations": [
+      "Analytic sweep uses lumped passive loss and single-mode waveguide approximations rather than full 3D FDTD/EME.",
+      "NN training benchmark uses a synthetic 8D->16->6 nonlinear teacher-student MLP; large-scale Transformer training dynamics may exhibit different sensitivity to 6-bit photonic noise.",
+      "Electronic baseline (3.5 TOPS/W) is modeled at matched system boundary rather than cycle-accurate RTL simulation."
+    ],
+    "falsifiable_next_experiments": [
+      "Fabricate and measure an 8x8 TFLN Pockels MZI tile with 8-channel 50 GHz Si3N4 microcomb to test whether WDM outer-channel dispersion (<0.12 rad RMSE) can be compensated via per-wavelength digital pre-distortion.",
+      "Measure closed-loop thermal stabilization power per MZI under active 10 GHz modulation to validate the 0.05 mW/MZI calibration assumption."
+    ]
+  }
+}

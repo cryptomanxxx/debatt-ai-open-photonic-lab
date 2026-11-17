@@ -1,0 +1,102 @@
+name: AG003 source recovery
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [submit, retrieve]
+        default: retrieve
+      recovery_run_id:
+        description: Previous AG003 source recovery run ID (retrieve only)
+        type: string
+        default: ''
+      confirm_free_project:
+        description: Verified free tier and billing disabled; authorize selected operation
+        type: boolean
+        default: false
+      confirm_public_export:
+        description: Authorize public artifact of reviewed-for-known-secret-patterns source files
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: antigravity-live-probe
+  cancel-in-progress: false
+jobs:
+  recover:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_free_project == true && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 85
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: sudo apt-get update -qq && sudo apt-get install -y python3-cryptography
+      - name: Validate operation and previous recovery run
+        env:
+          MODE: ${{ inputs.mode }}
+          PRIOR: ${{ inputs.recovery_run_id }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [[ "$MODE" == submit ]]; then
+            [[ -z "$PRIOR" ]]
+          elif [[ "$MODE" == retrieve ]]; then
+            [[ "$PRIOR" =~ ^[0-9]+$ ]]
+            [[ "$PRIOR" != "$GITHUB_RUN_ID" ]]
+            gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRIOR" |
+              jq -e '.path == ".github/workflows/ag003-source-recovery.yml" and .head_branch == "main" and .event == "workflow_dispatch" and .status == "completed"' >/dev/null
+          else
+            exit 1
+          fi
+      - uses: actions/download-artifact@v7
+        with:
+          name: antigravity-encrypted-checkpoint-AG-PHOTONIC-003
+          run-id: 43993099721
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/ag-prior
+      - uses: actions/download-artifact@v7
+        if: inputs.mode == 'retrieve'
+        with:
+          name: ag003-source-recovery-encrypted
+          run-id: ${{ inputs.recovery_run_id }}
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/ag-recovery-prior
+      - name: Restore and retrieve existing recovery (GET only)
+        if: inputs.mode == 'retrieve'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          /usr/bin/python3 antigravity/reproduction/AG-PHOTONIC-003/recover_workspace.py --mode retrieve --prior "$RUNNER_TEMP/ag-prior/checkpoint.enc" --recovery "$RUNNER_TEMP/ag-recovery-prior/checkpoint.enc" --output "$RUNNER_TEMP/ag-output/checkpoint.enc" --confirm-free-project
+      - name: Request existing files only
+        if: inputs.mode == 'submit'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          /usr/bin/python3 antigravity/reproduction/AG-PHOTONIC-003/recover_workspace.py --prior "$RUNNER_TEMP/ag-prior/checkpoint.enc" --output "$RUNNER_TEMP/ag-output/checkpoint.enc" --confirm-free-project
+      - name: Poll only the recovery interaction
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          /usr/bin/python3 -c 'import os,sys; from pathlib import Path; sys.path.insert(0,"antigravity"); import manager; p=Path(os.environ["RUNNER_TEMP"])/"ag-output/checkpoint.enc"; sys.exit(manager.poll_existing(os.environ["GEMINI_API_KEY"],"AG-PHOTONIC-003",p))'
+      - name: Validate recovered file manifest
+        if: inputs.confirm_public_export == true
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          /usr/bin/python3 antigravity/reproduction/AG-PHOTONIC-003/extract_workspace.py --checkpoint "$RUNNER_TEMP/ag-output/checkpoint.enc" --original "$RUNNER_TEMP/ag-prior/checkpoint.enc" --output "$RUNNER_TEMP/ag-source"
+      - uses: actions/upload-artifact@v7
+        if: inputs.confirm_public_export == true && success()
+        with:
+          name: ag003-recovered-source-unverified
+          path: ${{ runner.temp }}/ag-source/
+          retention-days: 7
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: ag003-source-recovery-encrypted
+          path: ${{ runner.temp }}/ag-output/checkpoint.enc
+          retention-days: 90
+          if-no-files-found: warn

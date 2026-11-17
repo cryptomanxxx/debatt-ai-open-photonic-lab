@@ -83,28 +83,70 @@ def validate(manifest, blocked=()):
         raise ValueError("Invalid report")
     return files
 
+def select_manifest(response, blocked):
+    # Prefer successful code execution results over model-transcribed text.
+    # Never execute returned code, repair JSON, or choose between conflicting
+    # byte sets. Every recognized manifest must pass full validation.
+    candidates = []
+    for index, step in enumerate(response["steps"]):
+        if step.get("type") == "code_execution_result" and step.get("is_error") is False:
+            texts = [step.get("result")]
+            source = "code_execution_result"
+        elif step.get("type") == "model_output":
+            texts = [part.get("text") for part in step["content"] if part.get("type") == "text"]
+            source = "model_output"
+        else:
+            continue
+        for text in texts:
+            if not isinstance(text, str):
+                continue
+            try:
+                manifest = json.loads(text)
+            except ValueError:
+                continue
+            if not isinstance(manifest, dict) or "files" not in manifest:
+                continue
+            files = validate(manifest, blocked)
+            evidence = json.loads(metadata(manifest, blocked))
+            candidates.append((source, index, files, evidence))
+    if not candidates:
+        raise ValueError("No complete valid manifest")
+    chosen = next((c for c in candidates if c[0] == "code_execution_result"), candidates[0])
+    if any(c[2] != chosen[2] for c in candidates):
+        raise ValueError("Conflicting recovered bytes")
+    # Retain separate screened evidence rather than silently overwrite metadata.
+    evidence = dict(chosen[3])
+    evidence["manifest_source"] = chosen[0]
+    evidence["manifest_step"] = chosen[1]
+    evidence["other_manifest_evidence"] = [
+        {"source": c[0], "step": c[1], "metadata": c[3]}
+        for c in candidates if c is not chosen
+    ]
+    serialized = json.dumps(evidence, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
+    screen(serialized, blocked)
+    return chosen[2], serialized
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--checkpoint", type=Path, required=True)
     p.add_argument("--original", type=Path, required=True)
+    p.add_argument("--previous", type=Path)
     p.add_argument("--output", type=Path, required=True)
     a = p.parse_args()
     key = os.environ["GEMINI_API_KEY"]
     response = manager.load(key, "AG-PHOTONIC-003", a.checkpoint)
     if response.get("status") != "completed":
         raise ValueError("Recovery not completed")
-    texts = [part["text"] for step in response["steps"]
-             if step.get("type") == "model_output"
-             for part in step["content"] if part.get("type") == "text"]
-    if not texts:
-        raise ValueError("No manifest")
-    manifest = json.loads(texts[-1])
     original = manager.load(key, "AG-PHOTONIC-003", a.original)
     if original.get("status") != "completed" or original["id"] == response["id"]:
         raise ValueError("Invalid original checkpoint")
-    blocked = identifiers(original, response) | {key}
-    files = validate(manifest, blocked)
-    evidence = metadata(manifest, blocked)
+    previous = manager.load(key, "AG-PHOTONIC-003", a.previous) if a.previous else {}
+    if response.get("environment_id") != original.get("environment_id"):
+        raise ValueError("Recovery environment mismatch")
+    if previous and previous.get("environment_id") != original.get("environment_id"):
+        raise ValueError("Previous recovery environment mismatch")
+    blocked = identifiers(original, previous, response) | {key}
+    files, evidence = select_manifest(response, blocked)
     a.output.mkdir(parents=True, exist_ok=False)
     for name, data in files.items():
         (a.output / name).write_bytes(data)

@@ -15,6 +15,10 @@
     "43990374686": {
       "file": "AG-INFRA-001/b5b9e4ea9c4682ebc3cf5697832bb3ea023e4ad4537258647ea55f7d241c4622.enc",
       "sha256": "f459c85c9059ccc0f410e092c77505f8a9a07b262ec37326f5bddc8b0363d939"
+    },
+    "43990973896": {
+      "file": "AG-INFRA-001/6bc29023835a87f5e2fa462a6f2f83747b912ed68a3eb2cfbbccc76bc6073839.enc",
+      "sha256": "fa93645c123ea6956b6b130bfc891b3dbcc8b40af2354b2770ce84e787ffabd0"
     }
   },
   "AG-PHOTONIC-001": {

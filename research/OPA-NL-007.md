@@ -88,7 +88,7 @@ tolerance or a measured thermal drift range.
 ## Evaluation protocol and checks
 
 35 mechanism cases plus 264 tolerance cases = 299 labeled
-cases (including eight repeated nominal cases across the two
+cases (including four repeated nominal cases across the two
 families and other repeated physical parameters); 598 groups
 across both drives, 2990 seed-level rows, five frozen NL003
 absorber weights per drive, fresh balanced jittered XOR test

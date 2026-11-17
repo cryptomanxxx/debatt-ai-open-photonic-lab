@@ -1,0 +1,502 @@
+{
+  "experiment": "OPA-SYS-001",
+  "source": "antigravity/reproduction/AG-PHOTONIC-003/original/report.json",
+  "checks": {
+    "fixed_configuration_strict_loss_decrease": true,
+    "loss_removed_matches_terms": true,
+    "low_loss_matches_archived_rounded": true,
+    "candidate_loss_matches": true,
+    "candidate_power_matches_rounded_input": true,
+    "candidate_throughput_matches": true,
+    "two_ops_per_mac": true,
+    "fanout_ideal_conservation": true,
+    "fanout_single_branch_equivalence": true,
+    "sweep_count": true,
+    "all_positive": true
+  },
+  "failures": [],
+  "fixed_loss": {
+    "config": {
+      "arch_type": "MZI",
+      "source_topo": "central",
+      "n_pump": 1,
+      "n_comb": 1,
+      "n_lambda": 8,
+      "mesh_m": 8,
+      "n_tiles": 1,
+      "phase_tech": "pockels_tfln",
+      "bits": 4,
+      "cadence_steps": 1
+    },
+    "nominal_terms_db": {
+      "pump_rejection": 1.0,
+      "comb_rolloff": 3.0,
+      "distribution_split": 0.0,
+      "distribution_waveguide": 0.75,
+      "mux_demux": 2.0,
+      "tile_split": 9.930899869919436,
+      "modulator": 2.5,
+      "mesh": 4.25,
+      "tile_waveguide": 1.5999999999999999,
+      "detector_split": 3.0
+    },
+    "low_terms_db": {
+      "pump_rejection": 1.0,
+      "comb_rolloff": 3.0,
+      "distribution_split": 0.0,
+      "distribution_waveguide": 0.0,
+      "mux_demux": 0.0,
+      "tile_split": 9.930899869919436,
+      "modulator": 0.0,
+      "mesh": 1.7000000000000002,
+      "tile_waveguide": 0.0,
+      "detector_split": 3.0
+    },
+    "nominal_db": 28.030899869919438,
+    "low_db": 18.630899869919435,
+    "removed_db": 9.400000000000002,
+    "nominal_feasibility": "not evaluated by this audit"
+  },
+  "candidate": {
+    "id": "CFG-0100",
+    "config": {
+      "arch_type": "IndepLaser_MZI",
+      "source_topo": "distributed",
+      "n_pump": 1,
+      "n_comb": 1,
+      "n_lambda": 8,
+      "mesh_m": 8,
+      "n_tiles": 32,
+      "phase_tech": "pockels_tfln",
+      "bits": 6,
+      "cadence_steps": 1
+    },
+    "loss_db": 23.38089986991944,
+    "inferred_pump_mw": 447.99,
+    "accounting": {
+      "components_w": {
+        "laser": 71.6784,
+        "phase_static": 0.002048,
+        "phase_dynamic": 0.01987577639751553,
+        "converters_drivers": 40.7055900621118,
+        "tia": 10.189118012422359,
+        "calibration": 0.1024,
+        "electronic_compute": 26.33142857142857,
+        "sram": 4.579378881987578,
+        "hbm": 122.1167701863354,
+        "cooling_proxy": 41.358751423602456
+      },
+      "chip_w": 81.92983930434784,
+      "card_proxy_w": 275.7250094906832,
+      "system_proxy_w": 317.0837609142857,
+      "tops": 488.4670807453416,
+      "topsw": 1.5404985715348078,
+      "energy_j": 0.006273083659124735,
+      "pj_per_mac": 1.2982809831542967,
+      "step_s": 1.978368e-05,
+      "serial_step_s": 3.5889807359999996e-05,
+      "useful_macs": 4831838208
+    },
+    "break_even_power_w": 139.5620230700976,
+    "modeled_reference_topsw": 3.5
+  },
+  "pump_fanout": [
+    {
+      "combs_per_pump": 1,
+      "corrected_mw": 113.00300356982035,
+      "original_formula_mw": 113.00300356982035,
+      "ratio": 1.0
+    },
+    {
+      "combs_per_pump": 2,
+      "corrected_mw": 242.16979974979327,
+      "original_formula_mw": 484.33959949958654,
+      "ratio": 2.0
+    },
+    {
+      "combs_per_pump": 4,
+      "corrected_mw": 518.9792311548574,
+      "original_formula_mw": 2075.9169246194297,
+      "ratio": 4.0
+    },
+    {
+      "combs_per_pump": 8,
+      "corrected_mw": 1112.1925303996002,
+      "original_formula_mw": 8897.540243196801,
+      "ratio": 8.0
+    }
+  ],
+  "sensitivity": [
+    {
+      "loss_reduction_db": 0.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 211.7580466285714,
+      "topsw": 2.306722641818303,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 0.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 184.28132662857143,
+      "topsw": 2.6506596717196005,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 0.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 162.29995062857142,
+      "topsw": 3.0096563729906114,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 0.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 246.86661805714283,
+      "topsw": 1.9786680134787398,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 0.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 219.38989805714283,
+      "topsw": 2.226479364232688,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 0.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 197.40852205714282,
+      "topsw": 2.474397131669663,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 0.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 317.0837609142857,
+      "topsw": 1.5404985715348078,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 0.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 289.6070409142857,
+      "topsw": 1.6866547139298043,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 0.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 267.6256649142857,
+      "topsw": 1.8251877334028717,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 3.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 170.64083048642485,
+      "topsw": 2.86254514440025,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 3.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 156.8698492004737,
+      "topsw": 3.1138366182853865,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 3.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 145.85306417171282,
+      "topsw": 3.3490354386402834,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 3.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 205.74940191499627,
+      "topsw": 2.3740874879779623,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 3.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 191.97842062904516,
+      "topsw": 2.5443853488574826,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 3.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 180.96163560028424,
+      "topsw": 2.6992852884259317,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 3.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 275.9665447721391,
+      "topsw": 1.7700228161665776,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 3.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 262.195563486188,
+      "topsw": 1.8629875893040164,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 3.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 251.1787784574271,
+      "topsw": 1.9446988465553554,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 6.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 150.03340667368778,
+      "topsw": 3.255722119325888,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 6.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 143.131566658649,
+      "topsw": 3.412713855848968,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 6.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 137.610094646618,
+      "topsw": 3.54964570004637,
+      "exceeds_modeled_reference": true
+    },
+    {
+      "loss_reduction_db": 6.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 185.14197810225923,
+      "topsw": 2.6383378083794007,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 6.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 178.24013808722046,
+      "topsw": 2.7404999007929063,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 6.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 172.71866607518942,
+      "topsw": 2.8281082285147905,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 6.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 255.35912095940205,
+      "topsw": 1.912863260611709,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 6.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 248.45728094436328,
+      "topsw": 1.9660002672842718,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 6.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 242.93580893233226,
+      "topsw": 2.010683739429291,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 9.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 139.70522894079733,
+      "topsw": 3.4964122993015425,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 9.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 136.24611483672206,
+      "topsw": 3.5851817230217735,
+      "exceeds_modeled_reference": true
+    },
+    {
+      "loss_reduction_db": 9.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 133.47882355346178,
+      "topsw": 3.6595099337963353,
+      "exceeds_modeled_reference": true
+    },
+    {
+      "loss_reduction_db": 9.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 174.81380036936878,
+      "topsw": 2.7942134986668465,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 9.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 171.35468626529348,
+      "topsw": 2.8506199123675597,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 9.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 168.5873949820332,
+      "topsw": 2.8974116409913018,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 9.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 245.0309432265116,
+      "topsw": 1.9934914109757669,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 9.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 241.57182912243633,
+      "topsw": 2.022036603025309,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 9.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 238.80453783917608,
+      "topsw": 2.0454681689269316,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 12.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 134.52887811443918,
+      "topsw": 3.6309459172759855,
+      "exceeds_modeled_reference": true
+    },
+    {
+      "loss_reduction_db": 12.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 132.79521428581657,
+      "topsw": 3.67834852612993,
+      "exceeds_modeled_reference": true
+    },
+    {
+      "loss_reduction_db": 12.0,
+      "hbm_multiplier": 0.25,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 131.40828322291853,
+      "topsw": 3.717171161247996,
+      "exceeds_modeled_reference": true
+    },
+    {
+      "loss_reduction_db": 12.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 169.63744954301063,
+      "topsw": 2.8794766843125257,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 12.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 167.90378571438802,
+      "topsw": 2.9092082627383182,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 12.0,
+      "hbm_multiplier": 0.5,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 166.51685465148995,
+      "topsw": 2.933439271163719,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 12.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.2,
+      "system_proxy_w": 239.85459240015345,
+      "topsw": 2.0365133552682777,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 12.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.3,
+      "system_proxy_w": 238.12092857153084,
+      "topsw": 2.0513403995004476,
+      "exceeds_modeled_reference": false
+    },
+    {
+      "loss_reduction_db": 12.0,
+      "hbm_multiplier": 1.0,
+      "laser_wpe": 0.5,
+      "system_proxy_w": 236.7339975086328,
+      "topsw": 2.0633583933272157,
+      "exceeds_modeled_reference": false
+    }
+  ],
+  "limitations": [
+    "Analytic accounting audit of archived assumptions, not independent parameter measurement.",
+    "Candidate launch power is rounded original input; no new SNR, LO, amplifier or convergence model.",
+    "Path convention includes assumed detector splitting and per-stage phase loss; not a validated optical transfer.",
+    "Coupling loss is upstream of path; setting it to zero does not change reported path loss.",
+    "Pump fanout comparison isolates a duplicated ideal splitter factor, not full comb feasibility.",
+    "Chip and card/system proxies retain original boundary; host, additional idle power and workload accuracy unknown.",
+    "Overlap assumed; serial latency bound reported, not a scheduler simulation.",
+    "Sensitivity holds workload, receiver power and throughput fixed; no claim of feasible hardware or matched task accuracy.",
+    "Electronic reference is an archived assumption, not a measured GPU benchmark."
+  ]
+}

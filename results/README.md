@@ -66,3 +66,17 @@ compared number for number.
 When a new experiment is merged, copy its `result.json` (or the files from its
 artifact) into `results/opa-fdtd-NNN/`, add a `provenance.json` with the
 workflow run, job and commit, and add a row to the table above.
+
+## AG-PHOTONIC-003 system audit series
+
+[Final research report](../antigravity/reproduction/AG-PHOTONIC-003/FINAL_REPORT.md) · [architecture diagram](../antigravity/reproduction/AG-PHOTONIC-003/architecture-recommendation.svg).
+The following are analytical/numerical experiments, not measured devices.
+
+| Experiment | Archived evidence | Main finding |
+|---|---|---|
+| SYS001 | [report](opa-sys-001/result.json) | 1.5405 system TOPS/W for CFG-0100; memory and source power dominate |
+| SYS002 | [report](opa-sys-002/result.json) | 325 → 472 feasible after pump fanout correction |
+| SYS003 | [report](opa-sys-003/result.json) | Receiver and ASE sensitivity; 12-bit nominal RIN ceiling |
+| SYS004 | [report](opa-sys-004/result.json) | 886 feasible; first 82 eight-bit independent-laser keys |
+| SYS005 | [report](opa-sys-005/result.json) | 2,758 feasible; first 152 six-bit comb keys |
+| SYS006 | [report](opa-sys-006/result.json) | Eight-bit selected numerical proxy passes; six-bit fails all-seed gate |

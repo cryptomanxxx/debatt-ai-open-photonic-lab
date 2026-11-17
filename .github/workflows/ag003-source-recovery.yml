@@ -16,7 +16,7 @@ jobs:
   recover:
     if: github.ref == 'refs/heads/main' && inputs.confirm_free_project == true && github.run_attempt == 1
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 85
     steps:
       - uses: actions/checkout@v5
         with:
@@ -33,10 +33,15 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           /usr/bin/python3 antigravity/reproduction/AG-PHOTONIC-003/recover_workspace.py --prior "$RUNNER_TEMP/ag-prior/checkpoint.enc" --output "$RUNNER_TEMP/ag-output/checkpoint.enc" --confirm-free-project
+      - name: Poll only the recovery interaction
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          /usr/bin/python3 -c 'import os,sys; from pathlib import Path; sys.path.insert(0,"antigravity"); import manager; p=Path(os.environ["RUNNER_TEMP"])/"ag-output/checkpoint.enc"; sys.exit(manager.poll_existing(os.environ["GEMINI_API_KEY"],"AG-PHOTONIC-003",p))'
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: antigravity-encrypted-checkpoint-AG-PHOTONIC-003
+          name: ag003-source-recovery-encrypted
           path: ${{ runner.temp }}/ag-output/checkpoint.enc
           retention-days: 90
           if-no-files-found: warn

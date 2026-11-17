@@ -36,10 +36,13 @@ def symmetric(w):
 
 
 def seed(binary=False):
-    x = np.linspace(-SIZE/2, SIZE/2, N)
-    cross = (np.minimum(abs(x[:, None]), abs(x[None, :])) < WIDTH/2)
-    return symmetric(np.where(cross, 1. if binary else .8,
-                              0. if binary else .2).ravel())
+    # Integer distances from the grid centre prevent asymmetric rounding
+    # at nominal +/- WIDTH/2. Exclude boundary nodes consistently.
+    offsets = abs(2*np.arange(N) - (N-1))
+    distance = np.minimum(offsets[:, None], offsets[None, :])
+    cross = distance < (WIDTH*(N-1)/SIZE - 1e-12)
+    return np.where(cross, 1. if binary else .8,
+                    0. if binary else .2).ravel()
 
 
 def port_volume(port):
@@ -219,6 +222,10 @@ def main():
 
     designs = {"plain_cross": seed(True), "initial": initial,
                "optimized": w, "thresholded": binary(w)}
+    # Fail before measuring a mislabeled baseline or thresholded design.
+    for label in ("plain_cross", "thresholded"):
+        if not np.all(np.isin(designs[label], (0., 1.))):
+            raise RuntimeError(f"{label} must contain only binary weights")
     rows = []
     for res in RES:
         for label, weights in designs.items():
@@ -248,6 +255,10 @@ def main():
         objective_agreement=all(abs(m["objective"]-m["adjoint_forward_objective"])<1e-6
                                 for m in rows if m["adjoint_forward_objective"] is not None),
         symmetry=all(np.max(abs(v-symmetric(v)))<1e-12 for v in designs.values()),
+        binary_designs=all(np.all(np.isin(designs[k], (0., 1.)))
+                           for k in ("plain_cross", "thresholded")),
+        seed_geometry=bool(np.array_equal(designs["plain_cross"],
+                                        (initial > .5).astype(float))),
         physical_sanity=all(0<=m["transmission"]+m["crosstalk"]+m["reflection"]<=1.05
                             for m in rows),
         accepted_steps_monotonic=all(h["objective_after"]>=h["objective_before"] for h in history))

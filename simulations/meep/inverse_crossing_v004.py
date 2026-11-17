@@ -9,7 +9,7 @@ import meep as mp
 import meep.adjoint as mpa
 import numpy as np
 
-from opa_common import modal_powers, write_report
+from opa_common import write_report
 
 OUT = Path("results/opa-id-004")
 SIZE = 2.4
@@ -94,6 +94,19 @@ def monitor(sim, port, wl):
                                yee_grid=True, decimation_factor=1)
 
 
+def port_power(sim, mon, port, wl, outgoing=True):
+    # Use the same signed MPB k-point convention as Meep 1.35.1's
+    # EigenmodeCoefficient, but in an independent direct FDTD run.
+    # The default positive-k solve's alpha[1] is not numerically identical
+    # to solving the negative-k mode and reading alpha[0].
+    x, y = PORTS[port]
+    sign = (1 if x+y > 0 else -1) * (1 if outgoing else -1)
+    k = mp.Vector3(sign/wl, 0) if x else mp.Vector3(0, sign/wl)
+    coeff = sim.get_eigenmode_coefficients(mon, [1], eig_parity=PARITY,
+        direction=mp.NO_DIRECTION, kpoint_func=lambda *_: k)
+    return float(abs(coeff.alpha[0,0,0])**2)
+
+
 def run(sim):
     sim.run(until_after_sources=mp.stop_when_dft_decayed(1e-10, MIN_TIME))
 
@@ -104,10 +117,10 @@ def reference(res, wl, axis):
     try:
         left, right = [monitor(sim, p, wl) for p in (input_port, output_port)]
         run(sim)
-        inc = modal_powers(sim, left, PARITY)[0]
+        inc = port_power(sim, left, input_port, wl, outgoing=False)
         if not np.isfinite(inc) or inc <= 0:
             raise RuntimeError("Invalid incident reference")
-        return inc, sim.get_flux_data(left), modal_powers(sim, right, PARITY)[0]/inc
+        return inc, sim.get_flux_data(left), port_power(sim, right, output_port, wl)/inc
     finally:
         sim.reset_meep()
 
@@ -142,9 +155,7 @@ def measure(w, res, wl, axis, ref):
         sim.load_minus_flux_data(monitors[src], subtraction)
         run(sim)
         def outgoing(p):
-            # Positive coordinate for east/north, negative for west/south.
-            return modal_powers(sim, monitors[p], PARITY)[
-                0 if p in ("east", "north") else 1]/inc
+            return port_power(sim, monitors[p], p, wl)/inc
         t, c1, c2, r = map(outgoing, (dst, side1, side2, src))
         return dict(resolution=res, wavelength_um=wl, axis=axis,
             straight_reference=straight, transmission=t, crosstalk_1=c1,
@@ -187,6 +198,16 @@ def main():
     ref(RES[0])
     ref(RES[-1], WL, "y")
     initial = seed()
+    # Early diagnostic on the plain crossing, whose side-port power is
+    # substantial. Keep the original 1e-6 agreement criterion.
+    for res in RES:
+        direct = measure(seed(True), res, WL, "x", ref(res))
+        adj, _ = objective(seed(True), res, ref(res)[0])
+        print("objective preflight", json.dumps(dict(resolution=res,
+            direct=direct["objective"], adjoint=adj,
+            difference=abs(direct["objective"]-adj))), flush=True)
+        if abs(direct["objective"]-adj) >= 1e-6:
+            raise RuntimeError("Direct/adjoint objective preflight mismatch")
     w = initial.copy()
     gradients = [row for res in RES
                  for row in gradient_checks(initial, res, ref(res)[0])]

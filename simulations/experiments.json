@@ -375,6 +375,19 @@
         "antigravity/reproduction/AG-PHOTONIC-003/original/*",
         "antigravity/reproduction/AG-PHOTONIC-003/corrected/physics_model.py"
       ]
+    },
+    {
+      "id": "opa-sys-003",
+      "name": "System: AG003 receiver noise and optical source audit",
+      "script": "simulations/circuit/ag003_receiver_audit_v003.py",
+      "result_dir": "results/opa-sys-003",
+      "artifact": "opa-sys-003",
+      "timeout_minutes": 10,
+      "deps": [
+        "antigravity/reproduction/AG-PHOTONIC-003/import_snapshot.py",
+        "antigravity/reproduction/AG-PHOTONIC-003/original/*",
+        "antigravity/reproduction/AG-PHOTONIC-003/corrected/physics_model.py"
+      ]
     }
   ]
 }

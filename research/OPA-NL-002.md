@@ -90,3 +90,60 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/nonlinear_ac
 
 Artifacts: result.json, metrics.csv, learning_curves.csv,
 truth_table.csv, loss_matches.csv; emitted SHA-256 for archival.
+
+## Initial observed results — 17 November 2026
+
+[Experiment run 44157326386](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44157326386),
+job 134301579784, artifact 14361432237. All 12 implementation checks
+passed. Digital preflight is false and both nominal pass_gate flags are
+false. The full preregistered hypothesis therefore failed; do not
+retroactively change the gate. However both nominal optical candidates
+classified all 2048 held-out examples correctly on each of five seeds
+at drive 1 mW, extra loss 1 dB and normalized field noise std .01.
+This is 10,240/10,240 correct per candidate, not a physical experiment.
+
+The CI stdout includes nominal rows and gates only, not the full 840
+metrics or exact-corner rows. The following values are derived from
+those nominal rows. Full reference accuracy, matched linear margins,
+ablation results, truth tables and sweep comparisons require the
+verified full artifact, and are not asserted here.
+
+| Nominal metric | Absorber | Softsat |
+|---|---:|---:|
+| Accuracy, all five seeds | 100% | 100% |
+| Raw cross-entropy, mean | .616841 | .609439 |
+| Scale-16 cross-entropy, mean | .079100 | .065099 |
+| Minimum signed margin across seeds/examples | .094577 | .082325 |
+| Mean launched optical signal incl. reference (mW) | 3.027539 | 3.027539 |
+| Mean activation input (mW) | 2.733689 | 2.562842 |
+| Mean activation output (mW) | 1.141907 | .799634 |
+| Mean final signal output (mW) | .025585 | .031519 |
+| Max activation channel input across seeds (mW) | 2.940993 | 2.934872 |
+| Aggregate activation loss from ratio of mean powers (dB) | 3.791186 | 5.058306 |
+
+All power values are conditional noiseless signal powers, not
+electrical power, and not comparable directly to NL001's 128-channel
+launch. Softsat has higher mean final output despite higher activation
+loss because learned passive matrix contractions differ. No general
+mechanism ranking follows. The final readout scale 16 is electronic
+and does not increase the modeled optical output.
+
+### Evidence and next step
+
+Source ZIP metadata: 209,386 bytes, SHA-256
+d30f10458d6780136368778e1ba287849dfbb0cf301c68186c3f917e44f2a431.
+Five science-file hashes pinned from CI stdout. The new archive
+workflow verifies the actual ZIP digest, CRC, exact entries, five
+science hashes and all staged bytes including environment metadata
+and provenance. Workflow has not yet run. Do not claim independent
+byte verification until it succeeds.
+
+After archival, compute per-seed digital preflight metrics, paired
+nominal differences to both matched linear and same-weight ablation,
+exact corner results, noise and power sweep. Report each criterion
+separately while retaining original failed composite gate. Diagnose
+why tanh preflight failed before designing a new independently
+preregistered experiment. Candidate directions include a constructive
+XOR reference, optimizer/contraction diagnostics, and independent
+seeds; no post-hoc rescue of NL002. Only then proceed to calibrated
+material mechanisms. No measured hardware or energy advantage.

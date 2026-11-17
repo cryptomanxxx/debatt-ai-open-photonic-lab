@@ -61,7 +61,7 @@ def simulate(z,b,d,h,tr,on,gap,dt):
     a=np.zeros(shape,complex);q=np.zeros(shape)
     out=np.empty((2,)+z.shape,complex)
     energies=np.zeros((2,z.shape[0],6)) # input, reflection, drop, absorption, initial, final
-    max_balance=0.;min_q=0.;max_q=0.;max_mvm_excess=0.
+    max_balance=0.;min_q=0.;max_q=0.
     for j in range(SYMBOLS):
         a[0]=0;q[0]=0
         s=np.broadcast_to(z[...,j],shape)

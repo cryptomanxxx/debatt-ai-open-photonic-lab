@@ -1,6 +1,6 @@
 # AG-PHOTONIC-003 — source recovery and independent reproduction
 
-Status: **SOURCE RECOVERED — all seven files verified against snapshot digests; archival and independent reproduction pending.**
+Status: **SOURCE ARCHIVED — seven exact files in `original/`; isolated replay pending, no independent scientific result.**
 
 ## Evidence and provenance
 
@@ -53,6 +53,31 @@ The prompt requests a read-only code execution that emits the complete base64 ma
 ## Energy audit (mandatory before accepting results)
 
 Final export step 4: low-loss test failed with feasible=true and path_loss_db=18.63; all_passed=false. Step 11 reports all_passed=true. The intervening source changes are absent from this export. Obtain the previous and final implementation where possible; inspect loss contributions, units, fixed versus variable losses, and the exact assertion. Compare identical configurations with only a specified passive-loss parameter changed; verify non-increase in path loss and a strict decrease when the changed component contributes nonzero loss. Check power conservation using unrounded component values and explicit tolerances, MAC/op accounting and system versus chip boundaries. A relaxed assertion alone is not scientific validation. Preserve failures.
+
+## First independent replay
+
+The archived files were merged in PR #100; archive workflow 44076232809
+verified their bytes before and after staging. Use **AG003 isolated original replay**
+on main with explicit confirm_replay. The workflow verifies all original hashes,
+builds a container using Python 3.12.3 and the reported NumPy 2.5.4 and Pandas
+3.1.1, and copies only the six Python files into a disposable /workspace.
+The container has no network, no credentials, no repository mount, an
+unprivileged user, a read-only root filesystem and bounded resources.
+Original report.json is not copied to the writable workspace, so it cannot
+masquerade as a replay result. If exact dependencies are unavailable, the
+build fails visibly; no silent substitution. The base image is version-tagged,
+not digest-locked, and transitive dependencies are not fully pinned; this is a
+first replay, not bit-identical environment reconstruction.
+
+Artifacts preserve build and execution logs, image ID, exit code, replayed
+report and comparison.json when available. The comparator checks the full
+structured sweep, parameter, circuit, training (all seeds), and ranking
+sections, with exact categorical/integer matches and float tolerance
+relative 1e-8 / absolute 1e-10. Only explicitly named runtime fields are
+ignored within those sections. Environment versions are compared separately;
+narrative and limitations prose are excluded. Mismatches fail the comparison
+but retain evidence. A successful replay is not a validation of the model
+or a correction of the known issues in PRELIMINARY_AUDIT.md.
 
 ## Reproduction acceptance
 

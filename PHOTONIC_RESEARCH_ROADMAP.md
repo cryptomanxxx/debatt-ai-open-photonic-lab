@@ -43,7 +43,7 @@ This limited accounting experiment is the bridge between AG003-ENERGY-001
 (the proposed audit) and OPA-SYS-001; no duplicate energy experiment is
 needed. It complements MOD-005 rather than rerunning its tiled inference
 sweep. The priority-1 nonlinear activation track remains a separate planned
-experiment; this audit continues the already active AG003 work. Finish the AG003 correction, rerun and convergence audit before starting the other six tracks.
+experiment; this audit continues the already active AG003 work. The AG003 correction, rerun and convergence audit are now complete; see the [final report](antigravity/reproduction/AG-PHOTONIC-003/FINAL_REPORT.md). Physical validation remains pending. The six other tracks remain planned.
 
 
 

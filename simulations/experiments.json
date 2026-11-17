@@ -550,6 +550,33 @@
         "results/opa-nl-005/provenance.json"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/nonlinear_activation_v006.py"
+    },
+    {
+      "id": "opa-nl-007",
+      "name": "Circuit: complex-transfer mechanism ablations and detuning tolerance",
+      "script": "simulations/circuit/nonlinear_activation_v007.py",
+      "result_dir": "results/opa-nl-007",
+      "artifact": "opa-nl-007",
+      "timeout_minutes": 30,
+      "deps": [
+        "simulations/circuit/nonlinear_activation_v001.py",
+        "simulations/circuit/nonlinear_activation_v002.py",
+        "simulations/circuit/nonlinear_activation_v003.py",
+        "simulations/circuit/nonlinear_activation_v004.py",
+        "simulations/circuit/nonlinear_activation_v005.py",
+        "simulations/circuit/nonlinear_activation_v006.py",
+        "results/opa-nl-003/weights.json",
+        "results/opa-nl-003/result.json",
+        "results/opa-nl-003/provenance.json",
+        "results/opa-nl-005/summary.csv",
+        "results/opa-nl-005/result.json",
+        "results/opa-nl-005/provenance.json",
+        "results/opa-nl-006/summary.csv",
+        "results/opa-nl-006/result.json",
+        "results/opa-nl-006/transfer.csv",
+        "results/opa-nl-006/provenance.json"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/nonlinear_activation_v007.py"
     }
   ]
 }

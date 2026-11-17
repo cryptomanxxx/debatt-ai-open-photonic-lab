@@ -99,7 +99,11 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          /usr/bin/python3 antigravity/reproduction/AG-PHOTONIC-003/extract_workspace.py --checkpoint "$RUNNER_TEMP/ag-output/checkpoint.enc" --original "$RUNNER_TEMP/ag-prior/checkpoint.enc" --output "$RUNNER_TEMP/ag-source"
+          args=()
+          if [[ -f "$RUNNER_TEMP/ag-recovery-prior/checkpoint.enc" ]]; then
+            args+=(--previous "$RUNNER_TEMP/ag-recovery-prior/checkpoint.enc")
+          fi
+          /usr/bin/python3 antigravity/reproduction/AG-PHOTONIC-003/extract_workspace.py --checkpoint "$RUNNER_TEMP/ag-output/checkpoint.enc" --original "$RUNNER_TEMP/ag-prior/checkpoint.enc" --output "$RUNNER_TEMP/ag-source" "${args[@]}"
       - uses: actions/upload-artifact@v7
         if: inputs.confirm_public_export == true && success()
         with:

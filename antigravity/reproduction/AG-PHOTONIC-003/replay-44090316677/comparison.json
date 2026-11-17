@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "experiment": "AG-PHOTONIC-003",
+  "structured_match": true,
+  "dependency_versions_match": true,
+  "versions": {
+    "python": {
+      "original": "3.12.3",
+      "replay": "3.12.3",
+      "match": true
+    },
+    "numpy": {
+      "original": "2.5.4",
+      "replay": "2.5.4",
+      "match": true
+    },
+    "pandas": {
+      "original": "3.1.1",
+      "replay": "3.1.1",
+      "match": true
+    }
+  },
+  "comparison_counts": {
+    "matched": 1882,
+    "numeric_within_tolerance": 26,
+    "runtime_ignored": 2
+  },
+  "difference_count": 0,
+  "differences": [],
+  "numeric_tolerance": {
+    "relative": 1e-08,
+    "absolute": 1e-10
+  },
+  "scope": [
+    "equations_and_conventions",
+    "parameter_provenance",
+    "analytic_sweep_summary",
+    "physical_verification",
+    "rankings_and_pareto_candidates"
+  ],
+  "excluded": [
+    "environment (versions reported separately)",
+    "narrative findings",
+    "limitations prose",
+    "two explicit runtime_s fields"
+  ],
+  "scientific_validation": false,
+  "note": "Matching output is replay evidence, not independent validation of physics."
+}

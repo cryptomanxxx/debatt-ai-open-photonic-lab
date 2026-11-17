@@ -29,7 +29,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh api "repos/$GITHUB_REPOSITORY/actions/runs/44113634095" |
-            jq -e '.path == ".github/workflows/experiments.yml" and .head_branch == "research/opa-sys-004-receiver" and .event == "pull_request" and .conclusion == "success" and .head_sha == "a9e88dc885d48e596f5684631a5468caabcc1f28"' >/dev/null
+            jq -e '.path == ".github/workflows/experiments.yml" and .head_branch == "research/opa-sys-004-paired" and .event == "pull_request" and .conclusion == "success" and .head_sha == "a9e88dc885d48e596f5684631a5468caabcc1f28"' >/dev/null
           gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/14340214791" |
             jq -e '.name == "opa-sys-004" and .expired == false and .workflow_run.id == 44113634095 and .digest == "sha256:1bd2c6b94eb2acbb0a2b51cdc7f1b8ee26bd4dba075f8cb12e75d589dd821ef3" and .size_in_bytes == 482695' >/dev/null
       - uses: actions/download-artifact@v7

@@ -60,4 +60,4 @@ Prioritize receiver SNR and source/amp accounting at fixed configuration, includ
 
 Stage 2: [OPA-SYS-003 receiver and source diagnostic](RECEIVER_AUDIT.md), CI complete (9/9 checks; six conditional 6-bit comb links). Results analyzed; [permanent evidence archive](../../../../results/opa-sys-003/) complete. This diagnostic does not modify the stage-one physics model.
 
-[OPA-SYS-004](../stage2/README.md) now implements the two isolated correction flags in a separate stage-two evaluator; paired sweep pending CI.
+[OPA-SYS-004](../stage2/README.md) now implements the two isolated correction flags in a separate stage-two evaluator; paired sweep complete: 886 feasible, 414 new, 82 at 8 bits (independent lasers only). Permanent archive pending.

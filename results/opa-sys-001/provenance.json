@@ -1,0 +1,40 @@
+{
+  "experiment": "OPA-SYS-001",
+  "workflow_run_id": 44103015958,
+  "job_id": 134107861313,
+  "artifact_id": 14336967799,
+  "artifact_sha256": "6eddb482581cfb068ad310ca92b9cd7ef3bd2e441d323229136e0aaa5e1fa97a",
+  "artifact_bytes": 17955,
+  "head_sha": "e1b159d1de2f34bfed0e93f0385e14c297281bd9",
+  "merge_sha": "d00c5917d231043150399c452981b42793c9ed43",
+  "pull_request": 108,
+  "source_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44103015958/job/134107861313",
+  "artifact_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44103015958/artifacts/14336967799",
+  "verification": "Downloaded ZIP SHA-256 and CRC verified. JSON and CRLF CSV reconstructed from CI log, exact Git blob hashes matched; environment lock reused by exact blob hash. Installed package inventory is recorded by hash but not yet archived in Git.",
+  "files": {
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c",
+      "git_blob_sha1": "e0f73c62ff0fe442819a24eff4c391bc1d95e8d8",
+      "archived": true
+    },
+    "result.json": {
+      "bytes": 14381,
+      "sha256": "c13faf2851b61a3b5c29929a0edab6493dca5ada37142566dd14063835db940b",
+      "git_blob_sha1": "ddd838c3527b0e14cab360fd9e8edb7859410ae4",
+      "archived": true
+    },
+    "sensitivity.csv": {
+      "bytes": 2642,
+      "sha256": "946ff9a4ab5b23314a6f9fb1f3b18b8b93da0aa9c8de4e842c45098e7a9e480b",
+      "git_blob_sha1": "b52d6f5bf9102faa7353d31cd50f1323b0f905a9",
+      "archived": true
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6",
+      "git_blob_sha1": "b78cc4b63c8815d1e064dec794040bbff4e2ffac",
+      "archived": false
+    }
+  }
+}

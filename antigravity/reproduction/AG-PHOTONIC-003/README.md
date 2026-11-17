@@ -118,7 +118,7 @@ separately. Do not replace original/report.json.
 
 ## Next independent scientific investigation
 
-The first registered audit is [OPA-SYS-001](../../../simulations/circuit/system_energy_audit_v001.py), pending CI. It reconstructs fixed MZI path losses and the distributed independent-laser candidate budget, and isolates pump fanout double counting. The larger investigation will continue with independently
+The first registered audit is [OPA-SYS-001](../../../simulations/circuit/system_energy_audit_v001.py), [completed and archived](../../../results/opa-sys-001/README.md). It reconstructs fixed MZI path losses and the distributed independent-laser candidate budget, and isolates pump fanout double counting. The larger investigation will continue with independently
 derived loss and power identities, fixed-configuration passive-loss
 comparisons (including rejected configurations), unrounded component
 accounting, and matched system boundaries. Preserve negative results and

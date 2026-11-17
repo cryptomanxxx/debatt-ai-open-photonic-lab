@@ -267,8 +267,7 @@ reduction, HBM energy and laser efficiency at fixed workload and throughput.
 Reports component powers, assumed overlap and serial latency, and modeled
 break-even power. CI checks numerical identities, not a required efficiency
 advantage. This is an accounting audit, not a measured or independently
-calibrated receiver, optical gain, scheduling or training model. Results
-pending CI. See [research backlog](PHOTONIC_RESEARCH_ROADMAP.md).
+calibrated receiver, optical gain, scheduling or training model. All 11 checks passed; six of 45 hypothetical cases exceed the assumed reference. See [archived results](results/opa-sys-001/README.md) and [research backlog](PHOTONIC_RESEARCH_ROADMAP.md).
 
 ## OPA-MOD-006: hybrid AI training
 

@@ -14,6 +14,53 @@ from scientific_export import SENSITIVE
 NAMES = frozenset(("params.py", "physics_model.py", "sweep.py",
                    "circuit_sim.py", "train_sim.py", "run_all.py", "report.json"))
 
+ID_KEYS = frozenset(("id", "call_id", "signature", "environment_id",
+                     "previous_interaction_id", "interaction_id"))
+
+def identifiers(*responses):
+    blocked = set()
+    def visit(obj):
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                if key in ID_KEYS and isinstance(value, str) and value:
+                    blocked.add(value)
+                if isinstance(value, (dict, list)):
+                    visit(value)
+        elif isinstance(obj, list):
+            for value in obj:
+                visit(value)
+    for response in responses:
+        visit(response)
+    return blocked
+
+def screen(text, blocked):
+    if SENSITIVE.search(text) or any(s and s in text for s in blocked):
+        raise ValueError("Sensitive content")
+
+def metadata(manifest, blocked=()):
+    # Preserve all non-file evidence, including dependency and energy audit fields.
+    # Screen decoded strings as well as serialized output (escaped JSON strings
+    # must not hide known identifiers or secret patterns).
+    evidence = {k: v for k, v in manifest.items() if k != "files"}
+    evidence["file_integrity"] = [
+        {k: item[k] for k in ("name", "size_bytes", "sha256")}
+        for item in manifest["files"]
+    ]
+    def visit(obj):
+        if isinstance(obj, str):
+            screen(obj, blocked)
+        elif isinstance(obj, dict):
+            for k, v in obj.items():
+                screen(k, blocked)
+                visit(v)
+        elif isinstance(obj, list):
+            for v in obj:
+                visit(v)
+    visit(evidence)
+    serialized = json.dumps(evidence, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
+    screen(serialized, blocked)
+    return serialized
+
 def validate(manifest, blocked=()):
     if not isinstance(manifest, dict) or manifest.get("missing") or not isinstance(manifest.get("files"), list):
         raise ValueError("Incomplete manifest")
@@ -28,8 +75,7 @@ def validate(manifest, blocked=()):
         if hashlib.sha256(data).hexdigest() != item["sha256"]:
             raise ValueError("Digest mismatch")
         decoded = data.decode("utf-8")
-        if SENSITIVE.search(decoded) or any(s and s in decoded for s in blocked):
-            raise ValueError("Sensitive content")
+        screen(decoded, blocked)
         files[name] = data
     if set(files) != NAMES:
         raise ValueError("Missing original files")
@@ -40,6 +86,7 @@ def validate(manifest, blocked=()):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--checkpoint", type=Path, required=True)
+    p.add_argument("--original", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
     a = p.parse_args()
     key = os.environ["GEMINI_API_KEY"]
@@ -52,10 +99,16 @@ def main():
     if not texts:
         raise ValueError("No manifest")
     manifest = json.loads(texts[-1])
-    files = validate(manifest, (key, response.get("id"), response.get("environment_id")))
+    original = manager.load(key, "AG-PHOTONIC-003", a.original)
+    if original.get("status") != "completed" or original["id"] == response["id"]:
+        raise ValueError("Invalid original checkpoint")
+    blocked = identifiers(original, response) | {key}
+    files = validate(manifest, blocked)
+    evidence = metadata(manifest, blocked)
     a.output.mkdir(parents=True, exist_ok=False)
     for name, data in files.items():
         (a.output / name).write_bytes(data)
+    (a.output / "recovery-metadata.json").write_text(evidence, encoding="utf-8")
     print("Seven files passed byte-integrity checks; manual scientific and security review required.")
 
 if __name__ == "__main__":

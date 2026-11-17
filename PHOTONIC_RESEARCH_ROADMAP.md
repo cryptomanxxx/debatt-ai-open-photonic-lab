@@ -37,13 +37,13 @@ Only after a viable compact-model study, pursue component-level simulation with 
 
 ### End-to-end system accounting
 
-**First implementation: OPA-SYS-001 (pending CI).** The existing AG003
+**First implementation: OPA-SYS-001 ([completed accounting audit](results/opa-sys-001/README.md)).** The existing AG003
 reproduction supplies an archived parameter set and candidate to audit.
 This limited accounting experiment is the bridge between AG003-ENERGY-001
 (the proposed audit) and OPA-SYS-001; no duplicate energy experiment is
 needed. It complements MOD-005 rather than rerunning its tiled inference
 sweep. The priority-1 nonlinear activation track remains a separate planned
-experiment; this audit continues the already active AG003 work.
+experiment; this audit continues the already active AG003 work. Finish the AG003 correction, rerun and convergence audit before starting the other six tracks.
 
 
 

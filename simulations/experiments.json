@@ -488,6 +488,24 @@
         "results/opa-nl-002/result.json"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/nonlinear_activation_v003.py"
+    },
+    {
+      "id": "opa-nl-004",
+      "name": "Circuit: frozen-weight saturable absorber requirements and recovery envelope",
+      "script": "simulations/circuit/nonlinear_activation_v004.py",
+      "result_dir": "results/opa-nl-004",
+      "artifact": "opa-nl-004",
+      "timeout_minutes": 30,
+      "deps": [
+        "simulations/circuit/nonlinear_activation_v001.py",
+        "simulations/circuit/nonlinear_activation_v002.py",
+        "simulations/circuit/nonlinear_activation_v003.py",
+        "results/opa-nl-003/provenance.json",
+        "results/opa-nl-003/weights.json",
+        "results/opa-nl-003/result.json",
+        "results/opa-nl-003/receiver.csv"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/nonlinear_activation_v004.py"
     }
   ]
 }

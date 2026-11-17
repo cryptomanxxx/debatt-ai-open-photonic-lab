@@ -1,6 +1,8 @@
 # AG-PHOTONIC-003 — source recovery and independent reproduction
 
-Status: **ORIGINAL REPLAY MATCHED — structured output reproduced; independent physics validation pending.**
+Status: **ORIGINAL REPLAY MATCHED — six analytical/numerical audits complete; physical validation pending.**
+
+See the [final research report](FINAL_REPORT.md) and [architecture diagram](architecture-recommendation.svg).
 
 ## Evidence and provenance
 

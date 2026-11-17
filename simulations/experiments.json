@@ -362,6 +362,19 @@
       "deps": [
         "antigravity/reproduction/AG-PHOTONIC-003/original/report.json"
       ]
+    },
+    {
+      "id": "opa-sys-002",
+      "name": "System: paired AG003 pump fanout correction sweep",
+      "script": "simulations/circuit/ag003_pump_fanout_v002.py",
+      "result_dir": "results/opa-sys-002",
+      "artifact": "opa-sys-002",
+      "timeout_minutes": 15,
+      "deps": [
+        "antigravity/reproduction/AG-PHOTONIC-003/import_snapshot.py",
+        "antigravity/reproduction/AG-PHOTONIC-003/original/*",
+        "antigravity/reproduction/AG-PHOTONIC-003/corrected/physics_model.py"
+      ]
     }
   ]
 }

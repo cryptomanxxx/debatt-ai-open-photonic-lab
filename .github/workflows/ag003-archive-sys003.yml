@@ -1,0 +1,69 @@
+name: AG003 archive SYS003 evidence
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_archive:
+        description: Archive exact SYS003 evidence to a separate review branch
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: ag003-sys003-archive
+  cancel-in-progress: false
+jobs:
+  archive:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_archive == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      ROOT: antigravity/reproduction/AG-PHOTONIC-003
+      ARCHIVE_BRANCH: research/ag003-sys003-44110377779
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Verify run and artifact identity
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/44110377779" |
+            jq -e '.path == ".github/workflows/experiments.yml" and .head_branch == "research/opa-sys-003-receiver" and .event == "pull_request" and .conclusion == "success" and .head_sha == "1b99e0765e231029c645faa1079b955393e48fb6"' >/dev/null
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/14341345457" |
+            jq -e '.name == "opa-sys-003" and .expired == false and .workflow_run.id == 44110377779 and .digest == "sha256:a8fca83090e05522b5d2f82843dc36d758ff00c75f950fff8805b404dc3b7a44" and .size_in_bytes == 37403' >/dev/null
+      - uses: actions/download-artifact@v7
+        with:
+          artifact-ids: 14341345457
+          run-id: 44110377779
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/ag003-sys003-evidence
+          merge-multiple: true
+      - name: Verify exact artifact files
+        run: |
+          python3 "$ROOT/archive_sys003.py" --source "$RUNNER_TEMP/ag003-sys003-evidence" --output results/opa-sys-003
+      - name: Archive to separate review branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh auth setup-git
+          if git ls-remote --exit-code --heads origin "refs/heads/$ARCHIVE_BRANCH" >/dev/null; then
+            echo "Archive branch exists; refusing overwrite."
+            exit 1
+          else
+            status=$?
+            [[ "$status" == 2 ]]
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$ARCHIVE_BRANCH"
+          git -c core.autocrlf=false add -f -- results/opa-sys-003
+          stage="$RUNNER_TEMP/ag003-sys003-staged"
+          mkdir "$stage"
+          for file in results/opa-sys-003/*; do
+            git show ":$file" > "$stage/$(basename "$file")"
+          done
+          python3 "$ROOT/archive_sys003.py" --source "$stage" --staged
+          git commit -m "Archive exact OPA-SYS-003 evidence from run 44110377779"
+          git push origin "HEAD:refs/heads/$ARCHIVE_BRANCH"
+          echo "Review branch: https://github.com/$GITHUB_REPOSITORY/compare/main...$ARCHIVE_BRANCH" >> "$GITHUB_STEP_SUMMARY"

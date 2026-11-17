@@ -240,3 +240,183 @@ ablations from the original screen and validate new hypotheses
 on independent data. Do not equate stored energy or external
 lifetime with measured pulse threshold, local intensity,
 throughput or system energy. Calibration remains outstanding.
+
+## Full archived cavity analysis
+
+Archive PR 148, merge 1e1d886c7c3767c8287d1c7324f52bb38768636f, workflow 44181484363.
+Sources: [summary](../results/opa-nl-006/summary.csv),
+[metrics](../results/opa-nl-006/metrics.csv),
+[cavity audit](../results/opa-nl-006/cavity_audit.csv),
+[transfer](../results/opa-nl-006/transfer.csv),
+[references](../results/opa-nl-006/references.csv) and
+[provenance](../results/opa-nl-006/provenance.json).
+Read all 432 groups, 2160 seed metrics, 216 audits, 14040
+transfer rows and 30 references. The original archive is
+unchanged. All comparisons below are post-hoc analysis of
+the preregistered sweep, not new experimental measurements.
+
+### Marginal pass counts
+
+| Parameter | Value | Low drive pass/tested | High drive pass/tested |
+|---|---:|---:|---:|
+| tau_ext_ps | 2 | 8/72 | 15/72 |
+| tau_ext_ps | 10 | 17/72 | 17/72 |
+| tau_ext_ps | 50 | 18/72 | 5/72 |
+| usat_fj | 0.3 | 24/108 | 13/108 |
+| usat_fj | 3 | 19/108 | 24/108 |
+| tpa | 0 | 24/108 | 25/108 |
+| tpa | 0.1 | 19/108 | 12/108 |
+| detuning | -0.5 | 25/72 | 16/72 |
+| detuning | 0 | 12/72 | 13/72 |
+| detuning | 0.5 | 6/72 | 8/72 |
+| shift | 0 | 29/108 | 31/108 |
+| shift | 1 | 14/108 | 6/108 |
+
+60/216 low-drive and 45/216 high-drive groups meet the clean
+accuracy threshold; 17 and 8 further groups fail the receiver
+screen respectively. All modeled diode powers are below 2 mW
+(maximum .139579 mW). The maximum recorded clean passivity
+excess is negative (-.013897 mW). 15 low-drive and 26 high-drive
+groups have perfect worst-repeat accuracy. Longer external
+lifetimes help some low-drive cases but hurt high-drive pass
+counts in this particular grid. These are conditional counts,
+not material yield or monotone causal effects.
+
+### Common component tuples
+
+11/216 distinct tuples pass at both drives; 69 pass at least
+one drive. Six are perfect at both. All common tuples have
+zero competing nonlinear loss. No weak endpoint tuple passes
+both drives. The two drives use separate frozen weight sets.
+
+| Tlow | Thigh | tau ext ps | Us fJ | b | d | h | Low worst % | High worst % |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 0.1 | 0.4 | 2 | 0.3 | 0 | -0.5 | 1 | 97.607422 | 97.900391 |
+| 0.1 | 0.4 | 10 | 0.3 | 0 | -0.5 | 0 | 100.000000 | 100.000000 |
+| 0.1 | 0.4 | 10 | 0.3 | 0 | 0 | 0 | 100.000000 | 100.000000 |
+| 0.1 | 0.4 | 50 | 3 | 0 | -0.5 | 0 | 99.853516 | 100.000000 |
+| 0.1 | 0.4 | 50 | 3 | 0 | 0 | 0 | 100.000000 | 100.000000 |
+| 0.1 | 0.4 | 50 | 3 | 0 | 0.5 | 0 | 97.851563 | 99.951172 |
+| 0.15 | 0.85 | 2 | 0.3 | 0 | -0.5 | 0 | 98.486328 | 100.000000 |
+| 0.15 | 0.85 | 2 | 0.3 | 0 | 0 | 0 | 99.951172 | 100.000000 |
+| 0.15 | 0.85 | 10 | 0.3 | 0 | 0 | 0 | 100.000000 | 100.000000 |
+| 0.15 | 0.85 | 50 | 3 | 0 | -0.5 | 0 | 100.000000 | 100.000000 |
+| 0.15 | 0.85 | 50 | 3 | 0 | 0 | 0 | 100.000000 | 100.000000 |
+
+### Weak reference endpoint family: matched resonance-shift control
+
+All three passing weak (.373,.4) groups have Us=3 fJ, d=-.5,
+h=1. Label them W1–W3 below, in archived summary order.
+With h=0 and every other parameter and test draw fixed,
+all three fail. This matched sweep comparison establishes
+the importance of the assumed intensity-dependent detuning
+in these particular configurations. It does not isolate
+amplitude modulation from phase modulation, because detuning
+changes both. It also does not establish a specific Kerr,
+carrier, thermal or graphene mechanism. The nominal .027
+endpoint depth is not the actual resonant transmission swing.
+
+| Candidate | Drive mW | tau ext ps | b | Clean min % | Mean receiver % | Worst % | Matched h=0 worst % |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| W1 | 1 | 2 | 0 | 100.000000 | 99.947510 | 99.609375 | 35.888672 |
+| W2 | 0.1 | 10 | 0 | 100.000000 | 99.915771 | 99.609375 | 48.925781 |
+| W3 | 0.1 | 10 | 0.1 | 100.000000 | 98.873291 | 97.021484 | 42.333984 |
+
+| Candidate | Mean output uW | Min signed field sqrt(mW) | Peak per-channel input mW | Peak stored fJ | Peak diode mW | Min local relaxation rate /ps |
+|---|---:|---:|---:|---:|---:|---:|
+| W1 | 27.928299 | 0.037491 | 2.850272 | 4.372373 | 0.089011 | 0.293866 |
+| W2 | 1.706864 | 0.012042 | 0.294937 | 2.248729 | 0.060337 | 0.058773 |
+| W3 | 1.440618 | 0.009905 | 0.294937 | 2.057128 | 0.059007 | 0.063550 |
+
+W3 tolerates b=.1 at low drive with reduced margin relative
+to W2. All three have perfect clean accuracy but none is
+perfect after noise. The independent distributed A/B/C
+references remain perfect at both drives; the weak candidates
+do not outperform them in accuracy. W1's mean output exceeds
+the paired high-drive reference C (14.822827 uW), while W2
+and W3 fall below low-drive C (2.096747 uW). Output power alone
+does not determine the signed receiver margin or efficiency.
+The peak stored energies are not incident pulse energies.
+The local relaxation rates are from the instantaneous
+Jacobian over the full evaluated range, not measured recovery
+or a validated symbol rate.
+
+### Actual sampled transfer variation
+
+Use the archived subsampled transfer rows only; no interpolation.
+Restrict the sample range to powers at or below the maximum
+actual per-channel input for each candidate. This is a sampled
+envelope including zero, not the distribution of actual
+classifier inputs or an exact continuous extremum.
+Transmission before the additional 1 dB output loss.
+
+| Candidate | Last sampled input mW within peak | T min % | T max % | Sample swing pp | Phase min deg | Phase max deg |
+|---|---:|---:|---:|---:|---:|---:|
+| W1 | 2.151392 | 27.166788 | 38.644560 | 11.477772 | -31.413967 | 1.833595 |
+| W2 | 0.245487 | 27.166788 | 37.468278 | 10.301490 | -31.413967 | -8.439711 |
+| W3 | 0.245487 | 27.166788 | 34.754119 | 7.587331 | -31.413967 | -9.325755 |
+
+| Candidate | Sample input mW | Transmission % | Phase deg | Stored energy fJ |
+|---|---:|---:|---:|---:|
+| W1 | 0.000000 | 27.166788 | -31.413967 | 0.000000 |
+| W1 | 0.028012 | 27.481062 | -30.902059 | 0.030791 |
+| W1 | 0.096832 | 28.259448 | -29.615073 | 0.109456 |
+| W1 | 0.334733 | 30.938269 | -24.913630 | 0.414242 |
+| W1 | 0.848612 | 35.591229 | -14.716308 | 1.208125 |
+| W1 | 2.933525 | 38.293498 | 7.084167 | 4.493397 |
+| W1 | 4.000000 | 37.447932 | 11.747814 | 5.991669 |
+| W2 | 0.000000 | 27.166788 | -31.413967 | 0.000000 |
+| W2 | 0.028012 | 28.750846 | -28.786990 | 0.161071 |
+| W2 | 0.096832 | 32.514236 | -21.861870 | 0.629682 |
+| W2 | 0.334733 | 38.424148 | -2.726609 | 2.572365 |
+| W2 | 0.848612 | 37.250196 | 12.562575 | 6.322189 |
+| W2 | 2.933525 | 32.717037 | 24.668253 | 19.195249 |
+| W2 | 4.000000 | 31.830622 | 26.440111 | 25.464498 |
+| W3 | 0.000000 | 27.166788 | -31.413967 | 0.000000 |
+| W3 | 0.028012 | 28.599128 | -28.721685 | 0.160221 |
+| W3 | 0.096832 | 31.720499 | -21.823992 | 0.614310 |
+| W3 | 0.334733 | 34.801665 | -4.253804 | 2.329852 |
+| W3 | 0.848612 | 30.949434 | 8.734844 | 5.252809 |
+| W3 | 2.933525 | 22.230858 | 17.167041 | 13.042955 |
+| W3 | 4.000000 | 20.061305 | 17.867754 | 16.049044 |
+
+The low-power transmission is about 27.17% in these detuned
+cases, not .373. W1/W2/W3 have sampled swings of roughly
+11.48, 10.30 and 7.59 percentage points, respectively,
+within the classifier peak-input envelope. Their sampled
+phase excursions are also significant. Therefore the weak
+reference endpoint result must not be interpreted as a
+classifier operating with only 2.7 percentage points of
+actual transmission swing. High-power roll-off is visible
+even without b due to detuning past resonance; b additionally
+reduces transmission. All sampled configurations pass the
+instantaneous uniqueness/stability gate; across all 216
+audits the minimum relaxation rate ranges from .008975 to
+.589904 /ps, not a device clock specification.
+
+### NL007 next experiment: mechanism isolation and detuning tolerance
+
+Before introducing a calibrated material or geometry, perform
+a preregistered independent-data diagnostic of the three
+weak candidates and strong common reference tuples. Separate
+the full complex transfer H(P) into amplitude-only with
+constant low-power phase, phase-only with constant low-power
+amplitude, and linear frozen complex gain controls. These
+are numerical ablations, not independent physical components.
+Also switch off saturable loss at fixed unbleached loss and
+switch off nonlinear detuning separately, preserving passive
+port accounting for the physical TCMT variants. Compare
+signed field margin, accuracy and noise with the same frozen
+weights and independent paired draws. Evaluate a finer
+signed detuning and shift sweep around W2/W3, including
+calibration drift and zero nonlinear shift, without choosing
+phase alignment from test labels. Keep actual transmission
+range, cavity stored energy, and incident power separate.
+Retain independent reference curves and root/stability gates.
+
+Only after isolating the mechanism should we pursue finite
+material response and pulsed TCMT, with measured coupling,
+linewidth, nonlinear shift and recovery where available.
+Neither the weak-family success nor these proposed ablations
+establishes a fabricated weak-absorption device, a reduction
+in physical activation energy, or a throughput advantage.

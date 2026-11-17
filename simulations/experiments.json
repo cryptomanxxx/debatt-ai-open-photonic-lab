@@ -406,6 +406,25 @@
         "results/opa-sys-002/result.json",
         "results/opa-sys-002/corrected_feasible.json"
       ]
+    },
+    {
+      "id": "opa-sys-005",
+      "name": "System: AG003 optical gain policy and booster accounting sweep",
+      "script": "simulations/circuit/ag003_gain_sweep_v005.py",
+      "result_dir": "results/opa-sys-005",
+      "artifact": "opa-sys-005",
+      "timeout_minutes": 30,
+      "deps": [
+        "antigravity/reproduction/AG-PHOTONIC-003/import_snapshot.py",
+        "antigravity/reproduction/AG-PHOTONIC-003/original/*",
+        "antigravity/reproduction/AG-PHOTONIC-003/corrected/physics_model.py",
+        "antigravity/reproduction/AG-PHOTONIC-003/stage2/physics_model.py",
+        "antigravity/reproduction/AG-PHOTONIC-003/stage3/physics_model.py",
+        "simulations/circuit/ag003_pump_fanout_v002.py",
+        "simulations/circuit/ag003_receiver_audit_v003.py",
+        "results/opa-sys-004/result.json",
+        "results/opa-sys-004/combined_feasible.json"
+      ]
     }
   ]
 }

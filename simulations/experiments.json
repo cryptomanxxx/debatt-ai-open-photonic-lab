@@ -443,6 +443,24 @@
         "results/opa-sys-005/*"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/ag003_convergence_v006.py"
+    },
+    {
+      "id": "opa-nl-001",
+      "name": "Circuit: passive all-optical nonlinear activation between coherent MVM layers",
+      "script": "simulations/circuit/nonlinear_activation_v001.py",
+      "result_dir": "results/opa-nl-001",
+      "artifact": "opa-nl-001",
+      "timeout_minutes": 30,
+      "deps": [
+        "simulations/circuit/modular_multilayer_v007.py",
+        "simulations/circuit/mesh.py",
+        "simulations/circuit/mzi.py",
+        "simulations/circuit/modular_power_budget_v002.py",
+        "simulations/circuit/modular_imperfections_v003.py",
+        "simulations/circuit/modular_calibration_v004.py",
+        "simulations/circuit/modular_training_v006.py"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/nonlinear_activation_v001.py"
     }
   ]
 }

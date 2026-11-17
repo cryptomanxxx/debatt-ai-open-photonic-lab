@@ -39,6 +39,11 @@ See [Antigravity lab documentation](antigravity/README.md) and [repository agent
 
 ## Roadmap
 
+See the [prioritized photonic computing research backlog](PHOTONIC_RESEARCH_ROADMAP.md)
+for nonlinear activation, system energy/latency, precision, optical gain,
+material comparisons, short-term optical memory and digital optical logic.
+These are proposed research directions, not completed experiments.
+
 | Phase | Goal | Status |
 |-------|------|--------|
 | 1 | FDTD fundamentals: reproducible Meep pipeline, convergence and normalization practice | **Done** (001–009) |

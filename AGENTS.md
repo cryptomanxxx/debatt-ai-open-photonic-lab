@@ -14,3 +14,6 @@ Use interaction GETs for status/response retrieval, not workspace file export. U
 
 Retain the billing-disabled/free-project policy and explicit authorization for live requests. Never expose credentials or environment identifiers. Encrypt full snapshots and review files before public export. Preserve original bytes; conduct corrected research separately. Current snapshots are not proof of historical immutability.
 
+## OPA research planning
+
+Before proposing a new OPA research experiment, review the [prioritized research backlog](PHOTONIC_RESEARCH_ROADMAP.md), the current README, experiment registry and archived results. Reuse existing experiments rather than duplicating them. The backlog contains hypotheses, not validated results; keep the existing roadmap active and preserve the distinction between simulations, fabrication and measured hardware. Follow repository experiment and CI conventions.

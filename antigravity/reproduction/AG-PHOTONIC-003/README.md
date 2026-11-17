@@ -15,6 +15,8 @@ Status: **BLOCKED — original workspace files not yet recovered; no independent
 Recover exactly these existing files from the original environment, without rerunning or editing them:
 `params.py`, `physics_model.py`, `sweep.py`, `circuit_sim.py`, `train_sim.py`, `run_all.py`, `report.json`. Record byte lengths and SHA-256; obtain dependency versions and any input files required to execute. Do not publish credentials or interaction identifiers. Preserve files under `original/` after review; do not reconstruct missing code from the summary. See recover_workspace.py for the explicit, separate source-export request. It requires the existing encrypted checkpoint and an operator-confirmed free project; it does not start a fresh environment.
 
+After merge, manually dispatch **AG003 source recovery** on main with mode `submit` and an empty recovery run ID, only after verifying free-tier eligibility and billing disabled. If the job is still active or a GET failed, use mode `retrieve` with the previous recovery workflow run ID; this never submits a new interaction. A completed recovery can be exported without any new Google request. Both modes require the original manager checkpoint (run 43993099721) to remain available. Separate public-export confirmation is required. The resulting artifact includes `recovery-metadata.json` with screened dependency information, energy-audit evidence and file integrity records. Automated screening and matching agent-supplied digests do not prove provenance or absence of arbitrary secrets; review before committing.
+
 ## Agent-reported comparison targets (not independent measurements)
 
 - 330960 analytic configurations; 325 feasible before convergence gate; 330635 rejected.

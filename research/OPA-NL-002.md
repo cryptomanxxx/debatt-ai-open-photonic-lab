@@ -147,3 +147,100 @@ preregistered experiment. Candidate directions include a constructive
 XOR reference, optimizer/contraction diagnostics, and independent
 seeds; no post-hoc rescue of NL002. Only then proceed to calibrated
 material mechanisms. No measured hardware or energy advantage.
+
+## Full archived-evidence analysis
+
+Source: [immutable archived metrics](../results/opa-nl-002/result.json),
+[truth table](../results/opa-nl-002/truth_table.csv),
+[learning curves](../results/opa-nl-002/learning_curves.csv) and
+[provenance](../results/opa-nl-002/provenance.json).
+Archive workflow 44159838370 verified raw ZIP and staged bytes;
+PR 132 merged as bdb771786c3776ae0034e1e0fdfa5535d83c79de.
+All 840 rows and 1,120 corner records were inspected by grouping.
+
+### Nominal criterion decomposition
+
+| Criterion | Absorber | Softsat |
+|---|---:|---:|
+| Mean test accuracy | 100% | 100% |
+| Worst seed accuracy | 100% | 100% |
+| Matched linear mean accuracy | 48.1934% | 43.8477% |
+| Same-weight linear ablation mean accuracy | 50.8008% | 49.8242% |
+| Minimum paired improvement vs matched linear (points) | 47.3145 | 49.9512 |
+| Minimum paired improvement vs ablation (points) | 44.5801 | 43.3105 |
+| Exact corners correct | 20/20 | 20/20 |
+| Optical-specific criteria | pass | pass |
+| Original composite gate | FAIL | FAIL |
+
+The digital preflight remains false. No gate is retroactively changed.
+A positive result for nonlinear shape under this model is not proof
+of superiority over optimized electronic inference.
+
+### Digital preflight diagnosis
+
+| Seed | Tanh noiseless test accuracy | Incorrect / 2048 | Minimum signed margin |
+|---|---:|---:|---:|
+| 1201 | 100% | 0 | .000092 |
+| 1202 | 99.9512% | 1 | -.001734 |
+| 1203 | 100% | 0 | .039050 |
+| 1204 | 100% | 0 | .027121 |
+| 1205 | 98.2910% | 35 | -.017114 |
+
+All 20 exact tanh corners are correct. The sole preflight failure is
+seed 1205 below 99%, not inability of tanh to represent XOR.
+Seed 1205 sampled minibatch CE at steps 500/1000/1500 is
+.173916/.313165/.311372; these are different batches, not a fixed
+validation trajectory. Both final matrix spectral norms are one
+for every tanh seed within numerical tolerance. The small margins,
+fixed final readout scale and constrained optimizer are plausible
+contributors, not proven causes. No checkpoint weights were archived,
+so exact causal diagnosis cannot be inferred from these metrics.
+
+### Power/noise sweep
+
+Mean accuracy at 1 dB extra loss and normalized field noise .01:
+
+| Drive (mW/unit squared amplitude) | Absorber | Softsat | Aggregate launch (mW) |
+|---|---:|---:|---:|
+| .1 | 100% | 69.8242% | .302754 |
+| 1 | 100% | 100% | 3.027539 |
+| 10 | 100% | 100% | 30.275390 |
+
+At .1 mW absorber: 20/20 corners, matched linear mean 46.8359%,
+ablation mean 48.9258%, minimum paired improvements 43.9453 and
+49.7070 points. Mean final signal .000591492 mW (0.591492 uW),
+maximum activation input per channel .286874 mW. At noise .03
+and 1 dB, mean accuracy 98.5449%, worst seed 97.4121%.
+At .1 mW/3 dB/.03, mean 95.8691%, worst 93.8965%.
+At 1 mW/1 dB/.03 both candidates remain 100% on every seed.
+Across 27 drive/loss/noise combinations each, absorber achieves
+all-seed perfection in 19 and softsat in 18. At .1 mW/1 dB/.01
+softsat worst seed 63.5254%, 15/20 corners, mean final signal
+.064686 uW. At 10 mW/1 dB/.01 softsat mean final signal 400.523 uW.
+
+The low-drive absorber is a promising follow-up, not a preregistered
+success or demonstrated physical operating point. Each drive/loss
+case is separately trained. Relative to nominal it reduces launch
+power by 90% while reducing final signal power from 25.585 to
+0.591 uW (about 43 times); the readout and LO are unmodeled.
+Noise is normalized, not fixed absolute optical noise or measured
+receiver noise; .01 corresponds to a different absolute field
+perturbation at each drive. No energy/bit or electrical power claim.
+
+### Proposed NL003: independent constructive reference and receiver-aware test
+
+Before selecting a material, preregister a fresh XOR experiment with
+independent seeds and an analytic tanh construction. For inputs
+(x1,x2,1), use hidden rows proportional to (1,1,1), (-1,-1,1),
+(0,0,1), remaining rows zero; contract the matrix by its spectral
+norm. Use output coefficients proportional to (1,1,-c) with c
+chosen analytically between same-sign and opposite-sign responses
+over the entire +/-0.2 jitter boxes; normalize output norm.
+Verify the interval bound and compare trained tanh against that
+constructive reference. Do not alter NL002. Test fixed absolute
+field noise in sqrt(mW) separately from normalized noise, report
+minimum received power and margins, and add an explicit idealized
+coherent readout noise model with declared LO and bandwidth
+assumptions. Keep electronic readout and optical power separate.
+No device-specific feasibility claim until independently calibrated
+material response, phase and dynamics are available.

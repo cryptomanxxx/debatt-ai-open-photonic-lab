@@ -4,12 +4,16 @@ on:
     inputs:
       mode:
         type: choice
-        options: [submit, retrieve]
+        options: [submit, retrieve, continue]
         default: retrieve
       recovery_run_id:
-        description: Previous AG003 source recovery run ID (retrieve only)
+        description: Previous AG003 source recovery run ID (retrieve or continue)
         type: string
         default: ''
+      token_budget:
+        description: Requested token budget for submit or continue (20000 to 1000000)
+        type: number
+        default: 1000000
       confirm_free_project:
         description: Verified free tier and billing disabled; authorize selected operation
         type: boolean
@@ -39,10 +43,12 @@ jobs:
           MODE: ${{ inputs.mode }}
           PRIOR: ${{ inputs.recovery_run_id }}
           GH_TOKEN: ${{ github.token }}
+          BUDGET: ${{ inputs.token_budget }}
         run: |
+          [[ "$BUDGET" =~ ^[0-9]{5,7}$ ]] && (( 10#$BUDGET >= 20000 && 10#$BUDGET <= 1000000 )) || exit 1
           if [[ "$MODE" == submit ]]; then
             [[ -z "$PRIOR" ]]
-          elif [[ "$MODE" == retrieve ]]; then
+          elif [[ "$MODE" == retrieve || "$MODE" == continue ]]; then
             [[ "$PRIOR" =~ ^[0-9]+$ ]]
             [[ "$PRIOR" != "$GITHUB_RUN_ID" ]]
             gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRIOR" |
@@ -57,7 +63,7 @@ jobs:
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/ag-prior
       - uses: actions/download-artifact@v7
-        if: inputs.mode == 'retrieve'
+        if: inputs.mode == 'retrieve' || inputs.mode == 'continue'
         with:
           name: ag003-source-recovery-encrypted
           run-id: ${{ inputs.recovery_run_id }}
@@ -69,12 +75,20 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           /usr/bin/python3 antigravity/reproduction/AG-PHOTONIC-003/recover_workspace.py --mode retrieve --prior "$RUNNER_TEMP/ag-prior/checkpoint.enc" --recovery "$RUNNER_TEMP/ag-recovery-prior/checkpoint.enc" --output "$RUNNER_TEMP/ag-output/checkpoint.enc" --confirm-free-project
+      - name: Continue incomplete recovery (one explicit POST)
+        if: inputs.mode == 'continue'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BUDGET: ${{ inputs.token_budget }}
+        run: |
+          /usr/bin/python3 antigravity/reproduction/AG-PHOTONIC-003/recover_workspace.py --mode continue --prior "$RUNNER_TEMP/ag-prior/checkpoint.enc" --recovery "$RUNNER_TEMP/ag-recovery-prior/checkpoint.enc" --output "$RUNNER_TEMP/ag-output/checkpoint.enc" --budget "$BUDGET" --confirm-free-project
       - name: Request existing files only
         if: inputs.mode == 'submit'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BUDGET: ${{ inputs.token_budget }}
         run: |
-          /usr/bin/python3 antigravity/reproduction/AG-PHOTONIC-003/recover_workspace.py --prior "$RUNNER_TEMP/ag-prior/checkpoint.enc" --output "$RUNNER_TEMP/ag-output/checkpoint.enc" --confirm-free-project
+          /usr/bin/python3 antigravity/reproduction/AG-PHOTONIC-003/recover_workspace.py --prior "$RUNNER_TEMP/ag-prior/checkpoint.enc" --output "$RUNNER_TEMP/ag-output/checkpoint.enc" --budget "$BUDGET" --confirm-free-project
       - name: Poll only the recovery interaction
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

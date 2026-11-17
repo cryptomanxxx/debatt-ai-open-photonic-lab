@@ -17,8 +17,10 @@ Do not modify, regenerate, or rerun the experiment. Do not create substitute
 files. Read exactly params.py, physics_model.py, sweep.py, circuit_sim.py,
 train_sim.py, run_all.py, and report.json. For each, emit the exact original
 bytes in base64, byte length, SHA-256, and basename in a JSON manifest in
-the final text. If a file is missing, report it as missing. Include any
-required input filenames and dependency versions separately. If available,
+the final text. Use exactly one JSON object, no Markdown or surrounding text,
+with a files array; each file object must contain name, base64, size_bytes,
+and sha256. If a file is missing, omit it from files and list it in missing.
+Include any required input filenames and dependency versions separately. If available,
 also report the exact previous and final energy-validation assertion and
 the source diff, clearly distinguishing evidence from recollection.
 Do not disclose secrets, environment identifiers or unrelated files.

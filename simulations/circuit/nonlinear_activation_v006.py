@@ -15,7 +15,7 @@ ENDPOINTS=((.1,.4),(.15,.85),(.373,.4))
 TAU=(2.,10.,50.) # external energy lifetime, ps
 US=(.3,3.) # hypothetical intracavity saturation energy, fJ
 TPA=(0.,.1) # dimensionless loss slope per normalized energy
-DET=(0.,.5) # detuning / external decay rate
+DET=(-.5,0.,.5) # detuning / external decay rate
 SHIFT=(0.,1.) # saturating resonance shift / external decay rate
 NOISE=.0031622776601683794
 DRIVES=(.1,1.)
@@ -215,7 +215,7 @@ def main():
         port_balance=all(a["balance"]<1e-12 for a in audits),
         passive=all(a["peak_transmission"]<=1+1e-12 for a in audits) and
                 all(r["passivity_excess"]<=1e-9 for r in rows+refs),
-        counts=len(rows)==1440 and len(summary)==288 and len(audits)==144 and len(curves)==9360,
+        counts=len(rows)==2160 and len(summary)==432 and len(audits)==216 and len(curves)==14040,
         weights=len(weights)==10 and all(r["seeds"]==5 for r in summary),
         references=len(refs)==30,
         finite=all(np.isfinite(r["min_signed_field"]) for r in rows+refs),
@@ -226,7 +226,7 @@ def main():
         max_residual=max(a["residual"] for a in audits),max_balance=max(a["balance"] for a in audits),
         ambiguous_cavities=sum(not a["grid_unique_stable"] for a in audits),
         screens=[dict(drive_mw=d,low=l,high=h,passed=sum(r["screen_pass"] for r in summary
-                    if r["drive_mw"]==d and r["low"]==l and r["high"]==h),tested=48)
+                    if r["drive_mw"]==d and r["low"]==l and r["high"]==h),tested=72)
                  for d,(l,h) in itertools.product(DRIVES,ENDPOINTS)],
         limitations=["Hypothetical single-mode symmetric two-port cavity, no calibrated material or geometry.",
             "Instantaneous saturation closure; no carrier recovery, pulse train or thermal dynamics.",

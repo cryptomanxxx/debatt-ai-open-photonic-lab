@@ -132,8 +132,7 @@ def main():
                 current,sigma,ps,pp,pm,shot,thermal,rin=receiver(e,lo,bw,loss,phase)
                 sensed=current+sigma*rxdraw
                 margin=(2*yt-1)*current/sigma
-                # Average Gaussian conditional error, via erfc without scipy.
-                # Empirical errors include 8 paired realizations per example.
+                        # Empirical errors include 8 paired realizations per example.
                 rows.append(dict(seed=seed,kind=kind,drive_mw=drive,abs_noise_sqrt_mw=an,
                     lo_mw=lo,bw_ghz=bw,downstream_loss_db=loss,phase_deg=phase,
                     accuracy=accuracy(sensed,yt),

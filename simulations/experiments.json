@@ -338,6 +338,19 @@
         "tools/test_parallel_id003.py"
       ],
       "lock": "simulations/meep/opa-id-linux-64.lock.txt"
+    },
+    {
+      "id": "opa-id-004",
+      "name": "Inverse designed four-port photonic waveguide crossing",
+      "script": "simulations/meep/inverse_crossing_v004.py",
+      "result_dir": "results/opa-id-004",
+      "artifact": "opa-id-004",
+      "timeout_minutes": 60,
+      "deps": [
+        "simulations/meep/opa-id-linux-64.lock.txt",
+        "simulations/meep/opa_common.py"
+      ],
+      "lock": "simulations/meep/opa-id-linux-64.lock.txt"
     }
   ]
 }

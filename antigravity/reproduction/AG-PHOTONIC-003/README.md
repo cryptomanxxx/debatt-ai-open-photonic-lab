@@ -134,4 +134,4 @@ independent audit should corrected architecture rankings be interpreted.
 
 ## Controlled correction stage 1
 
-[OPA-SYS-002](corrected/README.md) isolates the two duplicated pump fanout factors and compares every original configuration against the minimally corrected model. Results pending CI; no convergence or hardware claims.
+[OPA-SYS-002](corrected/README.md) isolates the two duplicated pump fanout factors and compares every original configuration against the minimally corrected model. CI completed: 325 → 472 analytically feasible, all 147 new candidates at 4 bits; best efficiencies unchanged. See the linked report. Permanent archive pending explicit archive workflow; no convergence or hardware claims.

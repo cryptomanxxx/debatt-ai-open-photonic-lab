@@ -91,6 +91,56 @@ class RecoveryTest(unittest.TestCase):
             with patch.object(recover.manager, "load", side_effect=[parent, current]), patch.object(recover.manager, "seal"), patch.object(recover.manager.background, "request") as req:
                 recover.retrieve("key", Path("prior"), Path("recovery"), Path(tmp) / "out", True)
                 req.assert_not_called()
+    def test_continue_million_budget(self):
+        parent = {"id": "original", "status": "completed", "environment_id": "env"}
+        prior = dict(parent, id="recovery", status="incomplete")
+        final = dict(parent, id="continuation")
+        with tempfile.TemporaryDirectory() as tmp:
+            with patch.object(recover.manager, "load", side_effect=[parent, prior]), patch.object(recover.manager, "seal"), patch.object(recover.manager.background, "request", return_value=final) as req:
+                recover.recover("key", Path("prior"), Path(tmp) / "out", 1000000, True, Path("recovery"))
+                req.assert_called_once()
+                payload = req.call_args.kwargs["payload"]
+                self.assertEqual(payload["previous_interaction_id"], "recovery")
+                self.assertEqual(payload["environment"], "env")
+                self.assertEqual(payload["agent_config"]["max_total_tokens"], 1000000)
+    def test_continue_rejects_wrong_environment_or_status(self):
+        parent = {"id": "original", "status": "completed", "environment_id": "env"}
+        for prior in (dict(parent, id="recovery", status="completed"),
+                      dict(parent, id="recovery", status="incomplete", environment_id="wrong")):
+            with tempfile.TemporaryDirectory() as tmp:
+                with patch.object(recover.manager, "load", side_effect=[parent, prior]), patch.object(recover.manager.background, "request") as req:
+                    with self.assertRaises(ValueError):
+                        recover.recover("key", Path("prior"), Path(tmp) / "out", 1000000, True, Path("recovery"))
+                    req.assert_not_called()
+    def test_budget_above_million_rejected(self):
+        with patch.object(recover.manager.background, "request") as req:
+            with self.assertRaises(ValueError):
+                recover.recover("key", Path("prior"), Path("out"), 1000001, True)
+            req.assert_not_called()
+    def test_tool_result_manifest_without_final_text(self):
+        m = manifest()
+        m["dependencies"] = {"numpy": "version"}
+        r = {"steps": [{"type": "code_execution_result", "is_error": False, "result": json.dumps(m)},
+                       {"type": "model_output", "content": [{"type": "text", "text": "Done"}]}]}
+        files, evidence = extract.select_manifest(r, ())
+        self.assertEqual(set(files), extract.NAMES)
+        self.assertEqual(json.loads(evidence)["manifest_source"], "code_execution_result")
+        self.assertEqual(json.loads(evidence)["dependencies"], m["dependencies"])
+    def test_failed_tool_result_not_used(self):
+        r = {"steps": [{"type": "code_execution_result", "is_error": True, "result": json.dumps(manifest())}]}
+        with self.assertRaises(ValueError):
+            extract.select_manifest(r, ())
+    def test_conflicting_manifests_rejected(self):
+        m = manifest()
+        n = manifest()
+        item = next(x for x in n["files"] if x["name"] == "params.py")
+        data = b"# different"
+        item.update(base64=base64.b64encode(data).decode(), size_bytes=len(data),
+                    sha256=hashlib.sha256(data).hexdigest())
+        r = {"steps": [{"type": "code_execution_result", "is_error": False, "result": json.dumps(m)},
+                       {"type": "model_output", "content": [{"type": "text", "text": json.dumps(n)}]}]}
+        with self.assertRaises(ValueError):
+            extract.select_manifest(r, ())
     def test_no_confirmation_no_request(self):
         with patch.object(recover.manager.background, "request") as req:
             with self.assertRaises(ValueError):

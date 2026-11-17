@@ -142,3 +142,101 @@ valid without matching physical reference planes and material
 parameters. After archive analysis, investigate independently
 calibrated cavity coupling, field overlap, recovery and pulse
 dynamics, and separately retrain weak nonlinear candidates.
+
+## Initial observed results — 17 November 2026
+
+[Experiment run 44179461645](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44179461645),
+job 134379675713, artifact 14371092957, PR 146. All 14
+implementation checks passed, with no failures. Maximum normalized
+steady-state equation residual is 2.54616929392e-14 and maximum
+absolute port balance error is 5.55111512313e-16, below the
+preregistered tolerances. These checks validate numerical
+consistency of the assumed equations, not a physical cavity.
+
+| Reference endpoint pair (Tlow, Thigh) | Low-drive pass/tested | High-drive pass/tested |
+|---|---:|---:|
+| (.1,.4) | 19/72 | 20/72 |
+| (.15,.85) | 22/72 | 16/72 |
+| (.373,.4) | 2/72 | 1/72 |
+| Total | 43/216 | 37/216 |
+
+80/432 groups pass (18.52%). The weak reference endpoint family
+(.373,.4) has three passing drive/configuration groups out of
+144, compared with zero of 108 groups at absolute depth .027 in
+NL004 and zero of 90 in NL005. This is a new conditional
+numerical result, not a demonstration of a measured 2.7-point
+device. The endpoint parameters describe an on-resonance
+reference without competing nonlinear loss or detuning shift;
+the actual complex transfer may have substantially different
+transmission contrast and phase. The grids and mechanisms differ
+across experiments, so pass fractions are not directly comparable
+as yields. The aggregate report cannot identify the three weak
+passing tuples or whether any is common to both drives. Full
+transfer and ablation analysis is required before assigning a
+mechanism to their performance. No reduction of physical
+activation power is established.
+
+### Stability and independent bistability diagnostic
+
+All 216 tested cavity configurations pass the conservative
+uniqueness/stability audit (ambiguous_cavities=0). This is
+conditional on the instantaneous single-mode closure, the
+0–4 mW range, the stationary-fold check, and sampled grid
+and classifier inputs. It does not establish stability with
+finite carrier recovery, thermal dynamics or other modes.
+
+The separately specified stress case (ns=.1, sa=20, b=d=h=0,
+tau_ext=10 ps, Us=.3 fJ) has three steady-state roots at
+incident power 1.55685 mW, of which two are locally stable.
+It verifies that the implementation can recognize bistability;
+it is not a passing classifier configuration or a measured
+device. No history-dependent branch selection was used.
+
+### Independent distributed references
+
+All 30 reference rows (NL005 A/B/C, both drives, five seeds)
+have 100% clean and receiver accuracy, including worst repeat
+on fresh domain-44 inputs and noise domains 45/46.
+Each drive/reference has 81,920 correct sample/repeat outcomes
+from 10,240 distinct held-out inputs and eight simulated noise
+repeats. The six groups are paired across references; these
+are not independent physical measurements or a measured BER.
+
+| Drive mW | Reference | Mean receiver (%) | Worst repeat (%) | Output uW | Min signed field sqrt(mW) | Peak diode mW |
+|---:|---|---:|---:|---:|---:|---:|
+| 0.1 | A | 100.000000 | 100.000000 | 1.252570 | 0.021730 | 0.063932 |
+| 0.1 | B | 100.000000 | 100.000000 | 0.528032 | 0.010235 | 0.060592 |
+| 0.1 | C | 100.000000 | 100.000000 | 2.096747 | 0.023061 | 0.067156 |
+| 1 | A | 100.000000 | 100.000000 | 3.002775 | 0.009488 | 0.080580 |
+| 1 | B | 100.000000 | 100.000000 | 6.046877 | 0.039270 | 0.086197 |
+| 1 | C | 100.000000 | 100.000000 | 14.822827 | 0.046426 | 0.101053 |
+
+Candidate B now has perfect accuracy on the new draws;
+its previous NL005 low-drive worst repeat was 99.951172%.
+This is replication on new samples, not a modified transfer.
+The references use direct distributed RK4 and are not cavity
+candidates. No conclusion about the best resonator or its
+comparison to these references follows from aggregate counts.
+
+### Archive and remaining work
+
+Exact ZIP metadata: 661,907 bytes, SHA-256
+64eda82d93c4b08e11059d685ba183279fd98efbdf108980f1012d86c93b1dad.
+The archive helper pins all six science-file hashes emitted
+by CI, verifies raw ZIP identity, CRC, report counts, stability
+summary and staged bytes, and records environment metadata
+and provenance. Actual ZIP-byte verification awaits the manual
+archive workflow. Initial analysis uses CI stdout only.
+
+After archival, analyze all 2160 seed metrics, 432 grouped
+configurations, 216 cavity audits, 14040 transfer samples and
+30 references. Identify the three weak passing configurations,
+their actual transmission/phase variation and common-drive
+intersection; stratify by external lifetime, internal saturation
+energy, nonlinear loss, detuning and shift. Compare signed
+margin, output, peak cavity energy and local relaxation to
+paired distributed references. Distinguish post-hoc diagnostic
+ablations from the original screen and validate new hypotheses
+on independent data. Do not equate stored energy or external
+lifetime with measured pulse threshold, local intensity,
+throughput or system energy. Calibration remains outstanding.

@@ -1,0 +1,59 @@
+name: OPA archive NL006 evidence
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_archive:
+        description: Archive verified NL006 evidence to a separate review branch
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: opa-nl006-archive
+  cancel-in-progress: false
+jobs:
+  archive:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_archive == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      ARCHIVE_BRANCH: research/opa-nl006-44179461645
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Verify run and artifact identity
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/44179461645" |
+            jq -e '.path == ".github/workflows/experiments.yml" and .head_branch == "research/opa-nl-006" and .event == "pull_request" and .conclusion == "success" and .head_sha == "6d04f42b7c547a4dc7753145208cc83dc1e6b062"' >/dev/null
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/14371092957" |
+            jq -e '.name == "opa-nl-006" and .expired == false and .workflow_run.id == 44179461645 and .digest == "sha256:64eda82d93c4b08e11059d685ba183279fd98efbdf108980f1012d86c93b1dad" and .size_in_bytes == 661907' >/dev/null
+      - name: Download and verify raw ZIP
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/14371092957/zip" > "$RUNNER_TEMP/nl006.zip"
+          python3 research/archive_nl006.py --zip "$RUNNER_TEMP/nl006.zip" --output results/opa-nl-006
+      - name: Archive to separate review branch
+        run: |
+          gh auth setup-git
+          if git ls-remote --exit-code --heads origin "refs/heads/$ARCHIVE_BRANCH" >/dev/null; then
+            echo "Archive branch exists; refusing overwrite."
+            exit 1
+          else
+            status=$?
+            [[ "$status" == 2 ]]
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$ARCHIVE_BRANCH"
+          git -c core.autocrlf=false add -f -- results/opa-nl-006
+          stage="$RUNNER_TEMP/nl006-staged"
+          mkdir "$stage"
+          for file in results/opa-nl-006/*; do
+            git show ":$file" > "$stage/$(basename "$file")"
+          done
+          python3 research/archive_nl006.py --zip "$RUNNER_TEMP/nl006.zip" --staged "$stage"
+          git commit -m "Archive exact OPA-NL-006 evidence from run 44179461645"
+          git push origin "HEAD:refs/heads/$ARCHIVE_BRANCH"
+          echo "Review branch: https://github.com/$GITHUB_REPOSITORY/compare/main...$ARCHIVE_BRANCH" >> "$GITHUB_STEP_SUMMARY"

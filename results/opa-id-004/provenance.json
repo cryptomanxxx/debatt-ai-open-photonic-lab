@@ -1,0 +1,58 @@
+{
+  "experiment": "OPA-ID-004",
+  "workflow_run_id": 44083174983,
+  "job_id": 134038799877,
+  "artifact_id": 14328813060,
+  "artifact_sha256": "3d059d10fda6a3555b245cc48fde0ea8a936c59eb3c3975150b69cbfe82b5333",
+  "artifact_bytes": 21834,
+  "head_sha": "86961631ae40a469634009eed7e262f39004a4af",
+  "merge_sha": "2568bde4fc2983f5df7fe2100cd46121a804525b",
+  "pull_request": 102,
+  "source_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44083174983/job/134038799877",
+  "artifact_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44083174983/artifacts/14328813060",
+  "verification": "Downloaded original ZIP matched GitHub SHA-256 and passed ZIP CRC validation. All seven archived Git blob IDs match the original bytes. JSON and CSV/density blobs reconstructed from the CI log and checked against original ZIP; environment and inventory reused by exact blob ID.",
+  "files": {
+    "environment-lock.txt": {
+      "bytes": 9596,
+      "sha256": "0c16eed28a615f82016ef367494ec4278745fa18aff859533c253355aac0d1da",
+      "git_blob_sha1": "6fcd943bd8bd02d8ec8c734dc31b6abb4e0f96d0",
+      "archived": true
+    },
+    "gradient_checks.csv": {
+      "bytes": 860,
+      "sha256": "bf2e2f6a3076d24b773933b978fda59758d883ce0a40f7fbeea9da18306a2492",
+      "git_blob_sha1": "c84035f79a25d0c8c79e31dab78f9ec13138671b",
+      "archived": true
+    },
+    "installed-packages.json": {
+      "bytes": 69143,
+      "sha256": "214529956d0e62a98d1cc089bf291acf6295eb85958868136c0b2aaa0b9d5ec3",
+      "git_blob_sha1": "88c110a3f4ef13b8006b9fda426cfd71c01b86e2",
+      "archived": true
+    },
+    "measurements.csv": {
+      "bytes": 3402,
+      "sha256": "cc939debb5bbb9c6f83b18641b80dd5def72409bc241474cdc1661b46fed830a",
+      "git_blob_sha1": "16b14c79006277d502e899f0ed43548f25d19b78",
+      "archived": true
+    },
+    "optimization_history.csv": {
+      "bytes": 568,
+      "sha256": "d880504e53062d3ae8c4be53a281b0a65d6c7de63f802b7237bc684e63681053",
+      "git_blob_sha1": "adba6ccf99e93bac9e90427bbfadea268e84e531",
+      "archived": true
+    },
+    "optimized_density.csv": {
+      "bytes": 15625,
+      "sha256": "a6402187939d6489eed57aece4480e42d108aad2bd177736994810cdc777b615",
+      "git_blob_sha1": "eb8c73cdf30f981b59ad5532385ce40b6c364e7d",
+      "archived": true
+    },
+    "result.json": {
+      "bytes": 50716,
+      "sha256": "4f910d89daab943cea457bb57a5a6f91aeabf5b0e26a1ea13052f4f1a483712f",
+      "git_blob_sha1": "aab2d26265ede1f47ed3261af1d2bdd0034ef679",
+      "archived": true
+    }
+  }
+}

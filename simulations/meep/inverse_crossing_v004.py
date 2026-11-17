@@ -59,7 +59,9 @@ def simulation(w, res, wl, source_axis="x", reference=False):
     direction = mp.X if horizontal else mp.Y
     source = mp.Vector3(-2.7, 0) if horizontal else mp.Vector3(0, -2.7)
     source_size = mp.Vector3(0, SPAN) if horizontal else mp.Vector3(SPAN, 0)
-    parity = (mp.EVEN_Y if horizontal else mp.EVEN_X) + PARITY
+    # MPB exposes EVEN_Y and EVEN_Z, not EVEN_X. For y propagation,
+    # select the fundamental band without an in-plane parity constraint.
+    parity = mp.EVEN_Y + PARITY if horizontal else PARITY
     region = None
     if reference:
         geom = [mp.Block(size=mp.Vector3(mp.inf, WIDTH, mp.inf) if horizontal
@@ -181,6 +183,9 @@ def main():
             refs[key] = reference(*key)
         return refs[key]
 
+    # Validate both launch directions before expensive optimization.
+    ref(RES[0])
+    ref(RES[-1], WL, "y")
     initial = seed()
     w = initial.copy()
     gradients = [row for res in RES

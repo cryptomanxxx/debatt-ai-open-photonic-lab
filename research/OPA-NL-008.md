@@ -156,3 +156,177 @@ step-size convergence where needed. Retain the combined
 no-bleaching amplitude-only diagnostic as separate
 follow-up, not a physical cavity. Do not infer energy
 savings from stored optical energy or signal duration.
+
+## Initial observed results — 17 November 2026
+
+[Experiment run 44192685431](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44192685431),
+job 134426029605, source PR 154, artifact 14377357687.
+All 14 implementation checks passed. No implementation failures.
+The report contains 2160 seed rows, 432 groups and 60 paired
+stationary references. This initial analysis uses the CI-emitted
+JSON report, not yet the raw archived CSVs.
+
+| Numerical diagnostic | Observed maximum |
+|---|---:|
+| Long-step stationary field error (sqrt(mW)) | 9.03010273e-12 |
+| Normalized slot energy imbalance | 3.91443012e-7 |
+| Fine/coarse sampled field difference (sqrt(mW)) | 1.42437945e-7 |
+| Normalized fine/coarse aggregate energy difference | 5.24195381e-7 |
+
+### Accuracy screens
+
+Each cell is passing groups out of 18 independently labeled
+timing combinations; cold resets are diagnostics.
+
+| Candidate | .1 mW cold | .1 mW stream | 1 mW cold | 1 mW stream |
+|---|---:|---:|---:|---:|
+| C1 | 10/18 | 10/18 | 12/18 | 11/18 |
+| C2 | 10/18 | 10/18 | 12/18 | 10/18 |
+| C3 | 10/18 | 10/18 | 12/18 | 10/18 |
+| L1 | 12/18 | 10/18 | 2/18 | 0/18 |
+| L2 | 10/18 | 10/18 | 2/18 | 0/18 |
+| H1 | 0/18 | 0/18 | 6/18 | 4/18 |
+
+98/216 cold groups and 85/216 stream groups pass, total
+183/432. All 85 successful stream groups use on durations
+of 50 or 200 ps. No 10 ps stream group passes. Cold
+aggregates cannot establish which individual timing cases
+pass, nor distinguish history losses from gains; that
+requires the archived summary and metrics files.
+
+### Stream timing breakdown
+
+Each timing row has 12 candidate/drive groups.
+
+| On ps | Response ps | Gap ps | Pass/12 | Perfect/12 |
+|---:|---:|---:|---:|---:|
+| 10 | 0 | 0 | 0/12 | 0/12 |
+| 10 | 0 | 20 | 0/12 | 0/12 |
+| 10 | 5 | 0 | 0/12 | 0/12 |
+| 10 | 5 | 20 | 0/12 | 0/12 |
+| 10 | 50 | 0 | 0/12 | 0/12 |
+| 10 | 50 | 20 | 0/12 | 0/12 |
+| 50 | 0 | 0 | 8/12 | 4/12 |
+| 50 | 0 | 20 | 8/12 | 6/12 |
+| 50 | 5 | 0 | 8/12 | 4/12 |
+| 50 | 5 | 20 | 8/12 | 5/12 |
+| 50 | 50 | 0 | 0/12 | 0/12 |
+| 50 | 50 | 20 | 1/12 | 0/12 |
+| 200 | 0 | 0 | 9/12 | 5/12 |
+| 200 | 0 | 20 | 9/12 | 5/12 |
+| 200 | 5 | 0 | 9/12 | 5/12 |
+| 200 | 5 | 20 | 9/12 | 5/12 |
+| 200 | 50 | 0 | 8/12 | 5/12 |
+| 200 | 50 | 20 | 8/12 | 5/12 |
+
+By duration: 0/72 at 10 ps, 33/72 at 50 ps, 52/72 at
+200 ps. There are 49/216 perfect stream groups.
+The 50 ps no-gap condition has a nominal envelope cadence
+of 20 Gsymbols/s, not a validated hardware rate or receiver
+bandwidth. The fixed 1 GHz noise diagnostic cannot establish
+operation at this cadence.
+
+### Common-drive stream cases
+
+30 candidate/timing tuples pass at both drives; the
+frozen network weights differ between drives. All common-drive
+tuples are from C1/C2/C3.
+
+| Candidate | On ps | Response ps | Gap ps | .1 mW worst % | 1 mW worst % |
+|---|---:|---:|---:|---:|---:|
+| C1 | 50 | 0 | 0 | 100.000000 | 99.218750 |
+| C1 | 50 | 0 | 20 | 100.000000 | 100.000000 |
+| C1 | 200 | 0 | 0 | 99.218750 | 100.000000 |
+| C1 | 200 | 0 | 20 | 99.218750 | 100.000000 |
+| C1 | 50 | 5 | 0 | 99.218750 | 100.000000 |
+| C1 | 50 | 5 | 20 | 99.218750 | 100.000000 |
+| C1 | 200 | 5 | 0 | 99.218750 | 100.000000 |
+| C1 | 200 | 5 | 20 | 99.218750 | 100.000000 |
+| C1 | 200 | 50 | 0 | 99.218750 | 100.000000 |
+| C1 | 200 | 50 | 20 | 99.218750 | 100.000000 |
+| C2 | 50 | 0 | 0 | 98.437500 | 100.000000 |
+| C2 | 50 | 0 | 20 | 98.437500 | 100.000000 |
+| C2 | 200 | 0 | 0 | 98.437500 | 100.000000 |
+| C2 | 200 | 0 | 20 | 98.437500 | 100.000000 |
+| C2 | 50 | 5 | 0 | 98.437500 | 100.000000 |
+| C2 | 50 | 5 | 20 | 98.437500 | 100.000000 |
+| C2 | 200 | 5 | 0 | 98.437500 | 100.000000 |
+| C2 | 200 | 5 | 20 | 98.437500 | 100.000000 |
+| C2 | 200 | 50 | 0 | 97.656250 | 100.000000 |
+| C2 | 200 | 50 | 20 | 97.656250 | 100.000000 |
+| C3 | 50 | 0 | 0 | 98.437500 | 99.218750 |
+| C3 | 50 | 0 | 20 | 98.437500 | 100.000000 |
+| C3 | 200 | 0 | 0 | 98.437500 | 100.000000 |
+| C3 | 200 | 0 | 20 | 98.437500 | 100.000000 |
+| C3 | 50 | 5 | 0 | 98.437500 | 98.437500 |
+| C3 | 50 | 5 | 20 | 98.437500 | 100.000000 |
+| C3 | 200 | 5 | 0 | 98.437500 | 100.000000 |
+| C3 | 200 | 5 | 20 | 98.437500 | 100.000000 |
+| C3 | 200 | 50 | 0 | 98.437500 | 100.000000 |
+| C3 | 200 | 50 | 20 | 98.437500 | 100.000000 |
+
+C1 at 50 ps, zero gap and 5 ps response passes both drives:
+99.218750% and 100% worst repeat. At 50 ps, 20 ps gap and
+instantaneous response both are perfect. Neither demonstrates
+physical 20 Gbaud or a single network working at both powers.
+For C1 at 50 ps and 5 ps response, maximum stream-cold
+classifier field difference at .1/1 mW is respectively
+.002965690/.030126220 sqrt(mW) without gaps and
+.001111021/.006269989 sqrt(mW) with 20 ps gaps. This is
+direct evidence of history sensitivity in the conditional
+model even when the accuracy gate passes. A gap does not
+necessarily improve accuracy. The maximum deviations are
+from possibly different samples and seeds.
+
+L1 and L2 each have ten perfect low-drive stream groups
+and no passing high-drive stream group. H1 passes four
+high-drive stream groups (200 ps, response 0 or 5 ps,
+both gaps), none at low drive. The stationary reference
+for H1 low drive has perfect clean accuracy but fails
+the receiver gate. L1/L2 high-drive stationary references
+fail the gate, so their failures cannot be attributed
+solely to temporal memory.
+
+### Stationary reference comparison
+
+| Candidate | Drive mW | Min clean % | Worst repeat % |
+|---|---:|---:|---:|
+| C1 | 0.1 | 100.000000 | 99.218750 |
+| C1 | 1 | 100.000000 | 100.000000 |
+| C2 | 0.1 | 100.000000 | 98.437500 |
+| C2 | 1 | 100.000000 | 100.000000 |
+| C3 | 0.1 | 100.000000 | 98.437500 |
+| C3 | 1 | 100.000000 | 100.000000 |
+| L1 | 0.1 | 100.000000 | 100.000000 |
+| L1 | 1 | 3.125000 | 0.000000 |
+| L2 | 0.1 | 100.000000 | 100.000000 |
+| L2 | 1 | 0.000000 | 0.000000 |
+| H1 | 0.1 | 100.000000 | 81.250000 |
+| H1 | 1 | 100.000000 | 96.875000 |
+
+The 128-sample test per seed is smaller than NL007; perfect
+classification is not a physical BER estimate. No retraining,
+phase optimization or timing selection on held-out labels
+was done in the experiment. Identifying promising conditions
+from this completed sweep is post-hoc.
+
+### Archive and follow-up
+
+Source ZIP 544319 bytes; SHA-256
+27dfe96872e4a15292cdf9b65befdb4d305d63ed2ef3bba6046972c404882c01.
+The manual archive workflow pins this ZIP, verifies CRC,
+six CI-emitted science hashes, report counts and exact
+staged bytes. The raw ZIP has not yet been verified by
+that workflow. Permanent archive follows review.
+
+After archival, compare paired cold and stream groups
+including failures, examine the signed projected margins
+and sampled complex-field traces, and quantify energy
+accounting and convergence across timing cases. Resolve
+the 10–50 ps transition on independent data and longer
+sequences. A future dynamic receiver must account for
+integration, bandwidth, phase and correlated noise at
+the selected cadence. Material calibration remains open;
+the saturating index response is hypothetical, not a
+measured material law. No hardware speed or wall-plug
+energy advantage has been established.

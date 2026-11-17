@@ -49,8 +49,7 @@ passed 10/10 checks, including exact baseline candidates and rejection
 counts, 108 independent receiver roots and original/stage-one immutability.
 Artifact 14340214791 (482695 bytes) was independently downloaded, ZIP SHA-256
 matched GitHub metadata, CRC passed, and all eight extracted file digests
-were recorded in archive_sys004.py. Permanent archive pending explicit
-archive workflow.
+were recorded in archive_sys004.py. [Permanent archive](../../../../results/opa-sys-004/) complete.
 
 | Architecture | Baseline | Receiver only | Laser only | Combined |
 |---|---:|---:|---:|---:|
@@ -114,3 +113,5 @@ SYS004 baseline. Do not treat ideal coherent LO or gain optimization
 as a validated architecture before checking the assumptions and
 accounting. Independent-laser eight-bit candidates merit subsequent
 convergence testing, even if comb candidates remain infeasible.
+
+Next stage: [OPA-SYS-005 gain policy experiment](../stage3/README.md), pending CI.

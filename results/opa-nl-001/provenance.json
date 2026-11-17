@@ -1,0 +1,38 @@
+{
+  "artifact_bytes": 102722,
+  "artifact_id": 14360875814,
+  "artifact_sha256": "effb57fcb56dfb8433951bff8ff3d381f8e6bfaab31c51d54c0340751c4c9cc3",
+  "experiment": "OPA-NL-001",
+  "files": {
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c"
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6"
+    },
+    "learning_curves.csv": {
+      "bytes": 134304,
+      "sha256": "e51c1fcc9d8c3ccca76bfb2317170d7b0b2f3f5ca1a5e7c45c2f05d29595013f"
+    },
+    "metrics.csv": {
+      "bytes": 33826,
+      "sha256": "2bc49f22ccf3e9f37dd7900a8e34c05662c07f38a16ab50345d07d66f077b4c9"
+    },
+    "result.json": {
+      "bytes": 100589,
+      "sha256": "55fcef08ad90b353f01fda09360f53c2b6f6bac5bb3605dc6d7f44109f659abe"
+    },
+    "transfer.csv": {
+      "bytes": 137437,
+      "sha256": "d3a56fa723878f988ab2a99761ca0183546d173ab199e6457cee1b1f5bc2f05e"
+    }
+  },
+  "head_sha": "eaf191ad531beaee8b87df5048f151fbc5f6a81b",
+  "job_id": 134289115091,
+  "merge_sha": "c662cd33e824a9b794faa5d0b745d20a4ae5db91",
+  "pull_request": 127,
+  "verification": "Raw ZIP pinned to GitHub metadata; CRC and four science-file hashes pinned to CI stdout; environment hashes derived from verified ZIP; staged bytes compared to verified ZIP.",
+  "workflow_run_id": 44153775276
+}

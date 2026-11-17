@@ -47,15 +47,20 @@ def execute(key, experiment, mode, output, prior=None, legacy_id=None,
             budget=20_000, allow_submit=False, dynamic_webhook=False):
     if dynamic_webhook and (mode != "start" or experiment != "AG-INFRA-001" or budget != 20_000):
         raise ValueError("Dynamic webhook restricted to 20k infrastructure start")
-    if experiment not in EXPERIMENTS or not 20_000 <= budget <= 200_000:
+    if experiment not in EXPERIMENTS or not 20_000 <= budget <= 1_000_000:
         raise ValueError("Invalid experiment or budget")
     if output.exists():
         raise ValueError("Output already exists")
-    if mode == "start":
+    if mode in ("start", "budget-probe"):
         if not allow_submit or prior is not None or legacy_id:
             raise ValueError("Explicit new submission required")
         payload = dict(EXPERIMENTS[experiment], background=True, store=True)
         payload["agent_config"] = dict(payload["agent_config"], max_total_tokens=budget)
+        if mode == "budget-probe":
+            if experiment != "AG-INFRA-001" or budget != 1_000_000:
+                raise ValueError("Budget probe requires AG-INFRA-001 and 1M budget")
+            payload["input"] = "Reply with exactly OK and finish immediately. Do not use tools, execute commands, inspect files, or perform research."
+            payload["tools"] = []
         if dynamic_webhook:
             payload["webhook_config"] = {"uris": [DYNAMIC_URI]}
             print("Dynamic webhook diagnostic enabled.")
@@ -91,7 +96,7 @@ def execute(key, experiment, mode, output, prior=None, legacy_id=None,
     else:
         raise ValueError("Unknown operation")
     seal(key, experiment, result, output)
-    if mode in ("start", "continue"):
+    if mode in ("start", "continue", "budget-probe"):
         print("Interaction SHA256: " + hashlib.sha256(result["id"].encode()).hexdigest())
     status = result.get("status")
     if status == "completed":
@@ -156,7 +161,7 @@ def poll_existing(key, experiment, output, *, sleep=time.sleep):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--experiment", choices=EXPERIMENTS, required=True)
-    p.add_argument("--mode", choices=["start", "retrieve", "import", "continue"], required=True)
+    p.add_argument("--mode", choices=["start", "retrieve", "import", "continue", "budget-probe"], required=True)
     p.add_argument("--budget", type=int, default=20_000)
     p.add_argument("--prior", type=Path)
     p.add_argument("--output", type=Path, required=True)

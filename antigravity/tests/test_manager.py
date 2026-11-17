@@ -177,3 +177,30 @@ class ManagerTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 m.execute("key",exp,"continue",b,prior=a)
             req.assert_not_called()
+
+    def test_million_budget_probe(self):
+        with tempfile.TemporaryDirectory() as d, patch.object(m.background,"request",return_value={"id":"probe-id","status":"in_progress"}) as req:
+            a = Path(d)/"a.enc"
+            for exp, budget, allow in [("AG-INFRA-001",1000001,True),("AG-INFRA-001",999999,True),("AG-PHOTONIC-003",1000000,True),("AG-INFRA-001",1000000,False)]:
+                with self.assertRaises(ValueError):
+                    m.execute("key",exp,"budget-probe",a,budget=budget,allow_submit=allow)
+            req.assert_not_called()
+            self.assertEqual(m.execute("key","AG-INFRA-001","budget-probe",a,budget=1000000,allow_submit=True),0)
+            req.assert_called_once()
+            p = req.call_args.kwargs["payload"]
+            self.assertEqual(p["agent_config"]["max_total_tokens"],1000000)
+            self.assertEqual(p["tools"],[])
+            self.assertIn("finish immediately",p["input"])
+            self.assertNotIn("webhook_config",p)
+
+    def test_million_continuation(self):
+        with tempfile.TemporaryDirectory() as d, patch.object(m.background,"request",return_value={"id":"child-id","status":"in_progress"}) as req:
+            a,b = Path(d)/"a.enc",Path(d)/"b.enc"
+            exp = "AG-PHOTONIC-003"
+            m.seal("key",exp,{"id":"parent-id","status":"incomplete","environment_id":"env-id"},a)
+            with self.assertRaises(ValueError):
+                m.execute("key",exp,"continue",b,prior=a,budget=1000001,allow_submit=True)
+            req.assert_not_called()
+            self.assertEqual(m.execute("key",exp,"continue",b,prior=a,budget=1000000,allow_submit=True),0)
+            req.assert_called_once()
+            self.assertEqual(req.call_args.kwargs["payload"]["agent_config"]["max_total_tokens"],1000000)

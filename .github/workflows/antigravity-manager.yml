@@ -7,7 +7,7 @@ on:
         options: [AG-PHOTONIC-001, AG-INFRA-001, AG-PHOTONIC-002, AG-PHOTONIC-003]
       mode:
         type: choice
-        options: [retrieve, import, start, continue]
+        options: [retrieve, import, start, continue, budget-probe]
         default: retrieve
       prior_run_id:
         description: Optional historical run ID; blank selects latest checkpoint
@@ -16,6 +16,7 @@ on:
         description: Optional SHA256 binding for webhook retrieval
         type: string
       token_budget:
+        description: 20000 to 1000000; budget-probe requires 1000000
         type: number
         default: 20000
       poll_until_done:
@@ -61,7 +62,7 @@ jobs:
           else
             [[ -z "$PRIOR" ]]
           fi
-          if [[ "$MODE" == start || "$MODE" == continue ]]; then
+          if [[ "$MODE" == start || "$MODE" == continue || "$MODE" == budget-probe ]]; then
             [[ "$CONFIRM" == true ]]
           fi
       - name: Install encryption dependency

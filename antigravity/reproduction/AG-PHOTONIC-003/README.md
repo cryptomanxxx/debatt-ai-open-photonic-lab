@@ -1,6 +1,6 @@
 # AG-PHOTONIC-003 — source recovery and independent reproduction
 
-Status: **BLOCKED — original workspace files not yet recovered; no independent result.**
+Status: **SOURCE RECOVERED — all seven files verified against snapshot digests; archival and independent reproduction pending.**
 
 ## Evidence and provenance
 
@@ -10,7 +10,15 @@ Status: **BLOCKED — original workspace files not yet recovered; no independent
 - Archived encrypted response SHA-256: `a6963af6d467ad43ca97fd465b0bb6f1db69fad88ce4ca7b898f504c6aea950d`.
 - Export schema 2, completed, 14 steps. No complete workspace source or report in final export.
 
-## Recovery
+## Recovered snapshot and archival
+
+- Direct snapshot: [44074735184](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44074735184), source artifact 14325015236, ZIP SHA-256 `ff289ebdc02161598cc4a2655796c8e4ad4df537095b3f84129651f44d88f04d`.
+- TAR: 254464 bytes, 25 entries, SHA-256 `e89d34601d4acd5642c915ad59c4ed9a67e3e9e2942a1747f4b25e012ee05cc7`; encrypted artifact 14323698575.
+- Seven source/report files: 164850 bytes total; no missing or withheld files. All per-file hashes independently checked against the downloaded ZIP and pinned in import_snapshot.py.
+- The source ZIP expires November 24, 2026; archive promptly. Use **AG003 archive verified original files** on main with confirm_archive enabled. This copies verified bytes to `original/` on a new review branch, verifies the staged Git bytes, and pushes only that branch; no Google calls and no execution of recovered code. Open a separate PR to review the exact original files.
+- See [PRELIMINARY_AUDIT.md](PRELIMINARY_AUDIT.md) for observed source defects and reproduction requirements.
+
+## Recovery (historical procedure)
 
 ### Preferred route: direct workspace download
 

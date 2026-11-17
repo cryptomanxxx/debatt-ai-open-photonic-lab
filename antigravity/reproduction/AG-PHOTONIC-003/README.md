@@ -17,6 +17,14 @@ Recover exactly these existing files from the original environment, without reru
 
 After merge, manually dispatch **AG003 source recovery** on main with mode `submit` and an empty recovery run ID, only after verifying free-tier eligibility and billing disabled. If the job is still active or a GET failed, use mode `retrieve` with the previous recovery workflow run ID; this never submits a new interaction. A completed recovery can be exported without any new Google request. Both modes require the original manager checkpoint (run 43993099721) to remain available. Separate public-export confirmation is required. The resulting artifact includes `recovery-metadata.json` with screened dependency information, energy-audit evidence and file integrity records. Automated screening and matching agent-supplied digests do not prove provenance or absence of arbitrary secrets; review before committing.
 
+### Recovery continuation after the incomplete 100k request
+
+Run [44058629986](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44058629986) stopped with status incomplete. [Offline diagnostics](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44065743936) reported 179322 total tokens (177947 input), same environment, no complete manifest, and unknown incomplete reason. This supports a budget hypothesis but does not prove the cause.
+
+After review and merge, use AG003 source recovery with mode `continue`, recovery run ID `44058629986`, token budget `1000000`, and explicit free-project confirmation. This is one new source-only follow-up to the incomplete recovery in the original environment, not a GET-only retrieval. The requested budget is not a hard cost cap; verify billing is disabled. Do not repeat submit if the new interaction is active; use retrieve with its recovery run ID. No automatic POST retries.
+
+The prompt requests a read-only code execution that emits the complete base64 manifest directly as a tool result, followed by a short final response. The extractor accepts successful code-execution results and legacy model-output manifests, checks all recognized candidates, refuses conflicting bytes and retains screened metadata. These are agent-reported bytes, not independently attested provenance. Tool-output truncation or unavailable workspace files can still prevent export; do not repair or invent missing bytes.
+
 ## Agent-reported comparison targets (not independent measurements)
 
 - 330960 analytic configurations; 325 feasible before convergence gate; 330635 rejected.

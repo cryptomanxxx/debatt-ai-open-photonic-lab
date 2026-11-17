@@ -131,3 +131,7 @@ independent audit should corrected architecture rankings be interpreted.
 2. Execute original pipeline and record stdout, exit code, versions, hashes and machine-readable output separately from original report.
 3. Independently implement and test the sweep, energy accounting and seeded training metrics; compare counts and numerical results with documented tolerances, including negative results.
 4. Do not equate reproduction of analytical/circuit results with electromagnetic validation or hardware measurements. Do not claim large-model training or measured efficiency.
+
+## Controlled correction stage 1
+
+[OPA-SYS-002](corrected/README.md) isolates the two duplicated pump fanout factors and compares every original configuration against the minimally corrected model. Results pending CI; no convergence or hardware claims.

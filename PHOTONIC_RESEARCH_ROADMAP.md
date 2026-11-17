@@ -1,0 +1,69 @@
+# OPA research roadmap: photonic computing beyond linear layers
+
+Date: 2026-11-17. Status: proposed research, not implemented or validated.
+
+## Motivation and scope
+
+The [AI Andrew video](https://youtu.be/CJd37oe0quY), *Germany's NEW Photonic Chip JUST Made NVIDIA & AMD GPUs Look Like a JOKE!* (42:15), provides leads about Q.ANT's hybrid photonic accelerator and Akhetonics' all-optical digital architecture. The video is a secondary source, not evidence of measured OPA performance. Its commercial claims require primary-source verification before being cited as results. Timestamps below refer to the supplied transcript.
+
+The near-term OPA target remains a hybrid accelerator with electronic memory and control and optical matrix–vector multiplication (MVM). All-optical nonlinear computation is a research extension; all-optical digital logic is a separate, longer-term branch. Do not conflate inference, hybrid training and fully optical training.
+
+## Existing foundations and gaps
+
+- [MZI-001–003](results/README.md): programmable MZI, impairments/calibration and Clements mesh; precision is already studied at the component/mesh level.
+- MOD-006 and MOD-007: hybrid training and nonlinear multilayer classification with **electronic** tanh and digital backward updates. Extend these rather than duplicating them.
+- EO-001–002 and LAYOUT-004–005: TFLN electro-optic modeling and lnoi400 layouts already exist. Material comparison should build on these; an electro-optic modulator is not by itself an all-optical activation.
+- FDTD and coupler studies already address guided loss and convergence. Extend toward a cascaded link budget rather than repeating standalone bend experiments.
+
+See [README](README.md), [experiment registry](simulations/experiments.json) and [results](results/README.md) for authoritative current status. Proposed identifiers below are placeholders, to be checked against the registry before implementation.
+
+## Prioritized research backlog
+
+| Priority | Proposed track | Question and initial deliverable | Source lead |
+|---|---|---|---|
+| 1 | OPA-NL-001 | Can a physically motivated nonlinear optical transfer function support a second optical MVM? Compare an ideal activation, electronic baseline and optical candidate on identical inputs. | 11:44–14:04; 36:16–36:38 |
+| 2 | OPA-SYS-001 | Under what assumptions does a hybrid chain reduce end-to-end energy or latency? Produce a transparent parameterized energy/latency model and break-even sweeps. | 34:28–38:15 |
+| 3 | OPA-PRECISION-001 | How do noise, drift, quantization and loss affect multilayer task accuracy? Extend MOD-007/MZI-002 rather than recreating them. | 37:16–37:45 |
+| 4 | OPA-GAIN-001 | When does optical amplification help a cascaded waveguide path, and what does it cost in noise and electrical energy? | 06:02–06:15; 27:50–28:08; 36:46–37:07 |
+| 5 | OPA-MAT-001 | Compare Si, SiN and TFLN on matched functional requirements, using process-specific parameters and existing EO/layout work. | 10:57–11:44; 18:59–19:14 |
+| 6 | OPA-MEM-001 | Can delay lines or recirculating loops preserve a pulse for a useful short interval? | 24:21–24:51; 27:35–27:50 |
+| 7 | OPA-LOGIC-001 | Can optical logic be cascaded with sufficient regeneration, fan-out and timing margin? | 21:46–25:53 |
+
+### Nonlinear activation and multilayer chain
+
+Start with a bounded circuit-level study using a documented transfer model (e.g. Kerr ring with detuning and loss, saturable absorption, or nonlinear interferometer). Distinguish input power, complex field and encoded signed values. An intensity-only transfer is not automatically ReLU/tanh/GELU on signed amplitudes; explicitly specify encoding, bias, phase preservation or re-encoding, normalization, and whether any O/E/O conversion occurs. Compare two optical MVM layers separated by the candidate against electronic activation and a linear-only control, with paired data/seeds and a NumPy or PyTorch reference. Report transfer curves, task accuracy/error, insertion loss, required optical power, operating range, bandwidth and noise sensitivity; unsupported quantities remain unknown. An ideal mathematical activation is a behavioral baseline, not proof of a realizable device. Negative outcomes are valid.
+
+Only after a viable compact-model study, pursue component-level simulation with independently sourced material constants and appropriate nonlinear solvers, convergence and power normalization. Do not assume existing linear FDTD runs validate nonlinear dynamics.
+
+### End-to-end system accounting
+
+Define boundaries separately: optical core, accelerator card, host-inclusive system. Include wall-plug laser efficiency, coupling/splitting/propagation loss, modulators and drivers, DAC/ADC, detection/TIA, gain, tuning/calibration, memory traffic, host and idle overhead; avoid double counting. Report energy per inference or matched operation, throughput, latency, precision, workload shape and batch size; compare at matched accuracy. Sweep uncertain inputs with documented provenance and ranges. Separate assumed, simulated, datasheet and measured values. No CPU simulator runtime is evidence of physical photonic speed or energy.
+
+The transcript's 30 W chip versus 150 W card and its different 50x comparisons (34:53–37:07) illustrate why boundaries and baselines matter; these are unverified reported claims, not OPA parameters.
+
+### Precision and noise
+
+Reuse paired MOD-007 baselines and MZI calibration models. Sweep effective quantization (e.g. 4/6/8 bits), phase noise, detector noise and correlated thermal drift, separating static fabrication draws from dynamic noise. Report per-layer errors, held-out accuracy, calibration overhead and uncertainty across seeds. Compare noise-aware hybrid training against digital training plus optical deployment; do not claim optical backpropagation.
+
+### Gain and optical link budget
+
+Model propagation and insertion losses in dB, gain saturation, ASE/noise and receiver SNR. Compare passive, amplified and regeneration cases under identical launch conditions; include electrical pump/drive costs. Semiconductor optical amplifiers and rare-earth-doped waveguides are candidate mechanisms, not assumed available in each PDK. Provide an educational Chip 10 example only after equations and assumptions are documented; distinguish optical power at the laser, at the ring and at the receiver.
+
+### Materials
+
+Compare matched wavelength, mode/polarization, insertion loss, footprint, modulation efficiency and relevant bandwidth using process-specific cross sections and parameter provenance. Include existing Si/SiO2 and lnoi400 work; consider SiN where relevant to low-loss routing and combs. Distinguish Pockels modulation from optical intensity-dependent nonlinearity; do not assume all platforms support integrated gain or a common fabrication process.
+
+### Optical short-term memory
+
+Compare straight/spiral delay lines and recirculating loops. Track group delay, pulse broadening, round-trip loss, coupling, dispersion and usable retention at a defined receiver threshold; include amplification noise if present. Use a no-loop reference and test multiple round trips. This is transient storage, not a replacement for electronic DRAM or persistent model weights.
+
+### Digital optical logic
+
+Treat as exploratory and distinct from the hybrid AI path. Begin with truth tables, then two-stage cascade, contrast/noise margin, fan-out, power, timing and regeneration. A passive interference demonstration alone does not establish cascadable logic. Review the Akhetonics one-instruction architecture and delay-line memory paper before selecting a mechanism; a two-bit demonstrator does not establish a practical general-purpose computer.
+
+## Evidence and implementation rules
+
+1. Verify primary literature, datasheets and independent benchmarks; record URLs/DOIs, dates, workload, precision and measurement boundaries. Leads: Akhetonics' 2024 all-optical processor paper; Lightmatter's April 2025 Nature paper; Q.ANT/LRZ and Jülich results, IONOS access, next-generation disclosures, IMS CHIPS process. These are leads, not verified results or confirmed hardware access.
+2. Use existing numbered experiment and CI conventions, locked environments and registered dependencies. Specify hypothesis, controls, acceptance criteria, seeds, units and artifacts before running. Archive reports with provenance. Do not change historic results.
+3. Keep behavioral simulations, electromagnetic simulations, PDK/DRC status, fabrication and measured hardware evidence distinct. Do not claim fabrication readiness or speed/energy advantages without matching evidence.
+4. Keep the current component/layout roadmap active. Start with a small nonlinear multilayer feasibility experiment after reviewing current work; advance tracks only when dependencies are met. Update this backlog when evidence changes. No new experiments, hardware purchases or live external AI calls are authorized by this document.

@@ -1,6 +1,6 @@
 # AG-PHOTONIC-003 — source recovery and independent reproduction
 
-Status: **SOURCE ARCHIVED — seven exact files in `original/`; isolated replay pending, no independent scientific result.**
+Status: **ORIGINAL REPLAY MATCHED — structured output reproduced; independent physics validation pending.**
 
 ## Evidence and provenance
 
@@ -78,6 +78,52 @@ ignored within those sections. Environment versions are compared separately;
 narrative and limitations prose are excluded. Mismatches fail the comparison
 but retain evidence. A successful replay is not a validation of the model
 or a correction of the known issues in PRELIMINARY_AUDIT.md.
+
+## Verified replay result (2026-11-17)
+
+[Run 44090316677](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44090316677)
+completed successfully at commit `c682278bcace3eb3efd4eaba399ecda3311f1d79`.
+[Artifact 14331995499](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44090316677/artifacts/14331995499)
+contains six files; downloaded ZIP SHA-256 independently checked:
+`96699acf4a2338bfbb0fe9dc92c8f3964f620f6d3a95d08c6a1522f6c94b84ce`.
+All six file digests are pinned in archive_replay.py. Exit code 0.
+The comparison found 1882 exact matches, 26 floats within tolerance,
+zero differences and two explicitly ignored runtime values. Python 3.12.3,
+NumPy 2.5.4 and Pandas 3.1.1 match. The replay build log additionally
+records python-dateutil 4.0.0 and tzdata 2026.6; these are replay versions,
+not verified original-environment versions. Replay pipeline time was
+43.659 s versus original 78.294 s; this is not a controlled performance
+benchmark.
+
+| Structured result | Replayed value |
+|---|---:|
+| Analytic configurations | 330960 |
+| Feasible / rejected | 325 / 330635 |
+| Best convergent candidate | CFG-0100 |
+| System / chip TOPS/W | 1.5405 / 5.962 |
+| Modeled electronic reference TOPS/W | 3.5 |
+| Digital baseline final accuracy | 94.50% |
+| 8-bit / 6-bit / 4-bit hybrid final accuracy | 93.05% / 91.50% / 79.72% |
+
+The original low-loss validation still passes with nominal path loss null
+and low-loss path loss 18.63 dB. This is a reproduced weakness, not a valid
+monotonic comparison. All preliminary audit issues remain open.
+
+To preserve the exact evidence, manually dispatch **AG003 archive verified
+replay** on main with confirm_archive enabled. It checks artifact identity,
+all file hashes, independently recomputes the comparison, and verifies
+staged Git bytes before pushing a new review branch. No agent code is run
+and no Google requests are made. Review and merge the archive branch
+separately. Do not replace original/report.json.
+
+## Next independent scientific investigation
+
+Establish a separate energy-audit implementation with independently
+derived loss and power identities, fixed-configuration passive-loss
+comparisons (including rejected configurations), unrounded component
+accounting, and matched system boundaries. Preserve negative results and
+never alter the archived original/replay evidence. Only after the
+independent audit should corrected architecture rankings be interpreted.
 
 ## Reproduction acceptance
 

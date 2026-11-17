@@ -93,3 +93,70 @@ cavity rate model with uncertainty and independent validation;
 then perform frozen deployment and separate retraining. No physical
 model calibration, fabrication readiness, energy advantage or
 actual activation bandwidth established by NL004.
+
+## Initial observed results — 17 November 2026
+
+[Experiment run 44169138855](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44169138855),
+job 134343269714, artifact 14366547319. All 13 implementation checks
+passed, including equivalence to the original behavioral absorber,
+phase equivariance, exact-state equilibrium/semigroup/dark recovery,
+counts, passivity, finite fields and immutable NL003 evidence.
+
+| Drive (mW) | Configurations screened | All-seed screen pass | Fail |
+|---|---:|---:|---:|
+| .1 | 270 | 30 | 240 |
+| 1 | 270 | 32 | 238 |
+| Total | 540 | 62 | 478 |
+
+The screen requires >=95% clean and worst-repeat receiver accuracy
+for every seed and peak modeled diode power <=2 mW. 11.48% of the
+tested configurations pass. This fraction describes a discrete
+hypothetical grid, not a probability over materials or a yield
+prediction. Frozen weights were trained on the original behavioral
+transfer; failures do not demonstrate that separate retraining
+or alternative architectures cannot work.
+
+The baseline tuple (Psat=1 mW, DeltaT=.7, Thigh=.85, phi=0 degrees)
+passes for every seed at both drives with 100% clean, mean receiver
+and worst-repeat receiver accuracy on fresh domain-24 test inputs
+and independent domains 25/26 for noise. At .1 mW there are
+81,920 correct sample/repeat outcomes out of 81,920 (10,240 distinct
+held-out inputs, eight receiver/activation noise repeats); same
+count at 1 mW. These are repeated simulated outcomes, not a
+measured BER or evidence of independent 81,920 physical inputs.
+
+| Seed | .1 mW output mean (uW) | 1 mW output mean (uW) | .1 mW peak input per channel (mW) | 1 mW peak input per channel (mW) |
+|---|---:|---:|---:|---:|
+| 1301 | .641673 | 27.933094 | .291529 | 2.838915 |
+| 1302 | .552743 | 23.573097 | .287577 | 2.127249 |
+| 1303 | .576889 | 21.087714 | .290993 | 1.951717 |
+| 1304 | .605004 | 22.299626 | .285229 | 2.182471 |
+| 1305 | .632170 | 27.991379 | .290848 | 2.793078 |
+
+The per-channel activation input peak is not the global drive
+scale or aggregate optical launch. The minimum signed real
+output margin among seeds is .009870 sqrt(mW) at low drive and
+.092708 sqrt(mW) at high drive. Peak modeled per-diode power
+is .061798 mW and .117038 mW respectively, below the hypothetical
+cap. No physical diode saturation or measured throughput is
+established. The receiver uses the NL003 nominal assumptions.
+
+## Evidence archival and remaining analysis
+
+Exact source ZIP metadata: 150,226 bytes, SHA-256
+d5f3aafe2b46ec73f8fd8bf5484e93639b710c1684ebd5c3de96602c79fe7ee9.
+The archive helper pins all five science-file sizes and SHA-256
+digests from CI stdout and verifies raw ZIP identity, CRC, names,
+report counts and staged bytes, including environment and provenance.
+Actual ZIP verification awaits execution of the manual archive
+workflow. The initial observations above use CI stdout only;
+the detailed 540-row summary and 2700-row metrics are not yet
+permanently archived or analyzed here.
+
+After archival, identify minimum tested DeltaT, successful Psat
+ranges, high-transmission and phase sensitivity, worst-seed
+margins, and the intersection of passing component tuples between
+drives. Analyze the 27 illustrative recovery cases separately.
+Do not interpret an isolated grid pass as a continuous feasible
+interval. No calibrated material, actual activation rate or
+material-level feasibility conclusion follows from this screen.

@@ -48,14 +48,46 @@ def recover(key, prior, output, budget, confirm):
     if result.get("status") not in manager.background.ACTIVE and result.get("status") != "completed":
         raise ValueError("Recovery stopped; encrypted response preserved")
 
+def retrieve(key, prior, recovery, output, confirm):
+    if not confirm or not key or output.exists():
+        raise ValueError("Explicit confirmation and new output required")
+    parent = manager.load(key, EXPERIMENT, prior)
+    current = manager.load(key, EXPERIMENT, recovery)
+    if parent.get("status") != "completed" or current["id"] == parent["id"]:
+        raise ValueError("Invalid recovery checkpoint")
+    if current.get("environment_id") != parent.get("environment_id"):
+        raise ValueError("Recovery environment mismatch")
+    # Preserve the authenticated checkpoint before any potentially failing GET.
+    manager.seal(key, EXPERIMENT, current, output)
+    if current.get("status") == "completed":
+        return
+    if current.get("status") not in manager.background.ACTIVE:
+        raise ValueError("Recovery is not active")
+    result = manager.background.request(key, interaction_id=current["id"])
+    if result.get("id") != current["id"]:
+        raise ValueError("Interaction mismatch")
+    manager.seal(key, EXPERIMENT, result, output)
+    if result.get("status") not in manager.background.ACTIVE and result.get("status") != "completed":
+        raise ValueError("Recovery stopped; encrypted response preserved")
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--mode", choices=("submit", "retrieve"), default="submit")
+    p.add_argument("--recovery", type=Path)
     p.add_argument("--prior", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--budget", type=int, default=100_000)
     p.add_argument("--confirm-free-project", action="store_true")
     a = p.parse_args()
-    recover(os.environ["GEMINI_API_KEY"], a.prior, a.output, a.budget, a.confirm_free_project)
+    key = os.environ["GEMINI_API_KEY"]
+    if a.mode == "retrieve":
+        if a.recovery is None:
+            p.error("Recovery checkpoint required")
+        retrieve(key, a.prior, a.recovery, a.output, a.confirm_free_project)
+    else:
+        if a.recovery is not None:
+            p.error("Recovery checkpoint only valid in retrieve mode")
+        recover(key, a.prior, a.output, a.budget, a.confirm_free_project)
 
 if __name__ == "__main__":
     try:

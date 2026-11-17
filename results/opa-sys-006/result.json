@@ -1,0 +1,1124 @@
+{
+  "experiment": "OPA-SYS-006",
+  "checks": {
+    "archive_hashes": true,
+    "selected_from_archive": true,
+    "candidate_count": true,
+    "receiver_roots": true,
+    "gradient_finite_difference": true,
+    "fp32_dtype": true,
+    "ideal_matmul": true,
+    "paired_runs": true,
+    "complete_curves": true,
+    "finite": true,
+    "digital_learns": true,
+    "original_immutable": true,
+    "prior_stages_immutable": true
+  },
+  "failures": [],
+  "seeds": [
+    42,
+    137,
+    2025
+  ],
+  "epochs": 120,
+  "batch_size": 64,
+  "learning_rate": 0.008,
+  "target": 0.9,
+  "runs": 90,
+  "gradient_error": 2.7804092361805033e-11,
+  "source_hashes": {
+    "antigravity/reproduction/AG-PHOTONIC-003/corrected/physics_model.py": "f7a2a4a0864ddd83f80d420bc9555432113eeb7e97782a8446dabca69c663a53",
+    "antigravity/reproduction/AG-PHOTONIC-003/stage2/physics_model.py": "64f8353dc8dee1dcb5293a174aa0bb3f69c247a859fc14ca07520be0b405afb2",
+    "antigravity/reproduction/AG-PHOTONIC-003/stage3/physics_model.py": "72f27047f2bda3a87da11917f2de189943b42446921bc023aa96f703ebc554e6",
+    "results/opa-sys-005/result.json": "a40fe903f7fdfc95844f04385024ab266692b9ee754969fb0c27fd93aedc28a5",
+    "results/opa-sys-005/optimized_feasible.json": "2bd63d2dccba1a92d9902cf0e94a0e0c1ad70e2239793e94ddee82a4372d6b07"
+  },
+  "selected": {
+    "Hybrid:4": {
+      "candidate": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "Hybrid",
+          "source_topo": "distributed",
+          "n_pump": 8,
+          "n_comb": 8,
+          "n_lambda": 8,
+          "mesh_m": 16,
+          "n_tiles": 8,
+          "phase_tech": "pockels_tfln",
+          "bits": 4,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 2.2481,
+          "eta_chip_topsw": 10.3145,
+          "pj_per_mac_sys": 0.8897,
+          "j_per_step_sys": 0.0043,
+          "sustained_tops": 488.467,
+          "peak_tops": 527.68,
+          "peak_photonic_tops": 327.68,
+          "step_latency_ms": 0.0198,
+          "chip_area_mm2": 313.97,
+          "p_system_w": 217.283,
+          "p_chip_only_w": 47.357,
+          "total_path_loss_db": 31.79,
+          "p_pump_opt_mw": 42.38,
+          "used_amp": true,
+          "target_snr_db": 29.35,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 1.695,
+          "comb_stab": 0.8,
+          "optical_amp": 16.973,
+          "ps_static": 0.001,
+          "ps_dynamic": 0.057,
+          "conv_and_drv": 12.72,
+          "tia": 5.095,
+          "calibration": 0.099,
+          "elec_compute_opt": 26.331,
+          "memory_sram_hbm": 125.17,
+          "cooling_pue": 28.341
+        },
+        "gain_details": {
+          "gain_db": 23.0,
+          "booster_count": 8,
+          "source_count": 8,
+          "source_bank_mw": 42.37612633868263,
+          "upstream_loss_db": 4.0,
+          "downstream_loss_db": 27.786199826559248,
+          "signal_in_per_line_mw": 0.13289155033072908,
+          "signal_out_per_line_mw": 26.515350235269377,
+          "ase_out_per_line_mw": 0.005064457573187088,
+          "rx_signal_mw": 0.04414457960563679,
+          "rx_ase_mw": 8.431657455595219e-06,
+          "booster_output_mw": 212.16331754274051,
+          "discarded_surplus_mw_per_bank": 0.13118910901465916,
+          "laser_electric_w": 1.6950450535473052,
+          "amplifier_electric_w": 16.97306540341924,
+          "optical_electric_w": 18.668110456966545,
+          "source_limit_mw": 500.0,
+          "saturation_limit_mw": 250.0
+        },
+        "bom": {
+          "pump_lasers": 8,
+          "comb_rings": 8,
+          "weight_rings": 1024,
+          "mzis": 960,
+          "phase_shifters": 2944,
+          "modulators": 1024,
+          "photodiodes": 2048,
+          "dacs": 1024,
+          "adcs": 1024
+        }
+      },
+      "snr_db": 29.349999999999994,
+      "rms_noise": 0.03408003248003651,
+      "noise_terms_a2": {
+        "tia": 1.5749999999999999e-12,
+        "shot": 8.913356293774646e-14,
+        "rin": 3.4941201086490964e-16,
+        "signal_ase": 1.6883535129571444e-13,
+        "ase_ase": 8.061928900659273e-18
+      },
+      "headroom": 0.15134672982903796
+    },
+    "Hybrid:6": {
+      "candidate": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "Hybrid",
+          "source_topo": "distributed",
+          "n_pump": 8,
+          "n_comb": 8,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 8,
+          "phase_tech": "pockels_tfln",
+          "bits": 6,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 1.2428,
+          "eta_chip_topsw": 5.9548,
+          "pj_per_mac_sys": 1.6092,
+          "j_per_step_sys": 0.0078,
+          "sustained_tops": 122.117,
+          "peak_tops": 281.92,
+          "peak_photonic_tops": 81.92,
+          "step_latency_ms": 0.0791,
+          "chip_area_mm2": 120.05,
+          "p_system_w": 98.256,
+          "p_chip_only_w": 20.507,
+          "total_path_loss_db": 25.88,
+          "p_pump_opt_mw": 347.73,
+          "used_amp": true,
+          "target_snr_db": 41.39,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 13.909,
+          "comb_stab": 0.8,
+          "optical_amp": 19.694,
+          "ps_static": 0.0,
+          "ps_dynamic": 0.019,
+          "conv_and_drv": 10.176,
+          "tia": 2.547,
+          "calibration": 0.037,
+          "elec_compute_opt": 6.583,
+          "memory_sram_hbm": 31.674,
+          "cooling_pue": 12.816
+        },
+        "gain_details": {
+          "gain_db": 14.0,
+          "booster_count": 8,
+          "source_count": 8,
+          "source_bank_mw": 347.7270669900833,
+          "upstream_loss_db": 4.0,
+          "downstream_loss_db": 21.875899869919436,
+          "signal_in_per_line_mw": 1.2250350379293775,
+          "signal_out_per_line_mw": 30.771488898986266,
+          "ase_out_per_line_mw": 0.0006152787171561936,
+          "rx_signal_mw": 0.19978299680600214,
+          "rx_ase_mw": 3.994679178116287e-06,
+          "booster_output_mw": 246.17683342162738,
+          "discarded_surplus_mw_per_bank": 0.0,
+          "laser_electric_w": 13.909082679603332,
+          "amplifier_electric_w": 19.694146673730188,
+          "optical_electric_w": 33.60322935333352,
+          "source_limit_mw": 500.0,
+          "saturation_limit_mw": 250.0
+        },
+        "bom": {
+          "pump_lasers": 8,
+          "comb_rings": 8,
+          "weight_rings": 512,
+          "mzis": 224,
+          "phase_shifters": 960,
+          "modulators": 512,
+          "photodiodes": 1024,
+          "dacs": 512,
+          "adcs": 512
+        }
+      },
+      "snr_db": 41.38999999999999,
+      "rms_noise": 0.008521185113792304,
+      "noise_terms_a2": {
+        "tia": 1.5749999999999999e-12,
+        "shot": 4.0331850241373805e-13,
+        "rin": 7.156490608305808e-15,
+        "signal_ase": 3.6200408818611174e-13,
+        "ase_ase": 1.809576160870998e-18
+      },
+      "headroom": 0.015292666313490466
+    },
+    "MZI:6": {
+      "candidate": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "MZI",
+          "source_topo": "central",
+          "n_pump": 8,
+          "n_comb": 8,
+          "n_lambda": 8,
+          "mesh_m": 4,
+          "n_tiles": 16,
+          "phase_tech": "pockels_tfln",
+          "bits": 6,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 0.8899,
+          "eta_chip_topsw": 3.677,
+          "pj_per_mac_sys": 2.2474,
+          "j_per_step_sys": 0.0109,
+          "sustained_tops": 61.058,
+          "peak_tops": 240.96,
+          "peak_photonic_tops": 40.96,
+          "step_latency_ms": 0.1583,
+          "chip_area_mm2": 87.82,
+          "p_system_w": 68.611,
+          "p_chip_only_w": 16.606,
+          "total_path_loss_db": 25.43,
+          "p_pump_opt_mw": 176.41,
+          "used_amp": true,
+          "target_snr_db": 41.39,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 7.056,
+          "comb_stab": 0.8,
+          "optical_amp": 19.935,
+          "ps_static": 0.0,
+          "ps_dynamic": 0.005,
+          "conv_and_drv": 10.176,
+          "tia": 2.547,
+          "calibration": 0.013,
+          "elec_compute_opt": 3.291,
+          "memory_sram_hbm": 15.837,
+          "cooling_pue": 8.949
+        },
+        "gain_details": {
+          "gain_db": 17.0,
+          "booster_count": 8,
+          "source_count": 8,
+          "source_bank_mw": 176.40749503216244,
+          "upstream_loss_db": 4.0,
+          "downstream_loss_db": 21.430899869919436,
+          "signal_in_per_line_mw": 0.6214798411822069,
+          "signal_out_per_line_mw": 31.147776235722677,
+          "ase_out_per_line_mw": 0.0012530318469453495,
+          "rx_signal_mw": 0.22404593006595055,
+          "rx_ase_mw": 9.013057093596176e-06,
+          "booster_output_mw": 249.192234140557,
+          "discarded_surplus_mw_per_bank": 0.0,
+          "laser_electric_w": 7.056299801286497,
+          "amplifier_electric_w": 19.93537873124456,
+          "optical_electric_w": 26.991678532531054,
+          "source_limit_mw": 500.0,
+          "saturation_limit_mw": 250.0
+        },
+        "bom": {
+          "pump_lasers": 8,
+          "comb_rings": 8,
+          "weight_rings": 0,
+          "mzis": 256,
+          "phase_shifters": 512,
+          "modulators": 512,
+          "photodiodes": 1024,
+          "dacs": 512,
+          "adcs": 512
+        }
+      },
+      "snr_db": 41.38999999999999,
+      "rms_noise": 0.008521185113792304,
+      "noise_terms_a2": {
+        "tia": 1.5749999999999999e-12,
+        "shot": 4.5230924920096477e-13,
+        "rin": 9.00030396642772e-15,
+        "signal_ase": 9.159720612059011e-13,
+        "ase_ase": 9.212071472752921e-18
+      },
+      "headroom": 0.0032310634377720193
+    },
+    "MRR:6": {
+      "candidate": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "MRR",
+          "source_topo": "distributed",
+          "n_pump": 8,
+          "n_comb": 8,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 8,
+          "phase_tech": "pockels_tfln",
+          "bits": 6,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 0.38,
+          "eta_chip_topsw": 5.8092,
+          "pj_per_mac_sys": 5.2626,
+          "j_per_step_sys": 0.0254,
+          "sustained_tops": 10.235,
+          "peak_tops": 10.24,
+          "peak_photonic_tops": 10.24,
+          "step_latency_ms": 0.9442,
+          "chip_area_mm2": 51.95,
+          "p_system_w": 26.93,
+          "p_chip_only_w": 1.762,
+          "total_path_loss_db": 23.17,
+          "p_pump_opt_mw": 141.0,
+          "used_amp": true,
+          "target_snr_db": 41.39,
+          "photonic_mac_frac": 1.0,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 5.64,
+          "comb_stab": 0.8,
+          "optical_amp": 12.657,
+          "ps_static": 0.0,
+          "ps_dynamic": 0.001,
+          "conv_and_drv": 1.279,
+          "tia": 0.32,
+          "calibration": 0.026,
+          "elec_compute_opt": 0.04,
+          "memory_sram_hbm": 2.655,
+          "cooling_pue": 3.513
+        },
+        "gain_details": {
+          "gain_db": 16.0,
+          "booster_count": 8,
+          "source_count": 8,
+          "source_bank_mw": 141.00161647814187,
+          "upstream_loss_db": 4.0,
+          "downstream_loss_db": 19.170899869919435,
+          "signal_in_per_line_mw": 0.4967456864533647,
+          "signal_out_per_line_mw": 19.77580197186038,
+          "ase_out_per_line_mw": 0.000990071832975223,
+          "rx_signal_mw": 0.23935588923949938,
+          "rx_ase_mw": 1.198330789972368e-05,
+          "booster_output_mw": 158.21433634954684,
+          "discarded_surplus_mw_per_bank": 0.0,
+          "laser_electric_w": 5.640064659125675,
+          "amplifier_electric_w": 12.657146907963748,
+          "optical_electric_w": 18.297211567089423,
+          "source_limit_mw": 500.0,
+          "saturation_limit_mw": 250.0
+        },
+        "bom": {
+          "pump_lasers": 8,
+          "comb_rings": 8,
+          "weight_rings": 512,
+          "mzis": 0,
+          "phase_shifters": 512,
+          "modulators": 64,
+          "photodiodes": 128,
+          "dacs": 64,
+          "adcs": 64
+        }
+      },
+      "snr_db": 41.38999999999999,
+      "rms_noise": 0.008521185113792304,
+      "noise_terms_a2": {
+        "tia": 1.5749999999999999e-12,
+        "shot": 4.832221115304235e-13,
+        "rin": 1.0272385142138152e-14,
+        "signal_ase": 1.3010496844122146e-12,
+        "ase_ase": 1.6284202376100373e-17
+      },
+      "headroom": 0.3671426546018126
+    },
+    "IndepLaser_MZI:6": {
+      "candidate": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 32,
+          "phase_tech": "pockels_tfln",
+          "bits": 6,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 1.5405,
+          "eta_chip_topsw": 5.962,
+          "pj_per_mac_sys": 1.2983,
+          "j_per_step_sys": 0.0063,
+          "sustained_tops": 488.467,
+          "peak_tops": 527.68,
+          "peak_photonic_tops": 327.68,
+          "step_latency_ms": 0.0198,
+          "chip_area_mm2": 487.04,
+          "p_system_w": 317.085,
+          "p_chip_only_w": 81.93,
+          "total_path_loss_db": 23.38,
+          "p_pump_opt_mw": 447.99,
+          "used_amp": false,
+          "target_snr_db": 41.39,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 71.679,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.002,
+          "ps_dynamic": 0.02,
+          "conv_and_drv": 40.706,
+          "tia": 10.189,
+          "calibration": 0.102,
+          "elec_compute_opt": 26.331,
+          "memory_sram_hbm": 126.696,
+          "cooling_pue": 41.359
+        },
+        "gain_details": {
+          "gain_db": 0.0,
+          "booster_count": 0,
+          "source_count": 32,
+          "source_bank_mw": 447.9949352018028,
+          "upstream_loss_db": 0.0,
+          "downstream_loss_db": 23.38089986991944,
+          "signal_in_per_line_mw": 39.64451572519516,
+          "signal_out_per_line_mw": 39.64451572519516,
+          "ase_out_per_line_mw": 0.0,
+          "rx_signal_mw": 0.18200911172102707,
+          "rx_ase_mw": 0.0,
+          "booster_output_mw": 0.0,
+          "discarded_surplus_mw_per_bank": 0.0,
+          "laser_electric_w": 71.67918963228844,
+          "amplifier_electric_w": 0.0,
+          "optical_electric_w": 71.67918963228844,
+          "source_limit_mw": 4000.0,
+          "saturation_limit_mw": 250.0
+        },
+        "bom": {
+          "pump_lasers": 256,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 2048,
+          "phase_shifters": 4096,
+          "modulators": 2048,
+          "photodiodes": 4096,
+          "dacs": 2048,
+          "adcs": 2048
+        }
+      },
+      "snr_db": 41.38999999999999,
+      "rms_noise": 0.008521185113792304,
+      "noise_terms_a2": {
+        "tia": 1.5749999999999999e-12,
+        "shot": 3.6742953992790163e-13,
+        "rin": 5.939765768687595e-15,
+        "signal_ase": 0.0,
+        "ase_ase": 0.0
+      },
+      "headroom": 1.0
+    },
+    "IndepLaser_MZI:8": {
+      "candidate": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "IndepLaser_MZI",
+          "source_topo": "distributed",
+          "n_pump": 1,
+          "n_comb": 1,
+          "n_lambda": 8,
+          "mesh_m": 8,
+          "n_tiles": 16,
+          "phase_tech": "pockels_tfln",
+          "bits": 8,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 0.6359,
+          "eta_chip_topsw": 3.3796,
+          "pj_per_mac_sys": 3.1453,
+          "j_per_step_sys": 0.0152,
+          "sustained_tops": 244.234,
+          "peak_tops": 363.84,
+          "peak_photonic_tops": 163.84,
+          "step_latency_ms": 0.0396,
+          "chip_area_mm2": 243.52,
+          "p_system_w": 384.088,
+          "p_chip_only_w": 72.267,
+          "total_path_loss_db": 23.38,
+          "p_pump_opt_mw": 2508.3,
+          "used_amp": false,
+          "target_snr_db": 53.43,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 200.664,
+          "comb_stab": 0.0,
+          "optical_amp": 0.0,
+          "ps_static": 0.001,
+          "ps_dynamic": 0.02,
+          "conv_and_drv": 50.882,
+          "tia": 5.095,
+          "calibration": 0.051,
+          "elec_compute_opt": 13.166,
+          "memory_sram_hbm": 64.111,
+          "cooling_pue": 50.098
+        },
+        "gain_details": {
+          "gain_db": 0.0,
+          "booster_count": 0,
+          "source_count": 16,
+          "source_bank_mw": 2508.2984187084053,
+          "upstream_loss_db": 0.0,
+          "downstream_loss_db": 23.38089986991944,
+          "signal_in_per_line_mw": 221.96741143775185,
+          "signal_out_per_line_mw": 221.96741143775185,
+          "ase_out_per_line_mw": 0.0,
+          "rx_signal_mw": 1.019058768855779,
+          "rx_ase_mw": 0.0,
+          "booster_output_mw": 0.0,
+          "discarded_surplus_mw_per_bank": 0.0,
+          "laser_electric_w": 200.6638734966724,
+          "amplifier_electric_w": 0.0,
+          "optical_electric_w": 200.6638734966724,
+          "source_limit_mw": 4000.0,
+          "saturation_limit_mw": 250.0
+        },
+        "bom": {
+          "pump_lasers": 128,
+          "comb_rings": 0,
+          "weight_rings": 0,
+          "mzis": 1024,
+          "phase_shifters": 2048,
+          "modulators": 1024,
+          "photodiodes": 2048,
+          "dacs": 1024,
+          "adcs": 1024
+        }
+      },
+      "snr_db": 53.42999999999999,
+      "rms_noise": 0.002130590567542728,
+      "noise_terms_a2": {
+        "tia": 1.5749999999999999e-12,
+        "shot": 2.057217306648256e-12,
+        "rin": 1.8620079017449724e-13,
+        "signal_ase": 0.0,
+        "ase_ase": 0.0
+      },
+      "headroom": 1.0
+    },
+    "comb6_headroom": {
+      "candidate": {
+        "feasible": true,
+        "reject_reason": null,
+        "config": {
+          "arch_type": "Hybrid",
+          "source_topo": "distributed",
+          "n_pump": 8,
+          "n_comb": 8,
+          "n_lambda": 8,
+          "mesh_m": 4,
+          "n_tiles": 8,
+          "phase_tech": "pockels_tfln",
+          "bits": 6,
+          "cadence_steps": 1
+        },
+        "metrics": {
+          "eta_sys_topsw": 0.8775,
+          "eta_chip_topsw": 3.6712,
+          "pj_per_mac_sys": 2.2793,
+          "j_per_step_sys": 0.011,
+          "sustained_tops": 30.529,
+          "peak_tops": 220.48,
+          "peak_photonic_tops": 20.48,
+          "step_latency_ms": 0.3165,
+          "chip_area_mm2": 53.04,
+          "p_system_w": 34.792,
+          "p_chip_only_w": 8.316,
+          "total_path_loss_db": 21.27,
+          "p_pump_opt_mw": 121.34,
+          "used_amp": true,
+          "target_snr_db": 41.39,
+          "photonic_mac_frac": 0.667,
+          "weights_resident": false
+        },
+        "power_breakdown_w": {
+          "laser_wpe": 4.854,
+          "comb_stab": 0.8,
+          "optical_amp": 8.652,
+          "ps_static": 0.0,
+          "ps_dynamic": 0.007,
+          "conv_and_drv": 5.088,
+          "tia": 1.274,
+          "calibration": 0.015,
+          "elec_compute_opt": 1.646,
+          "memory_sram_hbm": 7.919,
+          "cooling_pue": 4.538
+        },
+        "gain_details": {
+          "gain_db": 15.0,
+          "booster_count": 8,
+          "source_count": 8,
+          "source_bank_mw": 121.34262921746947,
+          "upstream_loss_db": 4.0,
+          "downstream_loss_db": 17.265599913279623,
+          "signal_in_per_line_mw": 0.42748749377658424,
+          "signal_out_per_line_mw": 13.518341515710613,
+          "ase_out_per_line_mw": 0.0007811952692752596,
+          "rx_signal_mw": 0.25372509428159157,
+          "rx_ase_mw": 1.4662216006219857e-05,
+          "booster_output_mw": 108.1529816878391,
+          "discarded_surplus_mw_per_bank": 0.0,
+          "laser_electric_w": 4.853705168698778,
+          "amplifier_electric_w": 8.652238535027127,
+          "optical_electric_w": 13.505943703725904,
+          "source_limit_mw": 500.0,
+          "saturation_limit_mw": 250.0
+        },
+        "bom": {
+          "pump_lasers": 8,
+          "comb_rings": 8,
+          "weight_rings": 256,
+          "mzis": 48,
+          "phase_shifters": 352,
+          "modulators": 256,
+          "photodiodes": 512,
+          "dacs": 256,
+          "adcs": 256
+        }
+      },
+      "snr_db": 41.38999999999999,
+      "rms_noise": 0.008521185113792304,
+      "noise_terms_a2": {
+        "tia": 1.5749999999999999e-12,
+        "shot": 5.122352453113991e-13,
+        "rin": 1.154276633144456e-14,
+        "signal_ase": 1.6874700820486365e-12,
+        "ase_ase": 2.4378797569359848e-17
+      },
+      "headroom": 0.5673880732486436
+    }
+  },
+  "summaries": {
+    "digital_fp32": {
+      "mean_accuracy": 0.9433333333333334,
+      "min_accuracy": 0.9333333333333333,
+      "std_accuracy": 0.008164965809277268,
+      "converged_all_seeds": true,
+      "mean_digital_deploy_acc": 0.9433333333333334
+    },
+    "digital_fp64": {
+      "mean_accuracy": 0.9411111111111111,
+      "min_accuracy": 0.9316666666666666,
+      "std_accuracy": 0.009060836905722295,
+      "converged_all_seeds": true,
+      "mean_digital_deploy_acc": 0.9433333333333334
+    },
+    "quant_only_4": {
+      "mean_accuracy": 0.7922222222222222,
+      "min_accuracy": 0.73,
+      "std_accuracy": 0.04970902990726121,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.7305555555555556
+    },
+    "legacy_noise_4": {
+      "mean_accuracy": 0.8022222222222223,
+      "min_accuracy": 0.75,
+      "std_accuracy": 0.03849803586460092,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.7244444444444444
+    },
+    "quant_only_6": {
+      "mean_accuracy": 0.91,
+      "min_accuracy": 0.8983333333333333,
+      "std_accuracy": 0.009525793444156798,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.9172222222222223
+    },
+    "legacy_noise_6": {
+      "mean_accuracy": 0.8972222222222221,
+      "min_accuracy": 0.8783333333333333,
+      "std_accuracy": 0.022166597048066682,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.8999999999999999
+    },
+    "quant_only_8": {
+      "mean_accuracy": 0.9383333333333334,
+      "min_accuracy": 0.9266666666666666,
+      "std_accuracy": 0.009525793444156798,
+      "converged_all_seeds": true,
+      "mean_digital_deploy_acc": 0.9422222222222222
+    },
+    "legacy_noise_8": {
+      "mean_accuracy": 0.9227777777777778,
+      "min_accuracy": 0.9066666666666666,
+      "std_accuracy": 0.011573703697777616,
+      "converged_all_seeds": true,
+      "mean_digital_deploy_acc": 0.9327777777777778
+    },
+    "legacy_high_drift": {
+      "mean_accuracy": 0.7672222222222222,
+      "min_accuracy": 0.735,
+      "std_accuracy": 0.03247030932489434,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.6783333333333332
+    },
+    "Hybrid:4/nominal": {
+      "mean_accuracy": 0.7972222222222222,
+      "min_accuracy": 0.7516666666666667,
+      "std_accuracy": 0.034969122181902686,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.7338888888888889
+    },
+    "Hybrid:4/stress": {
+      "mean_accuracy": 0.8116666666666666,
+      "min_accuracy": 0.78,
+      "std_accuracy": 0.025855725062711332,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.7277777777777779
+    },
+    "Hybrid:4/severe": {
+      "mean_accuracy": 0.7805555555555556,
+      "min_accuracy": 0.7366666666666667,
+      "std_accuracy": 0.0367759314743008,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.6677777777777778
+    },
+    "Hybrid:6/nominal": {
+      "mean_accuracy": 0.903888888888889,
+      "min_accuracy": 0.895,
+      "std_accuracy": 0.00749485420179557,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.915
+    },
+    "Hybrid:6/stress": {
+      "mean_accuracy": 0.903888888888889,
+      "min_accuracy": 0.8933333333333333,
+      "std_accuracy": 0.0074948542017955954,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.9122222222222223
+    },
+    "Hybrid:6/severe": {
+      "mean_accuracy": 0.8888888888888888,
+      "min_accuracy": 0.8583333333333333,
+      "std_accuracy": 0.024507494444569778,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.8905555555555557
+    },
+    "MZI:6/nominal": {
+      "mean_accuracy": 0.903888888888889,
+      "min_accuracy": 0.895,
+      "std_accuracy": 0.00749485420179557,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.915
+    },
+    "MZI:6/stress": {
+      "mean_accuracy": 0.903888888888889,
+      "min_accuracy": 0.8933333333333333,
+      "std_accuracy": 0.0074948542017955954,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.9122222222222223
+    },
+    "MZI:6/severe": {
+      "mean_accuracy": 0.8888888888888888,
+      "min_accuracy": 0.8583333333333333,
+      "std_accuracy": 0.024507494444569778,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.8905555555555557
+    },
+    "MRR:6/nominal": {
+      "mean_accuracy": 0.903888888888889,
+      "min_accuracy": 0.895,
+      "std_accuracy": 0.00749485420179557,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.915
+    },
+    "MRR:6/stress": {
+      "mean_accuracy": 0.903888888888889,
+      "min_accuracy": 0.8933333333333333,
+      "std_accuracy": 0.0074948542017955954,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.9122222222222223
+    },
+    "MRR:6/severe": {
+      "mean_accuracy": 0.8888888888888888,
+      "min_accuracy": 0.8583333333333333,
+      "std_accuracy": 0.024507494444569778,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.8905555555555557
+    },
+    "IndepLaser_MZI:6/nominal": {
+      "mean_accuracy": 0.903888888888889,
+      "min_accuracy": 0.895,
+      "std_accuracy": 0.00749485420179557,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.915
+    },
+    "IndepLaser_MZI:6/stress": {
+      "mean_accuracy": 0.903888888888889,
+      "min_accuracy": 0.8933333333333333,
+      "std_accuracy": 0.0074948542017955954,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.9122222222222223
+    },
+    "IndepLaser_MZI:6/severe": {
+      "mean_accuracy": 0.8888888888888888,
+      "min_accuracy": 0.8583333333333333,
+      "std_accuracy": 0.024507494444569778,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.8905555555555557
+    },
+    "IndepLaser_MZI:8/nominal": {
+      "mean_accuracy": 0.9383333333333334,
+      "min_accuracy": 0.9166666666666666,
+      "std_accuracy": 0.01569382987980617,
+      "converged_all_seeds": true,
+      "mean_digital_deploy_acc": 0.9411111111111111
+    },
+    "IndepLaser_MZI:8/stress": {
+      "mean_accuracy": 0.9338888888888889,
+      "min_accuracy": 0.9166666666666666,
+      "std_accuracy": 0.015051352426826769,
+      "converged_all_seeds": true,
+      "mean_digital_deploy_acc": 0.9400000000000001
+    },
+    "IndepLaser_MZI:8/severe": {
+      "mean_accuracy": 0.9161111111111112,
+      "min_accuracy": 0.8916666666666667,
+      "std_accuracy": 0.018121673811444538,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.9361111111111112
+    },
+    "comb6_headroom/nominal": {
+      "mean_accuracy": 0.903888888888889,
+      "min_accuracy": 0.895,
+      "std_accuracy": 0.00749485420179557,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.915
+    },
+    "comb6_headroom/stress": {
+      "mean_accuracy": 0.903888888888889,
+      "min_accuracy": 0.8933333333333333,
+      "std_accuracy": 0.0074948542017955954,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.9122222222222223
+    },
+    "comb6_headroom/severe": {
+      "mean_accuracy": 0.8888888888888888,
+      "min_accuracy": 0.8583333333333333,
+      "std_accuracy": 0.024507494444569778,
+      "converged_all_seeds": false,
+      "mean_digital_deploy_acc": 0.8905555555555557
+    }
+  },
+  "derating": [
+    {
+      "candidate": "Hybrid:4",
+      "saturation_factor": 1.0,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 23.0,
+      "eta_sys_topsw": 2.2481
+    },
+    {
+      "candidate": "Hybrid:4",
+      "saturation_factor": 0.95,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 23.0,
+      "eta_sys_topsw": 2.2481
+    },
+    {
+      "candidate": "Hybrid:4",
+      "saturation_factor": 0.9,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 23.0,
+      "eta_sys_topsw": 2.2481
+    },
+    {
+      "candidate": "Hybrid:4",
+      "saturation_factor": 0.8,
+      "feasible": false,
+      "reason": "Optical link budget failed: loss=31.8 dB, no admissible gain",
+      "gain_db": null,
+      "eta_sys_topsw": null
+    },
+    {
+      "candidate": "Hybrid:6",
+      "saturation_factor": 1.0,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 14.0,
+      "eta_sys_topsw": 1.2428
+    },
+    {
+      "candidate": "Hybrid:6",
+      "saturation_factor": 0.95,
+      "feasible": false,
+      "reason": "Optical link budget failed: loss=25.9 dB, no admissible gain",
+      "gain_db": null,
+      "eta_sys_topsw": null
+    },
+    {
+      "candidate": "Hybrid:6",
+      "saturation_factor": 0.9,
+      "feasible": false,
+      "reason": "Optical link budget failed: loss=25.9 dB, no admissible gain",
+      "gain_db": null,
+      "eta_sys_topsw": null
+    },
+    {
+      "candidate": "Hybrid:6",
+      "saturation_factor": 0.8,
+      "feasible": false,
+      "reason": "Optical link budget failed: loss=25.9 dB, no admissible gain",
+      "gain_db": null,
+      "eta_sys_topsw": null
+    },
+    {
+      "candidate": "MZI:6",
+      "saturation_factor": 1.0,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 17.0,
+      "eta_sys_topsw": 0.8899
+    },
+    {
+      "candidate": "MZI:6",
+      "saturation_factor": 0.95,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 15.0,
+      "eta_sys_topsw": 0.8636
+    },
+    {
+      "candidate": "MZI:6",
+      "saturation_factor": 0.9,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 14.0,
+      "eta_sys_topsw": 0.8387
+    },
+    {
+      "candidate": "MZI:6",
+      "saturation_factor": 0.8,
+      "feasible": false,
+      "reason": "Optical link budget failed: loss=25.4 dB, no admissible gain",
+      "gain_db": null,
+      "eta_sys_topsw": null
+    },
+    {
+      "candidate": "MRR:6",
+      "saturation_factor": 1.0,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 16.0,
+      "eta_sys_topsw": 0.38
+    },
+    {
+      "candidate": "MRR:6",
+      "saturation_factor": 0.95,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 16.0,
+      "eta_sys_topsw": 0.38
+    },
+    {
+      "candidate": "MRR:6",
+      "saturation_factor": 0.9,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 16.0,
+      "eta_sys_topsw": 0.38
+    },
+    {
+      "candidate": "MRR:6",
+      "saturation_factor": 0.8,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 16.0,
+      "eta_sys_topsw": 0.38
+    },
+    {
+      "candidate": "IndepLaser_MZI:6",
+      "saturation_factor": 1.0,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 0.0,
+      "eta_sys_topsw": 1.5405
+    },
+    {
+      "candidate": "IndepLaser_MZI:6",
+      "saturation_factor": 0.95,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 0.0,
+      "eta_sys_topsw": 1.5405
+    },
+    {
+      "candidate": "IndepLaser_MZI:6",
+      "saturation_factor": 0.9,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 0.0,
+      "eta_sys_topsw": 1.5405
+    },
+    {
+      "candidate": "IndepLaser_MZI:6",
+      "saturation_factor": 0.8,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 0.0,
+      "eta_sys_topsw": 1.5405
+    },
+    {
+      "candidate": "IndepLaser_MZI:8",
+      "saturation_factor": 1.0,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 0.0,
+      "eta_sys_topsw": 0.6359
+    },
+    {
+      "candidate": "IndepLaser_MZI:8",
+      "saturation_factor": 0.95,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 0.0,
+      "eta_sys_topsw": 0.6359
+    },
+    {
+      "candidate": "IndepLaser_MZI:8",
+      "saturation_factor": 0.9,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 0.0,
+      "eta_sys_topsw": 0.6359
+    },
+    {
+      "candidate": "IndepLaser_MZI:8",
+      "saturation_factor": 0.8,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 0.0,
+      "eta_sys_topsw": 0.6359
+    },
+    {
+      "candidate": "comb6_headroom",
+      "saturation_factor": 1.0,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 15.0,
+      "eta_sys_topsw": 0.8775
+    },
+    {
+      "candidate": "comb6_headroom",
+      "saturation_factor": 0.95,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 15.0,
+      "eta_sys_topsw": 0.8775
+    },
+    {
+      "candidate": "comb6_headroom",
+      "saturation_factor": 0.9,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 15.0,
+      "eta_sys_topsw": 0.8775
+    },
+    {
+      "candidate": "comb6_headroom",
+      "saturation_factor": 0.8,
+      "feasible": true,
+      "reason": null,
+      "gain_db": 15.0,
+      "eta_sys_topsw": 0.8775
+    }
+  ],
+  "limitations": [
+    "Original synthetic teacher task, 8-128-6 student; not a Transformer.",
+    "Analog RMS error is conditional on normalized receiver SNR, not measured circuit transfer.",
+    "Per-tensor dynamic quantization assumes ideal scaling, no calibration cost.",
+    "Electronic ReLU, softmax, weight gradients and Adam; noisy backward activation MVM is a proxy.",
+    "Architecture differences at equal bits/SNR are not resolved; no wavelength, mesh, tile or MRR-specific training simulation.",
+    "Stress multipliers and common bias are assumptions, not measured drift; no out-of-band ASE or correlated noise.",
+    "Derating is a separate re-optimized link feasibility test, not coupled to numerical training.",
+    "No extrapolation of toy epochs or energy to system workload; no measured efficiency or matched electronic benchmark."
+  ]
+}

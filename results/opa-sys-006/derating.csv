@@ -1,0 +1,29 @@
+candidate,saturation_factor,feasible,reason,gain_db,eta_sys_topsw
+Hybrid:4,1.0,True,,23.0,2.2481
+Hybrid:4,0.95,True,,23.0,2.2481
+Hybrid:4,0.9,True,,23.0,2.2481
+Hybrid:4,0.8,False,"Optical link budget failed: loss=31.8 dB, no admissible gain",,
+Hybrid:6,1.0,True,,14.0,1.2428
+Hybrid:6,0.95,False,"Optical link budget failed: loss=25.9 dB, no admissible gain",,
+Hybrid:6,0.9,False,"Optical link budget failed: loss=25.9 dB, no admissible gain",,
+Hybrid:6,0.8,False,"Optical link budget failed: loss=25.9 dB, no admissible gain",,
+MZI:6,1.0,True,,17.0,0.8899
+MZI:6,0.95,True,,15.0,0.8636
+MZI:6,0.9,True,,14.0,0.8387
+MZI:6,0.8,False,"Optical link budget failed: loss=25.4 dB, no admissible gain",,
+MRR:6,1.0,True,,16.0,0.38
+MRR:6,0.95,True,,16.0,0.38
+MRR:6,0.9,True,,16.0,0.38
+MRR:6,0.8,True,,16.0,0.38
+IndepLaser_MZI:6,1.0,True,,0.0,1.5405
+IndepLaser_MZI:6,0.95,True,,0.0,1.5405
+IndepLaser_MZI:6,0.9,True,,0.0,1.5405
+IndepLaser_MZI:6,0.8,True,,0.0,1.5405
+IndepLaser_MZI:8,1.0,True,,0.0,0.6359
+IndepLaser_MZI:8,0.95,True,,0.0,0.6359
+IndepLaser_MZI:8,0.9,True,,0.0,0.6359
+IndepLaser_MZI:8,0.8,True,,0.0,0.6359
+comb6_headroom,1.0,True,,15.0,0.8775
+comb6_headroom,0.95,True,,15.0,0.8775
+comb6_headroom,0.9,True,,15.0,0.8775
+comb6_headroom,0.8,True,,15.0,0.8775

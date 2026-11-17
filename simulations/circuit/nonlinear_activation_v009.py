@@ -131,6 +131,28 @@ def main():
     z=np.stack([r[2].reshape(8,STREAMS,SYMBOLS) for r in data])
     if np.max(abs(z)**2)>4:raise ValueError("outside prior power domain")
     checks={};rows=[];audits=[];refs=[];traces=[];positions=[];confirmations=[];boundaries=[]
+    baseline={key:(False,)*4 for key in itertools.product(RESPONSES,DURATIONS,GAPS)}
+    targets,changes=boundary_targets(baseline)
+    expected={(tr,on,gap) for tr,on,gap in itertools.product(RESPONSES,(10,50,200),GAPS)}
+    baseline[5.,30,0.]=(True,False,False,False)
+    extra_targets,extra_changes=boundary_targets(baseline)
+    checks["boundary_selector_regression"]=(targets==expected and not changes and
+        extra_targets==expected|{(5.,25,0.),(5.,30,0.),(5.,35,0.)} and
+        extra_changes==[(5.,25,30,0.),(5.,30,35,0.)])
+    checks["all_stream_first_symbol_match"]=True
+    checks["independent_dataset_layout"]=all(len(y)==N and np.count_nonzero(y)==N//2
+        for _,_,_,y,_,_,_ in data) and all(
+        np.array_equal(a[3],bb[3]) for a in data for bb in data if a[0]==bb[0])
+    # Worst-case integration work: all 180 timing cases confirmed at .125 ps.
+    # Record exact grid step count and a short representative calibration on
+    # the actual runner; not a guaranteed wall-clock bound.
+    step_budget=sum(SYMBOLS*(int(np.ceil(on/dt))+int(np.ceil(gap/dt)))
+        for _,tr,on,gap,dt in itertools.product(CASES,RESPONSES,DURATIONS,GAPS,(.5,.25,.125)))
+    pilot_start=time.monotonic()
+    simulate(z[...,:1],*CASES["C1"],5.,50.,20.,.125)
+    pilot_seconds=time.monotonic()-pilot_start
+    print("RK4 step budget",step_budget,"pilot seconds",pilot_seconds,
+          "worst-case linear estimate seconds",step_budget*pilot_seconds/560,flush=True)
     # Analytic linear step including phase, with zero initial state.
     s=np.array([.3,-.7]);a0=np.zeros(2,complex);q0=np.zeros(2)
     a,_,e=segment(a0,q0,s,0.,-.8,0.,0.,50.,.25)
@@ -162,14 +184,15 @@ def main():
         cached={};flags={}
         for tr,on,gap in itertools.product(RESPONSES,DURATIONS,GAPS):
             begin=len(rows)
-            coarse,ec,bc,_,_=simulate(z,b,d,h,tr,on,gap,.5)
+            coarse,ec,bc,qcmin,qcmax=simulate(z,b,d,h,tr,on,gap,.5)
             fine,ef,bf,qmin,qmax=simulate(z,b,d,h,tr,on,gap,.25)
             # Compare normalized absolute field and integrated energy errors.
             field_error=float(np.max(abs(fine-coarse)))
             energy_error=float(np.max(abs(ef-ec)/(1+abs(ef))))
             meta=dict(candidate=name,tpa=b,detuning=d,shift=h,response_ps=tr,on_ps=on,gap_ps=gap)
             audits.append(dict(**meta,stationary_eligible=stable,field_error=field_error,
-                energy_error=energy_error,max_balance=max(bc,bf),q_min=qmin,q_max=qmax))
+                energy_error=energy_error,max_balance=max(bc,bf),q_min=min(qmin,qcmin),q_max=max(qmax,qcmax)))
+            checks["all_stream_first_symbol_match"] &= bool(np.array_equal(fine[0,...,0],fine[1,...,0]))
             cached[tr,on,gap]=(fine,ef)
             for i,(seed,drive,_,y,w2,noise,rx) in enumerate(data):
                 stat=(w2@ref[i].reshape(8,N)).ravel()
@@ -254,7 +277,7 @@ def main():
     checks["boundary_controls"]=all(any(r["candidate"]==name and r["response_ps"]==tr
         and r["on_ps"]==on and r["gap_ps"]==gap for r in confirmations)
         for name,tr,on,gap in itertools.product(CASES,RESPONSES,(10,50,200),GAPS))
-    checks["weights"]=len(weights)==10 and all(r["seeds"]==5 for r in summary)
+    checks["weights"]=len(weights)==10 and len({(r["seed"],r["drive_mw"]) for r in weights})==10 and all(r["seeds"]==5 for r in summary)
     checks["cold_memory_zero"]=all(r["max_memory_field"]==0 for r in rows if r["history"]=="cold")
     checks["first_symbol_match"]=all(r["cold_real"]==r["stream_real"] and r["cold_imag"]==r["stream_imag"] for r in traces if r["symbol"]==0)
     checks["finite"]=all(np.isfinite(v) for r in rows+audits+refs+positions+traces+confirmations for v in r.values() if isinstance(v,(float,int)))
@@ -267,6 +290,7 @@ def main():
             if r["candidate"]==n and r["drive_mw"]==d and r["history"]==h),tested=60)
             for n,d,h in itertools.product(CASES,(.1,1.),HISTORIES)],
         boundaries=boundaries,confirmation_count=len(confirmations),rng_domains=[74,75,76,77],
+        rk4_worst_case_steps=step_budget,pilot_seconds=pilot_seconds,
         stream_passes=[r for r in summary if r["history"]=="stream" and r["screen_pass"]],
         limitations=["Phenomenological finite index response, no material calibration or pulse propagation geometry.",
           "Rectangular signed envelopes, end-of-on sampling, 8 independent 64-symbol streams; cold reset is diagnostic.",

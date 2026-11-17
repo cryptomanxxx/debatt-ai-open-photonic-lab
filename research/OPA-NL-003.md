@@ -167,3 +167,122 @@ noise, bandwidth, loss and phase grid; compare source-power
 tradeoffs and retain weights for physical-mechanism research.
 Material response, dynamics and phase still require independent
 calibration before any device-level feasibility conclusion.
+
+## Complete archived receiver sweep analysis
+
+Source: [receiver.csv](../results/opa-nl-003/receiver.csv),
+[result.json](../results/opa-nl-003/result.json) and
+[provenance](../results/opa-nl-003/provenance.json), archived by
+PR 136, merge 7df2ed4c1251442f543f1bed1e3a48721fb5e0d9.
+Archive workflow 44166191166 verified the raw ZIP and staged bytes.
+Grouped all 2160 rows into 432 unique parameter configurations with
+five seeds each. Derived [configuration summary](OPA-NL-003-sweep.csv)
+records mean accuracy across equal-sized seeds, minimum worst-repeat
+accuracy over seeds, mean pre-receiver accuracy, minimum signed
+current/sigma, peak diode power, cap status and mean source electrical
+lower bound. This is descriptive post-hoc analysis, not a change
+to the original four preregistered gates.
+
+| Candidate/drive | Configurations | All seeds/repeats perfect | Worst repeat >=95% and diode cap | Worst repeat across sweep |
+|---|---:|---:|---:|---:|
+| Absorber .1 mW | 108 | 43 | 104 | 91.3574% |
+| Absorber 1 mW | 108 | 108 | 108 | 100% |
+| Softsat .1 mW | 108 | 0 | 0 | 49.6582% |
+| Softsat 1 mW | 108 | 108 | 108 | 100% |
+
+Every one of 2160 rows passes the assumed 2 mW per-diode cap;
+maximum observed peak is .808155 mW (softsat 1 mW). This cap is
+not a calibrated saturation limit.
+
+### Low-drive absorber: LO/ENBW tradeoff
+
+Fixed nominal absolute activation-output noise .00316227766 sqrt(mW),
+3 dB downstream signal loss and 15-degree relative phase offset.
+Each cell shows mean accuracy / worst seed-repeat accuracy (%).
+
+| LO mW | .1 GHz | 1 GHz | 7 GHz | Mean signal+LO electrical lower bound mW |
+|---|---:|---:|---:|---:|
+| .01 | 99.998779 / 99.951172 | 99.965820 / 99.853516 | 97.344971 / 95.947266 | 1.566078 |
+| .1 | 100 / 100 | 99.998779 / 99.951172 | 99.980469 / 99.902344 | 2.016078 |
+| 1 | 100 / 100 | 100 / 100 | 99.998779 / 99.951172 | 6.516078 |
+
+Reducing LO from .1 to .01 mW lowers its own optical/electrical
+power 90%, but lowers the combined signal+LO source electrical
+lower bound only 22.32% (2.016078 to 1.566078 mW).
+Relative to 1 mW signal drive and .1 mW LO (15.660781 mW),
+the latter lower bound is 90% smaller. These are assumed source
+power bounds at 20% WPE, not system power or energy per operation.
+
+For each LO/ENBW pair, worst accuracy over all 12 combinations of
+activation noise, loss and phase (and all seeds/repeats):
+
+| LO mW | .1 GHz | 1 GHz | 7 GHz |
+|---|---:|---:|---:|
+| .01 | 96.9238% | 96.2891% | 91.3574% |
+| .1 | 96.8262% | 96.9238% | 96.4355% |
+| 1 | 96.9727% | 96.8262% | 96.6797% |
+
+Eight of nine LO/ENBW pairs pass the descriptive 95% robustness
+screen over all twelve stress combinations. The sole failing pair
+is .01 mW LO / 7 GHz, at .01 sqrt(mW) activation noise for all four
+loss/phase combinations. Worst repeats for these four are 94.4824%,
+94.3359%, 91.7969%, 91.3574% at (0 dB,0 deg), (0 dB,15 deg),
+(3 dB,0 deg), (3 dB,15 deg). All nominal-noise and zero-noise
+configurations pass the screen.
+
+### Activation-noise bottleneck
+
+| Absolute noise sqrt(mW) | Perfect configurations | >=95% worst-repeat configurations | Worst repeat |
+|---|---:|---:|---:|
+| 0 | 31/36 | 36/36 | 96.5332% |
+| .00316227766 | 12/36 | 36/36 | 95.9473% |
+| .01 | 0/36 | 32/36 | 91.3574% |
+
+At high absolute activation noise, mean pre-receiver classification
+accuracy for the low-drive absorber is 97.957764%. At 3 dB loss,
+15 degrees and 7 GHz ENBW, increasing LO .01 -> .1 -> 1 mW
+raises mean accuracy 93.520508 -> 97.451172 -> 97.863770%.
+This approaches the pre-receiver accuracy; LO cannot generally
+restore information already lost through activation-field errors.
+Noise can occasionally flip a wrong sign to a right sign, so
+pre-receiver accuracy is not a strict upper bound on finite-sample
+receiver accuracy.
+
+### Recommended operating points for further numerical research
+
+- Low-source-power option: .1 mW drive, .01 mW LO, 1 GHz ENBW.
+  Nominal mean 99.965820%, worst repeat 99.853516%; across tested
+  stress combinations worst 96.2891%, all 12 pass 95%.
+- Wider receiver ENBW option: .1 mW drive, .1 mW LO, 7 GHz ENBW.
+  Nominal mean 99.980469%, worst repeat 99.902344%; across tested
+  stress combinations worst 96.4355%, all 12 pass 95%.
+- Conservative comparison: 1 mW absorber drive, .01 mW LO;
+  all tested ENBW/loss/phase/noise configurations perfect.
+  Higher optical launch is a tradeoff, not proof of superior hardware.
+
+These are post-hoc selections on a finite tested grid. Do not
+interpret ENBW as actual symbol rate or assume optimality outside
+the grid. Fixed static phase offsets do not model drift or tracking.
+No measured BER, independent error-rate confidence claim or physical
+device throughput follows from repeated noise draws on the same
+held-out examples.
+
+## Proposed NL004 — material-calibrated saturable absorber model
+
+Advance the priority nonlinear track using the archived NL003 weights
+as frozen reference; preserve original results. First establish
+primary-source material/device parameters and distinguish measured
+guided-mode CW transmission from pulse fluence, peak intensity,
+free-space measurements and nominal launched power. Candidate
+graphene or other integrated absorber mechanisms must have traceable
+wavelength, geometry, modal overlap, nonsaturable loss, saturation
+scale, recovery dynamics and phase response, or explicitly identified
+missing quantities. Do not assign an arbitrary 1 mW saturation power
+to a real device. A rate-equation/propagation model should compare
+steady-state transfer, transient response and phase preservation
+against the NL003 behavioral transfer, with independent convergence
+and passive power checks. Include frozen-weight deployment and
+separately reported retraining, measured-parameter uncertainty,
+downstream receiver and explicit energy/throughput limitations.
+Receiver ENBW is not evidence of absorber recovery speed. Actual
+fabrication and optical measurements remain separate milestones.

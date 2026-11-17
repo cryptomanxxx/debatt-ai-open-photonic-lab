@@ -58,4 +58,6 @@ These are analytical feasibility results, not training convergence or measured h
 
 Prioritize receiver SNR and source/amp accounting at fixed configuration, including balanced detection and local-oscillator optical/electrical costs, explicit signal versus ASE power and bandwidth, per-laser versus aggregate limits, and pump-threshold floor handling. Verify against independent algebraic tests before further full sweeps. Preserve this stage as an immutable comparison baseline; do not combine unrelated changes without attribution.
 
-Stage 2: [OPA-SYS-003 receiver and source diagnostic](RECEIVER_AUDIT.md), CI complete (9/9 checks; six conditional 6-bit comb links). Results analyzed; permanent evidence archive pending. This diagnostic does not modify the stage-one physics model.
+Stage 2: [OPA-SYS-003 receiver and source diagnostic](RECEIVER_AUDIT.md), CI complete (9/9 checks; six conditional 6-bit comb links). Results analyzed; [permanent evidence archive](../../../../results/opa-sys-003/) complete. This diagnostic does not modify the stage-one physics model.
+
+[OPA-SYS-004](../stage2/README.md) now implements the two isolated correction flags in a separate stage-two evaluator; paired sweep pending CI.

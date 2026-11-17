@@ -12,6 +12,12 @@ Status: **BLOCKED — original workspace files not yet recovered; no independent
 
 ## Recovery
 
+### Preferred route: direct workspace download
+
+Use **AG003 direct workspace snapshot** on main with explicit free-project confirmation. It decrypts the original completed manager checkpoint (43993099721) to obtain the existing environment ID and downloads the current workspace with one GET to the documented [Environments Files API](https://ai.google.dev/gemini-api/docs/agent-environment#download-a-directory-as-a-tar-archive). No interaction submission, agent execution or polling. The deprecated full-snapshot endpoint is not used. The full TAR is encrypted using the existing GEMINI_API_KEY with the domain-separated cipher input `workspace-snapshot-v1:` plus the key. Public diagnostics report only fixed expected names, sizes, hashes and counts. Public export of seven allowlisted screened files requires separate explicit consent and a complete set. No arbitrary archive extraction or execution. The 64 MiB archive limit and exact root/workspace paths are deliberate fail-closed limits. A current snapshot cannot prove that previous follow-up interactions did not modify files; review provenance before reproduction. Do not use model-based recovery again unless direct retrieval has been assessed.
+
+### Historical model-based recovery (not preferred)
+
 Recover exactly these existing files from the original environment, without rerunning or editing them:
 `params.py`, `physics_model.py`, `sweep.py`, `circuit_sim.py`, `train_sim.py`, `run_all.py`, `report.json`. Record byte lengths and SHA-256; obtain dependency versions and any input files required to execute. Do not publish credentials or interaction identifiers. Preserve files under `original/` after review; do not reconstruct missing code from the summary. See recover_workspace.py for the explicit, separate source-export request. It requires the existing encrypted checkpoint and an operator-confirmed free project; it does not start a fresh environment.
 

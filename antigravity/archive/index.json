@@ -53,6 +53,10 @@
     "43987092691": {
       "file": "AG-PHOTONIC-003/a0e470bda8f1a908ea71d35fc85d8073ee09e61b35fa6afa967ecfb4bb5cd1c0.enc",
       "sha256": "2c367783705c20bfe1d05b0dfdba2eda4b5992e678df1bd4aa46a6b3ab8ba15e"
+    },
+    "43991764157": {
+      "file": "AG-PHOTONIC-003/b74cb19b1e35bae470f4a79f88d73aa31b205a14dd9712e2324273e8d5342f51.enc",
+      "sha256": "88564e05e6963f47e98c5c71803004c122a0fd37d52ddabf76c3f4908dc9744f"
     }
   }
 }

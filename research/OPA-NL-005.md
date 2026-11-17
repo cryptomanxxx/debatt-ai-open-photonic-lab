@@ -98,3 +98,190 @@ comparison with the paired lumped references and practical
 transmission curves within the tested power range. No calibrated
 graphene parameters, cavity dynamics, throughput, hardware
 performance or system energy advantage established.
+
+## Full archived propagation analysis
+
+Archive: PR 144, merge c42b339c82ac69c9b3e5f6b6bb6fecd987973bf3, workflow 44176273617.
+Sources: [summary](../results/opa-nl-005/summary.csv),
+[metrics](../results/opa-nl-005/metrics.csv),
+[transfer](../results/opa-nl-005/transfer.csv),
+[convergence](../results/opa-nl-005/convergence.csv),
+[references](../results/opa-nl-005/references.csv), and
+[provenance](../results/opa-nl-005/provenance.json).
+The archive workflow verified the original ZIP and staged bytes.
+This post-hoc analysis reads all 270 grouped rows, 1350 seed
+rows, 8775 transfer samples, 135 convergence rows and 20 paired
+reference rows. The preregistered screen is unchanged.
+
+### Sensitivity to local saturation, TPA and phase
+
+| Local Psat (mW) | Low drive pass/27 | High drive pass/27 |
+|---:|---:|---:|
+| 0.03 | 18 | 4 |
+| 0.1 | 18 | 11 |
+| 0.3 | 9 | 12 |
+| 1 | 0 | 12 |
+| 3 | 0 | 2 |
+
+| Integrated TPA C (1/mW) | Low drive pass/45 | High drive pass/45 |
+|---:|---:|---:|
+| 0 | 16 | 24 |
+| 0.1 | 15 | 17 |
+| 1 | 14 | 0 |
+
+| Maximum integrated phase (deg) | Low drive pass/45 | High drive pass/45 |
+|---:|---:|---:|
+| 0 | 16 | 15 |
+| 10 | 15 | 15 |
+| 30 | 14 | 11 |
+
+At 1 mW drive, none of the 45 configurations with C=1 pass,
+whereas 14/45 pass at .1 mW drive. C is an integrated guided
+power coefficient, not a bulk material beta. These counts are
+conditional on the sampled parameter families and frozen
+weights. No continuous tolerance bound follows. Both drives
+have passing nonzero TPA and nonzero phase settings, including
+some combinations with both. The actual accumulated phase
+depends on spatial bleaching and is not a constant phase shift.
+
+| Endpoint pair | Drive mW | Pass at C=0/.1/1 (each 15) | Pass at phase=0/10/30 (each 15) |
+|---|---:|---|---|
+| 0.1/0.4 | 0.1 | 7/6/6 | 7/6/6 |
+| 0.1/0.4 | 1 | 11/8/0 | 7/7/5 |
+| 0.15/0.85 | 0.1 | 9/9/8 | 9/9/8 |
+| 0.15/0.85 | 1 | 13/9/0 | 8/8/6 |
+| 0.373/0.4 | 0.1 | 0/0/0 | 0/0/0 |
+| 0.373/0.4 | 1 | 0/0/0 | 0/0/0 |
+
+The weak .027 absolute depth family has no passes, with best
+worst-repeat accuracy 52.9785% and 44.7754% at low/high drive.
+Separate retraining or different architectures remain open.
+Clean all-seed threshold passes in 53/135 and 43/135
+configurations; 8 and 2 additional failures respectively occur
+after the clean screen. Perfect worst-repeat accuracy occurs
+in 23 and 31 configurations. All seed rows satisfy the modeled
+2 mW diode cap (maximum .128457 mW); maximum clean power
+excess is negative (-.015817 mW). Numerical convergence
+and interpolation maxima reproduce the initial report.
+
+### Common component tuples
+
+22 of 135 tuples pass both drives, 64 distinct tuples pass at
+least one drive, and eight are perfect at both drives. The
+weights are separately trained for each drive. This is not
+one weight set validated across drive changes.
+
+| Tlow | Thigh | Psat mW | C 1/mW | Phase deg | Low worst (%) | High worst (%) |
+|---:|---:|---:|---:|---:|---:|---:|
+| 0.1 | 0.4 | 0.03 | 0 | 0 | 100.000000 | 100.000000 |
+| 0.1 | 0.4 | 0.03 | 0 | 10 | 100.000000 | 99.755859 |
+| 0.1 | 0.4 | 0.1 | 0 | 0 | 100.000000 | 100.000000 |
+| 0.1 | 0.4 | 0.1 | 0 | 10 | 99.951172 | 100.000000 |
+| 0.1 | 0.4 | 0.1 | 0 | 30 | 99.511719 | 99.902344 |
+| 0.1 | 0.4 | 0.1 | 0.1 | 0 | 99.951172 | 100.000000 |
+| 0.1 | 0.4 | 0.1 | 0.1 | 10 | 99.951172 | 100.000000 |
+| 0.1 | 0.4 | 0.3 | 0 | 0 | 95.458984 | 100.000000 |
+| 0.15 | 0.85 | 0.03 | 0 | 0 | 100.000000 | 100.000000 |
+| 0.15 | 0.85 | 0.03 | 0 | 10 | 100.000000 | 99.755859 |
+| 0.15 | 0.85 | 0.1 | 0 | 0 | 100.000000 | 100.000000 |
+| 0.15 | 0.85 | 0.1 | 0 | 10 | 100.000000 | 100.000000 |
+| 0.15 | 0.85 | 0.1 | 0 | 30 | 100.000000 | 100.000000 |
+| 0.15 | 0.85 | 0.1 | 0.1 | 0 | 100.000000 | 100.000000 |
+| 0.15 | 0.85 | 0.1 | 0.1 | 10 | 100.000000 | 100.000000 |
+| 0.15 | 0.85 | 0.1 | 0.1 | 30 | 100.000000 | 95.605469 |
+| 0.15 | 0.85 | 0.3 | 0 | 0 | 99.853516 | 100.000000 |
+| 0.15 | 0.85 | 0.3 | 0 | 10 | 99.755859 | 100.000000 |
+| 0.15 | 0.85 | 0.3 | 0 | 30 | 98.974609 | 100.000000 |
+| 0.15 | 0.85 | 0.3 | 0.1 | 0 | 99.804688 | 100.000000 |
+| 0.15 | 0.85 | 0.3 | 0.1 | 10 | 99.755859 | 100.000000 |
+| 0.15 | 0.85 | 0.3 | 0.1 | 30 | 98.876953 | 100.000000 |
+
+### Paired reference and post-hoc candidate comparison
+
+The NL004 lower-depth lumped reference (.1,.4; Psat=.3 mW,
+zero phase) achieved 100% at both drives on the same data.
+The distributed model with identical endpoint assumptions,
+Psat=.3, C=0, phase=0 achieves only 95.458984% worst-repeat
+at low drive, with perfect clean accuracy, and 100% at high
+drive. Low-drive mean output drops to .118702 uW from the
+paired lumped reference. With C=.1 or phase=10 degrees the
+low-drive tuple fails the 95% screen. Thus transferring
+lumped parameters unchanged is not justified.
+
+Select three distinct numerical reference candidates after
+the sweep: A, lower absolute depth and lowest sampled passing
+Psat (.03 mW, zero TPA/phase); B, lower depth with nonzero TPA
+(.1 mW, C=.1, zero phase); C, stronger depth with both nonzero
+TPA and phase (.1 mW, C=.1, phase=10). D is the unchanged
+NL004-parameter distributed comparator. A and C are perfect
+at both drives, B passes both but is not perfect at low drive.
+No claim that zero TPA is realizable, or that any tuple is
+a calibrated material or optimal design. A's local Psat is
+ten times smaller than the numerical lumped NL004 scale,
+not a measured tenfold reduction in device input power.
+
+| Candidate | Tlow/Thigh | Psat mW | C 1/mW | Phase deg |
+|---|---|---:|---:|---:|
+| A | 0.1/0.4 | 0.03 | 0 | 0 |
+| B | 0.1/0.4 | 0.1 | 0.1 | 0 |
+| C | 0.15/0.85 | 0.1 | 0.1 | 10 |
+| D | 0.1/0.4 | 0.3 | 0 | 0 |
+
+| Candidate | Drive mW | Mean receiver (%) | Worst (%) | Output uW | Min signed field sqrt(mW) | Peak diode mW |
+|---|---:|---:|---:|---:|---:|---:|
+| A | 0.1 | 100.000000 | 100.000000 | 1.254652 | 0.021815 | 0.063763 |
+| A | 1 | 100.000000 | 100.000000 | 3.006673 | 0.009381 | 0.080516 |
+| B | 0.1 | 99.998779 | 99.951172 | 0.528890 | 0.010315 | 0.060521 |
+| B | 1 | 100.000000 | 100.000000 | 6.055126 | 0.038998 | 0.086130 |
+| C | 0.1 | 100.000000 | 100.000000 | 2.101555 | 0.023230 | 0.067220 |
+| C | 1 | 100.000000 | 100.000000 | 14.833007 | 0.047104 | 0.101698 |
+| D | 0.1 | 97.357178 | 95.458984 | 0.118702 | 0.001884 | 0.056699 |
+| D | 1 | 100.000000 | 100.000000 | 10.372968 | 0.052824 | 0.092799 |
+
+The lower-depth candidate A shows a reduced high-drive signed
+margin compared with C; candidate C has greater output at
+both drives but requires strong absolute modulation. Output
+power is not a sufficient proxy for coherent signed readout.
+
+### Archived transfer samples
+
+The following are actual sampled powers in transfer.csv,
+not nominal classifier drive values. Transmission excludes
+the additional fixed 1 dB loss. Phase for C in degrees.
+No interpolation or extrapolation is used for this table.
+
+| Local input mW | A transmission | B transmission | C transmission | C phase deg | D transmission |
+|---:|---:|---:|---:|---:|---:|
+| 0.027228 | 0.147408 | 0.114539 | 0.183043 | 1.155472 | 0.104913 |
+| 0.106178 | 0.242406 | 0.153938 | 0.285908 | 3.754961 | 0.119029 |
+| 0.263051 | 0.315474 | 0.213173 | 0.448374 | 6.419551 | 0.145895 |
+| 1.025770 | 0.374786 | 0.304137 | 0.647987 | 8.916784 | 0.239391 |
+| 2.541304 | 0.389504 | 0.313040 | 0.638462 | 9.525154 | 0.313126 |
+| 4.000000 | 0.393281 | 0.298385 | 0.591002 | 9.678350 | 0.340408 |
+
+With nonzero TPA, the sampled transmission of B and C turns
+down at high input power. This is competing absorption,
+not gain. The actual activation inputs remain within the
+verified 4 mW lookup grid; 4 mW is a transfer sample, not
+a classifier input requirement.
+
+### NL006 direction
+
+Investigate a passive resonantly enhanced activation model
+using temporal coupled-mode theory with explicit port
+coupling, intrinsic and saturable losses, nonlinear loss,
+detuning, intracavity energy and phase. Distinguish incident
+guided power, circulating energy and local material intensity.
+Use independent analytic linear-cavity limits and energy
+balance; assess multiple steady-state roots and stability
+rather than assume a unique branch. Compare with candidates
+A/B/C and independent held-out data. Separate static
+classifier results from cavity lifetime and pulse dynamics.
+Avoid mapping 4 fJ pulse thresholds or pump-probe FWHM to
+CW saturation powers or lifetimes without measured coupling,
+waveform and material overlap. A cavity may increase internal
+field at lower input but can also introduce insertion loss,
+phase distortion, bandwidth constraints and bistability.
+Calibration remains blocked by missing measured complex
+transfer, coupling, geometry and recovery data. No fabricated
+device or actual system-level energy/speed claim.

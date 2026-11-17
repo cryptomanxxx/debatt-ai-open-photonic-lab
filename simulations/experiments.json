@@ -461,6 +461,19 @@
         "simulations/circuit/modular_training_v006.py"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/nonlinear_activation_v001.py"
+    },
+    {
+      "id": "opa-nl-002",
+      "name": "Circuit: balanced XOR with passive nonlinear field activation and matched attenuation controls",
+      "script": "simulations/circuit/nonlinear_activation_v002.py",
+      "result_dir": "results/opa-nl-002",
+      "artifact": "opa-nl-002",
+      "timeout_minutes": 30,
+      "deps": [
+        "simulations/circuit/nonlinear_activation_v001.py",
+        "results/opa-nl-001/result.json"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/nonlinear_activation_v002.py"
     }
   ]
 }

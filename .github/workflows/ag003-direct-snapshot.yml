@@ -1,0 +1,64 @@
+name: AG003 direct workspace snapshot
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_free_project:
+        description: Verify free project and authorize read-only environment download
+        type: boolean
+        default: false
+      confirm_public_export:
+        description: Authorize public export of seven screened research files if complete
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: antigravity-live-probe
+  cancel-in-progress: false
+jobs:
+  snapshot:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_free_project == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: sudo apt-get update -qq && sudo apt-get install -y python3-cryptography
+      - run: /usr/bin/python3 -m unittest discover -s antigravity/tests
+      - uses: actions/download-artifact@v7
+        with:
+          name: antigravity-encrypted-checkpoint-AG-PHOTONIC-003
+          run-id: 43993099721
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/ag-original
+      - name: Download current workspace (GET only)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PUBLIC_EXPORT: ${{ inputs.confirm_public_export }}
+        run: |
+          args=()
+          if [[ "$PUBLIC_EXPORT" == true ]]; then args+=(--confirm-public-export); fi
+          /usr/bin/python3 antigravity/reproduction/AG-PHOTONIC-003/download_snapshot.py --checkpoint "$RUNNER_TEMP/ag-original/checkpoint.enc" --output "$RUNNER_TEMP/ag-snapshot" --confirm-free-project "${args[@]}"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: ag003-workspace-snapshot-encrypted
+          path: ${{ runner.temp }}/ag-snapshot/snapshot.tar.enc
+          retention-days: 90
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: ag003-workspace-snapshot-diagnostics
+          path: ${{ runner.temp }}/ag-snapshot/snapshot-diagnostics.json
+          retention-days: 7
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v7
+        if: success() && inputs.confirm_public_export == true
+        with:
+          name: ag003-direct-source-unverified
+          path: ${{ runner.temp }}/ag-snapshot/source/
+          retention-days: 7
+          if-no-files-found: error

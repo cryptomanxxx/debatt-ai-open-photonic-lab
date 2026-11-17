@@ -27,6 +27,12 @@ reproducible so that anyone can learn from it and build on it.
 
 See [Antigravity lab documentation](antigravity/README.md) and [repository agent instructions](AGENTS.md). Existing research files must be retrieved via Google's Environments Files API first (direct GET, no new AI interaction), rather than asking an agent to reproduce or export its own source. This method succeeded in AG-PHOTONIC-003.
 
+The [AG-PHOTONIC-003 final report](antigravity/reproduction/AG-PHOTONIC-003/FINAL_REPORT.md)
+consolidates the reproduced original and six system audits. See the
+[recommended research architecture diagram](antigravity/reproduction/AG-PHOTONIC-003/architecture-recommendation.svg).
+The six-bit comb link is a proposed experimental target; the eight-bit
+independent-laser training proxy is a numerical reference, not a validated chip.
+
 ## Principles
 
 1. **Reproducible:** every experiment runs in GitHub Actions against an exact,

@@ -121,13 +121,12 @@ def main():
                     row[prefix+"_topsw"]=r.get("metrics",{}).get("eta_sys_topsw")
                     row[prefix+"_pump_mw"]=r.get("metrics",{}).get("p_pump_opt_mw")
                 writer.writerow(row)
-    # Independent direct equal-split conservation check. Test actual corrected
-    # evaluator by comparing against original with adjusted source-only inputs:
-    # old requires N times the power, including the threshold floor.
-    optical=sys.modules["params"].OPTICAL_PARAMS
+    # Independent direct equal-split conservation examples. The exact two-line
+    # source comparison above verifies that the implemented expressions match.
+    # These examples cover threshold- and line-power-dominated regimes.
     tests=[]
     for n in (1,2,4,8):
-        for line,threshold in ((1.,20.),(30.,1.)):
+        for line,threshold in ((.01,20.),(30.,1.)):
             efficiency=.1
             coupling=1.5
             excess=.3

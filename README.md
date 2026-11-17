@@ -23,6 +23,10 @@ idea to a fabricated photonic chip is still hard and mostly happens behind
 closed doors. This lab aims to make every step open, documented and
 reproducible so that anyone can learn from it and build on it.
 
+## Antigravity research
+
+See [Antigravity lab documentation](antigravity/README.md) and [repository agent instructions](AGENTS.md). Existing research files must be retrieved via Google's Environments Files API first (direct GET, no new AI interaction), rather than asking an agent to reproduce or export its own source. This method succeeded in AG-PHOTONIC-003.
+
 ## Principles
 
 1. **Reproducible:** every experiment runs in GitHub Actions against an exact,

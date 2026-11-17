@@ -95,3 +95,75 @@ weights.json, result.json; hashes emitted for archival.
 
 No fabricated chip, device bandwidth, physical receiver validation,
 system energy advantage or optical backpropagation is claimed.
+
+## Initial observed results (17 November 2026)
+
+[Run 44163676304](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44163676304),
+job 134324031154, artifact 14364861512. All 16 implementation checks
+passed. Constructive digital preflight passed with 100% on each
+of five independent seeds and an analytic normalized signed-field
+margin lower bound of .0765285956 across the jitter boxes.
+Independently trained tanh scored 100%, 99.8046875%, 100%, 100%,
+100% on seeds 1301–1305 respectively. This does not alter the
+failed NL002 composite gate.
+
+At the fixed nominal receiver point (.1 mW LO, 1 GHz ENBW,
+3 dB downstream loss, 15-degree phase offset, .00316227766
+sqrt(mW) absolute activation-output noise), three of four
+preregistered candidate/drive gates pass:
+
+| Metric | Absorber .1 mW | Absorber 1 mW | Softsat .1 mW | Softsat 1 mW |
+|---|---:|---:|---:|---:|
+| Mean receiver accuracy (%) | 99.998779 | 100 | 59.591064 | 100 |
+| Worst seed/repeat accuracy (%) | 99.951172 | 100 | 50.439453 | 100 |
+| Clean accuracy (%) | 100 | 100 | 57.861328 | 100 |
+| Pre-receiver accuracy with absolute noise (%) | 100 | 100 | 59.394531 | 100 |
+| Matched linear clean accuracy (%) | 57.978516 | 47.607422 | 46.142578 | 40.517578 |
+| Same-weight ablation clean accuracy (%) | 49.980469 | 50.761719 | 48.115234 | 45.410156 |
+| Minimum clean paired gain vs matched (pp) | 25 | 37.451172 | -5.810547 | 50 |
+| Minimum clean paired gain vs ablation (pp) | 50 | 25 | -.292969 | 50 |
+| Mean signal launch (mW) | .303216 | 3.032156 | .303216 | 3.032156 |
+| Mean clean MVM output (uW) | .604620 | 24.654142 | .128520 | 33.813549 |
+| Min clean MVM output over seeds/examples (uW) | .100153 | 8.798384 | 2.331919e-9 | 15.760399 |
+| Mean received signal incl. activation noise (uW) | .307940 | 12.361319 | .069513 | 16.952192 |
+| Min signed current/sigma | .649695 | 68.321248 | -18.481749 | 93.406447 |
+| Peak modeled diode power (mW) | .061696 | .117038 | .057349 | .120617 |
+| Signal+LO source electrical lower bound (mW) | 2.016078 | 15.660781 | 2.016078 | 15.660781 |
+| Original NL003 gate | PASS | PASS | FAIL | PASS |
+
+The low-drive absorber has exactly one incorrect receiver
+classification among 81,920 paired sample/noise outcomes,
+on seed 1304. Its pre-receiver classification is perfect on
+these draws. These are eight repeated noise draws on each of
+10,240 held-out examples, not 81,920 independent inputs or a
+measured BER. Worst modeled signed current/sigma is only .65;
+do not infer a robust universal error guarantee from the mean
+accuracy. Low-drive softsat fails already in clean classification.
+All modeled peak diode powers remain below the hypothetical cap
+at this point; this is not experimental saturation validation.
+
+Low-drive absorber reduces signal launch 90% relative to
+1 mW drive. The modeled signal-plus-LO electrical source lower
+bound is about 87.1% lower (2.016 vs 15.661 mW), conditional on
+20% WPE and lossless source delivery; this excludes all electronics,
+phase locking, actual distribution, thermal and control costs.
+No total system energy advantage or physical operating speed is
+established. The receiver ENBW is not symbol rate.
+Each drive is independently trained. The normalized activation
+noise comparison is separate from absolute-noise receiver cases.
+
+## Evidence and remaining analysis
+
+Source ZIP metadata: 117,695 bytes; SHA-256
+aa85eab11f7af5c5bd52a147b241083f85c622038e8d0a7991470e3c61e19ba6.
+The archive helper pins all six science-file sizes and digests
+emitted in CI, verifies exact ZIP identity, CRC and staged bytes
+including environment metadata and provenance. The actual raw ZIP
+verification is pending manual archive workflow execution.
+The initial analysis above is computed from the full nominal and
+paired rows in CI stdout, not the entire 2,160-row receiver CSV.
+After archival, analyze worst-seed accuracy across the full LO,
+noise, bandwidth, loss and phase grid; compare source-power
+tradeoffs and retain weights for physical-mechanism research.
+Material response, dynamics and phase still require independent
+calibration before any device-level feasibility conclusion.

@@ -45,7 +45,7 @@ def stats(values):
 
 def main():
     manifest = json.loads((ROOT / "provenance.json").read_text())
-    require(manifest["experiment"] == "OPA-NL-013" and manifest["workflow_run_id"] == 44311554574
+    require(manifest["experiment"] == "OPA-NL-014" and manifest["workflow_run_id"] == 44311554574
             and len(manifest["files"]) == 15, "archive identity")
     for name, info in manifest["files"].items():
         raw = (ROOT / name).read_bytes()

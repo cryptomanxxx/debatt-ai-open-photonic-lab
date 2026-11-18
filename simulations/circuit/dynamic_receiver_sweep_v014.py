@@ -60,6 +60,12 @@ def prepare_coefficients(weights):
     fixed={(45,1.,60):archived[45,1.,60]}
     evidence=[dict(r,source="archived_NL013_NL012") for r in records
               if (r["on_ps"],r["lo_mw"],r["fc_ghz"])==(45,1.,60)]
+    nl013=json.loads(Path("results/opa-nl-013/coefficients.json").read_text())
+    for record in evidence:
+        matches=[r for r in nl013 if (r["on_ps"],r["lo_mw"],r["fc_ghz"],r["readout"])==
+                 (45,1.,60,record["readout"])]
+        assert len(matches)==1 and matches[0]["sha256"]==record["sha256"]
+        assert digest(matches[0]["coefficients"])==record["sha256"]
     z,w,_,noise,seeds,_,_=make_data(weights,CAL_DOMAINS,512)
     for on in (42,43,44):
         receivers=tuple((lo,fc) for dur,lo,fc in SETTINGS if dur==on)
@@ -110,10 +116,14 @@ def main():
     run_case(z[...,:1],w,noise[...,:1],seeds,CASES["C2"],44,0,5,grids(44)[-1],CAL_DOMAINS,tuple((lo,fc) for dur,lo,fc in SETTINGS if dur==44))
     pilot_seconds=time.monotonic()-pilot_start
     step_budget=sum(256*round(on/dt) for _,on,_,_ in TIMINGS for dt in grids(on))+sum(64*round(on/grids(on)[-1]) for on in (42,43,44))
-    print("Pilot seconds",pilot_seconds,"step budget",step_budget,flush=True)
+    # Conservative timing estimate: all symbol steps priced at the 12-receiver fine-grid pilot.
+    estimated_seconds=pilot_seconds*(4*256*3+3*64)
+    print("Pilot seconds",pilot_seconds,"step budget",step_budget,
+          "conservative estimated seconds",estimated_seconds,flush=True)
     # Finish and persist every fit before generating exploratory test examples.
     fixed_all,coefficient_records=prepare_coefficients(weights)
     (OUT/"coefficients.json").write_text(json.dumps(coefficient_records,indent=2,allow_nan=False)+"\n")
+    frozen_file_hash=sha(OUT/"coefficients.json")
     coefficient_hashes=set(); paired_readouts=[]
     rows=[];audits=[];conv=[];resolution_groups=[];resolution_rows=[]
     for panel,domains in PANELS.items():
@@ -199,7 +209,10 @@ def main():
                 resolution_rows.extend(local)
                 if level==2:rows.extend(local)
                 print(name,on,gap,tr,dt,"elapsed",round(time.monotonic()-start,1),flush=True)
-            del prev,res,peak,end,cold,grid
+            # Release references held by the convergence comparison and last receiver loop.
+            if level==2:
+                del old,op,oe,of,og,oldflags,oldrows
+            del prev,res,peak,end,cold,grid,values
     groups=[dict(r) for r in resolution_groups if r["resolution_level"]==2]
     # Flag any final-resolution gate disagreement explicitly, not a physics failure.
     middle={(r["panel"],r["candidate"],r["on_ps"],r["gap_ps"],r["response_ps"],r["lo_mw"],r["fc_ghz"],r["readout"],r["drive_mw"]):r for r in resolution_groups if r["resolution_level"]==1}
@@ -240,6 +253,7 @@ def main():
         paired_keys.add(rk)
     expected_seed_keys={("exploratory","C2",on,0,5,lo,fc,method,drive,seed) for (on,lo,fc),method,drive,seed in itertools.product(SETTINGS,READOUTS,(.1,1.),range(1301,1306))}
     expected_paired_keys={k+(anchor,rep) for k in expected_seed_keys if k[-3] in READOUTS[4:] for anchor in READOUTS[:4]+(("ridge8",) if k[-3]=="ridge16" else ()) for rep in range(REPEATS)}
+    checks["frozen_file_unchanged"]=sha(OUT/"coefficients.json")==frozen_file_hash
     checks.update(paired_marginals=paired_ok and paired_keys==expected_paired_keys,counts=len(rows)==2590 and len(groups)==518 and len(audits)==12 and len(conv)==8 and len(resolution_groups)==1554 and len(resolution_rows)==7770 and len(pairs)==259 and len(coefficient_records)==111 and len(paired_readouts)==38480,
         paired_counts=all(sum(r[k] for k in ('both_correct','equalizer_only','anchor_only','neither'))==N for r in paired_readouts),
         unique_keys=set(seed_index)==expected_seed_keys and {tuple(r[k] for k in keys)+(r["seed"],r["resolution_level"]) for r in resolution_rows}=={k+(level,) for k in expected_seed_keys for level in range(3)},
@@ -262,11 +276,29 @@ def main():
         ambiguous_groups=sum(not g["numerically_stable_gate"] for g in groups),
         tolerances=dict(field=FIELD_TOL,current=CURRENT_TOL,noisy=NOISY_TOL,diode_mw=DIODE_TOL),
         convergence=conv,segment_regression_current_error=err_current,segment_regression_covariance_error=err_cov,
-        pilot_seconds=pilot_seconds,step_budget=step_budget,elapsed_seconds=time.monotonic()-start,
+        pilot_seconds=pilot_seconds,conservative_estimated_seconds=estimated_seconds,step_budget=step_budget,elapsed_seconds=time.monotonic()-start,
         limitations=["Piecewise midpoint current and PSD; exact segment-level covariance and common Gaussian latents, not Brownian path coupling.",
           "All 37 receiver settings evaluated at aligned dt <= .0625 ps; groups with gate disagreement excluded from confirmed passes.",
           "Single exploratory panel; numerical passing gates do not independently confirm a new cadence. A failed frozen control prevents promotion.",
           "Hypothetical electrical PSD and symbol-held optical field noise; no measured receiver, BER, hardware throughput or wall-plug claim."])
+    # Aggregate exact paired gains per drive/setting/readout, not independent trials.
+    from collections import defaultdict
+    totals=defaultdict(lambda:[0,0,0,0])
+    for r in paired_readouts:
+        k=tuple(r[name] for name in ("on_ps","lo_mw","fc_ghz","drive_mw","readout","anchor"))
+        for i,name in enumerate(("both_correct","equalizer_only","anchor_only","neither")):
+            totals[k][i]+=r[name]
+    paired_summary=[]
+    for k,(both,eq,base,neither) in sorted(totals.items()):
+        paired_summary.append(dict(zip(("on_ps","lo_mw","fc_ghz","drive_mw","readout","anchor"),k),
+            both_correct=both,equalizer_only=eq,anchor_only=base,neither=neither,
+            net_correct=eq-base,accuracy_delta=(eq-base)/(both+eq+base+neither)))
+    coefficient_summary=[dict(on_ps=r["on_ps"],lo_mw=r["lo_mw"],fc_ghz=r["fc_ghz"],
+        readout=r["readout"],source=r["source"],sha256=r["sha256"],
+        l2_norm=float(np.linalg.norm(r["coefficients"])),condition=r["condition"],
+        calibration_rmse_a=r["calibration_rmse_a"]) for r in coefficient_records]
+    write_csv("paired_summary.csv",paired_summary)
+    write_csv("coefficient_summary.csv",coefficient_summary)
     for r in resolution_rows:
         for arm in ("electrical","combined"):
             r[arm+"_failure_reasons"]=";".join(x for x,failed in (
@@ -275,7 +307,7 @@ def main():
                 ("diode",r[arm+"_peak_diode_mw"]>2)) if failed)
     for name,items in (("metrics.csv",rows),("summary.csv",groups),("resolution_groups.csv",resolution_groups),("resolution_metrics.csv",resolution_rows),("convergence.csv",conv),("optical_audit.csv",audits),("common_drive_pairs.csv",pairs),("paired_readouts.csv",paired_readouts)):
         write_csv(name,items)
-    (OUT/"coefficients.json").write_text(json.dumps(coefficient_records,indent=2,allow_nan=False)+"\n")
+    # Coefficient artifact was written before test generation; never rewrite it.
     (OUT/"result.json").write_text(json.dumps(result,indent=2,allow_nan=False)+"\n")
     print(json.dumps(result,indent=2,allow_nan=False))
     for p in sorted(OUT.iterdir()):

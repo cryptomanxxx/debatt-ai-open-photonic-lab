@@ -1,0 +1,3 @@
+panel,candidate,on_ps,gap_ps,response_ps,dt_ps,resolution_level,cadence_gsymbol_s,coarse_dt_ps,field_error,waveform_grid_error,clean_current_error,noisy_current_error,peak_error_mw,changed_group_gates,changed_seed_gates
+exploratory,C2,42,0,5,0.125,1,23.80952380952381,0.25,3.259453156966816e-10,3.3112918765590872e-09,2.211397207051765e-08,2.2116101075172513e-08,8.964327140592587e-07,0,0
+exploratory,C2,42,0,5,0.0625,2,23.80952380952381,0.125,2.007695704763319e-11,2.0346841387083277e-10,5.530801282889117e-09,5.5313345575396834e-09,1.7269620800064445e-07,0,0

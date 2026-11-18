@@ -186,7 +186,8 @@ def main():
     with (OUT/"nl012_seed_analysis.json").open("w") as out:
         subprocess.run([sys.executable,"research/analyze_nl012.py"],stdout=out,check=True)
     assert len(weights)==10 and len({(r["seed"],r["drive_mw"]) for r in weights})==10
-    assert all({r["seed"] for r in weights if r["drive_mw"]==d}=={1201,1202,1203,1204,1205} for d in (.1,1.))
+    # Pin the actual five NL003 archived absorber seeds, not NL002 training seeds.
+    assert all({r["seed"] for r in weights if r["drive_mw"]==d}=={1301,1302,1303,1304,1305} for d in (.1,1.))
     prior_domains=set(range(100,132))|set(range(10004,10009))|set(range(10014,10019))|{1,2,3,4,11,12,13,14,15,24,25,26,34,35,36,44,45,46,54,55,56,64,65,66,67,74,75,76,77,84,85,86,87,88,94,95,96,97,98,999}
     domains_flat=[x for domains in PANELS.values() for x in domains]
     assert len(set(domains_flat))==10 and not set(domains_flat)&prior_domains

@@ -8,7 +8,7 @@ import json
 import time
 from pathlib import Path
 import numpy as np
-from dynamic_receiver import hybrid, psd, coefficients, rk4_wave_step
+from dynamic_receiver import hybrid, psd, coefficients, rk4_wave_step, noisy_step, deterministic
 from nonlinear_activation_v002 import dataset
 from nonlinear_activation_v003 import rng, R, Q
 from nonlinear_activation_v006 import solve, folds, response, sha, NOISE, K1
@@ -226,6 +226,32 @@ def verify_partition():
         assert np.allclose(windows([1.,2.,3.,4.],np.array(lengths)),[4.,3.5,2.75])
     return max_det,max_cov
 
+def verify_stationary():
+    # Independent synthetic long sequence; fixed tolerances, burn-in unnecessary
+    # because initial state has the exact stationary distribution.
+    fc,dt,lo=40.,5.,3.
+    a,m,c=coefficients(fc,dt); spectrum=float(psd(0.,lo))
+    stationary=spectrum*np.pi*fc*1e9/2
+    rg=np.random.default_rng(110110)
+    n=8192; streams=64
+    state=rg.normal(size=streams)*np.sqrt(stationary)
+    end=[];means=[];old=[]
+    factor=np.linalg.cholesky(c)
+    for _ in range(n):
+        old.append(state)
+        state,mean=noisy_step(state,0.,spectrum,a,m,factor,*rg.normal(size=(2,streams)))
+        end.append(state);means.append(mean)
+    e=np.asarray(end);o=np.asarray(old);j=np.asarray(means)
+    var_ratio=float(np.var(e)/stationary)
+    lag=float(np.mean(e*o)/stationary)
+    mean_ratio=float(np.var(j)/(m*m*stationary+spectrum*c[1,1]))
+    # Constant and step analytic checks at higher cutoff/LO.
+    aa,mm,_=coefficients(120.,40.)
+    v,j0=deterministic(0.,1.,aa,mm)
+    assert abs(v-(1-aa))<1e-14 and abs(j0-(1-mm))<1e-14
+    assert abs(var_ratio-1)<.02 and abs(lag-a)<.02 and abs(mean_ratio-1)<.02
+    return dict(variance_ratio=var_ratio,lag=lag,expected_lag=float(a),mean_variance_ratio=mean_ratio)
+
 def group_analysis(groups,keys):
     bykey={tuple(g[k] for k in keys):g for g in groups}
     pairs=[]
@@ -271,6 +297,8 @@ def main():
     err_current,err_cov=verify_segment()
     checks['segment_regression']=err_current<1e-15 and err_cov<1e-9
     partition_det,partition_cov=verify_partition()
+    noise_regression=verify_stationary()
+    checks['stationary_noise_regression']=True
     checks['partition_regression']=partition_det<1e-15 and partition_cov<1e-9
     if not checks['segment_regression'] or not checks['partition_regression']:raise ValueError('segment regression')
     # Full ten-weight 200 ps slot at the finest resolution as runtime calibration.
@@ -341,7 +369,9 @@ def main():
         g["confirmed_combined_pass"]=g["combined_pass"] and g["numerically_stable_gate"]
     common=[g for g in groups if g["drive_mw"]==.1 and g["confirmed_combined_pass"] and any(
         h["drive_mw"]==1 and h["confirmed_combined_pass"] and all(g[k]==h[k] for k in keys[:-1]) for h in groups)]
+    common.sort(key=lambda g:-g['cadence_gsymbol_s'])
     pairs,best=group_analysis(groups,keys)
+    fastest=[g for g in common if g['cadence_gsymbol_s']==common[0]['cadence_gsymbol_s']] if common else []
     for g in groups:
         reasons=[]
         if not g["stationary_eligible"]:reasons.append("stationary")
@@ -355,6 +385,8 @@ def main():
         unique_keys=len({tuple(r[k] for k in keys)+ (r["seed"],) for r in rows})==7680 and len({tuple(r[k] for k in keys)+(r["seed"],r["resolution_level"]) for r in resolution_rows})==23040,
         optical_balance=all(r["balance"]<1e-6 and r["mvm_excess"]<1e-9 and r["q_min"]>=-1e-10 and r["q_max"]<=1+1e-10 for r in audits),
         hybrid=all(r["hybrid_error"]<1e-15 for r in audits),
+        aggregate_energy_balance=all(abs(r["input_fj"]+r["initial_fj"]-r["reflection_fj"]-r["drop_fj"]-r["absorption_fj"]-r["final_fj"])/(1+r["input_fj"]+r["initial_fj"])<1e-6 for r in resolution_rows),
+        unique_group_keys=len({tuple(r[k] for k in keys)+(r["resolution_level"],) for r in resolution_groups})==4608,
         first_symbol=all(r["first_symbol_error"]<1e-12 for r in audits),
         convergence=all(r["field_error"]<FIELD_TOL and r["clean_current_error"]<CURRENT_TOL
             and r["waveform_grid_error"]<FIELD_TOL and r["noisy_current_error"]<NOISY_TOL and r["peak_error_mw"]<DIODE_TOL for r in conv),
@@ -363,6 +395,7 @@ def main():
     checks={k:bool(v) for k,v in checks.items()}
     result=dict(experiment="OPA-NL-011",checks=checks,failures=[k for k,v in checks.items() if not v],
         rows=len(rows),groups=len(groups),rng_domains=[94,95,96,97,98],resolution_groups=len(resolution_groups),
+        fastest_common_confirmed_passes=fastest,stationary_noise_regression=noise_regression,
         best_maximin_by_timing=best,partition_current_error=partition_det,partition_covariance_error=partition_cov,
         common_confirmed_passes=common,combined_confirmed_groups=sum(g["confirmed_combined_pass"] for g in groups),
         ambiguous_groups=sum(not g["numerically_stable_gate"] for g in groups),

@@ -602,6 +602,32 @@
         "results/opa-nl-007/provenance.json"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/nonlinear_activation_v008.py"
+    },
+    {
+      "id": "opa-nl-009",
+      "name": "Circuit: independent timing boundary and long-stream validation",
+      "script": "simulations/circuit/nonlinear_activation_v009.py",
+      "result_dir": "results/opa-nl-009",
+      "artifact": "opa-nl-009",
+      "timeout_minutes": 180,
+      "deps": [
+        "simulations/circuit/nonlinear_activation_v001.py",
+        "simulations/circuit/nonlinear_activation_v002.py",
+        "simulations/circuit/nonlinear_activation_v003.py",
+        "simulations/circuit/nonlinear_activation_v004.py",
+        "simulations/circuit/nonlinear_activation_v005.py",
+        "simulations/circuit/nonlinear_activation_v006.py",
+        "simulations/circuit/nonlinear_activation_v007.py",
+        "results/opa-nl-003/weights.json",
+        "results/opa-nl-003/result.json",
+        "results/opa-nl-003/provenance.json",
+        "results/opa-nl-007/summary.csv",
+        "results/opa-nl-007/result.json",
+        "results/opa-nl-007/transfer.csv",
+        "results/opa-nl-007/provenance.json",
+        "results/opa-nl-008/*"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/nonlinear_activation_v009.py"
     }
   ]
 }

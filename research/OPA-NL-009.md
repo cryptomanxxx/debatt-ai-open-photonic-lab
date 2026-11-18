@@ -1,6 +1,6 @@
 # OPA-NL-009 — Timing boundary and long-stream validation
 
-Status: proposed protocol for review; not implemented or run. Parent evidence: [NL008](OPA-NL-008.md), [archive](../results/opa-nl-008/provenance.json), source run 44192685431, archive run 44195593749, archive merge 84678fb6d8c0eb9cbe1adeafe1a16d45f243a72f.
+Status: implemented and executed; initial CI-report analysis below; raw archive pending. Parent evidence: [NL008](OPA-NL-008.md), [archive](../results/opa-nl-008/provenance.json), source run 44192685431, archive run 44195593749, archive merge 84678fb6d8c0eb9cbe1adeafe1a16d45f243a72f.
 
 ## Paired archive analysis
 
@@ -44,3 +44,53 @@ A separate dynamic receiver stage must model optical/electrical filtering, integ
 ## Before execution
 
 Implement the experiment in the existing registered experiment framework, verify RNG domain allocation and source conventions, add regression checks and review the runtime budget. This protocol PR intentionally does not modify the solver or existing results.
+
+## Initial observed results — 18 November 2026
+
+Source [run 44197189683](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44197189683), job 134441768784, PR 158, artifact 14381707815. All 19 implementation checks passed, 3600 seed rows, 720 groups, 30 references, 110 extra confirmations and 34 detected boundary intervals (changes in the four-component drive/history gate vector). Candidate loops finished in 2254.3 seconds. Source is CI-emitted JSON, not yet independently verified raw files.
+
+Maximum stationary error 9.030102731546361e-12; slot balance 2.1940922663195583e-7; coarse/fine field difference 1.0812542784080838e-7; normalized aggregate energy difference 3.4792038083437574e-7. Extra convergence gate passed.
+
+152/360 cold groups and 124/360 stream groups pass. These aggregate counts do not establish paired losses/gains; inspect raw summary after archival. Of 180 candidate/timing tuples, 54 pass streaming at both drives (different frozen networks). Duration breakdown:
+
+| On ps | Stream pass / 36 | Both drives / 18 |
+|---:|---:|---:|
+| 10 | 0 | 0 |
+| 15 | 0 | 0 |
+| 20 | 0 | 0 |
+| 25 | 1 | 0 |
+| 30 | 6 | 1 |
+| 35 | 13 | 4 |
+| 40 | 20 | 8 |
+| 45 | 23 | 11 |
+| 50 | 25 | 12 |
+| 200 | 36 | 18 |
+
+### Shortest sampled passing stream duration at both drives
+
+| Candidate | Response ps | Gap ps | Shortest on ps | Worst repeat .1 mW | Worst repeat 1 mW |
+|---|---:|---:|---:|---:|---:|
+| C1 | 0 | 0 | 45 | 99.609375% | 95.312500% |
+| C1 | 0 | 20 | 30 | 96.093750% | 99.218750% |
+| C1 | 5 | 0 | 45 | 99.609375% | 97.265625% |
+| C1 | 5 | 20 | 35 | 97.460938% | 100.000000% |
+| C1 | 50 | 0 | 200 | 99.609375% | 100.000000% |
+| C1 | 50 | 20 | 200 | 99.609375% | 100.000000% |
+| C2 | 0 | 0 | 35 | 97.070313% | 96.679688% |
+| C2 | 0 | 20 | 35 | 96.484375% | 100.000000% |
+| C2 | 5 | 0 | 40 | 97.460938% | 100.000000% |
+| C2 | 5 | 20 | 40 | 97.265625% | 100.000000% |
+| C2 | 50 | 0 | 200 | 98.632813% | 100.000000% |
+| C2 | 50 | 20 | 200 | 98.632813% | 100.000000% |
+| C3 | 0 | 0 | 45 | 98.828125% | 95.312500% |
+| C3 | 0 | 20 | 40 | 97.460938% | 99.609375% |
+| C3 | 5 | 0 | 50 | 98.828125% | 99.023438% |
+| C3 | 5 | 20 | 40 | 96.093750% | 99.804688% |
+| C3 | 50 | 0 | 200 | 99.023438% | 100.000000% |
+| C3 | 50 | 20 | 200 | 99.023438% | 100.000000% |
+
+No interpolation or monotonicity is assumed. At 25 ps only C2, instantaneous response, 20 ps gap, 1 mW passes (worst repeat 96.2890625%); this is not a both-drive result. C1 30 ps with 20 ps gap has a nominal cadence of 20 Gsymbol/s. C2 35 ps without gap, instantaneous response, reaches nominal 28.571 Gsymbol/s, worst repeats 97.0703125% and 96.6796875%; memory field maxima .006483965 and .041808187 sqrt(mW). C2 40 ps without gap and 5 ps response reaches nominal 25 Gsymbol/s, worst repeats 97.4609375% and 100%, memory field maxima .004777573 and .038180851 sqrt(mW). All five seeds have perfect clean pre-receiver accuracy for these two C2 timings; projected accuracy is not necessarily perfect. These results are conditional on the hypothetical material response and fixed 1 GHz noise diagnostic, not validated receiver bandwidth or hardware throughput. No physical energy or speed advantage is established. The longer test is independent, so differences from NL008 cannot be attributed exclusively to stream length.
+
+### Archive and next steps
+
+ZIP 11597063 bytes, SHA-256 acc3645d4eefcf394d8706ab738271479af5d2fea29161c1a1385dd93b2ce158. Archive workflow will verify identity, CRC, all ten CI-emitted file hashes and staged bytes, then create a separate review branch. No archive execution yet. After archival analyze paired groups, signed margins, position trends and traces, then preregister a dynamic receiver experiment with bandwidth, integration and correlated noise, rather than treating the fixed ENBW diagnostic as validation at these rates.

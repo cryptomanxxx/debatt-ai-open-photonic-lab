@@ -36,8 +36,15 @@ def coefficients(fc_ghz,dt_ps):
     # Unit one-sided input PSD. Kernels for state and step mean.
     k=lam*np.exp(-x*_U)
     j=-np.expm1(-x*_U)/dt
-    cov=dt/2*np.array([[np.dot(_W,k*k),np.dot(_W,k*j)],
-                       [np.dot(_W,k*j),np.dot(_W,j*j)]])
+    if x<=.1:
+        cov=dt/2*np.array([[np.dot(_W,k*k),np.dot(_W,k*j)],
+                           [np.dot(_W,k*j),np.dot(_W,j*j)]])
+    else:
+        one=-np.expm1(-x); two=-np.expm1(-2*x)
+        v=lam*two/4
+        cross=one**2/(4*dt)
+        avg=(dt-2*one/lam+two/(2*lam))/(2*dt**2)
+        cov=np.array([[v,cross],[cross,avg]])
     return a,m,cov
 
 def deterministic(state,current,a,m):

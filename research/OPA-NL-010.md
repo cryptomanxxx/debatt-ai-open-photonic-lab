@@ -1,6 +1,6 @@
 # OPA-NL-010 — Dynamic balanced optical receiver
 
-Status: proposed protocol for review, not implemented or run.
+Status: implemented and executed; initial CI-report analysis below; raw archive pending.
 Parent: [NL009](OPA-NL-009.md), [verified evidence](../results/opa-nl-009/provenance.json), experiment run 44197189683, archive run 44277660202, archive merge 174355d7bd5239b20d1d467fb42a68378cc26dda.
 
 ## NL009 paired archive analysis
@@ -63,3 +63,37 @@ Retain a separate paired optical-noise sensitivity arm: inherited absolute activ
 Before running: verify all NL009 archive hashes and NL003 weights; add reproducible CI-side analysis of NL009 large CSVs (paired counts, signed margins and first/last position summaries, trace coverage); preserve originals. Validate constant and stepped signal against analytic causal filter, numerical integration against exact segment integral, hybrid power conservation, phase/sign checks, analytic stationary noise variance and lag covariance, joint integration covariance, nested-resolution consistency, no resets within streams, gap handling and all first-symbol equality where appropriate. Use deterministic fixed RNG seeds and statistical tolerances specified before sampling; test noise implementation with independent synthetic long sequences, not classification success. Validate dt convergence of waveform, filtered current and integrated decision, diode peaks and gate agreement at boundary; document tolerances in implementation PR. Test no-noise high-cutoff limit toward instantaneous receiver (finite cutoff not exact), and low-cutoff memory counterexample. Check finite values, expected unique keys, archive immutability, passive MVM and inherited TCMT energy balance. Budget runtime/memory; stream waveform chunks or deterministic partitions, no silent omissions.
 
 No hardware rate, BER, measured receiver parameters, wall-plug advantage or general AI performance established. Future material/receiver calibration and system power accounting remain separate tasks.
+
+## Initial observed results — 18 November 2026
+
+Source [experiment run 44283625212](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44283625212), job 134730602845, PR 163, artifact 14418487339. All 13 implementation checks passed. 1680 primary seed rows, 336 primary groups, 5040 seed rows across three resolutions, 1008 resolution groups, 21 optical audits and 14 convergence comparisons. Runtime 313.210 seconds. The source is the CI-emitted JSON report, not yet the independently verified raw CSV archive.
+
+44/336 groups passed the combined-noise gate and were numerically confirmed; 13/168 matched timing/LO/cutoff/readout tuples passed at both drive powers. No ambiguous groups and zero changed seed/group gates across all 14 comparisons. Of the 13 common-drive tuples, one is C2 at 50 ps on, zero gap, 5 ps material response, LO 1 mW, cutoff 20 GHz, end readout (nominal 20 Gsymbol/s); the other 12 are C2 at 200 ps on, zero gap, 50 ps material response (5 Gsymbol/s). No tested common-drive tuple passes at 25, 28.571 or 33.333 Gsymbol/s, nor at the C1 timings. This is a sampled conditional model result, not a universal speed boundary. NL009 used fresh but different data and a static 1 GHz diagnostic, so the change cannot be attributed solely to the receiver.
+
+### All common-drive confirmed tuples
+
+| On ps | Response ps | LO mW | Cutoff GHz | Readout | Electrical worst .1 mW | Combined worst .1 mW |
+|---:|---:|---:|---:|---|---:|---:|
+| 50 | 5 | 1 | 20 | end | 97.851563% | 95.117188% |
+| 200 | 50 | 0.1 | 5 | end | 97.851563% | 95.117188% |
+| 200 | 50 | 0.1 | 10 | half_mean | 98.242188% | 95.117188% |
+| 200 | 50 | 0.1 | 20 | half_mean | 97.851563% | 95.507813% |
+| 200 | 50 | 0.1 | 40 | half_mean | 97.851563% | 95.507813% |
+| 200 | 50 | 0.1 | 80 | half_mean | 97.851563% | 95.703125% |
+| 200 | 50 | 1 | 5 | end | 99.804688% | 97.851563% |
+| 200 | 50 | 1 | 10 | end | 99.218750% | 97.851563% |
+| 200 | 50 | 1 | 10 | half_mean | 99.804688% | 97.070313% |
+| 200 | 50 | 1 | 20 | end | 98.632813% | 96.484375% |
+| 200 | 50 | 1 | 20 | half_mean | 99.804688% | 97.460938% |
+| 200 | 50 | 1 | 40 | half_mean | 99.804688% | 97.460938% |
+| 200 | 50 | 1 | 80 | half_mean | 99.804688% | 97.460938% |
+
+All rows have clean filtered minimum accuracy 100% at .1 mW. The report lists the .1 mW group for each common-drive tuple; it establishes the corresponding 1 mW pass, but does not include its exact accuracy. Do not infer exact 1 mW accuracy, electrical-only pass counts, per-drive optima, or readout/LO rankings from this subset. At the fastest common-drive tuple the .1 mW worst repeat is 97.8515625% electrical-only and 95.1171875% combined; the latter is just 0.1171875 percentage points above the gate. The cutoff is 20 GHz, ENBW pi*20/2 = 31.4159 GHz, not 20 GHz ENBW. The 5 Gsymbol/s controls include both LO settings and both readouts; the largest listed .1 mW combined worst repeat is 97.8515625% (LO 1 mW, end, cutoff 5 or 10 GHz). These are observed results, not recommended hardware settings.
+
+### Numerical verification
+
+Max optical endpoint difference 4.433272107508771e-10 sqrt(mW), grid waveform difference 3.4620989501835674e-9 sqrt(mW), clean current difference 1.4313086827060173e-8 A, paired noisy decision current difference 1.4323350872312872e-8 A, sampled diode peak difference 7.570014529667546e-7 mW. All three resolutions used common segment Gaussian latents with exact joint segment covariance, a distributional coupling rather than a shared Brownian path. Numerical convergence does not validate material or receiver assumptions. No measured hardware rate, BER, energy advantage or general AI accuracy is established.
+
+### Archive and next steps
+
+ZIP 475556 bytes, SHA-256 e1647c33b2e3b6d85c7f7f26cdd31d18c869285c899c9ef567a5c5dc196fa80e. Manual archive workflow verifies artifact identity, CRC, all nine CI-emitted file hashes and staged bytes on a separate review branch. Archive not yet executed. After archival analyze all 336 groups and 1680 primary metrics: separate clean/electrical/combined gate losses, drive-specific passes, paired readout and LO comparisons, cutoff sensitivity and margins at the 20–28.571 Gsymbol/s timings. Do not tune thresholds or select new timings on the same test labels. A follow-up may preregister independent data and a finer receiver/LO sweep near the marginal 20 Gsymbol/s point, subject to this full analysis.

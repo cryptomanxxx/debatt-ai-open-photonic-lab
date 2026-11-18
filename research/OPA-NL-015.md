@@ -1,6 +1,6 @@
 # OPA-NL-015 — Independent frozen-coefficient confirmation at 42 ps
 
-Status: preregistered proposal; no new simulations or test data generated.
+Status: executed; independent numerical confirmation achieved for prespecified Ridge16 endpoints, primary Ridge8 failed; exact archive pending.
 Basis: [NL014](OPA-NL-014.md), run 44311554574, archive merge c027a1717add3d50c73f39654859dd1aacfb1999.
 
 ## Source review and diagnosis
@@ -54,3 +54,38 @@ Two disjoint new test panels A domains 10304–10308, B 10314–10318, audit aga
 ## Decision
 
 Confirm 42 ps / 23.8095238095 Gsymbol/s only for explicitly passing frozen endpoints, and only if both positive controls pass. At 42 ps aggregate eight-segment rate 190.476 Gsegment/s, not measured ADC performance. No hardware throughput, BER, general AI accuracy or wall-plug claim. If 42 ps fails, report failure and evaluate the prespecified slower supporting endpoints without post-hoc retuning. Any future 41/40 ps sweep is a separate exploratory protocol, not part of this test.
+
+## Executed results — 2026-11-18
+
+[Successful run 44321189432](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44321189432), job 134860496443, source head 22860166d0ef7cfd22823dd3feb7518281aa6615, CI merge f551aeda2ee06ab86e5cf327f6c32ae463f5f0b2, final merge 263027a2f168b6c659599da51416439834e97e1f. All 24 implementation checks passed. The mandatory NL014 raw archive audit completed successfully before NL015 inputs were generated, including all 38480 exact paired rows and marginal/summary checks. 980 primary seed rows, 2940 resolution rows, 196 primary groups, 588 resolution groups, 49 two-panel common-drive pairs, 21 frozen vectors, 14560 paired rows, 24 optical audits and 16 convergence comparisons. Elapsed 1392.785600994 s. 90/196 passing groups, 7/49 two-panel common-drive tuples, zero ambiguous groups. No seed or group gate changes in any of the sixteen comparisons. Both 45 ps positive controls pass; comparability gate satisfied.
+
+### Primary and secondary outcomes
+
+Primary Ridge8 at 42 ps/2 mW/120 GHz **failed**: low-drive A 0.9482421875 (1942/2048, four below the minimum passing count 1946), B 0.953125; high-drive A 0.99609375, B 0.99755859375. Secondary Ridge16 at identical setting **passed**: low A 0.95068359375 (1947/2048, one above minimum), low B 0.95556640625; high A 0.99609375, B 0.998046875. Therefore the primary did not confirm; secondary and one supporting Ridge16 endpoint independently confirm 42 ps, 23.8095238095 Gsymbol/s, with 5 ps response (7.142857% faster than confirmed 45 ps). No Ridge8 configuration confirmed at 42 or 43 ps. Ridge8 at 44 ps/1 mW/80 GHz did confirm 22.7272727273 Gsymbol/s. Distinguish passing finite-panel thresholds from statistical guarantees.
+
+### All preregistered endpoints and controls
+
+| ps | LO mW | GHz | Readout | A low | A high | B low | B high | Both panels |
+|---:|---:|---:|---|---:|---:|---:|---:|---|
+| 42 | 2 | 120 | ridge8 | 0.9482421875 | 0.99609375 | 0.953125 | 0.99755859375 | Fail |
+| 42 | 2 | 120 | ridge16 | 0.95068359375 | 0.99609375 | 0.95556640625 | 0.998046875 | Pass |
+| 42 | 1 | 120 | ridge16 | 0.9462890625 | 0.99609375 | 0.9501953125 | 0.99755859375 | Fail |
+| 42 | 2 | 80 | ridge16 | 0.94921875 | 0.99609375 | 0.95703125 | 0.9970703125 | Fail |
+| 42 | 3 | 120 | ridge8 | 0.94873046875 | 0.99609375 | 0.953125 | 0.99755859375 | Fail |
+| 42 | 3 | 120 | ridge16 | 0.9521484375 | 0.99609375 | 0.9560546875 | 0.998046875 | Pass |
+| 43 | 1 | 120 | ridge8 | 0.94921875 | 0.99755859375 | 0.953125 | 0.99853515625 | Fail |
+| 43 | 1 | 120 | ridge16 | 0.95068359375 | 0.99853515625 | 0.9560546875 | 0.99853515625 | Pass |
+| 44 | 1 | 80 | ridge8 | 0.95263671875 | 0.9990234375 | 0.955078125 | 0.99951171875 | Pass |
+| 44 | 1 | 80 | ridge16 | 0.955078125 | 0.9990234375 | 0.962890625 | 0.99951171875 | Pass |
+| 45 | 1 | 60 | ridge8 | 0.958984375 | 1 | 0.96044921875 | 0.99951171875 | Pass |
+| 45 | 1 | 60 | ridge16 | 0.95947265625 | 1 | 0.96533203125 | 0.99951171875 | Pass |
+
+All five non-control confirmed pairs are prespecified: 42 ps Ridge16/2 mW/120 GHz and Ridge16/3 mW/120 GHz, 43 ps Ridge16/1 mW/120 GHz, and both ordinary ridge methods at 44 ps/1 mW/80 GHz. At 42 ps the 3 mW Ridge16 maximin .9521484375 (1950/2048, four above minimum), versus .95068359375 at 2 mW; both narrow margins. Lower-bandwidth Ridge16/2 mW/80 GHz fails panel A at .94921875 (1944/2048); 1 mW/120 GHz fails A .9462890625. Higher LO does not rescue primary Ridge8 (3 mW A .94873046875). 43 ps/1 mW Ridge8 also fails A .94921875. All failures retained. All seven readouts at every setting remain in the archive. No retuning.
+
+### Numerical checks and scope
+
+Maximum field error 3.123450903746927e-10 sqrt(mW), waveform error 3.2114531789139675e-9 sqrt(mW), clean current error 2.2320639370680033e-8 A, noisy current error 2.2325046308195682e-8 A, sampled peak error 0.0000014018425202877438 mW. All within inherited tolerances. Independent input/noise panels with same weights and model assumptions, not independent training or physical devices. 190.476 Gsegment/s aggregate eight-segment feature rate; not measured ADC feasibility, hardware throughput, BER, energy or general AI performance. LO-only electrical lower bound 10/15 mW for 2/3 mW under assumed 20% efficiency; not total system power. The narrow margins and earlier NL012 40 ps finite-response failure argue for explicit optical/noise diagnosis before a new exploratory 41–40 ps sweep. Do not claim 25 Gsymbol/s until independently confirmed.
+
+### Archive and next step
+
+Original artifact 14437276291, ZIP 685440 bytes, SHA-256 da2b2834f27301c25bf155573086dfcf01b332c6a351729a80204b096fc27dce. Manual workflow pins all fifteen original file hashes and verifies staged bytes. Detailed raw-data diagnosis follows archive merge; NL016 must be a separate preregistered exploratory protocol, using disjoint domains and preserving NL015 frozen 42 ps reference. Investigate low-drive noise margin, signal/readout distortion and optical memory; consider receiver redesign if 41–40 ps fails, rather than lowering gates or repeatedly selecting on test panels.

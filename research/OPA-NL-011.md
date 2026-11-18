@@ -1,6 +1,6 @@
 # OPA-NL-011 — Receiver bandwidth, local oscillator and late integration
 
-Status: preregistered proposal for review; not implemented or executed.
+Status: implemented and executed; initial CI-report analysis below, raw archive pending.
 Parent: [NL010 protocol and initial results](OPA-NL-010.md), [verified archive](../results/opa-nl-010/provenance.json), experiment run 44283625212, archive run 44285931563, archive merge 565d2af6aeab01f48a45a93efb2eac59c7e690c1.
 
 ## Detailed NL010 archive analysis
@@ -65,3 +65,42 @@ Primary gate remains all five seeds stationary eligible, unfiltered and clean fi
 ## Independent follow-up
 
 Any passing receiver setting selected from NL011 is exploratory on its test grid. Confirm it in a subsequent experiment with independently generated inputs/noise and longer streams before presenting it as robust. No measured hardware speed, BER, energy advantage, device feasibility or general AI accuracy established.
+
+## Initial results — 18 November 2026
+
+Source [experiment run 44288710042](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44288710042), job 134748083271, PR 167, artifact 14421271696. All 17 implementation checks passed. 7680 primary seed rows, 1536 primary groups, 23040 resolution rows and 4608 resolution groups, 24 optical audits and 16 convergence comparisons. Runtime 587.726 seconds. This analysis uses the CI-emitted JSON report; full raw CSV analysis and independent archive verification remain pending.
+
+328/1536 combined groups passed and were numerically confirmed. 108/768 common-drive tuples pass at both drives, of which 35 are C2 50 ps on, 5 ps response (20 Gsymbol/s) and 73 are the 200 ps / 50 ps control (5 Gsymbol/s). No tested faster timing passed at both drives. No ambiguous group and zero changes in seed/group gate status across all 16 comparisons. The 328 passing drive groups imply 216 both-drive-group members and 112 passing single-drive groups, but the JSON subset does not identify which drive for those 112. Counts are not comparable as an effectiveness ratio to NL010's different grid and independent data.
+
+### Best maximin receiver settings by timing (all ties)
+
+| On ps | Response ps | LO mW | Cutoff GHz | Readout | Worst .1 mW | Worst 1 mW | Both pass |
+|---:|---:|---:|---:|---|---:|---:|---|
+| 35 | 0 | 2 | 80 | end | 88.085938% | 88.281250% | no |
+| 35 | 0 | 3 | 80 | end | 88.085938% | 88.281250% | no |
+| 35 | 5 | 2 | 80 | end | 83.398438% | 83.203125% | no |
+| 35 | 5 | 3 | 80 | end | 83.398438% | 83.203125% | no |
+| 37.5 | 5 | 3 | 60 | end | 87.500000% | 87.890625% | no |
+| 40 | 5 | 3 | 40 | end | 90.625000% | 90.820313% | no |
+| 45 | 5 | 3 | 30 | end | 94.531250% | 97.656250% | no |
+| 50 | 5 | 2 | 120 | quarter_mean | 96.093750% | 99.804688% | yes |
+| 50 | 5 | 3 | 20 | end | 96.093750% | 99.609375% | yes |
+| 50 | 5 | 3 | 80 | eighth_mean | 96.093750% | 100.000000% | yes |
+| 50 | 5 | 3 | 120 | quarter_mean | 96.093750% | 99.804688% | yes |
+| 40 | 0 | 3 | 40 | end | 93.945313% | 95.507813% | no |
+| 200 | 50 | 2 | 40 | quarter_mean | 98.632813% | 100.000000% | yes |
+| 200 | 50 | 3 | 40 | quarter_mean | 98.632813% | 100.000000% | yes |
+
+The closest finite-response point above 20 Gsymbol/s is 45 ps, 5 ps response, LO 3 mW, cutoff 30 GHz, end readout: 94.53125% and 97.65625% worst repeat at .1/1 mW. The low-drive deficit is .46875 percentage points (three additional correct classifications would meet the 487/512 threshold; 484/512 observed versus 487/512 required). At 40 ps, 5 ps response, best common-drive accuracy is 90.625%; instantaneous closure at the same duration gives 93.9453125%, still below threshold. Do not present instantaneous closure as measured material speed. The best 35 ps finite-response result is 83.203125%. Maximin rankings include failures and are retrospective, not independently validated.
+
+### Receiver tradeoff at 20 Gsymbol/s
+
+Among the 35 common-drive passing tuples at 50 ps, LO counts (.1,1,2,3 mW) are 0,11,12,12; readout counts (end,eighth_mean,quarter_mean,half_mean) are 9,14,12,0. The original 1 mW / 20 GHz / end setting passes again on independent NL011 draws (low-drive worst 95.5078125%, clean 100%, electrical-only worst 97.8515625%, sampled low-drive peak .5268138641566373 mW). Its exact high-drive accuracy is not in this JSON subset. The best maximin accuracy is 96.09375% shared by four settings; the lowest LO among these is 2 mW, 120 GHz, quarter_mean, giving 96.09375% and 99.8046875% at .1/1 mW. At assumed 20% laser conversion efficiency, LO-only electrical power lower bounds are 5,10,15 mW for 1,2,3 mW LO. This does not include signal launch, receiver electronics, distribution, ADC or phase control. More LO does not necessarily improve the limiting rate. A conditional power-accuracy Pareto analysis needs the full seed CSV.
+
+### Numerical evidence and limits
+
+Maximum endpoint error 5.911444476124354e-10 sqrt(mW), common-grid waveform error 3.1684383104613736e-9 sqrt(mW), clean decision error 2.8801995021032864e-8 A, noisy decision error 2.8806896928810664e-8 A, sampled diode peak error 1.7515214043584137e-6 mW. Partition regression current/covariance errors 1.4907779871675686e-19 A and 1.3728045331342105e-14 relative. Stationary long-sequence variance ratio 1.0012673236303482, lag 0.28528539589534957 versus expected 0.28460954333602934, mean variance ratio 1.0033964410261738. These verify numerical implementation, not device behavior. No measured hardware rate, BER, energy efficiency or general AI accuracy established.
+
+### Archive and follow-up
+
+Original ZIP 2132487 bytes, SHA-256 89ce5da2a5000e58dc67fcd121ee2e0d7801d5048af9806ebdf3033ab47e19b2. The manual archive workflow pins run, artifact, ZIP and ten original file hashes and verifies staged bytes. After archival, analyze all 1536 groups, 768 common-drive pairs and seed metrics: clean versus electrical versus combined gate attrition by timing and drive, sampled diode failures, paired LO/readout effects and conditional power tradeoffs. Do not infer global gate counts or causes from the passing subset. NL012 should investigate a fixed causal equalizer or alternative receive filter only after this diagnosis; independently calibrate on separate inputs, freeze coefficients before held-out testing, include unequalized anchors and noise-amplification/power costs. An independent longer-stream confirmation of a low-LO 20 Gsymbol/s anchor and a prespecified 45 ps neighborhood is also useful. No new protocol approved here.

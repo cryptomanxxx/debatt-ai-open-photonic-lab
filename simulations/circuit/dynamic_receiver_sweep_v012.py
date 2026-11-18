@@ -122,6 +122,11 @@ def verify_causality():
     target=rg.normal(size=(2,8,6))
     coef,info=fit(raw,target,16,.01)
     assert not coef.flags.writeable and info["sha256"]==digest(coef)
+    # The fitting interface accepts no labels; test-data perturbation cannot
+    # change the immutable calibration vector used in decisions.
+    frozen=digest(coef)
+    decide(changed,[coef[:8],coef,coef])
+    assert digest(coef)==frozen
     return True
 
 def verify_eight_segments():
@@ -221,7 +226,7 @@ def main():
     pilot_seconds=time.monotonic()-pilot_start
     step_budget=sum(128*round(on/dt) for _,on,_,_ in TIMINGS for dt in grids(on))+sum(64*round(on/grids(on)[-1]) for _,on,_,_ in TIMINGS)
     print("Pilot seconds",pilot_seconds,"step budget",step_budget,flush=True)
-    calibration=[]; coefficient_hashes=set()
+    calibration=[]; coefficient_hashes=set(); paired_readouts=[]
     rows=[];audits=[];conv=[];resolution_groups=[];resolution_rows=[]
     for name,on,gap,tr in TIMINGS:
         case=CASES[name];stable=eligible(z,case);prev=None
@@ -239,11 +244,11 @@ def main():
 
         for level,dt in enumerate(grids(on)):
             raw,peak,end,cold,grid,terms,diag=run_case(z,w,noise,seeds,case,on,gap,tr,dt,TEST_DOMAINS)
-            res={k:decide(v,fixed[k]) for k,v in raw.items()}
+            res={k:decide(raw.pop(k),fixed[k]) for k in tuple(raw)}
             del raw
             for k,coefs in fixed.items():
                 for method,c in zip(READOUTS[4:],coefs):
-                    coefficient_hashes.add((on,tr,*k,method,digest(c)))
+                    coefficient_hashes.add((on,tr,level,*k,method,digest(c)))
                     assert not c.flags.writeable
             meta=dict(candidate=name,on_ps=on,gap_ps=gap,response_ps=tr,dt_ps=dt,resolution_level=level,cadence_gsymbol_s=1000/(on+gap))
             audits.append(dict(**meta,**diag,first_symbol_error=float(np.max(abs(end[...,0]-cold[...,0])))))
@@ -252,7 +257,7 @@ def main():
                 for k,readout in enumerate(READOUTS):
                     for i,(seed,drive) in enumerate(zip(seeds,drives)):
                         rr=dict(**meta,lo_mw=lo,fc_ghz=fc,enbw_ghz=np.pi*fc/2,readout=readout,
-                            integration_ps=on*FRACTIONS[k],taps=0 if k<4 else (8 if k==4 else 16),
+                            integration_ps=on*FRACTIONS[k],feature_history_ps=on if k>=5 else 0.,taps=0 if k<4 else (8 if k==4 else 16),
                             segment_rate_gsegment_s=8*1000/on if k>=4 else 0.,
                             coefficient_sha256=digest(fixed[lo,fc][k-4]) if k>=4 else '',seed=seed,drive_mw=drive,stationary_eligible=stable,
                             unfiltered_accuracy=float(np.mean((end[i].real>0)==y[i])),
@@ -271,6 +276,19 @@ def main():
                         rr["clean_target_rmse_a"]=float(np.sqrt(np.mean((values[k,0,i,0]-target)**2)))
                         for rep_idx in range(REPEATS):
                             rr[f"combined_correct_r{rep_idx}"]=int(np.sum((values[k,2,i,rep_idx]>0)==y[i]))
+                        if level==2 and k>=4:
+                            # Exact paired correct/incorrect counts, not independent
+                            # differences of marginal worst-repeat accuracies.
+                            eq=(values[k,2,i]>0)==y[i]
+                            for ak,anchor in enumerate(READOUTS[:4]):
+                                ac=(values[ak,2,i]>0)==y[i]
+                                for ri in range(REPEATS):
+                                    paired_readouts.append(dict(**meta,lo_mw=lo,fc_ghz=fc,drive_mw=drive,seed=seed,
+                                        readout=readout,anchor=anchor,repeat=ri,
+                                        both_correct=int(np.sum(eq[ri]&ac[ri])),
+                                        equalizer_only=int(np.sum(eq[ri]&~ac[ri])),
+                                        anchor_only=int(np.sum(~eq[ri]&ac[ri])),
+                                        neither=int(np.sum(~eq[ri]&~ac[ri]))))
                         rr.update(electrical_pass=pass_gate(rr,"electrical"),combined_pass=pass_gate(rr,"combined"))
                         local.append(rr)
             flags={}
@@ -323,9 +341,10 @@ def main():
         if g["combined_peak_diode_mw"]>2:reasons.append("diode")
         if not g["numerically_stable_gate"]:reasons.append("resolution")
         g["failure_reasons"]=";".join(reasons)
-    checks.update(counts=len(rows)==5040 and len(groups)==1008 and len(audits)==12 and len(conv)==8 and len(resolution_groups)==3024 and len(resolution_rows)==15120 and len(pairs)==504 and len(calibration)==216,
+    checks.update(counts=len(rows)==5040 and len(groups)==1008 and len(audits)==12 and len(conv)==8 and len(resolution_groups)==3024 and len(resolution_rows)==15120 and len(pairs)==504 and len(calibration)==216 and len(paired_readouts)==69120,
+        paired_counts=all(sum(r[k] for k in ('both_correct','equalizer_only','anchor_only','neither'))==1024 for r in paired_readouts),
         unique_keys=len({tuple(r[k] for k in keys)+ (r["seed"],) for r in rows})==5040 and len({tuple(r[k] for k in keys)+(r["seed"],r["resolution_level"]) for r in resolution_rows})==15120,
-        frozen_coefficients=coefficient_hashes=={(v["on_ps"],v["response_ps"],v["lo_mw"],v["fc_ghz"],v["readout"],v["sha256"]) for v in calibration},
+        frozen_coefficients=coefficient_hashes=={(v["on_ps"],v["response_ps"],level,v["lo_mw"],v["fc_ghz"],v["readout"],v["sha256"]) for v in calibration for level in range(3)},
         optical_balance=all(r["balance"]<1e-6 and r["mvm_excess"]<1e-9 and r["q_min"]>=-1e-10 and r["q_max"]<=1+1e-10 for r in audits),
         hybrid=all(r["hybrid_error"]<1e-15 for r in audits),
         aggregate_energy_balance=all(abs(r["input_fj"]+r["initial_fj"]-r["reflection_fj"]-r["drop_fj"]-r["absorption_fj"]-r["final_fj"])/(1+r["input_fj"]+r["initial_fj"])<1e-6 for r in resolution_rows),
@@ -348,7 +367,7 @@ def main():
         limitations=["Piecewise midpoint current and PSD; exact segment-level covariance and common Gaussian latents, not Brownian path coupling.",
           "All four timings evaluated at aligned dt <= .0625 ps; groups with gate disagreement excluded from confirmed passes.",
           "Hypothetical electrical PSD and symbol-held optical field noise; no measured receiver, BER, hardware throughput or wall-plug claim."])
-    for name,items in (("metrics.csv",rows),("summary.csv",groups),("resolution_groups.csv",resolution_groups),("resolution_metrics.csv",resolution_rows),("convergence.csv",conv),("optical_audit.csv",audits),("common_drive_pairs.csv",pairs)):
+    for name,items in (("metrics.csv",rows),("summary.csv",groups),("resolution_groups.csv",resolution_groups),("resolution_metrics.csv",resolution_rows),("convergence.csv",conv),("optical_audit.csv",audits),("common_drive_pairs.csv",pairs),("paired_readouts.csv",paired_readouts)):
         write_csv(name,items)
     (OUT/"coefficients.json").write_text(json.dumps(calibration,indent=2,allow_nan=False)+"\n")
     (OUT/"result.json").write_text(json.dumps(result,indent=2,allow_nan=False)+"\n")

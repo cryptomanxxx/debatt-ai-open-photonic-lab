@@ -1,6 +1,6 @@
 # OPA-NL-017 — Causal extended-history receiver exploration
 
-Status: proposed protocol; no NL017 simulations or new test inputs generated.
+Status: executed; 41 ps passes exploratory gates, 40 ps fails; both frozen 42 ps controls pass. Exact archive pending; independent confirmation required.
 Basis: [OPA-NL-016](OPA-NL-016.md), source run 44334443261, archive merge 36f86e24a594e8b5a4af18f80189919d4d241edd.
 
 ## Raw archive diagnosis
@@ -45,3 +45,136 @@ Verify candidates against NL016 archive; controls against NL014/NL015/NL016, exa
 ## Decision
 
 If any candidate passes both drives and both frozen positive controls pass, propose independent confirmation with disjoint panels and immutable coefficients; rank faster cadence, lower LO, lower cutoff, fewer taps, greater worst-case margin, then fixed method order. No new confirmed cadence from this exploratory sweep. If no extended-history improvement, investigate alternative noise-aware calibration or optical/matched receiver architecture in a separately preregistered experiment; avoid repeatedly tuning against existing test labels. Confirmed baseline 23.8095238095 Gsymbol/s. 25 Gsymbol/s and 200 Gsegment/s aggregate feature rate are modeled, not measured throughput or ADC feasibility. No physical BER, system power, or general AI accuracy claim.
+
+## Executed results — 2026-11-18
+
+[Successful run 44350128879](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44350128879), job 134963287020, source head eb312013bb8e63035d4aed471ad14f73dfa523a9, CI merge d06cbd17b2cc52953e4bf1dc0b7ad586401ac11d, final merge 3ba9430f9b27ebaa3bd2cf43271a29ea8fbddac7. All 26 implementation checks passed, including mandatory full NL016 archive audit, inherited and extended-history causal regressions, coefficient links, paired marginals, frozen archives and matched comparison counts. 500 primary rows, 1500 resolution seed rows, 100 primary groups, 300 resolution groups, 50 common-drive tuples, 30 coefficient records, 11680 paired rows, 292 paired summaries, 36 matched history and 12 recalibration summaries, nine optical audits and six convergence comparisons. Runtime 701.2258623949999 s. 58/100 passing groups, 20/50 common-drive tuples (16 new exploratory 41 ps tuples and four 42 ps controls), zero ambiguous groups and zero changed group/seed gates across all six comparisons.
+
+### Scientific outcomes and selection
+
+40 ps: 0/12 common-drive passes. Best fresh Ridge24 and Ridge32 at LO3/120 GHz both .9453125 low (1936/2048, ten below threshold), .98779296875 high. 41 ps: 16/24 common-drive passes, all eight ridge methods pass at each of 80 and 120 GHz, all four anchors fail at both. 42 ps: both frozen ordinary Ridge16 positive controls pass; frozen Ridge8 also passes at both LO settings on this panel, unlike some earlier panels. Do not reinterpret earlier failed primary endpoints. Under preregistered rank, proposed candidate is frozen_ridge16_midlow at 41 ps/3 mW/80 GHz, maximin 0.95263671875 (1951/2048, five above minimum), high 0.99365234375. The frozen vector is NL016 Ridge16 Midlow, SHA-256 1ccfbaa45af3fb4aea0effb527a8c834e5e3a1b6b190d84a1dd8116034c26c9b; NL016 same endpoint failed at .9482421875 (1942/2048). No refit required for proposed candidate. Fresh Ridge24 Midlow ties its low-drive maximin at 80 GHz but uses more coefficients, hence ranks below it. Fresh Ridge32 Midlow at 120 GHz reaches .9521484375 but requires higher bandwidth and more taps. New panel and noise draws mean NL016-to-NL017 differences are not an isolated effect of history or recalibration. Independent confirmation must use fresh disjoint panels, retain frozen vectors and report earlier failure explicitly. Confirmed baseline remains 23.8095238095 Gsymbol/s; 24.3902439024 Gsymbol/s is an exploratory 2.43902439% increase, not a confirmed new cadence. No 25 Gsymbol/s pass.
+
+### All candidate and control tuples
+
+| ps | LO mW | GHz | method | low | high | both drives |
+|---:|---:|---:|---|---:|---:|---|
+| 40 | 3 | 120 | end | 0.8837890625 | 0.97509765625 | fail |
+| 40 | 3 | 120 | eighth_mean | 0.91162109375 | 0.9287109375 | fail |
+| 40 | 3 | 120 | quarter_mean | 0.89892578125 | 0.8369140625 | fail |
+| 40 | 3 | 120 | half_mean | 0.7978515625 | 0.64892578125 | fail |
+| 40 | 3 | 120 | frozen_ridge16 | 0.94482421875 | 0.98681640625 | fail |
+| 40 | 3 | 120 | frozen_ridge16_midlow | 0.94091796875 | 0.98876953125 | fail |
+| 40 | 3 | 120 | ridge16 | 0.94482421875 | 0.98779296875 | fail |
+| 40 | 3 | 120 | ridge16_midlow | 0.9423828125 | 0.98876953125 | fail |
+| 40 | 3 | 120 | ridge24 | 0.9453125 | 0.98779296875 | fail |
+| 40 | 3 | 120 | ridge24_midlow | 0.94189453125 | 0.98876953125 | fail |
+| 40 | 3 | 120 | ridge32 | 0.9453125 | 0.98779296875 | fail |
+| 40 | 3 | 120 | ridge32_midlow | 0.9423828125 | 0.98876953125 | fail |
+| 41 | 3 | 80 | end | 0.9072265625 | 0.9833984375 | fail |
+| 41 | 3 | 80 | eighth_mean | 0.92236328125 | 0.93701171875 | fail |
+| 41 | 3 | 80 | quarter_mean | 0.90283203125 | 0.8408203125 | fail |
+| 41 | 3 | 80 | half_mean | 0.7998046875 | 0.64892578125 | fail |
+| 41 | 3 | 80 | frozen_ridge16 | 0.951171875 | 0.99267578125 | pass |
+| 41 | 3 | 80 | frozen_ridge16_midlow | 0.95263671875 | 0.99365234375 | pass |
+| 41 | 3 | 80 | ridge16 | 0.951171875 | 0.9931640625 | pass |
+| 41 | 3 | 80 | ridge16_midlow | 0.9521484375 | 0.99365234375 | pass |
+| 41 | 3 | 80 | ridge24 | 0.9521484375 | 0.99365234375 | pass |
+| 41 | 3 | 80 | ridge24_midlow | 0.95263671875 | 0.99462890625 | pass |
+| 41 | 3 | 80 | ridge32 | 0.951171875 | 0.9931640625 | pass |
+| 41 | 3 | 80 | ridge32_midlow | 0.9521484375 | 0.99462890625 | pass |
+| 41 | 3 | 120 | end | 0.8896484375 | 0.9873046875 | fail |
+| 41 | 3 | 120 | eighth_mean | 0.92236328125 | 0.95556640625 | fail |
+| 41 | 3 | 120 | quarter_mean | 0.91162109375 | 0.8681640625 | fail |
+| 41 | 3 | 120 | half_mean | 0.81640625 | 0.6728515625 | fail |
+| 41 | 3 | 120 | frozen_ridge16 | 0.95166015625 | 0.994140625 | pass |
+| 41 | 3 | 120 | frozen_ridge16_midlow | 0.951171875 | 0.99462890625 | pass |
+| 41 | 3 | 120 | ridge16 | 0.95166015625 | 0.994140625 | pass |
+| 41 | 3 | 120 | ridge16_midlow | 0.95166015625 | 0.99462890625 | pass |
+| 41 | 3 | 120 | ridge24 | 0.95068359375 | 0.99462890625 | pass |
+| 41 | 3 | 120 | ridge24_midlow | 0.95166015625 | 0.9951171875 | pass |
+| 41 | 3 | 120 | ridge32 | 0.951171875 | 0.99462890625 | pass |
+| 41 | 3 | 120 | ridge32_midlow | 0.9521484375 | 0.99462890625 | pass |
+| 42 | 2 | 120 | end | 0.8935546875 | 0.9921875 | fail |
+| 42 | 2 | 120 | eighth_mean | 0.92919921875 | 0.97509765625 | fail |
+| 42 | 2 | 120 | quarter_mean | 0.92138671875 | 0.89697265625 | fail |
+| 42 | 2 | 120 | half_mean | 0.833984375 | 0.69677734375 | fail |
+| 42 | 2 | 120 | ridge8 | 0.95263671875 | 0.99658203125 | pass |
+| 42 | 2 | 120 | ridge16 | 0.95654296875 | 0.99609375 | pass |
+| 42 | 2 | 120 | ridge16_strong | 0.93994140625 | 0.990234375 | fail |
+| 42 | 3 | 120 | end | 0.89453125 | 0.99267578125 | fail |
+| 42 | 3 | 120 | eighth_mean | 0.93017578125 | 0.97509765625 | fail |
+| 42 | 3 | 120 | quarter_mean | 0.921875 | 0.8974609375 | fail |
+| 42 | 3 | 120 | half_mean | 0.8349609375 | 0.69677734375 | fail |
+| 42 | 3 | 120 | ridge8 | 0.95361328125 | 0.99658203125 | pass |
+| 42 | 3 | 120 | ridge16 | 0.9580078125 | 0.99609375 | pass |
+| 42 | 3 | 120 | ridge16_strong | 0.9404296875 | 0.99072265625 | fail |
+
+### Matched effects of history (all 36 comparisons)
+
+Each row contains 81920 matched repeated decisions. Net is equalizer-only minus anchor-only; these are descriptive, not independent observations. At 41/80 low drive, ordinary Ridge24 vs Ridge16 net -7, Ridge32 vs Ridge16 -1; Midlow Ridge24 and Ridge32 vs matched Ridge16 Midlow +21 and +20. The largest absolute net across all 36 comparisons is 21 decisions (0.025634765625 percentage points). History has mixed, very small effects, not sufficient evidence for architectural promotion. The same frozen 16-tap baseline passes on this panel, so attributing the 41 ps success to longer history would be invalid.
+
+| ps | GHz | drive mW | method | anchor | equalizer-only | anchor-only | net |
+|---:|---:|---:|---|---|---:|---:|---:|
+| 40 | 120 | 0.1 | ridge24 | ridge16 | 39 | 30 | 9 |
+| 40 | 120 | 0.1 | ridge24_midlow | ridge16_midlow | 59 | 52 | 7 |
+| 40 | 120 | 0.1 | ridge32 | ridge16 | 46 | 47 | -1 |
+| 40 | 120 | 0.1 | ridge32 | ridge24 | 23 | 33 | -10 |
+| 40 | 120 | 0.1 | ridge32_midlow | ridge16_midlow | 65 | 68 | -3 |
+| 40 | 120 | 0.1 | ridge32_midlow | ridge24_midlow | 29 | 39 | -10 |
+| 40 | 120 | 1 | ridge24 | ridge16 | 6 | 3 | 3 |
+| 40 | 120 | 1 | ridge24_midlow | ridge16_midlow | 1 | 6 | -5 |
+| 40 | 120 | 1 | ridge32 | ridge16 | 5 | 7 | -2 |
+| 40 | 120 | 1 | ridge32 | ridge24 | 1 | 6 | -5 |
+| 40 | 120 | 1 | ridge32_midlow | ridge16_midlow | 5 | 6 | -1 |
+| 40 | 120 | 1 | ridge32_midlow | ridge24_midlow | 6 | 2 | 4 |
+| 41 | 80 | 0.1 | ridge24 | ridge16 | 37 | 44 | -7 |
+| 41 | 80 | 0.1 | ridge24_midlow | ridge16_midlow | 63 | 42 | 21 |
+| 41 | 80 | 0.1 | ridge32 | ridge16 | 43 | 44 | -1 |
+| 41 | 80 | 0.1 | ridge32 | ridge24 | 28 | 22 | 6 |
+| 41 | 80 | 0.1 | ridge32_midlow | ridge16_midlow | 74 | 54 | 20 |
+| 41 | 80 | 0.1 | ridge32_midlow | ridge24_midlow | 28 | 29 | -1 |
+| 41 | 80 | 1 | ridge24 | ridge16 | 6 | 5 | 1 |
+| 41 | 80 | 1 | ridge24_midlow | ridge16_midlow | 2 | 2 | 0 |
+| 41 | 80 | 1 | ridge32 | ridge16 | 5 | 4 | 1 |
+| 41 | 80 | 1 | ridge32 | ridge24 | 2 | 2 | 0 |
+| 41 | 80 | 1 | ridge32_midlow | ridge16_midlow | 2 | 2 | 0 |
+| 41 | 80 | 1 | ridge32_midlow | ridge24_midlow | 0 | 0 | 0 |
+| 41 | 120 | 0.1 | ridge24 | ridge16 | 36 | 50 | -14 |
+| 41 | 120 | 0.1 | ridge24_midlow | ridge16_midlow | 60 | 47 | 13 |
+| 41 | 120 | 0.1 | ridge32 | ridge16 | 46 | 58 | -12 |
+| 41 | 120 | 0.1 | ridge32 | ridge24 | 25 | 23 | 2 |
+| 41 | 120 | 0.1 | ridge32_midlow | ridge16_midlow | 72 | 55 | 17 |
+| 41 | 120 | 0.1 | ridge32_midlow | ridge24_midlow | 33 | 29 | 4 |
+| 41 | 120 | 1 | ridge24 | ridge16 | 1 | 2 | -1 |
+| 41 | 120 | 1 | ridge24_midlow | ridge16_midlow | 1 | 2 | -1 |
+| 41 | 120 | 1 | ridge32 | ridge16 | 1 | 2 | -1 |
+| 41 | 120 | 1 | ridge32 | ridge24 | 0 | 0 | 0 |
+| 41 | 120 | 1 | ridge32_midlow | ridge16_midlow | 0 | 2 | -2 |
+| 41 | 120 | 1 | ridge32_midlow | ridge24_midlow | 0 | 1 | -1 |
+
+### Matched effects of fresh calibration (all 12 comparisons)
+
+Fresh calibration gives positive aggregate net counts in all 12 matched comparisons (range 2 to 18), but not necessarily a higher worst-repeat margin. For example fresh Ridge16 Midlow at 41/80 low drive gains 17 decisions over frozen, yet worst .9521484375 vs frozen .95263671875. Report both metrics; no statistical guarantee.
+
+| ps | GHz | drive mW | fresh | frozen anchor | net |
+|---:|---:|---:|---|---|---:|
+| 40 | 120 | 0.1 | ridge16 | frozen_ridge16 | 13 |
+| 40 | 120 | 0.1 | ridge16_midlow | frozen_ridge16_midlow | 15 |
+| 40 | 120 | 1 | ridge16 | frozen_ridge16 | 8 |
+| 40 | 120 | 1 | ridge16_midlow | frozen_ridge16_midlow | 2 |
+| 41 | 80 | 0.1 | ridge16 | frozen_ridge16 | 16 |
+| 41 | 80 | 0.1 | ridge16_midlow | frozen_ridge16_midlow | 17 |
+| 41 | 80 | 1 | ridge16 | frozen_ridge16 | 6 |
+| 41 | 80 | 1 | ridge16_midlow | frozen_ridge16_midlow | 4 |
+| 41 | 120 | 0.1 | ridge16 | frozen_ridge16 | 14 |
+| 41 | 120 | 0.1 | ridge16_midlow | frozen_ridge16_midlow | 18 |
+| 41 | 120 | 1 | ridge16 | frozen_ridge16 | 3 |
+| 41 | 120 | 1 | ridge16_midlow | frozen_ridge16_midlow | 2 |
+
+### Numerical checks and scope
+
+Maximum field error 3.8611508781360944e-10 sqrt(mW), waveform 3.294582955365686e-9 sqrt(mW), clean current 2.4890759045027855e-8 A, noisy current 2.4896476231002712e-8 A, sampled peak 0.000001310007484489617 mW. All within inherited tolerances. Hypothetical modeled receiver; no measured hardware throughput, power, BER, ADC feasibility or general AI performance. Feature rate at 41 ps is 195.1219512195 Gsegment/s aggregate; not a physical ADC specification.
+
+### Archive and next decision
+
+Artifact 14448662570, ZIP 411265 bytes, SHA-256 f66c6fb132af365fb4f96cf938891eb58314ad65c92a553e1df6a0ae065a571d. Manual archive workflow verifies all fifteen original hashes, CRC, source identity and staged bytes. After archive merge, audit all 11680 raw comparisons, inspect lag-block norms, calibration conditions, per-seed/repeat margins and noise decomposition. Preregister NL018 independent two-panel confirmation of ranked frozen 41 ps/3 mW/80 GHz Ridge16 Midlow with unchanged 5 ps response, drive limits, numerical gates and 42 ps controls; include matched ordinary/extended-history comparators only with explicitly frozen coefficient pins and clearly separate primary/supporting endpoints. No test-label tuning, no premature 40 ps promotion. If primary fails, report failure rather than repeat until pass; consider more robust receiver or noise-aware objective in a separate exploration.

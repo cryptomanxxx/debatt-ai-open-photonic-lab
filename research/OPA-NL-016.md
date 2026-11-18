@@ -1,6 +1,6 @@
 # OPA-NL-016 — Exploratory 41 and 40 ps finite-response sweep
 
-Status: proposed protocol, no new test inputs or simulation results.
+Status: executed; 40 and 41 ps failed all common-drive gates; both frozen 42 ps Ridge16 controls passed. Exact archive pending.
 Basis: [OPA-NL-015](OPA-NL-015.md), archived source run 44321189432, archive merge 9de7408bf32a8f332c7dbdb0b22ffc0b64cb16b2.
 
 ## Archived raw-data diagnosis
@@ -39,3 +39,47 @@ Expected 122 readout-setting combinations (12*9+2*7), 1220 primary seed rows, 24
 ## Decision
 
 If a candidate at 40 or 41 ps passes all numerical gates and both frozen Ridge16 controls pass, label it exploratory and preregister independent confirmation with new domains and immutable coefficients before any new speed claim. Select by faster cadence first, then lower LO, then lower cutoff, then simpler readout/taps; report margin and all passing alternatives. A marginal pass is not proof of robust hardware operation. If both timings fail, inspect clean/optical and combined-noise failure mechanisms and consider a different causal receiver architecture; do not simply lower threshold or keep tuning on exploratory labels. If control fails, report comparability failure and do not promote. Confirmed baseline remains 23.8095238095 Gsymbol/s. 40 ps implies aggregate 200 Gsegment/s eight-segment feature rate, not measured ADC capability. No measured energy, BER, general AI accuracy or hardware throughput claim.
+
+## Executed results — 2026-11-18
+
+[Successful run 44334443261](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44334443261), job 134907416490, source head 2fb0289227c2fbc5896d1b25762fd20f2f1af38d, CI merge 4ce7f78b488a067128f9696a35f5cc4242d39aee, final merge 7c68af667245631c9d1ecd3d384af9f2d6ac8113. All 25 implementation checks passed, including the mandatory full NL015 archive audit, coefficient links, paired marginals and summary counts, frozen archive integrity and numerical regressions. 1220 primary rows, 3660 resolution seed rows, 244 primary groups, 732 resolution groups, 122 common-drive tuples, 66 coefficient records, 24160 paired rows, 604 paired summaries, nine optical audits and six convergence comparisons. Runtime 560.89905126 s. 88/244 passing groups, only 2/122 common-drive tuples (both controls); zero ambiguous groups and zero seed/group gate changes across all six comparisons. No candidate proposed for confirmation.
+
+### Scientific outcomes
+
+40 ps (25 Gsymbol/s): 0/54 common-drive passes. Best Ridge16 Midlow, LO3 mW, 120 GHz, low .94189453125 (1929/2048; 17 below threshold), high .98828125. 41 ps (24.3902439024 Gsymbol/s): 0/54 common-drive passes. Best Ridge16 Midlow, LO3 mW, 80 and 120 GHz tie at low .9482421875 (1942/2048; four below threshold); high .99365234375 and .99462890625 respectively. The confirmed 42 ps references pass: LO2/120 GHz Ridge16 low .95068359375 (1947/2048), high .99755859375; LO3/120 GHz Ridge16 low .95263671875 (1951/2048), high .99755859375. Both ordinary Ridge8 controls fail low drive as expected from NL015. No new confirmed cadence; baseline remains 23.8095238095 Gsymbol/s. Green CI is not a scientific pass.
+
+### Best result by method at each exploratory timing
+
+| ps | readout | LO mW | GHz | low | high | maximin |
+|---:|---|---:|---:|---:|---:|---:|
+| 40 | ridge8 | 3 | 160 | 0.9365234375 | 0.986328125 | 0.9365234375 |
+| 40 | ridge16 | 3 | 160 | 0.94091796875 | 0.986328125 | 0.94091796875 |
+| 40 | ridge16_midlow | 3 | 120 | 0.94189453125 | 0.98828125 | 0.94189453125 |
+| 40 | ridge16_mid | 3 | 120 | 0.9345703125 | 0.982421875 | 0.9345703125 |
+| 40 | ridge16_strong | 3 | 160 | 0.92333984375 | 0.96826171875 | 0.92333984375 |
+| 41 | ridge8 | 3 | 120 | 0.94189453125 | 0.99267578125 | 0.94189453125 |
+| 41 | ridge16 | 3 | 80 | 0.94677734375 | 0.99267578125 | 0.94677734375 |
+| 41 | ridge16_midlow | 3 | 80 | 0.9482421875 | 0.99365234375 | 0.9482421875 |
+| 41 | ridge16_mid | 3 | 120 | 0.943359375 | 0.9912109375 | 0.943359375 |
+| 41 | ridge16_strong | 3 | 160 | 0.9306640625 | 0.98193359375 | 0.9306640625 |
+
+Midlow (.003) improves best observed maximin over ordinary Ridge16 (.01) by .0009765625 at 40 ps and .00146484375 at 41 ps; these are best-over-setting descriptive comparisons, not a matched causal estimate of changing lambda. Mid (.03) and Strong (.1) underperform ordinary Ridge16 on this criterion. No variant passes. At 41 ps, Midlow LO3 at 80/120 GHz ties in worst low-drive count; 160 GHz is slightly worse. At 40 ps 120 GHz outperforms 80/160 GHz in best maximin. H1 not supported at threshold; H2 weaker regularization looks promising but not sufficient, intermediate .03 not an improvement in best maximin; H3 no evidence that 160 GHz solves the gate. Full paired comparisons, seed-level clean/noise/optical memory and matched regularization diagnosis must follow archive merge; do not infer specific causation from aggregate winners.
+
+### Best result by cutoff
+
+| ps | GHz | best method | LO mW | maximin |
+|---:|---:|---|---:|---:|
+| 40 | 80 | ridge16_midlow | 3 | 0.939453125 |
+| 40 | 120 | ridge16_midlow | 3 | 0.94189453125 |
+| 40 | 160 | ridge16 | 3 | 0.94091796875 |
+| 41 | 80 | ridge16_midlow | 3 | 0.9482421875 |
+| 41 | 120 | ridge16_midlow | 3 | 0.9482421875 |
+| 41 | 160 | ridge16_midlow | 3 | 0.94775390625 |
+
+### Convergence and scope
+
+Maximum field error 3.8926947290475945e-10 sqrt(mW), waveform 3.2543464668535975e-9 sqrt(mW), clean current 3.317732073988312e-8 A, noisy current 3.318469559912421e-8 A, sampled peak 0.000001689466457177602 mW. All within preregistered tolerances. Neither gate disagreement nor failed control explains the scientific failure. Results are finite-panel simulations with hypothetical receiver PSD and fixed weights, not physical throughput, BER, ADC feasibility, wall-plug power or general AI accuracy.
+
+### Archive and next research decision
+
+Original artifact 14441791865, ZIP 842705 bytes, SHA-256 3651a19dec08defbed0e1a5a3f47e821ebd9917482dfd235b9cceae33bfb5d6b. Manual workflow verifies all fifteen original files, CRC, source identity and staged bytes. No independent confirmation experiment for failed candidates. After archiving, audit the full raw rows and diagnose clean/unfiltered vs electrical/combined failures, per-seed and per-repeat margins, coefficient norms and paired effects. Consider a separately preregistered causal receiver redesign (e.g. additional temporal history or a noise-aware objective), while retaining frozen controls, same 5 ps response, same power limits and 95% thresholds; do not optimize repeatedly on NL016 test labels. Choice of architecture contingent on raw analysis, not yet preregistered.

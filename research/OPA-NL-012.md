@@ -64,3 +64,7 @@ Primary inherited gate: all five seeds stationary eligible, clean unfiltered opt
 Report LO and signal laser lower bounds at assumed 20% efficiency, tap counts (8 or 16), sampling requirement (8 means per symbol), and arithmetic count (8 or 16 weighted terms per decision); do not claim receiver electrical power without calibrated ADC/filter/compute model. A 25 Gsymbol/s eight-segment readout implies 200 Gsegment/s aggregate segment rate, not necessarily a single ADC specification. Digital implementation may erase photonic energy advantages; analog alternatives are a separate study. No hardware rate, BER, general AI accuracy or total efficiency established.
 
 A passing exploratory grid point requires subsequent independent confirmation before robust claims. If no gain, report null result and consider optical noise/margin redesign rather than unbounded LO increases.
+
+## Implementation clarification (before execution)
+
+NL001 uses seed-domain training draws 100+step, so the tentative 104–108 and 114–118 reservations overlap that earlier domain family. Use 10004–10008 and 10014–10018 instead, after inspecting NL001–011 RNG call sites. All other preregistered settings remain unchanged. The archive audit runs before calibration; coefficients are saved in a separate JSON artifact. No numerical outcome was used to choose domains.

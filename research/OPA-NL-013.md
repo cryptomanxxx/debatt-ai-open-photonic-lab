@@ -52,7 +52,7 @@ Pin these nine little-endian float64 coefficient SHA-256 digests (in Ridge8, Rid
 | On/response, LO, cutoff | Ridge8 | Ridge16 | Strong |
 |---|---|---|---|
 | 45/5, 1, 60 | 1f21ed5381aefa68f2ac7ec8eae6189b4332c93d07bcf4977c7ebb433985d08d | 1cf055e0bb853b437070171a1ee9135716f61a760a2421dca1e9ca6da57f794f | 64db2504804993c2f4a9db888957f186179b09807b45c4e468c31c376b7e0623 |
-| 45/5, 2, 60 | 6b5dd601fc801b904deedb05b7784d9ae1955cfbccc61532147d7c6f3b15c3 | 1e462161c94f12ad8dd2ed6a6bc317f3073fae0da125141fd8d395bc9159e8cb | 06d73bfc95e3e1b6fd05367104509cf61c5f191a5a96a0c6e169f51b318aef9a |
+| 45/5, 2, 60 | 6b5dd601fc801b904deedb05b7784d9ae1955cfbccc61532147d7c6f3f3b15c3 | 1e462161c94f12ad8dd2ed6a6bc317f3073fae0da125141fd8d395bc9159e8cb | 06d73bfc95e3e1b6fd05367104509cf61c5f191a5a96a0c6e169f51b318aef9a |
 | 50/5, 1, 20 | 84b210baa61ecac14b3b0b0a28e705c018d91b971a1114a458d7b613a1796e8e | 83faf818f67ccc216a7a8102b5908f9ac354a5c3a71affe5d571bf9a95d2fba4 | 094e3cdae57127e28438151cde43dc54632d2889718cf182bc8726cd10d34c4d |
 
 Verify full NL012 manifest hashes, coefficient archive identity, each fixed key and digest, readonly arrays and unchanged hashes at all resolutions. Preserve original frozen NL003 weights, optical dynamics, signal-only 3 dB loss, phase, PSD, held optical offsets, stationary receiver initialization and diode cap. No calls to fit during NL013. Retain exact eight-segment moments and common latent pairing; no cross-stream history or future samples. Prior implementation audit script must pass before simulation.

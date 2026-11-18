@@ -1,6 +1,6 @@
 # OPA-NL-012 — Fixed causal receiver equalization and noise-aware readout
 
-Status: proposed protocol, not implemented or executed.
+Status: implemented and executed; initial CI-report analysis below, raw archive pending.
 Parent: [NL011](OPA-NL-011.md), [verified archive](../results/opa-nl-011/provenance.json), run 44288710042, archive run 44292291745, archive merge dcb3e5ef2aae0327e354923a7c7ac8d0f9370af3.
 
 ## Archived NL011 diagnosis
@@ -68,3 +68,49 @@ A passing exploratory grid point requires subsequent independent confirmation be
 ## Implementation clarification (before execution)
 
 NL001 uses seed-domain training draws 100+step, so the tentative 104–108 and 114–118 reservations overlap that earlier domain family. Use 10004–10008 and 10014–10018 instead, after inspecting NL001–011 RNG call sites. All other preregistered settings remain unchanged. The archive audit runs before calibration; coefficients are saved in a separate JSON artifact. No numerical outcome was used to choose domains.
+
+## Initial results — 18 November 2026
+
+Source [experiment run 44296016894](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44296016894), job 134773246258, PR 171, artifact 14425195090. All 22 implementation checks passed, including full NL011 seed audit. 5040 primary seed rows, 1008 primary groups, 15120 resolution rows, 3024 resolution groups; eight convergence comparisons. Runtime 526.188 seconds. The successful run also produced the preregistered coefficients and paired-readout evidence; the full raw files are not yet archived or independently analyzed here. These results come from the CI-emitted report.
+
+491/1008 combined groups confirmed; 173/504 common-drive tuples pass at both drives. No ambiguous groups, no seed or group gate changes across all eight resolution comparisons. 40 common-drive tuples at 40 ps with instantaneous material closure (25 Gsymbol/s); 40 at 45 ps with 5 ps material response (22.222 Gsymbol/s); 93 at 50 ps with 5 ps response (20 Gsymbol/s); zero at 40 ps with 5 ps response. 145 passing single-drive groups (491 - 2*173) not classified by drive from this report subset. The fastest finite-response result improves nominal cadence by 11.111% relative to the prior 20 Gsymbol/s confirmation. Instantaneous closure is a diagnostic, not physically validated material speed.
+
+### Best maximin settings by timing (all ties)
+
+| On ps | Response ps | LO mW | Cutoff GHz | Readout | Worst .1 mW | Worst 1 mW | Both pass |
+|---:|---:|---:|---:|---|---:|---:|---|
+| 40 | 5 | 3 | 120 | ridge16 | 93.750000% | 98.632813% | no |
+| 45 | 5 | 2 | 60 | ridge16 | 97.070313% | 100.000000% | yes |
+| 45 | 5 | 2 | 120 | ridge16 | 97.070313% | 100.000000% | yes |
+| 45 | 5 | 3 | 60 | ridge16 | 97.070313% | 100.000000% | yes |
+| 45 | 5 | 3 | 120 | ridge16 | 97.070313% | 100.000000% | yes |
+| 50 | 5 | 2 | 40 | ridge16 | 98.339844% | 100.000000% | yes |
+| 50 | 5 | 2 | 80 | ridge16 | 98.339844% | 100.000000% | yes |
+| 50 | 5 | 2 | 120 | ridge16 | 98.339844% | 100.000000% | yes |
+| 50 | 5 | 3 | 40 | ridge16 | 98.339844% | 100.000000% | yes |
+| 50 | 5 | 3 | 60 | ridge16 | 98.339844% | 100.000000% | yes |
+| 50 | 5 | 3 | 80 | ridge16 | 98.339844% | 100.000000% | yes |
+| 50 | 5 | 3 | 120 | ridge16 | 98.339844% | 100.000000% | yes |
+| 40 | 0 | 2 | 60 | ridge16 | 96.777344% | 99.707031% | yes |
+| 40 | 0 | 3 | 60 | ridge16 | 96.777344% | 99.707031% | yes |
+
+At 45 ps the best shared-drive result is 97.0703125% and 100% worst repeat at .1/1 mW, with Ridge16, LO 2 or 3 mW and cutoff 60 or 120 GHz. The 2 mW / 60 GHz setting is a lower-LO, lower-cutoff member of these ties, not a measured energy optimum. At 40 ps finite response the best result is 93.75% / 98.6328125% with Ridge16, LO 3 mW, cutoff 120 GHz; no shared pass. At 40 ps instantaneous response, best 96.77734375% / 99.70703125% with Ridge16, LO 2 or 3 mW, cutoff 60 GHz. At 50 ps finite response, best 98.33984375% / 100%. All are retrospective maxima on the sampled grid, not independent confirmation of selected settings.
+
+### Common-drive passes by method
+
+| On/response ps | End | Eighth | Quarter | Half | Ridge8 | Ridge16 | Ridge16 strong | Total |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 40/5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 45/5 | 0 | 0 | 0 | 0 | 18 | 18 | 4 | 40 |
+| 50/5 | 11 | 17 | 14 | 0 | 18 | 18 | 15 | 93 |
+| 40/0 | 0 | 0 | 0 | 0 | 17 | 18 | 5 | 40 |
+
+Each method/timing has 18 shared LO/cutoff tuples. At 45 ps both Ridge8 and Ridge16 pass all 18 receiver settings; no unequalized readout passes any, on identical held-out trajectories. This supports a model-specific benefit of equalization without relying on cross-experiment comparisons. Stronger regularization passes only four. At 45 ps LO 1 mW also passes at every cutoff for both Ridge8 and Ridge16. Best reported low-drive worst among these is Ridge16 at 60 GHz, 96.38671875%; exact high-drive value is not included in the passing subset. LO-only electrical lower bound at assumed 20% efficiency is 5 mW for 1 mW LO, 10 mW for 2 mW, 15 mW for 3 mW. Eight segment means per symbol at 45 ps imply 177.778 Gsegment/s aggregate rate; Ridge8/16 require eight/sixteen weighted terms per decision. Receiver/ADC, distribution and phase-lock costs are not modeled; cannot claim energy efficiency. Paired per-repeat correctness and seed-level noise amplification need raw analysis before ranking methods by accuracy gain or noise reduction.
+
+### Numerical verification
+
+Maximum endpoint difference 3.874585396872041e-10 sqrt(mW), common-grid waveform difference 3.231376433874881e-9 sqrt(mW), clean decision difference 2.49810265303004e-8 A, noisy decision difference 2.4984369511655462e-8 A, sampled peak difference 1.4617213190959433e-6 mW. Eight-segment partition current/covariance errors 1.8973538018496328e-19 A and 1.4052147573268e-14 relative; segment regression errors 1.3552527156068805e-19 A and 4.574024407557909e-15 relative. All frozen-coefficient and paired-count checks passed. These validate numerical consistency, not physical hardware, BER or general AI accuracy.
+
+### Archive and next steps
+
+Original ZIP 2838736 bytes, SHA-256 1744fb578163f69d8a35b5fd35a1a0354cecbef3146d7177fc1bb1c28f8e5daf. Manual workflow pins run, artifact, raw ZIP and thirteen original file hashes and verifies staged bytes. Includes NL011 seed audit, coefficient records and paired readouts. After archival inspect all 1008 groups and 504 common-drive pairs, verify seed-level gates, analyze paired equalizer versus anchor outcomes, coefficient norms/conditioning, noise amplification, power and low-complexity tradeoffs. For NL013 prioritize independently confirming a prespecified 45 ps, 5 ps material-response, LO 1 mW Ridge8/Ridge16 anchor using frozen NL012 coefficients and longer independent streams; investigate 42–44 ps finite-response settings only in a separately preregistered exploratory sweep. The 40 ps finite-response shortfall motivates optical margin/noise redesign or improved readout rather than interpreting the instantaneous result as hardware performance. No new protocol approved here.

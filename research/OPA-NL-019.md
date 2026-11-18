@@ -1,6 +1,6 @@
 # OPA-NL-019 — Noise-aware margin-oriented receiver exploration at 42 ps
 
-Status: proposed protocol; no NL019 calibration/test data generated or simulation run.
+Status: executed; all four margin contrasts improved over matched fresh Ridge16, but none meets exact 96% robustness target. No candidate advances. Exact archive pending.
 Basis: [NL018](OPA-NL-018.md), run 44387159815, exact archive merge 5860106e9ce2c437b0e747a9c91700720ab114e0.
 
 ## Source audit and diagnosis
@@ -42,3 +42,74 @@ Calibration domains 10704..10708, 512 balanced examples per seed/drive (8 stream
 2 settings x8 methods x2 drives x5 seeds=160 primary rows, 480 resolution rows, 32 primary groups, 96 resolution groups, 16 common-drive tuples, 8 coefficient records (2 frozen, 6 freshly fitted), 3 optical audits and 2 convergence comparisons (one timing, two receivers). At each setting pair each of four coefficient readouts against all four anchors (16); fresh_ridge16 vs frozen_ridge16 (1); both margin methods vs fresh_ridge16 and frozen_ridge16 (4); margin16_low vs margin16_balanced (1). Total 22 pairs per setting x2 settings x2 drives x5 seeds x8 repeats=3520 paired raw rows, 88 summaries (81920 decisions each). Record exact both-correct, method-only, anchor-only, neither, both marginals and net; no independent-sample significance claims. Require exact coverage, archive immutability, vector digest at all grids, all physics/numerical checks inherited. Compare matched margin methods vs fresh ordinary to isolate objective under identical calibration data; fresh vs frozen indicates calibration effect.
 
 Prespecified primary exploratory contrast margin16_balanced vs fresh_ridge16 at 42/2/120 low drive; secondary margin16_low same setting, both methods at 42/3/120, high-drive tradeoffs. Report absolute worst accuracy difference, paired net and limiting seeds/repeats. Advancement criterion for a candidate: both drives pass all inherited gates, maximin >=.96, low-drive worst strictly higher than matched fresh Ridge16 and positive low-drive net vs fresh Ridge16. Among qualifying new margin methods rank lower LO first, higher maximin second, fewer ties by balanced before low. If none qualify report no robust candidate; no repeat-until-pass and no speed promotion. If any qualify, separately preregister independent two-panel frozen confirmation with unchanged weights and physics. Historical NL015 23.81 Gsymbol/s confirmation remains qualified by NL018 failures. No physical BER, measured power, ADC feasibility, general AI performance or hardware throughput claim.
+
+## Executed results — 2026-11-18
+
+[Successful run 44409237897](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44409237897), job 135172718163, source head 3ea0d1ede9610f42a3c06ebf2602b82d909dc437, CI merge 76e6f4af6edd18450e1001cb6a81e569a2f532db, final merge 391709e2d50208f3ef6cf1a65e1e1152062c72e6. All 30 implementation checks passed, including mandatory NL018 audit, analytic gradient regression (max finite-difference error 4.1237524506243517e-10), optimizer checks, exact paired marginals and coefficient immutability. 160 primary rows, 480 resolution rows, 32 primary groups, 96 resolution groups, 16 common-drive tuples, 8 coefficient records, 3520 paired raw rows, 88 summaries, 3 optical audits and 2 convergence comparisons. Runtime 189.936796388 s. 20/32 passing groups, 8/16 both-drive passes (all coefficient methods), no numerical ambiguity or grid-gate changes. No independent confirmation.
+
+### All 16 tuples
+
+| LO mW | method | combined worst low | combined worst high | both drives pass | 96% target |
+|---:|---|---:|---:|---|---|
+| 2 | end | 0.8974609375 | 0.9921875 | no | no |
+| 2 | eighth_mean | 0.923828125 | 0.97265625 | no | no |
+| 2 | quarter_mean | 0.916015625 | 0.890625 | no | no |
+| 2 | half_mean | 0.82861328125 | 0.7119140625 | no | no |
+| 2 | frozen_ridge16 | 0.9541015625 | 0.9970703125 | yes | no |
+| 2 | fresh_ridge16 | 0.955078125 | 0.9970703125 | yes | no |
+| 2 | margin16_balanced | 0.95751953125 | 1 | yes | no |
+| 2 | margin16_low | 0.958984375 | 1 | yes | no |
+| 3 | end | 0.8994140625 | 0.9921875 | no | no |
+| 3 | eighth_mean | 0.9248046875 | 0.97265625 | no | no |
+| 3 | quarter_mean | 0.91650390625 | 0.89111328125 | no | no |
+| 3 | half_mean | 0.8291015625 | 0.7109375 | no | no |
+| 3 | frozen_ridge16 | 0.955078125 | 0.9970703125 | yes | no |
+| 3 | fresh_ridge16 | 0.95556640625 | 0.9970703125 | yes | no |
+| 3 | margin16_balanced | 0.95849609375 | 1 | yes | no |
+| 3 | margin16_low | 0.9599609375 | 1 | yes | no |
+
+### Prespecified contrasts
+
+| LO mW | method | low worst delta vs fresh | net correct vs fresh (81920 low-drive decisions) | limiting seed/repeat | qualifies |
+|---:|---|---:|---:|---|---|
+| 2 | margin16_balanced | 0.00244140625 | 417 | 1303/3 | no |
+| 2 | margin16_low | 0.00390625 | 452 | 1303/3 | no |
+| 3 | margin16_balanced | 0.0029296875 | 436 | 1303/3 | no |
+| 3 | margin16_low | 0.00439453125 | 469 | 1303/3 | no |
+
+The primary contrast (balanced LO2) improves worst accuracy by 5/2048, +417 net matched correct decisions. Best exploratory method is Margin16 Low LO3, worst 1966/2048=.9599609375; target requires ceil(.96*2048)=1967 correct. Exactly one decision short; do not round to a pass. Both drives pass 95%, but all four fail the 96% advancement criterion. All four improve both worst and aggregate low-drive accuracy relative to matched fresh Ridge16, with best +9/2048 worst and +469/81920 net (+.572509765625 percentage points); objective change effect under shared calibration data is larger than recalibration alone (+10/-8 net at low drive). Weighting low drive vs balanced yields +35/+33 net at LO2/3 and +3/2048 worst at both settings. All four margin methods correctly classify all 81920 combined decisions per setting at high drive in this finite panel (each +29 net relative to either Ridge16). No physical error-free or BER claim. Limiting seed shifts to 1303 repeat3 for all four margin endpoints; whether seed1304 improved within the same panel requires raw seed-level comparison, not inference from the limiting seed alone.
+
+### Exact matched counts
+
+| contrast | LO mW | drive mW | method | anchor | both correct | method only | anchor only | neither | net |
+|---|---:|---:|---|---|---:|---:|---:|---:|---:|
+| margin | 2 | 0.1 | margin16_balanced | fresh_ridge16 | 79173 | 816 | 399 | 1532 | 417 |
+| margin | 2 | 0.1 | margin16_balanced | frozen_ridge16 | 79171 | 818 | 391 | 1540 | 427 |
+| margin | 2 | 0.1 | margin16_low | fresh_ridge16 | 79175 | 849 | 397 | 1499 | 452 |
+| margin | 2 | 0.1 | margin16_low | frozen_ridge16 | 79173 | 851 | 389 | 1507 | 462 |
+| margin | 2 | 1 | margin16_balanced | fresh_ridge16 | 81891 | 29 | 0 | 0 | 29 |
+| margin | 2 | 1 | margin16_balanced | frozen_ridge16 | 81891 | 29 | 0 | 0 | 29 |
+| margin | 2 | 1 | margin16_low | fresh_ridge16 | 81891 | 29 | 0 | 0 | 29 |
+| margin | 2 | 1 | margin16_low | frozen_ridge16 | 81891 | 29 | 0 | 0 | 29 |
+| margin | 3 | 0.1 | margin16_balanced | fresh_ridge16 | 79243 | 810 | 374 | 1493 | 436 |
+| margin | 3 | 0.1 | margin16_balanced | frozen_ridge16 | 79248 | 805 | 377 | 1490 | 428 |
+| margin | 3 | 0.1 | margin16_low | fresh_ridge16 | 79250 | 836 | 367 | 1467 | 469 |
+| margin | 3 | 0.1 | margin16_low | frozen_ridge16 | 79254 | 832 | 371 | 1463 | 461 |
+| margin | 3 | 1 | margin16_balanced | fresh_ridge16 | 81891 | 29 | 0 | 0 | 29 |
+| margin | 3 | 1 | margin16_balanced | frozen_ridge16 | 81891 | 29 | 0 | 0 | 29 |
+| margin | 3 | 1 | margin16_low | fresh_ridge16 | 81891 | 29 | 0 | 0 | 29 |
+| margin | 3 | 1 | margin16_low | frozen_ridge16 | 81891 | 29 | 0 | 0 | 29 |
+| recalibration | 2 | 0.1 | fresh_ridge16 | frozen_ridge16 | 79523 | 49 | 39 | 2309 | 10 |
+| recalibration | 2 | 1 | fresh_ridge16 | frozen_ridge16 | 81891 | 0 | 0 | 29 | 0 |
+| recalibration | 3 | 0.1 | fresh_ridge16 | frozen_ridge16 | 79572 | 45 | 53 | 2250 | -8 |
+| recalibration | 3 | 1 | fresh_ridge16 | frozen_ridge16 | 81891 | 0 | 0 | 29 | 0 |
+| weighting | 2 | 0.1 | margin16_low | margin16_balanced | 79958 | 66 | 31 | 1865 | 35 |
+| weighting | 2 | 1 | margin16_low | margin16_balanced | 81920 | 0 | 0 | 0 | 0 |
+| weighting | 3 | 0.1 | margin16_low | margin16_balanced | 80025 | 61 | 28 | 1806 | 33 |
+| weighting | 3 | 1 | margin16_low | margin16_balanced | 81920 | 0 | 0 | 0 | 0 |
+
+These are descriptive paired repeated decisions, not independent trials. Numerical convergence maxima: field 3.259453156966816e-10 sqrt(mW), waveform 3.3112918765590872e-9 sqrt(mW), clean current 2.211397207051765e-8 A, noisy current 2.2116101075172513e-8 A, peak 8.964327140592587e-7 mW. All within inherited tolerances. No changed seed or group gates.
+
+### Archive and next decision
+
+Artifact 14475309037, ZIP 169652 bytes, SHA-256 17a7ed1175c4fdee87539eadd7e9999f4f7d54c9ce55556be656cf0029672d40. Manual archive workflow pins exact source, ZIP CRC, all fifteen original hashes and staged bytes, including no qualifying candidate. After merge of exact archive, audit all 3520 paired rows, coefficient directions/norms and optimizer results, seed1303/1304 repeat profiles, clean/electrical/combined arms and normalized noise diagnostics. Do not promote the best near-miss or rerun NL019 until pass. A separately preregistered exploratory objective refinement is a possible next research direction: improve worst-group margin on calibration only while keeping all five seeds and both drives, and compare matched fresh/frozen objectives. Specify design and new disjoint domains after raw audit, no threshold relaxation, no fitting prior test inputs or labels, no speed promotion. Historical NL015 23.81 Gsymbol/s confirmation remains qualified by NL018 robustness failures. No physical throughput, measured BER, wall-plug power or ADC feasibility claim.

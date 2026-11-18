@@ -388,6 +388,9 @@ def main():
     checks["endpoint_coverage"]=len(supporting)==5 and len(positive_controls)==2 and set(by_endpoint)=={(on,lo,fc,m) for on,lo,fc in SETTINGS for m in methods(on)}
     result["checks"]=checks
     result["failures"]=[k for k,v in checks.items() if not v]
+    # A numerical endpoint pass is not a valid confirmation if implementation checks fail.
+    result["independent_confirmation_passed"]=bool(confirmed and not result["failures"])
+    result["confirmed_cadence_gsymbol_s"]=1000/41 if result["independent_confirmation_passed"] else 1000/42
     write_csv("paired_summary.csv",paired_summary)
     write_csv("coefficient_summary.csv",coefficient_summary)
     for r in resolution_rows:

@@ -155,7 +155,7 @@ def main():
         seed,rep=int(r["seed"]),int(r["repeat"])
         anchor=r["anchor"]
         pk=k+(seed,anchor,rep)
-        require(pk not in seen and k[-2] in RIDGES and anchor in anchors(k[2] if len(k)==8 else k[1],k[-2])
+        require(pk not in seen and k[-2] in RIDGES and anchor in anchors(k[2],k[-2])
                 and 0<=rep<8 and int(r["resolution_level"])==2, "paired key")
         seen.add(pk)
         a=primary[k+(seed,)]
@@ -166,7 +166,7 @@ def main():
         for i,v in enumerate(n):
             aggregate[k[1:]+(anchor,)][i]+=v
     require(seen=={k+(seed,anchor,rep) for k in expected if k[-2] in RIDGES
-                   for seed in SEEDS for anchor in anchors(k[2] if len(k)==8 else k[1],k[-2]) for rep in range(8)}, "paired coverage")
+                   for seed in SEEDS for anchor in anchors(k[2],k[-2]) for rep in range(8)}, "paired coverage")
     # Recompute every archived paired summary from the full raw contingency table.
     summaries=read("paired_summary.csv")
     require(len(summaries)==292, "paired summary count")
@@ -192,7 +192,7 @@ def main():
             entry[name]=stats(float(r[name]) for r in rr)
         if k[-2] in RIDGES:
             entry["paired"]={}
-            for anchor in anchors(k[2] if len(k)==8 else k[1],k[-2]):
+            for anchor in anchors(k[1],k[-2]):
                 both,eq,base,neither=aggregate[k+(anchor,)]
                 entry["paired"][anchor]=dict(both_correct=both,equalizer_only=eq,anchor_only=base,neither=neither,
                                              net_correct=eq-base,accuracy_delta=(eq-base)/(both+eq+base+neither))

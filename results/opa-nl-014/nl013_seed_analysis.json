@@ -1,0 +1,3190 @@
+{
+  "verified": true,
+  "source_run": 44304216745,
+  "primary_rows": 420,
+  "resolution_rows": 1260,
+  "paired_rows": 6240,
+  "groups": [
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "eighth_mean",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.9375,
+        "mean": 0.9560546875,
+        "max": 0.9736328125
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.96142578125,
+        "mean": 0.97373046875,
+        "max": 0.986328125
+      },
+      "electrical_noise_amplification": {
+        "min": 0.5419290034642744,
+        "mean": 0.5533426256583021,
+        "max": 0.5630720127914481
+      },
+      "clean_target_rmse_a": {
+        "min": 1.9873205172001257e-06,
+        "mean": 2.070317459548371e-06,
+        "max": 2.185851739629923e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.935546875,
+        "mean": 0.9685546875,
+        "max": 0.9921875
+      },
+      "last8_combined_accuracy": {
+        "min": 0.93359375,
+        "mean": 0.959375,
+        "max": 0.99609375
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5219920476123179,
+        "mean": 0.5256476017549241,
+        "max": 0.5286664048366699
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "eighth_mean",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.9853515625,
+        "mean": 0.996875,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.99658203125,
+        "mean": 0.999462890625,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.990234375,
+        "mean": 0.997802734375,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 0.5417045541228024,
+        "mean": 0.5531129357848128,
+        "max": 0.5627996261234232
+      },
+      "clean_target_rmse_a": {
+        "min": 1.364103839402483e-05,
+        "mean": 1.4225813897604517e-05,
+        "max": 1.4801370584930906e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 0.982421875,
+        "mean": 0.9978515625,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 0.978515625,
+        "mean": 0.997265625,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.584214963398534,
+        "mean": 0.5961704871365694,
+        "max": 0.6211369203737843
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "end",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.92724609375,
+        "mean": 0.943359375,
+        "max": 0.95849609375
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.94482421875,
+        "mean": 0.960107421875,
+        "max": 0.9765625
+      },
+      "electrical_noise_amplification": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "clean_target_rmse_a": {
+        "min": 8.824568941635376e-07,
+        "mean": 9.196727440544194e-07,
+        "max": 9.719189803582174e-07
+      },
+      "first8_combined_accuracy": {
+        "min": 0.912109375,
+        "mean": 0.9576171875,
+        "max": 0.982421875
+      },
+      "last8_combined_accuracy": {
+        "min": 0.91796875,
+        "mean": 0.9490234375,
+        "max": 0.97265625
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5219920476123179,
+        "mean": 0.5256476017549241,
+        "max": 0.5286664048366699
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "end",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.998046875,
+        "mean": 0.999560546875,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.99755859375,
+        "mean": 0.999658203125,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "clean_target_rmse_a": {
+        "min": 6.308833020142252e-06,
+        "mean": 6.557585017872577e-06,
+        "max": 6.796838031172649e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.998046875,
+        "mean": 0.9998046875,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.584214963398534,
+        "mean": 0.5961704871365694,
+        "max": 0.6211369203737843
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "half_mean",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.8505859375,
+        "mean": 0.887353515625,
+        "max": 0.9267578125
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.8876953125,
+        "mean": 0.945068359375,
+        "max": 0.99951171875
+      },
+      "electrical_worst": {
+        "min": 0.8671875,
+        "mean": 0.913427734375,
+        "max": 0.9638671875
+      },
+      "electrical_noise_amplification": {
+        "min": 0.2063524864260647,
+        "mean": 0.20844616646021102,
+        "max": 0.21161148329287038
+      },
+      "clean_target_rmse_a": {
+        "min": 7.372258353363127e-06,
+        "mean": 7.670725850319812e-06,
+        "max": 8.063210630726653e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.86328125,
+        "mean": 0.909765625,
+        "max": 0.947265625
+      },
+      "last8_combined_accuracy": {
+        "min": 0.8515625,
+        "mean": 0.8904296875,
+        "max": 0.953125
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5219920476123179,
+        "mean": 0.5256476017549241,
+        "max": 0.5286664048366699
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "half_mean",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.7216796875,
+        "mean": 0.7958984375,
+        "max": 0.90087890625
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.71533203125,
+        "mean": 0.8021484375,
+        "max": 0.9248046875
+      },
+      "electrical_worst": {
+        "min": 0.7138671875,
+        "mean": 0.797412109375,
+        "max": 0.90869140625
+      },
+      "electrical_noise_amplification": {
+        "min": 0.20594282351736853,
+        "mean": 0.20809316047214793,
+        "max": 0.21128051335140471
+      },
+      "clean_target_rmse_a": {
+        "min": 4.2424183504478756e-05,
+        "mean": 4.49325028882536e-05,
+        "max": 4.760060827649796e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 0.658203125,
+        "mean": 0.79921875,
+        "max": 0.9375
+      },
+      "last8_combined_accuracy": {
+        "min": 0.685546875,
+        "mean": 0.81015625,
+        "max": 0.90625
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.584214963398534,
+        "mean": 0.5961704871365694,
+        "max": 0.6211369203737843
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "quarter_mean",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.92626953125,
+        "mean": 0.94951171875,
+        "max": 0.97216796875
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.95458984375,
+        "mean": 0.9712890625,
+        "max": 0.98828125
+      },
+      "electrical_noise_amplification": {
+        "min": 0.3568778876082349,
+        "mean": 0.36394523250457295,
+        "max": 0.37320896687120897
+      },
+      "clean_target_rmse_a": {
+        "min": 3.452206356130053e-06,
+        "mean": 3.594468789533866e-06,
+        "max": 3.7894735883329684e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.927734375,
+        "mean": 0.962890625,
+        "max": 0.982421875
+      },
+      "last8_combined_accuracy": {
+        "min": 0.92578125,
+        "mean": 0.95546875,
+        "max": 0.98828125
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5219920476123179,
+        "mean": 0.5256476017549241,
+        "max": 0.5286664048366699
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "quarter_mean",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.93017578125,
+        "mean": 0.978955078125,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.9384765625,
+        "mean": 0.985888671875,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.9306640625,
+        "mean": 0.98154296875,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 0.3565847303892507,
+        "mean": 0.3636352153992699,
+        "max": 0.3728624194500899
+      },
+      "clean_target_rmse_a": {
+        "min": 2.2264675832814102e-05,
+        "mean": 2.33416472073037e-05,
+        "max": 2.4434721489806115e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 0.8984375,
+        "mean": 0.9796875,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 0.923828125,
+        "mean": 0.9810546875,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.584214963398534,
+        "mean": 0.5961704871365694,
+        "max": 0.6211369203737843
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "ridge16",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.9599609375,
+        "mean": 0.969970703125,
+        "max": 0.9833984375
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.9755859375,
+        "mean": 0.98271484375,
+        "max": 0.990234375
+      },
+      "electrical_noise_amplification": {
+        "min": 0.6254960206625199,
+        "mean": 0.6374316627052392,
+        "max": 0.6536686830800582
+      },
+      "clean_target_rmse_a": {
+        "min": 9.437606039368528e-07,
+        "mean": 9.975828373333645e-07,
+        "max": 1.0598276024856063e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.955078125,
+        "mean": 0.9814453125,
+        "max": 0.994140625
+      },
+      "last8_combined_accuracy": {
+        "min": 0.953125,
+        "mean": 0.9720703125,
+        "max": 0.998046875
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5219920476123179,
+        "mean": 0.5256476017549241,
+        "max": 0.5286664048366699
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      },
+      "paired": {
+        "end": {
+          "both_correct": 153840,
+          "equalizer_only": 6069,
+          "anchor_only": 1875,
+          "neither": 2056,
+          "net_correct": 4194,
+          "accuracy_delta": 0.02559814453125
+        },
+        "eighth_mean": {
+          "both_correct": 156911,
+          "equalizer_only": 2998,
+          "anchor_only": 657,
+          "neither": 3274,
+          "net_correct": 2341,
+          "accuracy_delta": 0.014288330078125
+        },
+        "quarter_mean": {
+          "both_correct": 156076,
+          "equalizer_only": 3833,
+          "anchor_only": 540,
+          "neither": 3391,
+          "net_correct": 3293,
+          "accuracy_delta": 0.020098876953125
+        },
+        "half_mean": {
+          "both_correct": 145482,
+          "equalizer_only": 14427,
+          "anchor_only": 1010,
+          "neither": 2921,
+          "net_correct": 13417,
+          "accuracy_delta": 0.081890869140625
+        },
+        "ridge8": {
+          "both_correct": 159442,
+          "equalizer_only": 467,
+          "anchor_only": 154,
+          "neither": 3777,
+          "net_correct": 313,
+          "accuracy_delta": 0.001910400390625
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "ridge16",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.99951171875,
+        "mean": 0.999951171875,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.99951171875,
+        "mean": 0.99990234375,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 0.6250172431342255,
+        "mean": 0.6369290831883545,
+        "max": 0.6531170275513968
+      },
+      "clean_target_rmse_a": {
+        "min": 5.111633846821014e-06,
+        "mean": 5.25054776040123e-06,
+        "max": 5.392958654953125e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.584214963398534,
+        "mean": 0.5961704871365694,
+        "max": 0.6211369203737843
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      },
+      "paired": {
+        "end": {
+          "both_correct": 163804,
+          "equalizer_only": 35,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 35,
+          "accuracy_delta": 0.000213623046875
+        },
+        "eighth_mean": {
+          "both_correct": 163493,
+          "equalizer_only": 346,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 346,
+          "accuracy_delta": 0.00211181640625
+        },
+        "quarter_mean": {
+          "both_correct": 160795,
+          "equalizer_only": 3044,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 3044,
+          "accuracy_delta": 0.0185791015625
+        },
+        "half_mean": {
+          "both_correct": 131124,
+          "equalizer_only": 32715,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 32715,
+          "accuracy_delta": 0.199676513671875
+        },
+        "ridge8": {
+          "both_correct": 163837,
+          "equalizer_only": 2,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 2,
+          "accuracy_delta": 1.220703125e-05
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "ridge16_strong",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.9384765625,
+        "mean": 0.960498046875,
+        "max": 0.97802734375
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.9951171875,
+        "mean": 0.99873046875,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.95654296875,
+        "mean": 0.974658203125,
+        "max": 0.99072265625
+      },
+      "electrical_noise_amplification": {
+        "min": 0.4444434911345436,
+        "mean": 0.4523543037244389,
+        "max": 0.4614549031600954
+      },
+      "clean_target_rmse_a": {
+        "min": 2.2777166310338946e-06,
+        "mean": 2.4444762118470036e-06,
+        "max": 2.6033327487873344e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.927734375,
+        "mean": 0.969921875,
+        "max": 0.994140625
+      },
+      "last8_combined_accuracy": {
+        "min": 0.94140625,
+        "mean": 0.96640625,
+        "max": 0.99609375
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5219920476123179,
+        "mean": 0.5256476017549241,
+        "max": 0.5286664048366699
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      },
+      "paired": {
+        "end": {
+          "both_correct": 152730,
+          "equalizer_only": 5708,
+          "anchor_only": 2985,
+          "neither": 2417,
+          "net_correct": 2723,
+          "accuracy_delta": 0.016619873046875
+        },
+        "eighth_mean": {
+          "both_correct": 155617,
+          "equalizer_only": 2821,
+          "anchor_only": 1951,
+          "neither": 3451,
+          "net_correct": 870,
+          "accuracy_delta": 0.00531005859375
+        },
+        "quarter_mean": {
+          "both_correct": 155285,
+          "equalizer_only": 3153,
+          "anchor_only": 1331,
+          "neither": 4071,
+          "net_correct": 1822,
+          "accuracy_delta": 0.01112060546875
+        },
+        "half_mean": {
+          "both_correct": 145231,
+          "equalizer_only": 13207,
+          "anchor_only": 1261,
+          "neither": 4141,
+          "net_correct": 11946,
+          "accuracy_delta": 0.07291259765625
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "ridge16_strong",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.99755859375,
+        "mean": 0.9994140625,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.99853515625,
+        "mean": 0.99970703125,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 0.44405595335023484,
+        "mean": 0.4519397771049157,
+        "max": 0.46100185847727465
+      },
+      "clean_target_rmse_a": {
+        "min": 1.1723609859698379e-05,
+        "mean": 1.208039174181431e-05,
+        "max": 1.242271919355029e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 0.998046875,
+        "mean": 0.9998046875,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.584214963398534,
+        "mean": 0.5961704871365694,
+        "max": 0.6211369203737843
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      },
+      "paired": {
+        "end": {
+          "both_correct": 163766,
+          "equalizer_only": 26,
+          "anchor_only": 38,
+          "neither": 10,
+          "net_correct": -12,
+          "accuracy_delta": -7.32421875e-05
+        },
+        "eighth_mean": {
+          "both_correct": 163492,
+          "equalizer_only": 300,
+          "anchor_only": 1,
+          "neither": 47,
+          "net_correct": 299,
+          "accuracy_delta": 0.001824951171875
+        },
+        "quarter_mean": {
+          "both_correct": 160794,
+          "equalizer_only": 2998,
+          "anchor_only": 1,
+          "neither": 47,
+          "net_correct": 2997,
+          "accuracy_delta": 0.018292236328125
+        },
+        "half_mean": {
+          "both_correct": 131123,
+          "equalizer_only": 32669,
+          "anchor_only": 1,
+          "neither": 47,
+          "net_correct": 32668,
+          "accuracy_delta": 0.1993896484375
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "ridge8",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.95654296875,
+        "mean": 0.968359375,
+        "max": 0.98193359375
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.97412109375,
+        "mean": 0.981494140625,
+        "max": 0.990234375
+      },
+      "electrical_noise_amplification": {
+        "min": 0.6195439373552383,
+        "mean": 0.6324931956255022,
+        "max": 0.6486415295861176
+      },
+      "clean_target_rmse_a": {
+        "min": 1.041468438795268e-06,
+        "mean": 1.0825091170910151e-06,
+        "max": 1.1241073970810977e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.947265625,
+        "mean": 0.97890625,
+        "max": 0.994140625
+      },
+      "last8_combined_accuracy": {
+        "min": 0.951171875,
+        "mean": 0.9705078125,
+        "max": 0.998046875
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5219920476123179,
+        "mean": 0.5256476017549241,
+        "max": 0.5286664048366699
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      },
+      "paired": {
+        "end": {
+          "both_correct": 153669,
+          "equalizer_only": 5927,
+          "anchor_only": 2046,
+          "neither": 2198,
+          "net_correct": 3881,
+          "accuracy_delta": 0.023687744140625
+        },
+        "eighth_mean": {
+          "both_correct": 156811,
+          "equalizer_only": 2785,
+          "anchor_only": 757,
+          "neither": 3487,
+          "net_correct": 2028,
+          "accuracy_delta": 0.0123779296875
+        },
+        "quarter_mean": {
+          "both_correct": 155999,
+          "equalizer_only": 3597,
+          "anchor_only": 617,
+          "neither": 3627,
+          "net_correct": 2980,
+          "accuracy_delta": 0.0181884765625
+        },
+        "half_mean": {
+          "both_correct": 145357,
+          "equalizer_only": 14239,
+          "anchor_only": 1135,
+          "neither": 3109,
+          "net_correct": 13104,
+          "accuracy_delta": 0.07998046875
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 60,
+      "readout": "ridge8",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.99951171875,
+        "mean": 0.99990234375,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.99951171875,
+        "mean": 0.99990234375,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 0.61907541376309,
+        "mean": 0.6320003363866661,
+        "max": 0.6480998063763456
+      },
+      "clean_target_rmse_a": {
+        "min": 5.124685759524069e-06,
+        "mean": 5.239792874598508e-06,
+        "max": 5.383787557428317e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.584214963398534,
+        "mean": 0.5961704871365694,
+        "max": 0.6211369203737843
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      },
+      "paired": {
+        "end": {
+          "both_correct": 163803,
+          "equalizer_only": 34,
+          "anchor_only": 1,
+          "neither": 2,
+          "net_correct": 33,
+          "accuracy_delta": 0.000201416015625
+        },
+        "eighth_mean": {
+          "both_correct": 163493,
+          "equalizer_only": 344,
+          "anchor_only": 0,
+          "neither": 3,
+          "net_correct": 344,
+          "accuracy_delta": 0.002099609375
+        },
+        "quarter_mean": {
+          "both_correct": 160795,
+          "equalizer_only": 3042,
+          "anchor_only": 0,
+          "neither": 3,
+          "net_correct": 3042,
+          "accuracy_delta": 0.01856689453125
+        },
+        "half_mean": {
+          "both_correct": 131124,
+          "equalizer_only": 32713,
+          "anchor_only": 0,
+          "neither": 3,
+          "net_correct": 32713,
+          "accuracy_delta": 0.199664306640625
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "eighth_mean",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.9443359375,
+        "mean": 0.96171875,
+        "max": 0.97998046875
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.96875,
+        "mean": 0.97861328125,
+        "max": 0.990234375
+      },
+      "electrical_noise_amplification": {
+        "min": 0.5419300155398941,
+        "mean": 0.5533436109431931,
+        "max": 0.5630730748246329
+      },
+      "clean_target_rmse_a": {
+        "min": 2.8104956282067343e-06,
+        "mean": 2.927871029711115e-06,
+        "max": 3.0912611755214447e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.939453125,
+        "mean": 0.9724609375,
+        "max": 0.994140625
+      },
+      "last8_combined_accuracy": {
+        "min": 0.943359375,
+        "mean": 0.9646484375,
+        "max": 0.998046875
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.0309957380438952,
+        "mean": 1.0361253797034977,
+        "max": 1.0403566774376658
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 11.506143784465449,
+        "mean": 11.512440497065821,
+        "max": 11.519539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "eighth_mean",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.98681640625,
+        "mean": 0.997265625,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.99658203125,
+        "mean": 0.999462890625,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.99169921875,
+        "mean": 0.998193359375,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 0.5417959339134729,
+        "mean": 0.5532063911732326,
+        "max": 0.562900418896651
+      },
+      "clean_target_rmse_a": {
+        "min": 1.9291341501682004e-05,
+        "mean": 2.011833894978796e-05,
+        "max": 2.093229902291946e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 0.982421875,
+        "mean": 0.998046875,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 0.98046875,
+        "mean": 0.9974609375,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.115833497865108,
+        "mean": 1.1324424990674837,
+        "max": 1.1669824240550681
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 25.061437844654492,
+        "mean": 25.12440497065821,
+        "max": 25.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "end",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.9365234375,
+        "mean": 0.9509765625,
+        "max": 0.9658203125
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.9560546875,
+        "mean": 0.96767578125,
+        "max": 0.9814453125
+      },
+      "electrical_noise_amplification": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "clean_target_rmse_a": {
+        "min": 1.2479825079357162e-06,
+        "mean": 1.3006136675866379e-06,
+        "max": 1.374501003550405e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.9296875,
+        "mean": 0.9640625,
+        "max": 0.98828125
+      },
+      "last8_combined_accuracy": {
+        "min": 0.935546875,
+        "mean": 0.9583984375,
+        "max": 0.9765625
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.0309957380438952,
+        "mean": 1.0361253797034977,
+        "max": 1.0403566774376658
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 11.506143784465449,
+        "mean": 11.512440497065821,
+        "max": 11.519539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "end",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.998046875,
+        "mean": 0.999609375,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.998046875,
+        "mean": 0.99970703125,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "clean_target_rmse_a": {
+        "min": 8.922037219832366e-06,
+        "mean": 9.273825668690002e-06,
+        "max": 9.612180524937584e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.998046875,
+        "mean": 0.9998046875,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.115833497865108,
+        "mean": 1.1324424990674837,
+        "max": 1.1669824240550681
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 25.061437844654492,
+        "mean": 25.12440497065821,
+        "max": 25.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "half_mean",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.8515625,
+        "mean": 0.88994140625,
+        "max": 0.93017578125
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.8876953125,
+        "mean": 0.945068359375,
+        "max": 0.99951171875
+      },
+      "electrical_worst": {
+        "min": 0.86865234375,
+        "mean": 0.917333984375,
+        "max": 0.96875
+      },
+      "electrical_noise_amplification": {
+        "min": 0.2063546569498586,
+        "mean": 0.20844816047259224,
+        "max": 0.2116133585110685
+      },
+      "clean_target_rmse_a": {
+        "min": 1.0425947748644483e-05,
+        "mean": 1.084804453076817e-05,
+        "max": 1.1403101830244534e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 0.861328125,
+        "mean": 0.911328125,
+        "max": 0.947265625
+      },
+      "last8_combined_accuracy": {
+        "min": 0.85546875,
+        "mean": 0.8927734375,
+        "max": 0.955078125
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.0309957380438952,
+        "mean": 1.0361253797034977,
+        "max": 1.0403566774376658
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 11.506143784465449,
+        "mean": 11.512440497065821,
+        "max": 11.519539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "half_mean",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.72021484375,
+        "mean": 0.796337890625,
+        "max": 0.9033203125
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.71533203125,
+        "mean": 0.8021484375,
+        "max": 0.9248046875
+      },
+      "electrical_worst": {
+        "min": 0.71435546875,
+        "mean": 0.79794921875,
+        "max": 0.91064453125
+      },
+      "electrical_noise_amplification": {
+        "min": 0.20610985598112763,
+        "mean": 0.2082372684863826,
+        "max": 0.21141567310371795
+      },
+      "clean_target_rmse_a": {
+        "min": 5.9996855684638786e-05,
+        "mean": 6.354415497593652e-05,
+        "max": 6.731742580183241e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 0.658203125,
+        "mean": 0.79921875,
+        "max": 0.939453125
+      },
+      "last8_combined_accuracy": {
+        "min": 0.685546875,
+        "mean": 0.8095703125,
+        "max": 0.904296875
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.115833497865108,
+        "mean": 1.1324424990674837,
+        "max": 1.1669824240550681
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 25.061437844654492,
+        "mean": 25.12440497065821,
+        "max": 25.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "quarter_mean",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.9296875,
+        "mean": 0.953173828125,
+        "max": 0.974609375
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.958984375,
+        "mean": 0.97646484375,
+        "max": 0.9931640625
+      },
+      "electrical_noise_amplification": {
+        "min": 0.3568793741855427,
+        "mean": 0.3639467662386582,
+        "max": 0.37321059824959524
+      },
+      "clean_target_rmse_a": {
+        "min": 4.882157048949728e-06,
+        "mean": 5.083346511685595e-06,
+        "max": 5.359124942875107e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.931640625,
+        "mean": 0.9662109375,
+        "max": 0.982421875
+      },
+      "last8_combined_accuracy": {
+        "min": 0.93359375,
+        "mean": 0.9591796875,
+        "max": 0.9921875
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.0309957380438952,
+        "mean": 1.0361253797034977,
+        "max": 1.0403566774376658
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 11.506143784465449,
+        "mean": 11.512440497065821,
+        "max": 11.519539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "quarter_mean",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.9306640625,
+        "mean": 0.979931640625,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.9384765625,
+        "mean": 0.985888671875,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.93115234375,
+        "mean": 0.98193359375,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 0.3567042472333541,
+        "mean": 0.3637615570792606,
+        "max": 0.37300351694239386
+      },
+      "clean_target_rmse_a": {
+        "min": 3.148700652460617e-05,
+        "mean": 3.301007404869696e-05,
+        "max": 3.455591452369311e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 0.8984375,
+        "mean": 0.98046875,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 0.923828125,
+        "mean": 0.98203125,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.115833497865108,
+        "mean": 1.1324424990674837,
+        "max": 1.1669824240550681
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 25.061437844654492,
+        "mean": 25.12440497065821,
+        "max": 25.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "ridge16",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.96484375,
+        "mean": 0.974267578125,
+        "max": 0.986328125
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.98046875,
+        "mean": 0.987109375,
+        "max": 0.99462890625
+      },
+      "electrical_noise_amplification": {
+        "min": 0.6341117254201206,
+        "mean": 0.6461781292852005,
+        "max": 0.6628099900157396
+      },
+      "clean_target_rmse_a": {
+        "min": 1.2778767993724146e-06,
+        "mean": 1.3564178339575771e-06,
+        "max": 1.4495065404946122e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.958984375,
+        "mean": 0.9833984375,
+        "max": 0.994140625
+      },
+      "last8_combined_accuracy": {
+        "min": 0.953125,
+        "mean": 0.976171875,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.0309957380438952,
+        "mean": 1.0361253797034977,
+        "max": 1.0403566774376658
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 11.506143784465449,
+        "mean": 11.512440497065821,
+        "max": 11.519539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      },
+      "paired": {
+        "end": {
+          "both_correct": 155321,
+          "equalizer_only": 5251,
+          "anchor_only": 1532,
+          "neither": 1736,
+          "net_correct": 3719,
+          "accuracy_delta": 0.022698974609375
+        },
+        "eighth_mean": {
+          "both_correct": 157817,
+          "equalizer_only": 2755,
+          "anchor_only": 524,
+          "neither": 2744,
+          "net_correct": 2231,
+          "accuracy_delta": 0.013616943359375
+        },
+        "quarter_mean": {
+          "both_correct": 156758,
+          "equalizer_only": 3814,
+          "anchor_only": 447,
+          "neither": 2821,
+          "net_correct": 3367,
+          "accuracy_delta": 0.020550537109375
+        },
+        "half_mean": {
+          "both_correct": 146084,
+          "equalizer_only": 14488,
+          "anchor_only": 793,
+          "neither": 2475,
+          "net_correct": 13695,
+          "accuracy_delta": 0.083587646484375
+        },
+        "ridge8": {
+          "both_correct": 160133,
+          "equalizer_only": 439,
+          "anchor_only": 120,
+          "neither": 3148,
+          "net_correct": 319,
+          "accuracy_delta": 0.001947021484375
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "ridge16",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.99951171875,
+        "mean": 0.999951171875,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.99951171875,
+        "mean": 0.999951171875,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 0.6338196667313643,
+        "mean": 0.6458715814699044,
+        "max": 0.6624730584154401
+      },
+      "clean_target_rmse_a": {
+        "min": 6.982379013753916e-06,
+        "mean": 7.186938390130852e-06,
+        "max": 7.395196156681041e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.115833497865108,
+        "mean": 1.1324424990674837,
+        "max": 1.1669824240550681
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 25.061437844654492,
+        "mean": 25.12440497065821,
+        "max": 25.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      },
+      "paired": {
+        "end": {
+          "both_correct": 163815,
+          "equalizer_only": 24,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 24,
+          "accuracy_delta": 0.000146484375
+        },
+        "eighth_mean": {
+          "both_correct": 163520,
+          "equalizer_only": 319,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 319,
+          "accuracy_delta": 0.001947021484375
+        },
+        "quarter_mean": {
+          "both_correct": 160889,
+          "equalizer_only": 2950,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 2950,
+          "accuracy_delta": 0.01800537109375
+        },
+        "half_mean": {
+          "both_correct": 131129,
+          "equalizer_only": 32710,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 32710,
+          "accuracy_delta": 0.19964599609375
+        },
+        "ridge8": {
+          "both_correct": 163839,
+          "equalizer_only": 0,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 0,
+          "accuracy_delta": 0.0
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "ridge16_strong",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.94482421875,
+        "mean": 0.9642578125,
+        "max": 0.98193359375
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.99609375,
+        "mean": 0.998876953125,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.95849609375,
+        "mean": 0.97861328125,
+        "max": 0.9931640625
+      },
+      "electrical_noise_amplification": {
+        "min": 0.4457617747097006,
+        "mean": 0.4536984592254266,
+        "max": 0.46284603401554636
+      },
+      "clean_target_rmse_a": {
+        "min": 3.210863517811754e-06,
+        "mean": 3.4453562215386905e-06,
+        "max": 3.6685888738351547e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.939453125,
+        "mean": 0.9740234375,
+        "max": 0.994140625
+      },
+      "last8_combined_accuracy": {
+        "min": 0.9453125,
+        "mean": 0.9689453125,
+        "max": 0.99609375
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.0309957380438952,
+        "mean": 1.0361253797034977,
+        "max": 1.0403566774376658
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 11.506143784465449,
+        "mean": 11.512440497065821,
+        "max": 11.519539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      },
+      "paired": {
+        "end": {
+          "both_correct": 154150,
+          "equalizer_only": 4865,
+          "anchor_only": 2703,
+          "neither": 2122,
+          "net_correct": 2162,
+          "accuracy_delta": 0.01319580078125
+        },
+        "eighth_mean": {
+          "both_correct": 156537,
+          "equalizer_only": 2478,
+          "anchor_only": 1804,
+          "neither": 3021,
+          "net_correct": 674,
+          "accuracy_delta": 0.00411376953125
+        },
+        "quarter_mean": {
+          "both_correct": 155983,
+          "equalizer_only": 3032,
+          "anchor_only": 1222,
+          "neither": 3603,
+          "net_correct": 1810,
+          "accuracy_delta": 0.01104736328125
+        },
+        "half_mean": {
+          "both_correct": 145808,
+          "equalizer_only": 13207,
+          "anchor_only": 1069,
+          "neither": 3756,
+          "net_correct": 12138,
+          "accuracy_delta": 0.07408447265625
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "ridge16_strong",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.998046875,
+        "mean": 0.99951171875,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.9990234375,
+        "mean": 0.9998046875,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 0.4455294220769622,
+        "mean": 0.4534499180297297,
+        "max": 0.4625743118942408
+      },
+      "clean_target_rmse_a": {
+        "min": 1.649460515513759e-05,
+        "mean": 1.6995700644807403e-05,
+        "max": 1.7476094543805226e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 0.998046875,
+        "mean": 0.9998046875,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.115833497865108,
+        "mean": 1.1324424990674837,
+        "max": 1.1669824240550681
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 25.061437844654492,
+        "mean": 25.12440497065821,
+        "max": 25.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      },
+      "paired": {
+        "end": {
+          "both_correct": 163784,
+          "equalizer_only": 18,
+          "anchor_only": 31,
+          "neither": 7,
+          "net_correct": -13,
+          "accuracy_delta": -7.9345703125e-05
+        },
+        "eighth_mean": {
+          "both_correct": 163520,
+          "equalizer_only": 282,
+          "anchor_only": 0,
+          "neither": 38,
+          "net_correct": 282,
+          "accuracy_delta": 0.00172119140625
+        },
+        "quarter_mean": {
+          "both_correct": 160889,
+          "equalizer_only": 2913,
+          "anchor_only": 0,
+          "neither": 38,
+          "net_correct": 2913,
+          "accuracy_delta": 0.017779541015625
+        },
+        "half_mean": {
+          "both_correct": 131129,
+          "equalizer_only": 32673,
+          "anchor_only": 0,
+          "neither": 38,
+          "net_correct": 32673,
+          "accuracy_delta": 0.199420166015625
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "ridge8",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.9619140625,
+        "mean": 0.972216796875,
+        "max": 0.98486328125
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.978515625,
+        "mean": 0.98583984375,
+        "max": 0.99365234375
+      },
+      "electrical_noise_amplification": {
+        "min": 0.6277690750513917,
+        "mean": 0.6409562127172144,
+        "max": 0.6574824005282509
+      },
+      "clean_target_rmse_a": {
+        "min": 1.418308339029664e-06,
+        "mean": 1.4743817275903395e-06,
+        "max": 1.5324793261699162e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.951171875,
+        "mean": 0.9814453125,
+        "max": 0.994140625
+      },
+      "last8_combined_accuracy": {
+        "min": 0.955078125,
+        "mean": 0.9748046875,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.0309957380438952,
+        "mean": 1.0361253797034977,
+        "max": 1.0403566774376658
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 11.506143784465449,
+        "mean": 11.512440497065821,
+        "max": 11.519539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.0029044322141261176,
+        "mean": 0.0030254703274122156,
+        "max": 0.0031930695148918993
+      },
+      "paired": {
+        "end": {
+          "both_correct": 155140,
+          "equalizer_only": 5113,
+          "anchor_only": 1713,
+          "neither": 1874,
+          "net_correct": 3400,
+          "accuracy_delta": 0.020751953125
+        },
+        "eighth_mean": {
+          "both_correct": 157719,
+          "equalizer_only": 2534,
+          "anchor_only": 622,
+          "neither": 2965,
+          "net_correct": 1912,
+          "accuracy_delta": 0.011669921875
+        },
+        "quarter_mean": {
+          "both_correct": 156670,
+          "equalizer_only": 3583,
+          "anchor_only": 535,
+          "neither": 3052,
+          "net_correct": 3048,
+          "accuracy_delta": 0.018603515625
+        },
+        "half_mean": {
+          "both_correct": 145967,
+          "equalizer_only": 14286,
+          "anchor_only": 910,
+          "neither": 2677,
+          "net_correct": 13376,
+          "accuracy_delta": 0.081640625
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 45,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 2.0,
+      "fc_ghz": 60,
+      "readout": "ridge8",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.99951171875,
+        "mean": 0.999951171875,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.99951171875,
+        "mean": 0.999951171875,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 0.6274835689471118,
+        "mean": 0.6406558997779384,
+        "max": 0.6571518418883682
+      },
+      "clean_target_rmse_a": {
+        "min": 6.994998773168889e-06,
+        "mean": 7.1661882785569675e-06,
+        "max": 7.379205313096854e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 1.115833497865108,
+        "mean": 1.1324424990674837,
+        "max": 1.1669824240550681
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 25.061437844654492,
+        "mean": 25.12440497065821,
+        "max": 25.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.02582002259605244,
+        "mean": 0.027487262640624906,
+        "max": 0.02909518420385763
+      },
+      "paired": {
+        "end": {
+          "both_correct": 163815,
+          "equalizer_only": 24,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 24,
+          "accuracy_delta": 0.000146484375
+        },
+        "eighth_mean": {
+          "both_correct": 163520,
+          "equalizer_only": 319,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 319,
+          "accuracy_delta": 0.001947021484375
+        },
+        "quarter_mean": {
+          "both_correct": 160889,
+          "equalizer_only": 2950,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 2950,
+          "accuracy_delta": 0.01800537109375
+        },
+        "half_mean": {
+          "both_correct": 131129,
+          "equalizer_only": 32710,
+          "anchor_only": 0,
+          "neither": 1,
+          "net_correct": 32710,
+          "accuracy_delta": 0.19964599609375
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "eighth_mean",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.9443359375,
+        "mean": 0.96357421875,
+        "max": 0.98095703125
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.9755859375,
+        "mean": 0.984765625,
+        "max": 0.99560546875
+      },
+      "electrical_noise_amplification": {
+        "min": 0.7737147266774831,
+        "mean": 0.7840628371674876,
+        "max": 0.7958735070788078
+      },
+      "clean_target_rmse_a": {
+        "min": 3.8255483693403764e-06,
+        "mean": 3.986533942577586e-06,
+        "max": 4.207829498335146e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.943359375,
+        "mean": 0.973828125,
+        "max": 0.990234375
+      },
+      "last8_combined_accuracy": {
+        "min": 0.94921875,
+        "mean": 0.9681640625,
+        "max": 0.998046875
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5226439466339562,
+        "mean": 0.5261081699209419,
+        "max": 0.5297204537878051
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0018646599820049351,
+        "mean": 0.001924941486201201,
+        "max": 0.0020193802808530035
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "eighth_mean",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.97021484375,
+        "mean": 0.992919921875,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.9794921875,
+        "mean": 0.9962890625,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.97119140625,
+        "mean": 0.9939453125,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 0.7734377856953116,
+        "mean": 0.7837273852827064,
+        "max": 0.7954617632874533
+      },
+      "clean_target_rmse_a": {
+        "min": 2.6365131124657118e-05,
+        "mean": 2.7526518547894606e-05,
+        "max": 2.8680678508702528e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 0.958984375,
+        "mean": 0.9931640625,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 0.95703125,
+        "mean": 0.9931640625,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5844463909391193,
+        "mean": 0.5964358405409069,
+        "max": 0.6218396365736989
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.019143311574733413,
+        "mean": 0.020316218524306744,
+        "max": 0.021227292050512745
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "end",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.95556640625,
+        "mean": 0.970703125,
+        "max": 0.984375
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.97998046875,
+        "mean": 0.988427734375,
+        "max": 0.99658203125
+      },
+      "electrical_noise_amplification": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "clean_target_rmse_a": {
+        "min": 2.6236311882936716e-06,
+        "mean": 2.734548274060557e-06,
+        "max": 2.8878315260785262e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.958984375,
+        "mean": 0.9814453125,
+        "max": 0.99609375
+      },
+      "last8_combined_accuracy": {
+        "min": 0.962890625,
+        "mean": 0.976171875,
+        "max": 0.994140625
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5226439466339562,
+        "mean": 0.5261081699209419,
+        "max": 0.5297204537878051
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0018646599820049351,
+        "mean": 0.001924941486201201,
+        "max": 0.0020193802808530035
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "end",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.9970703125,
+        "mean": 0.999365234375,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.99755859375,
+        "mean": 0.999609375,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "clean_target_rmse_a": {
+        "min": 1.8475589201765518e-05,
+        "mean": 1.925484777081161e-05,
+        "max": 2.0020883341303385e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 0.99609375,
+        "mean": 0.999609375,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 0.998046875,
+        "mean": 0.9998046875,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5844463909391193,
+        "mean": 0.5964358405409069,
+        "max": 0.6218396365736989
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.019143311574733413,
+        "mean": 0.020316218524306744,
+        "max": 0.021227292050512745
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "half_mean",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.82275390625,
+        "mean": 0.8603515625,
+        "max": 0.8994140625
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.85546875,
+        "mean": 0.9017578125,
+        "max": 0.9814453125
+      },
+      "electrical_worst": {
+        "min": 0.83935546875,
+        "mean": 0.88330078125,
+        "max": 0.93408203125
+      },
+      "electrical_noise_amplification": {
+        "min": 0.4358504553508708,
+        "mean": 0.44130043350809045,
+        "max": 0.45087279094764376
+      },
+      "clean_target_rmse_a": {
+        "min": 9.389315588499535e-06,
+        "mean": 9.77839059994835e-06,
+        "max": 1.0279647783249282e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 0.84765625,
+        "mean": 0.88671875,
+        "max": 0.921875
+      },
+      "last8_combined_accuracy": {
+        "min": 0.810546875,
+        "mean": 0.8638671875,
+        "max": 0.9296875
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5226439466339562,
+        "mean": 0.5261081699209419,
+        "max": 0.5297204537878051
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0018646599820049351,
+        "mean": 0.001924941486201201,
+        "max": 0.0020193802808530035
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "half_mean",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.66064453125,
+        "mean": 0.73193359375,
+        "max": 0.83349609375
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.66064453125,
+        "mean": 0.740283203125,
+        "max": 0.84375
+      },
+      "electrical_worst": {
+        "min": 0.65673828125,
+        "mean": 0.733203125,
+        "max": 0.83935546875
+      },
+      "electrical_noise_amplification": {
+        "min": 0.43491604240689163,
+        "mean": 0.440490358846672,
+        "max": 0.45010639703303534
+      },
+      "clean_target_rmse_a": {
+        "min": 5.574099137840283e-05,
+        "mean": 5.8960028270379965e-05,
+        "max": 6.236333064159285e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 0.603515625,
+        "mean": 0.7431640625,
+        "max": 0.900390625
+      },
+      "last8_combined_accuracy": {
+        "min": 0.640625,
+        "mean": 0.74375,
+        "max": 0.8359375
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5844463909391193,
+        "mean": 0.5964358405409069,
+        "max": 0.6218396365736989
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.019143311574733413,
+        "mean": 0.020316218524306744,
+        "max": 0.021227292050512745
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "quarter_mean",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.9248046875,
+        "mean": 0.948291015625,
+        "max": 0.97265625
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.99951171875,
+        "mean": 0.999951171875,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.95751953125,
+        "mean": 0.975,
+        "max": 0.99365234375
+      },
+      "electrical_noise_amplification": {
+        "min": 0.6206561591685206,
+        "mean": 0.6321785190335882,
+        "max": 0.6410407577786139
+      },
+      "clean_target_rmse_a": {
+        "min": 5.382652387494852e-06,
+        "mean": 5.607310829244313e-06,
+        "max": 5.911956983117037e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.9296875,
+        "mean": 0.9609375,
+        "max": 0.982421875
+      },
+      "last8_combined_accuracy": {
+        "min": 0.927734375,
+        "mean": 0.953515625,
+        "max": 0.986328125
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5226439466339562,
+        "mean": 0.5261081699209419,
+        "max": 0.5297204537878051
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0018646599820049351,
+        "mean": 0.001924941486201201,
+        "max": 0.0020193802808530035
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "quarter_mean",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.87060546875,
+        "mean": 0.9501953125,
+        "max": 0.99951171875
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.873046875,
+        "mean": 0.960693359375,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.87158203125,
+        "mean": 0.955322265625,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 0.6199949123187242,
+        "mean": 0.6316032233267947,
+        "max": 0.6405052470460302
+      },
+      "clean_target_rmse_a": {
+        "min": 3.5454996564387954e-05,
+        "mean": 3.715905795048164e-05,
+        "max": 3.888876257259728e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 0.8515625,
+        "mean": 0.9576171875,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 0.869140625,
+        "mean": 0.9548828125,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5844463909391193,
+        "mean": 0.5964358405409069,
+        "max": 0.6218396365736989
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.019143311574733413,
+        "mean": 0.020316218524306744,
+        "max": 0.021227292050512745
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "ridge16",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.97509765625,
+        "mean": 0.981591796875,
+        "max": 0.98974609375
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.986328125,
+        "mean": 0.991357421875,
+        "max": 0.99755859375
+      },
+      "electrical_noise_amplification": {
+        "min": 1.451112034882486,
+        "mean": 1.481336963143788,
+        "max": 1.5023478119008624
+      },
+      "clean_target_rmse_a": {
+        "min": 1.454422359046501e-06,
+        "mean": 1.503432927622005e-06,
+        "max": 1.5516987387404256e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.978515625,
+        "mean": 0.988671875,
+        "max": 0.99609375
+      },
+      "last8_combined_accuracy": {
+        "min": 0.96875,
+        "mean": 0.9841796875,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5226439466339562,
+        "mean": 0.5261081699209419,
+        "max": 0.5297204537878051
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0018646599820049351,
+        "mean": 0.001924941486201201,
+        "max": 0.0020193802808530035
+      },
+      "paired": {
+        "end": {
+          "both_correct": 158949,
+          "equalizer_only": 2613,
+          "anchor_only": 884,
+          "neither": 1394,
+          "net_correct": 1729,
+          "accuracy_delta": 0.010552978515625
+        },
+        "eighth_mean": {
+          "both_correct": 158379,
+          "equalizer_only": 3183,
+          "anchor_only": 474,
+          "neither": 1804,
+          "net_correct": 2709,
+          "accuracy_delta": 0.016534423828125
+        },
+        "quarter_mean": {
+          "both_correct": 155822,
+          "equalizer_only": 5740,
+          "anchor_only": 486,
+          "neither": 1792,
+          "net_correct": 5254,
+          "accuracy_delta": 0.03206787109375
+        },
+        "half_mean": {
+          "both_correct": 141722,
+          "equalizer_only": 19840,
+          "anchor_only": 722,
+          "neither": 1556,
+          "net_correct": 19118,
+          "accuracy_delta": 0.11668701171875
+        },
+        "ridge8": {
+          "both_correct": 161237,
+          "equalizer_only": 325,
+          "anchor_only": 58,
+          "neither": 2220,
+          "net_correct": 267,
+          "accuracy_delta": 0.001629638671875
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "ridge16",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 1.4498243582974455,
+        "mean": 1.4802129192324338,
+        "max": 1.5011219195513872
+      },
+      "clean_target_rmse_a": {
+        "min": 6.849342763731268e-06,
+        "mean": 6.990283351032636e-06,
+        "max": 7.148096208580381e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5844463909391193,
+        "mean": 0.5964358405409069,
+        "max": 0.6218396365736989
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.019143311574733413,
+        "mean": 0.020316218524306744,
+        "max": 0.021227292050512745
+      },
+      "paired": {
+        "end": {
+          "both_correct": 163778,
+          "equalizer_only": 62,
+          "anchor_only": 0,
+          "neither": 0,
+          "net_correct": 62,
+          "accuracy_delta": 0.00037841796875
+        },
+        "eighth_mean": {
+          "both_correct": 162836,
+          "equalizer_only": 1004,
+          "anchor_only": 0,
+          "neither": 0,
+          "net_correct": 1004,
+          "accuracy_delta": 0.0061279296875
+        },
+        "quarter_mean": {
+          "both_correct": 156309,
+          "equalizer_only": 7531,
+          "anchor_only": 0,
+          "neither": 0,
+          "net_correct": 7531,
+          "accuracy_delta": 0.045965576171875
+        },
+        "half_mean": {
+          "both_correct": 120690,
+          "equalizer_only": 43150,
+          "anchor_only": 0,
+          "neither": 0,
+          "net_correct": 43150,
+          "accuracy_delta": 0.26336669921875
+        },
+        "ridge8": {
+          "both_correct": 163840,
+          "equalizer_only": 0,
+          "anchor_only": 0,
+          "neither": 0,
+          "net_correct": 0,
+          "accuracy_delta": 0.0
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "ridge16_strong",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.93994140625,
+        "mean": 0.963134765625,
+        "max": 0.98193359375
+      },
+      "clean_filtered_accuracy": {
+        "min": 0.97412109375,
+        "mean": 0.99150390625,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.9560546875,
+        "mean": 0.976416015625,
+        "max": 0.994140625
+      },
+      "electrical_noise_amplification": {
+        "min": 1.027660484378252,
+        "mean": 1.04032944189556,
+        "max": 1.053265993799955
+      },
+      "clean_target_rmse_a": {
+        "min": 3.1768125949189786e-06,
+        "mean": 3.4627782966660535e-06,
+        "max": 3.746455250058711e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.9296875,
+        "mean": 0.969921875,
+        "max": 0.9921875
+      },
+      "last8_combined_accuracy": {
+        "min": 0.94140625,
+        "mean": 0.9677734375,
+        "max": 0.9921875
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5226439466339562,
+        "mean": 0.5261081699209419,
+        "max": 0.5297204537878051
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0018646599820049351,
+        "mean": 0.001924941486201201,
+        "max": 0.0020193802808530035
+      },
+      "paired": {
+        "end": {
+          "both_correct": 156599,
+          "equalizer_only": 2131,
+          "anchor_only": 3234,
+          "neither": 1876,
+          "net_correct": -1103,
+          "accuracy_delta": -0.006732177734375
+        },
+        "eighth_mean": {
+          "both_correct": 156127,
+          "equalizer_only": 2603,
+          "anchor_only": 2726,
+          "neither": 2384,
+          "net_correct": -123,
+          "accuracy_delta": -0.000750732421875
+        },
+        "quarter_mean": {
+          "both_correct": 153996,
+          "equalizer_only": 4734,
+          "anchor_only": 2312,
+          "neither": 2798,
+          "net_correct": 2422,
+          "accuracy_delta": 0.01478271484375
+        },
+        "half_mean": {
+          "both_correct": 140392,
+          "equalizer_only": 18338,
+          "anchor_only": 2052,
+          "neither": 3058,
+          "net_correct": 16286,
+          "accuracy_delta": 0.09940185546875
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "ridge16_strong",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 0.99951171875,
+        "mean": 0.99990234375,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.99951171875,
+        "mean": 0.999951171875,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 1.0267415191691867,
+        "mean": 1.0393353183270764,
+        "max": 1.0520996158262041
+      },
+      "clean_target_rmse_a": {
+        "min": 1.6141865102384314e-05,
+        "mean": 1.658597740554693e-05,
+        "max": 1.7269481158704053e-05
+      },
+      "first8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5844463909391193,
+        "mean": 0.5964358405409069,
+        "max": 0.6218396365736989
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.019143311574733413,
+        "mean": 0.020316218524306744,
+        "max": 0.021227292050512745
+      },
+      "paired": {
+        "end": {
+          "both_correct": 163776,
+          "equalizer_only": 61,
+          "anchor_only": 2,
+          "neither": 1,
+          "net_correct": 59,
+          "accuracy_delta": 0.000360107421875
+        },
+        "eighth_mean": {
+          "both_correct": 162836,
+          "equalizer_only": 1001,
+          "anchor_only": 0,
+          "neither": 3,
+          "net_correct": 1001,
+          "accuracy_delta": 0.006109619140625
+        },
+        "quarter_mean": {
+          "both_correct": 156309,
+          "equalizer_only": 7528,
+          "anchor_only": 0,
+          "neither": 3,
+          "net_correct": 7528,
+          "accuracy_delta": 0.045947265625
+        },
+        "half_mean": {
+          "both_correct": 120690,
+          "equalizer_only": 43147,
+          "anchor_only": 0,
+          "neither": 3,
+          "net_correct": 43147,
+          "accuracy_delta": 0.263348388671875
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "ridge8",
+      "drive_mw": 0.1,
+      "combined_worst": {
+        "min": 0.9716796875,
+        "mean": 0.979833984375,
+        "max": 0.9892578125
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 0.9853515625,
+        "mean": 0.9908203125,
+        "max": 0.99755859375
+      },
+      "electrical_noise_amplification": {
+        "min": 1.4305621069421277,
+        "mean": 1.4577489510313497,
+        "max": 1.4785312649538258
+      },
+      "clean_target_rmse_a": {
+        "min": 1.59980861905734e-06,
+        "mean": 1.6480477350706967e-06,
+        "max": 1.7108376905518317e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 0.970703125,
+        "mean": 0.9861328125,
+        "max": 0.99609375
+      },
+      "last8_combined_accuracy": {
+        "min": 0.96484375,
+        "mean": 0.982421875,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5226439466339562,
+        "mean": 0.5261081699209419,
+        "max": 0.5297204537878051
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 6.506143784465449,
+        "mean": 6.51244049706582,
+        "max": 6.5195396289603575
+      },
+      "max_optical_memory_field": {
+        "min": 0.0018646599820049351,
+        "mean": 0.001924941486201201,
+        "max": 0.0020193802808530035
+      },
+      "paired": {
+        "end": {
+          "both_correct": 158803,
+          "equalizer_only": 2492,
+          "anchor_only": 1030,
+          "neither": 1515,
+          "net_correct": 1462,
+          "accuracy_delta": 0.00892333984375
+        },
+        "eighth_mean": {
+          "both_correct": 158288,
+          "equalizer_only": 3007,
+          "anchor_only": 565,
+          "neither": 1980,
+          "net_correct": 2442,
+          "accuracy_delta": 0.01490478515625
+        },
+        "quarter_mean": {
+          "both_correct": 155737,
+          "equalizer_only": 5558,
+          "anchor_only": 571,
+          "neither": 1974,
+          "net_correct": 4987,
+          "accuracy_delta": 0.030438232421875
+        },
+        "half_mean": {
+          "both_correct": 141614,
+          "equalizer_only": 19681,
+          "anchor_only": 830,
+          "neither": 1715,
+          "net_correct": 18851,
+          "accuracy_delta": 0.115057373046875
+        }
+      }
+    },
+    {
+      "candidate": "C2",
+      "on_ps": 50,
+      "gap_ps": 0,
+      "response_ps": 5,
+      "lo_mw": 1.0,
+      "fc_ghz": 20,
+      "readout": "ridge8",
+      "drive_mw": 1.0,
+      "combined_worst": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "clean_filtered_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_worst": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "electrical_noise_amplification": {
+        "min": 1.429319881625661,
+        "mean": 1.456664534134582,
+        "max": 1.4773467339445345
+      },
+      "clean_target_rmse_a": {
+        "min": 6.9628813152968825e-06,
+        "mean": 7.083455142747179e-06,
+        "max": 7.2286792200373986e-06
+      },
+      "first8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "last8_combined_accuracy": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "combined_peak_diode_mw": {
+        "min": 0.5844463909391193,
+        "mean": 0.5964358405409069,
+        "max": 0.6218396365736989
+      },
+      "signal_plus_lo_electric_lower_mw": {
+        "min": 20.061437844654492,
+        "mean": 20.12440497065821,
+        "max": 20.19539628960358
+      },
+      "max_optical_memory_field": {
+        "min": 0.019143311574733413,
+        "mean": 0.020316218524306744,
+        "max": 0.021227292050512745
+      },
+      "paired": {
+        "end": {
+          "both_correct": 163778,
+          "equalizer_only": 62,
+          "anchor_only": 0,
+          "neither": 0,
+          "net_correct": 62,
+          "accuracy_delta": 0.00037841796875
+        },
+        "eighth_mean": {
+          "both_correct": 162836,
+          "equalizer_only": 1004,
+          "anchor_only": 0,
+          "neither": 0,
+          "net_correct": 1004,
+          "accuracy_delta": 0.0061279296875
+        },
+        "quarter_mean": {
+          "both_correct": 156309,
+          "equalizer_only": 7531,
+          "anchor_only": 0,
+          "neither": 0,
+          "net_correct": 7531,
+          "accuracy_delta": 0.045965576171875
+        },
+        "half_mean": {
+          "both_correct": 120690,
+          "equalizer_only": 43150,
+          "anchor_only": 0,
+          "neither": 0,
+          "net_correct": 43150,
+          "accuracy_delta": 0.26336669921875
+        }
+      }
+    }
+  ],
+  "note": "Descriptive matched counts, not independent observations or measured power."
+}

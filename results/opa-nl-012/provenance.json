@@ -1,0 +1,66 @@
+{
+  "artifact_bytes": 2838736,
+  "artifact_id": 14425195090,
+  "artifact_sha256": "1744fb578163f69d8a35b5fd35a1a0354cecbef3146d7177fc1bb1c28f8e5daf",
+  "experiment": "OPA-NL-012",
+  "files": {
+    "coefficients.json": {
+      "bytes": 276005,
+      "sha256": "e4489c8cb9c2e54a82d30757f9013d6101bc0b53bb39a9ac7469fafabd9f8b2b"
+    },
+    "common_drive_pairs.csv": {
+      "bytes": 38619,
+      "sha256": "eaa2e9b41831eb5229f08ac93cad81304a8ed0c0b1e5b62e715048a7dac6023e"
+    },
+    "convergence.csv": {
+      "bytes": 1470,
+      "sha256": "2e7240e721e66c478e978de48980a4756ddd9c8392ae89b8502746418ca5680a"
+    },
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c"
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6"
+    },
+    "metrics.csv": {
+      "bytes": 3083512,
+      "sha256": "b0ca5f7462ec191db95e40d3b31bef02b2fe7b8f397a3e850886a5e5225966d1"
+    },
+    "nl011_seed_analysis.json": {
+      "bytes": 1853165,
+      "sha256": "6db9fbf17eeb231daad192382dd3c891f2a60d842c17638b2d93e5a9ad2b947b"
+    },
+    "optical_audit.csv": {
+      "bytes": 1605,
+      "sha256": "355c780e15af912c87b8523b241de630de0fb9d6342308b726ea8dbd56bcb129"
+    },
+    "paired_readouts.csv": {
+      "bytes": 5621846,
+      "sha256": "e2078e5181dda7daa9eaaf9d5d7f83fc3caf084a887c736535c8835a3487b59b"
+    },
+    "resolution_groups.csv": {
+      "bytes": 370940,
+      "sha256": "c803000998785c0b70b65c3b49a52ac536457f23d9f0fdfc8d80094ac0734bf6"
+    },
+    "resolution_metrics.csv": {
+      "bytes": 9240088,
+      "sha256": "cc50dac7b838971a68d6ef56f72f7c33a75e6a8169546c15aa0c13705ede68c9"
+    },
+    "result.json": {
+      "bytes": 156517,
+      "sha256": "6127456671b807ecb7b583a5f0f30c92631dbc71fc781f341474ccdbf10990a7"
+    },
+    "summary.csv": {
+      "bytes": 147629,
+      "sha256": "0b2b4416082188fb2be56d50bf3b70bf0f29792c23a4b15e1e1fa6259e93cdd4"
+    }
+  },
+  "head_sha": "ab30ce5c9a89a13fb6d2299884ba6f4c5e899cc6",
+  "job_id": 134773246258,
+  "merge_sha": "0c4b52d836daeb8307a74985ce79f9ad9a416f34",
+  "pull_request": 171,
+  "verification": "Raw ZIP pinned to GitHub metadata; CRC and all thirteen file hashes pinned to CI stdout; staged bytes compared to verified ZIP.",
+  "workflow_run_id": 44296016894
+}

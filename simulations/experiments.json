@@ -788,6 +788,46 @@
         "research/analyze_nl012.py"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/dynamic_receiver_sweep_v013.py"
+    },
+    {
+      "id": "opa-nl-014",
+      "name": "Circuit: exploratory finite-response cadence boundary",
+      "script": "simulations/circuit/dynamic_receiver_sweep_v014.py",
+      "result_dir": "results/opa-nl-014",
+      "artifact": "opa-nl-014",
+      "timeout_minutes": 180,
+      "deps": [
+        "simulations/circuit/nonlinear_activation_v001.py",
+        "simulations/circuit/nonlinear_activation_v002.py",
+        "simulations/circuit/nonlinear_activation_v003.py",
+        "simulations/circuit/nonlinear_activation_v004.py",
+        "simulations/circuit/nonlinear_activation_v005.py",
+        "simulations/circuit/nonlinear_activation_v006.py",
+        "simulations/circuit/nonlinear_activation_v007.py",
+        "results/opa-nl-003/weights.json",
+        "results/opa-nl-003/result.json",
+        "results/opa-nl-003/provenance.json",
+        "results/opa-nl-007/summary.csv",
+        "results/opa-nl-007/result.json",
+        "results/opa-nl-007/transfer.csv",
+        "results/opa-nl-007/provenance.json",
+        "results/opa-nl-008/*",
+        "simulations/circuit/nonlinear_activation_v009.py",
+        "simulations/circuit/dynamic_receiver.py",
+        "results/opa-nl-009/*",
+        "simulations/circuit/dynamic_receiver_sweep_v010.py",
+        "results/opa-nl-010/*",
+        "simulations/circuit/dynamic_receiver_sweep_v011.py",
+        "results/opa-nl-011/*",
+        "research/analyze_nl011.py",
+        "simulations/circuit/dynamic_receiver_sweep_v012.py",
+        "results/opa-nl-012/*",
+        "research/analyze_nl012.py",
+        "simulations/circuit/dynamic_receiver_sweep_v013.py",
+        "results/opa-nl-013/*",
+        "research/analyze_nl013.py"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/dynamic_receiver_sweep_v014.py"
     }
   ]
 }

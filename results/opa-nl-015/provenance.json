@@ -1,0 +1,74 @@
+{
+  "artifact_bytes": 685440,
+  "artifact_id": 14437276291,
+  "artifact_sha256": "da2b2834f27301c25bf155573086dfcf01b332c6a351729a80204b096fc27dce",
+  "experiment": "OPA-NL-015",
+  "files": {
+    "coefficient_summary.csv": {
+      "bytes": 3538,
+      "sha256": "e13d33489dcb66f920e9eadb1ac79df358478c8dfd861a77345011ec7a3a150a"
+    },
+    "coefficients.json": {
+      "bytes": 27568,
+      "sha256": "692fa64e8ffeddbb0f8d6f834da5bf100b2809bd13e03459692e0e959db1f36a"
+    },
+    "convergence.csv": {
+      "bytes": 3043,
+      "sha256": "7da0ac82d7bb8c3cf4e0b5733d5ca35d0a7c5e5b5546ef1c815b397bc9fdd04b"
+    },
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c"
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6"
+    },
+    "metrics.csv": {
+      "bytes": 638659,
+      "sha256": "66233d21f1adc0c3e053e96e6d82c113c2aeb6e3a45d049b9ad5350cf695c33b"
+    },
+    "nl014_seed_analysis.json": {
+      "bytes": 1032395,
+      "sha256": "5ecca0b85f289fb7ae7882aa2a4ea736c4c3d076917bf33b6b321dd463ccb033"
+    },
+    "optical_audit.csv": {
+      "bytes": 3528,
+      "sha256": "5206fd0045c4fb340bd7d7990a1265f1debaaa94b7a700b152970776b4d93cae"
+    },
+    "paired_readouts.csv": {
+      "bytes": 1381890,
+      "sha256": "faa15e0cd72f90fc0364ce694629deda556640e878d546dbf5a6faeda0975190"
+    },
+    "paired_summary.csv": {
+      "bytes": 27537,
+      "sha256": "0955ba5f0fbc32287aa61768b72d7c560a102de79ba9c8434b610fd6f791d7b6"
+    },
+    "resolution_groups.csv": {
+      "bytes": 82192,
+      "sha256": "bf692237ce8d2373b892ee26462f01e33a70f1cf55e021e644262c9a11a1319c"
+    },
+    "resolution_metrics.csv": {
+      "bytes": 1911648,
+      "sha256": "846706c1b31276966a9ecceab75f278dff51bcd79ab60059596b2075cd34b1b3"
+    },
+    "result.json": {
+      "bytes": 58849,
+      "sha256": "513c9651069fe1a26ee34969718d9ab8b114959becba396711f32deb2d6a8924"
+    },
+    "summary.csv": {
+      "bytes": 34231,
+      "sha256": "3a696920e6b936d4f7847efb0705ae1ef9b74598d4db9dad5037b63b97940c7b"
+    },
+    "two_panel_pairs.csv": {
+      "bytes": 7079,
+      "sha256": "25c6709ae66f370eb81b124bfd1d7ac20c09520f3e462bd9bac3a5fa43abb0e2"
+    }
+  },
+  "head_sha": "22860166d0ef7cfd22823dd3feb7518281aa6615",
+  "job_id": 134860496443,
+  "merge_sha": "f551aeda2ee06ab86e5cf327f6c32ae463f5f0b2",
+  "pull_request": 183,
+  "verification": "Raw ZIP pinned to GitHub metadata; CRC and all fifteen file hashes pinned to CI stdout; staged bytes compared to verified ZIP.",
+  "workflow_run_id": 44321189432
+}

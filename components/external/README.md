@@ -12,3 +12,7 @@ Canonical records: [registry.json](../registry.json). Existing repo use is the i
 | lnoi400-mzm | `mzm_unbalanced` | Luxtelligence lnoi400 | pdk_sax_model_evaluated |
 
 Sources: [ubcpdk](https://github.com/gdsfactory/ubc), [SiEPIC EBeam](https://github.com/SiEPIC/SiEPIC_EBeam_PDK), [Luxtelligence documentation](https://luxtelligence.github.io/lxt_pdk_gf/). See pinned locks and local evidence in the registry. Model discovery is not model import. No mixing of PDKs.
+
+## Original external geometry
+
+[OPA-LIB-001: SiEPIC EBeam original GDS](SiEPIC-EBeam/README.md) contains three byte-identical core library GDS files at a distinct pinned upstream revision. [Manifest](SiEPIC-EBeam/manifest.json). Related v1 reference IDs indicate design-family relationships, not exact revision equivalence. Geometry checks are separate from DRC, optical data and measurements.

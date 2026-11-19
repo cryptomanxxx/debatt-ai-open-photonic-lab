@@ -1,0 +1,46 @@
+name: OPA LIB003 complex S model import
+on:
+  pull_request:
+    paths:
+      - 'components/external/Luxtelligence/lnoi400/s_parameters/**'
+      - 'components/external/Luxtelligence/lnoi400/archive/**'
+      - 'tools/audit_lnoi400_lib003.py'
+      - 'layout/requirements-lock-lnoi400.txt'
+      - '.github/workflows/opa-lib003.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  LXT_PDK_COMMIT: d16db6a4882657feb1ce696c16c604ff6cb7ccfa
+  JAX_ENABLE_X64: "true"
+  JAX_PLATFORMS: cpu
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install locked environment and pinned upstream
+        run: |
+          pip install -r layout/requirements-lock-lnoi400.txt
+          git clone --quiet https://github.com/Luxtelligence/lxt_pdk_gf "$RUNNER_TEMP/lxt_pdk_gf"
+          git -C "$RUNNER_TEMP/lxt_pdk_gf" checkout --quiet "$LXT_PDK_COMMIT"
+          pip install --no-deps -e "$RUNNER_TEMP/lxt_pdk_gf"
+          if pip show gdsfactoryplus >/dev/null 2>&1; then exit 1; fi
+      - name: Sample exact imported coefficients and audit complex S
+        env:
+          LXT_PDK_DIR: ${{ runner.temp }}/lxt_pdk_gf
+        run: |
+          python tools/audit_lnoi400_lib003.py
+          cp layout/requirements-lock-lnoi400.txt results/opa-lib-003/environment-lock.txt
+          pip list --format=json > results/opa-lib-003/installed-packages.json
+      - uses: actions/upload-artifact@v7
+        with:
+          name: opa-lib-003
+          path: results/opa-lib-003/
+          if-no-files-found: error

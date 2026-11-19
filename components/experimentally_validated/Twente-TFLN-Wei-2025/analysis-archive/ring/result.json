@@ -1,0 +1,321 @@
+{
+  "experiment": "OPA-LIB-004-TFLN-RING",
+  "source_doi": "10.5281/zenodo.14065933",
+  "article_doi": "10.1038/s41467-025-57441-1",
+  "source_path": "archive/original/source data/Sup fig 4/Supplementary fig 4a.csv",
+  "source_sha256": "448402f57041b484fb1ead4b85977b1b0cef07416b812345a327f9e49ff08886",
+  "rows": 10001,
+  "resonance_candidates": [
+    {
+      "center_nm": 1549.46741,
+      "center_ghz": 193480.97034193188,
+      "dip_dbm": -77.806,
+      "baseline_dbm": -62.788,
+      "apparent_extinction_db": 15.018,
+      "half_depth_dbm": -65.66364139035565,
+      "left_nm": 1549.462596184291,
+      "right_nm": 1549.4724882267733,
+      "width_nm": 0.009892042482306351,
+      "apparent_width_ghz": 1.235212589308094,
+      "apparent_q": 156637.7901396799,
+      "baseline_samples": 374,
+      "baseline_window_sensitivity": [
+        {
+          "inner_nm": 0.04,
+          "outer_nm": 0.07,
+          "metrics": {
+            "center_nm": 1549.46741,
+            "center_ghz": 193480.97034193188,
+            "dip_dbm": -77.806,
+            "baseline_dbm": -62.746,
+            "apparent_extinction_db": 15.059999999999995,
+            "half_depth_dbm": -65.62291767909957,
+            "left_nm": 1549.4625653285393,
+            "right_nm": 1549.4725388536813,
+            "width_nm": 0.009973525141958817,
+            "apparent_width_ghz": 1.2453872574833038,
+            "apparent_q": 155358.07772188145,
+            "baseline_samples": 376
+          }
+        },
+        {
+          "inner_nm": 0.05,
+          "outer_nm": 0.08,
+          "metrics": {
+            "center_nm": 1549.46741,
+            "center_ghz": 193480.97034193188,
+            "dip_dbm": -77.806,
+            "baseline_dbm": -62.788,
+            "apparent_extinction_db": 15.018,
+            "half_depth_dbm": -65.66364139035565,
+            "left_nm": 1549.462596184291,
+            "right_nm": 1549.4724882267733,
+            "width_nm": 0.009892042482306351,
+            "apparent_width_ghz": 1.235212589308094,
+            "apparent_q": 156637.7901396799,
+            "baseline_samples": 374
+          }
+        },
+        {
+          "inner_nm": 0.06,
+          "outer_nm": 0.09,
+          "metrics": {
+            "center_nm": 1549.46741,
+            "center_ghz": 193480.97034193188,
+            "dip_dbm": -77.806,
+            "baseline_dbm": -62.952,
+            "apparent_extinction_db": 14.854,
+            "half_depth_dbm": -65.82254164157224,
+            "left_nm": 1549.4627055400738,
+            "right_nm": 1549.472288418701,
+            "width_nm": 0.009582878627270475,
+            "apparent_width_ghz": 1.196607579721918,
+            "apparent_q": 161691.24583591163,
+            "baseline_samples": 374
+          }
+        }
+      ]
+    },
+    {
+      "center_nm": 1549.82723,
+      "center_ghz": 193436.05028800532,
+      "dip_dbm": -77.312,
+      "baseline_dbm": -62.858,
+      "apparent_extinction_db": 14.454,
+      "half_depth_dbm": -65.71529288719893,
+      "left_nm": 1549.8225639276436,
+      "right_nm": 1549.8323309785162,
+      "width_nm": 0.009767050872596883,
+      "apparent_width_ghz": 1.21903859798348,
+      "apparent_q": 158679.18424238992,
+      "baseline_samples": 374,
+      "baseline_window_sensitivity": [
+        {
+          "inner_nm": 0.04,
+          "outer_nm": 0.07,
+          "metrics": {
+            "center_nm": 1549.82723,
+            "center_ghz": 193436.05028800532,
+            "dip_dbm": -77.312,
+            "baseline_dbm": -62.758,
+            "apparent_extinction_db": 14.553999999999995,
+            "half_depth_dbm": -65.6187164638413,
+            "left_nm": 1549.8225010852618,
+            "right_nm": 1549.832424341642,
+            "width_nm": 0.009923256380261591,
+            "apparent_width_ghz": 1.2385347905846709,
+            "apparent_q": 156181.36184667904,
+            "baseline_samples": 374
+          }
+        },
+        {
+          "inner_nm": 0.05,
+          "outer_nm": 0.08,
+          "metrics": {
+            "center_nm": 1549.82723,
+            "center_ghz": 193436.05028800532,
+            "dip_dbm": -77.312,
+            "baseline_dbm": -62.858,
+            "apparent_extinction_db": 14.454,
+            "half_depth_dbm": -65.71529288719893,
+            "left_nm": 1549.8225639276436,
+            "right_nm": 1549.8323309785162,
+            "width_nm": 0.009767050872596883,
+            "apparent_width_ghz": 1.21903859798348,
+            "apparent_q": 158679.18424238992,
+            "baseline_samples": 374
+          }
+        },
+        {
+          "inner_nm": 0.06,
+          "outer_nm": 0.09,
+          "metrics": {
+            "center_nm": 1549.82723,
+            "center_ghz": 193436.05028800532,
+            "dip_dbm": -77.312,
+            "baseline_dbm": -62.83,
+            "apparent_extinction_db": 14.482,
+            "half_depth_dbm": -65.68825917476246,
+            "left_nm": 1549.8225464773866,
+            "right_nm": 1549.8323632581485,
+            "width_nm": 0.00981678076186654,
+            "apparent_width_ghz": 1.2252454398410444,
+            "apparent_q": 157875.3480715672,
+            "baseline_samples": 374
+          }
+        }
+      ]
+    },
+    {
+      "center_nm": 1550.1877,
+      "center_ghz": 193391.06999752353,
+      "dip_dbm": -75.736,
+      "baseline_dbm": -62.724,
+      "apparent_extinction_db": 13.012000000000008,
+      "half_depth_dbm": -65.52248790529765,
+      "left_nm": 1550.1826347237643,
+      "right_nm": 1550.193435603194,
+      "width_nm": 0.010800879429780252,
+      "apparent_width_ghz": 1.3474450394868993,
+      "apparent_q": 143524.2732209441,
+      "baseline_samples": 375,
+      "baseline_window_sensitivity": [
+        {
+          "inner_nm": 0.04,
+          "outer_nm": 0.07,
+          "metrics": {
+            "center_nm": 1550.1877,
+            "center_ghz": 193391.06999752353,
+            "dip_dbm": -75.736,
+            "baseline_dbm": -62.812,
+            "apparent_extinction_db": 12.924000000000007,
+            "half_depth_dbm": -65.60625832377225,
+            "left_nm": 1550.1826752617042,
+            "right_nm": 1550.1933617827044,
+            "width_nm": 0.010686521000252469,
+            "apparent_width_ghz": 1.3331784799325617,
+            "apparent_q": 145060.14979127637,
+            "baseline_samples": 374
+          }
+        },
+        {
+          "inner_nm": 0.05,
+          "outer_nm": 0.08,
+          "metrics": {
+            "center_nm": 1550.1877,
+            "center_ghz": 193391.06999752353,
+            "dip_dbm": -75.736,
+            "baseline_dbm": -62.724,
+            "apparent_extinction_db": 13.012000000000008,
+            "half_depth_dbm": -65.52248790529765,
+            "left_nm": 1550.1826347237643,
+            "right_nm": 1550.193435603194,
+            "width_nm": 0.010800879429780252,
+            "apparent_width_ghz": 1.3474450394868993,
+            "apparent_q": 143524.2732209441,
+            "baseline_samples": 375
+          }
+        },
+        {
+          "inner_nm": 0.06,
+          "outer_nm": 0.09,
+          "metrics": {
+            "center_nm": 1550.1877,
+            "center_ghz": 193391.06999752353,
+            "dip_dbm": -75.736,
+            "baseline_dbm": -62.77,
+            "apparent_extinction_db": 12.966000000000001,
+            "half_depth_dbm": -65.56628716591634,
+            "left_nm": 1550.1826560164986,
+            "right_nm": 1550.1933968286517,
+            "width_nm": 0.010740812153017032,
+            "apparent_width_ghz": 1.3399514653474924,
+            "apparent_q": 144326.92153321466,
+            "baseline_samples": 374
+          }
+        }
+      ]
+    },
+    {
+      "center_nm": 1550.54785,
+      "center_ghz": 193346.15052350692,
+      "dip_dbm": -77.224,
+      "baseline_dbm": -62.704,
+      "apparent_extinction_db": 14.520000000000003,
+      "half_depth_dbm": -65.56356097993391,
+      "left_nm": 1550.542954468969,
+      "right_nm": 1550.5532613563328,
+      "width_nm": 0.010306887363867645,
+      "apparent_width_ghz": 1.2852207900197254,
+      "apparent_q": 150438.081942745,
+      "baseline_samples": 374,
+      "baseline_window_sensitivity": [
+        {
+          "inner_nm": 0.04,
+          "outer_nm": 0.07,
+          "metrics": {
+            "center_nm": 1550.54785,
+            "center_ghz": 193346.15052350692,
+            "dip_dbm": -77.224,
+            "baseline_dbm": -62.672,
+            "apparent_extinction_db": 14.552000000000007,
+            "half_depth_dbm": -65.5326487358393,
+            "left_nm": 1550.5429241599907,
+            "right_nm": 1550.5533118077253,
+            "width_nm": 0.010387647734660277,
+            "apparent_width_ghz": 1.2952912148140405,
+            "apparent_q": 149268.47979221784,
+            "baseline_samples": 374
+          }
+        },
+        {
+          "inner_nm": 0.05,
+          "outer_nm": 0.08,
+          "metrics": {
+            "center_nm": 1550.54785,
+            "center_ghz": 193346.15052350692,
+            "dip_dbm": -77.224,
+            "baseline_dbm": -62.704,
+            "apparent_extinction_db": 14.520000000000003,
+            "half_depth_dbm": -65.56356097993391,
+            "left_nm": 1550.542954468969,
+            "right_nm": 1550.5532613563328,
+            "width_nm": 0.010306887363867645,
+            "apparent_width_ghz": 1.2852207900197254,
+            "apparent_q": 150438.081942745,
+            "baseline_samples": 374
+          }
+        },
+        {
+          "inner_nm": 0.06,
+          "outer_nm": 0.09,
+          "metrics": {
+            "center_nm": 1550.54785,
+            "center_ghz": 193346.15052350692,
+            "dip_dbm": -77.224,
+            "baseline_dbm": -62.594,
+            "apparent_extinction_db": 14.630000000000003,
+            "half_depth_dbm": -65.45726792141504,
+            "left_nm": 1550.5428426070384,
+            "right_nm": 1550.5534135485047,
+            "width_nm": 0.010570941466312433,
+            "apparent_width_ghz": 1.3181470709338632,
+            "apparent_q": 146680.2565411215,
+            "baseline_samples": 374
+          }
+        }
+      ]
+    }
+  ],
+  "adjacent_spacing_ghz": [
+    44.92005392655847,
+    44.9802904817916,
+    44.919474016613094
+  ],
+  "median_spacing_ghz": 44.92005392655847,
+  "literature_fsr_ghz": 44,
+  "scope": "apparent optical notch metrics from one archived circuit spectrum; no isolated resonator assignment",
+  "isolated_ring_fsr_ghz": null,
+  "intrinsic_q": null,
+  "calibrated_loaded_q": null,
+  "complex_s": null,
+  "coupling_state": null,
+  "geometry_match": null,
+  "measurement_uncertainty": null,
+  "qualification": null,
+  "checks": {
+    "source_identity": true,
+    "shape_grid": true,
+    "minima_readback": true,
+    "width_readback": true,
+    "periodicity": true,
+    "frequency_crosscheck": true
+  },
+  "limitations": [
+    "Absolute dBm, not normalized transmission; local baseline estimated from median wings.",
+    "Half-depth is midpoint in linear power, not 3 dB above dip minimum.",
+    "Apparent widths/Q include instrument response and circuit context; no deconvolution or isolated-ring fit.",
+    "Spacing is consistent with reported 44 GHz FSR, not exact independent attribution to a specific ring.",
+    "No phase, under/overcoupling discrimination, intrinsic Q or exact LNOI400 calibration."
+  ]
+}

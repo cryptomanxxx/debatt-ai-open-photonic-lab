@@ -1,0 +1,97 @@
+{
+  "article_doi": "10.1038/s41467-025-57441-1",
+  "creator": "Chuangchuang Wei",
+  "dataset_license": "CC BY 4.0",
+  "limitations": "No new measurements, exact geometry match, measured complex S, calibration or qualification. Original dataset attribution retained; derived outputs unchanged.",
+  "members": {
+    "cascade/minima.csv": {
+      "bytes": 1842,
+      "sha256": "9628a4ce6785249bee0e3ed4d29477a10f9a2a158075841950dd644eb299abd9"
+    },
+    "cascade/original.zip": {
+      "bytes": 4117,
+      "sha256": "34f56ea9f0129ddd47f51aac986e2b330506eaac5321ad402b67ab263b579a2a"
+    },
+    "cascade/result.json": {
+      "bytes": 25025,
+      "sha256": "e6116167f673cc3bd2f538ef75ba8b3183292a4be56cfb020cd9bb59feeb2a1b"
+    },
+    "modulator/original.zip": {
+      "bytes": 11259,
+      "sha256": "df009e625b21908f2b914ec6d4ef5c047536f026ee08a08098b6ac1171b00415"
+    },
+    "modulator/result.json": {
+      "bytes": 3689,
+      "sha256": "db226646d10783a925f6d18e9f522d2403426427e95c3d5eda8791cc854dc562"
+    },
+    "modulator/theory-replay.csv": {
+      "bytes": 24128,
+      "sha256": "d02f93d31b29625487e8ef31f752764ea793013195f3426260a7c71cac9499f0"
+    },
+    "ring/notches.csv": {
+      "bytes": 863,
+      "sha256": "6ba0a75aa19da6a186c7a3cd8800115dac9d9b8a2c12043b495418cd48b440b4"
+    },
+    "ring/original.zip": {
+      "bytes": 3065,
+      "sha256": "b53c87a8d16cf0d94f5acc5f2cff96287ff8138b67b1e8c657b01179ab0aa7d4"
+    },
+    "ring/result.json": {
+      "bytes": 11209,
+      "sha256": "e51114f1bdcac83ea28a084432dff3aa9f0a0e010696e100357cc2b496613027"
+    }
+  },
+  "original_checks": 19,
+  "source_doi": "10.5281/zenodo.14065933",
+  "sources": [
+    {
+      "analysis_git_blob_sha1": "e47c3c1c885528dacfad4eafb4ebf9c0278cd16d",
+      "artifact": 14553832752,
+      "branch": "research/opa-lib004-tfln-modulator",
+      "csv": "theory-replay.csv",
+      "experiment": "OPA-LIB-004-TFLN-MOD",
+      "head": "486df2fba21c6b49452f1b89b841c0a416087e01",
+      "job": 135726228294,
+      "key": "modulator",
+      "name": "opa-lib004-tfln-modulator",
+      "pr": 236,
+      "run": 44571150197,
+      "sha256": "df009e625b21908f2b914ec6d4ef5c047536f026ee08a08098b6ac1171b00415",
+      "size": 11259,
+      "workflow": ".github/workflows/opa-lib004-tfln-modulator.yml"
+    },
+    {
+      "analysis_git_blob_sha1": "eb561ac5dcc1722838387620b418bcb8682d4148",
+      "artifact": 14554579309,
+      "branch": "research/opa-lib004-tfln-ring",
+      "csv": "notches.csv",
+      "experiment": "OPA-LIB-004-TFLN-RING",
+      "head": "3c1905b61155fcec1b21ecda703bbc243d72aafc",
+      "job": 135731524810,
+      "key": "ring",
+      "name": "opa-lib004-tfln-ring",
+      "pr": 237,
+      "run": 44572624091,
+      "sha256": "b53c87a8d16cf0d94f5acc5f2cff96287ff8138b67b1e8c657b01179ab0aa7d4",
+      "size": 3065,
+      "workflow": ".github/workflows/opa-lib004-tfln-ring.yml"
+    },
+    {
+      "analysis_git_blob_sha1": "f24c12818e5766a72850c71fef385769bbb9e2c2",
+      "artifact": 14555297042,
+      "branch": "research/opa-lib004-tfln-cascade",
+      "csv": "minima.csv",
+      "experiment": "OPA-LIB-004-TFLN-CASCADE",
+      "head": "1d71760dcf4c543a79178820444853805c4efd4d",
+      "job": 135735156833,
+      "key": "cascade",
+      "name": "opa-lib004-tfln-cascade",
+      "pr": 238,
+      "run": 44573645121,
+      "sha256": "34f56ea9f0129ddd47f51aac986e2b330506eaac5321ad402b67ab263b579a2a",
+      "size": 4117,
+      "workflow": ".github/workflows/opa-lib004-tfln-cascade.yml"
+    }
+  ],
+  "verification": "Pinned original ZIP/CRC/member set, all JSON fields against original CI log, full replay with pinned reviewed implementation, all CSV cells compared with numeric tolerance; exact staged bytes. Replay is not an independent estimator."
+}

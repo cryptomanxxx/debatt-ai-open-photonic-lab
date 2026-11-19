@@ -1,0 +1,66 @@
+{
+  "artifact": 14548435012,
+  "branch": "research/opa-lib-004",
+  "center_ci": [
+    1.5872622926232898,
+    3.216775702215931
+  ],
+  "center_loss": 2.4020189974196104,
+  "center_r2": 0.9670429846738993,
+  "complete_spectral_fits": 5972,
+  "detector_readings": 90015,
+  "experiment": "OPA-LIB-004",
+  "floor_counts": [
+    17,
+    0,
+    3,
+    1,
+    8
+  ],
+  "head": "13f96480274d9e4f8871a5c3bde04abd710bbfa5",
+  "loo": [
+    2.123377623642176,
+    2.536588430982804,
+    2.4107464940963084,
+    2.3803502588936825,
+    2.796002875918146
+  ],
+  "members": {
+    "datasets/cutback-spectrum.csv": {
+      "bytes": 456161,
+      "sha256": "cdbf931b6cd56bfba21ca785f154ad29c4d0342a81467d6f7f70258da424e676"
+    },
+    "datasets/raw-detectors.csv": {
+      "bytes": 2048307,
+      "sha256": "cfe12e3c38691d78d6485d840601f42d1543f0d1981d373a66d46172fa6c957d"
+    },
+    "evidence/installed-packages.json": {
+      "bytes": 116,
+      "sha256": "1db4052c53fa26f589be166af79ffd216fb2f01988da90a2e0efb2609715ceb8"
+    },
+    "evidence/result.json": {
+      "bytes": 6201,
+      "sha256": "3e3a4b6d9d133e7e582389525892daa6004d536d6433c85926e59c6aa9995feb"
+    },
+    "original.zip": {
+      "bytes": 786855,
+      "sha256": "687d1c7b520cac1c68abbed2fd50833b1cb40e57a058e6b495a5f92992799c41"
+    }
+  },
+  "name": "opa-lib-004",
+  "pr": 230,
+  "quartic_loss": 2.4728764622493866,
+  "revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+  "run": 44558959047,
+  "sha256": "687d1c7b520cac1c68abbed2fd50833b1cb40e57a058e6b495a5f92992799c41",
+  "size": 786855,
+  "source_sha256": [
+    "ee9b119c19753724b090a27ca68b4038dd45d343cfeff7e9865470db34ff3808",
+    "0b91e9f623b2e141490acf1a7e3a5ee5faebc852ce3d44e1b985e421a15f3c85",
+    "0966e07ca12429e1513cce34aa8b862da7ba2beebe9ca83f54950af8329b1720",
+    "c74b479858732029cab26fe3ff5f28adda6cd9cee0dc3623f9863a99ea9267c3",
+    "7e6bd50f78df147e4df89d16319ed76cf6d933ce96d71dc6a9ae71a6ed4241cb"
+  ],
+  "verification": "Exact ZIP/CRC/member set, independent uncompressed MAT v5 read, all 90015 raw detector values, all eligible spectrum OLS fits, center CI and leave-one-out replay, quartic derived regression from frozen fitted values, staged byte identity. No rerun or claim of independent quartic refit.",
+  "workflow": ".github/workflows/opa-lib004.yml"
+}

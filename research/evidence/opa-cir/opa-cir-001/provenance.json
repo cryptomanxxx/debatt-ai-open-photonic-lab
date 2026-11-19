@@ -1,0 +1,28 @@
+{
+  "artifact": 14524511143,
+  "branch": "research/opa-cir-001",
+  "checks": 20,
+  "experiment": "OPA-CIR-001",
+  "head": "8328219e569da2ab825f8ea4b5312df4583f0156",
+  "members": {
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c"
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6"
+    },
+    "result.json": {
+      "bytes": 2026,
+      "sha256": "cae679b5a5973fe738c80e67d5fb1e853c0621d327cbd99e3fe00b628b3caf5a"
+    }
+  },
+  "name": "opa-cir-001",
+  "pr": 212,
+  "run": 44511534366,
+  "sha256": "e619bc1d79062ea086ef0620932991ec18cc19c95c4f406ebfd975a4846f98fb",
+  "size": 14448,
+  "verification": "Pinned GitHub ZIP digest and byte count, safe member names, CRC and report checks; staged bytes independently compared.",
+  "workflow": ".github/workflows/experiments.yml"
+}

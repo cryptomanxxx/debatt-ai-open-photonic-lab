@@ -1,0 +1,59 @@
+{
+  "experiment": "OPA-CIR-001",
+  "seed": 20261119,
+  "random_trials": 128,
+  "tolerance": 1e-12,
+  "checks": {
+    "ideal_complex_field": true,
+    "unitarity": true,
+    "reciprocity": true,
+    "reflectionless": true,
+    "reverse_transpose": true,
+    "programmed_targets": true,
+    "lossy_reference": true,
+    "passivity_excess": true,
+    "archived_sweep": true,
+    "archived_rotation": true,
+    "reflective_network": true,
+    "reflective_unitarity": true,
+    "asymmetric_reflection": true,
+    "boundary_reordering": true,
+    "duplicate_port_rejected": true,
+    "unconnected_port_rejected": true,
+    "unknown_port_rejected": true,
+    "singular_loop_rejected": true,
+    "nonfinite_rejected": true,
+    "wrong_phase_detected": true
+  },
+  "errors": {
+    "ideal_complex_field": 4.0029660424867215e-16,
+    "unitarity": 1.1102230246251565e-15,
+    "reciprocity": 4.0029660424867215e-16,
+    "reflectionless": 0.0,
+    "reverse_transpose": 3.356589068483857e-16,
+    "programmed_targets": 1.2123818431320796e-15,
+    "lossy_reference": 3.376611507232129e-16,
+    "passivity_excess": 0.0,
+    "archived_sweep": 3.3306690738754696e-16,
+    "archived_rotation": 1.1346035992702495e-16,
+    "reflective_network": 1.1102230246251565e-16,
+    "reflective_unitarity": 2.220446049250313e-16,
+    "asymmetric_reflection": 1.1102230246251565e-16,
+    "boundary_reordering": 0.0
+  },
+  "failures": [],
+  "reference": "OPA-MZI-001 archived sweep and rotation; existing MZI-002 hardware transfer formula",
+  "model_scope": "ideal/assumed linear single-frequency power-normalized scattering blocks",
+  "port_order": [
+    "input_top",
+    "input_bottom",
+    "output_top",
+    "output_bottom"
+  ],
+  "limitations": [
+    "No PDK model imported, no measured or FDTD complex S data.",
+    "Assumed lossy reference is not physical device evidence.",
+    "No wavelength interpolation, active/nonlinear state, noise, electrical or thermal model.",
+    "Linear steady-state solve; no transient or physical throughput claim."
+  ]
+}

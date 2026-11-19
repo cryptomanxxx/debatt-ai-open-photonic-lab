@@ -1,0 +1,24 @@
+{
+  "artifact": 14529294780,
+  "branch": "research/opa-cir-008",
+  "checks": 10,
+  "experiment": "OPA-CIR-008",
+  "head": "2896e0270d42cf940f0a879f4f2231ed9f66ca1c",
+  "members": {
+    "cir007-source.zip": {
+      "bytes": 10718,
+      "sha256": "abc07f6aa4bc74b2dbb708a3cbeb29a23ee557bfd724259baa5eb45d0202e26c"
+    },
+    "result.json": {
+      "bytes": 149436,
+      "sha256": "6f889de5902c8d9ed314b7d172dd8c6a921aea6cd373c280833ac009909af4c2"
+    }
+  },
+  "name": "opa-cir-008",
+  "pr": 219,
+  "run": 44526090427,
+  "sha256": "593e1189ca0b9d78c89c116412f0bae7ea4b9ad006ce58b15d35f6b5858c4183",
+  "size": 19553,
+  "verification": "Pinned GitHub ZIP digest and byte count, safe member names, CRC and report checks; staged bytes independently compared.",
+  "workflow": ".github/workflows/opa-cir008-system.yml"
+}

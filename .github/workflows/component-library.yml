@@ -1,0 +1,21 @@
+name: OPA component library
+on:
+  pull_request:
+    paths:
+      - 'components/**'
+      - 'tools/check_component_library.py'
+      - '.github/workflows/component-library.yml'
+      - 'results/**'
+      - 'layout/**'
+      - 'research/OPA-NL-FINAL-REPORT.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  registry:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: python3 tools/check_component_library.py

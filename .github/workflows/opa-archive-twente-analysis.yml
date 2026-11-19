@@ -1,0 +1,61 @@
+name: OPA archive Twente analysis evidence
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_archive:
+        description: Archive three original analysis artifacts on separate review branch
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: opa-twente-analysis-archive
+  cancel-in-progress: false
+jobs:
+  archive:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_archive == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ARCHIVE_BRANCH: research/opa-lib004-tfln-analysis-evidence
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/twente-analysis-zips"
+          for key in modulator ring cascade; do
+            m=$(jq -ce --arg k "$key" '.[] | select(.key == $k)' components/experimentally_validated/Twente-TFLN-Wei-2025/analysis-archive-source.json)
+            run=$(jq -r .run <<< "$m")
+            artifact=$(jq -r .artifact <<< "$m")
+            gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run" | jq -e --argjson m "$m" '.conclusion == "success" and .event == "pull_request" and .head_sha == $m.head and .head_branch == $m.branch and .path == $m.workflow' >/dev/null
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact" | jq -e --argjson m "$m" '.name == $m.name and .workflow_run.id == $m.run and .digest == ("sha256:" + $m.sha256) and .size_in_bytes == $m.size and .expired == false' >/dev/null
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact/zip" > "$RUNNER_TEMP/twente-analysis-zips/$key.zip"
+          done
+          root=components/experimentally_validated/Twente-TFLN-Wei-2025/analysis-archive
+          python3 research/archive_twente_analysis.py --source "$RUNNER_TEMP/twente-analysis-zips" --output "$root"
+          gh auth setup-git
+          if git ls-remote --exit-code --heads origin "refs/heads/$ARCHIVE_BRANCH" >/dev/null; then
+            echo "Archive branch exists; refusing overwrite."
+            exit 1
+          else
+            status=$?
+            [[ "$status" == 2 ]]
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$ARCHIVE_BRANCH"
+          git -c core.autocrlf=false add -f -- "$root"
+          stage="$RUNNER_TEMP/twente-analysis-staged"
+          mkdir "$stage"
+          git ls-files -z -- "$root" | while IFS= read -r -d '' file; do
+            rel="${file#$root/}"
+            mkdir -p "$stage/$(dirname "$rel")"
+            git show ":$file" > "$stage/$rel"
+          done
+          python3 research/archive_twente_analysis.py --staged "$stage"
+          git commit -m "Archive exact OPA-LIB-004 Twente analysis evidence"
+          git push origin "HEAD:refs/heads/$ARCHIVE_BRANCH"

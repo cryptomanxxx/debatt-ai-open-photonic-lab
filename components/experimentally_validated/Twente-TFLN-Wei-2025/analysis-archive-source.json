@@ -1,0 +1,1578 @@
+[
+  {
+    "key": "modulator",
+    "head": "486df2fba21c6b49452f1b89b841c0a416087e01",
+    "run": 44571150197,
+    "artifact": 14553832752,
+    "size": 11259,
+    "sha256": "df009e625b21908f2b914ec6d4ef5c047536f026ee08a08098b6ac1171b00415",
+    "pr": 236,
+    "job": 135726228294,
+    "experiment": "OPA-LIB-004-TFLN-MOD",
+    "name": "opa-lib004-tfln-modulator",
+    "branch": "research/opa-lib004-tfln-modulator",
+    "workflow": ".github/workflows/opa-lib004-tfln-modulator.yml",
+    "csv": "theory-replay.csv",
+    "expected_result": {
+      "experiment": "OPA-LIB-004-TFLN-MOD",
+      "source_doi": "10.5281/zenodo.14065933",
+      "article_doi": "10.1038/s41467-025-57441-1",
+      "source_files": {
+        "1a": {
+          "sha256": "2eaab62a46d5602d340cfdf38fa285e4d2837921c5bd5a7081f991c09b65ef99",
+          "data_rows": 10001,
+          "columns": [
+            "Frequency (GHz)",
+            "Optical power (dBm)"
+          ]
+        },
+        "1b": {
+          "sha256": "cafbf3676703360c9a4965f0ffba8352ce8948c08baa32e324aaac47059892d8",
+          "data_rows": 1001,
+          "columns": [
+            "Frequency (GHz)",
+            "Optical power carrier max (dBm)",
+            "Optical power sideband max (dBm)"
+          ]
+        },
+        "1c": {
+          "sha256": "26b49de6c0b7f3e2bee16ee57bfd2d0915f837b4d0a5bf62477d02b95b550519",
+          "data_rows": 400,
+          "columns": [
+            "Modulation depth (rad)",
+            "Ratio of sideband and carrier (dB)"
+          ]
+        }
+      },
+      "carrier": {
+        "frequency_ghz": 193317.08,
+        "power_dbm": -16.15772
+      },
+      "sidebands": [
+        {
+          "side": "lower",
+          "frequency_ghz": 193312.06,
+          "offset_ghz": -5.019999999989523,
+          "power_dbm": -43.02588,
+          "relative_db": -26.86816,
+          "modulation_depth_rad": 0.09060995411797967,
+          "table_interpolated_depth_rad": 0.09062887725823593,
+          "window_sensitivity": [
+            {
+              "halfwidth_ghz": 0.25,
+              "peak_ghz": 193312.06,
+              "power_dbm": -43.02588
+            },
+            {
+              "halfwidth_ghz": 0.5,
+              "peak_ghz": 193312.06,
+              "power_dbm": -43.02588
+            },
+            {
+              "halfwidth_ghz": 0.75,
+              "peak_ghz": 193312.06,
+              "power_dbm": -43.02588
+            }
+          ]
+        },
+        {
+          "side": "upper",
+          "frequency_ghz": 193322.1,
+          "offset_ghz": 5.0200000000186265,
+          "power_dbm": -42.67036,
+          "relative_db": -26.51264,
+          "modulation_depth_rad": 0.09438737462908176,
+          "table_interpolated_depth_rad": 0.09439754038257171,
+          "window_sensitivity": [
+            {
+              "halfwidth_ghz": 0.25,
+              "peak_ghz": 193322.1,
+              "power_dbm": -42.67036
+            },
+            {
+              "halfwidth_ghz": 0.5,
+              "peak_ghz": 193322.1,
+              "power_dbm": -42.67036
+            },
+            {
+              "halfwidth_ghz": 0.75,
+              "peak_ghz": 193322.1,
+              "power_dbm": -42.67036
+            }
+          ]
+        }
+      ],
+      "sideband_asymmetry_db": 0.3555199999999985,
+      "maxhold": {
+        "samples": 10001,
+        "frequency_span_ghz": [
+          193300,
+          193500
+        ],
+        "peak_frequency_ghz": 193399.8,
+        "peak_power_dbm": -19.10201
+      },
+      "theoretical_curve": {
+        "samples": 400,
+        "max_abs_error_db": 0.00010160020905658484,
+        "rmse_db": 0.00003177653953379493
+      },
+      "literature": {
+        "rf_ghz": 5,
+        "modulation_depth_rad": 0.095,
+        "vpi_rf_v": 3.5,
+        "electrode_length_cm": 1
+      },
+      "independently_extracted_vpi_v": null,
+      "delivered_rf_peak_voltage_v": null,
+      "eo_bandwidth_ghz": null,
+      "measurement_uncertainty": null,
+      "complex_s": null,
+      "geometry_match": null,
+      "qualification": null,
+      "checks": {
+        "source_identity": true,
+        "shape_grid": true,
+        "peak_readback": true,
+        "bessel_table": true,
+        "inversion_crosscheck": true,
+        "maxhold_readback": true
+      },
+      "limitations": [
+        "Separate bias scans; not simultaneous power ratios or complex optical S.",
+        "Figure 1c theoretical reference only; not 400 independent measurements.",
+        "Delivered RF amplitude not established by these CSVs; no independent Vpi.",
+        "Maxhold optical spectrum not calibrated EO frequency response; no bandwidth inferred.",
+        "Window sensitivity is not measurement uncertainty.",
+        "Different TFLN process from lnoi400; no model calibration."
+      ]
+    },
+    "analysis_git_blob_sha1": "e47c3c1c885528dacfad4eafb4ebf9c0278cd16d"
+  },
+  {
+    "key": "ring",
+    "head": "3c1905b61155fcec1b21ecda703bbc243d72aafc",
+    "run": 44572624091,
+    "artifact": 14554579309,
+    "size": 3065,
+    "sha256": "b53c87a8d16cf0d94f5acc5f2cff96287ff8138b67b1e8c657b01179ab0aa7d4",
+    "pr": 237,
+    "job": 135731524810,
+    "experiment": "OPA-LIB-004-TFLN-RING",
+    "name": "opa-lib004-tfln-ring",
+    "branch": "research/opa-lib004-tfln-ring",
+    "workflow": ".github/workflows/opa-lib004-tfln-ring.yml",
+    "csv": "notches.csv",
+    "expected_result": {
+      "experiment": "OPA-LIB-004-TFLN-RING",
+      "source_doi": "10.5281/zenodo.14065933",
+      "article_doi": "10.1038/s41467-025-57441-1",
+      "source_path": "archive/original/source data/Sup fig 4/Supplementary fig 4a.csv",
+      "source_sha256": "448402f57041b484fb1ead4b85977b1b0cef07416b812345a327f9e49ff08886",
+      "rows": 10001,
+      "resonance_candidates": [
+        {
+          "center_nm": 1549.46741,
+          "center_ghz": 193480.97034193188,
+          "dip_dbm": -77.806,
+          "baseline_dbm": -62.788,
+          "apparent_extinction_db": 15.018,
+          "half_depth_dbm": -65.66364139035565,
+          "left_nm": 1549.462596184291,
+          "right_nm": 1549.4724882267733,
+          "width_nm": 0.009892042482306351,
+          "apparent_width_ghz": 1.235212589308094,
+          "apparent_q": 156637.7901396799,
+          "baseline_samples": 374,
+          "baseline_window_sensitivity": [
+            {
+              "inner_nm": 0.04,
+              "outer_nm": 0.07,
+              "metrics": {
+                "center_nm": 1549.46741,
+                "center_ghz": 193480.97034193188,
+                "dip_dbm": -77.806,
+                "baseline_dbm": -62.746,
+                "apparent_extinction_db": 15.059999999999995,
+                "half_depth_dbm": -65.62291767909957,
+                "left_nm": 1549.4625653285393,
+                "right_nm": 1549.4725388536813,
+                "width_nm": 0.009973525141958817,
+                "apparent_width_ghz": 1.2453872574833038,
+                "apparent_q": 155358.07772188145,
+                "baseline_samples": 376
+              }
+            },
+            {
+              "inner_nm": 0.05,
+              "outer_nm": 0.08,
+              "metrics": {
+                "center_nm": 1549.46741,
+                "center_ghz": 193480.97034193188,
+                "dip_dbm": -77.806,
+                "baseline_dbm": -62.788,
+                "apparent_extinction_db": 15.018,
+                "half_depth_dbm": -65.66364139035565,
+                "left_nm": 1549.462596184291,
+                "right_nm": 1549.4724882267733,
+                "width_nm": 0.009892042482306351,
+                "apparent_width_ghz": 1.235212589308094,
+                "apparent_q": 156637.7901396799,
+                "baseline_samples": 374
+              }
+            },
+            {
+              "inner_nm": 0.06,
+              "outer_nm": 0.09,
+              "metrics": {
+                "center_nm": 1549.46741,
+                "center_ghz": 193480.97034193188,
+                "dip_dbm": -77.806,
+                "baseline_dbm": -62.952,
+                "apparent_extinction_db": 14.854,
+                "half_depth_dbm": -65.82254164157224,
+                "left_nm": 1549.4627055400738,
+                "right_nm": 1549.472288418701,
+                "width_nm": 0.009582878627270475,
+                "apparent_width_ghz": 1.196607579721918,
+                "apparent_q": 161691.24583591163,
+                "baseline_samples": 374
+              }
+            }
+          ]
+        },
+        {
+          "center_nm": 1549.82723,
+          "center_ghz": 193436.05028800532,
+          "dip_dbm": -77.312,
+          "baseline_dbm": -62.858,
+          "apparent_extinction_db": 14.454,
+          "half_depth_dbm": -65.71529288719893,
+          "left_nm": 1549.8225639276436,
+          "right_nm": 1549.8323309785162,
+          "width_nm": 0.009767050872596883,
+          "apparent_width_ghz": 1.21903859798348,
+          "apparent_q": 158679.18424238992,
+          "baseline_samples": 374,
+          "baseline_window_sensitivity": [
+            {
+              "inner_nm": 0.04,
+              "outer_nm": 0.07,
+              "metrics": {
+                "center_nm": 1549.82723,
+                "center_ghz": 193436.05028800532,
+                "dip_dbm": -77.312,
+                "baseline_dbm": -62.758,
+                "apparent_extinction_db": 14.553999999999995,
+                "half_depth_dbm": -65.6187164638413,
+                "left_nm": 1549.8225010852618,
+                "right_nm": 1549.832424341642,
+                "width_nm": 0.009923256380261591,
+                "apparent_width_ghz": 1.2385347905846709,
+                "apparent_q": 156181.36184667904,
+                "baseline_samples": 374
+              }
+            },
+            {
+              "inner_nm": 0.05,
+              "outer_nm": 0.08,
+              "metrics": {
+                "center_nm": 1549.82723,
+                "center_ghz": 193436.05028800532,
+                "dip_dbm": -77.312,
+                "baseline_dbm": -62.858,
+                "apparent_extinction_db": 14.454,
+                "half_depth_dbm": -65.71529288719893,
+                "left_nm": 1549.8225639276436,
+                "right_nm": 1549.8323309785162,
+                "width_nm": 0.009767050872596883,
+                "apparent_width_ghz": 1.21903859798348,
+                "apparent_q": 158679.18424238992,
+                "baseline_samples": 374
+              }
+            },
+            {
+              "inner_nm": 0.06,
+              "outer_nm": 0.09,
+              "metrics": {
+                "center_nm": 1549.82723,
+                "center_ghz": 193436.05028800532,
+                "dip_dbm": -77.312,
+                "baseline_dbm": -62.83,
+                "apparent_extinction_db": 14.482,
+                "half_depth_dbm": -65.68825917476246,
+                "left_nm": 1549.8225464773866,
+                "right_nm": 1549.8323632581485,
+                "width_nm": 0.00981678076186654,
+                "apparent_width_ghz": 1.2252454398410444,
+                "apparent_q": 157875.3480715672,
+                "baseline_samples": 374
+              }
+            }
+          ]
+        },
+        {
+          "center_nm": 1550.1877,
+          "center_ghz": 193391.06999752353,
+          "dip_dbm": -75.736,
+          "baseline_dbm": -62.724,
+          "apparent_extinction_db": 13.012000000000008,
+          "half_depth_dbm": -65.52248790529765,
+          "left_nm": 1550.1826347237643,
+          "right_nm": 1550.193435603194,
+          "width_nm": 0.010800879429780252,
+          "apparent_width_ghz": 1.3474450394868993,
+          "apparent_q": 143524.2732209441,
+          "baseline_samples": 375,
+          "baseline_window_sensitivity": [
+            {
+              "inner_nm": 0.04,
+              "outer_nm": 0.07,
+              "metrics": {
+                "center_nm": 1550.1877,
+                "center_ghz": 193391.06999752353,
+                "dip_dbm": -75.736,
+                "baseline_dbm": -62.812,
+                "apparent_extinction_db": 12.924000000000007,
+                "half_depth_dbm": -65.60625832377225,
+                "left_nm": 1550.1826752617042,
+                "right_nm": 1550.1933617827044,
+                "width_nm": 0.010686521000252469,
+                "apparent_width_ghz": 1.3331784799325617,
+                "apparent_q": 145060.14979127637,
+                "baseline_samples": 374
+              }
+            },
+            {
+              "inner_nm": 0.05,
+              "outer_nm": 0.08,
+              "metrics": {
+                "center_nm": 1550.1877,
+                "center_ghz": 193391.06999752353,
+                "dip_dbm": -75.736,
+                "baseline_dbm": -62.724,
+                "apparent_extinction_db": 13.012000000000008,
+                "half_depth_dbm": -65.52248790529765,
+                "left_nm": 1550.1826347237643,
+                "right_nm": 1550.193435603194,
+                "width_nm": 0.010800879429780252,
+                "apparent_width_ghz": 1.3474450394868993,
+                "apparent_q": 143524.2732209441,
+                "baseline_samples": 375
+              }
+            },
+            {
+              "inner_nm": 0.06,
+              "outer_nm": 0.09,
+              "metrics": {
+                "center_nm": 1550.1877,
+                "center_ghz": 193391.06999752353,
+                "dip_dbm": -75.736,
+                "baseline_dbm": -62.77,
+                "apparent_extinction_db": 12.966000000000001,
+                "half_depth_dbm": -65.56628716591634,
+                "left_nm": 1550.1826560164986,
+                "right_nm": 1550.1933968286517,
+                "width_nm": 0.010740812153017032,
+                "apparent_width_ghz": 1.3399514653474924,
+                "apparent_q": 144326.92153321466,
+                "baseline_samples": 374
+              }
+            }
+          ]
+        },
+        {
+          "center_nm": 1550.54785,
+          "center_ghz": 193346.15052350692,
+          "dip_dbm": -77.224,
+          "baseline_dbm": -62.704,
+          "apparent_extinction_db": 14.520000000000003,
+          "half_depth_dbm": -65.56356097993391,
+          "left_nm": 1550.542954468969,
+          "right_nm": 1550.5532613563328,
+          "width_nm": 0.010306887363867645,
+          "apparent_width_ghz": 1.2852207900197254,
+          "apparent_q": 150438.081942745,
+          "baseline_samples": 374,
+          "baseline_window_sensitivity": [
+            {
+              "inner_nm": 0.04,
+              "outer_nm": 0.07,
+              "metrics": {
+                "center_nm": 1550.54785,
+                "center_ghz": 193346.15052350692,
+                "dip_dbm": -77.224,
+                "baseline_dbm": -62.672,
+                "apparent_extinction_db": 14.552000000000007,
+                "half_depth_dbm": -65.5326487358393,
+                "left_nm": 1550.5429241599907,
+                "right_nm": 1550.5533118077253,
+                "width_nm": 0.010387647734660277,
+                "apparent_width_ghz": 1.2952912148140405,
+                "apparent_q": 149268.47979221784,
+                "baseline_samples": 374
+              }
+            },
+            {
+              "inner_nm": 0.05,
+              "outer_nm": 0.08,
+              "metrics": {
+                "center_nm": 1550.54785,
+                "center_ghz": 193346.15052350692,
+                "dip_dbm": -77.224,
+                "baseline_dbm": -62.704,
+                "apparent_extinction_db": 14.520000000000003,
+                "half_depth_dbm": -65.56356097993391,
+                "left_nm": 1550.542954468969,
+                "right_nm": 1550.5532613563328,
+                "width_nm": 0.010306887363867645,
+                "apparent_width_ghz": 1.2852207900197254,
+                "apparent_q": 150438.081942745,
+                "baseline_samples": 374
+              }
+            },
+            {
+              "inner_nm": 0.06,
+              "outer_nm": 0.09,
+              "metrics": {
+                "center_nm": 1550.54785,
+                "center_ghz": 193346.15052350692,
+                "dip_dbm": -77.224,
+                "baseline_dbm": -62.594,
+                "apparent_extinction_db": 14.630000000000003,
+                "half_depth_dbm": -65.45726792141504,
+                "left_nm": 1550.5428426070384,
+                "right_nm": 1550.5534135485047,
+                "width_nm": 0.010570941466312433,
+                "apparent_width_ghz": 1.3181470709338632,
+                "apparent_q": 146680.2565411215,
+                "baseline_samples": 374
+              }
+            }
+          ]
+        }
+      ],
+      "adjacent_spacing_ghz": [
+        44.92005392655847,
+        44.9802904817916,
+        44.919474016613094
+      ],
+      "median_spacing_ghz": 44.92005392655847,
+      "literature_fsr_ghz": 44,
+      "scope": "apparent optical notch metrics from one archived circuit spectrum; no isolated resonator assignment",
+      "isolated_ring_fsr_ghz": null,
+      "intrinsic_q": null,
+      "calibrated_loaded_q": null,
+      "complex_s": null,
+      "coupling_state": null,
+      "geometry_match": null,
+      "measurement_uncertainty": null,
+      "qualification": null,
+      "checks": {
+        "source_identity": true,
+        "shape_grid": true,
+        "minima_readback": true,
+        "width_readback": true,
+        "periodicity": true,
+        "frequency_crosscheck": true
+      },
+      "limitations": [
+        "Absolute dBm, not normalized transmission; local baseline estimated from median wings.",
+        "Half-depth is midpoint in linear power, not 3 dB above dip minimum.",
+        "Apparent widths/Q include instrument response and circuit context; no deconvolution or isolated-ring fit.",
+        "Spacing is consistent with reported 44 GHz FSR, not exact independent attribution to a specific ring.",
+        "No phase, under/overcoupling discrimination, intrinsic Q or exact LNOI400 calibration."
+      ]
+    },
+    "analysis_git_blob_sha1": "eb561ac5dcc1722838387620b418bcb8682d4148"
+  },
+  {
+    "key": "cascade",
+    "head": "1d71760dcf4c543a79178820444853805c4efd4d",
+    "run": 44573645121,
+    "artifact": 14555297042,
+    "size": 4117,
+    "sha256": "34f56ea9f0129ddd47f51aac986e2b330506eaac5321ad402b67ab263b579a2a",
+    "pr": 238,
+    "job": 135735156833,
+    "experiment": "OPA-LIB-004-TFLN-CASCADE",
+    "name": "opa-lib004-tfln-cascade",
+    "branch": "research/opa-lib004-tfln-cascade",
+    "workflow": ".github/workflows/opa-lib004-tfln-cascade.yml",
+    "csv": "minima.csv",
+    "expected_result": {
+      "experiment": "OPA-LIB-004-TFLN-CASCADE",
+      "source_doi": "10.5281/zenodo.14065933",
+      "article_doi": "10.1038/s41467-025-57441-1",
+      "scans": [
+        {
+          "scan": "a",
+          "rows": 10001,
+          "source_sha256": "448402f57041b484fb1ead4b85977b1b0cef07416b812345a327f9e49ff08886",
+          "minima_count": 4,
+          "minima_per_period": 1,
+          "periods": [
+            {
+              "period": 1,
+              "span_ghz": 0,
+              "adjacent_gaps_ghz": [],
+              "minima": [
+                {
+                  "wavelength_nm": 1549.46741,
+                  "power_dbm": -77.806,
+                  "frequency_ghz": 193480.97034193188
+                }
+              ]
+            },
+            {
+              "period": 2,
+              "span_ghz": 0,
+              "adjacent_gaps_ghz": [],
+              "minima": [
+                {
+                  "wavelength_nm": 1549.82723,
+                  "power_dbm": -77.312,
+                  "frequency_ghz": 193436.05028800532
+                }
+              ]
+            },
+            {
+              "period": 3,
+              "span_ghz": 0,
+              "adjacent_gaps_ghz": [],
+              "minima": [
+                {
+                  "wavelength_nm": 1550.1877,
+                  "power_dbm": -75.736,
+                  "frequency_ghz": 193391.06999752353
+                }
+              ]
+            },
+            {
+              "period": 4,
+              "span_ghz": 0,
+              "adjacent_gaps_ghz": [],
+              "minima": [
+                {
+                  "wavelength_nm": 1550.54785,
+                  "power_dbm": -77.224,
+                  "frequency_ghz": 193346.15052350692
+                }
+              ]
+            }
+          ],
+          "span_range_ghz": [
+            0,
+            0
+          ],
+          "adjacent_gap_range_ghz": null,
+          "recurrence_range_ghz": [
+            44.919474016621585,
+            44.98029048178378
+          ],
+          "median_recurrence_ghz": 44.920053926564776,
+          "sensitivity": [
+            {
+              "threshold_dbm": -71,
+              "radius_samples": 75,
+              "total": 4,
+              "counts_by_window": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -71,
+              "radius_samples": 100,
+              "total": 4,
+              "counts_by_window": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -71,
+              "radius_samples": 125,
+              "total": 4,
+              "counts_by_window": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -72,
+              "radius_samples": 75,
+              "total": 4,
+              "counts_by_window": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -72,
+              "radius_samples": 100,
+              "total": 4,
+              "counts_by_window": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -72,
+              "radius_samples": 125,
+              "total": 4,
+              "counts_by_window": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -73,
+              "radius_samples": 75,
+              "total": 4,
+              "counts_by_window": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -73,
+              "radius_samples": 100,
+              "total": 4,
+              "counts_by_window": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -73,
+              "radius_samples": 125,
+              "total": 4,
+              "counts_by_window": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -74,
+              "radius_samples": 75,
+              "total": 4,
+              "counts_by_window": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -74,
+              "radius_samples": 100,
+              "total": 4,
+              "counts_by_window": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -74,
+              "radius_samples": 125,
+              "total": 4,
+              "counts_by_window": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "outside_windows": 0
+            }
+          ]
+        },
+        {
+          "scan": "b",
+          "rows": 10001,
+          "source_sha256": "65d605cd0f3f1eb33aa4290f161c8a318c0bb6f40c34905b895645b5535bee2a",
+          "minima_count": 8,
+          "minima_per_period": 2,
+          "periods": [
+            {
+              "period": 1,
+              "span_ghz": 11.639824122136096,
+              "adjacent_gaps_ghz": [
+                11.639824122136096
+              ],
+              "minima": [
+                {
+                  "wavelength_nm": 1549.37068,
+                  "power_dbm": -75.87,
+                  "frequency_ghz": 193493.04970712366
+                },
+                {
+                  "wavelength_nm": 1549.46389,
+                  "power_dbm": -76.678,
+                  "frequency_ghz": 193481.40988300153
+                }
+              ]
+            },
+            {
+              "period": 2,
+              "span_ghz": 11.600706939105871,
+              "adjacent_gaps_ghz": [
+                11.600706939105871
+              ],
+              "minima": [
+                {
+                  "wavelength_nm": 1549.73141,
+                  "power_dbm": -77.022,
+                  "frequency_ghz": 193448.01045234024
+                },
+                {
+                  "wavelength_nm": 1549.82435,
+                  "power_dbm": -76.41,
+                  "frequency_ghz": 193436.40974540115
+                }
+              ]
+            },
+            {
+              "period": 3,
+              "span_ghz": 11.619025707999267,
+              "adjacent_gaps_ghz": [
+                11.619025707999267
+              ],
+              "minima": [
+                {
+                  "wavelength_nm": 1550.0912,
+                  "power_dbm": -75.792,
+                  "frequency_ghz": 193403.10944285084
+                },
+                {
+                  "wavelength_nm": 1550.18433,
+                  "power_dbm": -76.062,
+                  "frequency_ghz": 193391.49041714284
+                }
+              ]
+            },
+            {
+              "period": 4,
+              "span_ghz": 11.599907853367162,
+              "adjacent_gaps_ghz": [
+                11.599907853367162
+              ],
+              "minima": [
+                {
+                  "wavelength_nm": 1550.45163,
+                  "power_dbm": -76.636,
+                  "frequency_ghz": 193358.1494573939
+                },
+                {
+                  "wavelength_nm": 1550.54465,
+                  "power_dbm": -76.252,
+                  "frequency_ghz": 193346.54954954053
+                }
+              ]
+            }
+          ],
+          "span_range_ghz": [
+            11.599907853367162,
+            11.639824122136096
+          ],
+          "adjacent_gap_range_ghz": [
+            11.599907853367162,
+            11.639824122136096
+          ],
+          "recurrence_range_ghz": [
+            44.901009489404714,
+            45.03925478342772
+          ],
+          "median_recurrence_ghz": 44.95042652961644,
+          "sensitivity": [
+            {
+              "threshold_dbm": -71,
+              "radius_samples": 75,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -71,
+              "radius_samples": 100,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -71,
+              "radius_samples": 125,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -72,
+              "radius_samples": 75,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -72,
+              "radius_samples": 100,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -72,
+              "radius_samples": 125,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -73,
+              "radius_samples": 75,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -73,
+              "radius_samples": 100,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -73,
+              "radius_samples": 125,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -74,
+              "radius_samples": 75,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -74,
+              "radius_samples": 100,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -74,
+              "radius_samples": 125,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "outside_windows": 0
+            }
+          ]
+        },
+        {
+          "scan": "c",
+          "rows": 10001,
+          "source_sha256": "062fe853a964851304f199bef4722fa79c9c4e4c9221f45c5efdf85890e6c8be",
+          "minima_count": 12,
+          "minima_per_period": 3,
+          "periods": [
+            {
+              "period": 1,
+              "span_ghz": 12.200584282915099,
+              "adjacent_gaps_ghz": [
+                4.640649198475209,
+                7.55993508443989
+              ],
+              "minima": [
+                {
+                  "wavelength_nm": 1549.36459,
+                  "power_dbm": -75.428,
+                  "frequency_ghz": 193493.81025933995
+                },
+                {
+                  "wavelength_nm": 1549.40175,
+                  "power_dbm": -75.12,
+                  "frequency_ghz": 193489.16961014146
+                },
+                {
+                  "wavelength_nm": 1549.46229,
+                  "power_dbm": -74.172,
+                  "frequency_ghz": 193481.60967505703
+                }
+              ]
+            },
+            {
+              "period": 2,
+              "span_ghz": 12.281040741508683,
+              "adjacent_gaps_ghz": [
+                4.541133643542836,
+                7.739907097965847
+              ],
+              "minima": [
+                {
+                  "wavelength_nm": 1549.72436,
+                  "power_dbm": -74.646,
+                  "frequency_ghz": 193448.89048527315
+                },
+                {
+                  "wavelength_nm": 1549.76074,
+                  "power_dbm": -74.904,
+                  "frequency_ghz": 193444.34935162961
+                },
+                {
+                  "wavelength_nm": 1549.82275,
+                  "power_dbm": -73.804,
+                  "frequency_ghz": 193436.60944453164
+                }
+              ]
+            },
+            {
+              "period": 3,
+              "span_ghz": 12.240399360540032,
+              "adjacent_gaps_ghz": [
+                4.560232022225894,
+                7.680167338314138
+              ],
+              "minima": [
+                {
+                  "wavelength_nm": 1550.08478,
+                  "power_dbm": -74.504,
+                  "frequency_ghz": 193403.91046223938
+                },
+                {
+                  "wavelength_nm": 1550.12133,
+                  "power_dbm": -75.664,
+                  "frequency_ghz": 193399.35023021715
+                },
+                {
+                  "wavelength_nm": 1550.18289,
+                  "power_dbm": -75.358,
+                  "frequency_ghz": 193391.67006287884
+                }
+              ]
+            },
+            {
+              "period": 4,
+              "span_ghz": 12.319515210573018,
+              "adjacent_gaps_ghz": [
+                4.579316815896692,
+                7.740198394676327
+              ],
+              "minima": [
+                {
+                  "wavelength_nm": 1550.44441,
+                  "power_dbm": -75.924,
+                  "frequency_ghz": 193359.04987396483
+                },
+                {
+                  "wavelength_nm": 1550.48113,
+                  "power_dbm": -80.688,
+                  "frequency_ghz": 193354.47055714895
+                },
+                {
+                  "wavelength_nm": 1550.5432,
+                  "power_dbm": -74.602,
+                  "frequency_ghz": 193346.73035875426
+                }
+              ]
+            }
+          ],
+          "span_range_ghz": [
+            12.200584282915099,
+            12.319515210573018
+          ],
+          "adjacent_gap_range_ghz": [
+            4.541133643542836,
+            7.740198394676327
+          ],
+          "recurrence_range_ghz": [
+            44.82025851186215,
+            45.00023052538812
+          ],
+          "median_recurrence_ghz": 44.93938165280218,
+          "sensitivity": [
+            {
+              "threshold_dbm": -71,
+              "radius_samples": 75,
+              "total": 12,
+              "counts_by_window": [
+                3,
+                3,
+                3,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -71,
+              "radius_samples": 100,
+              "total": 12,
+              "counts_by_window": [
+                3,
+                3,
+                3,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -71,
+              "radius_samples": 125,
+              "total": 12,
+              "counts_by_window": [
+                3,
+                3,
+                3,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -72,
+              "radius_samples": 75,
+              "total": 12,
+              "counts_by_window": [
+                3,
+                3,
+                3,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -72,
+              "radius_samples": 100,
+              "total": 12,
+              "counts_by_window": [
+                3,
+                3,
+                3,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -72,
+              "radius_samples": 125,
+              "total": 12,
+              "counts_by_window": [
+                3,
+                3,
+                3,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -73,
+              "radius_samples": 75,
+              "total": 12,
+              "counts_by_window": [
+                3,
+                3,
+                3,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -73,
+              "radius_samples": 100,
+              "total": 12,
+              "counts_by_window": [
+                3,
+                3,
+                3,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -73,
+              "radius_samples": 125,
+              "total": 12,
+              "counts_by_window": [
+                3,
+                3,
+                3,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -74,
+              "radius_samples": 75,
+              "total": 11,
+              "counts_by_window": [
+                3,
+                2,
+                3,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -74,
+              "radius_samples": 100,
+              "total": 11,
+              "counts_by_window": [
+                3,
+                2,
+                3,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -74,
+              "radius_samples": 125,
+              "total": 11,
+              "counts_by_window": [
+                3,
+                2,
+                3,
+                3
+              ],
+              "outside_windows": 0
+            }
+          ]
+        },
+        {
+          "scan": "d",
+          "rows": 10001,
+          "source_sha256": "40ab41ca5bcd316ed01fec415091d19594ebd2b8c46d69a2f7e7723fbcf6ec3c",
+          "minima_count": 16,
+          "minima_per_period": 4,
+          "periods": [
+            {
+              "period": 1,
+              "span_ghz": 12.539100960170805,
+              "adjacent_gaps_ghz": [
+                4.219843036929872,
+                4.019856849435349,
+                4.299401073805583
+              ],
+              "minima": [
+                {
+                  "wavelength_nm": 1549.35723,
+                  "power_dbm": -74.514,
+                  "frequency_ghz": 193494.72942402057
+                },
+                {
+                  "wavelength_nm": 1549.39102,
+                  "power_dbm": -74.142,
+                  "frequency_ghz": 193490.50958098363
+                },
+                {
+                  "wavelength_nm": 1549.42321,
+                  "power_dbm": -73.144,
+                  "frequency_ghz": 193486.48972413418
+                },
+                {
+                  "wavelength_nm": 1549.45764,
+                  "power_dbm": -73.328,
+                  "frequency_ghz": 193482.19032306038
+                }
+              ]
+            },
+            {
+              "period": 2,
+              "span_ghz": 12.540766217019684,
+              "adjacent_gaps_ghz": [
+                4.140492483251958,
+                4.120344297861828,
+                4.279929435905899
+              ],
+              "minima": [
+                {
+                  "wavelength_nm": 1549.71715,
+                  "power_dbm": -74.086,
+                  "frequency_ghz": 193449.7904988662
+                },
+                {
+                  "wavelength_nm": 1549.75032,
+                  "power_dbm": -73.94,
+                  "frequency_ghz": 193445.65000638296
+                },
+                {
+                  "wavelength_nm": 1549.78333,
+                  "power_dbm": -73.346,
+                  "frequency_ghz": 193441.5296620851
+                },
+                {
+                  "wavelength_nm": 1549.81762,
+                  "power_dbm": -74.1,
+                  "frequency_ghz": 193437.2497326492
+                }
+              ]
+            },
+            {
+              "period": 3,
+              "span_ghz": 12.38024157228828,
+              "adjacent_gaps_ghz": [
+                4.17974079396335,
+                4.059790182704945,
+                4.140710595619986
+              ],
+              "minima": [
+                {
+                  "wavelength_nm": 1550.07741,
+                  "power_dbm": -73.732,
+                  "frequency_ghz": 193404.8300207149
+                },
+                {
+                  "wavelength_nm": 1550.11091,
+                  "power_dbm": -75.162,
+                  "frequency_ghz": 193400.65027992093
+                },
+                {
+                  "wavelength_nm": 1550.14345,
+                  "power_dbm": -73.628,
+                  "frequency_ghz": 193396.5904897382
+                },
+                {
+                  "wavelength_nm": 1550.17664,
+                  "power_dbm": -73.808,
+                  "frequency_ghz": 193392.4497791426
+                }
+              ]
+            },
+            {
+              "period": 4,
+              "span_ghz": 12.359512502563586,
+              "adjacent_gaps_ghz": [
+                4.019415505747502,
+                4.120257458856656,
+                4.219839537959425
+              ],
+              "minima": [
+                {
+                  "wavelength_nm": 1550.43848,
+                  "power_dbm": -75.592,
+                  "frequency_ghz": 193359.7894190552
+                },
+                {
+                  "wavelength_nm": 1550.47071,
+                  "power_dbm": -79.368,
+                  "frequency_ghz": 193355.77000354943
+                },
+                {
+                  "wavelength_nm": 1550.50375,
+                  "power_dbm": -74.694,
+                  "frequency_ghz": 193351.64974609058
+                },
+                {
+                  "wavelength_nm": 1550.53759,
+                  "power_dbm": -73.884,
+                  "frequency_ghz": 193347.42990655263
+                }
+              ]
+            }
+          ],
+          "span_range_ghz": [
+            12.359512502563586,
+            12.540766217019684
+          ],
+          "adjacent_gap_range_ghz": [
+            4.019415505747502,
+            4.299401073805583
+          ],
+          "recurrence_range_ghz": [
+            44.79995350658308,
+            45.04060165970945
+          ],
+          "median_recurrence_ghz": 44.94066702942423,
+          "sensitivity": [
+            {
+              "threshold_dbm": -71,
+              "radius_samples": 75,
+              "total": 16,
+              "counts_by_window": [
+                4,
+                4,
+                4,
+                4
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -71,
+              "radius_samples": 100,
+              "total": 16,
+              "counts_by_window": [
+                4,
+                4,
+                4,
+                4
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -71,
+              "radius_samples": 125,
+              "total": 16,
+              "counts_by_window": [
+                4,
+                4,
+                4,
+                4
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -72,
+              "radius_samples": 75,
+              "total": 16,
+              "counts_by_window": [
+                4,
+                4,
+                4,
+                4
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -72,
+              "radius_samples": 100,
+              "total": 16,
+              "counts_by_window": [
+                4,
+                4,
+                4,
+                4
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -72,
+              "radius_samples": 125,
+              "total": 16,
+              "counts_by_window": [
+                4,
+                4,
+                4,
+                4
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -73,
+              "radius_samples": 75,
+              "total": 16,
+              "counts_by_window": [
+                4,
+                4,
+                4,
+                4
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -73,
+              "radius_samples": 100,
+              "total": 16,
+              "counts_by_window": [
+                4,
+                4,
+                4,
+                4
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -73,
+              "radius_samples": 125,
+              "total": 16,
+              "counts_by_window": [
+                4,
+                4,
+                4,
+                4
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -74,
+              "radius_samples": 75,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                1,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -74,
+              "radius_samples": 100,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                1,
+                3
+              ],
+              "outside_windows": 0
+            },
+            {
+              "threshold_dbm": -74,
+              "radius_samples": 125,
+              "total": 8,
+              "counts_by_window": [
+                2,
+                2,
+                1,
+                3
+              ],
+              "outside_windows": 0
+            }
+          ]
+        }
+      ],
+      "rows": 40004,
+      "additional_rows_vs_ring": 30003,
+      "minima_count": 40,
+      "selection": {
+        "threshold_dbm": -72,
+        "radius_samples": 100,
+        "wavelength_windows_nm": [
+          [
+            1549.3,
+            1549.6
+          ],
+          [
+            1549.66,
+            1549.96
+          ],
+          [
+            1550.02,
+            1550.32
+          ],
+          [
+            1550.38,
+            1550.68
+          ]
+        ],
+        "exploratory": true
+      },
+      "scope": "Four optical circuit spectra; repeated minima, no isolated physical ring attribution",
+      "physical_ring_assignment": null,
+      "heater_settings": null,
+      "complex_s": null,
+      "geometry_match": null,
+      "qualification": null,
+      "measurement_uncertainty": null,
+      "checks": {
+        "source_identity": true,
+        "shape_grid": true,
+        "common_grid": true,
+        "independent_minima_readback": true,
+        "repeated_count": true,
+        "recurrence": true,
+        "span_consistency": true
+      },
+      "limitations": [
+        "Exploratory threshold and windows chosen after data inspection; sensitivity is descriptive, not instrument uncertainty.",
+        "Minima counts are algorithm-dependent, not physical ring counts.",
+        "Ordinal recurrence is not proof of common mode identity or isolated FSR.",
+        "Absolute optical power, no coherent phase or transfer matrix reconstruction.",
+        "No calibrated cascade model, exact geometry match, or RF bandwidth inferred."
+      ]
+    },
+    "analysis_git_blob_sha1": "f24c12818e5766a72850c71fef385769bbb9e2c2"
+  }
+]

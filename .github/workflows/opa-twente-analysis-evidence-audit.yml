@@ -1,0 +1,35 @@
+name: OPA Twente permanent analysis audit
+on:
+  pull_request:
+    paths:
+      - 'components/experimentally_validated/Twente-TFLN-Wei-2025/**'
+      - 'tools/audit_twente_tfln_*.py'
+      - 'research/archive_twente_analysis.py'
+      - '.github/workflows/opa-twente-analysis-evidence-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: |
+          set -euo pipefail
+          root=components/experimentally_validated/Twente-TFLN-Wei-2025/analysis-archive
+          if ! git cat-file -e "HEAD:$root/modulator/original.zip"; then
+            test -z "$(git ls-files -- "$root")"
+            echo "Archive pending; preflight separate."
+            exit 0
+          fi
+          stage="$RUNNER_TEMP/twente-analysis-committed"
+          mkdir "$stage"
+          git ls-files -z -- "$root" | while IFS= read -r -d '' file; do
+            rel="${file#$root/}"
+            mkdir -p "$stage/$(dirname "$rel")"
+            git show "HEAD:$file" > "$stage/$rel"
+          done
+          python3 research/archive_twente_analysis.py --staged "$stage"

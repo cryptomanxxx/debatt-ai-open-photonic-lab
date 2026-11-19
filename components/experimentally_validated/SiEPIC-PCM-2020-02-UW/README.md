@@ -33,3 +33,7 @@ CI exports raw detector CSV, cutback-spectrum CSV, result JSON and environment l
 - Dominguez Bucio et al., [10.5258/SOTON/D0392](https://doi.org/10.5258/SOTON/D0392): CC BY 4.0 SiN angled MMI O-band spreadsheet, not 1550 nm TFLN; file content not retrieved, reference only.
 - Vitali et al., [10.5258/SOTON/D2550](https://doi.org/10.5258/SOTON/D2550): CC BY-labelled SiN grating-coupler source spreadsheet; not SiEPIC SOI. File content not retrieved, reference only.
 - [TFLN directional coupler paper](https://opg.optica.org/ol/abstract.cfm?uri=ol-48-5-1264) and [TFLN polarization-insensitive MMI paper](https://opg.optica.org/ol/abstract.cfm?uri=ol-49-15-4409): data on request, no public raw files verified. Exact Luxtelligence MMI/DC measured complex S remains unavailable in checked sources. Request data from source owner before any claim of model validation.
+
+### Device identity clarification
+
+The filename/device-label suffixes 1698, 1695, 1711, 1712, 1699 differ from the stored `measured_device_number` values 1363, 1360, 1376, 1377, 1364 respectively. These independent fields were read directly from the original MAT bytes and are checked separately. No scientific data or acceptance threshold changed.

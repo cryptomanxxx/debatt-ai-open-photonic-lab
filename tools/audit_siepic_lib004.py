@@ -19,6 +19,7 @@ OUT = ROOT / "results/opa-lib-004"
 REV = "363fbb52eefa8669100499ab531d3fe7befc4867"
 LENGTHS = [1213, 11204, 32237, 53018, 102530]
 DEVICES = [1698, 1695, 1711, 1712, 1699]
+MEASURED_DEVICES = [1363, 1360, 1376, 1377, 1364]
 BLOBS = ["4cdfbe9acf553a68696337663e5acdec2144cd98",
          "68aa62ff077e818561bfb64ad6839b07cb82bcc7",
          "68ef25d77935bf25c17a424e8723d45d1a625dab",
@@ -67,10 +68,11 @@ def main():
             m["analysis_git_blob_sha1"] == "7360437856a7491acd1c1fa4bf5a89aaf4f5dffc", "analysis identity")
     require(len(m["files"]) == 5, "file count")
     scans = []; records = []; reference = None
-    for e, length, device, expected_blob in zip(m["files"], LENGTHS, DEVICES, BLOBS, strict=True):
+    for e, length, device, measured_device, expected_blob in zip(m["files"], LENGTHS, DEVICES, MEASURED_DEVICES, BLOBS, strict=True):
         name = f"PCM_PCM_SpiralWG{length}TE_gap2000_{device}.mat"
         require(e["name"] == name and e["source_path"] == "PCM/D2020_02_UW/"+name
-                and e["nominal_length_um"] == length and e["device_number"] == device, "selection")
+                and e["nominal_length_um"] == length and e["device_number"] == device
+                and e["measured_device_number"] == measured_device, "selection")
         raw = (BASE/"original"/name).read_bytes()
         require(len(raw) == e["bytes"] == 193336 and blob(raw) == e["git_blob_sha1"] == expected_blob, "original MAT identity")
         mat = loadmat(BASE/"original"/name, squeeze_me=True, struct_as_record=False)
@@ -83,12 +85,13 @@ def main():
             reference = w
         else:
             require(np.array_equal(reference,w), "identical measured grids")
-        require(str(meta.device) == name[:-4] and int(meta.measured_device_number) == device, "measured device identity")
+        require(str(meta.device) == name[:-4], "stored device label identity")
+        require(int(meta.measured_device_number) == measured_device, "stored measured-device identity")
         coord = str(meta.coord_file_line).split(",")
         require(len(coord)==7 and coord[2:5]==["TE","1550","device"] and coord[5]==name[:-4], "TE label")
         require(np.isclose(float(coord[0]),float(meta.gds_x_coord)) and np.isclose(float(coord[1]),float(meta.gds_y_coord)), "layout coordinate metadata")
         scans.append(p)
-        records.append(dict(name=name,nominal_length_um=length,device_number=device,
+        records.append(dict(name=name,nominal_length_um=length,device_number=device, measured_device_number=measured_device,
                             gds_coord_as_stored=[float(meta.gds_x_coord),float(meta.gds_y_coord)],
                             measured_time_as_stored=str(meta.time_str),sha256=sha(raw),git_blob_sha1=expected_blob,
                             points=len(w),detectors=3,detector2_floor_count=int(np.count_nonzero(p[:,1]<=FLOOR)),

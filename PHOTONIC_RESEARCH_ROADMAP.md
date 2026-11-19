@@ -82,3 +82,8 @@ Treat as exploratory and distinct from the hybrid AI path. Begin with truth tabl
 ## 2026-11-19 phase decision: OPA-CIR takes priority
 
 The current OPA-NL phase closes with [NL001–NL021 final report](research/OPA-NL-FINAL-REPORT.md), subject to the final archive audit. NL021 confirmed the frozen LO3 Margin16 endpoint at 42 ps in the specified numerical model, while LO2 missed the 96% gate. No NL022 is planned. Prioritize OPA-CIR-001: verify circuit assembly against existing MZI results and progressively connect physics-derived complex S-parameters to circuit models. Keep electronic activation as the hybrid baseline and nonlinear dynamics as a conditional optional block. Component research should respond to system bottlenecks; retain fabrication and measurement roadmap. This is prioritization, not evidence of an implemented circuit simulator or hardware.
+
+
+### Reuse-first component strategy
+
+Use the [OPA component library](components/README.md) before proposing custom component optimization. OPA-CIR-001 remains the next main experiment; prioritize system-level requirements and reuse pinned PDK models where appropriate. Keep measurement, geometry, DRC, compact-model validity and fabrication qualification separate. No cross-process connection without an explicit interface.

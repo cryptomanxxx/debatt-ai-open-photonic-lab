@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "components": [
+    {
+      "id": "siepic-bdc-te1550",
+      "origin": "external",
+      "cell": "ebeam_bdc_te1550",
+      "kind": "directional_coupler",
+      "pdk": {
+        "name": "SiEPIC EBeam via ubcpdk",
+        "version": "3.3.0",
+        "platform": "SOI silicon photonics",
+        "source": "https://github.com/gdsfactory/ubc",
+        "license": "MIT",
+        "lock": "layout/requirements-lock-ubc.txt"
+      },
+      "local_evidence": [
+        "results/opa-layout-002/result.json",
+        "results/opa-layout-003/result.json"
+      ],
+      "model": {
+        "type": "upstream_compact_model_candidate",
+        "complex_s_parameters": "not_imported"
+      },
+      "evidence_scope": "layout_use",
+      "measurement": null,
+      "qualification": null,
+      "redistribution": "reference_only",
+      "notes": "TE nominal 1550 nm; used in DRC-clean parent layouts; no local complex S audit."
+    },
+    {
+      "id": "siepic-gc-te1550",
+      "origin": "external",
+      "cell": "ebeam_gc_te1550",
+      "kind": "grating_coupler",
+      "pdk": {
+        "name": "SiEPIC EBeam via ubcpdk",
+        "version": "3.3.0",
+        "platform": "SOI silicon photonics",
+        "source": "https://github.com/gdsfactory/ubc",
+        "license": "MIT",
+        "lock": "layout/requirements-lock-ubc.txt"
+      },
+      "local_evidence": [
+        "results/opa-layout-002/result.json"
+      ],
+      "model": {
+        "type": "placeholder",
+        "complex_s_parameters": "not_imported"
+      },
+      "evidence_scope": "layout_use",
+      "measurement": null,
+      "qualification": null,
+      "redistribution": "reference_only",
+      "notes": "Local README identifies 6 dB / 35 nm placeholder; do not substitute paper measurement for model calibration."
+    },
+    {
+      "id": "siepic-heater",
+      "origin": "external",
+      "cell": "straight_heater_metal",
+      "kind": "phase_shifter",
+      "pdk": {
+        "name": "SiEPIC EBeam via ubcpdk",
+        "version": "3.3.0",
+        "platform": "SOI silicon photonics",
+        "source": "https://github.com/gdsfactory/ubc",
+        "license": "MIT",
+        "lock": "layout/requirements-lock-ubc.txt"
+      },
+      "local_evidence": [
+        "results/opa-layout-002/result.json"
+      ],
+      "model": {
+        "type": "not_audited",
+        "complex_s_parameters": "not_imported"
+      },
+      "evidence_scope": "layout_use",
+      "measurement": null,
+      "qualification": null,
+      "redistribution": "reference_only",
+      "notes": "Thermal and electrical budget must be evaluated separately."
+    },
+    {
+      "id": "lnoi400-mmi2x2",
+      "origin": "external",
+      "cell": "mmi2x2_optimized1550",
+      "kind": "mmi",
+      "pdk": {
+        "name": "Luxtelligence lnoi400",
+        "version": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+        "platform": "thin-film lithium niobate",
+        "source": "https://github.com/Luxtelligence/lxt_pdk_gf",
+        "license": "MIT",
+        "lock": "layout/requirements-lock-lnoi400.txt"
+      },
+      "local_evidence": [
+        "layout/mzi_2x2_lnoi400_v004.py",
+        "results/opa-layout-005/result.json"
+      ],
+      "model": {
+        "type": "upstream_compact_model_candidate",
+        "complex_s_parameters": "not_imported"
+      },
+      "evidence_scope": "layout_use",
+      "measurement": null,
+      "qualification": null,
+      "redistribution": "reference_only",
+      "notes": "Used inside MZI; component model not imported or independently checked."
+    },
+    {
+      "id": "lnoi400-edge",
+      "origin": "external",
+      "cell": "double_linear_inverse_taper",
+      "kind": "edge_coupler",
+      "pdk": {
+        "name": "Luxtelligence lnoi400",
+        "version": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+        "platform": "thin-film lithium niobate",
+        "source": "https://github.com/Luxtelligence/lxt_pdk_gf",
+        "license": "MIT",
+        "lock": "layout/requirements-lock-lnoi400.txt"
+      },
+      "local_evidence": [
+        "results/opa-layout-005/result.json"
+      ],
+      "model": {
+        "type": "upstream_compact_model_candidate",
+        "complex_s_parameters": "not_imported"
+      },
+      "evidence_scope": "layout_use",
+      "measurement": null,
+      "qualification": null,
+      "redistribution": "reference_only",
+      "notes": "Parent layout port checks, not measured coupling."
+    },
+    {
+      "id": "lnoi400-mzm",
+      "origin": "external",
+      "cell": "mzm_unbalanced",
+      "kind": "modulator",
+      "pdk": {
+        "name": "Luxtelligence lnoi400",
+        "version": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+        "platform": "thin-film lithium niobate",
+        "source": "https://github.com/Luxtelligence/lxt_pdk_gf",
+        "license": "MIT",
+        "lock": "layout/requirements-lock-lnoi400.txt"
+      },
+      "local_evidence": [
+        "results/opa-layout-005/result.json"
+      ],
+      "model": {
+        "type": "pdk_sax_model_evaluated",
+        "complex_s_parameters": "not_imported"
+      },
+      "evidence_scope": "layout_use",
+      "measurement": null,
+      "qualification": null,
+      "redistribution": "reference_only",
+      "notes": "Vpi 6.6 V for 5 mm model; not measured; no RF verification or DRC."
+    },
+    {
+      "id": "opa-coupler-generic",
+      "origin": "debatt_ai",
+      "cell": "OPA-COUPLER-001–003",
+      "kind": "directional_coupler",
+      "pdk": null,
+      "local_evidence": [
+        "results/opa-coupler-001/result.json",
+        "results/opa-coupler-002/result.json",
+        "results/opa-coupler-003/result.json"
+      ],
+      "model": {
+        "type": "mpb_fdtd_coupled_mode",
+        "complex_s_parameters": "not_imported"
+      },
+      "evidence_scope": "numerical_research",
+      "measurement": null,
+      "qualification": null,
+      "redistribution": "repository_reference",
+      "notes": "Generic geometry, not foundry-qualified; Richardson convergence check failed; power fractions not complex S."
+    },
+    {
+      "id": "opa-nl-c2",
+      "origin": "debatt_ai",
+      "cell": "C2 / frozen Margin16",
+      "kind": "nonlinear_dynamic_block",
+      "pdk": null,
+      "local_evidence": [
+        "research/OPA-NL-FINAL-REPORT.md",
+        "results/opa-nl-021/provenance.json"
+      ],
+      "model": {
+        "type": "nonlinear_state_and_receiver",
+        "complex_s_parameters": "not_imported"
+      },
+      "evidence_scope": "numerical_research",
+      "measurement": null,
+      "qualification": null,
+      "redistribution": "repository_reference",
+      "notes": "Conditional 42 ps model; not linear S matrix or measured device."
+    },
+    {
+      "id": "opa-mzi-reference",
+      "origin": "debatt_ai",
+      "cell": "OPA-MZI-001",
+      "kind": "mzi",
+      "pdk": null,
+      "local_evidence": [
+        "results/opa-mzi-001/result.json"
+      ],
+      "model": {
+        "type": "ideal_behavioral_matrix",
+        "complex_s_parameters": "not_imported"
+      },
+      "evidence_scope": "numerical_research",
+      "measurement": null,
+      "qualification": null,
+      "redistribution": "repository_reference",
+      "notes": "Analytic circuit reference, not electromagnetic or hardware validation."
+    }
+  ],
+  "experimental_evidence": [
+    {
+      "id": "siepic-bdc-te1550",
+      "scope": "published_design_family",
+      "doi": "10.1364/OE.23.003795",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25836231/",
+      "local_link": "results/opa-layout-002/result.json",
+      "finding": "SOI broadband directional couplers including 50:50 demonstrated; reported bandwidths exceed 75 nm across studied devices.",
+      "exact_pdk_revision_verified": false,
+      "raw_complex_s_available": false
+    },
+    {
+      "id": "siepic-gc-te1550",
+      "scope": "published_design_family",
+      "doi": "10.1364/OE.22.020652",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25321270/",
+      "local_link": "results/opa-layout-002/result.json",
+      "finding": "Published TE grating coupler measured insertion loss 4.1 dB and 1 dB bandwidth 30.6 nm; not the local placeholder model.",
+      "exact_pdk_revision_verified": false,
+      "raw_complex_s_available": false
+    }
+  ],
+  "discovery_queue": [
+    {
+      "name": "CORNERSTONE",
+      "url": "https://www.cornerstone.sotonfab.co.uk/",
+      "status": "not_audited"
+    },
+    {
+      "name": "VTT",
+      "url": "https://gdsfactory.github.io/gdsfactory/",
+      "status": "not_audited"
+    },
+    {
+      "name": "AIM Photonics",
+      "url": "https://www.aimphotonics.com/pdk",
+      "status": "not_audited"
+    }
+  ]
+}

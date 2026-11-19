@@ -17,3 +17,7 @@ Retain the billing-disabled/free-project policy and explicit authorization for l
 ## OPA research planning
 
 Before proposing a new OPA research experiment, review the [prioritized research backlog](PHOTONIC_RESEARCH_ROADMAP.md), the current README, experiment registry and archived results. Reuse existing experiments rather than duplicating them. The backlog contains hypotheses, not validated results; keep the existing roadmap active and preserve the distinction between simulations, fabrication and measured hardware. Follow repository experiment and CI conventions.
+
+## Reuse-first OPA component selection
+
+Check [components/registry.json](components/registry.json) and [library policy](components/README.md) before proposing new component designs. Record the system requirement or missing model that justifies custom research; do not duplicate existing PDK cells, copy restricted data, or imply measurement/qualification from a layout DRC pass. Keep origin and experimental evidence separate.

@@ -1,0 +1,49 @@
+name: OPA CIR002 lnoi400 model audit
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "tools/audit_lnoi400_cir002.py"
+      - "simulations/circuit/scattering_network.py"
+      - "layout/requirements-lock-lnoi400.txt"
+      - "research/OPA-CIR-002.md"
+      - ".github/workflows/opa-cir002-lnoi400.yml"
+permissions:
+  contents: read
+env:
+  LXT_PDK_COMMIT: d16db6a4882657feb1ce696c16c604ff6cb7ccfa
+  JAX_ENABLE_X64: "true"
+  JAX_PLATFORMS: cpu
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install existing locked PDK environment
+        run: |
+          pip install -r layout/requirements-lock-lnoi400.txt
+          git clone --quiet https://github.com/Luxtelligence/lxt_pdk_gf "$RUNNER_TEMP/lxt_pdk_gf"
+          git -C "$RUNNER_TEMP/lxt_pdk_gf" checkout --quiet "$LXT_PDK_COMMIT"
+          test "$(git -C "$RUNNER_TEMP/lxt_pdk_gf" rev-parse HEAD)" = "$LXT_PDK_COMMIT"
+          pip install --no-deps -e "$RUNNER_TEMP/lxt_pdk_gf"
+          if pip show gdsfactoryplus >/dev/null 2>&1; then exit 1; fi
+      - name: Audit PDK and cross-check circuit assembly
+        env:
+          LXT_PDK_DIR: ${{ runner.temp }}/lxt_pdk_gf
+        run: |
+          mkdir -p results/opa-cir-002
+          cp layout/requirements-lock-lnoi400.txt results/opa-cir-002/environment-lock.txt
+          pip list --format=json > results/opa-cir-002/installed-packages.json
+          python tools/audit_lnoi400_cir002.py
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: opa-cir-002
+          path: results/opa-cir-002/
+          if-no-files-found: error

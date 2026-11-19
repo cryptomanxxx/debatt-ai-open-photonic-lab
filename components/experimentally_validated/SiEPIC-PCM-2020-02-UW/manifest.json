@@ -35,7 +35,8 @@
       "nominal_length_um": 1213,
       "device_number": 1698,
       "bytes": 193336,
-      "git_blob_sha1": "4cdfbe9acf553a68696337663e5acdec2144cd98"
+      "git_blob_sha1": "4cdfbe9acf553a68696337663e5acdec2144cd98",
+      "measured_device_number": 1363
     },
     {
       "name": "PCM_PCM_SpiralWG11204TE_gap2000_1695.mat",
@@ -43,7 +44,8 @@
       "nominal_length_um": 11204,
       "device_number": 1695,
       "bytes": 193336,
-      "git_blob_sha1": "68aa62ff077e818561bfb64ad6839b07cb82bcc7"
+      "git_blob_sha1": "68aa62ff077e818561bfb64ad6839b07cb82bcc7",
+      "measured_device_number": 1360
     },
     {
       "name": "PCM_PCM_SpiralWG32237TE_gap2000_1711.mat",
@@ -51,7 +53,8 @@
       "nominal_length_um": 32237,
       "device_number": 1711,
       "bytes": 193336,
-      "git_blob_sha1": "68ef25d77935bf25c17a424e8723d45d1a625dab"
+      "git_blob_sha1": "68ef25d77935bf25c17a424e8723d45d1a625dab",
+      "measured_device_number": 1376
     },
     {
       "name": "PCM_PCM_SpiralWG53018TE_gap2000_1712.mat",
@@ -59,7 +62,8 @@
       "nominal_length_um": 53018,
       "device_number": 1712,
       "bytes": 193336,
-      "git_blob_sha1": "b43f95bba900f8862af75d9798a3363a028c125f"
+      "git_blob_sha1": "b43f95bba900f8862af75d9798a3363a028c125f",
+      "measured_device_number": 1377
     },
     {
       "name": "PCM_PCM_SpiralWG102530TE_gap2000_1699.mat",
@@ -67,7 +71,9 @@
       "nominal_length_um": 102530,
       "device_number": 1699,
       "bytes": 193336,
-      "git_blob_sha1": "a54b25e1b78d44bc73188b7821398b85ac37258e"
+      "git_blob_sha1": "a54b25e1b78d44bc73188b7821398b85ac37258e",
+      "measured_device_number": 1364
     }
-  ]
+  ],
+  "device_identity": "device_number is the suffix of the stored device label; measured_device_number is a separate integer metadata field. Both pinned independently; no assumed equivalence."
 }

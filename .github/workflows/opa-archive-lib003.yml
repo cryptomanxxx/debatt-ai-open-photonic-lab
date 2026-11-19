@@ -58,6 +58,6 @@ jobs:
             git show ":$file" > "$stage/$rel"
           done
           python3 research/archive_lib003.py --source "$RUNNER_TEMP/lib003.zip" --staged "$stage"
-          git commit -m "Archive exact OPA-LIB-002 complex S evidence"
+          git commit -m "Archive exact OPA-LIB-003 complex S evidence"
           git push origin "HEAD:refs/heads/$ARCHIVE_BRANCH"
           echo "Review branch: https://github.com/$GITHUB_REPOSITORY/compare/main...$ARCHIVE_BRANCH" >> "$GITHUB_STEP_SUMMARY"

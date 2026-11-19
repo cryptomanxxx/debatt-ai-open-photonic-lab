@@ -1,0 +1,71 @@
+{
+  "experiment": "OPA-LIB-003",
+  "revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "components": [
+    {
+      "component": "mmi-2x2",
+      "samples": 201,
+      "midpoint_samples": 200,
+      "max_native_polynomial_error": 0.0,
+      "max_reciprocity_error": 0.0,
+      "max_sigma": 0.9929422282945128,
+      "min_sigma": 0.9886372452368195,
+      "nonpassive_samples": 0,
+      "passivity_screen_eligible": true,
+      "usage": "conditional_numerical_only",
+      "center": {
+        "wavelength_nm": 1550.0,
+        "sigma_max": 0.9913596053849588,
+        "reciprocity_error": 0.0,
+        "max_input_power": 0.9771303676124363,
+        "bar_power": 0.49039107746307714,
+        "cross_power": 0.48665573301264026,
+        "reflection_power": 8.355713671886865e-05
+      },
+      "max_complex_linear_midpoint_error": 0.0005772152585584936,
+      "dataset_sha256": "6d9aae38d6d5c0cea5a540d2a0dc6789b1467a7ed06934c7a951fdff2430f016",
+      "source_sha256": "f9016f890543146e1438836da2adb84fc2b14c9a8500311f34bcc640747acb36",
+      "gds_sha256": "7870fceeb2a81ace7b140f52a63b1080eeabc4f428b713034b71a29a6fe2fbf9"
+    },
+    {
+      "component": "directional-coupler",
+      "samples": 201,
+      "midpoint_samples": 200,
+      "max_native_polynomial_error": 0.0,
+      "max_reciprocity_error": 0.0,
+      "max_sigma": 1.1275809745127237,
+      "min_sigma": 1.084133470944008,
+      "nonpassive_samples": 201,
+      "passivity_screen_eligible": false,
+      "usage": "quarantined_nonpassive",
+      "center": {
+        "wavelength_nm": 1550.0,
+        "sigma_max": 1.087383781460826,
+        "reciprocity_error": 0.0,
+        "max_input_power": 1.0020569185350152,
+        "bar_power": 0.5357387083185516,
+        "cross_power": 0.44956852782244794,
+        "reflection_power": 0.0167496823940155
+      },
+      "max_complex_linear_midpoint_error": 0.0006252299617571072,
+      "dataset_sha256": "f44f5df47b510a340b0a533d7b7779af0f21582de8a944675b1d96cea9a5c8d9",
+      "source_sha256": "dee53fbabae7e3a06c871016441accc3d6b7a89c7ce324001ac9cf741abd6a54",
+      "gds_sha256": "fe00bd054cd915620e8c65d20418fa6284771a09059941315811f0c418b753c2"
+    }
+  ],
+  "checks": {
+    "source_identity": true,
+    "geometry_link": true,
+    "full_complex_grid": true,
+    "native_polynomial_agreement": true,
+    "reciprocity": true,
+    "passivity_classification": true
+  },
+  "limitations": [
+    "Original upstream coefficients are simulated polynomial fits, not raw measured data.",
+    "Passivity assumes compatible power-normalized ports; no physical reference plane calibration.",
+    "Directional coupler original fit is quarantined, not clipped, renormalized or interpreted as physical gain.",
+    "Sampled passivity does not certify continuous-band passivity or device performance.",
+    "No circuit substitution or WDM claim in LIB003; no cross-platform mixing."
+  ]
+}

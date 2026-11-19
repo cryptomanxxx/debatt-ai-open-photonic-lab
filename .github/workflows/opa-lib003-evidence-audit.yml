@@ -1,0 +1,40 @@
+name: OPA LIB003 permanent evidence audit
+on:
+  pull_request:
+    paths:
+      - 'components/external/Luxtelligence/lnoi400/s_parameters/archive/**'
+      - 'components/external/Luxtelligence/lnoi400/s_parameters/archive-source.json'
+      - 'components/external/Luxtelligence/lnoi400/s_parameters/manifest.json'
+      - 'components/external/Luxtelligence/lnoi400/LICENSE'
+      - 'components/external/Luxtelligence/lnoi400/s_parameters/original/**'
+      - 'components/external/Luxtelligence/lnoi400/archive/gds/**'
+      - 'layout/requirements-lock-lnoi400.txt'
+      - 'research/archive_lib003.py'
+      - '.github/workflows/opa-lib003-evidence-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Verify exact archived Git bytes when present
+        run: |
+          set -euo pipefail
+          root=components/external/Luxtelligence/lnoi400/s_parameters/archive
+          if ! git cat-file -e "HEAD:$root/original.zip"; then
+            test -z "$(git ls-files -- "$root")"
+            echo "Archive not yet committed; preflight is separate."
+            exit 0
+          fi
+          stage="$RUNNER_TEMP/lib003-committed"
+          mkdir "$stage"
+          git ls-files -z -- "$root" | while IFS= read -r -d '' file; do
+            rel="${file#$root/}"
+            mkdir -p "$stage/$(dirname "$rel")"
+            git show "HEAD:$file" > "$stage/$rel"
+          done
+          python3 research/archive_lib003.py --source "$stage/original.zip" --staged "$stage"

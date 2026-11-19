@@ -1,0 +1,32 @@
+name: OPA LIB004 measured SiEPIC spiral cutback
+on:
+  pull_request:
+    paths:
+      - 'components/experimentally_validated/SiEPIC-PCM-2020-02-UW/**'
+      - 'tools/audit_siepic_lib004.py'
+      - '.github/workflows/opa-lib004.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install pinned numerical dependencies
+        run: python -m pip install numpy==2.2.0 scipy==1.18.1
+      - name: Read exact original measurements and independently analyze cutback
+        run: |
+          python tools/audit_siepic_lib004.py
+          python -m pip list --format=json > results/opa-lib-004/installed-packages.json
+      - uses: actions/upload-artifact@v7
+        with:
+          name: opa-lib-004
+          path: results/opa-lib-004/
+          if-no-files-found: error

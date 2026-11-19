@@ -1,0 +1,48 @@
+{
+  "experiment": "OPA-CIR-002",
+  "pdk_commit": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "source_data_sha256": "f9016f890543146e1438836da2adb84fc2b14c9a8500311f34bcc640747acb36",
+  "source_license_sha256": "25eb4543fa066651d9f9044d3d9bb4e45e913c486a48cb54be6f7f2827a6663c",
+  "versions": {
+    "sax": "0.16.14",
+    "jax": "0.12.0.1",
+    "numpy": "2.2.0",
+    "lxt_pdk_gf": "2.0"
+  },
+  "source_type": "upstream FDTD polynomial compact model",
+  "port_order": [
+    "o1",
+    "o2",
+    "o3",
+    "o4"
+  ],
+  "wavelength_um": [
+    1.54,
+    1.56
+  ],
+  "samples": 63,
+  "tolerance": 1e-10,
+  "checks": {
+    "polynomial_error": true,
+    "reciprocity_error": true,
+    "sax_network_error": true,
+    "complete_grid": true,
+    "phase_sensitive": true
+  },
+  "metrics": {
+    "polynomial_error": 0.0,
+    "reciprocity_error": 0.0,
+    "sax_network_error": 3.4989384658674724e-14,
+    "passivity_excess": 0.0,
+    "network_passivity_excess": 0.0
+  },
+  "failures": [],
+  "passivity_eligible": true,
+  "limitations": [
+    "Narrow exploratory grid, not certified upstream validity range.",
+    "No calibrated measurement, process corners, temperature, polarization or reference-plane de-embedding audit.",
+    "Assumes compatible fundamental optical modes and native model port reference planes; no geometry-extracted MZI.",
+    "SAX agreement verifies numerical connection, not physical model accuracy.",
+    "No external model files copied into repository."
+  ]
+}

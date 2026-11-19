@@ -1,0 +1,32 @@
+{
+  "artifact": 14522744683,
+  "branch": "research/opa-cir-002",
+  "checks": 5,
+  "experiment": "OPA-CIR-002",
+  "head": "7d2c8bac050e25affd7977686f234a9c6fd2ef35",
+  "members": {
+    "environment-lock.txt": {
+      "bytes": 2617,
+      "sha256": "69bf31827d68ed00ec1dff36f32053f67d426b335604bd425d47206822e959d3"
+    },
+    "installed-packages.json": {
+      "bytes": 5359,
+      "sha256": "cbd21fa17cff8e12361fd3e72f334dac834d5d9d17207b50c7479f86e6013c12"
+    },
+    "result.json": {
+      "bytes": 1470,
+      "sha256": "c088176b22d478d64299f1c62477dfccebde1aa20bc0cf058cdbc6f8ee216559"
+    },
+    "sweep.csv": {
+      "bytes": 11288,
+      "sha256": "1186c3c538af034d0d1333d407112388bb2c735488099be9f81d942c32b45ce6"
+    }
+  },
+  "name": "opa-cir-002",
+  "pr": 213,
+  "run": 44513345216,
+  "sha256": "6272dc7414fa970ed7e8fe6f995a0a9c983c6660649bd8cc161695ee6c6bad10",
+  "size": 7438,
+  "verification": "Pinned GitHub ZIP digest and byte count, safe member names, CRC and report checks; staged bytes independently compared.",
+  "workflow": ".github/workflows/opa-cir002-lnoi400.yml"
+}

@@ -1,0 +1,38 @@
+name: OPA LIB002 permanent evidence audit
+on:
+  pull_request:
+    paths:
+      - 'components/external/Luxtelligence/lnoi400/archive/**'
+      - 'components/external/Luxtelligence/lnoi400/archive-source.json'
+      - 'components/external/Luxtelligence/lnoi400/generation-spec.json'
+      - 'components/external/Luxtelligence/lnoi400/LICENSE'
+      - 'layout/requirements-lock-lnoi400.txt'
+      - 'research/archive_lib002.py'
+      - '.github/workflows/opa-lib002-evidence-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Verify exact archived Git bytes when present
+        run: |
+          set -euo pipefail
+          root=components/external/Luxtelligence/lnoi400/archive
+          if ! git cat-file -e "HEAD:$root/original.zip"; then
+            test -z "$(git ls-files -- "$root")"
+            echo "Archive not yet committed; preflight is separate."
+            exit 0
+          fi
+          stage="$RUNNER_TEMP/lib002-committed"
+          mkdir "$stage"
+          git ls-files -z -- "$root" | while IFS= read -r -d '' file; do
+            rel="${file#$root/}"
+            mkdir -p "$stage/$(dirname "$rel")"
+            git show "HEAD:$file" > "$stage/$rel"
+          done
+          python3 research/archive_lib002.py --source "$stage/original.zip" --staged "$stage"

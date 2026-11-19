@@ -8,3 +8,7 @@ Published physical demonstrations linked to external component IDs. Neither entr
 | siepic-gc-te1550 | [10.1364/OE.22.020652](https://pubmed.ncbi.nlm.nih.gov/25321270/): Published TE grating coupler measured insertion loss 4.1 dB and 1 dB bandwidth 30.6 nm; not the local placeholder model. | Published design family; exact revision unverified |
 
 For exact-cell promotion require documented revision/geometry, process, measurement conditions, traceable data and license; for calibrated circuit use also require model-to-measurement agreement. No exact-cell entries yet.
+
+## Imported external measurement evidence
+
+[OPA-LIB-004 SiEPIC PCM spiral cutback](SiEPIC-PCM-2020-02-UW/README.md): five original TE MAT scans from D2020_02_UW, 6001 wavelength points each, three detectors. Measured external test structures only; no exact pinned-cell geometry or phase, no complex S or qualification. Independent cutback CI pending.

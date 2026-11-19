@@ -29,3 +29,7 @@ After archive-preparation PR merge, run [OPA archive LIB002 evidence](https://gi
 ## Completed archive
 
 [Archive run 44547625238](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44547625238) verified the pinned ZIP and all staged bytes and created archive commit `36aaa3f`. The archive contains 21 files totaling 273787 bytes. [Original ZIP](archive/original.zip) | [GDS files](archive/gds/) | [Port metadata](archive/ports/) | [Verification report](archive/evidence/result.json) | [Provenance and hashes](archive/provenance.json). These are exact CI-generated exports, not upstream original GDS or measured hardware. No DRC or imported S data. The permanent offline audit checks committed bytes on the archive PR.
+
+## Complex model import
+
+[LIB003 complex scattering models](s_parameters/README.md) adds original upstream coefficient files for MMI and directional coupler. The historical GDS archive remains unchanged; model evidence and passivity status are separate.

@@ -1219,6 +1219,19 @@
         "research/OPA-NL-021.md"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/circuit/dynamic_receiver_sweep_v021.py"
+    },
+    {
+      "id": "opa-cir-001",
+      "name": "Circuit: reusable scattering network MZI reference",
+      "script": "simulations/circuit/scattering_network_v001.py",
+      "result_dir": "results/opa-cir-001",
+      "artifact": "opa-cir-001",
+      "timeout_minutes": 10,
+      "deps": [
+        "simulations/circuit/scattering_network.py",
+        "simulations/circuit/mzi.py",
+        "results/opa-mzi-001/result.json"
+      ]
     }
   ]
 }

@@ -95,3 +95,7 @@ CIR001–007 implementations are merged. CIR006's frozen WDM grid failed the mul
 ## CIR phase closure and next research decision (2026-11-19)
 
 [OPA-CIR Final Research Report](research/OPA-CIR-FINAL-REPORT.md) consolidates eight merged experiments, 63 numerical checks and the permanent evidence archive (PR221). Freeze CIR001–008 on report audit and merge. Single-carrier 1550 nm, nominal 8-bit interface is the conditional baseline, not a fabricated accelerator. WDM remains unresolved. Proposed next priorities: process-access and passive geometry/model-to-layout closure, physical attenuator/encoder/receiver validation, bounded WDM attribution and matched system economics. Retain electronic activation, the closed NL phase and fabrication roadmap. No new experimental series authorized by the report alone.
+
+## OPA-LIB component evidence phase (2026-11-19)
+
+Before selecting FAB001 components, establish a revision-pinned external library. LIB001 imports original SiEPIC core GDS; LIB002 targets Luxtelligence geometry; LIB003 complex S datasets; LIB004 available licensed measurement data; LIB005 matched comparisons; LIB006 FAB001 selection. Only LIB001 is implemented by this PR. Keep silicon and TFLN separate, and distinguish original files, PCell-generated geometry, simulations, measurements and qualification. No fabrication commitment.

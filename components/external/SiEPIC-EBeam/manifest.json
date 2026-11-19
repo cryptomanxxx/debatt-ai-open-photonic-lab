@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment": "OPA-LIB-001",
+  "source_repository": "https://github.com/SiEPIC/SiEPIC_EBeam_PDK",
+  "revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+  "platform": "SiEPIC EBeam SOI",
+  "license": "MIT",
+  "license_path": "components/external/SiEPIC-EBeam/LICENSE.md",
+  "license_source_path": "LICENSE.md",
+  "license_git_blob_sha1": "e5d16d71c2ff1f40c393ef23a2e01cb850aa9a4d",
+  "license_scope": "Project-level MIT license covers the documented GDS library; selected core EBeam files only, no partner/beta libraries or fabrication rights inferred.",
+  "components": [
+    {
+      "id": "siepic-original-ebeam-bdc-te1550",
+      "cell": "ebeam_bdc_te1550",
+      "kind": "directional_coupler",
+      "related_registry_id": "siepic-bdc-te1550",
+      "source_path": "klayout/EBeam/gds/EBeam/ebeam_bdc_te1550.gds",
+      "git_blob_sha1": "26c73f88ceb9b282f5da2ff4e1f4418bfbabb98a",
+      "path": "components/external/SiEPIC-EBeam/gds/ebeam_bdc_te1550.gds",
+      "origin": "external_original",
+      "geometry_status": "pending_ci",
+      "drc": null,
+      "measurement": null,
+      "qualification": null,
+      "complex_s_parameters": "not_imported"
+    },
+    {
+      "id": "siepic-original-ebeam-gc-te1550",
+      "cell": "ebeam_gc_te1550",
+      "kind": "grating_coupler",
+      "related_registry_id": "siepic-gc-te1550",
+      "source_path": "klayout/EBeam/gds/EBeam/ebeam_gc_te1550.gds",
+      "git_blob_sha1": "c25af553ffde8f7431659886abc9918379b278df",
+      "path": "components/external/SiEPIC-EBeam/gds/ebeam_gc_te1550.gds",
+      "origin": "external_original",
+      "geometry_status": "pending_ci",
+      "drc": null,
+      "measurement": null,
+      "qualification": null,
+      "complex_s_parameters": "not_imported"
+    },
+    {
+      "id": "siepic-original-ebeam-y-1550",
+      "cell": "ebeam_y_1550",
+      "kind": "y_branch",
+      "related_registry_id": null,
+      "source_path": "klayout/EBeam/gds/EBeam/ebeam_y_1550.gds",
+      "git_blob_sha1": "f05fbc54dbfd33169540ad2245a2b3d103dceb72",
+      "path": "components/external/SiEPIC-EBeam/gds/ebeam_y_1550.gds",
+      "origin": "external_original",
+      "geometry_status": "pending_ci",
+      "drc": null,
+      "measurement": null,
+      "qualification": null,
+      "complex_s_parameters": "not_imported"
+    }
+  ]
+}

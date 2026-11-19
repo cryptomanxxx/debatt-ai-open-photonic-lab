@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment": "OPA-LIB-003",
+  "source_repository": "https://github.com/Luxtelligence/lxt_pdk_gf",
+  "revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "license": "MIT",
+  "license_git_blob_sha1": "875338218a9fe94f14cd43f4118220149bfdb22e",
+  "source_model_git_blob_sha1": "be29fc2aa6576db00832f9a2beb4d83d02cca58b",
+  "source_evaluator_git_blob_sha1": "12badb7f68770de8e5a0279ee81dc28ea2e38bb2",
+  "wavelength_grid_nm": {
+    "start": 1540,
+    "stop": 1560,
+    "step": 0.1,
+    "count": 201
+  },
+  "port_order": [
+    "o1",
+    "o2",
+    "o3",
+    "o4"
+  ],
+  "matrix_convention": "S[row output port, column input port]; b=S a",
+  "complex_encoding": "[real,imaginary]",
+  "phase": "upstream exp(+i*phase polynomial); phase radians; phasor time convention not independently documented",
+  "normalization": "native dimensionless complex field coefficients; power normalization assumed for numerical passivity screening, not independently established",
+  "reference_planes": "PCell port coordinates archived; FDTD de-embedding and exact modal planes not independently established",
+  "validity": "exploratory grid only; upstream certified interval and uncertainty unknown",
+  "polarization": "not independently specified in source coefficient JSON; compatible native optical mode assumed",
+  "bias_temperature": "not specified in source",
+  "interpolation": "no interpolation required; evaluate original polynomials directly within study grid; no extrapolation or certification",
+  "components": [
+    {
+      "id": "mmi-2x2",
+      "model": "mmi2x2_optimized1550",
+      "source_path": "lnoi400/data/mmi_2x2_optimized_1550.json",
+      "local_source": "original/mmi_2x2_optimized_1550.json",
+      "source_git_blob_sha1": "2e037979067b3d172709e7160a3ebe5bf88171af",
+      "gds_sha256": "7870fceeb2a81ace7b140f52a63b1080eeabc4f428b713034b71a29a6fe2fbf9",
+      "geometry_scope": "same pinned PDK factory name and nominal default PCell; exact FDTD geometry and reference-plane equivalence not established",
+      "source_type": "upstream simulated polynomial fit, not raw FDTD or measured S samples",
+      "measurement": null,
+      "qualification": null
+    },
+    {
+      "id": "directional-coupler",
+      "model": "directional_coupler_balanced",
+      "source_path": "lnoi400/data/directional_coupler_balanced.json",
+      "local_source": "original/directional_coupler_balanced.json",
+      "source_git_blob_sha1": "adbffde2e72fc5e43a12ad9d0985d246fcc66990",
+      "gds_sha256": "fe00bd054cd915620e8c65d20418fa6284771a09059941315811f0c418b753c2",
+      "geometry_scope": "same pinned PDK factory name and nominal default PCell; exact FDTD geometry and reference-plane equivalence not established",
+      "source_type": "upstream simulated polynomial fit, not raw FDTD or measured S samples",
+      "measurement": null,
+      "qualification": null
+    }
+  ]
+}

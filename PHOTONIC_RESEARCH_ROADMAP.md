@@ -103,3 +103,7 @@ Before selecting FAB001 components, establish a revision-pinned external library
 ### LIB002 execution
 
 [LIB002](components/external/Luxtelligence/lnoi400/README.md) selects seven lnoi400 PCell references, at the same revision as CIR002–008. Export and audit via locked CI, then archive exact generated outputs. No new DRC, measured or S-parameter claim. Continue to LIB003 after verified archive.
+
+### LIB003 execution
+
+[LIB003](components/external/Luxtelligence/lnoi400/s_parameters/README.md) imports exact upstream simulated MMI and directional-coupler polynomial models at the LIB002/CIR revision. Audit full four-port complex matrices at 201 wavelengths, preserve nonpassive fits without modification, quarantine them from passive circuits and archive sampled outputs after CI. No measured validity or WDM remediation claim.

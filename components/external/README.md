@@ -20,3 +20,7 @@ Sources: [ubcpdk](https://github.com/gdsfactory/ubc), [SiEPIC EBeam](https://git
 ## External PCell exports
 
 [Luxtelligence lnoi400 / LIB002](Luxtelligence/lnoi400/README.md): seven pinned PCell export specifications, including CIR-relevant MMI, EO and balanced MZM. CI output must be archived separately; keep distinct from imported original SiEPIC files.
+
+## External complex scattering data
+
+[OPA-LIB-003](Luxtelligence/lnoi400/s_parameters/README.md): two exact upstream simulated polynomial models linked to archived GDS, with a numerical passivity screen and quarantine for nonpassive fits. Sampled output pending CI.

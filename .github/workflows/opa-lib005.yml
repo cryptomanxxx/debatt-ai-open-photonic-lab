@@ -1,0 +1,29 @@
+name: OPA LIB005 component comparability audit
+on:
+  pull_request:
+    paths:
+      - 'components/**'
+      - 'tools/audit_lib005.py'
+      - 'results/opa-eo-002/result.json'
+      - 'results/opa-coupler-003/result.json'
+      - 'results/opa-layout-002/result.json'
+      - 'results/opa-layout-005/result.json'
+      - 'research/evidence/opa-cir/opa-cir-003/**'
+      - '.github/workflows/opa-lib005.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: python3 tools/audit_lib005.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: opa-lib-005
+          path: results/opa-lib-005/
+          if-no-files-found: error

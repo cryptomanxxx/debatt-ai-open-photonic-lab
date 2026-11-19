@@ -1,0 +1,34 @@
+name: OPA CIR permanent evidence audit
+on:
+  pull_request:
+    paths:
+      - "research/evidence/opa-cir/**"
+      - "research/archive_cir.py"
+      - "research/cir_archive_manifest.json"
+      - ".github/workflows/opa-cir-evidence-audit.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Verify committed original ZIPs and all archived members offline
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/cir-zips" "$RUNNER_TEMP/cir-committed"
+          root=research/evidence/opa-cir
+          while IFS= read -r -d '' file; do
+            rel="${file#research/evidence/opa-cir/}"
+            mkdir -p "$RUNNER_TEMP/cir-committed/$(dirname "$rel")"
+            git show "HEAD:$file" > "$RUNNER_TEMP/cir-committed/$rel"
+          done < <(git ls-files -z -- "$root")
+          for n in $(seq -w 1 8); do
+            name=$(printf 'opa-cir-%03d' "$n")
+            cp "$RUNNER_TEMP/cir-committed/$name/original.zip" "$RUNNER_TEMP/cir-zips/$name.zip"
+          done
+          python3 research/archive_cir.py --source "$RUNNER_TEMP/cir-zips" --staged "$RUNNER_TEMP/cir-committed"

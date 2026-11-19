@@ -1,0 +1,42 @@
+name: OPA CIR007 coherent interface audit
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "tools/audit_lnoi400_cir007.py"
+      - "research/OPA-CIR-007.md"
+      - ".github/workflows/opa-cir007-interface.yml"
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install numpy==2.2.0
+      - name: Retrieve exact CIR006 artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/14527555003" | jq -e '.name == "opa-cir-006" and .workflow_run.id == 44517897095 and .digest == "sha256:0f35693c16434e42d16038aac5bd33fb8d832ba1c9d69b5d85d998a28bae8b05" and .expired == false' >/dev/null
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/14527555003/zip" > "$RUNNER_TEMP/cir006.zip"
+      - name: Run frozen coherent interface audit
+        env:
+          CIR006_ZIP: ${{ runner.temp }}/cir006.zip
+        run: |
+          mkdir -p results/opa-cir-007
+          pip list --format=json > results/opa-cir-007/installed-packages.json
+          python tools/audit_lnoi400_cir007.py
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: opa-cir-007
+          path: results/opa-cir-007/
+          if-no-files-found: error

@@ -77,3 +77,8 @@ Treat as exploratory and distinct from the hybrid AI path. Begin with truth tabl
 2. Use existing numbered experiment and CI conventions, locked environments and registered dependencies. Specify hypothesis, controls, acceptance criteria, seeds, units and artifacts before running. Archive reports with provenance. Do not change historic results.
 3. Keep behavioral simulations, electromagnetic simulations, PDK/DRC status, fabrication and measured hardware evidence distinct. Do not claim fabrication readiness or speed/energy advantages without matching evidence.
 4. Keep the current component/layout roadmap active. Start with a small nonlinear multilayer feasibility experiment after reviewing current work; advance tracks only when dependencies are met. Update this backlog when evidence changes. No new experiments, hardware purchases or live external AI calls are authorized by this document.
+
+
+## 2026-11-19 phase decision: OPA-CIR takes priority
+
+The current OPA-NL phase closes with [NL001–NL021 final report](research/OPA-NL-FINAL-REPORT.md), subject to the final archive audit. NL021 confirmed the frozen LO3 Margin16 endpoint at 42 ps in the specified numerical model, while LO2 missed the 96% gate. No NL022 is planned. Prioritize OPA-CIR-001: verify circuit assembly against existing MZI results and progressively connect physics-derived complex S-parameters to circuit models. Keep electronic activation as the hybrid baseline and nonlinear dynamics as a conditional optional block. Component research should respond to system bottlenecks; retain fabrication and measurement roadmap. This is prioritization, not evidence of an implemented circuit simulator or hardware.

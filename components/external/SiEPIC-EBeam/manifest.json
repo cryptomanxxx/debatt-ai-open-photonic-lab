@@ -23,7 +23,14 @@
       "drc": null,
       "measurement": null,
       "qualification": null,
-      "complex_s_parameters": "not_imported"
+      "complex_s_parameters": "not_imported",
+      "bytes": 7674,
+      "optical_pin_labels": [
+        "opt1",
+        "opt2",
+        "opt3",
+        "opt4"
+      ]
     },
     {
       "id": "siepic-original-ebeam-gc-te1550",
@@ -38,7 +45,11 @@
       "drc": null,
       "measurement": null,
       "qualification": null,
-      "complex_s_parameters": "not_imported"
+      "complex_s_parameters": "not_imported",
+      "bytes": 115348,
+      "optical_pin_labels": [
+        "opt1"
+      ]
     },
     {
       "id": "siepic-original-ebeam-y-1550",
@@ -53,7 +64,14 @@
       "drc": null,
       "measurement": null,
       "qualification": null,
-      "complex_s_parameters": "not_imported"
+      "complex_s_parameters": "not_imported",
+      "bytes": 12006,
+      "optical_pin_labels": [
+        "opt1",
+        "opt2",
+        "opt3"
+      ]
     }
-  ]
+  ],
+  "geometry_status_definition": "Original bytes verified by Git object identity; CI audits named cell, layer 1 geometry and layer 68 pin labels. No DRC or optical model verification."
 }

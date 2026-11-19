@@ -1,0 +1,195 @@
+{
+  "experiment": "OPA-LIB-004",
+  "revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+  "source_run": "PCM/D2020_02_UW",
+  "evidence_scope": "external_measured_test_structures",
+  "geometry_match": "none to existing archived GDS; upstream nominal spiral lengths and device metadata only",
+  "measurement_files": [
+    {
+      "name": "PCM_PCM_SpiralWG1213TE_gap2000_1698.mat",
+      "nominal_length_um": 1213,
+      "device_number": 1698,
+      "measured_device_number": 1363,
+      "gds_coord_as_stored": [
+        5941.43,
+        7340.53
+      ],
+      "measured_time_as_stored": "Sun Mar 01 03:03:28 2020",
+      "sha256": "ee9b119c19753724b090a27ca68b4038dd45d343cfeff7e9865470db34ff3808",
+      "git_blob_sha1": "4cdfbe9acf553a68696337663e5acdec2144cd98",
+      "points": 6001,
+      "detectors": 3,
+      "detector2_floor_count": 17,
+      "detector2_center_db": -25.376132318130566
+    },
+    {
+      "name": "PCM_PCM_SpiralWG11204TE_gap2000_1695.mat",
+      "nominal_length_um": 11204,
+      "device_number": 1695,
+      "measured_device_number": 1360,
+      "gds_coord_as_stored": [
+        6820.23,
+        7415.62
+      ],
+      "measured_time_as_stored": "Sun Mar 01 03:01:53 2020",
+      "sha256": "0b91e9f623b2e141490acf1a7e3a5ee5faebc852ce3d44e1b985e421a15f3c85",
+      "git_blob_sha1": "68aa62ff077e818561bfb64ad6839b07cb82bcc7",
+      "points": 6001,
+      "detectors": 3,
+      "detector2_floor_count": 0,
+      "detector2_center_db": -32.439206132237835
+    },
+    {
+      "name": "PCM_PCM_SpiralWG32237TE_gap2000_1711.mat",
+      "nominal_length_um": 32237,
+      "device_number": 1711,
+      "measured_device_number": 1376,
+      "gds_coord_as_stored": [
+        6450.59,
+        8079.61
+      ],
+      "measured_time_as_stored": "Sun Mar 01 03:10:21 2020",
+      "sha256": "0966e07ca12429e1513cce34aa8b862da7ba2beebe9ca83f54950af8329b1720",
+      "git_blob_sha1": "68ef25d77935bf25c17a424e8723d45d1a625dab",
+      "points": 6001,
+      "detectors": 3,
+      "detector2_floor_count": 3,
+      "detector2_center_db": -36.03509304381582
+    },
+    {
+      "name": "PCM_PCM_SpiralWG53018TE_gap2000_1712.mat",
+      "nominal_length_um": 53018,
+      "device_number": 1712,
+      "measured_device_number": 1377,
+      "gds_coord_as_stored": [
+        6564.11,
+        8423.39
+      ],
+      "measured_time_as_stored": "Sun Mar 01 03:10:52 2020",
+      "sha256": "c74b479858732029cab26fe3ff5f28adda6cd9cee0dc3623f9863a99ea9267c3",
+      "git_blob_sha1": "b43f95bba900f8862af75d9798a3363a028c125f",
+      "points": 6001,
+      "detectors": 3,
+      "detector2_floor_count": 1,
+      "detector2_center_db": -41.29090969191405
+    },
+    {
+      "name": "PCM_PCM_SpiralWG102530TE_gap2000_1699.mat",
+      "nominal_length_um": 102530,
+      "device_number": 1699,
+      "measured_device_number": 1364,
+      "gds_coord_as_stored": [
+        5939.76,
+        7611.21
+      ],
+      "measured_time_as_stored": "Sun Mar 01 03:04:00 2020",
+      "sha256": "7e6bd50f78df147e4df89d16319ed76cf6d933ce96d71dc6a9ae71a6ed4241cb",
+      "git_blob_sha1": "a54b25e1b78d44bc73188b7821398b85ac37258e",
+      "points": 6001,
+      "detectors": 3,
+      "detector2_floor_count": 8,
+      "detector2_center_db": -51.54415074216904
+    }
+  ],
+  "detector_number": 2,
+  "polarization": "TE label",
+  "wavelength_points_per_scan": 6001,
+  "detector_readings": 90015,
+  "center_wavelength_nm": 1550,
+  "center_raw_fit": {
+    "loss_db_per_cm": 2.4020189974196104,
+    "slope_db_per_cm": -2.4020189974196104,
+    "intercept_db": -27.719318239225444,
+    "r2": 0.9670429846738993,
+    "residual_db": [
+      2.6345508254818775,
+      -2.028665808303458,
+      -0.5723861626087796,
+      -0.8365671321693213,
+      0.803068277599678
+    ],
+    "slope_standard_error_db_per_cm": 0.2560158527870864,
+    "conditional_ols_95ci_loss_db_per_cm": [
+      1.5872622926232898,
+      3.216775702215931
+    ]
+  },
+  "center_local_quartic_fit": {
+    "loss_db_per_cm": 2.4728764622493866,
+    "slope_db_per_cm": -2.4728764622493866,
+    "intercept_db": -28.20537959405329,
+    "r2": 0.960253481118504,
+    "residual_db": [
+      2.988919389737763,
+      -2.0021954562141993,
+      -0.822780392709177,
+      -1.2550521374845758,
+      1.0911085966702032
+    ],
+    "slope_standard_error_db_per_cm": 0.29046806877375125,
+    "conditional_ols_95ci_loss_db_per_cm": [
+      1.548477429977468,
+      3.3972754945213053
+    ]
+  },
+  "center_local_quartic_detector_values_db": [
+    -25.516420119186378,
+    -32.978185838571704,
+    -36.99997183811581,
+    -42.571128159091664,
+    -52.46867336482605
+  ],
+  "leave_one_out_center": [
+    {
+      "omitted_device": 1698,
+      "loss_db_per_cm": 2.123377623642176
+    },
+    {
+      "omitted_device": 1695,
+      "loss_db_per_cm": 2.536588430982804
+    },
+    {
+      "omitted_device": 1711,
+      "loss_db_per_cm": 2.4107464940963084
+    },
+    {
+      "omitted_device": 1712,
+      "loss_db_per_cm": 2.3803502588936825
+    },
+    {
+      "omitted_device": 1699,
+      "loss_db_per_cm": 2.796002875918146
+    }
+  ],
+  "complete_spectral_fits": 5972,
+  "floor_or_below_counts": [
+    17,
+    0,
+    3,
+    1,
+    8
+  ],
+  "checks": {
+    "original_identity": true,
+    "shape_and_finite": true,
+    "common_grid": true,
+    "device_metadata": true,
+    "independent_center_readback": true,
+    "ols_crosscheck": true
+  },
+  "phase": null,
+  "complex_s": null,
+  "qualification": null,
+  "measurement_uncertainty": null,
+  "numpy_version": "2.2.0",
+  "scipy_version": "1.18.1",
+  "python_version": "3.12.16",
+  "limitations": [
+    "External measured spiral test structures, not exact archived component GDS.",
+    "Effective length-dependent loss includes bend/layout/fabrication/coupling variations; no isolated straight-waveguide loss claim.",
+    "Detector values follow upstream dB usage; absolute calibration, temperature and uncertainty unknown.",
+    "OLS intervals conditional on regression assumptions with n=5, not calibrated instrument or wafer uncertainty.",
+    "Stored -100 dB floor is observed, not a calibrated sensitivity; incomplete rows excluded, not interpolated.",
+    "No measured phase or complex S, no comparison to TFLN, no process qualification."
+  ]
+}

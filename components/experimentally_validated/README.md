@@ -11,4 +11,4 @@ For exact-cell promotion require documented revision/geometry, process, measurem
 
 ## Imported external measurement evidence
 
-[OPA-LIB-004 SiEPIC PCM spiral cutback](SiEPIC-PCM-2020-02-UW/README.md): five original TE MAT scans from D2020_02_UW, 6001 wavelength points each, three detectors. Measured external test structures only; no exact pinned-cell geometry or phase, no complex S or qualification. Independent cutback CI pending.
+[OPA-LIB-004 SiEPIC PCM spiral cutback](SiEPIC-PCM-2020-02-UW/README.md): five original TE MAT scans from D2020_02_UW, 6001 wavelength points each, three detectors. Measured external test structures only; no exact pinned-cell geometry or phase, no complex S or qualification. Independent cutback CI passed; the archive review PR preserves the verified [raw detector CSV](SiEPIC-PCM-2020-02-UW/archive/datasets/raw-detectors.csv), [spectral fits](SiEPIC-PCM-2020-02-UW/archive/datasets/cutback-spectrum.csv) and [report](SiEPIC-PCM-2020-02-UW/archive/evidence/result.json).

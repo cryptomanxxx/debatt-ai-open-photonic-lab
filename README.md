@@ -47,6 +47,12 @@ independent-laser training proxy is a numerical reference, not a validated chip.
 
 [Browse the component library](components/README.md): external PDK components, published physical evidence and Debatt-AI research models. Reuse existing verified models first; develop custom components only for identified system requirements. The initial catalog is reference-only and does not certify exact-cell measurements or import complex S data.
 
+## OPA-CIR research phase
+
+[Final research report: CIR001–008](research/OPA-CIR-FINAL-REPORT.md) | [Permanent evidence archive](research/evidence/opa-cir) | [Archive provenance](research/cir_archive_manifest.json).
+
+Eight numerical experiments connect complex scattering, pinned PDK models, a 4×4 SVD core, coherent I/Q interface and partial system accounting. The frozen single-carrier reference passes a provisional error screen; multi-carrier WDM does not. No fabricated chip, measured speed or energy advantage is established. Physical component and geometry validation are the next proposed priorities.
+
 ## Roadmap
 
 See the [prioritized photonic computing research backlog](PHOTONIC_RESEARCH_ROADMAP.md)

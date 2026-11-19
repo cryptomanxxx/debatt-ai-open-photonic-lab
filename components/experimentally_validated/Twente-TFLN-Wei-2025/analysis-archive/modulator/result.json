@@ -1,0 +1,134 @@
+{
+  "experiment": "OPA-LIB-004-TFLN-MOD",
+  "source_doi": "10.5281/zenodo.14065933",
+  "article_doi": "10.1038/s41467-025-57441-1",
+  "source_files": {
+    "1a": {
+      "sha256": "2eaab62a46d5602d340cfdf38fa285e4d2837921c5bd5a7081f991c09b65ef99",
+      "data_rows": 10001,
+      "columns": [
+        "Frequency (GHz)",
+        "Optical power (dBm)"
+      ]
+    },
+    "1b": {
+      "sha256": "cafbf3676703360c9a4965f0ffba8352ce8948c08baa32e324aaac47059892d8",
+      "data_rows": 1001,
+      "columns": [
+        "Frequency (GHz)",
+        "Optical power carrier max (dBm)",
+        "Optical power sideband max (dBm)"
+      ]
+    },
+    "1c": {
+      "sha256": "26b49de6c0b7f3e2bee16ee57bfd2d0915f837b4d0a5bf62477d02b95b550519",
+      "data_rows": 400,
+      "columns": [
+        "Modulation depth (rad)",
+        "Ratio of sideband and carrier (dB)"
+      ]
+    }
+  },
+  "carrier": {
+    "frequency_ghz": 193317.08,
+    "power_dbm": -16.15772
+  },
+  "sidebands": [
+    {
+      "side": "lower",
+      "frequency_ghz": 193312.06,
+      "offset_ghz": -5.019999999989523,
+      "power_dbm": -43.02588,
+      "relative_db": -26.86816,
+      "modulation_depth_rad": 0.09060995411797967,
+      "table_interpolated_depth_rad": 0.09062887725823593,
+      "window_sensitivity": [
+        {
+          "halfwidth_ghz": 0.25,
+          "peak_ghz": 193312.06,
+          "power_dbm": -43.02588
+        },
+        {
+          "halfwidth_ghz": 0.5,
+          "peak_ghz": 193312.06,
+          "power_dbm": -43.02588
+        },
+        {
+          "halfwidth_ghz": 0.75,
+          "peak_ghz": 193312.06,
+          "power_dbm": -43.02588
+        }
+      ]
+    },
+    {
+      "side": "upper",
+      "frequency_ghz": 193322.1,
+      "offset_ghz": 5.0200000000186265,
+      "power_dbm": -42.67036,
+      "relative_db": -26.51264,
+      "modulation_depth_rad": 0.09438737462908176,
+      "table_interpolated_depth_rad": 0.09439754038257171,
+      "window_sensitivity": [
+        {
+          "halfwidth_ghz": 0.25,
+          "peak_ghz": 193322.1,
+          "power_dbm": -42.67036
+        },
+        {
+          "halfwidth_ghz": 0.5,
+          "peak_ghz": 193322.1,
+          "power_dbm": -42.67036
+        },
+        {
+          "halfwidth_ghz": 0.75,
+          "peak_ghz": 193322.1,
+          "power_dbm": -42.67036
+        }
+      ]
+    }
+  ],
+  "sideband_asymmetry_db": 0.3555199999999985,
+  "maxhold": {
+    "samples": 10001,
+    "frequency_span_ghz": [
+      193300.0,
+      193500.0
+    ],
+    "peak_frequency_ghz": 193399.8,
+    "peak_power_dbm": -19.10201
+  },
+  "theoretical_curve": {
+    "samples": 400,
+    "max_abs_error_db": 0.00010160020905658484,
+    "rmse_db": 3.177653953379493e-05
+  },
+  "literature": {
+    "rf_ghz": 5,
+    "modulation_depth_rad": 0.095,
+    "vpi_rf_v": 3.5,
+    "electrode_length_cm": 1
+  },
+  "independently_extracted_vpi_v": null,
+  "delivered_rf_peak_voltage_v": null,
+  "eo_bandwidth_ghz": null,
+  "measurement_uncertainty": null,
+  "complex_s": null,
+  "geometry_match": null,
+  "qualification": null,
+  "checks": {
+    "source_identity": true,
+    "shape_grid": true,
+    "peak_readback": true,
+    "bessel_table": true,
+    "inversion_crosscheck": true,
+    "maxhold_readback": true
+  },
+  "limitations": [
+    "Separate bias scans; not simultaneous power ratios or complex optical S.",
+    "Figure 1c theoretical reference only; not 400 independent measurements.",
+    "Delivered RF amplitude not established by these CSVs; no independent Vpi.",
+    "Maxhold optical spectrum not calibrated EO frequency response; no bandwidth inferred.",
+    "Window sensitivity is not measurement uncertainty.",
+    "Different TFLN process from lnoi400; no model calibration."
+  ]
+}

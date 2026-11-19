@@ -1,0 +1,29 @@
+name: OPA NL final evidence audit
+on:
+  pull_request:
+    paths:
+      - 'research/analyze_nl021.py'
+      - 'research/OPA-NL-FINAL-REPORT.md'
+      - '.github/workflows/opa-nl-final-audit.yml'
+      - 'results/opa-nl-021/**'
+      - 'results/opa-nl-020/**'
+      - 'results/opa-nl-019/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Recompute archived evidence without simulation
+        run: |
+          python3 research/analyze_nl021.py > "$RUNNER_TEMP/nl021-final-audit.json"
+          python3 -c 'import json,sys; r=json.load(open(sys.argv[1])); assert r["verified"] is True; print({k:v for k,v in r.items() if k!="groups"})' "$RUNNER_TEMP/nl021-final-audit.json"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: nl021-final-audit
+          path: ${{ runner.temp }}/nl021-final-audit.json
+          if-no-files-found: error

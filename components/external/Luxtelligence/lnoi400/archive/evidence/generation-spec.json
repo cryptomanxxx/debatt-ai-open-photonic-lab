@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "experiment": "OPA-LIB-002",
+  "source_repository": "https://github.com/Luxtelligence/lxt_pdk_gf",
+  "revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "platform": "lnoi400 X-cut TFLN",
+  "license": "MIT",
+  "license_git_blob_sha1": "875338218a9fe94f14cd43f4118220149bfdb22e",
+  "source_cells_git_blob_sha1": "5136b2c23955ee3e8a11d66138247b6609ed9f4f",
+  "source_tech_git_blob_sha1": "de38117455c92f82910cab3708ee24ca87117a9c",
+  "origin": "external_pcell_generated",
+  "components": [
+    {
+      "id": "straight-rwg1000",
+      "factory": "straight_rwg1000",
+      "kwargs": {
+        "length": 100
+      },
+      "expected_optical_ports": 2,
+      "expected_electrical_ports": 0,
+      "required_geometry_layers": [
+        "2/0",
+        "3/0"
+      ],
+      "related_registry_id": null,
+      "drc": null,
+      "measurement": null,
+      "qualification": null
+    },
+    {
+      "id": "euler-bend-90",
+      "factory": "L_turn_bend",
+      "kwargs": {},
+      "expected_optical_ports": 2,
+      "expected_electrical_ports": 0,
+      "required_geometry_layers": [
+        "2/0",
+        "3/0"
+      ],
+      "related_registry_id": null,
+      "drc": null,
+      "measurement": null,
+      "qualification": null
+    },
+    {
+      "id": "mmi-2x2",
+      "factory": "mmi2x2_optimized1550",
+      "kwargs": {},
+      "expected_optical_ports": 4,
+      "expected_electrical_ports": 0,
+      "required_geometry_layers": [
+        "2/0",
+        "3/0"
+      ],
+      "related_registry_id": "lnoi400-mmi2x2",
+      "drc": null,
+      "measurement": null,
+      "qualification": null
+    },
+    {
+      "id": "directional-coupler",
+      "factory": "directional_coupler_balanced",
+      "kwargs": {},
+      "expected_optical_ports": 4,
+      "expected_electrical_ports": 0,
+      "required_geometry_layers": [
+        "2/0",
+        "3/0"
+      ],
+      "related_registry_id": null,
+      "drc": null,
+      "measurement": null,
+      "qualification": null
+    },
+    {
+      "id": "edge-coupler",
+      "factory": "double_linear_inverse_taper",
+      "kwargs": {},
+      "expected_optical_ports": 2,
+      "expected_electrical_ports": 0,
+      "required_geometry_layers": [
+        "2/0",
+        "3/0",
+        "3/1"
+      ],
+      "related_registry_id": "lnoi400-edge",
+      "drc": null,
+      "measurement": null,
+      "qualification": null
+    },
+    {
+      "id": "eo-phase-shifter-5mm",
+      "factory": "eo_phase_shifter",
+      "kwargs": {
+        "modulation_length": 5000
+      },
+      "expected_optical_ports": 2,
+      "expected_electrical_ports": 2,
+      "required_geometry_layers": [
+        "2/0",
+        "3/0",
+        "21/0"
+      ],
+      "related_registry_id": null,
+      "drc": null,
+      "measurement": null,
+      "qualification": null
+    },
+    {
+      "id": "mzm-2x2-5mm",
+      "factory": "mzm_unbalanced",
+      "kwargs": {
+        "modulation_length": 5000,
+        "length_imbalance": 0,
+        "splitter": "mmi2x2_optimized1550",
+        "with_heater": true
+      },
+      "expected_optical_ports": 4,
+      "expected_electrical_ports": 4,
+      "required_geometry_layers": [
+        "2/0",
+        "3/0",
+        "21/0",
+        "21/1"
+      ],
+      "related_registry_id": "lnoi400-mzm",
+      "drc": null,
+      "measurement": null,
+      "qualification": null
+    }
+  ]
+}

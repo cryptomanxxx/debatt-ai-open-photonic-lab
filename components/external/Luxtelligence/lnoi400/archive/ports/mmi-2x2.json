@@ -1,0 +1,73 @@
+{
+  "bbox_um": [
+    -25.0,
+    -6.75,
+    101.5,
+    6.75
+  ],
+  "complex_s_parameters": "not_imported",
+  "dbu_um": 0.001,
+  "drc": null,
+  "factory": "mmi2x2_optimized1550",
+  "gds_bytes": 450,
+  "gds_file": "mmi-2x2.gds",
+  "gds_sha256": "7870fceeb2a81ace7b140f52a63b1080eeabc4f428b713034b71a29a6fe2fbf9",
+  "id": "mmi-2x2",
+  "kwargs": {},
+  "measurement": null,
+  "origin": "external_pcell_generated",
+  "port_source": "upstream PCell API; not independently validated modal reference planes",
+  "ports": [
+    {
+      "center_um": [
+        -25.0,
+        -1.75
+      ],
+      "name": "o1",
+      "orientation_deg": 180.0,
+      "type": "optical",
+      "width_um": 1.0
+    },
+    {
+      "center_um": [
+        -25.0,
+        1.75
+      ],
+      "name": "o2",
+      "orientation_deg": 180.0,
+      "type": "optical",
+      "width_um": 1.0
+    },
+    {
+      "center_um": [
+        101.5,
+        1.75
+      ],
+      "name": "o3",
+      "orientation_deg": 0.0,
+      "type": "optical",
+      "width_um": 1.0
+    },
+    {
+      "center_um": [
+        101.5,
+        -1.75
+      ],
+      "name": "o4",
+      "orientation_deg": 0.0,
+      "type": "optical",
+      "width_um": 1.0
+    }
+  ],
+  "qualification": null,
+  "required_layer_area_um2": {
+    "2/0": 507.5,
+    "3/0": 1440.0
+  },
+  "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "top_cell": "mmi2x2optimized1550_WM5_LM76p5_WT1p5_LT25_PR0p7_CSxs_rwg1000",
+  "used_layers": [
+    "2/0",
+    "3/0"
+  ]
+}

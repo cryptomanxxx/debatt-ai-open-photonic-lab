@@ -1,0 +1,73 @@
+{
+  "bbox_um": [
+    -66.46000000000001,
+    -20.3,
+    66.46000000000001,
+    20.3
+  ],
+  "complex_s_parameters": "not_imported",
+  "dbu_um": 0.001,
+  "drc": null,
+  "factory": "directional_coupler_balanced",
+  "gds_bytes": 4696,
+  "gds_file": "directional-coupler.gds",
+  "gds_sha256": "fe00bd054cd915620e8c65d20418fa6284771a09059941315811f0c418b753c2",
+  "id": "directional-coupler",
+  "kwargs": {},
+  "measurement": null,
+  "origin": "external_pcell_generated",
+  "port_source": "upstream PCell API; not independently validated modal reference planes",
+  "ports": [
+    {
+      "center_um": [
+        -66.46000000000001,
+        -15.3
+      ],
+      "name": "o1",
+      "orientation_deg": 180.0,
+      "type": "optical",
+      "width_um": 1.0
+    },
+    {
+      "center_um": [
+        -66.46000000000001,
+        15.3
+      ],
+      "name": "o2",
+      "orientation_deg": 180.0,
+      "type": "optical",
+      "width_um": 1.0
+    },
+    {
+      "center_um": [
+        66.46000000000001,
+        15.3
+      ],
+      "name": "o3",
+      "orientation_deg": 0.0,
+      "type": "optical",
+      "width_um": 1.0
+    },
+    {
+      "center_um": [
+        66.46000000000001,
+        -15.3
+      ],
+      "name": "o4",
+      "orientation_deg": 0.0,
+      "type": "optical",
+      "width_um": 1.0
+    }
+  ],
+  "qualification": null,
+  "required_layer_area_um2": {
+    "2/0": 244.845938,
+    "3/0": 2339.8023239999998
+  },
+  "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "top_cell": "directional_coupler_balanced_IWS30p6_SL58_CSL16p92_CWS0_e88e65ac",
+  "used_layers": [
+    "2/0",
+    "3/0"
+  ]
+}

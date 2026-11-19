@@ -1,0 +1,55 @@
+{
+  "bbox_um": [
+    0.0,
+    -10.0,
+    360.0,
+    10.0
+  ],
+  "complex_s_parameters": "not_imported",
+  "dbu_um": 0.001,
+  "drc": null,
+  "factory": "double_linear_inverse_taper",
+  "gds_bytes": 2566,
+  "gds_file": "edge-coupler.gds",
+  "gds_sha256": "e064255aebba52e68334c8f35e49fb0b4b003c531c295af178c31b23c8ac30d3",
+  "id": "edge-coupler",
+  "kwargs": {},
+  "measurement": null,
+  "origin": "external_pcell_generated",
+  "port_source": "upstream PCell API; not independently validated modal reference planes",
+  "ports": [
+    {
+      "center_um": [
+        0.0,
+        0.0
+      ],
+      "name": "o1",
+      "orientation_deg": 180.0,
+      "type": "optical",
+      "width_um": 0.25
+    },
+    {
+      "center_um": [
+        360.0,
+        0.0
+      ],
+      "name": "o2",
+      "orientation_deg": 0.0,
+      "type": "optical",
+      "width_um": 1.0
+    }
+  ],
+  "qualification": null,
+  "required_layer_area_um2": {
+    "2/0": 150.0,
+    "3/0": 1062.0,
+    "3/1": 7200.0
+  },
+  "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "top_cell": "double_linear_inverse_taper_CSSxs_swg250_CSExs_rwg1000__e181987f",
+  "used_layers": [
+    "2/0",
+    "3/0",
+    "3/1"
+  ]
+}

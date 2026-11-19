@@ -1,0 +1,55 @@
+{
+  "bbox_um": [
+    0.0,
+    -5.0,
+    100.0,
+    5.0
+  ],
+  "complex_s_parameters": "not_imported",
+  "dbu_um": 0.001,
+  "drc": null,
+  "factory": "straight_rwg1000",
+  "gds_bytes": 252,
+  "gds_file": "straight-rwg1000.gds",
+  "gds_sha256": "5f71933012b3a87c3f587ac85bb5ff1fb4304355cd6b93ef18699e8ffbe62b0e",
+  "id": "straight-rwg1000",
+  "kwargs": {
+    "length": 100
+  },
+  "measurement": null,
+  "origin": "external_pcell_generated",
+  "port_source": "upstream PCell API; not independently validated modal reference planes",
+  "ports": [
+    {
+      "center_um": [
+        0.0,
+        0.0
+      ],
+      "name": "o1",
+      "orientation_deg": 180.0,
+      "type": "optical",
+      "width_um": 1.0
+    },
+    {
+      "center_um": [
+        100.0,
+        0.0
+      ],
+      "name": "o2",
+      "orientation_deg": 0.0,
+      "type": "optical",
+      "width_um": 1.0
+    }
+  ],
+  "qualification": null,
+  "required_layer_area_um2": {
+    "2/0": 100.0,
+    "3/0": 1000.0
+  },
+  "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "top_cell": "straight_rwg1000_L100",
+  "used_layers": [
+    "2/0",
+    "3/0"
+  ]
+}

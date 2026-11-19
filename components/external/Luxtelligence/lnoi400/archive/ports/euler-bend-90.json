@@ -1,0 +1,53 @@
+{
+  "bbox_um": [
+    0.0,
+    -5.0,
+    85.0,
+    80.0
+  ],
+  "complex_s_parameters": "not_imported",
+  "dbu_um": 0.001,
+  "drc": null,
+  "factory": "L_turn_bend",
+  "gds_bytes": 7198,
+  "gds_file": "euler-bend-90.gds",
+  "gds_sha256": "ad63bd2a4fd7d49a0c65e67565bb02fb5a5dc507917f3183331f77a815901941",
+  "id": "euler-bend-90",
+  "kwargs": {},
+  "measurement": null,
+  "origin": "external_pcell_generated",
+  "port_source": "upstream PCell API; not independently validated modal reference planes",
+  "ports": [
+    {
+      "center_um": [
+        0.0,
+        0.0
+      ],
+      "name": "o1",
+      "orientation_deg": 180.0,
+      "type": "optical",
+      "width_um": 1.0
+    },
+    {
+      "center_um": [
+        80.0,
+        80.0
+      ],
+      "name": "o2",
+      "orientation_deg": 90.0,
+      "type": "optical",
+      "width_um": 1.0
+    }
+  ],
+  "qualification": null,
+  "required_layer_area_um2": {
+    "2/0": 134.386593,
+    "3/0": 1344.035554
+  },
+  "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "top_cell": "L_turn_bend_R80_P1_WAFTrue_CSxs_rwg1000",
+  "used_layers": [
+    "2/0",
+    "3/0"
+  ]
+}

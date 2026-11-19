@@ -1,6 +1,6 @@
 # OPA-NL-020 — Robust margin optimization at 42 ps
 
-Status: preregistered proposal; no NL020 data generated or experiment run. Basis: exact NL019 archive merge f7a5a1469a86f5617ce2dc83796fe9abd845fcc8, source run 44409237897, [NL019](OPA-NL-019.md).
+Status: executed; all four robust methods meet the exploratory 96% target but fail strict worst-repeat improvement over fresh Margin16 Low. No robust candidate advances. Exact archive pending. Basis: exact NL019 archive merge f7a5a1469a86f5617ce2dc83796fe9abd845fcc8, source run 44409237897, [NL019](OPA-NL-019.md).
 
 ## Raw evidence audit and rationale
 
@@ -46,3 +46,94 @@ Reuse NL019 scaled calibration arrays X[g,r,s,t,f], signed labels Y[g,r,s,t], g=
 Calibration domains 10804..10808, 512 balanced examples per group, 8 repeats, 40960 rows per setting. Single exploratory test panel 10814..10818, 2048 balanced examples/group, 8 repeats. Explicitly disjoint from all prior domains including NL019. Same three aligned grids and tolerances, no discarded startup, same numerical gates and sampled diode cap 2 mW. Expected 200 primary,600 resolution,40 primary groups,120 resolution groups,20 both-drive tuples,12 coefficient records,3 optical audits,2 convergence comparisons. Pair each of six coefficient methods with four anchors (24 pairs per setting); fresh Ridge16 vs frozen fresh Ridge16; fresh low vs fresh Ridge16 and frozen low; both robust vs fresh low, frozen low and fresh Ridge16; robust repeat vs robust softmax. Total 34 pairs per setting x2 settings x2 drives x5 seeds x8 repeats=5440 paired raw rows,136 summaries each 81920 decisions. Verify exact keys and marginals, group/repeat minima, immutable vector hashes, archive and all inherited physics checks. Report normalized direction/noise, clean/electrical/combined diagnostics, all seed/repeat counts, calibration risk weights, matched gains. No inference of measured energy or BER.
 
 Primary contrast robust16_softmax vs fresh margin16_low at LO2 low drive; secondary repeat risk and LO3. Advancement requires all implementation checks, both drives pass existing gates, maximin >=.96, low-drive worst strictly better than matched fresh margin16_low, positive low-drive matched net vs fresh margin16_low. Rank qualifying robust methods by lower LO, higher maximin, then softmax before repeat. No rounding, no rerun-until-pass. If none qualifies, report no robust candidate and reconsider objective or longer symbol duration before any new preregistered study. Only a qualifying candidate can be proposed for separately preregistered frozen two-panel confirmation. Historical NL015 23.81 Gsymbol/s remains qualified by NL018 failures; no new speed promotion, physical throughput, ADC feasibility, measured BER or wall-plug claim.
+
+## Executed results — 2026-11-19
+
+[Successful run 44492281387](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44492281387), job 135450777884, head 2e672fd323a887728594f85fa13d5a711ec0d5fe, CI merge a5876d4a3f12d7d882cf3f0c4234b10cfd079fcf, final merge cbb721cf6e408a8d0c3cfae16c202c2f14400db5. All 32 implementation checks passed, including the mandatory NL019 raw audit, gradient regressions (robust 3.8899905518974265e-10), optimizer and risk cell coverage, paired marginals, immutable vectors and prior archives. 200 primary rows, 600 resolution rows, 40 primary groups, 120 resolution groups, 20 common-drive tuples, 12 coefficient records, 5440 paired rows, 136 summaries, 3 optical audits, 2 convergence comparisons. Runtime 192.44995623900002 s. 28/40 groups pass, 12/20 both-drive passes, 8/20 reach 96% (all four margin references and four robust configurations), zero ambiguous groups or changed seed/group gates. No independent confirmation.
+
+### All twenty tuples
+
+| LO mW | readout | low worst | high worst | both drives pass | 96% target |
+|---:|---|---:|---:|---|---|
+| 2 | end | 0.89208984375 | 0.99072265625 | no | no |
+| 2 | eighth_mean | 0.92431640625 | 0.97021484375 | no | no |
+| 2 | quarter_mean | 0.91552734375 | 0.89404296875 | no | no |
+| 2 | half_mean | 0.83154296875 | 0.69091796875 | no | no |
+| 2 | frozen_fresh_ridge16 | 0.955078125 | 0.99755859375 | yes | no |
+| 2 | frozen_margin16_low | 0.96337890625 | 0.99951171875 | yes | yes |
+| 2 | fresh_ridge16 | 0.955078125 | 0.9970703125 | yes | no |
+| 2 | margin16_low | 0.96337890625 | 0.99951171875 | yes | yes |
+| 2 | robust16_softmax | 0.962890625 | 0.99951171875 | yes | yes |
+| 2 | robust16_repeat | 0.962890625 | 0.99951171875 | yes | yes |
+| 3 | end | 0.89404296875 | 0.9912109375 | no | no |
+| 3 | eighth_mean | 0.92578125 | 0.97021484375 | no | no |
+| 3 | quarter_mean | 0.916015625 | 0.89453125 | no | no |
+| 3 | half_mean | 0.83154296875 | 0.69091796875 | no | no |
+| 3 | frozen_fresh_ridge16 | 0.9560546875 | 0.99755859375 | yes | no |
+| 3 | frozen_margin16_low | 0.9638671875 | 0.99951171875 | yes | yes |
+| 3 | fresh_ridge16 | 0.95654296875 | 0.9970703125 | yes | no |
+| 3 | margin16_low | 0.96337890625 | 0.99951171875 | yes | yes |
+| 3 | robust16_softmax | 0.962890625 | 0.99951171875 | yes | yes |
+| 3 | robust16_repeat | 0.962890625 | 0.99951171875 | yes | yes |
+
+### Prespecified robust contrasts
+
+| LO mW | readout | low worst delta vs fresh margin | net vs fresh margin /81920 | limiting seed/repeat | qualifies |
+|---:|---|---:|---:|---|---|
+| 2 | robust16_softmax | -0.00048828125 | 4 | 1303/1 | no |
+| 2 | robust16_repeat | -0.00048828125 | 4 | 1303/1 | no |
+| 3 | robust16_softmax | -0.00048828125 | 12 | 1303/1 | no |
+| 3 | robust16_repeat | -0.00048828125 | 14 | 1303/1 | no |
+
+All four robust candidates clear 96%, with low worst 1972/2048 and high worst 2047/2048. Fresh margin reference is 1973/2048 at both LO settings, so each robust candidate loses one worst-repeat decision despite positive aggregate net (+4,+4,+12,+14). No qualifying candidate under original protocol. Best frozen NL019 margin LO3 is 1974/2048 low and 2047/2048 high; LO2 is 1973/2048 low. Both frozen margin vectors reach 96% on new data, but NL019 itself missed that target and neither is an NL020 advancement candidate. No retroactive promotion or claim of independent two-panel confirmation. All four robust endpoints limited by seed1303 repeat1; seed-level improvement vs fresh needs raw audit. Comparing NL019 and NL020 absolute minima is confounded by different test draws. At matched low-drive inputs, fresh margin vs fresh ridge gains +497/+499 decisions at LO2/3; robust gains +501/+511 or +513 vs fresh ridge, but -16/-3/-1 vs frozen margin (LO2 both -16, LO3 softmax -3 and repeat -1). Recalibrating margin loses 20/15 net compared with frozen at low drive. Repeat vs softmax gives 0/+2 net at low drive, 0 at high. Fresh margin and both robust methods share 81917/81920 correct high-drive decisions at each setting, not error-free. The incremental robust-risk benefit is small and does not improve maximin. Descriptive paired repeated decisions only; no independent-trial significance claim.
+
+### Exact matched counts
+
+| contrast | LO mW | drive mW | method | anchor | both correct | method only | anchor only | neither | net |
+|---|---:|---:|---|---|---:|---:|---:|---:|---:|
+| robust | 2 | 0.1 | robust16_repeat | fresh_ridge16 | 79166 | 840 | 339 | 1575 | 501 |
+| robust | 2 | 0.1 | robust16_repeat | frozen_margin16_low | 79891 | 115 | 131 | 1783 | -16 |
+| robust | 2 | 0.1 | robust16_repeat | margin16_low | 79973 | 33 | 29 | 1885 | 4 |
+| robust | 2 | 0.1 | robust16_softmax | fresh_ridge16 | 79160 | 846 | 345 | 1569 | 501 |
+| robust | 2 | 0.1 | robust16_softmax | frozen_margin16_low | 79897 | 109 | 125 | 1789 | -16 |
+| robust | 2 | 0.1 | robust16_softmax | margin16_low | 79980 | 26 | 22 | 1892 | 4 |
+| robust | 2 | 1 | robust16_repeat | fresh_ridge16 | 81885 | 32 | 1 | 2 | 31 |
+| robust | 2 | 1 | robust16_repeat | frozen_margin16_low | 81915 | 2 | 1 | 2 | 1 |
+| robust | 2 | 1 | robust16_repeat | margin16_low | 81917 | 0 | 0 | 3 | 0 |
+| robust | 2 | 1 | robust16_softmax | fresh_ridge16 | 81885 | 32 | 1 | 2 | 31 |
+| robust | 2 | 1 | robust16_softmax | frozen_margin16_low | 81915 | 2 | 1 | 2 | 1 |
+| robust | 2 | 1 | robust16_softmax | margin16_low | 81917 | 0 | 0 | 3 | 0 |
+| robust | 3 | 0.1 | robust16_repeat | fresh_ridge16 | 79232 | 837 | 324 | 1527 | 513 |
+| robust | 3 | 0.1 | robust16_repeat | frozen_margin16_low | 79955 | 114 | 115 | 1736 | -1 |
+| robust | 3 | 0.1 | robust16_repeat | margin16_low | 80027 | 42 | 28 | 1823 | 14 |
+| robust | 3 | 0.1 | robust16_softmax | fresh_ridge16 | 79226 | 841 | 330 | 1523 | 511 |
+| robust | 3 | 0.1 | robust16_softmax | frozen_margin16_low | 79954 | 113 | 116 | 1737 | -3 |
+| robust | 3 | 0.1 | robust16_softmax | margin16_low | 80030 | 37 | 25 | 1828 | 12 |
+| robust | 3 | 1 | robust16_repeat | fresh_ridge16 | 81887 | 30 | 1 | 2 | 29 |
+| robust | 3 | 1 | robust16_repeat | frozen_margin16_low | 81915 | 2 | 2 | 1 | 0 |
+| robust | 3 | 1 | robust16_repeat | margin16_low | 81917 | 0 | 0 | 3 | 0 |
+| robust | 3 | 1 | robust16_softmax | fresh_ridge16 | 81887 | 30 | 1 | 2 | 29 |
+| robust | 3 | 1 | robust16_softmax | frozen_margin16_low | 81915 | 2 | 2 | 1 | 0 |
+| robust | 3 | 1 | robust16_softmax | margin16_low | 81917 | 0 | 0 | 3 | 0 |
+| recalibration | 2 | 0.1 | fresh_ridge16 | frozen_fresh_ridge16 | 79473 | 32 | 35 | 2380 | -3 |
+| recalibration | 2 | 0.1 | margin16_low | frozen_margin16_low | 79894 | 108 | 128 | 1790 | -20 |
+| recalibration | 2 | 1 | fresh_ridge16 | frozen_fresh_ridge16 | 81886 | 0 | 4 | 30 | -4 |
+| recalibration | 2 | 1 | margin16_low | frozen_margin16_low | 81915 | 2 | 1 | 2 | 1 |
+| recalibration | 3 | 0.1 | fresh_ridge16 | frozen_fresh_ridge16 | 79525 | 31 | 41 | 2323 | -10 |
+| recalibration | 3 | 0.1 | margin16_low | frozen_margin16_low | 79943 | 112 | 127 | 1738 | -15 |
+| recalibration | 3 | 1 | fresh_ridge16 | frozen_fresh_ridge16 | 81888 | 0 | 4 | 28 | -4 |
+| recalibration | 3 | 1 | margin16_low | frozen_margin16_low | 81915 | 2 | 2 | 1 | 0 |
+| margin | 2 | 0.1 | margin16_low | fresh_ridge16 | 79170 | 832 | 335 | 1583 | 497 |
+| margin | 2 | 1 | margin16_low | fresh_ridge16 | 81885 | 32 | 1 | 2 | 31 |
+| margin | 3 | 0.1 | margin16_low | fresh_ridge16 | 79235 | 820 | 321 | 1544 | 499 |
+| margin | 3 | 1 | margin16_low | fresh_ridge16 | 81887 | 30 | 1 | 2 | 29 |
+| risk | 2 | 0.1 | robust16_repeat | robust16_softmax | 79994 | 12 | 12 | 1902 | 0 |
+| risk | 2 | 1 | robust16_repeat | robust16_softmax | 81917 | 0 | 0 | 3 | 0 |
+| risk | 3 | 0.1 | robust16_repeat | robust16_softmax | 80058 | 11 | 9 | 1842 | 2 |
+| risk | 3 | 1 | robust16_repeat | robust16_softmax | 81917 | 0 | 0 | 3 | 0 |
+
+Numerical convergence maxima: field 3.198547123054762e-10 sqrt(mW), waveform 3.2553626278645155e-9 sqrt(mW), clean current 2.207321409593982e-8 A, noisy current 2.2075803204310877e-8 A, peak 0.0000012278704368817728 mW. No gate changes.
+
+### Archive and next decision
+
+Artifact 14513522210, ZIP 197602 bytes, SHA-256 299ba43c879ca6f80213c6946a0fb64194b5f5268dc5ab0b2021244193834e85. Manual archive helper pins run/head/ZIP and fifteen exact science file hashes plus staged bytes. After verified archive merge, audit all 5440 paired rows, 12 vectors, seed/repeat profiles and effective risk weights, normalized electrical variance, clean/electrical/combined arms. Investigate whether the fixed risk temperature actually reallocates enough weight and whether direction changes are material; do not tune from old test labels or select a new objective by test-only sweep. Under original protocol no robust candidate qualifies. Reconsider objective or symbol period after raw audit; a separately preregistered new study may assess the established margin baseline with independent panels, but this is a new decision, not retroactive NL020 advancement. Historical NL015 23.81 Gsymbol/s confirmation remains qualified by NL018 failures. No physical throughput, BER, ADC feasibility or measured power claim.

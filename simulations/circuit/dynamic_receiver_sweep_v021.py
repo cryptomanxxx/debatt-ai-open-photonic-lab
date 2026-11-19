@@ -386,8 +386,8 @@ def main():
         lag0_l2=r["lag_block_l2_norms"][0],
         lag1_l2=r["lag_block_l2_norms"][1] if r["taps"]>=16 else "",
         lag2_l2=r["lag_block_l2_norms"][2] if r["taps"]>=24 else "",
-        lag3_l2=r["lag_block_l2_norms"][3] if r["taps"]>=32 else "",condition=r["condition"],
-        calibration_rmse_a=r["calibration_rmse_a"]) for r in coefficient_records]
+        lag3_l2=r["lag_block_l2_norms"][3] if r["taps"]>=32 else "",condition=r.get("condition",""),
+        calibration_rmse_a=r.get("calibration_rmse_a","")) for r in coefficient_records]
     checks["paired_summary_counts"]=len(paired_summary)==240 and all(sum(r[k] for k in ("both_correct","equalizer_only","anchor_only","neither"))==81920 for r in paired_summary)
     checks["endpoint_coverage"]=len(supporting)==16 and set(by_endpoint)=={(on,lo,fc,m) for on,lo,fc in SETTINGS for m in methods(on)}
     checks["repeat_minima"]=all(min(r[f"combined_correct_r{i}"] for i in range(REPEATS))/N==r["combined_worst"] for r in resolution_rows)
@@ -396,6 +396,7 @@ def main():
     # A numerical endpoint pass is not a valid confirmation if implementation checks fail.
     result["independent_confirmation_passed"]=bool(confirmed and not result["failures"])
     result["confirmed_cadence_gsymbol_s"]=1000/42 if result["independent_confirmation_passed"] else None
+    result["primary_passed"]=bool(primary_ok and not result["failures"])
     result["secondary_passed"]=bool(secondary_ok and not result["failures"])
     result["robustness_ambiguous_groups"]=sum(not g["robustness_grid_agreement"] for g in groups)
     write_csv("paired_summary.csv",paired_summary)

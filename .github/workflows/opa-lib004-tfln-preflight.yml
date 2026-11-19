@@ -1,0 +1,25 @@
+name: OPA LIB004 Twente TFLN acquisition preflight
+on:
+  pull_request:
+    paths:
+      - 'components/experimentally_validated/Twente-TFLN-Wei-2025/**'
+      - 'tools/audit_twente_tfln_preflight.py'
+      - '.github/workflows/opa-lib004-tfln-preflight.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Inspect public Zenodo metadata and ZIP without publishing source bytes
+        run: python3 tools/audit_twente_tfln_preflight.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: opa-lib004-tfln-inventory
+          path: results/opa-lib004-tfln-preflight/inventory.json
+          if-no-files-found: error

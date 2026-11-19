@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment": "OPA-LIB-004",
+  "id": "siepic-pcm-2020-02-uw-spiral-te",
+  "source_repository": "https://github.com/SiEPIC/SiEPIC_EBeam_PDK",
+  "revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+  "source_run": "PCM/D2020_02_UW",
+  "platform": "SiEPIC EBeam silicon photonics; exact measured wafer stack/process not established by these files",
+  "evidence_scope": "external_measured_test_structures",
+  "geometry_match": "none to existing archived GDS; upstream nominal spiral lengths and device metadata only",
+  "license": "MIT project license; public PCM examples distributed within project; no separate data license located; retain attribution; no fabrication rights inferred",
+  "license_source": "LICENSE.md",
+  "license_git_blob_sha1": "e5d16d71c2ff1f40c393ef23a2e01cb850aa9a4d",
+  "analysis_source": "PCM/PCM_analysis/spiral_cutback_analysis.py",
+  "analysis_git_blob_sha1": "7360437856a7491acd1c1fa4bf5a89aaf4f5dffc",
+  "detector_number": 2,
+  "polarization": "TE from upstream labels",
+  "wavelength_unit": "m",
+  "detector_level_unit": "dB as used by upstream analysis; absolute reference not established",
+  "grid_nm": {
+    "start": 1520,
+    "stop": 1580,
+    "step": 0.01,
+    "count": 6001
+  },
+  "phase": null,
+  "complex_s": null,
+  "measurement_uncertainty": null,
+  "temperature": null,
+  "qualification": null,
+  "files": [
+    {
+      "name": "PCM_PCM_SpiralWG1213TE_gap2000_1698.mat",
+      "source_path": "PCM/D2020_02_UW/PCM_PCM_SpiralWG1213TE_gap2000_1698.mat",
+      "nominal_length_um": 1213,
+      "device_number": 1698,
+      "bytes": 193336,
+      "git_blob_sha1": "4cdfbe9acf553a68696337663e5acdec2144cd98"
+    },
+    {
+      "name": "PCM_PCM_SpiralWG11204TE_gap2000_1695.mat",
+      "source_path": "PCM/D2020_02_UW/PCM_PCM_SpiralWG11204TE_gap2000_1695.mat",
+      "nominal_length_um": 11204,
+      "device_number": 1695,
+      "bytes": 193336,
+      "git_blob_sha1": "68aa62ff077e818561bfb64ad6839b07cb82bcc7"
+    },
+    {
+      "name": "PCM_PCM_SpiralWG32237TE_gap2000_1711.mat",
+      "source_path": "PCM/D2020_02_UW/PCM_PCM_SpiralWG32237TE_gap2000_1711.mat",
+      "nominal_length_um": 32237,
+      "device_number": 1711,
+      "bytes": 193336,
+      "git_blob_sha1": "68ef25d77935bf25c17a424e8723d45d1a625dab"
+    },
+    {
+      "name": "PCM_PCM_SpiralWG53018TE_gap2000_1712.mat",
+      "source_path": "PCM/D2020_02_UW/PCM_PCM_SpiralWG53018TE_gap2000_1712.mat",
+      "nominal_length_um": 53018,
+      "device_number": 1712,
+      "bytes": 193336,
+      "git_blob_sha1": "b43f95bba900f8862af75d9798a3363a028c125f"
+    },
+    {
+      "name": "PCM_PCM_SpiralWG102530TE_gap2000_1699.mat",
+      "source_path": "PCM/D2020_02_UW/PCM_PCM_SpiralWG102530TE_gap2000_1699.mat",
+      "nominal_length_um": 102530,
+      "device_number": 1699,
+      "bytes": 193336,
+      "git_blob_sha1": "a54b25e1b78d44bc73188b7821398b85ac37258e"
+    }
+  ]
+}

@@ -91,3 +91,7 @@ Use the [OPA component library](components/README.md) before proposing custom co
 ## CIR001–008 system handoff (2026-11-19)
 
 CIR001–007 implementations are merged. CIR006's frozen WDM grid failed the multicarrier 5% screen; single 1550 nm carrier is the baseline, not a general rejection of WDM. CIR007 admitted four conditional interface settings. [CIR008](research/OPA-CIR-008.md) proposes partial integrated accounting on those exact settings. After verification, archive evidence and consolidate a phase report before choosing system-driven remediation. Keep electronic activation, physical attenuator/encoder/receiver validation and fabrication as open work. No measured hardware claim.
+
+## CIR phase closure and next research decision (2026-11-19)
+
+[OPA-CIR Final Research Report](research/OPA-CIR-FINAL-REPORT.md) consolidates eight merged experiments, 63 numerical checks and the permanent evidence archive (PR221). Freeze CIR001–008 on report audit and merge. Single-carrier 1550 nm, nominal 8-bit interface is the conditional baseline, not a fabricated accelerator. WDM remains unresolved. Proposed next priorities: process-access and passive geometry/model-to-layout closure, physical attenuator/encoder/receiver validation, bounded WDM attribution and matched system economics. Retain electronic activation, the closed NL phase and fabrication roadmap. No new experimental series authorized by the report alone.

@@ -60,3 +60,37 @@ Panel A domains 10904..10908; panel B 10914..10918; disjoint from each other and
 ## Counts and pairing
 
 2 panels x2 settings x9 methods x2 drives x5 seeds =360 primary rows,1080 resolution rows,72 primary groups,216 resolution groups,18 common two-panel tuples,10 frozen coefficient records,6 optical audits,4 convergence comparisons. Pair all five coefficient readouts against four anchors (20 pairs/setting); frozen_margin16_low vs frozen_fresh_ridge16; frozen_nl020_margin16_low vs frozen_margin16_low and frozen_fresh_ridge16; both robust references vs frozen_nl020_margin16_low, frozen_margin16_low and frozen_fresh_ridge16; repeat vs softmax. Total 30 pairs/setting x2 panels x2 settings x2 drives x5 seeds x8 repeats=9600 paired raw rows,240 summaries each 81920 decisions. Exact key coverage, both marginals, all seed and repeat counts, normalized noise and coefficient directions, optical energy balance, immutable archive and vector file, all numerical checks. Report every endpoint and all four primary/secondary group outcomes; no independent-trial significance claim. No fitting, no optimization of temperature, no adaptive selection. No measured BER, total wall-plug power, physical throughput or ADC feasibility claim. Only after confirmation and archive audit consider a separately preregistered 41 ps exploration; 40 ps remains long-term goal. If primary fails, reconsider robustness or longer periods, not threshold relaxation.
+
+
+## Recorded results — 2026-11-19
+
+Implementation PR [#207](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/pull/207), merge `651b180df79959428df3f1e92254f9b182f0e523`, [CI run 44504831351](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44504831351), job 135493790044. All 27 implementation checks pass; NL020 audit executed successfully before test generation. 360 primary rows, 1080 resolution rows, 72 primary groups, 216 resolution groups, 18 endpoints, 10 frozen vectors, 9600 paired rows and 240 paired summaries expected and checked by the experiment. No calibration. 48 groups meet the inherited confirmed 95% gate; no grid gate changes or 96% ambiguity. The archived raw data still require separate verification before final phase report.
+
+| LO mW | readout | A low | A high | B low | B high | 96% confirmed |
+|---:|---|---:|---:|---:|---:|---|
+| 2 | end | 1824/2048 | 2028/2048 | 1835/2048 | 2027/2048 | no |
+| 2 | eighth_mean | 1889/2048 | 1987/2048 | 1887/2048 | 1987/2048 | no |
+| 2 | quarter_mean | 1886/2048 | 1833/2048 | 1869/2048 | 1832/2048 | no |
+| 2 | half_mean | 1703/2048 | 1455/2048 | 1680/2048 | 1430/2048 | no |
+| 2 | frozen_fresh_ridge16 | 1960/2048 | 2037/2048 | 1950/2048 | 2039/2048 | no |
+| 2 | frozen_margin16_low | 1966/2048 | 2047/2048 | 1979/2048 | 2047/2048 | no |
+| 2 | frozen_nl020_margin16_low | 1965/2048 | 2046/2048 | 1977/2048 | 2045/2048 | no |
+| 2 | frozen_nl020_robust16_softmax | 1967/2048 | 2046/2048 | 1976/2048 | 2046/2048 | yes |
+| 2 | frozen_nl020_robust16_repeat | 1966/2048 | 2046/2048 | 1976/2048 | 2046/2048 | no |
+| 3 | end | 1830/2048 | 2028/2048 | 1840/2048 | 2028/2048 | no |
+| 3 | eighth_mean | 1890/2048 | 1988/2048 | 1889/2048 | 1989/2048 | no |
+| 3 | quarter_mean | 1887/2048 | 1833/2048 | 1871/2048 | 1831/2048 | no |
+| 3 | half_mean | 1702/2048 | 1455/2048 | 1682/2048 | 1428/2048 | no |
+| 3 | frozen_fresh_ridge16 | 1962/2048 | 2038/2048 | 1952/2048 | 2040/2048 | no |
+| 3 | frozen_margin16_low | 1970/2048 | 2047/2048 | 1979/2048 | 2047/2048 | yes |
+| 3 | frozen_nl020_margin16_low | 1967/2048 | 2046/2048 | 1979/2048 | 2045/2048 | yes |
+| 3 | frozen_nl020_robust16_softmax | 1967/2048 | 2046/2048 | 1977/2048 | 2046/2048 | yes |
+| 3 | frozen_nl020_robust16_repeat | 1967/2048 | 2046/2048 | 1978/2048 | 2046/2048 | yes |
+
+Primary LO3 frozen NL019 Margin16 passes all four groups: worst 1970/2048 = 0.9619140625. Secondary LO2 misses at A low, 1966/2048 = 0.9599609375, one decision short of 1967; it clears the inherited 95% gate. Five endpoints meet the robustness criterion, but only the preregistered primary establishes confirmation. Supporting NL020 robust references do not retroactively qualify NL020. No speed promotion. The result confirms 23.81 Gsymbol/s in this specified numerical model and two independent test-draw panels, not generalization to new model weights, measured BER, ADC feasibility, physical throughput or wall-plug power.
+
+Convergence maxima: field 3.255975398785524e-10 sqrt(mW), waveform 3.2581544869653435e-9 sqrt(mW), clean current 2.2319222120817644e-8 A, noisy current 2.23264349130301e-8 A, peak 0.0000012294607456553308 mW.
+
+### Archive and phase closure
+
+Artifact [14519955758](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44504831351/artifacts/14519955758), ZIP 326958 bytes, SHA-256 `b728cc934b003e44dd6ccfa3543e0ca16aa3f382b8bd370ad2a91b427df80a69`. Manual archive workflow pins run/head/ZIP and all fifteen science file hashes plus staged bytes. After archive review, perform raw-data audit and publish NL001–NL021 final research report. The current NL phase ends regardless of the positive primary outcome: no NL022 or 41 ps promotion is planned. Preserve the model and limitations as inputs to OPA-CIR system research; future nonlinear research requires a separately justified system-level need.

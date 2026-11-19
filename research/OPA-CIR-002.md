@@ -18,3 +18,7 @@ The model specifies complex bar o1-o4/o2-o3 and cross o1-o3/o2-o4 plus same-side
 ## Next
 
 After numerical verification and passivity review, integrate the model into a more complete PDK MZI with actual routing lengths, then mesh. No new FDTD optimization, no measured hardware claim. 
+
+## Recorded results
+
+Run [44513345216](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44513345216): 5/5 checks passed, 63 cases; polynomial and reciprocity error zero, SAX maximum error 3.4989384658674724e-14, MMI and circuit passivity excess zero, passivity_eligible true. Artifact 14522744683, ZIP SHA256 6272dc7414fa970ed7e8fe6f995a0a9c983c6660649bd8cc161695ee6c6bad10. Full artifact not yet permanently archived. Numerical eligibility only. Proceed to [CIR-003](OPA-CIR-003.md).

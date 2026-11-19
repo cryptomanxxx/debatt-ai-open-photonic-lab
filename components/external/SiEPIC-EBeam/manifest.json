@@ -73,5 +73,5 @@
       ]
     }
   ],
-  "geometry_status_definition": "Original bytes verified by Git object identity; CI audits named cell, layer 1 geometry and layer 68 pin labels. No DRC or optical model verification."
+  "geometry_status_definition": "Original bytes verified by Git object identity; CI audits named cell, layer 1/0 silicon geometry and layer 1/10 optical pin text labels. No DRC or optical model verification."
 }

@@ -99,3 +99,7 @@ CIR001–007 implementations are merged. CIR006's frozen WDM grid failed the mul
 ## OPA-LIB component evidence phase (2026-11-19)
 
 Before selecting FAB001 components, establish a revision-pinned external library. LIB001 imports original SiEPIC core GDS; LIB002 targets Luxtelligence geometry; LIB003 complex S datasets; LIB004 available licensed measurement data; LIB005 matched comparisons; LIB006 FAB001 selection. Only LIB001 is implemented by this PR. Keep silicon and TFLN separate, and distinguish original files, PCell-generated geometry, simulations, measurements and qualification. No fabrication commitment.
+
+### LIB002 execution
+
+[LIB002](components/external/Luxtelligence/lnoi400/README.md) selects seven lnoi400 PCell references, at the same revision as CIR002–008. Export and audit via locked CI, then archive exact generated outputs. No new DRC, measured or S-parameter claim. Continue to LIB003 after verified archive.

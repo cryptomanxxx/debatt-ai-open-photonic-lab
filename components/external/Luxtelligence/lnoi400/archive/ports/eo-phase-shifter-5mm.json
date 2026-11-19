@@ -1,0 +1,77 @@
+{
+  "bbox_um": [
+    -200.0,
+    -196.0,
+    5200.0,
+    182.0
+  ],
+  "complex_s_parameters": "not_imported",
+  "dbu_um": 0.001,
+  "drc": null,
+  "factory": "eo_phase_shifter",
+  "gds_bytes": 2566,
+  "gds_file": "eo-phase-shifter-5mm.gds",
+  "gds_sha256": "7a747953ab09030d2ad06eefb47e2d22ba0ef1a001b05433af09ce921f76bf58",
+  "id": "eo-phase-shifter-5mm",
+  "kwargs": {
+    "modulation_length": 5000
+  },
+  "measurement": null,
+  "origin": "external_pcell_generated",
+  "port_source": "upstream PCell API; not independently validated modal reference planes",
+  "ports": [
+    {
+      "center_um": [
+        -190.0,
+        -7.0
+      ],
+      "name": "e1",
+      "orientation_deg": 180.0,
+      "type": "electrical",
+      "width_um": 80.0
+    },
+    {
+      "center_um": [
+        5190.0,
+        -7.0
+      ],
+      "name": "e2",
+      "orientation_deg": 0.0,
+      "type": "electrical",
+      "width_um": 80.0
+    },
+    {
+      "center_um": [
+        0.0,
+        0.0
+      ],
+      "name": "o1",
+      "orientation_deg": 180.0,
+      "type": "optical",
+      "width_um": 1.0
+    },
+    {
+      "center_um": [
+        5000.0,
+        0.0
+      ],
+      "name": "o2",
+      "orientation_deg": 0.0,
+      "type": "optical",
+      "width_um": 1.0
+    }
+  ],
+  "qualification": null,
+  "required_layer_area_um2": {
+    "2/0": 12350.00404,
+    "21/0": 1986240.0,
+    "3/0": 50000.0
+  },
+  "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "top_cell": "eo_phase_shifter_RCWM2p5_TL100_ML5000_RCCW10_RGPW180_RG_3a46cd40",
+  "used_layers": [
+    "2/0",
+    "3/0",
+    "21/0"
+  ]
+}

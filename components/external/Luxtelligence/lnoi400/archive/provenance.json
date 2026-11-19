@@ -1,0 +1,127 @@
+{
+  "artifact": 14539755227,
+  "branch": "research/opa-lib-002",
+  "checks": 6,
+  "components": {
+    "directional-coupler": [
+      4696,
+      "fe00bd054cd915620e8c65d20418fa6284771a09059941315811f0c418b753c2"
+    ],
+    "edge-coupler": [
+      2566,
+      "e064255aebba52e68334c8f35e49fb0b4b003c531c295af178c31b23c8ac30d3"
+    ],
+    "eo-phase-shifter-5mm": [
+      2566,
+      "7a747953ab09030d2ad06eefb47e2d22ba0ef1a001b05433af09ce921f76bf58"
+    ],
+    "euler-bend-90": [
+      7198,
+      "ad63bd2a4fd7d49a0c65e67565bb02fb5a5dc507917f3183331f77a815901941"
+    ],
+    "mmi-2x2": [
+      450,
+      "7870fceeb2a81ace7b140f52a63b1080eeabc4f428b713034b71a29a6fe2fbf9"
+    ],
+    "mzm-2x2-5mm": [
+      110524,
+      "348711ff21b861f424282e7f1b316e31e568f9b96652ad288fd9633a2d2eff26"
+    ],
+    "straight-rwg1000": [
+      252,
+      "5f71933012b3a87c3f587ac85bb5ff1fb4304355cd6b93ef18699e8ffbe62b0e"
+    ]
+  },
+  "experiment": "OPA-LIB-002",
+  "head": "7ed48c4407c4420a8bfa582fe97020cf2d8617e8",
+  "members": {
+    "evidence/LICENSE": {
+      "bytes": 1075,
+      "sha256": "25eb4543fa066651d9f9044d3d9bb4e45e913c486a48cb54be6f7f2827a6663c"
+    },
+    "evidence/environment-lock.txt": {
+      "bytes": 2617,
+      "sha256": "69bf31827d68ed00ec1dff36f32053f67d426b335604bd425d47206822e959d3"
+    },
+    "evidence/generation-spec.json": {
+      "bytes": 3346,
+      "sha256": "e10cdaf1f51623255c9bac6900fcc10ab94515972bc01a20a5e4dd14f27e622d"
+    },
+    "evidence/installed-packages.json": {
+      "bytes": 5359,
+      "sha256": "cbd21fa17cff8e12361fd3e72f334dac834d5d9d17207b50c7479f86e6013c12"
+    },
+    "evidence/result.json": {
+      "bytes": 13777,
+      "sha256": "3bb32080c23cac102099f25b0bef7d92db7a2ba91cef4e5cbd27ce02979dd81f"
+    },
+    "gds/directional-coupler.gds": {
+      "bytes": 4696,
+      "sha256": "fe00bd054cd915620e8c65d20418fa6284771a09059941315811f0c418b753c2"
+    },
+    "gds/edge-coupler.gds": {
+      "bytes": 2566,
+      "sha256": "e064255aebba52e68334c8f35e49fb0b4b003c531c295af178c31b23c8ac30d3"
+    },
+    "gds/eo-phase-shifter-5mm.gds": {
+      "bytes": 2566,
+      "sha256": "7a747953ab09030d2ad06eefb47e2d22ba0ef1a001b05433af09ce921f76bf58"
+    },
+    "gds/euler-bend-90.gds": {
+      "bytes": 7198,
+      "sha256": "ad63bd2a4fd7d49a0c65e67565bb02fb5a5dc507917f3183331f77a815901941"
+    },
+    "gds/mmi-2x2.gds": {
+      "bytes": 450,
+      "sha256": "7870fceeb2a81ace7b140f52a63b1080eeabc4f428b713034b71a29a6fe2fbf9"
+    },
+    "gds/mzm-2x2-5mm.gds": {
+      "bytes": 110524,
+      "sha256": "348711ff21b861f424282e7f1b316e31e568f9b96652ad288fd9633a2d2eff26"
+    },
+    "gds/straight-rwg1000.gds": {
+      "bytes": 252,
+      "sha256": "5f71933012b3a87c3f587ac85bb5ff1fb4304355cd6b93ef18699e8ffbe62b0e"
+    },
+    "original.zip": {
+      "bytes": 104456,
+      "sha256": "ac55933d1bef84f08cdd696e4bcb24dd24c08801ab358ca6bdfe35a6e1db9292"
+    },
+    "ports/directional-coupler.json": {
+      "bytes": 1609,
+      "sha256": "470b3e4d01c6738927e3d90513b032d5d898cccd810f226d3d310d2a8b314690"
+    },
+    "ports/edge-coupler.json": {
+      "bytes": 1187,
+      "sha256": "d66cfe7d2ada2ccd1f040e3703874d229e369523a1caf19ab80715e04d21ab77"
+    },
+    "ports/eo-phase-shifter-5mm.json": {
+      "bytes": 1591,
+      "sha256": "0b6ca4d28594ce0fa973340fcdd5e250bed4d0b81e9f8aff217dd9d6debb69d4"
+    },
+    "ports/euler-bend-90.json": {
+      "bytes": 1126,
+      "sha256": "2fadc47d18cb26beb8dd943b755f9ee644d8588b1bf9d2bded3ce51d9a0942b3"
+    },
+    "ports/mmi-2x2.json": {
+      "bytes": 1480,
+      "sha256": "f4fe72b639b83dc8831d6b1701cd7c9894ac939211e8a89e68065805350e7dd0"
+    },
+    "ports/mzm-2x2-5mm.json": {
+      "bytes": 2445,
+      "sha256": "ca3bf00436455434e70ccdf121a56cc2abb2efdbbe4046f259a821e459f9a99b"
+    },
+    "ports/straight-rwg1000.json": {
+      "bytes": 1128,
+      "sha256": "ae0e7729026fa955ce17fab62e1efb0885e1c743d97461e25735fbbd22507b3d"
+    }
+  },
+  "name": "opa-lib-002",
+  "pr": 224,
+  "revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "run": 44543077787,
+  "sha256": "ac55933d1bef84f08cdd696e4bcb24dd24c08801ab358ca6bdfe35a6e1db9292",
+  "size": 104456,
+  "verification": "Pinned original CI artifact ZIP, CRC, exact member set, individual GDS hashes, sidecar/report equivalence and staged byte identity; no reruns.",
+  "workflow": ".github/workflows/opa-lib002.yml"
+}

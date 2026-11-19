@@ -1,0 +1,534 @@
+{
+  "experiment": "OPA-LIB-002",
+  "revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "origin": "external_pcell_generated",
+  "source_repository": "https://github.com/Luxtelligence/lxt_pdk_gf",
+  "license_sha256": "25eb4543fa066651d9f9044d3d9bb4e45e913c486a48cb54be6f7f2827a6663c",
+  "gdsfactory_version": "9.51.0",
+  "python_version": "3.12.16",
+  "components": [
+    {
+      "id": "straight-rwg1000",
+      "origin": "external_pcell_generated",
+      "factory": "straight_rwg1000",
+      "kwargs": {
+        "length": 100
+      },
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "top_cell": "straight_rwg1000_L100",
+      "gds_file": "straight-rwg1000.gds",
+      "gds_sha256": "5f71933012b3a87c3f587ac85bb5ff1fb4304355cd6b93ef18699e8ffbe62b0e",
+      "gds_bytes": 252,
+      "dbu_um": 0.001,
+      "bbox_um": [
+        0.0,
+        -5.0,
+        100.0,
+        5.0
+      ],
+      "used_layers": [
+        "2/0",
+        "3/0"
+      ],
+      "required_layer_area_um2": {
+        "2/0": 100.0,
+        "3/0": 1000.0
+      },
+      "ports": [
+        {
+          "name": "o1",
+          "type": "optical",
+          "center_um": [
+            0.0,
+            0.0
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 180.0
+        },
+        {
+          "name": "o2",
+          "type": "optical",
+          "center_um": [
+            100.0,
+            0.0
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 0.0
+        }
+      ],
+      "port_source": "upstream PCell API; not independently validated modal reference planes",
+      "drc": null,
+      "measurement": null,
+      "qualification": null,
+      "complex_s_parameters": "not_imported"
+    },
+    {
+      "id": "euler-bend-90",
+      "origin": "external_pcell_generated",
+      "factory": "L_turn_bend",
+      "kwargs": {},
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "top_cell": "L_turn_bend_R80_P1_WAFTrue_CSxs_rwg1000",
+      "gds_file": "euler-bend-90.gds",
+      "gds_sha256": "ad63bd2a4fd7d49a0c65e67565bb02fb5a5dc507917f3183331f77a815901941",
+      "gds_bytes": 7198,
+      "dbu_um": 0.001,
+      "bbox_um": [
+        0.0,
+        -5.0,
+        85.0,
+        80.0
+      ],
+      "used_layers": [
+        "2/0",
+        "3/0"
+      ],
+      "required_layer_area_um2": {
+        "2/0": 134.386593,
+        "3/0": 1344.035554
+      },
+      "ports": [
+        {
+          "name": "o1",
+          "type": "optical",
+          "center_um": [
+            0.0,
+            0.0
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 180.0
+        },
+        {
+          "name": "o2",
+          "type": "optical",
+          "center_um": [
+            80.0,
+            80.0
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 90.0
+        }
+      ],
+      "port_source": "upstream PCell API; not independently validated modal reference planes",
+      "drc": null,
+      "measurement": null,
+      "qualification": null,
+      "complex_s_parameters": "not_imported"
+    },
+    {
+      "id": "mmi-2x2",
+      "origin": "external_pcell_generated",
+      "factory": "mmi2x2_optimized1550",
+      "kwargs": {},
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "top_cell": "mmi2x2optimized1550_WM5_LM76p5_WT1p5_LT25_PR0p7_CSxs_rwg1000",
+      "gds_file": "mmi-2x2.gds",
+      "gds_sha256": "7870fceeb2a81ace7b140f52a63b1080eeabc4f428b713034b71a29a6fe2fbf9",
+      "gds_bytes": 450,
+      "dbu_um": 0.001,
+      "bbox_um": [
+        -25.0,
+        -6.75,
+        101.5,
+        6.75
+      ],
+      "used_layers": [
+        "2/0",
+        "3/0"
+      ],
+      "required_layer_area_um2": {
+        "2/0": 507.5,
+        "3/0": 1440.0
+      },
+      "ports": [
+        {
+          "name": "o1",
+          "type": "optical",
+          "center_um": [
+            -25.0,
+            -1.75
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 180.0
+        },
+        {
+          "name": "o2",
+          "type": "optical",
+          "center_um": [
+            -25.0,
+            1.75
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 180.0
+        },
+        {
+          "name": "o3",
+          "type": "optical",
+          "center_um": [
+            101.5,
+            1.75
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 0.0
+        },
+        {
+          "name": "o4",
+          "type": "optical",
+          "center_um": [
+            101.5,
+            -1.75
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 0.0
+        }
+      ],
+      "port_source": "upstream PCell API; not independently validated modal reference planes",
+      "drc": null,
+      "measurement": null,
+      "qualification": null,
+      "complex_s_parameters": "not_imported"
+    },
+    {
+      "id": "directional-coupler",
+      "origin": "external_pcell_generated",
+      "factory": "directional_coupler_balanced",
+      "kwargs": {},
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "top_cell": "directional_coupler_balanced_IWS30p6_SL58_CSL16p92_CWS0_e88e65ac",
+      "gds_file": "directional-coupler.gds",
+      "gds_sha256": "fe00bd054cd915620e8c65d20418fa6284771a09059941315811f0c418b753c2",
+      "gds_bytes": 4696,
+      "dbu_um": 0.001,
+      "bbox_um": [
+        -66.46000000000001,
+        -20.3,
+        66.46000000000001,
+        20.3
+      ],
+      "used_layers": [
+        "2/0",
+        "3/0"
+      ],
+      "required_layer_area_um2": {
+        "2/0": 244.845938,
+        "3/0": 2339.8023239999998
+      },
+      "ports": [
+        {
+          "name": "o1",
+          "type": "optical",
+          "center_um": [
+            -66.46000000000001,
+            -15.3
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 180.0
+        },
+        {
+          "name": "o2",
+          "type": "optical",
+          "center_um": [
+            -66.46000000000001,
+            15.3
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 180.0
+        },
+        {
+          "name": "o3",
+          "type": "optical",
+          "center_um": [
+            66.46000000000001,
+            15.3
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 0.0
+        },
+        {
+          "name": "o4",
+          "type": "optical",
+          "center_um": [
+            66.46000000000001,
+            -15.3
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 0.0
+        }
+      ],
+      "port_source": "upstream PCell API; not independently validated modal reference planes",
+      "drc": null,
+      "measurement": null,
+      "qualification": null,
+      "complex_s_parameters": "not_imported"
+    },
+    {
+      "id": "edge-coupler",
+      "origin": "external_pcell_generated",
+      "factory": "double_linear_inverse_taper",
+      "kwargs": {},
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "top_cell": "double_linear_inverse_taper_CSSxs_swg250_CSExs_rwg1000__e181987f",
+      "gds_file": "edge-coupler.gds",
+      "gds_sha256": "e064255aebba52e68334c8f35e49fb0b4b003c531c295af178c31b23c8ac30d3",
+      "gds_bytes": 2566,
+      "dbu_um": 0.001,
+      "bbox_um": [
+        0.0,
+        -10.0,
+        360.0,
+        10.0
+      ],
+      "used_layers": [
+        "2/0",
+        "3/0",
+        "3/1"
+      ],
+      "required_layer_area_um2": {
+        "2/0": 150.0,
+        "3/0": 1062.0,
+        "3/1": 7200.0
+      },
+      "ports": [
+        {
+          "name": "o1",
+          "type": "optical",
+          "center_um": [
+            0.0,
+            0.0
+          ],
+          "width_um": 0.25,
+          "orientation_deg": 180.0
+        },
+        {
+          "name": "o2",
+          "type": "optical",
+          "center_um": [
+            360.0,
+            0.0
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 0.0
+        }
+      ],
+      "port_source": "upstream PCell API; not independently validated modal reference planes",
+      "drc": null,
+      "measurement": null,
+      "qualification": null,
+      "complex_s_parameters": "not_imported"
+    },
+    {
+      "id": "eo-phase-shifter-5mm",
+      "origin": "external_pcell_generated",
+      "factory": "eo_phase_shifter",
+      "kwargs": {
+        "modulation_length": 5000
+      },
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "top_cell": "eo_phase_shifter_RCWM2p5_TL100_ML5000_RCCW10_RGPW180_RG_3a46cd40",
+      "gds_file": "eo-phase-shifter-5mm.gds",
+      "gds_sha256": "7a747953ab09030d2ad06eefb47e2d22ba0ef1a001b05433af09ce921f76bf58",
+      "gds_bytes": 2566,
+      "dbu_um": 0.001,
+      "bbox_um": [
+        -200.0,
+        -196.0,
+        5200.0,
+        182.0
+      ],
+      "used_layers": [
+        "2/0",
+        "3/0",
+        "21/0"
+      ],
+      "required_layer_area_um2": {
+        "2/0": 12350.00404,
+        "3/0": 50000.0,
+        "21/0": 1986240.0
+      },
+      "ports": [
+        {
+          "name": "e1",
+          "type": "electrical",
+          "center_um": [
+            -190.0,
+            -7.0
+          ],
+          "width_um": 80.0,
+          "orientation_deg": 180.0
+        },
+        {
+          "name": "e2",
+          "type": "electrical",
+          "center_um": [
+            5190.0,
+            -7.0
+          ],
+          "width_um": 80.0,
+          "orientation_deg": 0.0
+        },
+        {
+          "name": "o1",
+          "type": "optical",
+          "center_um": [
+            0.0,
+            0.0
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 180.0
+        },
+        {
+          "name": "o2",
+          "type": "optical",
+          "center_um": [
+            5000.0,
+            0.0
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 0.0
+        }
+      ],
+      "port_source": "upstream PCell API; not independently validated modal reference planes",
+      "drc": null,
+      "measurement": null,
+      "qualification": null,
+      "complex_s_parameters": "not_imported"
+    },
+    {
+      "id": "mzm-2x2-5mm",
+      "origin": "external_pcell_generated",
+      "factory": "mzm_unbalanced",
+      "kwargs": {
+        "modulation_length": 5000,
+        "length_imbalance": 0,
+        "splitter": "mmi2x2_optimized1550",
+        "with_heater": true
+      },
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "top_cell": "mzm_unbalanced_ML5000_LI0_LTAR75_RPSW80_RCCW10_RGPW180__a9214e64",
+      "gds_file": "mzm-2x2-5mm.gds",
+      "gds_sha256": "348711ff21b861f424282e7f1b316e31e568f9b96652ad288fd9633a2d2eff26",
+      "gds_bytes": 110524,
+      "dbu_um": 0.001,
+      "bbox_um": [
+        -641.8000000000001,
+        -231.0,
+        6490.75,
+        231.0
+      ],
+      "used_layers": [
+        "2/0",
+        "3/0",
+        "21/0",
+        "21/1"
+      ],
+      "required_layer_area_um2": {
+        "2/0": 30072.363443,
+        "3/0": 146035.44783299998,
+        "21/0": 2061480.0,
+        "21/1": 12161.58
+      },
+      "ports": [
+        {
+          "name": "e1",
+          "type": "electrical",
+          "center_um": [
+            -300.0,
+            0.0
+          ],
+          "width_um": 80.0,
+          "orientation_deg": 180.0
+        },
+        {
+          "name": "e2",
+          "type": "electrical",
+          "center_um": [
+            5300.0,
+            0.0
+          ],
+          "width_um": 80.0,
+          "orientation_deg": 0.0
+        },
+        {
+          "name": "e3",
+          "type": "electrical",
+          "center_um": [
+            5458.5,
+            176.8
+          ],
+          "width_um": 75.0,
+          "orientation_deg": 90.0
+        },
+        {
+          "name": "e4",
+          "type": "electrical",
+          "center_um": [
+            6158.5,
+            176.8
+          ],
+          "width_um": 75.0,
+          "orientation_deg": 90.0
+        },
+        {
+          "name": "o1",
+          "type": "optical",
+          "center_um": [
+            -641.8000000000001,
+            -1.75
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 180.0
+        },
+        {
+          "name": "o2",
+          "type": "optical",
+          "center_um": [
+            -641.8000000000001,
+            1.75
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 180.0
+        },
+        {
+          "name": "o3",
+          "type": "optical",
+          "center_um": [
+            6490.75,
+            1.75
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 0.0
+        },
+        {
+          "name": "o4",
+          "type": "optical",
+          "center_um": [
+            6490.75,
+            -1.75
+          ],
+          "width_um": 1.0,
+          "orientation_deg": 0.0
+        }
+      ],
+      "port_source": "upstream PCell API; not independently validated modal reference planes",
+      "drc": null,
+      "measurement": null,
+      "qualification": null,
+      "complex_s_parameters": "not_imported"
+    }
+  ],
+  "checks": {
+    "source_identity": true,
+    "license_identity": true,
+    "geometry_readback": true,
+    "pcell_port_inventory": true,
+    "allowed_layers": true,
+    "fresh_process_reproducibility": true
+  },
+  "limitations": [
+    "Generated from external PCells with pinned defaults/overrides, not original upstream GDS bytes.",
+    "GDS geometry and PCell port metadata only; not DRC, modal reference-plane verification, RF simulation, measurement or fabrication qualification.",
+    "CIR002 MMI nominal geometry is a candidate model correspondence, not validated measured equivalence.",
+    "MZM uses 2x2 splitter unlike default 1x2 compact MZM model; do not attach that default model to this four-port geometry.",
+    "No complex S dataset imported and no cross-process assembly."
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "bbox_um": [
+    -641.8000000000001,
+    -231.0,
+    6490.75,
+    231.0
+  ],
+  "complex_s_parameters": "not_imported",
+  "dbu_um": 0.001,
+  "drc": null,
+  "factory": "mzm_unbalanced",
+  "gds_bytes": 110524,
+  "gds_file": "mzm-2x2-5mm.gds",
+  "gds_sha256": "348711ff21b861f424282e7f1b316e31e568f9b96652ad288fd9633a2d2eff26",
+  "id": "mzm-2x2-5mm",
+  "kwargs": {
+    "length_imbalance": 0,
+    "modulation_length": 5000,
+    "splitter": "mmi2x2_optimized1550",
+    "with_heater": true
+  },
+  "measurement": null,
+  "origin": "external_pcell_generated",
+  "port_source": "upstream PCell API; not independently validated modal reference planes",
+  "ports": [
+    {
+      "center_um": [
+        -300.0,
+        0.0
+      ],
+      "name": "e1",
+      "orientation_deg": 180.0,
+      "type": "electrical",
+      "width_um": 80.0
+    },
+    {
+      "center_um": [
+        5300.0,
+        0.0
+      ],
+      "name": "e2",
+      "orientation_deg": 0.0,
+      "type": "electrical",
+      "width_um": 80.0
+    },
+    {
+      "center_um": [
+        5458.5,
+        176.8
+      ],
+      "name": "e3",
+      "orientation_deg": 90.0,
+      "type": "electrical",
+      "width_um": 75.0
+    },
+    {
+      "center_um": [
+        6158.5,
+        176.8
+      ],
+      "name": "e4",
+      "orientation_deg": 90.0,
+      "type": "electrical",
+      "width_um": 75.0
+    },
+    {
+      "center_um": [
+        -641.8000000000001,
+        -1.75
+      ],
+      "name": "o1",
+      "orientation_deg": 180.0,
+      "type": "optical",
+      "width_um": 1.0
+    },
+    {
+      "center_um": [
+        -641.8000000000001,
+        1.75
+      ],
+      "name": "o2",
+      "orientation_deg": 180.0,
+      "type": "optical",
+      "width_um": 1.0
+    },
+    {
+      "center_um": [
+        6490.75,
+        1.75
+      ],
+      "name": "o3",
+      "orientation_deg": 0.0,
+      "type": "optical",
+      "width_um": 1.0
+    },
+    {
+      "center_um": [
+        6490.75,
+        -1.75
+      ],
+      "name": "o4",
+      "orientation_deg": 0.0,
+      "type": "optical",
+      "width_um": 1.0
+    }
+  ],
+  "qualification": null,
+  "required_layer_area_um2": {
+    "2/0": 30072.363443,
+    "21/0": 2061480.0,
+    "21/1": 12161.58,
+    "3/0": 146035.44783299998
+  },
+  "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "top_cell": "mzm_unbalanced_ML5000_LI0_LTAR75_RPSW80_RCCW10_RGPW180__a9214e64",
+  "used_layers": [
+    "2/0",
+    "3/0",
+    "21/0",
+    "21/1"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "experiment": "OPA-LIB-002",
+  "name": "opa-lib-002",
+  "run": 44543077787,
+  "artifact": 14539755227,
+  "size": 104456,
+  "sha256": "ac55933d1bef84f08cdd696e4bcb24dd24c08801ab358ca6bdfe35a6e1db9292",
+  "head": "7ed48c4407c4420a8bfa582fe97020cf2d8617e8",
+  "branch": "research/opa-lib-002",
+  "workflow": ".github/workflows/opa-lib002.yml",
+  "pr": 224,
+  "revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "checks": 6,
+  "components": {
+    "straight-rwg1000": [
+      252,
+      "5f71933012b3a87c3f587ac85bb5ff1fb4304355cd6b93ef18699e8ffbe62b0e"
+    ],
+    "euler-bend-90": [
+      7198,
+      "ad63bd2a4fd7d49a0c65e67565bb02fb5a5dc507917f3183331f77a815901941"
+    ],
+    "mmi-2x2": [
+      450,
+      "7870fceeb2a81ace7b140f52a63b1080eeabc4f428b713034b71a29a6fe2fbf9"
+    ],
+    "directional-coupler": [
+      4696,
+      "fe00bd054cd915620e8c65d20418fa6284771a09059941315811f0c418b753c2"
+    ],
+    "edge-coupler": [
+      2566,
+      "e064255aebba52e68334c8f35e49fb0b4b003c531c295af178c31b23c8ac30d3"
+    ],
+    "eo-phase-shifter-5mm": [
+      2566,
+      "7a747953ab09030d2ad06eefb47e2d22ba0ef1a001b05433af09ce921f76bf58"
+    ],
+    "mzm-2x2-5mm": [
+      110524,
+      "348711ff21b861f424282e7f1b316e31e568f9b96652ad288fd9633a2d2eff26"
+    ]
+  }
+}

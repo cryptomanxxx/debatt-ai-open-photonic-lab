@@ -1,0 +1,40 @@
+name: OPA CIR008 integrated system accounting
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "tools/audit_lnoi400_cir008.py"
+      - "research/OPA-CIR-008.md"
+      - "antigravity/reproduction/AG-PHOTONIC-003/original/params.py"
+      - ".github/workflows/opa-cir008-system.yml"
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Fetch exact CIR007 evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/14528427171" | jq -e '.name == "opa-cir-007" and .workflow_run.id == 44523102737 and .digest == "sha256:abc07f6aa4bc74b2dbb708a3cbeb29a23ee557bfd724259baa5eb45d0202e26c" and .expired == false' >/dev/null
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/14528427171/zip" > "$RUNNER_TEMP/cir007.zip"
+      - name: Audit conditional system budget
+        env:
+          CIR007_ZIP: ${{ runner.temp }}/cir007.zip
+        run: |
+          python tools/audit_lnoi400_cir008.py
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: opa-cir-008
+          path: results/opa-cir-008/
+          if-no-files-found: error

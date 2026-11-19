@@ -13,3 +13,7 @@ This is deliberately a core abstraction, not full GDS extraction. The flattened 
 5 wavelengths 1540–1560 nm, 2 heater settings (0,1 V), 33 EO settings 0–13.2 V: 330 cases. Full complex 4x4 S, all entries and both incident-port power budgets; report reflection, transmission, unaccounted power and heater power based on upstream 25 ohm assumption. Maximum full-matrix SAX difference and reciprocity error <=1e-10. Require finite grid and central output power excursion >0.5 as a basic modulation control. Passivity of all blocks and core evaluated separately; block promotion if violated, never clip. Archive CSV and result with pinned model identity. No device measurement, RF bandwidth, system energy or fabrication claim.
 
 Next: integrate routing/interface models where supported and add independent phase control for a programmable 2x2 building block before 4x4 mesh. 
+
+## Recorded results
+
+[Run 44514440625](https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/44514440625): 5/5 checks, 330 cases, SAX error 1.608206982491765e-11, reciprocity error 5.558049685633556e-16, zero passivity excess for components and core; passivity_eligible true. Central in1/out1 power range 0.000017495673080302988 to 0.9297678675132858. Artifact 14524464961, ZIP SHA256 c5787503483007e4e2458757c206c18f309b2882a7602d9ddb814598ba068ebd. Full artifact not yet permanently archived. Next [CIR-004](OPA-CIR-004.md).

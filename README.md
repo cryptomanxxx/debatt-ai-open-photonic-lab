@@ -43,6 +43,10 @@ independent-laser training proxy is a numerical reference, not a validated chip.
 3. **Incremental:** experiments are numbered (`OPA-FDTD-NNN`), small, and
    build on each other. Old experiments are kept unchanged as a record.
 
+## OPA Photonic Component Library
+
+[Browse the component library](components/README.md): external PDK components, published physical evidence and Debatt-AI research models. Reuse existing verified models first; develop custom components only for identified system requirements. The initial catalog is reference-only and does not certify exact-cell measurements or import complex S data.
+
 ## Roadmap
 
 See the [prioritized photonic computing research backlog](PHOTONIC_RESEARCH_ROADMAP.md)

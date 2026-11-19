@@ -1,0 +1,23 @@
+name: OPA CIR final report audit
+on:
+  pull_request:
+    paths:
+      - "research/OPA-CIR-FINAL-REPORT.md"
+      - "research/analyze_cir_final.py"
+      - "research/archive_cir.py"
+      - "research/cir_archive_manifest.json"
+      - "research/evidence/opa-cir/**"
+      - "antigravity/reproduction/AG-PHOTONIC-003/original/params.py"
+      - ".github/workflows/opa-cir-final-audit.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: python3 research/analyze_cir_final.py

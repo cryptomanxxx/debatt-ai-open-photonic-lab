@@ -1,0 +1,35 @@
+name: OPA Twente TFLN permanent evidence audit
+on:
+  pull_request:
+    paths:
+      - 'components/experimentally_validated/Twente-TFLN-Wei-2025/archive/**'
+      - 'components/experimentally_validated/Twente-TFLN-Wei-2025/manifest.json'
+      - 'research/archive_twente_tfln.py'
+      - '.github/workflows/opa-twente-tfln-evidence-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Verify exact archived Git bytes when present
+        run: |
+          set -euo pipefail
+          root=components/experimentally_validated/Twente-TFLN-Wei-2025/archive
+          if ! git cat-file -e "HEAD:$root/original.zip"; then
+            test -z "$(git ls-files -- "$root")"
+            echo "Archive not yet committed; preflight is separate."
+            exit 0
+          fi
+          stage="$RUNNER_TEMP/twente-committed"
+          mkdir "$stage"
+          git ls-files -z -- "$root" | while IFS= read -r -d '' file; do
+            rel="${file#$root/}"
+            mkdir -p "$stage/$(dirname "$rel")"
+            git show "HEAD:$file" > "$stage/$rel"
+          done
+          python3 research/archive_twente_tfln.py --source "$stage/original.zip" --staged "$stage"

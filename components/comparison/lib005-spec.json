@@ -1,0 +1,170 @@
+{
+  "experiment": "OPA-LIB-005",
+  "source_commit": "2212d57eb6c1fff65b9d63a99215f5faec244cfe",
+  "sources": {
+    "registry": {
+      "path": "components/registry.json",
+      "git_blob_sha1": "6605d731473604f48495dc0426d52f9ee00c5a98"
+    },
+    "si_geometry": {
+      "path": "components/external/SiEPIC-EBeam/manifest.json",
+      "git_blob_sha1": "1fb93dfbb4bde020c07c20cb9eef699962e030c6"
+    },
+    "ln_geometry": {
+      "path": "components/external/Luxtelligence/lnoi400/generation-spec.json",
+      "git_blob_sha1": "704c9d4dce280e3a87708d15e63d4f87a9799940"
+    },
+    "s_manifest": {
+      "path": "components/external/Luxtelligence/lnoi400/s_parameters/manifest.json",
+      "git_blob_sha1": "767cf6c736ed73c000fe2590b9ac97db71b2faa4"
+    },
+    "s_report": {
+      "path": "components/external/Luxtelligence/lnoi400/s_parameters/archive/evidence/result.json",
+      "git_blob_sha1": "fbd2dc9ee3fb0764c5c8413c44e4d69836773055"
+    },
+    "pcm": {
+      "path": "components/experimentally_validated/SiEPIC-PCM-2020-02-UW/archive/evidence/result.json",
+      "git_blob_sha1": "6c1e76f37e6a7dca9d2f00100739777ece636ba2"
+    },
+    "mod": {
+      "path": "components/experimentally_validated/Twente-TFLN-Wei-2025/analysis-archive/modulator/result.json",
+      "git_blob_sha1": "9e5e1e97469b834680f314d2d48025d5c8e2e867"
+    },
+    "ring": {
+      "path": "components/experimentally_validated/Twente-TFLN-Wei-2025/analysis-archive/ring/result.json",
+      "git_blob_sha1": "f9f7af5e4da80d30f5d614b489244c8e459a887e"
+    },
+    "cascade": {
+      "path": "components/experimentally_validated/Twente-TFLN-Wei-2025/analysis-archive/cascade/result.json",
+      "git_blob_sha1": "2bf460ed9d140025efdca8eb878229331aaea561"
+    },
+    "cir": {
+      "path": "research/evidence/opa-cir/opa-cir-003/files/result.json",
+      "git_blob_sha1": "b53c98647c21e423e423fde7fa034b67dde77f10"
+    },
+    "layout": {
+      "path": "results/opa-layout-005/result.json",
+      "git_blob_sha1": "8dcc6d89663c0d43a8ad1ac9225e33492661771b"
+    },
+    "si_layout": {
+      "path": "results/opa-layout-002/result.json",
+      "git_blob_sha1": "1237cf6b83963e6369b35d13ed685f970bf0ad25"
+    },
+    "eo": {
+      "path": "results/opa-eo-002/result.json",
+      "git_blob_sha1": "ea6a090e1782a311f69dd64a2bb5f4a3726a4000"
+    },
+    "coupler": {
+      "path": "results/opa-coupler-003/result.json",
+      "git_blob_sha1": "64bb37942744cb66f9af05650f913189c4963381"
+    }
+  },
+  "policy": {
+    "calibration_requires": [
+      "same_component_geometry_and_revision",
+      "same_process_and_stack",
+      "same_observable_and_units",
+      "matched_operating_conditions",
+      "matched_ports_and_reference_planes",
+      "traceable_measurement_and_uncertainty"
+    ],
+    "cross_platform_calibration": false,
+    "power_only_phase_inference": false,
+    "exact_cell_promotions": 0
+  },
+  "comparisons": [
+    {
+      "id": "eo-vpi-length",
+      "status": "context_only",
+      "missing": [
+        "geometry/process match",
+        "RF versus static drive conditions",
+        "delivered RF voltage and uncertainty",
+        "matched voltage convention verification"
+      ]
+    },
+    {
+      "id": "soi-grating",
+      "status": "context_only",
+      "missing": [
+        "exact revision",
+        "measured source curve",
+        "placeholder bandwidth definition",
+        "reference planes and uncertainty"
+      ]
+    },
+    {
+      "id": "soi-cutback",
+      "status": "measurement_reference_only",
+      "missing": [
+        "matched spiral simulation",
+        "isolated straight loss",
+        "process and measurement uncertainty"
+      ]
+    },
+    {
+      "id": "tfln-ring",
+      "status": "measurement_reference_only",
+      "missing": [
+        "matched ring geometry",
+        "isolated ring assignment",
+        "instrument resolution",
+        "phase and coupling"
+      ]
+    },
+    {
+      "id": "tfln-mmi",
+      "status": "conditional_numerical_only",
+      "missing": [
+        "exact FDTD geometry and planes",
+        "measured complex S"
+      ]
+    },
+    {
+      "id": "tfln-dc",
+      "status": "quarantined_nonpassive",
+      "missing": [
+        "passive model",
+        "measured complex S",
+        "exact FDTD geometry and planes"
+      ]
+    },
+    {
+      "id": "soi-bdc",
+      "status": "published_family_only",
+      "missing": [
+        "exact revision",
+        "compact model",
+        "measured complex S"
+      ]
+    },
+    {
+      "id": "generic-coupler",
+      "status": "numerical_only",
+      "missing": [
+        "matched physical device",
+        "converged FDTD",
+        "complex S"
+      ]
+    },
+    {
+      "id": "tfln-cascade",
+      "status": "measurement_reference_only",
+      "missing": [
+        "physical ring assignments",
+        "heater settings",
+        "coherent transfer matrix",
+        "matched circuit model"
+      ]
+    },
+    {
+      "id": "tfln-mzm",
+      "status": "conditional_numerical_only",
+      "missing": [
+        "matched RF and optical measurement",
+        "exact geometry/reference planes",
+        "physical calibration"
+      ]
+    }
+  ]
+}

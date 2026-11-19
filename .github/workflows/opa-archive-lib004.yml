@@ -58,6 +58,6 @@ jobs:
             git show ":$file" > "$stage/$rel"
           done
           python3 research/archive_lib004.py --source "$RUNNER_TEMP/lib004.zip" --staged "$stage"
-          git commit -m "Archive exact OPA-LIB-003 measured spiral cutback evidence"
+          git commit -m "Archive exact OPA-LIB-004 measured spiral cutback evidence"
           git push origin "HEAD:refs/heads/$ARCHIVE_BRANCH"
           echo "Review branch: https://github.com/$GITHUB_REPOSITORY/compare/main...$ARCHIVE_BRANCH" >> "$GITHUB_STEP_SUMMARY"

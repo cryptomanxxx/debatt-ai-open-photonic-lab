@@ -1,0 +1,66 @@
+{
+  "artifact": 14541764334,
+  "branch": "research/opa-lib-003",
+  "components": {
+    "directional-coupler": {
+      "dataset_sha256": "f44f5df47b510a340b0a533d7b7779af0f21582de8a944675b1d96cea9a5c8d9",
+      "max_sigma": 1.1275809745127237,
+      "midpoint_error": 0.0006252299617571072,
+      "nonpassive_samples": 201,
+      "source_sha256": "dee53fbabae7e3a06c871016441accc3d6b7a89c7ce324001ac9cf741abd6a54",
+      "usage": "quarantined_nonpassive"
+    },
+    "mmi-2x2": {
+      "dataset_sha256": "6d9aae38d6d5c0cea5a540d2a0dc6789b1467a7ed06934c7a951fdff2430f016",
+      "max_sigma": 0.9929422282945128,
+      "midpoint_error": 0.0005772152585584936,
+      "nonpassive_samples": 0,
+      "source_sha256": "f9016f890543146e1438836da2adb84fc2b14c9a8500311f34bcc640747acb36",
+      "usage": "conditional_numerical_only"
+    }
+  },
+  "experiment": "OPA-LIB-003",
+  "head": "d8cdaa69f045d8df87c39534fe23cd18591b81de",
+  "members": {
+    "datasets/directional-coupler.s.json": {
+      "bytes": 286631,
+      "sha256": "f44f5df47b510a340b0a533d7b7779af0f21582de8a944675b1d96cea9a5c8d9"
+    },
+    "datasets/mmi-2x2.s.json": {
+      "bytes": 288906,
+      "sha256": "6d9aae38d6d5c0cea5a540d2a0dc6789b1467a7ed06934c7a951fdff2430f016"
+    },
+    "evidence/environment-lock.txt": {
+      "bytes": 2617,
+      "sha256": "69bf31827d68ed00ec1dff36f32053f67d426b335604bd425d47206822e959d3"
+    },
+    "evidence/installed-packages.json": {
+      "bytes": 5359,
+      "sha256": "cbd21fa17cff8e12361fd3e72f334dac834d5d9d17207b50c7479f86e6013c12"
+    },
+    "evidence/result.json": {
+      "bytes": 2877,
+      "sha256": "606adacc1e5ea4cf93fd54c439d90162e632e01be82787d8d806163acfb150fc"
+    },
+    "metrics/directional-coupler.metrics.csv": {
+      "bytes": 22597,
+      "sha256": "f090a7c7a05be64f2739335f313cc8aac936f5e2c060bead17a150c7c4ddd5e0"
+    },
+    "metrics/mmi-2x2.metrics.csv": {
+      "bytes": 23030,
+      "sha256": "dc1919564b0511e2de873e7a36375dd192d3f90850d1ef89e3472d85df5f1b61"
+    },
+    "original.zip": {
+      "bytes": 75129,
+      "sha256": "64d8a9965195bf1086afb7e2dc352b064e200aa03a106e9db67e02d6fbb87465"
+    }
+  },
+  "name": "opa-lib-003",
+  "pr": 227,
+  "revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "run": 44549140764,
+  "sha256": "64d8a9965195bf1086afb7e2dc352b064e200aa03a106e9db67e02d6fbb87465",
+  "size": 75129,
+  "verification": "Exact ZIP, CRC, member set, dataset hashes, source/GDS linkage, independent polynomial and sampled passivity replay, midpoint diagnostics and staged byte identity; no reruns.",
+  "workflow": ".github/workflows/opa-lib003.yml"
+}

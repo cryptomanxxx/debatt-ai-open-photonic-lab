@@ -107,3 +107,7 @@ Before selecting FAB001 components, establish a revision-pinned external library
 ### LIB003 execution
 
 [LIB003](components/external/Luxtelligence/lnoi400/s_parameters/README.md) imports exact upstream simulated MMI and directional-coupler polynomial models at the LIB002/CIR revision. Audit full four-port complex matrices at 201 wavelengths, preserve nonpassive fits without modification, quarantine them from passive circuits and archive sampled outputs after CI. No measured validity or WDM remediation claim.
+
+### LIB004 execution
+
+[LIB004](components/experimentally_validated/SiEPIC-PCM-2020-02-UW/README.md) imports five exact original SiEPIC TE spiral cutback scans and independent analysis. Derive effective loss from detector 2 with explicit regression limitations, no phase or geometry-equivalence claim. Preserve measured bytes and archive derived CI results. Additional source leads require file-level evidence and license. Do not calibrate TFLN from silicon measurements.

@@ -1,0 +1,32 @@
+name: OPA LIB002 archive preflight
+on:
+  pull_request:
+    paths:
+      - 'components/external/Luxtelligence/lnoi400/archive-source.json'
+      - 'research/archive_lib002.py'
+      - '.github/workflows/opa-lib002-archive-preflight.yml'
+      - '.github/workflows/opa-archive-lib002.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Fetch exact successful artifact and audit read-only
+        run: |
+          set -euo pipefail
+          m=$(cat components/external/Luxtelligence/lnoi400/archive-source.json)
+          run=$(jq -r .run <<< "$m")
+          artifact=$(jq -r .artifact <<< "$m")
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run" | jq -e --argjson m "$m" '.conclusion == "success" and .event == "pull_request" and .head_sha == $m.head and .head_branch == $m.branch and .path == $m.workflow' >/dev/null
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact" | jq -e --argjson m "$m" '.name == $m.name and .workflow_run.id == $m.run and .digest == ("sha256:" + $m.sha256) and .size_in_bytes == $m.size and .expired == false' >/dev/null
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact/zip" > "$RUNNER_TEMP/lib002.zip"
+          python3 research/archive_lib002.py --source "$RUNNER_TEMP/lib002.zip" --output "$RUNNER_TEMP/lib002-check"

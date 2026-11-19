@@ -16,3 +16,7 @@ Sources: [ubcpdk](https://github.com/gdsfactory/ubc), [SiEPIC EBeam](https://git
 ## Original external geometry
 
 [OPA-LIB-001: SiEPIC EBeam original GDS](SiEPIC-EBeam/README.md) contains three byte-identical core library GDS files at a distinct pinned upstream revision. [Manifest](SiEPIC-EBeam/manifest.json). Related v1 reference IDs indicate design-family relationships, not exact revision equivalence. Geometry checks are separate from DRC, optical data and measurements.
+
+## External PCell exports
+
+[Luxtelligence lnoi400 / LIB002](Luxtelligence/lnoi400/README.md): seven pinned PCell export specifications, including CIR-relevant MMI, EO and balanced MZM. CI output must be archived separately; keep distinct from imported original SiEPIC files.

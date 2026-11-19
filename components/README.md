@@ -1,6 +1,6 @@
 # OPA Photonic Component Library
 
-System-first, reuse-first registry for OPA-CIR. This initial release is a **reference catalog**, not an imported model package or a fabricated component library. It links existing evidence instead of copying the [GDS release archive](../gds/README.md) or the generated [chip design catalog](../catalog/README.md).
+System-first, reuse-first registry for OPA-CIR. The initial **reference catalog** is complemented by the original external geometry archive; neither is a fabricated component library or imported optical model package. It links existing evidence instead of copying the [GDS release archive](../gds/README.md) or the generated [chip design catalog](../catalog/README.md).
 
 ## Three views
 
@@ -14,7 +14,7 @@ A component has one canonical ID in [registry.json](registry.json). Experimental
 
 Record origin, cell identity, platform, exact PDK revision, upstream source, license, local evidence, model type, scope and limitations. Keep geometry, DRC, simulation, measured data and process qualification separate: a parent layout DRC pass does not establish component model accuracy. A paper about a design family does not certify the current PDK revision. Unknown measurements and qualification are null. Never invent loss, phase, bandwidth or power values.
 
-Before importing any third-party bytes check the specific file license, attribution and redistribution rights; a software MIT license does not automatically cover foundry data, all models, fabrication rights or NDA materials. Keep restricted data outside the public repo. Pin revisions and file hashes for imported artifacts. This release imports no third-party layout/model bytes.
+Before importing any third-party bytes check the specific file license, attribution and redistribution rights; a software MIT license does not automatically cover foundry data, all models, fabrication rights or NDA materials. Keep restricted data outside the public repo. Pin revisions and file hashes for imported artifacts. OPA-LIB-001 adds a separately versioned [original SiEPIC GDS archive](external/SiEPIC-EBeam/README.md). The v1 reference registry is unchanged in scope; imported revision-specific artifacts have their own manifest and CI audit. No third-party complex S dataset is imported yet.
 
 ## Circuit handoff
 

@@ -45,7 +45,7 @@ independent-laser training proxy is a numerical reference, not a validated chip.
 
 ## OPA Photonic Component Library
 
-[Browse the component library](components/README.md): external PDK components, published physical evidence and Debatt-AI research models. Reuse existing verified models first; develop custom components only for identified system requirements. The v1 reference catalog is complemented by the [OPA-LIB-001 original SiEPIC GDS archive](components/external/SiEPIC-EBeam/README.md). No exact-cell measurement certification or imported complex S data yet.
+[Browse the component library](components/README.md): external PDK components, published physical evidence and Debatt-AI research models. Reuse existing verified models first; develop custom components only for identified system requirements. The v1 reference catalog is complemented by the [OPA-LIB-001 original SiEPIC GDS archive](components/external/SiEPIC-EBeam/README.md). [LIB003](components/external/Luxtelligence/lnoi400/s_parameters/README.md) adds original simulated complex model coefficients; sampled export pending CI. No exact-cell measurement certification.
 
 ## OPA-CIR research phase
 

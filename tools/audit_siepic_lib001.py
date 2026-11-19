@@ -57,16 +57,17 @@ def main():
         require(not region.is_empty(),"empty silicon geometry")
         bbox=region.bbox()
         require(bbox.width()>0 and bbox.height()>0,"nonpositive silicon bounding box")
-        # Read direct pin text markers on all datatypes of SiEPIC pin layer 68.
-        labels=[]
-        for li in layout.layer_indices():
-            if layout.get_info(li).layer==68:
-                labels.extend(s.text.string for s in c.shapes(li).each() if s.is_text())
+        # The three pinned original GDS files encode optical pin text
+        # on layer 1, TEXTTYPE 10 (KLayout layer 1/10).
+        # Layer 68/0 contains component and model metadata, not pins.
+        pin_layer=layout.find_layer(1,10)
+        require(pin_layer is not None and pin_layer>=0,"missing optical pin text layer 1/10")
+        labels=[s.text.string for s in c.shapes(pin_layer).each() if s.is_text()]
         expected=[f"opt{i}" for i in range(1,pins+1)]
         require(sorted(labels)==expected==e["optical_pin_labels"],"optical pin label identity")
         rows.append(dict(cell=cell,bytes=len(raw),git_blob_sha1=blob,sha256=sha(raw),
                          dbu_um=layout.dbu, silicon_bbox_um=[v*layout.dbu for v in (bbox.left,bbox.bottom,bbox.right,bbox.top)],
-                         silicon_polygon_count=region.count(),pin_labels=sorted(labels),
+                         silicon_polygon_count=region.count(),pin_labels=sorted(labels),pin_text_layer="1/10",
                          layers=sorted([f"{layout.get_info(i).layer}/{layout.get_info(i).datatype}" for i in layout.layer_indices()]),
                          top_cells=sorted([x.name for x in layout.top_cells()]),
                          geometry_status="parsed_and_checked",drc=None,measurement=None,qualification=None))

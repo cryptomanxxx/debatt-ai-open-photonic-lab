@@ -1,0 +1,31 @@
+{
+  "experiment": "OPA-LIB-003",
+  "name": "opa-lib-003",
+  "run": 44549140764,
+  "artifact": 14541764334,
+  "size": 75129,
+  "sha256": "64d8a9965195bf1086afb7e2dc352b064e200aa03a106e9db67e02d6fbb87465",
+  "head": "d8cdaa69f045d8df87c39534fe23cd18591b81de",
+  "branch": "research/opa-lib-003",
+  "workflow": ".github/workflows/opa-lib003.yml",
+  "pr": 227,
+  "revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+  "components": {
+    "mmi-2x2": {
+      "dataset_sha256": "6d9aae38d6d5c0cea5a540d2a0dc6789b1467a7ed06934c7a951fdff2430f016",
+      "source_sha256": "f9016f890543146e1438836da2adb84fc2b14c9a8500311f34bcc640747acb36",
+      "nonpassive_samples": 0,
+      "max_sigma": 0.9929422282945128,
+      "midpoint_error": 0.0005772152585584936,
+      "usage": "conditional_numerical_only"
+    },
+    "directional-coupler": {
+      "dataset_sha256": "f44f5df47b510a340b0a533d7b7779af0f21582de8a944675b1d96cea9a5c8d9",
+      "source_sha256": "dee53fbabae7e3a06c871016441accc3d6b7a89c7ce324001ac9cf741abd6a54",
+      "nonpassive_samples": 201,
+      "max_sigma": 1.1275809745127237,
+      "midpoint_error": 0.0006252299617571072,
+      "usage": "quarantined_nonpassive"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+name: OPA archive Twente TFLN evidence
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_archive:
+        description: Archive exact attributed CC BY 4.0 dataset on separate branch
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: opa-twente-tfln-archive
+  cancel-in-progress: false
+jobs:
+  archive:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_archive == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ARCHIVE_BRANCH: research/opa-lib004-tfln-evidence
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Fetch exact licensed dataset and verify staged bytes
+        run: |
+          set -euo pipefail
+          gh auth setup-git
+          if git ls-remote --exit-code --heads origin "refs/heads/$ARCHIVE_BRANCH" >/dev/null; then
+            echo "Archive branch exists; refusing overwrite."
+            exit 1
+          else
+            status=$?
+            [[ "$status" == 2 ]]
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$ARCHIVE_BRANCH"
+          root=components/experimentally_validated/Twente-TFLN-Wei-2025/archive
+          python3 research/archive_twente_tfln.py --output "$root"
+          git -c core.autocrlf=false add -f -- "$root"
+          stage="$RUNNER_TEMP/twente-staged"
+          mkdir "$stage"
+          git ls-files -z -- "$root" | while IFS= read -r -d '' file; do
+            rel="${file#$root/}"
+            mkdir -p "$stage/$(dirname "$rel")"
+            git show ":$file" > "$stage/$rel"
+          done
+          python3 research/archive_twente_tfln.py --source "$stage/original.zip" --staged "$stage"
+          git commit -m "Archive exact OPA-LIB-004 Twente TFLN CC BY dataset"
+          git push origin "HEAD:refs/heads/$ARCHIVE_BRANCH"

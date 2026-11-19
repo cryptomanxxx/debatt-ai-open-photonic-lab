@@ -1,0 +1,19 @@
+name: OPA LIB004 Twente archive preflight
+on:
+  pull_request:
+    paths:
+      - 'components/experimentally_validated/Twente-TFLN-Wei-2025/manifest.json'
+      - 'research/archive_twente_tfln.py'
+      - '.github/workflows/opa-twente-archive-preflight.yml'
+      - '.github/workflows/opa-archive-twente-tfln.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: python3 research/archive_twente_tfln.py --output "$RUNNER_TEMP/twente-check"

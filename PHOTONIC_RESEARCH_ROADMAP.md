@@ -87,3 +87,7 @@ The current OPA-NL phase closes with [NL001–NL021 final report](research/OPA-N
 ### Reuse-first component strategy
 
 Use the [OPA component library](components/README.md) before proposing custom component optimization. OPA-CIR-001 remains the next main experiment; prioritize system-level requirements and reuse pinned PDK models where appropriate. Keep measurement, geometry, DRC, compact-model validity and fabrication qualification separate. No cross-process connection without an explicit interface.
+
+## CIR001–008 system handoff (2026-11-19)
+
+CIR001–007 implementations are merged. CIR006's frozen WDM grid failed the multicarrier 5% screen; single 1550 nm carrier is the baseline, not a general rejection of WDM. CIR007 admitted four conditional interface settings. [CIR008](research/OPA-CIR-008.md) proposes partial integrated accounting on those exact settings. After verification, archive evidence and consolidate a phase report before choosing system-driven remediation. Keep electronic activation, physical attenuator/encoder/receiver validation and fabrication as open work. No measured hardware claim.

@@ -1,0 +1,35 @@
+name: OPA CIR archive preflight
+on:
+  pull_request:
+    paths:
+      - "research/archive_cir.py"
+      - "research/cir_archive_manifest.json"
+      - ".github/workflows/opa-archive-cir.yml"
+      - ".github/workflows/opa-cir-archive-preflight.yml"
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Read-only download and verification
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/cir-zips"
+          while IFS= read -r row; do
+            run=$(jq -r .run <<< "$row")
+            artifact=$(jq -r .artifact <<< "$row")
+            name=$(jq -r .name <<< "$row")
+            gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run" | jq -e --argjson m "$row" '.conclusion == "success" and .event == "pull_request" and .head_sha == $m.head and .head_branch == $m.branch and .path == $m.workflow' >/dev/null
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact" | jq -e --argjson m "$row" '.name == $m.name and .workflow_run.id == $m.run and .digest == ("sha256:" + $m.sha256) and .size_in_bytes == $m.size and .expired == false' >/dev/null
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact/zip" > "$RUNNER_TEMP/cir-zips/$name.zip"
+          done < <(jq -c '.[]' research/cir_archive_manifest.json)
+          python3 research/archive_cir.py --source "$RUNNER_TEMP/cir-zips" --output "$RUNNER_TEMP/cir-evidence"
+          python3 research/archive_cir.py --source "$RUNNER_TEMP/cir-zips" --staged "$RUNNER_TEMP/cir-evidence"

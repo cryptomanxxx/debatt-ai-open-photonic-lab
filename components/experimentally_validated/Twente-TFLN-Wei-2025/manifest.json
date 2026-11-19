@@ -48,9 +48,336 @@
     "source data/Supplementary fig 10c.csv",
     "source data/Supplementary fig 7.csv"
   ],
-  "license_status": "unverified",
-  "redistribution": "blocked_pending_dataset_rights_review",
+  "license_status": "verified_cc_by_4_0",
+  "redistribution": "allowed_with_attribution_for_pinned_dataset_only",
   "geometry_match": null,
   "complex_s": null,
-  "qualification": null
+  "qualification": null,
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "license_evidence": "https://zenodo.org/records/14065933",
+  "verified_run": 44563505684,
+  "zip_bytes": 1794097,
+  "zip_sha256": "71e1853e540dd05b1bde846e7da43cd2b2dd72b84629d354bee226f4ac3c3e3b",
+  "inventory": [
+    {
+      "path": "source data/Fig 2/Fig 2c.csv",
+      "bytes": 2021098,
+      "sha256": "752d64befe5dc43e7012971e8119cfc04f3eff540ea4aefdc2a6bca51cde06b4",
+      "row_width_counts": {
+        "22": 10001
+      }
+    },
+    {
+      "path": "source data/Fig 2/Fig 2d.csv",
+      "bytes": 535566,
+      "sha256": "e90e32af1527634b931ee35aa0c376129ebbd443f0d9bad98e212af050df43d8",
+      "row_width_counts": {
+        "6": 10001
+      }
+    },
+    {
+      "path": "source data/Fig 3/Fig 3a.csv",
+      "bytes": 76113,
+      "sha256": "cd26a2905c0c983213646367ac04c66dc7bbfd2bdecd0a50b10661d9fcd455cf",
+      "row_width_counts": {
+        "3": 2402
+      }
+    },
+    {
+      "path": "source data/Fig 3/Fig 3b.csv",
+      "bytes": 31274,
+      "sha256": "dda4916e539c7ad2c963d3da610d83e1167b35f7ea34fc4416aca8c5163943b0",
+      "row_width_counts": {
+        "3": 1002
+      }
+    },
+    {
+      "path": "source data/Fig 3/Fig 3c.csv",
+      "bytes": 30581,
+      "sha256": "ef33788b4fc12fb91fdd0a29e1e18889e129155632e59756e82c2cf29cb08c65",
+      "row_width_counts": {
+        "3": 1002
+      }
+    },
+    {
+      "path": "source data/Fig 3/Fig 3d.csv",
+      "bytes": 324,
+      "sha256": "5788a30ce8f7e5435adadad99fc56919dc17379a6007bf9315dc127e8d56e043",
+      "row_width_counts": {
+        "8": 8
+      }
+    },
+    {
+      "path": "source data/Fig 3/Fig 3e.csv",
+      "bytes": 103,
+      "sha256": "e7c44bc746bce6f8da089ed648018fd2b4728f18e62795f25f2e572eb58f4f91",
+      "row_width_counts": {
+        "3": 5
+      }
+    },
+    {
+      "path": "source data/Fig 4/Fig 4c.csv",
+      "bytes": 29226,
+      "sha256": "45bebc60fef070bc406796058acaf5dab66cbb36dea8008b01f1c59bb706c20c",
+      "row_width_counts": {
+        "3": 1002
+      }
+    },
+    {
+      "path": "source data/Fig 4/Fig 4d.csv",
+      "bytes": 29244,
+      "sha256": "06a97e7ccf124de7df0f51cea35a8b811876d06555ef66d09cc75c76f8853eb8",
+      "row_width_counts": {
+        "3": 1002
+      }
+    },
+    {
+      "path": "source data/Fig 4/Fig 4e.csv",
+      "bytes": 28726,
+      "sha256": "bf7373af387e271ad00cdf6bcd97c8f9c38b5f50bc043883d1e7a04e535ab0b0",
+      "row_width_counts": {
+        "3": 1002
+      }
+    },
+    {
+      "path": "source data/Sup fig 1/Supplementary fig 1a.csv",
+      "bytes": 186666,
+      "sha256": "2eaab62a46d5602d340cfdf38fa285e4d2837921c5bd5a7081f991c09b65ef99",
+      "row_width_counts": {
+        "2": 10002
+      }
+    },
+    {
+      "path": "source data/Sup fig 1/Supplementary fig 1b.csv",
+      "bytes": 30644,
+      "sha256": "cafbf3676703360c9a4965f0ffba8352ce8948c08baa32e324aaac47059892d8",
+      "row_width_counts": {
+        "3": 1002
+      }
+    },
+    {
+      "path": "source data/Sup fig 1/Supplementary fig 1c.csv",
+      "bytes": 7306,
+      "sha256": "26b49de6c0b7f3e2bee16ee57bfd2d0915f837b4d0a5bf62477d02b95b550519",
+      "row_width_counts": {
+        "2": 401
+      }
+    },
+    {
+      "path": "source data/Sup fig 3/Supplementary fig 3a.csv",
+      "bytes": 16750,
+      "sha256": "5d04f180284e3ed44a556d2b374255380f279952a3168b36df347bb1059fef47",
+      "row_width_counts": {
+        "2": 1001
+      }
+    },
+    {
+      "path": "source data/Sup fig 3/Supplementary fig 3b.csv",
+      "bytes": 35449,
+      "sha256": "cf466f99d04ea3a9504bd6876286bf328d51de73ef31e5e85b763b404fee98db",
+      "row_width_counts": {
+        "2": 1802
+      }
+    },
+    {
+      "path": "source data/Sup fig 3/Supplementary fig 3c.csv",
+      "bytes": 59087,
+      "sha256": "35a73674506d8dfaf35fa292e8e013f59177d7d9879793021fdb3cfafa4feb66",
+      "row_width_counts": {
+        "2": 3002
+      }
+    },
+    {
+      "path": "source data/Sup fig 3/Supplementary fig 3d.csv",
+      "bytes": 33487,
+      "sha256": "1be6e4439a7ebe0208f1da42ea98e5a007479c3a06162bc6ad77703fe15e9fb5",
+      "row_width_counts": {
+        "2": 1702
+      }
+    },
+    {
+      "path": "source data/Sup fig 3/Supplementary fig 3e.csv",
+      "bytes": 983421,
+      "sha256": "3866a551e1df470e12068470ea289af99e224ba943c7047534aa235d80549c61",
+      "row_width_counts": {
+        "2": 50001
+      }
+    },
+    {
+      "path": "source data/Sup fig 3/Supplementary fig 3f.csv",
+      "bytes": 982683,
+      "sha256": "66aad9566c9a16dad7edf7e1c10bd38f3a46bfcb15bd86852a9df75eecdbc10d",
+      "row_width_counts": {
+        "2": 49990
+      }
+    },
+    {
+      "path": "source data/Sup fig 4/Supplementary fig 4a.csv",
+      "bytes": 196819,
+      "sha256": "448402f57041b484fb1ead4b85977b1b0cef07416b812345a327f9e49ff08886",
+      "row_width_counts": {
+        "2": 10002
+      }
+    },
+    {
+      "path": "source data/Sup fig 4/Supplementary fig 4b.csv",
+      "bytes": 196811,
+      "sha256": "65d605cd0f3f1eb33aa4290f161c8a318c0bb6f40c34905b895645b5535bee2a",
+      "row_width_counts": {
+        "2": 10002
+      }
+    },
+    {
+      "path": "source data/Sup fig 4/Supplementary fig 4c.csv",
+      "bytes": 196781,
+      "sha256": "062fe853a964851304f199bef4722fa79c9c4e4c9221f45c5efdf85890e6c8be",
+      "row_width_counts": {
+        "2": 10002
+      }
+    },
+    {
+      "path": "source data/Sup fig 4/Supplementary fig 4d.csv",
+      "bytes": 196763,
+      "sha256": "40ab41ca5bcd316ed01fec415091d19594ebd2b8c46d69a2f7e7723fbcf6ec3c",
+      "row_width_counts": {
+        "2": 10002
+      }
+    },
+    {
+      "path": "source data/Sup fig 4/Supplementary fig 4e.csv",
+      "bytes": 98283,
+      "sha256": "cab30db90464dbd1be38f5b888e1a49ff5c8b4cbc98b8c942821652d915d3f30",
+      "row_width_counts": {
+        "3": 3102
+      }
+    },
+    {
+      "path": "source data/Sup fig 4/Supplementary fig 4f.csv",
+      "bytes": 76113,
+      "sha256": "cd26a2905c0c983213646367ac04c66dc7bbfd2bdecd0a50b10661d9fcd455cf",
+      "row_width_counts": {
+        "3": 2402
+      }
+    },
+    {
+      "path": "source data/Sup fig 5/Supplementary fig 5a.csv",
+      "bytes": 156,
+      "sha256": "a3890d5c2f455db11a641afcff63b379958f28ae872e445a291b3a56e3e6e46c",
+      "row_width_counts": {
+        "3": 7
+      }
+    },
+    {
+      "path": "source data/Sup fig 5/Supplementary fig 5b.csv",
+      "bytes": 98,
+      "sha256": "1d78189f369f149817b0dcdcc70af4286b3bb43b8fc2436827fa5f6ef927ad45",
+      "row_width_counts": {
+        "2": 7
+      }
+    },
+    {
+      "path": "source data/Sup fig 5/Supplementary fig 5c.csv",
+      "bytes": 193,
+      "sha256": "916e3e2c98c44c13023eab1519719431585d9a1c783d65e2240a694dd269d329",
+      "row_width_counts": {
+        "3": 11
+      }
+    },
+    {
+      "path": "source data/Sup fig 6/Supplementary fig 6a.csv",
+      "bytes": 30575,
+      "sha256": "25fc8c86681711da7f8340028d2570dd3841fa02fb260e6df7e2832b5b1b1616",
+      "row_width_counts": {
+        "3": 1002
+      }
+    },
+    {
+      "path": "source data/Sup fig 6/Supplementary fig 6b.csv",
+      "bytes": 31603,
+      "sha256": "e744f7d60cf234bf5a531e3b40311639c2e78edcab88fbae323ac0363b4fa569",
+      "row_width_counts": {
+        "3": 1002
+      }
+    },
+    {
+      "path": "source data/Sup fig 6/Supplementary fig 6c.csv",
+      "bytes": 31577,
+      "sha256": "e229ff7f7da146e97759336edc8b887ca4fec85806b1c42b9e602f8f4f1091b7",
+      "row_width_counts": {
+        "3": 1002
+      }
+    },
+    {
+      "path": "source data/Sup fig 6/Supplementary fig 6d.csv",
+      "bytes": 327,
+      "sha256": "3a49a1efdd469ae3073e4d69ebf2247f5401a7b766c556e74b8a7e4c52091e8a",
+      "row_width_counts": {
+        "8": 8
+      }
+    },
+    {
+      "path": "source data/Sup fig 6/Supplementary fig 6e.csv",
+      "bytes": 326,
+      "sha256": "3672d1b2b74027e2e68bf0fe7b3438c320d352af5f50c90712a6af3c94aad341",
+      "row_width_counts": {
+        "8": 8
+      }
+    },
+    {
+      "path": "source data/Sup fig 6/Supplementary fig 6f.csv",
+      "bytes": 326,
+      "sha256": "80cef57d63302873b0c3207296e358308b12449195447ae7e989e80adaa26724",
+      "row_width_counts": {
+        "8": 8
+      }
+    },
+    {
+      "path": "source data/Sup fig 8/Supplementary fig 8a.csv",
+      "bytes": 49103,
+      "sha256": "afdf016309166ab1da572a80a17342218e3e160d2f3295a02947a9ec3ddfbb02",
+      "row_width_counts": {
+        "6": 1001
+      }
+    },
+    {
+      "path": "source data/Sup fig 8/Supplementary fig 8b.csv",
+      "bytes": 48031,
+      "sha256": "cbbf47c50dcd701ec48e6ae95b478b1de23f16b65763ff6fc8ca4b3b74ba4b07",
+      "row_width_counts": {
+        "4": 1350
+      }
+    },
+    {
+      "path": "source data/Sup fig 9/Supplementary fig 9a.csv",
+      "bytes": 30291,
+      "sha256": "15ad18fa20e22b99563d2877b3ed08929f3bda661d55ec65c0fccf29415986dd",
+      "row_width_counts": {
+        "3": 1002
+      }
+    },
+    {
+      "path": "source data/Sup fig 9/Supplementary fig 9b.csv",
+      "bytes": 31290,
+      "sha256": "7e9779a792909cd950cd0d645c05619ed5f57202a784445b1f44d5054f45b031",
+      "row_width_counts": {
+        "3": 1002
+      }
+    },
+    {
+      "path": "source data/Supplementary fig 10c.csv",
+      "bytes": 52667,
+      "sha256": "b3e366e18f293d6f752e059f4ba99752599512efafa45060f841a36aac64e7c3",
+      "row_width_counts": {
+        "8": 692
+      }
+    },
+    {
+      "path": "source data/Supplementary fig 7.csv",
+      "bytes": 161,
+      "sha256": "af63f11a2e4dc6ba0ecbea50ad04de0490e42f7cdb491ceed493fa725c8d4db6",
+      "row_width_counts": {
+        "3": 8
+      }
+    }
+  ]
 }

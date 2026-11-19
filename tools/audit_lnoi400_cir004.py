@@ -26,19 +26,22 @@ MMI=dense(models.mmi2x2_optimized1550(wl=WL),PORTS)
 TO=dense(models.to_phase_shifter(wl=WL,heater_length=BIAS,V_dc=0.),("o1","o2"))
 EO0=dense(models.eo_phase_shifter(wl=WL,length=LENGTH,V_dc=0.),("o1","o2"))
 
-def eo(v):
+def eo(v, wl=WL):
     # Upstream EO phase shifter uses voltage/Vpi in gplugins; evaluate
     # its exact native API, never fit a transmission magnitude.
-    return dense(models.eo_phase_shifter(wl=WL,length=LENGTH,V_dc=float(v)),("o1","o2"))
+    return dense(models.eo_phase_shifter(wl=wl,length=LENGTH,V_dc=float(v)),("o1","o2"))
 
-def physical_core(theta_voltage):
-    b={"left":(PORTS,MMI),"right":(PORTS,MMI),
-       "eo_top":(("o1","o2"),eo(theta_voltage)),
-       "eo_bottom":(("o1","o2"),eo(-theta_voltage)),
-       "ht_top":(("o1","o2"),TO),"ht_bottom":(("o1","o2"),TO)}
+def physical_core(theta_voltage, wl=WL):
+    mmi=MMI if wl==WL else dense(models.mmi2x2_optimized1550(wl=wl),PORTS)
+    to=TO if wl==WL else dense(models.to_phase_shifter(wl=wl,heater_length=BIAS,V_dc=0.),("o1","o2"))
+    b={"left":(PORTS,mmi),"right":(PORTS,mmi),
+       "eo_top":(("o1","o2"),eo(theta_voltage,wl)),
+       "eo_bottom":(("o1","o2"),eo(-theta_voltage,wl)),
+       "ht_top":(("o1","o2"),to),"ht_bottom":(("o1","o2"),to)}
     return assemble(b,LINKS,EXTERNAL)
 
-def topology(ops, settings, output, ideal=False):
+def topology(ops, settings, output, ideal=False, wl=WL):
+    eo0=EO0 if wl==WL else eo(0.,wl)
     # Sequential wiring is equivalent to rectangular disjoint-column
     # ordering; physical bypass routing is not yet included.
     blocks={}; links=[]; tails=[None]*4; inputs=[None]*4
@@ -57,11 +60,11 @@ def topology(ops, settings, output, ideal=False):
         else:
             # Differential core plus independently controlled input phase.
             # Matched zero-voltage reference on other arm.
-            append("p"+str(i),("o1","o2"),eo(phi),(m,))
-            append("d"+str(i),("o1","o2"),EO0,(m+1,))
-            append("m"+str(i),EXT,physical_core(theta),(m,m+1))
+            append("p"+str(i),("o1","o2"),eo(phi,wl),(m,))
+            append("d"+str(i),("o1","o2"),eo0,(m+1,))
+            append("m"+str(i),EXT,physical_core(theta,wl),(m,m+1))
     for i,v in enumerate(output):
-        s=reciprocal_transmission([[np.exp(1j*v)]]) if ideal else eo(v)
+        s=reciprocal_transmission([[np.exp(1j*v)]]) if ideal else eo(v,wl)
         append("out"+str(i),("o1","o2"),s,(i,))
     return assemble(blocks,links,inputs+tails)
 

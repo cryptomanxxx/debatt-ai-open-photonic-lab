@@ -1,0 +1,32 @@
+name: OPA LIB005-D2 SiEPIC BDC negative evidence decision
+on:
+  pull_request:
+    paths:
+      - 'components/comparison/lib005-bdc-decision.json'
+      - 'tools/audit_lib005_bdc_decision.py'
+      - '.github/workflows/opa-lib005-bdc-decision.yml'
+      - 'research/OPA-LIB-005-D2.md'
+      - 'tools/audit_lib005_bdc.py'
+      - 'components/comparison/lib005-bdc-audit.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned numerical dependency
+        run: python3 -m pip install --break-system-packages numpy==2.2.6
+      - name: Replay D1 and verify exact original CI report
+        run: python3 tools/audit_lib005_bdc_decision.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: opa-lib-005-d2
+          path: |
+            results/opa-lib-005-d1/
+            results/opa-lib-005-d2/
+          if-no-files-found: error

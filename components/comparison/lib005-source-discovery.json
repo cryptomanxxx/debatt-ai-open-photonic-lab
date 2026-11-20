@@ -1,0 +1,211 @@
+{
+  "experiment": "OPA-LIB-005-C",
+  "method": "exact_revision_source_discovery",
+  "upstream_repo": "SiEPIC/SiEPIC_EBeam_PDK",
+  "upstream_revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+  "upstream_raw_base": "https://raw.githubusercontent.com/SiEPIC/SiEPIC_EBeam_PDK/363fbb52eefa8669100499ab531d3fe7befc4867/",
+  "local_sources": {
+    "si_manifest": {
+      "path": "components/external/SiEPIC-EBeam/manifest.json",
+      "git_blob_sha1": "1fb93dfbb4bde020c07c20cb9eef699962e030c6"
+    },
+    "lib005_b": {
+      "path": "components/comparison/lib005-passive-test-plan.json",
+      "git_blob_sha1": "e47857cd7370520597e8510e723fa0be70397181"
+    },
+    "lnoi_manifest": {
+      "path": "components/external/Luxtelligence/lnoi400/s_parameters/manifest.json",
+      "git_blob_sha1": "767cf6c736ed73c000fe2590b9ac97db71b2faa4"
+    }
+  },
+  "upstream_sources": [
+    {
+      "key": "bdc_model",
+      "path": "klayout/EBeam/CML/EBeam/source_data/bdc_TE_source/bdc_Thickness =220 width=500.sparam",
+      "kind": "complex_4port_sparameter",
+      "expected_blocks": 16,
+      "expected_samples_per_block": 51,
+      "git_blob_sha1": "e58996b7e644c509407f07581668458222fe3e92"
+    },
+    {
+      "key": "gc_model",
+      "path": "klayout/EBeam/CML/EBeam/source_data/gc_source/GC_TE1550_thickness=220 deltaw=0.txt",
+      "kind": "unclassified_numeric_9_column",
+      "expected_rows": 100,
+      "git_blob_sha1": "3837751e9b80479ce2d2071cc721fcf7193853b0"
+    },
+    {
+      "key": "bdc_lookup",
+      "path": "klayout/EBeam/CML/EBeam/source_data/bdc_TE_source/bdc_lookup_table.xml",
+      "kind": "lookup_xml",
+      "git_blob_sha1": "8c949ae4cf25ad4a552dceebf1efc824a8fa892f"
+    },
+    {
+      "key": "gc_lookup",
+      "path": "klayout/EBeam/CML/EBeam/source_data/gc_source/GC_TE_lookup_table.xml",
+      "kind": "lookup_xml",
+      "git_blob_sha1": "3f6f1daae37595be35e8fecbe33846689dd9de21"
+    },
+    {
+      "key": "opics_model_registry",
+      "path": "klayout/EBeam/pymacros/opics_ebeam/__init__.py",
+      "kind": "model_source",
+      "git_blob_sha1": "5248fb98ba42b3b121b4384ef9a0d99d2226c66e"
+    },
+    {
+      "key": "bdc_docs",
+      "path": "docs/components/ebeam/ebeam_bdc/ebeam_bdc.md",
+      "kind": "documentation",
+      "git_blob_sha1": "e87afe8365820ee4390e69e3232cc387373e1d9c"
+    },
+    {
+      "key": "gc_docs",
+      "path": "docs/components/ebeam/grating_coupler/grating_coupler.md",
+      "kind": "documentation",
+      "git_blob_sha1": "95b865b50870023f73e00759820cfda6ec23a7a0"
+    }
+  ],
+  "assessments": [
+    {
+      "id": "siepic-bdc-te1550",
+      "local_gds": "ebeam_bdc_te1550",
+      "model_key": "bdc_model",
+      "model_named_in_upstream": "ebeam_bdc_te1550",
+      "same_pdk_revision": true,
+      "nominal_params_match": {
+        "height_nm": 220,
+        "width_nm": 500
+      },
+      "optical_data_format": "16 complex four-port transmission blocks, 51 points each, magnitude and phase",
+      "model_source_identified": true,
+      "model_exact_gds_geometry_proven": false,
+      "independent_measured_raw_data_proven": false,
+      "calibration_eligible": false,
+      "status": "source_pdk_compact_model_only",
+      "remaining": [
+        "original complex model reference-plane and polarization/phase normalization audit",
+        "model generation: FDTD versus measured field samples not established",
+        "exact GDS-to-model geometry verification",
+        "raw same-cell measurement, uncertainty and process-run metadata"
+      ]
+    },
+    {
+      "id": "siepic-gc-te1550",
+      "local_gds": "ebeam_gc_te1550",
+      "model_key": "gc_model",
+      "model_named_in_upstream": "GC",
+      "same_pdk_revision": true,
+      "nominal_params_match": {
+        "height_nm": 220,
+        "deltaw_nm": 0
+      },
+      "optical_data_format": "100 rows x 9 numeric fields, source column semantics unverified",
+      "model_source_identified": true,
+      "model_exact_gds_geometry_proven": false,
+      "independent_measured_raw_data_proven": false,
+      "calibration_eligible": false,
+      "status": "source_pdk_compact_model_only",
+      "remaining": [
+        "full column and port conventions, S parameter interpretation",
+        "exact GDS-to-model geometry verification",
+        "measured same-cell raw data and uncertainty",
+        "validate against placeholder not automatically replace 6dB"
+      ]
+    },
+    {
+      "id": "lnoi400-mmi2x2",
+      "local_gds": "mmi2x2_optimized1550",
+      "model_key": null,
+      "same_pdk_revision": true,
+      "model_source_identified": true,
+      "model_exact_gds_geometry_proven": false,
+      "independent_measured_raw_data_proven": false,
+      "calibration_eligible": false,
+      "status": "already_imported_simulation_only",
+      "remaining": [
+        "exact upstream FDTD source geometry and mode planes",
+        "measured matching complex S parameters, run conditions and uncertainty"
+      ]
+    },
+    {
+      "id": "lnoi400-directional-coupler",
+      "local_gds": "directional_coupler_balanced",
+      "model_key": null,
+      "same_pdk_revision": true,
+      "model_source_identified": true,
+      "model_exact_gds_geometry_proven": false,
+      "independent_measured_raw_data_proven": false,
+      "calibration_eligible": false,
+      "status": "already_imported_quarantined_nonpassive",
+      "remaining": [
+        "resolve 201/201 nonpassive simulated polynomial points upstream",
+        "exact source FDTD setup and geometry",
+        "measured source data and uncertainty"
+      ]
+    },
+    {
+      "id": "siepic-ebl-dc-te1550",
+      "local_gds": null,
+      "model_key": null,
+      "same_pdk_revision": null,
+      "model_source_identified": true,
+      "model_exact_gds_geometry_proven": false,
+      "independent_measured_raw_data_proven": false,
+      "calibration_eligible": false,
+      "status": "adjacent_non_matching_device",
+      "remaining": [
+        "different device ebeam_dc_te1550, not our ebeam_bdc_te1550",
+        "not eligible for direct substitution"
+      ]
+    },
+    {
+      "id": "openebl-results",
+      "local_gds": null,
+      "model_key": null,
+      "same_pdk_revision": null,
+      "model_source_identified": false,
+      "model_exact_gds_geometry_proven": false,
+      "independent_measured_raw_data_proven": false,
+      "calibration_eligible": false,
+      "status": "potential_source_needs_device_linkage",
+      "remaining": [
+        "per-device original design hash",
+        "measurement trace and lab metadata",
+        "rights and reuse checks"
+      ]
+    }
+  ],
+  "external_leads": [
+    {
+      "url": "https://github.com/SiEPIC/SiEPIC_EBeam_PDK/blob/363fbb52eefa8669100499ab531d3fe7befc4867/docs/components/ebeam/ebeam_bdc/ebeam_bdc.md",
+      "meaning": "same-revision official BDC documentation; illustrates measured plots, no raw matching device attribution"
+    },
+    {
+      "url": "https://github.com/SiEPIC/SiEPIC_EBeam_PDK/blob/363fbb52eefa8669100499ab531d3fe7befc4867/docs/components/ebeam/grating_coupler/grating_coupler.md",
+      "meaning": "official GC documented experimental family, not identified raw original curve for exact GDS"
+    },
+    {
+      "url": "https://github.com/SiEPIC/SiEPIC_EBeam_PDK/issues/321",
+      "meaning": "discussion of ebeam_dc_te1550 (different component from bdc), raw model lead"
+    },
+    {
+      "url": "https://siepic.ca/openebl/",
+      "meaning": "published measurement collection and metadata guidance; no exact GDS match verified"
+    },
+    {
+      "url": "https://github.com/SiEPIC/openEBL-2026-05",
+      "meaning": "run-level public design repository; actual matched measurements not yet validated"
+    },
+    {
+      "url": "https://luxtelligence.github.io/lxt_pdk_gf/notebooks/models.html",
+      "meaning": "official model documentation notes blend of experiment and FDTD, but specific coefficient provenance remains unresolved"
+    }
+  ],
+  "policy": {
+    "original_source_copied_into_repository": false,
+    "exact_cell_calibrations": 0,
+    "never_infer_measurement_from_numerical_file": true,
+    "quarantined_dc_must_remain_quarantined": true,
+    "no_new_fabrication_claim": true
+  }
+}

@@ -92,14 +92,16 @@ def replay():
             "d2":{"result.json":(a/"result.json").read_bytes(),"spectral-audit.csv":(a/"spectral-audit.csv").read_bytes(),
                   "decision.json":(b/"decision.json").read_bytes()}}
 
-def audit(source):
+def audit(source, replay_enabled=True):
     manifest=json.loads(MANIFEST.read_text())
     require([p["key"] for p in manifest]==["d1","d2"],"manifest order")
     require({p.name for p in source.iterdir()}=={"d1.zip","d2.zip"},"original ZIP count")
     require([p["experiment"] for p in manifest]==["OPA-LIB-005-D1","OPA-LIB-005-D2"],"original experiments")
     outputs={}
     count=0
-    rerun=replay()
+    # A committed archive must be verifiable indefinitely with no upstream requests.
+    # A fresh original-artifact preflight still replays both reviewed analyses.
+    rerun=replay() if replay_enabled else None
     original_hashes={}
     for p in manifest:
         key=p["key"]
@@ -114,13 +116,28 @@ def audit(source):
         require(report["experiment"]==p["experiment"] and all(x is True for x in report["checks"].values()),"checks "+key)
         count+=len(report["checks"])
         for n in expected:
-            if n.endswith(".json"):
-                equal(json.loads(files[n]),json.loads(rerun[key][n]),key+"/replay "+n)
-            else:equal_csv(files[n],rerun[key][n])
+            if rerun is not None:
+                if n.endswith(".json"):
+                    equal(json.loads(files[n]),json.loads(rerun[key][n]),key+"/replay "+n)
+                else:
+                    equal_csv(files[n],rerun[key][n])
             outputs[key+"/"+n]=files[n]
+        if not replay_enabled:
+            # Independent of both source URLs and expired Actions ZIPs.
+            # Check CSV shape, frequency ordering and original duplicated D1 output identity.
+            csv_rows=list(csv.DictReader(io.StringIO(files["spectral-audit.csv"].decode("utf-8"))))
+            require(len(csv_rows)==51 and all("sigma_max" in row and "nonpassive_screen" in row for row in csv_rows),"offline CSV inventory "+key)
+            flags=[row["nonpassive_screen"] for row in csv_rows]
+            require(all(flag in ("True","False") for flag in flags) and flags.count("True")==50,"offline CSV negative status "+key)
+            frequencies=[float(row["frequency_hz"]) for row in csv_rows]
+            require(all(math.isfinite(v) for v in frequencies) and all(b>a for a,b in zip(frequencies,frequencies[1:])),"offline CSV frequencies "+key)
+
         outputs[key+"/original.zip"]=raw
         original_hashes[key]={"sha256":sha256(raw),"size":len(raw),"run":p["run"],"artifact":p["artifact"]}
     require(count==16,"16 original verified checks")
+    # The D2 CI artifact includes the same D1 outputs; no replacement is allowed.
+    equal(json.loads(outputs["d1/result.json"]),json.loads(outputs["d2/result.json"]),"D1/D2 original repeated result")
+    equal_csv(outputs["d1/spectral-audit.csv"],outputs["d2/spectral-audit.csv"])
     first=manifest[0]["expected_result"]
     second=manifest[1]["expected_result"]
     require(first["passivity"]["nonpassive_frequencies"]==50 and first["samples"]==51,"50/51 negative")
@@ -129,7 +146,7 @@ def audit(source):
     provenance={"experiment":"OPA-LIB-005-ARCHIVE","source":original_hashes,
                 "source_refs":[{k:v for k,v in p.items() if k!="expected_result"} for p in manifest],
                 "checks":count,"archival_evidence_not_measurement":True,"classification":"quarantined_nonpassive",
-                "replay":"Exact reviewed D1 and D2 scripts; JSON fields compared against original CI logs and replay; CSV cells compared against replay. This is not an independent estimator.",
+                "replay":"At initial staging, exact reviewed D1 and D2 scripts replay all JSON fields and spectral CSV cells. Permanent staged audit checks pinned original ZIP bytes, CRC, source log reports, full CSV inventory, repeated D1/D2 identity and exact Git-staged bytes offline. Replay is not an independent estimator.",
                 "limitations":"Original source numerical coefficients remain untouched. No measured complex S, physical optical gain, exact matched geometry or fabrication qualification.",
                 "members":{k:{"bytes":len(v),"sha256":sha256(v)} for k,v in sorted(outputs.items())}}
     outputs["provenance.json"]=(json.dumps(provenance,indent=2,sort_keys=True)+"\n").encode()
@@ -148,7 +165,7 @@ def main():
             tmp=Path(tmp)
             for key in ("d1","d2"):
                 shutil.copyfile(args.staged/key/"original.zip",tmp/(key+".zip"))
-            outputs=audit(tmp)
+            outputs=audit(tmp, replay_enabled=False)
         paths={p.relative_to(args.staged).as_posix() for p in args.staged.rglob("*") if p.is_file()}
         require(paths==set(outputs),"exact staged file set")
         for path,data in outputs.items():
@@ -160,5 +177,5 @@ def main():
             p=args.output/path
             p.parent.mkdir(parents=True,exist_ok=True)
             p.write_bytes(data)
-    print("Verified 2 original CI ZIPs, 16 checks, 50/51 negative passivity points, "+str(len(outputs))+" archive files.")
+    print("Verified 2 original CI ZIPs, 16 checks, 50/51 negative passivity points, "+str(len(outputs))+" archive files; "+("offline staged" if args.staged else "fresh replay")+".")
 if __name__=="__main__": main()

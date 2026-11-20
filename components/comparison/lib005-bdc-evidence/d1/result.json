@@ -1,0 +1,107 @@
+{
+  "experiment": "OPA-LIB-005-D1",
+  "component": "SiEPIC EBeam ebeam_bdc_te1550",
+  "source": {
+    "repository": "SiEPIC/SiEPIC_EBeam_PDK",
+    "revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+    "path": "klayout/EBeam/CML/EBeam/source_data/bdc_TE_source/bdc_Thickness =220 width=500.sparam",
+    "git_blob_sha1": "e58996b7e644c509407f07581668458222fe3e92",
+    "source_kind": "upstream_pdk_complex_compact_model_not_qualified_measurement"
+  },
+  "model_interpretation": {
+    "power_assumption": "stored magnitudes treated as dimensionless field coefficients; modal power normalization and reference planes unverified",
+    "phase_assumption": "stored third column interpreted as radians for numerical testing; upstream convention unverified",
+    "port_assumption": "upstream port headers mapped output port then input port; native physical GDS mapping not independently verified"
+  },
+  "samples": 51,
+  "complex_values": 816,
+  "wavelength_range_nm": [
+    1499.9972881288088,
+    1600.002444361424
+  ],
+  "center": {
+    "frequency_hz": 193366000000000.0,
+    "wavelength_nm": 1550.3886826019052,
+    "sigma_max": 1.002574942217895,
+    "nonpassive_screen": true,
+    "reciprocity_max_abs_field": 0.0029678298811370582,
+    "input1_collected_power": 0.9920333963120866,
+    "input2_collected_power": 0.9946072504018733,
+    "input1_rightward_power": 0.9919883234570002,
+    "input2_rightward_power": 0.9945645490889999,
+    "input1_leftward_power": 4.507285508646099e-05,
+    "input2_leftward_power": 4.2701312873281004e-05,
+    "input1_bar_split": 0.5055964992139755,
+    "input2_cross_split": 0.5067236399343061,
+    "input1_output_phase_difference_rad": 1.3857999999999961
+  },
+  "passivity": {
+    "criterion": "largest singular value <= 1+1e-9 for each frequency if power-normalized",
+    "max_sigma_global": 1.0068756797677312,
+    "min_sigma_max": 0.9998405565185579,
+    "nonpassive_frequencies": 50,
+    "all_samples_pass_conditional_screen": false,
+    "conditional_numerical_usage": "quarantined_nonpassive"
+  },
+  "reciprocity": {
+    "max_abs_field_disagreement": 0.003289759193923786,
+    "not_independent_device_measurement": true
+  },
+  "power": {
+    "input1_collected_range": [
+      0.989102592080364,
+      0.996437087775771
+    ],
+    "input1_rightward_range": [
+      0.989070306145,
+      0.9963986108660001
+    ],
+    "input1_leftward_range": [
+      4.845463761125e-06,
+      6.7325484687389e-05
+    ],
+    "input1_split_range": [
+      0.45597229507189985,
+      0.5060720476288598
+    ]
+  },
+  "phase": {
+    "input1_output_phase_difference_rad_range": [
+      0.7905779999999999,
+      1.9521000000000015
+    ],
+    "model_only": true,
+    "group_delay_not_reported": true
+  },
+  "scope": {
+    "exact_gds_model_equivalence": false,
+    "measured_complex_s": false,
+    "fabrication_qualified": false,
+    "calibration_eligible": false,
+    "missing": [
+      "exact geometry and port mapping",
+      "validated S normalization and phase convention",
+      "independently measured original device",
+      "process and instrument metadata",
+      "uncertainty and physical reference plane"
+    ]
+  },
+  "checks": {
+    "upstream_blob_identity": true,
+    "all_816_complex_entries": true,
+    "wavelength_consistency": true,
+    "full_singular_spectrum": true,
+    "crosscheck_column_norms": true,
+    "right_and_left_power_separation": true,
+    "phase_proxy_explicit": true,
+    "no_measured_or_qualified_claim": true
+  },
+  "limitations": [
+    "The upstream optical model is not independently proven to be an experiment of the exact GDS geometry.",
+    "Phase is interpreted as radians solely to test the upstream tabulation; phase convention and reference planes are unknown.",
+    "Singular-value passivity is conditional on native field coefficients being appropriately power-normalized.",
+    "Collected four-port power does not measure external radiation or propagation loss independently.",
+    "No group delay, EO bandwidth, real silicon fabrication measurements or calibration are inferred.",
+    "The measured Twente TFLN results and nonpassive Luxtelligence directional-coupler fit are separate evidence."
+  ]
+}

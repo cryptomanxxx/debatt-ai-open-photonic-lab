@@ -1,0 +1,54 @@
+{
+  "experiment": "OPA-LIB-005-D2",
+  "source_pr": 244,
+  "original_ci_run": 44792693356,
+  "source_artifact_id": 14656862431,
+  "passivity": {
+    "criterion": "largest singular value <= 1+1e-9 for each frequency if power-normalized",
+    "max_sigma_global": 1.0068756797677312,
+    "min_sigma_max": 0.9998405565185579,
+    "nonpassive_frequencies": 50,
+    "all_samples_pass_conditional_screen": false,
+    "conditional_numerical_usage": "quarantined_nonpassive"
+  },
+  "center": {
+    "wavelength_nm": 1550.3886826019052,
+    "input1_collected_power": 0.9920333963120866,
+    "sigma_max": 1.002574942217895
+  },
+  "decision": {
+    "status": "quarantined_nonpassive",
+    "usable_for_passive_circuit": false,
+    "raw_measured_data_available": false,
+    "component_id": "siepic-bdc-te1550",
+    "source_revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+    "model_file_hash": "e58996b7e644c509407f07581668458222fe3e92",
+    "independent_corrected_model_available": false,
+    "exact_geometry_calibrated": false,
+    "context": "conditional field-normalized singular-value screen; 50 of 51 samples exceed 1+1e-9",
+    "restoration_requirements": [
+      "independently establish S power normalization and port/phase convention",
+      "obtain exact geometry and reference plane mapping",
+      "audit model source and independent complex passivity re-derivation",
+      "source correction must be versioned rather than modifying original",
+      "validate against actual matched measurement before calibration claims"
+    ]
+  },
+  "checks": {
+    "source_run_pinned": true,
+    "full_report_replayed": true,
+    "eight_d1_checks": true,
+    "negative_passivity_retained": true,
+    "source_model_identity": true,
+    "no_data_promotion": true,
+    "multiport_counterexample": true,
+    "future_gate_fail_closed": true
+  },
+  "limitations": [
+    "CI green verifies the correct calculation and conservatively stated negative classification, not component passivity.",
+    "No experiment shows optical amplification or a measured loss at this PDK cell.",
+    "No normalization or renormalization of the source model was performed.",
+    "This gate does not infer all five other untested PDK models' suitability.",
+    "Original D1 ZIP remains a temporary GitHub Actions artifact until separately archived."
+  ]
+}

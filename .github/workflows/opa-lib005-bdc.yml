@@ -1,0 +1,28 @@
+name: OPA LIB005-D1 SiEPIC broadband coupler complex S audit
+on:
+  pull_request:
+    paths:
+      - 'components/comparison/lib005-bdc-audit.json'
+      - 'components/comparison/lib005-source-discovery.json'
+      - 'tools/audit_lib005_bdc.py'
+      - '.github/workflows/opa-lib005-bdc.yml'
+      - 'research/OPA-LIB-005-D1.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned numerical dependency
+        run: python3 -m pip install --break-system-packages numpy==2.2.6
+      - run: python3 tools/audit_lib005_bdc.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: opa-lib-005-d1
+          path: results/opa-lib-005-d1/
+          if-no-files-found: error

@@ -1,0 +1,65 @@
+name: OPA archive LIB005 BDC negative evidence
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_archive:
+        description: Archive original D1 and D2 CI artifact ZIPs to separate review branch
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: opa-lib005-bdc-archive
+  cancel-in-progress: false
+jobs:
+  archive:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_archive == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ARCHIVE_BRANCH: research/opa-lib005-bdc-evidence
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install audited numerical dependency
+        run: python3 -m pip install --break-system-packages numpy==2.2.6
+      - name: Verify and commit exact original evidence in distinct branch
+        run: |
+          set -euo pipefail
+          tmp="$RUNNER_TEMP/lib005-bdc-zips"
+          mkdir "$tmp"
+          for key in d1 d2; do
+            m=$(jq -ce --arg key "$key" '.[] | select(.key == $key)' components/comparison/lib005-bdc-archive-source.json)
+            run=$(jq -r .run <<< "$m")
+            artifact=$(jq -r .artifact <<< "$m")
+            gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run" | jq -e --argjson m "$m" '.conclusion == "success" and .event == "pull_request" and .head_sha == $m.head and .head_branch == $m.branch and .path == $m.workflow' >/dev/null
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact" | jq -e --argjson m "$m" '.name == $m.name and .workflow_run.id == $m.run and .digest == ("sha256:" + $m.sha256) and .size_in_bytes == $m.size and .expired == false' >/dev/null
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact/zip" > "$tmp/$key.zip"
+          done
+          root=components/comparison/lib005-bdc-evidence
+          python3 research/archive_lib005_bdc.py --source "$tmp" --output "$root"
+          gh auth setup-git
+          if git ls-remote --exit-code --heads origin "refs/heads/$ARCHIVE_BRANCH" >/dev/null; then
+            echo "Archive review branch already exists; refusing overwrite."
+            exit 1
+          else
+            status=$?
+            [[ "$status" == 2 ]]
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$ARCHIVE_BRANCH"
+          git -c core.autocrlf=false add -f -- "$root"
+          staged="$RUNNER_TEMP/lib005-bdc-staged"
+          mkdir "$staged"
+          git ls-files -z -- "$root" | while IFS= read -r -d '' file; do
+            rel="${file#$root/}"
+            mkdir -p "$staged/$(dirname "$rel")"
+            git show ":$file" > "$staged/$rel"
+          done
+          python3 research/archive_lib005_bdc.py --staged "$staged"
+          git commit -m "Archive exact LIB005 negative broadband coupler evidence"
+          git push origin "HEAD:refs/heads/$ARCHIVE_BRANCH"

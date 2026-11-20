@@ -5,10 +5,11 @@ simulation of single components, through Mach–Zehnder interferometer (MZI)
 meshes, to chip layouts that can be sent to a multi-project wafer (MPW)
 fabrication run.
 
-> **Status:** early stage. The lab currently contains a series of
-> reproducible Meep FDTD experiments on generic dielectric waveguides. No
-> foundry-calibrated component or chip layout exists yet. See the
-> [roadmap](#roadmap).
+> **Status:** numerical design chain complete; nothing fabricated or measured
+> yet. The lab contains reproducible component simulations, MZI chip layouts
+> in two open PDKs, 4×4 circuit models and a revision-pinned component
+> library. The next step is a small passive test chip, which needs
+> fabrication access. **[One-page project status](STATUS.md)** · [Roadmap](#roadmap)
 
 ## Interactive demonstrations
 

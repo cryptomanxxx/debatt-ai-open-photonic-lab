@@ -1,0 +1,191 @@
+[
+  {
+    "key": "d1",
+    "run": 44792693356,
+    "job": 136484190144,
+    "artifact": 14656862431,
+    "size": 7569,
+    "sha256": "76892cda933dd3831c809aa14adb622b7fe19ae95fa5131a9fa250e6ced6cb0f",
+    "head": "05224ddc6d230d592253d560f16c908d60c43276",
+    "pr": 244,
+    "branch": "research/opa-lib005-bdc-complex-audit",
+    "workflow": ".github/workflows/opa-lib005-bdc.yml",
+    "name": "opa-lib-005-d1",
+    "experiment": "OPA-LIB-005-D1",
+    "expected_result": {
+      "experiment": "OPA-LIB-005-D1",
+      "component": "SiEPIC EBeam ebeam_bdc_te1550",
+      "source": {
+        "repository": "SiEPIC/SiEPIC_EBeam_PDK",
+        "revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+        "path": "klayout/EBeam/CML/EBeam/source_data/bdc_TE_source/bdc_Thickness =220 width=500.sparam",
+        "git_blob_sha1": "e58996b7e644c509407f07581668458222fe3e92",
+        "source_kind": "upstream_pdk_complex_compact_model_not_qualified_measurement"
+      },
+      "model_interpretation": {
+        "power_assumption": "stored magnitudes treated as dimensionless field coefficients; modal power normalization and reference planes unverified",
+        "phase_assumption": "stored third column interpreted as radians for numerical testing; upstream convention unverified",
+        "port_assumption": "upstream port headers mapped output port then input port; native physical GDS mapping not independently verified"
+      },
+      "samples": 51,
+      "complex_values": 816,
+      "wavelength_range_nm": [
+        1499.9972881288088,
+        1600.002444361424
+      ],
+      "center": {
+        "frequency_hz": 193366000000000,
+        "wavelength_nm": 1550.3886826019052,
+        "sigma_max": 1.002574942217895,
+        "nonpassive_screen": true,
+        "reciprocity_max_abs_field": 0.0029678298811370582,
+        "input1_collected_power": 0.9920333963120866,
+        "input2_collected_power": 0.9946072504018733,
+        "input1_rightward_power": 0.9919883234570002,
+        "input2_rightward_power": 0.9945645490889999,
+        "input1_leftward_power": 0.00004507285508646099,
+        "input2_leftward_power": 0.000042701312873281004,
+        "input1_bar_split": 0.5055964992139755,
+        "input2_cross_split": 0.5067236399343061,
+        "input1_output_phase_difference_rad": 1.3857999999999961
+      },
+      "passivity": {
+        "criterion": "largest singular value <= 1+1e-9 for each frequency if power-normalized",
+        "max_sigma_global": 1.0068756797677312,
+        "min_sigma_max": 0.9998405565185579,
+        "nonpassive_frequencies": 50,
+        "all_samples_pass_conditional_screen": false,
+        "conditional_numerical_usage": "quarantined_nonpassive"
+      },
+      "reciprocity": {
+        "max_abs_field_disagreement": 0.003289759193923786,
+        "not_independent_device_measurement": true
+      },
+      "power": {
+        "input1_collected_range": [
+          0.989102592080364,
+          0.996437087775771
+        ],
+        "input1_rightward_range": [
+          0.989070306145,
+          0.9963986108660001
+        ],
+        "input1_leftward_range": [
+          0.000004845463761125,
+          0.000067325484687389
+        ],
+        "input1_split_range": [
+          0.45597229507189985,
+          0.5060720476288598
+        ]
+      },
+      "phase": {
+        "input1_output_phase_difference_rad_range": [
+          0.7905779999999999,
+          1.9521000000000015
+        ],
+        "model_only": true,
+        "group_delay_not_reported": true
+      },
+      "scope": {
+        "exact_gds_model_equivalence": false,
+        "measured_complex_s": false,
+        "fabrication_qualified": false,
+        "calibration_eligible": false,
+        "missing": [
+          "exact geometry and port mapping",
+          "validated S normalization and phase convention",
+          "independently measured original device",
+          "process and instrument metadata",
+          "uncertainty and physical reference plane"
+        ]
+      },
+      "checks": {
+        "upstream_blob_identity": true,
+        "all_816_complex_entries": true,
+        "wavelength_consistency": true,
+        "full_singular_spectrum": true,
+        "crosscheck_column_norms": true,
+        "right_and_left_power_separation": true,
+        "phase_proxy_explicit": true,
+        "no_measured_or_qualified_claim": true
+      },
+      "limitations": [
+        "The upstream optical model is not independently proven to be an experiment of the exact GDS geometry.",
+        "Phase is interpreted as radians solely to test the upstream tabulation; phase convention and reference planes are unknown.",
+        "Singular-value passivity is conditional on native field coefficients being appropriately power-normalized.",
+        "Collected four-port power does not measure external radiation or propagation loss independently.",
+        "No group delay, EO bandwidth, real silicon fabrication measurements or calibration are inferred.",
+        "The measured Twente TFLN results and nonpassive Luxtelligence directional-coupler fit are separate evidence."
+      ]
+    }
+  },
+  {
+    "key": "d2",
+    "run": 44794454729,
+    "job": 136490226385,
+    "artifact": 14656894199,
+    "size": 8921,
+    "sha256": "a5bd631aceb4171d5079f960b79433a6b4f68858aada83b59ce5e25ed532e3a6",
+    "head": "b0ce17ad4a11e00891a734509223b5142dcc28a6",
+    "pr": 245,
+    "branch": "research/opa-lib005-bdc-negative-decision",
+    "workflow": ".github/workflows/opa-lib005-bdc-decision.yml",
+    "name": "opa-lib-005-d2",
+    "experiment": "OPA-LIB-005-D2",
+    "expected_result": {
+      "experiment": "OPA-LIB-005-D2",
+      "source_pr": 244,
+      "original_ci_run": 44792693356,
+      "source_artifact_id": 14656862431,
+      "passivity": {
+        "criterion": "largest singular value <= 1+1e-9 for each frequency if power-normalized",
+        "max_sigma_global": 1.0068756797677312,
+        "min_sigma_max": 0.9998405565185579,
+        "nonpassive_frequencies": 50,
+        "all_samples_pass_conditional_screen": false,
+        "conditional_numerical_usage": "quarantined_nonpassive"
+      },
+      "center": {
+        "wavelength_nm": 1550.3886826019052,
+        "input1_collected_power": 0.9920333963120866,
+        "sigma_max": 1.002574942217895
+      },
+      "decision": {
+        "status": "quarantined_nonpassive",
+        "usable_for_passive_circuit": false,
+        "raw_measured_data_available": false,
+        "component_id": "siepic-bdc-te1550",
+        "source_revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+        "model_file_hash": "e58996b7e644c509407f07581668458222fe3e92",
+        "independent_corrected_model_available": false,
+        "exact_geometry_calibrated": false,
+        "context": "conditional field-normalized singular-value screen; 50 of 51 samples exceed 1+1e-9",
+        "restoration_requirements": [
+          "independently establish S power normalization and port/phase convention",
+          "obtain exact geometry and reference plane mapping",
+          "audit model source and independent complex passivity re-derivation",
+          "source correction must be versioned rather than modifying original",
+          "validate against actual matched measurement before calibration claims"
+        ]
+      },
+      "checks": {
+        "source_run_pinned": true,
+        "full_report_replayed": true,
+        "eight_d1_checks": true,
+        "negative_passivity_retained": true,
+        "source_model_identity": true,
+        "no_data_promotion": true,
+        "multiport_counterexample": true,
+        "future_gate_fail_closed": true
+      },
+      "limitations": [
+        "CI green verifies the correct calculation and conservatively stated negative classification, not component passivity.",
+        "No experiment shows optical amplification or a measured loss at this PDK cell.",
+        "No normalization or renormalization of the source model was performed.",
+        "This gate does not infer all five other untested PDK models' suitability.",
+        "Original D1 ZIP remains a temporary GitHub Actions artifact until separately archived."
+      ]
+    }
+  }
+]

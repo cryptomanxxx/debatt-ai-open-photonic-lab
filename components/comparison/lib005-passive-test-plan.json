@@ -1,0 +1,556 @@
+{
+  "experiment": "OPA-LIB-005-B",
+  "stage": "passive_measurement_planning",
+  "scope": "study design only; no manufacturing geometry or foundry access claim",
+  "source_pins": {
+    "lib005": {
+      "path": "components/comparison/lib005-spec.json",
+      "git_blob_sha1": "8eae41fd8e5861d8abb1b223fc36417275465e34"
+    },
+    "soi": {
+      "path": "components/external/SiEPIC-EBeam/manifest.json",
+      "git_blob_sha1": "1fb93dfbb4bde020c07c20cb9eef699962e030c6"
+    },
+    "tfln": {
+      "path": "components/external/Luxtelligence/lnoi400/generation-spec.json",
+      "git_blob_sha1": "704c9d4dce280e3a87708d15e63d4f87a9799940"
+    },
+    "si_layout": {
+      "path": "results/opa-layout-002/result.json",
+      "git_blob_sha1": "1237cf6b83963e6369b35d13ed685f970bf0ad25"
+    },
+    "tfln_layout": {
+      "path": "results/opa-layout-005/result.json",
+      "git_blob_sha1": "8dcc6d89663c0d43a8ad1ac9225e33492661771b"
+    }
+  },
+  "platforms": [
+    {
+      "id": "soi",
+      "stack": "SiEPIC EBeam SOI",
+      "source_kind": "upstream_original_gds",
+      "interface_kind": "grating",
+      "access": "unconfirmed",
+      "design_rule_deck": "not_confirmed_for_individual_test_cells"
+    },
+    {
+      "id": "tfln",
+      "stack": "Luxtelligence lnoi400 X-cut TFLN",
+      "source_kind": "generated_external_pcell",
+      "interface_kind": "edge",
+      "access": "unconfirmed",
+      "design_rule_deck": "unconfirmed"
+    }
+  ],
+  "global_measurement_protocol": {
+    "preconditions": [
+      "Select exactly one accessible and licensed process for each submitted design; do not put SOI and TFLN on a single die without an established heterogeneous process.",
+      "Obtain official current layer map, process rules, MPW eligibility, and DRC/DFM acceptance from the facility.",
+      "Confirm usable wavelength band, polarization/mode, optical coupling arrangement, available laser detector meter OSA and coherent receiver if phase needed.",
+      "Create unambiguous per-die structure identifiers, GDS source hashes, port labels, design and as-fabricated geometry records.",
+      "Pre-register exact lengths/radii, wavelengths, repeats, measurement uncertainty methodology and acceptable confidence thresholds before manufacture."
+    ],
+    "sequence": [
+      "instrument baseline and source power drift checks",
+      "fiber or edge alignment and polarization check",
+      "I/O back-to-back reference repeated before and after each device group",
+      "spectral acquisition with repeated devices and controls",
+      "power-floor, saturation and dynamic-range checks",
+      "wavelength and polarization calibration",
+      "derive loss and ratios with propagated uncertainty and residual diagnostics",
+      "independent review of exact geometry-to-measurement mapping"
+    ],
+    "data_export": [
+      "raw_spectra.csv",
+      "instrument-settings.json",
+      "device-map.csv",
+      "reference-measurements.csv",
+      "derived-metrics.json",
+      "source-and-license-provenance.json"
+    ],
+    "do_not_infer": [
+      "phase from power-only readings",
+      "intrinsic microring Q from system power notches",
+      "physical loss of one interface without a defensible two-interface model",
+      "wafer/process yield from one die",
+      "manufacturer DRC clearance from generic geometric checks"
+    ]
+  },
+  "structures": [
+    {
+      "id": "soi-cutback",
+      "platform": "soi",
+      "source_revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+      "source_kind": "upstream_original_gds",
+      "measurement_readiness": "planning_only",
+      "fabrication_status": "not_fabricated",
+      "calibration_status": "not_calibrated",
+      "process_access": "unconfirmed",
+      "qualification": null,
+      "license_or_process_permission": "not_confirmed",
+      "measurement_method": "external_tunable_laser_and_power_meter_or_OSA",
+      "hypothesis": "Separate propagation-dependent loss from coupling and common-path loss.",
+      "readouts": [
+        "transmitted optical power versus wavelength",
+        "power versus independently measured path length",
+        "regression slope dB/cm and residuals"
+      ],
+      "controls": [
+        "at least three distinct lengths and independent input/output reference structures",
+        "identical input/output coupling geometry and routing as far as physically possible"
+      ],
+      "required_metadata": [
+        "as-fabricated path lengths",
+        "wavelength grid and OSA/power-meter calibration",
+        "fiber alignment and polarization",
+        "fit residuals and uncertainty"
+      ],
+      "pitfalls": [
+        "spiral bend contribution",
+        "coupling drift across devices",
+        "detector floor"
+      ],
+      "reuse": [],
+      "design_action": "new process-specific cutback set; earlier SiEPIC measured spirals are an external reference, not the same geometry",
+      "design_status": "new_design_required",
+      "planned_structure_count": null,
+      "replicates": null,
+      "footprint_um": null,
+      "acceptance_thresholds": null,
+      "measurement_uncertainty": null
+    },
+    {
+      "id": "soi-bends",
+      "platform": "soi",
+      "source_revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+      "source_kind": "upstream_original_gds",
+      "measurement_readiness": "planning_only",
+      "fabrication_status": "not_fabricated",
+      "calibration_status": "not_calibrated",
+      "process_access": "unconfirmed",
+      "qualification": null,
+      "license_or_process_permission": "not_confirmed",
+      "measurement_method": "external_tunable_laser_and_power_meter_or_OSA",
+      "hypothesis": "Determine excess loss attributable to bends relative to matched straight reference.",
+      "readouts": [
+        "transmitted optical power versus wavelength",
+        "incremental insertion loss per bend with uncertainty"
+      ],
+      "controls": [
+        "multiple repeated bends and matched-length straight controls",
+        "same optical I/O and polarization"
+      ],
+      "required_metadata": [
+        "bend radius and count",
+        "total optical path length",
+        "layout and lithography revision"
+      ],
+      "pitfalls": [
+        "bend transition and straight loss not isolated",
+        "scattered light and floor"
+      ],
+      "reuse": [],
+      "design_action": "new matched-radius SOI bends; design/process rule review required",
+      "design_status": "new_design_required",
+      "planned_structure_count": null,
+      "replicates": null,
+      "footprint_um": null,
+      "acceptance_thresholds": null,
+      "measurement_uncertainty": null
+    },
+    {
+      "id": "soi-coupler",
+      "platform": "soi",
+      "source_revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+      "source_kind": "upstream_original_gds",
+      "measurement_readiness": "planning_only",
+      "fabrication_status": "not_fabricated",
+      "calibration_status": "not_calibrated",
+      "process_access": "unconfirmed",
+      "qualification": null,
+      "license_or_process_permission": "not_confirmed",
+      "measurement_method": "external_tunable_laser_and_power_meter_or_OSA",
+      "hypothesis": "Quantify four-port power split and excess loss across wavelength.",
+      "readouts": [
+        "bar and cross output powers",
+        "normalized split fraction",
+        "total collected output power relative to matched reference",
+        "optional complex S only with separately calibrated coherent phase"
+      ],
+      "controls": [
+        "both input ports separately where accessible",
+        "straight-through optical I/O reference"
+      ],
+      "required_metadata": [
+        "physical port order and access",
+        "input launch power at each reference plane",
+        "polarization and reference calibration"
+      ],
+      "pitfalls": [
+        "missing fourth port or uncollected radiation",
+        "power-only data cannot yield phase"
+      ],
+      "reuse": [
+        "ebeam_bdc_te1550"
+      ],
+      "design_action": "place same-revision original four-port BDC in matched I/O test harness",
+      "design_status": "existing_cell_needs_test_harness",
+      "planned_structure_count": null,
+      "replicates": null,
+      "footprint_um": null,
+      "acceptance_thresholds": null,
+      "measurement_uncertainty": null
+    },
+    {
+      "id": "soi-mzi",
+      "platform": "soi",
+      "source_revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+      "source_kind": "upstream_original_gds",
+      "measurement_readiness": "planning_only",
+      "fabrication_status": "not_fabricated",
+      "calibration_status": "not_calibrated",
+      "process_access": "unconfirmed",
+      "qualification": null,
+      "license_or_process_permission": "not_confirmed",
+      "measurement_method": "external_tunable_laser_and_power_meter_or_OSA",
+      "hypothesis": "Characterize passive interference fringe contrast and spectral period.",
+      "readouts": [
+        "output power spectrum at both outputs",
+        "fringe extinction and free spectral range",
+        "relative arm group-delay estimate conditional on known topology"
+      ],
+      "controls": [
+        "matched-path reference MZI and one deliberately imbalanced MZI",
+        "independently characterized splitters and optical I/O"
+      ],
+      "required_metadata": [
+        "as-designed and as-built optical path difference",
+        "phase/group-index assumptions",
+        "thermal conditions"
+      ],
+      "pitfalls": [
+        "fringe contrast conflates loss mismatch and splitter imbalance",
+        "no phase reconstruction from intensity alone"
+      ],
+      "reuse": [
+        "ebeam_bdc_te1550"
+      ],
+      "design_action": "reuse parent MZI architecture only as layout starting point; remove heater for passive test or document if retained unpowered",
+      "design_status": "existing_parent_layout_needs_revision",
+      "planned_structure_count": null,
+      "replicates": null,
+      "footprint_um": null,
+      "acceptance_thresholds": null,
+      "measurement_uncertainty": null
+    },
+    {
+      "id": "soi-io",
+      "platform": "soi",
+      "source_revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+      "source_kind": "upstream_original_gds",
+      "measurement_readiness": "planning_only",
+      "fabrication_status": "not_fabricated",
+      "calibration_status": "not_calibrated",
+      "process_access": "unconfirmed",
+      "qualification": null,
+      "license_or_process_permission": "not_confirmed",
+      "measurement_method": "external_tunable_laser_and_power_meter_or_OSA",
+      "hypothesis": "Determine fiber-to-chip or chip-to-chip interface loss without assuming a generic coupler placeholder.",
+      "readouts": [
+        "fiber-to-fiber transmission spectrum",
+        "repeatability across alignments",
+        "inferred per-interface loss only under verified symmetry"
+      ],
+      "controls": [
+        "identical back-to-back couplers with known route length",
+        "independent light-source and receiver power reference"
+      ],
+      "required_metadata": [
+        "fiber type and angle/polarization",
+        "facet or grating geometry",
+        "alignment settings and wavelength-dependent reference"
+      ],
+      "pitfalls": [
+        "two-coupler loss cannot be uniquely split absent symmetry",
+        "coupling alignment drift"
+      ],
+      "reuse": [
+        "ebeam_gc_te1550"
+      ],
+      "design_action": "paired grating input/output reference structures; do not import 4.1 dB family figure as calibrated device value",
+      "design_status": "existing_cell_needs_test_harness",
+      "planned_structure_count": null,
+      "replicates": null,
+      "footprint_um": null,
+      "acceptance_thresholds": null,
+      "measurement_uncertainty": null
+    },
+    {
+      "id": "tfln-cutback",
+      "platform": "tfln",
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "source_kind": "generated_external_pcell",
+      "measurement_readiness": "planning_only",
+      "fabrication_status": "not_fabricated",
+      "calibration_status": "not_calibrated",
+      "process_access": "unconfirmed",
+      "qualification": null,
+      "license_or_process_permission": "not_confirmed",
+      "measurement_method": "external_tunable_laser_and_power_meter_or_OSA",
+      "hypothesis": "Separate propagation-dependent loss from coupling and common-path loss.",
+      "readouts": [
+        "transmitted optical power versus wavelength",
+        "power versus independently measured path length",
+        "regression slope dB/cm and residuals"
+      ],
+      "controls": [
+        "at least three distinct lengths and independent input/output reference structures",
+        "identical input/output coupling geometry and routing as far as physically possible"
+      ],
+      "required_metadata": [
+        "as-fabricated path lengths",
+        "wavelength grid and OSA/power-meter calibration",
+        "fiber alignment and polarization",
+        "fit residuals and uncertainty"
+      ],
+      "pitfalls": [
+        "spiral bend contribution",
+        "coupling drift across devices",
+        "detector floor"
+      ],
+      "reuse": [
+        "straight_rwg1000"
+      ],
+      "design_action": "generate matched series of longer routed waveguides and references; 100 um PCell alone is not a loss extraction",
+      "design_status": "new_test_harness_required",
+      "planned_structure_count": null,
+      "replicates": null,
+      "footprint_um": null,
+      "acceptance_thresholds": null,
+      "measurement_uncertainty": null
+    },
+    {
+      "id": "tfln-bends",
+      "platform": "tfln",
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "source_kind": "generated_external_pcell",
+      "measurement_readiness": "planning_only",
+      "fabrication_status": "not_fabricated",
+      "calibration_status": "not_calibrated",
+      "process_access": "unconfirmed",
+      "qualification": null,
+      "license_or_process_permission": "not_confirmed",
+      "measurement_method": "external_tunable_laser_and_power_meter_or_OSA",
+      "hypothesis": "Determine excess loss attributable to bends relative to matched straight reference.",
+      "readouts": [
+        "transmitted optical power versus wavelength",
+        "incremental insertion loss per bend with uncertainty"
+      ],
+      "controls": [
+        "multiple repeated bends and matched-length straight controls",
+        "same optical I/O and polarization"
+      ],
+      "required_metadata": [
+        "bend radius and count",
+        "total optical path length",
+        "layout and lithography revision"
+      ],
+      "pitfalls": [
+        "bend transition and straight loss not isolated",
+        "scattered light and floor"
+      ],
+      "reuse": [
+        "L_turn_bend"
+      ],
+      "design_action": "repeat and count Euler bends against length-matched straights",
+      "design_status": "new_test_harness_required",
+      "planned_structure_count": null,
+      "replicates": null,
+      "footprint_um": null,
+      "acceptance_thresholds": null,
+      "measurement_uncertainty": null
+    },
+    {
+      "id": "tfln-coupler",
+      "platform": "tfln",
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "source_kind": "generated_external_pcell",
+      "measurement_readiness": "planning_only",
+      "fabrication_status": "not_fabricated",
+      "calibration_status": "not_calibrated",
+      "process_access": "unconfirmed",
+      "qualification": null,
+      "license_or_process_permission": "not_confirmed",
+      "measurement_method": "external_tunable_laser_and_power_meter_or_OSA",
+      "hypothesis": "Quantify four-port power split and excess loss across wavelength.",
+      "readouts": [
+        "bar and cross output powers",
+        "normalized split fraction",
+        "total collected output power relative to matched reference",
+        "optional complex S only with separately calibrated coherent phase"
+      ],
+      "controls": [
+        "both input ports separately where accessible",
+        "straight-through optical I/O reference"
+      ],
+      "required_metadata": [
+        "physical port order and access",
+        "input launch power at each reference plane",
+        "polarization and reference calibration"
+      ],
+      "pitfalls": [
+        "missing fourth port or uncollected radiation",
+        "power-only data cannot yield phase"
+      ],
+      "reuse": [
+        "mmi2x2_optimized1550"
+      ],
+      "design_action": "prefer MMI with conditional numerical passivity; do not use quarantined nonpassive directional-coupler model",
+      "design_status": "existing_cell_needs_test_harness",
+      "planned_structure_count": null,
+      "replicates": null,
+      "footprint_um": null,
+      "acceptance_thresholds": null,
+      "measurement_uncertainty": null
+    },
+    {
+      "id": "tfln-mzi",
+      "platform": "tfln",
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "source_kind": "generated_external_pcell",
+      "measurement_readiness": "planning_only",
+      "fabrication_status": "not_fabricated",
+      "calibration_status": "not_calibrated",
+      "process_access": "unconfirmed",
+      "qualification": null,
+      "license_or_process_permission": "not_confirmed",
+      "measurement_method": "external_tunable_laser_and_power_meter_or_OSA",
+      "hypothesis": "Characterize passive interference fringe contrast and spectral period.",
+      "readouts": [
+        "output power spectrum at both outputs",
+        "fringe extinction and free spectral range",
+        "relative arm group-delay estimate conditional on known topology"
+      ],
+      "controls": [
+        "matched-path reference MZI and one deliberately imbalanced MZI",
+        "independently characterized splitters and optical I/O"
+      ],
+      "required_metadata": [
+        "as-designed and as-built optical path difference",
+        "phase/group-index assumptions",
+        "thermal conditions"
+      ],
+      "pitfalls": [
+        "fringe contrast conflates loss mismatch and splitter imbalance",
+        "no phase reconstruction from intensity alone"
+      ],
+      "reuse": [
+        "mmi2x2_optimized1550"
+      ],
+      "design_action": "passive two-MMI MZI, balanced and intentionally imbalanced routes; not the active 5mm MZM",
+      "design_status": "new_passive_layout_required",
+      "planned_structure_count": null,
+      "replicates": null,
+      "footprint_um": null,
+      "acceptance_thresholds": null,
+      "measurement_uncertainty": null
+    },
+    {
+      "id": "tfln-io",
+      "platform": "tfln",
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "source_kind": "generated_external_pcell",
+      "measurement_readiness": "planning_only",
+      "fabrication_status": "not_fabricated",
+      "calibration_status": "not_calibrated",
+      "process_access": "unconfirmed",
+      "qualification": null,
+      "license_or_process_permission": "not_confirmed",
+      "measurement_method": "external_tunable_laser_and_power_meter_or_OSA",
+      "hypothesis": "Determine fiber-to-chip or chip-to-chip interface loss without assuming a generic coupler placeholder.",
+      "readouts": [
+        "fiber-to-fiber transmission spectrum",
+        "repeatability across alignments",
+        "inferred per-interface loss only under verified symmetry"
+      ],
+      "controls": [
+        "identical back-to-back couplers with known route length",
+        "independent light-source and receiver power reference"
+      ],
+      "required_metadata": [
+        "fiber type and angle/polarization",
+        "facet or grating geometry",
+        "alignment settings and wavelength-dependent reference"
+      ],
+      "pitfalls": [
+        "two-coupler loss cannot be uniquely split absent symmetry",
+        "coupling alignment drift"
+      ],
+      "reuse": [
+        "double_linear_inverse_taper"
+      ],
+      "design_action": "edge/facet reference, package and facet handling unresolved",
+      "design_status": "existing_cell_needs_test_harness",
+      "planned_structure_count": null,
+      "replicates": null,
+      "footprint_um": null,
+      "acceptance_thresholds": null,
+      "measurement_uncertainty": null
+    }
+  ],
+  "decision_gates": [
+    {
+      "id": "P0",
+      "name": "process access and legal/technical feasibility",
+      "state": "open",
+      "requires": [
+        "facility/foundry confirmed",
+        "process revision and design rules",
+        "design/data rights",
+        "cost and schedule"
+      ]
+    },
+    {
+      "id": "P1",
+      "name": "measurement design freeze",
+      "state": "open",
+      "requires": [
+        "each test row's geometries and count frozen",
+        "operating band and optical mode",
+        "controls, port planes and quantitative acceptance thresholds",
+        "measurement uncertainty and data format"
+      ]
+    },
+    {
+      "id": "P2",
+      "name": "geometry and manufacturing review",
+      "state": "open",
+      "requires": [
+        "fabrication-ready layouts",
+        "foundry-approved DRC/DFM",
+        "design-to-measurement identifiers"
+      ]
+    },
+    {
+      "id": "P3",
+      "name": "post-fabrication measurements",
+      "state": "open",
+      "requires": [
+        "actual measured raw files",
+        "reference corrections and uncertainty",
+        "matched simulation and exact GDS"
+      ],
+      "note": "No hardware results exist yet."
+    }
+  ],
+  "separation": {
+    "cross_platform_calibration": false,
+    "reference_only_soi_cutback": true,
+    "reference_only_twente_ring": true,
+    "quarantined_tfln_dc_allowed": false,
+    "integrated_sources_required": false,
+    "integrated_detectors_required": false,
+    "external_instruments_allowed": true
+  },
+  "outputs_status": "proposed"
+}

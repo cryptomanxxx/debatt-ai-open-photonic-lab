@@ -1,0 +1,30 @@
+name: OPA LIB005-D4 diagnostic decision replay
+on:
+  pull_request:
+    paths:
+      - 'components/comparison/lib005-bdc-d4-decision.json'
+      - 'tools/audit_lib005_bdc_d4.py'
+      - 'research/OPA-LIB-005-D4.md'
+      - '.github/workflows/opa-lib005-bdc-d4.yml'
+      - 'tools/audit_lib005_bdc_diagnostics.py'
+      - 'components/comparison/lib005-bdc-evidence/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned numerical dependency
+        run: python3 -m pip install --break-system-packages numpy==2.2.6
+      - name: Independently replay unchanged D3 and check interpretations
+        run: python3 tools/audit_lib005_bdc_d4.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: opa-lib-005-d4
+          path: results/opa-lib-005-d4/
+          if-no-files-found: error

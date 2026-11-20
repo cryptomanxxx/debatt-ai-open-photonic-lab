@@ -1,0 +1,145 @@
+{
+  "experiment": "OPA-LIB-005-D4",
+  "source_pr": 248,
+  "source_head_sha": "249dd7425dd218f69d4b8f53db2466649c21f8fd",
+  "source_ci_run": 44799618360,
+  "source_artifact_id": 14661240719,
+  "source_artifact_name": "opa-lib-005-d3",
+  "source_artifact_sha256": "3a5bc1866ff89bddb88d88f2455c264ea5481f77b57eeb713652aecaa899f379",
+  "source_script": "tools/audit_lib005_bdc_diagnostics.py",
+  "source_script_git_blob_sha1": "097445d815468d65bf48d2a94697347c02b543d2",
+  "archived_d1_d2_provenance_path": "components/comparison/lib005-bdc-evidence/provenance.json",
+  "archived_d1_d2_provenance_git_blob_sha1": "1fea6e3ee32fa0f1528178628243b70d6629ee88",
+  "source_original_pdk_git_blob_sha1": "e58996b7e644c509407f07581668458222fe3e92",
+  "expected_d3_observations": {
+    "experiment": "OPA-LIB-005-D3",
+    "coherent_multiport": {
+      "violating_samples_despite_all_input_columns_at_most_one": 50,
+      "max_single_input_collected_power": 0.9993140432611353,
+      "max_offdiagonal_gram_fro": 0.027898701640421946,
+      "max_optimal_coherent_power_ratio": 1.013798634507731,
+      "center_wavelength_nm": 1550.3886826019052,
+      "center_optimal_coherent_power_ratio": 1.005156514763216
+    },
+    "variants": {
+      "as_tabulated": {
+        "max_sigma": 1.0068756797677312,
+        "min_sigma": 0.9998405565185579,
+        "violating_frequency_points": 50
+      },
+      "reciprocity_symmetrized_counterfactual": {
+        "max_sigma": 1.0067022784277107,
+        "min_sigma": 0.9993737177367621,
+        "violating_frequency_points": 49
+      },
+      "same_side_port_blocks_removed_counterfactual": {
+        "max_sigma": 1.0006512636330458,
+        "min_sigma": 0.9990127975366588,
+        "violating_frequency_points": 28
+      },
+      "forward_2x2_submatrix_diagnostic": {
+        "max_sigma": 1.000141608236999,
+        "min_sigma": 0.9975602859854417,
+        "violating_frequency_points": 9
+      },
+      "backward_2x2_submatrix_diagnostic": {
+        "max_sigma": 1.0006512636330456,
+        "min_sigma": 0.9981106262136613,
+        "violating_frequency_points": 28
+      },
+      "all_phases_zero_counterfactual": {
+        "max_sigma": 1.420111355988738,
+        "min_sigma": 1.41020046836777,
+        "violating_frequency_points": 51
+      },
+      "unitary_port_phase_control": {
+        "max_sigma": 1.0068756797677314,
+        "min_sigma": 0.999840556518558,
+        "violating_frequency_points": 50
+      }
+    },
+    "controls": {
+      "port_phase_gauge_max_sigma_difference": 6.661338147750939e-16,
+      "rephasing_invariance": true,
+      "original_svd_replayed": true,
+      "input_vector_reconstruction": true
+    },
+    "status": {
+      "component": "siepic-bdc-te1550",
+      "decision": "quarantined_nonpassive",
+      "promoted_to_passive_model": false,
+      "original_source_modified": false,
+      "derived_counterfactual_model_qualified": false,
+      "fabricated_device_passivity_inferred": false
+    },
+    "checks": {
+      "pinned_source": true,
+      "archived_rows_match": true,
+      "all_four_ports": true,
+      "svd_and_coherent_excitation": true,
+      "gram_column_consistency": true,
+      "phase_gauge_control": true,
+      "all_variants_finite": true,
+      "negative_model_gate_retained": true
+    }
+  },
+  "decisions": [
+    {
+      "test": "as_tabulated",
+      "outcome": "quarantined_nonpassive",
+      "inference": "Native model's coherent four-port passivity screen fails in 50/51 source points."
+    },
+    {
+      "test": "all_column_powers_below_one",
+      "outcome": "not_sufficient",
+      "inference": "50/51 samples have a coherent input combination violating passivity even though each port separately collects <=1."
+    },
+    {
+      "test": "reciprocity_symmetrized_counterfactual",
+      "outcome": "does_not_repair",
+      "inference": "Averaging S and S-transpose only reduces violations from 50 to 49; not a valid physical correction."
+    },
+    {
+      "test": "same_side_port_blocks_removed_counterfactual",
+      "outcome": "does_not_repair",
+      "inference": "Eliminating reflection and same-side coupling blocks changes 50 to 28 violations and the matrix is not a valid substitute for original geometry."
+    },
+    {
+      "test": "forward_2x2_submatrix_diagnostic",
+      "outcome": "not_certification",
+      "inference": "Forward 2x2 submatrix still violates at 9/51 and cannot certify the full 4x4 source."
+    },
+    {
+      "test": "backward_2x2_submatrix_diagnostic",
+      "outcome": "not_certification",
+      "inference": "Reverse 2x2 submatrix violates at 28/51 and cannot certify the full 4x4 source."
+    },
+    {
+      "test": "all_phases_zero_counterfactual",
+      "outcome": "worsens",
+      "inference": "Zero phase makes violations 51/51, so phase structure matters but original source phase convention is unverified."
+    },
+    {
+      "test": "unitary_port_phase_control",
+      "outcome": "invariance",
+      "inference": "Constant unit-magnitude diagonal input/output rephasing leaves singular values unchanged to numerical precision; not a physical de-embedding test."
+    }
+  ],
+  "scientific_scope": {
+    "root_cause_determined": false,
+    "measurement_independent": false,
+    "exact_gds_and_model_equivalence": false,
+    "source_port_normalization_verified": false,
+    "reference_planes_verified": false,
+    "physical_optical_amplification_claim": false,
+    "model_status": "quarantined_nonpassive",
+    "counterfactuals_must_not_replace_source": true,
+    "soi_tfln_processes_kept_separate": true
+  },
+  "next_actions": [
+    "Retrieve SiEPIC original model generation information and verify phase/port conventions and power-wave normalization.",
+    "Seek manufacturer explanation for the specific PDK model and independent exact-device characterization.",
+    "Keep the passive chip selection gates open; prioritize a standalone independently testable SOI splitter and TFLN MMI on separate process routes.",
+    "Prepare final LIB005 summary only after D4 replay checks and review."
+  ]
+}

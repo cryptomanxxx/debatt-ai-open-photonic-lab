@@ -1,0 +1,33 @@
+name: OPA LIB005-E evidence-gated final summary
+on:
+  pull_request:
+    paths:
+      - 'components/comparison/lib005-final-evidence.json'
+      - 'tools/audit_lib005_final.py'
+      - 'research/OPA-LIB-005-E.md'
+      - '.github/workflows/opa-lib005-final.yml'
+      - 'components/comparison/lib005-spec.json'
+      - 'components/comparison/lib005-passive-test-plan.json'
+      - 'components/comparison/lib005-source-discovery.json'
+      - 'components/comparison/lib005-bdc-evidence/**'
+      - 'components/comparison/lib005-bdc-d4-decision.json'
+      - 'components/external/Luxtelligence/lnoi400/s_parameters/archive/evidence/result.json'
+      - 'components/external/Luxtelligence/lnoi400/s_parameters/manifest.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Audit all pinned evidence and fail-closed fabrication gates offline
+        run: python3 tools/audit_lib005_final.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: opa-lib-005-e
+          path: results/opa-lib-005-e/
+          if-no-files-found: error

@@ -1,0 +1,166 @@
+{
+  "experiment": "OPA-LIB-005-E",
+  "stage": "evidence_summary_and_LIB006_handoff",
+  "source_pins": {
+    "comparability": {
+      "path": "components/comparison/lib005-spec.json",
+      "git_blob_sha1": "8eae41fd8e5861d8abb1b223fc36417275465e34"
+    },
+    "passive_plan": {
+      "path": "components/comparison/lib005-passive-test-plan.json",
+      "git_blob_sha1": "e47857cd7370520597e8510e723fa0be70397181"
+    },
+    "discovery": {
+      "path": "components/comparison/lib005-source-discovery.json",
+      "git_blob_sha1": "90a8d5f7d7341f20f4425eaaff8ffc604260870d"
+    },
+    "soi_original_bdc": {
+      "path": "components/comparison/lib005-bdc-evidence/d1/result.json",
+      "git_blob_sha1": "bb44fda4ef03ba6f5c7f363412a731f6d175b010"
+    },
+    "soi_negative_archive": {
+      "path": "components/comparison/lib005-bdc-evidence/provenance.json",
+      "git_blob_sha1": "1fea6e3ee32fa0f1528178628243b70d6629ee88"
+    },
+    "soi_diagnostics": {
+      "path": "components/comparison/lib005-bdc-d4-decision.json",
+      "git_blob_sha1": "b9375d4a518095e552864c81ed1266b64fae4b55"
+    },
+    "tfln_passivity": {
+      "path": "components/external/Luxtelligence/lnoi400/s_parameters/archive/evidence/result.json",
+      "git_blob_sha1": "fbd2dc9ee3fb0764c5c8413c44e4d69836773055"
+    },
+    "tfln_manifest": {
+      "path": "components/external/Luxtelligence/lnoi400/s_parameters/manifest.json",
+      "git_blob_sha1": "767cf6c736ed73c000fe2590b9ac97db71b2faa4"
+    }
+  },
+  "provenance_policy": {
+    "distinct_platforms": [
+      "SiEPIC EBeam SOI",
+      "Luxtelligence lnoi400 TFLN"
+    ],
+    "sources_original_only": false,
+    "local_original_gds_not_equivalent_to_measured_device": true,
+    "independent_matched_raw_measurements": 0,
+    "exact_cell_calibrations": 0,
+    "verified_fabricated_new_dies": 0,
+    "foundry_drc_qualified_designs": 0,
+    "physical_performance_claims": false,
+    "never_substitute_adjacent_device_model": true
+  },
+  "comparability": {
+    "examined": 10,
+    "calibration_eligible": 0
+  },
+  "passive_test_plan": {
+    "structures": 10,
+    "soi": 5,
+    "tfln": 5,
+    "ready_to_manufacture": 0,
+    "design_gates": [
+      "P0 process access",
+      "P1 measurement plan freeze",
+      "P2 foundry layout review",
+      "P3 physical evidence"
+    ],
+    "status": "planning_only"
+  },
+  "models": [
+    {
+      "id": "siepic-bdc-te1550",
+      "platform": "soi",
+      "source_revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+      "evidence": "original same-PDK compact four-port numerical model, source-file provenance pinned",
+      "samples": 51,
+      "nonpassive_samples": 50,
+      "max_sigma": 1.0068756797677312,
+      "usage": "quarantined_nonpassive",
+      "exact_cell_raw_measurement": false,
+      "geometry_match_verified": false
+    },
+    {
+      "id": "lnoi400-mmi2x2",
+      "platform": "tfln",
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "evidence": "simulated polynomial S fit, conditional numerical screening only",
+      "samples": 201,
+      "nonpassive_samples": 0,
+      "max_sigma": 0.9929422282945128,
+      "usage": "conditional_numerical_only",
+      "exact_cell_raw_measurement": false,
+      "geometry_match_verified": false
+    },
+    {
+      "id": "lnoi400-directional-coupler",
+      "platform": "tfln",
+      "source_revision": "d16db6a4882657feb1ce696c16c604ff6cb7ccfa",
+      "evidence": "simulated polynomial S fit, conditional numerical screening only",
+      "samples": 201,
+      "nonpassive_samples": 201,
+      "max_sigma": 1.1275809745127237,
+      "usage": "quarantined_nonpassive",
+      "exact_cell_raw_measurement": false,
+      "geometry_match_verified": false
+    },
+    {
+      "id": "siepic-grating-te1550",
+      "platform": "soi",
+      "source_revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+      "evidence": "100×9 PDK source table, meanings and physical calibration unverified",
+      "samples": null,
+      "nonpassive_samples": null,
+      "max_sigma": null,
+      "usage": "source_identified_not_passivity_screened",
+      "exact_cell_raw_measurement": false,
+      "geometry_match_verified": false
+    }
+  ],
+  "soi_coherence": {
+    "source": "OPA-LIB-005-D3/D4",
+    "violations_with_individually_bounded_columns": 50,
+    "max_single_port_power": 0.9993140432611353,
+    "max_coherent_power_ratio": 1.013798634507731,
+    "source_phase_normalization_verified": false,
+    "physical_root_cause_identified": false,
+    "source_original_unchanged": true,
+    "unphysical_counterfactuals_qualified": false
+  },
+  "lib006_handoff": {
+    "priority": "Choose exactly one manufacturable process route before any test-chip fabrication commitment.",
+    "candidate_soi": [
+      "soi-cutback",
+      "soi-bends",
+      "soi-io",
+      "soi-coupler"
+    ],
+    "candidate_tfln": [
+      "tfln-cutback",
+      "tfln-bends",
+      "tfln-io",
+      "tfln-coupler"
+    ],
+    "conditionally_use_model_for_numerical_sweep": [
+      "lnoi400-mmi2x2"
+    ],
+    "excluded_compact_models_for_passive_simulation": [
+      "siepic-bdc-te1550",
+      "lnoi400-directional-coupler"
+    ],
+    "soi_bdc_still_allowed_as_measurement_test_structure_not_certified_model": true,
+    "actions": [
+      "Confirm one accessible fabricator/process, fabrication and reuse permission, official layer map, waveguide stack and foundry DRC rules.",
+      "Design simple same-process I/O back-to-back references and cutback/bend controls with known geometry, port labels and repeats.",
+      "Pre-register measurement wavelengths, polarization, loss uncertainty, reference planes and acceptance criteria before fabrication.",
+      "Review candidate GDS and official foundry DRC/DFM; independently verify fabrication schedule and cost.",
+      "Manufacture and measure only after P0–P2 are satisfied; archive actual device and instrument metadata before claiming calibration."
+    ],
+    "platform_mixing_without_validated_heterogeneous_process": false
+  },
+  "limitations": [
+    "This is a decision summary backed by Git-stored source documents, not a new numerical or experimental validation.",
+    "Sampled singular-value screening assumes power-normalized ports and does not certify continuous-band passive behavior.",
+    "SOI BDC 50/51 and TFLN DC 201/201 are separate process/model failures and must never be merged as a common measured effect.",
+    "No foundry access, PDK rights for fabrication, official DRC, exact GDS-to-model match or actual new test-chip measurement established."
+  ]
+}

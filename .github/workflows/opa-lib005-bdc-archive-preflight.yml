@@ -1,0 +1,38 @@
+name: OPA LIB005 BDC archive preflight
+on:
+  pull_request:
+    paths:
+      - 'components/comparison/lib005-bdc-archive-source.json'
+      - 'research/archive_lib005_bdc.py'
+      - '.github/workflows/opa-lib005-bdc-archive-preflight.yml'
+      - '.github/workflows/opa-archive-lib005-bdc.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install audited numerical dependency
+        run: python3 -m pip install --break-system-packages numpy==2.2.6
+      - name: Validate exact D1 and D2 artifacts against reviewed replay
+        run: |
+          set -euo pipefail
+          tmp="$RUNNER_TEMP/lib005-bdc-zips"
+          mkdir "$tmp"
+          for key in d1 d2; do
+            m=$(jq -ce --arg key "$key" '.[] | select(.key == $key)' components/comparison/lib005-bdc-archive-source.json)
+            run=$(jq -r .run <<< "$m")
+            artifact=$(jq -r .artifact <<< "$m")
+            gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run" | jq -e --argjson m "$m" '.conclusion == "success" and .event == "pull_request" and .head_sha == $m.head and .head_branch == $m.branch and .path == $m.workflow' >/dev/null
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact" | jq -e --argjson m "$m" '.name == $m.name and .workflow_run.id == $m.run and .digest == ("sha256:" + $m.sha256) and .size_in_bytes == $m.size and .expired == false' >/dev/null
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact/zip" > "$tmp/$key.zip"
+          done
+          python3 research/archive_lib005_bdc.py --source "$tmp" --output "$RUNNER_TEMP/lib005-bdc-check"

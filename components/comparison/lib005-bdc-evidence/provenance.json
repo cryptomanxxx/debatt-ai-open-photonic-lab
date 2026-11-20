@@ -1,0 +1,82 @@
+{
+  "archival_evidence_not_measurement": true,
+  "checks": 16,
+  "classification": "quarantined_nonpassive",
+  "experiment": "OPA-LIB-005-ARCHIVE",
+  "limitations": "Original source numerical coefficients remain untouched. No measured complex S, physical optical gain, exact matched geometry or fabrication qualification.",
+  "members": {
+    "d1/original.zip": {
+      "bytes": 7569,
+      "sha256": "76892cda933dd3831c809aa14adb622b7fe19ae95fa5131a9fa250e6ced6cb0f"
+    },
+    "d1/result.json": {
+      "bytes": 4168,
+      "sha256": "e98dc8347c424ebff9e3802b93415f7a3bbd9991f0714fdd402dab27b9e94b7e"
+    },
+    "d1/spectral-audit.csv": {
+      "bytes": 13381,
+      "sha256": "94174ac7d2c3d7a249eb0c53db6e0efb7e0bb2c6d9a4f16905d84ecd156f81f5"
+    },
+    "d2/decision.json": {
+      "bytes": 2319,
+      "sha256": "67f5abb0462263d04cae323ae4e3ff582b665a26b2f339f42296d0d576b37c61"
+    },
+    "d2/original.zip": {
+      "bytes": 8921,
+      "sha256": "a5bd631aceb4171d5079f960b79433a6b4f68858aada83b59ce5e25ed532e3a6"
+    },
+    "d2/result.json": {
+      "bytes": 4168,
+      "sha256": "e98dc8347c424ebff9e3802b93415f7a3bbd9991f0714fdd402dab27b9e94b7e"
+    },
+    "d2/spectral-audit.csv": {
+      "bytes": 13381,
+      "sha256": "94174ac7d2c3d7a249eb0c53db6e0efb7e0bb2c6d9a4f16905d84ecd156f81f5"
+    }
+  },
+  "replay": "At initial staging, exact reviewed D1 and D2 scripts replay all JSON fields and spectral CSV cells. Permanent staged audit checks pinned original ZIP bytes, CRC, source log reports, full CSV inventory, repeated D1/D2 identity and exact Git-staged bytes offline. Replay is not an independent estimator.",
+  "source": {
+    "d1": {
+      "artifact": 14656862431,
+      "run": 44792693356,
+      "sha256": "76892cda933dd3831c809aa14adb622b7fe19ae95fa5131a9fa250e6ced6cb0f",
+      "size": 7569
+    },
+    "d2": {
+      "artifact": 14656894199,
+      "run": 44794454729,
+      "sha256": "a5bd631aceb4171d5079f960b79433a6b4f68858aada83b59ce5e25ed532e3a6",
+      "size": 8921
+    }
+  },
+  "source_refs": [
+    {
+      "artifact": 14656862431,
+      "branch": "research/opa-lib005-bdc-complex-audit",
+      "experiment": "OPA-LIB-005-D1",
+      "head": "05224ddc6d230d592253d560f16c908d60c43276",
+      "job": 136484190144,
+      "key": "d1",
+      "name": "opa-lib-005-d1",
+      "pr": 244,
+      "run": 44792693356,
+      "sha256": "76892cda933dd3831c809aa14adb622b7fe19ae95fa5131a9fa250e6ced6cb0f",
+      "size": 7569,
+      "workflow": ".github/workflows/opa-lib005-bdc.yml"
+    },
+    {
+      "artifact": 14656894199,
+      "branch": "research/opa-lib005-bdc-negative-decision",
+      "experiment": "OPA-LIB-005-D2",
+      "head": "b0ce17ad4a11e00891a734509223b5142dcc28a6",
+      "job": 136490226385,
+      "key": "d2",
+      "name": "opa-lib-005-d2",
+      "pr": 245,
+      "run": 44794454729,
+      "sha256": "a5bd631aceb4171d5079f960b79433a6b4f68858aada83b59ce5e25ed532e3a6",
+      "size": 8921,
+      "workflow": ".github/workflows/opa-lib005-bdc-decision.yml"
+    }
+  ]
+}

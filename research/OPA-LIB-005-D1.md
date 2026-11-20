@@ -1,0 +1,11 @@
+# OPA-LIB-005-D1 — SiEPIC ebeam_bdc_te1550 complex S audit
+
+Analyze the exact [upstream PDK four-port BDC file](https://github.com/SiEPIC/SiEPIC_EBeam_PDK/blob/363fbb52eefa8669100499ab531d3fe7befc4867/klayout/EBeam/CML/EBeam/source_data/bdc_TE_source/bdc_Thickness%20%3D220%20width%3D500.sparam) identified in [OPA-LIB-005-C](OPA-LIB-005-C.md). The source is pinned to Git blob `e58996b7e644c509407f07581668458222fe3e92` at SiEPIC revision `363fbb52eefa8669100499ab531d3fe7befc4867`. The file is **not** proven raw optical measurement evidence; exact GDS-to-model geometry, origin, port mapping, modal and phase normalization and reference planes remain unknown.
+
+## Prespecified analysis
+
+Build a 4×4 frequency-resolved complex matrix from 16 blocks × 51 rows. Interpret stored magnitude and phase as field amplitude and radian phase **conditionally**. Calculate each input's total four-port collected output, forward port 3/4 power, backward port 1/2 power, normalized 3-vs-4 output split, and output-to-output relative phase. Check reciprocity via max `|S-S^T|` and full singular value decomposition at each sampled wavelength. If `sigma_max > 1 + 1e-9` at **any** of 51 samples, quarantine for passive circuit use; do not renormalize away the violation. Compare column norms to singular-value bound. The nominal 1550-nm sample is the nearest provided source point, without interpolating physical measurements.
+
+A previous discovery preview of center magnitude indicated forward split about 50.38% / 49.62% and a total input-1 collected power about 0.9967. **These are approximate model-level preview values, not acceptance criteria or wafer measurements.** Only the full CI calculation establishes passivity or other quantitative details. No inferred wafer loss, group delay, RF bandwidth, calibrated excess loss, manufacturer DRC or certification.
+
+This PR adds analysis only, no proprietary/other upstream files, no registry promotion and no reuse of incompatible SOI/TFLN models. CI produces `result.json` plus `spectral-audit.csv`. Archive derived results separately after CI and Codex review. If passivity fails, retain negative finding and choose other library candidates for LIB006. Independently verify phase convention and physical GDS-to-model correspondence before using the model for phase-sensitive design.

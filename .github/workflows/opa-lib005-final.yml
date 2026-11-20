@@ -12,6 +12,7 @@ on:
       - 'components/comparison/lib005-bdc-evidence/**'
       - 'components/comparison/lib005-bdc-d4-decision.json'
       - 'components/external/Luxtelligence/lnoi400/s_parameters/archive/evidence/result.json'
+      - 'components/external/Luxtelligence/lnoi400/s_parameters/manifest.json'
   workflow_dispatch:
 permissions:
   contents: read

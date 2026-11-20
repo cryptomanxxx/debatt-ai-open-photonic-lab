@@ -52,7 +52,43 @@ def main():
     ensure(p["all_phases_zero_counterfactual"]["violating_frequency_points"]==51,"zero phase outcome")
     ensure(p["unitary_port_phase_control"]["violating_frequency_points"]==50 and d3["controls"]["port_phase_gauge_max_sigma_difference"]<1e-12,"gauge invariant")
     ensure(d3["coherent_multiport"]["violating_samples_despite_all_input_columns_at_most_one"]==50,"single-port insufficiency")
-    ensure(len(m["decisions"])==8 and len(set(x["test"] for x in m["decisions"]))==8,"decision coverage")
+    # The eight reported decisions must be exactly the verified interpretations,
+    # not merely eight unique arbitrary labels. This is an output integrity gate.
+    expected_decisions=[
+        ("as_tabulated","quarantined_nonpassive",
+         "Native model's coherent four-port passivity screen fails in 50/51 source points."),
+        ("all_column_powers_below_one","not_sufficient",
+         "50/51 samples have a coherent input combination violating passivity even though each port separately collects <=1."),
+        ("reciprocity_symmetrized_counterfactual","does_not_repair",
+         "Averaging S and S-transpose only reduces violations from 50 to 49; not a valid physical correction."),
+        ("same_side_port_blocks_removed_counterfactual","does_not_repair",
+         "Eliminating reflection and same-side coupling blocks changes 50 to 28 violations and the matrix is not a valid substitute for original geometry."),
+        ("forward_2x2_submatrix_diagnostic","not_certification",
+         "Forward 2x2 submatrix still violates at 9/51 and cannot certify the full 4x4 source."),
+        ("backward_2x2_submatrix_diagnostic","not_certification",
+         "Reverse 2x2 submatrix violates at 28/51 and cannot certify the full 4x4 source."),
+        ("all_phases_zero_counterfactual","worsens",
+         "Zero phase makes violations 51/51, so phase structure matters but original source phase convention is unverified."),
+        ("unitary_port_phase_control","invariance",
+         "Constant unit-magnitude diagonal input/output rephasing leaves singular values unchanged to numerical precision; not a physical de-embedding test.")
+    ]
+    actual_decisions=m["decisions"]
+    ensure(len(actual_decisions)==len(expected_decisions),"decision coverage")
+    for actual,(test,outcome,inference) in zip(actual_decisions,expected_decisions):
+        ensure(set(actual)=={"test","outcome","inference"},"decision fields "+test)
+        ensure(actual["test"]==test and actual["outcome"]==outcome and actual["inference"]==inference,
+               "unverified or relabeled decision "+test)
+    # Link the labels back to the observed variant identities and numerical outcomes.
+    ensure(set(p)=={test for test,_,_ in expected_decisions if test!="all_column_powers_below_one"},
+           "variant-to-decision mapping")
+    ensure(p["reciprocity_symmetrized_counterfactual"]["violating_frequency_points"]>0
+           and p["same_side_port_blocks_removed_counterfactual"]["violating_frequency_points"]>0
+           and p["forward_2x2_submatrix_diagnostic"]["violating_frequency_points"]>0
+           and p["backward_2x2_submatrix_diagnostic"]["violating_frequency_points"]>0,
+           "counterfactuals do not repair model")
+    ensure(p["all_phases_zero_counterfactual"]["violating_frequency_points"]>
+           p["as_tabulated"]["violating_frequency_points"],"phase perturbation worsens")
+
     scope=m["scientific_scope"]
     ensure(all(scope[x] is False for x in ("root_cause_determined","measurement_independent","exact_gds_and_model_equivalence","source_port_normalization_verified","reference_planes_verified","physical_optical_amplification_claim")),"no unsupported claim")
     ensure(scope["model_status"]=="quarantined_nonpassive" and scope["counterfactuals_must_not_replace_source"] is True and scope["soi_tfln_processes_kept_separate"] is True,"remain quarantine")

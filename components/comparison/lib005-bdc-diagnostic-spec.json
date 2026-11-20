@@ -1,0 +1,33 @@
+{
+  "experiment": "OPA-LIB-005-D3",
+  "device": "SiEPIC EBeam ebeam_bdc_te1550",
+  "upstream_blob_sha1": "e58996b7e644c509407f07581668458222fe3e92",
+  "upstream_revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+  "reference_report_path": "components/comparison/lib005-bdc-evidence/d1/result.json",
+  "reference_report_git_blob_sha1": "bb44fda4ef03ba6f5c7f363412a731f6d175b010",
+  "reference_csv_path": "components/comparison/lib005-bdc-evidence/d1/spectral-audit.csv",
+  "reference_csv_git_blob_sha1": "164406cc4b44776c5a1a7473958b2ff96ff82410",
+  "note": "reference_csv hash placeholder needs actual verified sha; computed from GitHub fetch before writing",
+  "source_model_type": "unqualified PDK compact model, not measured optical S",
+  "passivity_tolerance": 1e-9,
+  "coherent_tests": [
+    "full_fabricated_as_tabulated",
+    "symmetrized_reciprocity_counterfactual",
+    "remove_same_side_port_blocks_counterfactual",
+    "forward_only_2x2_diagnostic",
+    "backward_only_2x2_diagnostic",
+    "magnitude_only_zero_phase_counterfactual",
+    "port_rephasing_unitary_invariance_control"
+  ],
+  "required_provenance": [
+    "exact GDS/model geometry",
+    "port reference planes",
+    "complex phasor and normalization convention",
+    "matched wafer measurement",
+    "uncertainty"
+  ],
+  "quarantine_remains": true,
+  "calibration_eligible": false,
+  "physical_device_quality_inferred": false,
+  "interpolation_and_rescaling": false
+}

@@ -1,0 +1,30 @@
+name: OPA LIB005-D3 SiEPIC complex S diagnostic controls
+on:
+  pull_request:
+    paths:
+      - 'components/comparison/lib005-bdc-diagnostic-spec.json'
+      - 'tools/audit_lib005_bdc_diagnostics.py'
+      - 'research/OPA-LIB-005-D3.md'
+      - '.github/workflows/opa-lib005-bdc-diagnostics.yml'
+      - 'components/comparison/lib005-bdc-evidence/**'
+      - 'tools/audit_lib005_bdc.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install numerical dependency
+        run: python3 -m pip install --break-system-packages numpy==2.2.6
+      - name: Recompute from pinned PDK and compare to archived PR244 evidence
+        run: python3 tools/audit_lib005_bdc_diagnostics.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: opa-lib-005-d3
+          path: results/opa-lib-005-d3/
+          if-no-files-found: error

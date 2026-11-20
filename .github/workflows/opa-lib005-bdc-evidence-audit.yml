@@ -17,15 +17,25 @@ jobs:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
+          fetch-depth: 0
       - name: Install audited numerical dependency
         run: python3 -m pip install --break-system-packages numpy==2.2.6
       - name: Verify Git-committed archive without expiring CI artifacts
         run: |
           set -euo pipefail
           root=components/comparison/lib005-bdc-evidence
+          # On PRs, removal of a previously existing archive must fail, never silently pass.
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            base="${{ github.event.pull_request.base.sha }}"
+            test -n "$base"
+            if git cat-file -e "$base:$root/d1/original.zip" 2>/dev/null; then
+              git cat-file -e "HEAD:$root/d1/original.zip" || { echo "Established archive was deleted"; exit 1; }
+              git cat-file -e "HEAD:$root/d2/original.zip" || { echo "Established D2 archive was deleted"; exit 1; }
+            fi
+          fi
           if ! git cat-file -e "HEAD:$root/d1/original.zip"; then
             test -z "$(git ls-files -- "$root")"
-            echo "Evidence archive pending; original artifacts verified separately by preflight."
+            echo "Evidence archive not yet created."
             exit 0
           fi
           stage="$RUNNER_TEMP/lib005-bdc-permanent"

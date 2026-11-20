@@ -1,0 +1,26 @@
+{
+  "experiment": "OPA-LIB-005-D1",
+  "component": "SiEPIC EBeam ebeam_bdc_te1550",
+  "source_manifest": "components/comparison/lib005-source-discovery.json",
+  "source_manifest_git_blob_sha1": "90a8d5f7d7341f20f4425eaaff8ffc604260870d",
+  "source_pdk_revision": "363fbb52eefa8669100499ab531d3fe7befc4867",
+  "source_file_key": "bdc_model",
+  "source_kind": "upstream_pdk_complex_compact_model_not_qualified_measurement",
+  "power_assumption": "stored magnitudes treated as dimensionless field coefficients; modal power normalization and reference planes unverified",
+  "phase_assumption": "stored third column interpreted as radians for numerical testing; upstream convention unverified",
+  "port_assumption": "upstream port headers mapped output port then input port; native physical GDS mapping not independently verified",
+  "analysis_scope": "51 x 4 x 4 complex samples, wavelength 1500-1600 nm, numerical passivity, reciprocity, pair split, reflection, group delay exploratory",
+  "exact_cell_geometry_match": false,
+  "measured_complex_s": false,
+  "fabrication_qualified": false,
+  "calibration_eligible": false,
+  "singular_value_eligibility": "reported_not_assumed",
+  "rerun_requires": "sha1-pinned upstream public PDK file",
+  "requires": [
+    "exact geometry and port mapping",
+    "validated S normalization and phase convention",
+    "independently measured original device",
+    "process and instrument metadata",
+    "uncertainty and physical reference plane"
+  ]
+}

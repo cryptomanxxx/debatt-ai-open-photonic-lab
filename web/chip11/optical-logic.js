@@ -303,14 +303,17 @@ for (const [key,[name,unit,min,max,step]] of Object.entries(controls)) {
 for (const [i, id] of ['a','b'].entries()) byId(id).onclick=()=>{bits[i]^=1;render(true);};
 byId('gate').onchange=()=>render(true);
 byId('inspect').onchange=()=>render();
-byId('preset').onchange=event=>{
-  const [adjust,next,message] = examples[event.target.value];
+function loadPreset(key) {
+  const [adjust,next,message] = examples[key];
   Object.assign(state,defaults,adjust);
   bits=next.slice();
   for (const [key,{input,update}] of fields) {input.value=state[key];update();}
+  byId('preset').value=key;
   byId('lesson').textContent=message;
   render(true);
-};
+}
+byId('preset').onchange=event=>loadPreset(event.target.value);
+byId('reset').onclick=()=>loadPreset('nominal');
 byId('play').onclick=animate;
 document.getElementById('pulse-start').addEventListener('click',()=>{if (!panel.hidden && !tab.hidden) animate();});
 narrow.addEventListener('change',()=>render());

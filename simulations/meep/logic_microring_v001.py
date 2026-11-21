@@ -19,6 +19,7 @@ FMIN, FMAX = 1 / 1.60, 1 / 1.50
 FCEN = (FMIN + FMAX) / 2
 BAND = FMAX - FMIN
 POINTS = 301
+POST_SOURCE_TIME = 1800
 
 
 def simulate(resolution, add_ring):
@@ -50,13 +51,15 @@ def simulate(resolution, add_ring):
                                     mp.ModeRegion(center=mp.Vector3(-4.75, Y), size=mp.Vector3(0, 2)))
     # Fixed post-pulse duration resolves the loaded linewidth in this deliberately
     # low-Q, small 2D ring. Cross-resolution comparison screens the peak location.
-    sim.run(until_after_sources=650)
+    sim.run(until_after_sources=POST_SOURCE_TIME)
     frequencies = np.array(mp.get_flux_freqs(through))
+
     def guided_power(monitor, direction_index):
         coefficients = sim.get_eigenmode_coefficients(
             monitor, [1], eig_parity=mp.ODD_Z, direction=mp.X,
         )
         return np.abs(coefficients.alpha[0, :, direction_index]) ** 2
+
     transmitted = guided_power(through, 0)
     dropped = guided_power(drop, 1) if drop is not None else None
     sim.reset_meep()
@@ -85,9 +88,11 @@ def characterize(resolution):
     upper = next((i for i in range(peak + 1, POINTS) if drop[i] < half_peak), None)
     if lower is None or upper is None:
         raise ValueError("Scan does not bracket the drop peak")
+
     def half_wavelength(index, neighbor):
         return np.interp(half_peak, [drop[index], drop[neighbor]],
                          [wavelength_nm[index], wavelength_nm[neighbor]])
+
     linewidth = float(half_wavelength(lower, lower + 1) - half_wavelength(upper, upper - 1))
     return {
         "resolution_px_per_um": resolution, "peak_nm": float(wavelength_nm[peak]),
@@ -115,6 +120,9 @@ def main():
         "physical_measurement": False, "meep_version": mp.__version__,
         "geometry": {"radius_um": RADIUS_UM, "waveguide_width_um": WIDTH_UM,
                      "gap_um": GAP_UM, "effective_index": INDEX, "cladding_index": 1.0},
+        "method": {"window_nm": [1000 / FMAX, 1000 / FMIN], "frequency_samples": POINTS,
+                   "time_after_source_um_over_c": POST_SOURCE_TIME, "pml_um": PML_UM,
+                   "mode": "ODD_Z fundamental, normalized against a straight guide"},
         "results": results, "resolution_peak_shift_nm": shift, "screens": screens,
         "scope": "Lossless materials. Uncollected power includes other ports, reflection, radiation and numerical error. These data do not calibrate the browser ring or a fabricated device.",
     }

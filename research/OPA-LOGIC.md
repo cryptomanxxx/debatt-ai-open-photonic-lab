@@ -26,7 +26,7 @@ coupling or electrical shift. See the
 
 | Experiment | Method and exported evidence |
 | --- | --- |
-| OPA-LOGIC-001 | Passive 2D effective-index Meep FDTD. Eigenmode excitation and straight-guide normalization at 24 and 32 pixels/µm. Through/drop spectra, strongest drop resonance, loaded Q, uncollected flux and predeclared screens. |
+| OPA-LOGIC-001 | Passive 2D effective-index Meep FDTD. Eigenmode excitation and port projection with straight-guide normalization at 24 and 32 pixels/µm. Through/drop spectra, strongest drop resonance, loaded Q, uncollected flux and predeclared screens. |
 | OPA-LOGIC-002 | Compact model evaluates 16 nominal AND/OR/XOR/NAND vectors and deterministic detuning, phase, drive, optical-input and loss perturbations. |
 | OPA-LOGIC-003 | Compact-model AND→XOR for all eight input patterns at each interstage loss. The measured quantity in the calculation is the optical power at the second-stage input plane, followed by electrical regeneration and routing of a fresh optical probe. |
 | OPA-LOGIC-004 | Per-slot accounting across operation rates and laser efficiencies. Exports the optical input/output, wall-plug laser, switching, drivers, receivers and static overhead terms. |
@@ -50,6 +50,17 @@ reflection, radiation and numerical error. It is not measured absorption.
 The 10 nm peak-shift screen is a coarse grid check. A foundry model would
 need mode-matched 3D extraction, channel separation, independent
 resolution/time convergence and a revision-matched measurement.
+
+In the local locked Meep 1.35.1 run, the main drop peak was at 1574.80 nm
+on the 24 px/µm grid and 1571.37 nm on the 32 px/µm grid. On the finer
+grid, the guided drop and through fractions were 54.84% and 6.60% at the
+peak, and 38.57% was uncollected. Extending the post-source window from
+650 to 1800 µm/c reduced maximum apparent guided power excess from
+11.0% to 0.29% across the two grids. The 3.44 nm grid shift was larger
+than the approximately 1.79 nm finer-grid linewidth. This verifies the
+qualitative add-drop signature and a bounded power balance for the toy
+geometry. It leaves the absolute wavelength unresolved at linewidth
+precision.
 
 The gate and cascade calculations use settled optical fields and ideal
 comparator decisions. An EO test chip needs calibrated bias, capacitance,

@@ -36,7 +36,7 @@ The four registered IDs are `opa-logic-001` through `opa-logic-004`.
 The workflow uploads per-experiment JSON and CSV files as well as the
 `all-experiment-results.zip` bundle. Compact runs use Node.js 20 or later.
 Run browser model assertions with
-`node --test web/chip11/optical-logic.test.mjs`. The browser also exports
+`node --test simulations/logic/optical-logic.test.mjs`. The browser also exports
 its selected parameter set, truth table, spectrum and per-vector energy
 budget as JSON, CSV or a single ZIP.
 

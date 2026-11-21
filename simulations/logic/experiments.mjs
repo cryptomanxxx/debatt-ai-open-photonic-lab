@@ -1,5 +1,5 @@
 import {mkdirSync, writeFileSync} from 'node:fs';
-import {defaults, energy, evaluate, gates, inputThresholdMw, pairs, truthTable} from '../../web/chip11/optical-logic-model.mjs';
+import {defaults, energy, evaluate, gates, inputThresholdMw, pairs, truthTable} from './optical-logic-model.mjs';
 
 const evidence = 'steady-state compact-model calculation';
 const gateNames = Object.keys(gates);

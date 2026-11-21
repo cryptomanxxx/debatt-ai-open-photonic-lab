@@ -1252,10 +1252,10 @@
       "timeout_minutes": 15,
       "deps": [
         "simulations/logic/experiments.mjs",
-        "web/chip11/optical-logic-model.mjs",
-        "web/chip11/optical-logic.test.mjs"
+        "simulations/logic/optical-logic-model.mjs",
+        "simulations/logic/optical-logic.test.mjs"
       ],
-      "run": "node --test web/chip11/optical-logic.test.mjs && node simulations/logic/run_logic_002.mjs"
+      "run": "node --test simulations/logic/optical-logic.test.mjs && node simulations/logic/run_logic_002.mjs"
     },
     {
       "id": "opa-logic-003",
@@ -1266,7 +1266,7 @@
       "timeout_minutes": 15,
       "deps": [
         "simulations/logic/experiments.mjs",
-        "web/chip11/optical-logic-model.mjs"
+        "simulations/logic/optical-logic-model.mjs"
       ],
       "run": "node simulations/logic/run_logic_003.mjs"
     },
@@ -1279,7 +1279,7 @@
       "timeout_minutes": 15,
       "deps": [
         "simulations/logic/experiments.mjs",
-        "web/chip11/optical-logic-model.mjs"
+        "simulations/logic/optical-logic-model.mjs"
       ],
       "run": "node simulations/logic/run_logic_004.mjs"
     }

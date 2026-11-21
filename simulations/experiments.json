@@ -1232,6 +1232,56 @@
         "simulations/circuit/mzi.py",
         "results/opa-mzi-001/result.json"
       ]
+    },
+    {
+      "id": "opa-logic-001",
+      "name": "Logic: passive silicon effective-index add-drop ring",
+      "script": "simulations/meep/logic_microring_v001.py",
+      "result_dir": "results/opa-logic-001",
+      "artifact": "opa-logic-001",
+      "timeout_minutes": 25,
+      "deps": [],
+      "run": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python simulations/meep/logic_microring_v001.py"
+    },
+    {
+      "id": "opa-logic-002",
+      "name": "Logic: Optical gate truth tables",
+      "script": "simulations/logic/run_logic_002.mjs",
+      "result_dir": "results/opa-logic-002",
+      "artifact": "opa-logic-002",
+      "timeout_minutes": 15,
+      "deps": [
+        "simulations/logic/experiments.mjs",
+        "simulations/logic/optical-logic-model.mjs",
+        "simulations/logic/optical-logic.test.mjs"
+      ],
+      "run": "node --test simulations/logic/optical-logic.test.mjs && node simulations/logic/run_logic_002.mjs"
+    },
+    {
+      "id": "opa-logic-003",
+      "name": "Logic: Two-gate optical link with electrical regeneration",
+      "script": "simulations/logic/run_logic_003.mjs",
+      "result_dir": "results/opa-logic-003",
+      "artifact": "opa-logic-003",
+      "timeout_minutes": 15,
+      "deps": [
+        "simulations/logic/experiments.mjs",
+        "simulations/logic/optical-logic-model.mjs"
+      ],
+      "run": "node simulations/logic/run_logic_003.mjs"
+    },
+    {
+      "id": "opa-logic-004",
+      "name": "Logic: Energy-efficiency accounting",
+      "script": "simulations/logic/run_logic_004.mjs",
+      "result_dir": "results/opa-logic-004",
+      "artifact": "opa-logic-004",
+      "timeout_minutes": 15,
+      "deps": [
+        "simulations/logic/experiments.mjs",
+        "simulations/logic/optical-logic-model.mjs"
+      ],
+      "run": "node simulations/logic/run_logic_004.mjs"
     }
   ]
 }

@@ -1,0 +1,48 @@
+#optical-logic-chip[hidden] { display: none; }
+#optical-logic-chip .ol-card { margin: 14px 0; min-width: 0; }
+#optical-logic-chip .ol-card h2 { font-size: 1.13rem; }
+.ol-toolbar, .ol-grid, .ol-keys { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+.ol-toolbar label { display: grid; gap: 5px; }
+.ol-toolbar button, .ol-toolbar select, .ol-exports select, .ol-spectra select { min-height: 44px; }
+.ol-toolbar select, .ol-exports select, .ol-spectra select {
+  background: #102a3a; color: #e9f5fa; border: 1px solid #3c6478; border-radius: 8px; padding: 6px 9px;
+}
+.ol-toolbar button[aria-pressed="true"] { background: #254c56; border-color: #8de5d8; }
+.ol-figure { margin: 14px 0 0; padding: 10px; background: #091a26; border: 1px solid #284a5b; border-radius: 12px; }
+.ol-figure svg { display: block; width: 100%; height: auto; }
+.ol-figure text { fill: #e0eff6; font: 650 14px system-ui,sans-serif; dominant-baseline: middle; }
+.ol-guide { fill: none; stroke-width: 4; stroke-linecap: round; }
+.ol-wire { fill: none; stroke: #dfb2ff; stroke-width: 1.45; stroke-dasharray: 4 4; }
+.ol-electrode { fill: #dfb2ff; }
+.ol-figure .ol-electrical { fill: #dfb2ff; }
+.ol-figure .ol-faint { fill: #a9c0d0; }
+.ol-figure .ol-output { fill: #69ead4; }
+.ol-focus { color: #9aeee1; font-weight: 650; margin: 8px 0; }
+.ol-keys { color: #bcd1de; font-size: .88rem; margin: 9px 0; align-items: center; }
+.ol-keys span::before { content: ''; display: inline-block; margin: 0 .38em .12em 0; width: .72em; height: .25em; background: var(--ol-color); }
+.ol-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(175px,100%),1fr)); align-items: start; }
+.ol-grid label, .ol-metrics > div { display: grid; gap: 5px; background: #112a38; border-radius: 9px; padding: 9px 11px; }
+.ol-grid label { color: #d4e8ef; font-size: .9rem; }
+.ol-grid output, .ol-metrics dd { font-variant-numeric: tabular-nums; color: #91e8db; }
+.ol-metrics dt { color: #b7d0dc; font-size: .85rem; }
+.ol-metrics dd { margin: 0; }
+.ol-columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+.ol-columns .ol-card { margin: 0 !important; }
+.ol-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.ol-table th, .ol-table td { text-align: left; border-bottom: 1px solid #284a5b; padding: .48rem .28rem; }
+.ol-table th { color: #91e8db; }
+.ol-current { background: #193e4c; }
+.ol-gridline { stroke: #315262; fill: none; }
+#ol-spectrum { max-width: 570px; }
+#ol-spectrum text { font-size: 12px; }
+.ol-spectra, .ol-exports { margin: 10px 0; }
+#optical-logic-chip a { color: #8ce9db; }
+#optical-logic-chip summary { cursor: pointer; color: #adede4; }
+#optical-logic-chip :focus-visible { outline: 2px solid #8ce9db; outline-offset: 2px; }
+@media (max-width: 740px) { .ol-columns { grid-template-columns: minmax(0,1fr); } }
+@media (max-width: 620px) {
+  .ol-figure { padding: 4px; }
+  .ol-figure text { font-size: 15px; }
+  .ol-toolbar label { flex: 1 1 165px; }
+  .ol-table { font-size: .83rem; }
+}

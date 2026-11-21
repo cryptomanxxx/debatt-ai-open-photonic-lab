@@ -1,0 +1,163 @@
+diff --git a/dist/index.html b/dist/index.html
+index 7956a5e..4fb499b 100644
+--- a/dist/index.html
++++ b/dist/index.html
+@@ -21,13 +21,13 @@
+   <link rel="stylesheet" href="scalable-photonic.css">
+   <script src="scalable-photonic-model.js" defer></script>
+   <script src="scalable-photonic-research.js" defer></script>
+-  <script src="scalable-photonic.js?v=80" defer></script>
++  <script src="scalable-photonic.js?v=81" defer></script>
+   <script src="opa-hub.js" defer></script>
+   <link rel="stylesheet" href="multilayer-photonic.css">
+   <link rel="stylesheet" href="photonic-components.css">
+   <script src="photonic-components-data.js?v=81" defer></script>
+   <script src="photonic-components-diagrams.js" defer></script>
+-  <script src="photonic-components.js?v=78" defer></script>
++  <script src="photonic-components.js?v=79" defer></script>
+   <script src="multilayer-photonic-model.js" defer></script>
+   <script src="multilayer-photonic.js" defer></script>
+   <link rel="stylesheet" href="photonic-benchmark.css">
+@@ -41,6 +41,8 @@
+   <link rel="stylesheet" href="frequency-wdm.css?v=109">
+   <script src="frequency-wdm-model.js" defer></script>
+   <script src="frequency-wdm.js?v=110" defer></script>
++  <link rel="stylesheet" href="optical-logic.css">
++  <script type="module" src="optical-logic.js"></script>
+   <link rel="stylesheet" href="photonic-learning.css?v=85">
+   <script src="photonic-learning.js?v=108" defer></script>
+ </head>
+@@ -256,7 +258,7 @@
+     <section id="panel-photonic-circuit-lab" class="tabpanel" role="tabpanel" aria-labelledby="tab-photonic-circuit-lab" hidden>
+       <header class="pulse-heading">
+         <h1>Photonic Circuit Lab <span class="pulse-version">v2.6 – Multilayer Photonic Neural Network</span></h1>
+-        <p class="intro">Follow a light pulse from laser emission to photodetection on ten predefined chips.</p>
++        <p class="intro">Follow a light pulse from laser emission to photodetection on eleven predefined chips.</p>
+       </header>
+       <div class="pulse-controls">
+         <div><label for="pulse-design">Chip design</label>
+@@ -271,10 +273,98 @@
+             <option value="scalable">Chip 8 · Scalable Photonic AI Processor</option>
+             <option value="multilayer">Chip 9 · Multilayer Photonic Neural Network</option>
+             <option value="microring">Chip 10 · Interactive Frequency Comb &amp; WDM Laboratory</option>
++            <option value="optical-logic">Chip 11 · Energy-Efficient Optical Logic</option>
+           </select>
+         </div>
+         <button type="button" class="btn primary" id="pulse-start">Start Simulation</button>
+       </div>
++      <section id="optical-logic-chip" hidden aria-labelledby="ol-title">
++        <div class="card ol-card">
++          <h2 id="ol-title">Chip 11 · Energy-Efficient Optical Logic</h2>
++          <p>Switch two optical data inputs and follow a separate laser probe through three silicon add-drop microrings. A photodetector reads the selected output port. The power at that port determines the observed bit.</p>
++          <div class="ol-toolbar">
++            <label>Logic gate <select id="ol-gate"><option>AND</option><option>OR</option><option>XOR</option><option>NAND</option></select></label>
++            <button id="ol-a" type="button" class="btn" aria-pressed="true">A = 1</button>
++            <button id="ol-b" type="button" class="btn" aria-pressed="true">B = 1</button>
++            <button id="ol-play" type="button" class="btn">Replay light paths</button>
++          </div>
++          <p id="ol-routing"></p>
++          <figure class="ol-figure">
++            <svg id="ol-diagram" role="img" aria-label="Optical inputs A and B drive microring electrodes through receivers. A separate carrier is routed by the rings to a detector across up to four paths." aria-describedby="ol-decode ol-routing ol-outputs"></svg>
++            <figcaption class="muted">Slow-motion schematic. O/E converts light to an electrical signal and PD marks the output photodetector. The add-drop ports use folded routing. Brightness shows calculated power on a compressed scale.</figcaption>
++          </figure>
++          <div class="ol-keys" aria-label="Circuit legend">
++            <span style="--ol-color:#69ead4">Probe carrier</span><span style="--ol-color:#8fadff">Optical A</span>
++            <span style="--ol-color:#ffbb76">Optical B</span><span style="--ol-color:#dfb2ff">Electrical control</span>
++          </div>
++          <p id="ol-animation-status" class="muted"></p>
++          <p id="ol-decode" class="muted"></p>
++          <p id="ol-outputs" class="ol-focus" role="status"></p>
++        </div>
++        <section class="card ol-card" aria-labelledby="ol-learn-title">
++          <h2 id="ol-learn-title">Learn by experimenting</h2>
++          <div class="ol-toolbar"><label>Choose an experiment
++            <select id="ol-preset">
++              <option value="nominal">Nominal circuit</option>
++              <option value="detune">Move the ring off resonance</option>
++              <option value="dark">Starve the optical data receivers</option>
++              <option value="passive">Disable the voltage shift</option>
++              <option value="loss">Increase waveguide, routing and interface loss</option>
++            </select></label><button type="button" class="btn" id="ol-reset">Restore defaults</button></div>
++          <p id="ol-lesson">Start with AND and switch one input off. Compare the power at the detector with the decision threshold.</p>
++          <div class="ol-grid" id="ol-controls"></div>
++          <p class="muted">The three rings share the same radius, gap and intrinsic Q in this model. The resonance offset represents a static trim. An optical input sets its data receiver to high at or above a fixed 25 µW decision threshold after link loss. Its decoded bit drives the assigned ring electrodes. The separate probe stays on for all four input patterns.</p>
++          <p class="muted">Radius, static trim and drive shift the resonance. A closer gap strengthens coupling and broadens the loaded line. Intrinsic Q controls loss inside the ring. Watch the through and drop fractions as you sweep the probe across the resonance, then raise link loss to see how much power still reaches the detector.</p>
++        </section>
++        <div class="ol-columns">
++          <section class="card ol-card" aria-labelledby="ol-table-title">
++            <h2 id="ol-table-title">Truth table and decision margin</h2>
++            <table class="ol-table" aria-labelledby="ol-table-title">
++              <thead><tr><th scope="col">A</th><th scope="col">B</th><th scope="col">Output</th><th scope="col">Detected</th><th scope="col">Expected</th></tr></thead>
++              <tbody id="ol-table"></tbody>
++            </table>
++            <p id="ol-margin" class="muted"></p>
++            <p class="muted">Path 01 means through at the A stage and drop at the B stage. The B signal drives two physical copies, one per branch. A selectable optical wiring map collects the paths for the chosen gate. Finite extinction leaves some light on other paths.</p>
++          </section>
++          <section class="card ol-card" aria-labelledby="ol-spectrum-title">
++            <h2 id="ol-spectrum-title">Microring transmission</h2>
++            <div class="ol-spectra"><label>Inspect <select id="ol-inspect"><option value="A">Ring A</option><option value="B">Rings B₀ and B₁</option></select></label></div>
++            <figure class="ol-figure"><svg id="ol-spectrum" viewBox="0 0 400 165" role="img" aria-describedby="ol-probe-marker"></svg></figure>
++            <div class="ol-keys"><span style="--ol-color:#69ead4">Through</span><span style="--ol-color:#8fadff">Drop</span><span style="--ol-color:#ffbb76">Intrinsic loss</span></div>
++            <p id="ol-probe-marker" class="muted"></p>
++            <dl class="ol-grid ol-metrics" id="ol-ring-metrics"></dl>
++          </section>
++        </div>
++        <section class="card ol-card" aria-labelledby="ol-energy-title">
++          <h2 id="ol-energy-title">Energy per operation</h2>
++          <p>One operation is one assumed clock slot. Optical energy is power divided by slot rate. The ring edge estimate is ½CV² with 20 fF per junction. Mean switching assumes independent equiprobable data bits and three capacitive loads. The receivers and drivers stay powered.</p>
++          <dl class="ol-grid ol-metrics" id="ol-optical-budget"></dl>
++          <dl class="ol-grid ol-metrics" id="ol-electrical-budget"></dl>
++          <details><summary>Edit energy assumptions</summary><div class="ol-grid" id="ol-energy-controls"></div></details>
++          <p class="muted">The system estimate adds laser electricity, ring switching, two drivers, three receivers and entered static overhead. Laser electricity already supplies the launched optical energy. The optical account shows probe losses separately. Laser efficiency represents conversion to launched light at the three model input planes. Gate selection is modeled as fixed wiring for each run. Configuration changes, packaging and host I/O need a separate budget. The rate is an accounting assumption. A steady-state spectrum cannot validate operation at that rate.</p>
++        </section>
++        <details class="card ol-card">
++          <summary><strong>Physics, scope and research evidence</strong></summary>
++          <ul class="steps">
++            <li><strong>Passive filtering.</strong> A fixed ring routes existing light according to wavelength. Sweep the probe with zero drive to see the through notch and drop peak. Input power scales the output in this linear regime.</li>
++            <li><strong>Electro-optic logic.</strong> Chip 11 detects A and B electrically and assumes a silicon carrier-depletion resonance shift of 130 pm/V. Coupled-mode theory models intrinsic and coupling loss. The ideal symmetric combiner adds complex fields with matched external path phases by default. The phase-step control adds a relative phase ramp across the four paths. Its unused ports carry the rest of the selected power. Loss of phase match, electrical bandwidth and noise require separate characterization.</li>
++            <li><strong>All-optical nonlinear logic.</strong> An optical control can shift a resonance through Kerr, free-carrier or thermal effects. Each mechanism has its own dynamics and loss. This mode would need an optical control path, a calibrated nonlinear model and independent power, speed and regeneration tests.</li>
++          </ul>
++          <p>This is an educational compact model. The OPA-LOGIC series tests its assumptions and scopes electromagnetic, cascade and energy results separately from physical measurements.</p>
++          <ul class="steps">
++            <li>Zhou et al. fabricated SOI microring logic and verified operation at 20 Gb/s. Their fJ/bit estimates cover the modulator loads within their accounting boundary. <a href="https://doi.org/10.1038/s41467-026-75750-x">Nature Communications, 2026</a>.</li>
++            <li>The MDPI design uses coherent, phase-controlled inputs in FDTD. Its simulated thresholds and contrast are specific to its architecture and assumptions. <a href="https://doi.org/10.3390/nano15100707">Nanomaterials, 2025</a>.</li>
++            <li><a href="https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/blob/main/research/OPA-LOGIC.md">OPA-LOGIC experiment methods and evidence</a>.</li>
++          </ul>
++        </details>
++        <div class="card ol-card ol-exports">
++          <label>Experiment export
++            <select id="ol-format"><option value="zip">ZIP · all results</option><option value="json">JSON · full record</option><option value="csv">CSV · truth table</option><option value="spectrum">CSV · ring spectrum</option></select>
++          </label>
++          <button id="ol-export" type="button" class="btn">Download experiment</button>
++          <span id="ol-export-status" role="status" class="muted"></span>
++        </div>
++      </section>
+       <section id="scalable-chip" hidden aria-labelledby="scalable-title">
+         <div class="card pulse-notes">
+           <h2 id="scalable-title">Chip 8 · Scalable Photonic AI Processor</h2>
+diff --git a/dist/photonic-components.js b/dist/photonic-components.js
+index 7d760b9..2aa7fc5 100644
+--- a/dist/photonic-components.js
++++ b/dist/photonic-components.js
+@@ -264,7 +264,7 @@
+   function followHash() {
+     const [tab,id] = window.location.hash.slice(1).split('/');
+     if (tab==='photonic-component-library' && id) showEntry(id);
+-    if (tab==='photonic-circuit-lab' && data.chipKeys.includes(id)) {
++    if (tab==='photonic-circuit-lab' && (data.chipKeys.includes(id) || id==='optical-logic')) {
+       const select=byId('pulse-design');
+       if (select.value!==id) {
+         select.value=id;
+diff --git a/dist/scalable-photonic.js b/dist/scalable-photonic.js
+index 232187d..63655d6 100644
+--- a/dist/scalable-photonic.js
++++ b/dist/scalable-photonic.js
+@@ -461,7 +461,7 @@
+   function selectChip() {
+     const selected=design.value==='scalable';
+     panel.hidden=!selected;
+-    document.getElementById('pulse-original').hidden=selected || ['multilayer','microring'].includes(design.value);
++    document.getElementById('pulse-original').hidden=selected || ['multilayer','microring','optical-logic'].includes(design.value);
+     if(selected) reset();
+     else stop();
+   }

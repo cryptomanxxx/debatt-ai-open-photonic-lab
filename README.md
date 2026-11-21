@@ -48,6 +48,10 @@ independent-laser training proxy is a numerical reference, not a validated chip.
 
 [Browse the component library](components/README.md): external PDK components, published physical evidence and Debatt-AI research models. Reuse existing verified models first; develop custom components only for identified system requirements. The v1 reference catalog is complemented by the [OPA-LIB-001 original SiEPIC GDS archive](components/external/SiEPIC-EBeam/README.md). [LIB003](components/external/Luxtelligence/lnoi400/s_parameters/README.md) adds original simulated complex model coefficients; sampled export pending CI. No exact-cell measurement certification.
 
+## Optical logic
+
+[OPA-LOGIC methods and evidence](research/OPA-LOGIC.md) · [Chip 11 Site integration](web/chip11/README.md). The series probes passive add-drop resonance, receiver-assisted logic, two-stage power margins and energy accounting.
+
 ## OPA-CIR research phase
 
 [Final research report: CIR001–008](research/OPA-CIR-FINAL-REPORT.md) | [Permanent evidence archive](research/evidence/opa-cir) | [Archive provenance](research/cir_archive_manifest.json).

@@ -111,3 +111,31 @@ Before selecting FAB001 components, establish a revision-pinned external library
 ### LIB004 execution
 
 [LIB004](components/experimentally_validated/SiEPIC-PCM-2020-02-UW/README.md) imports five exact original SiEPIC TE spiral cutback scans and independent analysis. Derive effective loss from detector 2 with explicit regression limitations, no phase or geometry-equivalence claim. Preserve measured bytes and archive derived CI results. Additional source leads require file-level evidence and license. Do not calibrate TFLN from silicon measurements.
+
+## Long-term vision: an all-optical OPA (2026-11-21)
+
+**Vision.** In the long term, Debatt-AI's OPA should keep signals optical across all layers of a neural network, from the first optical matrix–vector multiplication to the last, without optical-to-electrical-to-optical (O/E/O) conversion between layers. This is a research direction, not a current capability. The near-term target remains the hybrid accelerator described above, and nothing in this section changes the current priorities: process access and a passive test chip come first.
+
+**Why it matters.** In the hybrid baseline (CIR001–008) every layer passes through detection, ADC, electronic activation, DAC, driver and modulator. In the partial CIR008 budget, data converters, drivers and receivers account for roughly 70 % of the 0.61 W subtotal for a single 4×4 matrix layer (DAC, ADC, input drivers and TIA: 0.44 W). An all-optical chain would pay that conversion cost only at the system input and output, so the saving grows with network depth.
+
+**What it does not remove.** An all-optical design does not make a small mesh as efficient as a large one, and it adds new costs:
+
+1. *System boundary.* Input data and results still come from and return to electronic memory and hosts. Conversion at the boundary remains and is still amortized over N² operations per N inputs, so mesh size N continues to matter.
+2. *Photon budget.* Each output must be detected with enough optical power for the required precision (shot and receiver noise). Laser energy is shared across all operations in a mesh, which again favours larger meshes.
+3. *Accumulated loss.* Without conversion between layers there is no regeneration. Cascades need optical gain or regeneration, which costs electrical power and adds noise (see OPA-GAIN-001).
+4. *Optical activation.* Intensity-dependent optical nonlinearities are weak and usually need high optical power. The OPA-NL phase established only a phenomenological model, without a calibrated material or a fabricated device; electronic activation remains the baseline. A practical, low-energy, cascadable optical activation is the key enabling component and an open problem across the field.
+5. *Weights and control.* Weights are stored and phase shifters are held electronically; hold power and calibration remain.
+
+**Staged path and gates.** Each stage requires measured evidence from the previous one; none is authorized by this section.
+
+| Stage | Milestone | Gate before the next stage |
+|---|---|---|
+| 1 | Passive test chip (loss, couplers, MZIs, rings) | Measured spectra compared with pre-fabrication models |
+| 2 | Programmable MZI mesh on one platform | Measured matrix accuracy, drift and calibration |
+| 3 | Two optical layers cascaded without O/E/O | Measured link budget, noise and regeneration needs |
+| 4 | Optical activation with a real material or device | Measured transfer curve, power, speed and cascadability |
+| 5 | All-optical multilayer demonstrator | Matched-accuracy, matched-boundary energy comparison against the hybrid baseline and electronics |
+
+**Research questions to keep open.** How does energy per operation scale with mesh size N and network depth for hybrid versus all-optical chains at matched accuracy and system boundary (a future OPA-SYS extension)? Which activation mechanism, if any, meets the power and cascadability requirements on an accessible platform (a future reopening of OPA-NL, which its final report allows only when a concrete system need is identified)? Does the all-optical digital branch (OPA-LOGIC-001) or the analog branch offer the more realistic route?
+
+**Sources.** Akhetonics and similar all-optical efforts are leads for primary literature, not verified results (see Evidence and implementation rules). Claims of all-optical advantage require primary sources with stated workload, precision and measurement boundary.

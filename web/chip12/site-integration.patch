@@ -1,0 +1,77 @@
+diff --git a/dist/index.html b/dist/index.html
+index 4fb499b..118ed78 100644
+--- a/dist/index.html
++++ b/dist/index.html
+@@ -21,13 +21,13 @@
+   <link rel="stylesheet" href="scalable-photonic.css">
+   <script src="scalable-photonic-model.js" defer></script>
+   <script src="scalable-photonic-research.js" defer></script>
+-  <script src="scalable-photonic.js?v=81" defer></script>
++  <script src="scalable-photonic.js?v=82" defer></script>
+   <script src="opa-hub.js" defer></script>
+   <link rel="stylesheet" href="multilayer-photonic.css">
+   <link rel="stylesheet" href="photonic-components.css">
+   <script src="photonic-components-data.js?v=81" defer></script>
+   <script src="photonic-components-diagrams.js" defer></script>
+-  <script src="photonic-components.js?v=79" defer></script>
++  <script src="photonic-components.js?v=80" defer></script>
+   <script src="multilayer-photonic-model.js" defer></script>
+   <script src="multilayer-photonic.js" defer></script>
+   <link rel="stylesheet" href="photonic-benchmark.css">
+@@ -41,6 +41,8 @@
+   <link rel="stylesheet" href="frequency-wdm.css?v=109">
+   <script src="frequency-wdm-model.js" defer></script>
+   <script src="frequency-wdm.js?v=110" defer></script>
++  <link rel="stylesheet" href="photonic-memory.css">
++  <script type="module" src="photonic-memory.js"></script>
+   <link rel="stylesheet" href="optical-logic.css">
+   <script type="module" src="optical-logic.js"></script>
+   <link rel="stylesheet" href="photonic-learning.css?v=85">
+@@ -258,7 +260,7 @@
+     <section id="panel-photonic-circuit-lab" class="tabpanel" role="tabpanel" aria-labelledby="tab-photonic-circuit-lab" hidden>
+       <header class="pulse-heading">
+         <h1>Photonic Circuit Lab <span class="pulse-version">v2.6 – Multilayer Photonic Neural Network</span></h1>
+-        <p class="intro">Follow a light pulse from laser emission to photodetection on eleven predefined chips.</p>
++        <p class="intro">Explore light generation, communication and computation across twelve interactive chips.</p>
+       </header>
+       <div class="pulse-controls">
+         <div><label for="pulse-design">Chip design</label>
+@@ -274,10 +276,12 @@
+             <option value="multilayer">Chip 9 · Multilayer Photonic Neural Network</option>
+             <option value="microring">Chip 10 · Interactive Frequency Comb &amp; WDM Laboratory</option>
+             <option value="optical-logic">Chip 11 · Energy-Efficient Optical Logic</option>
++            <option value="photonic-memory">Chip 12 · Photonic Memory Interconnect</option>
+           </select>
+         </div>
+         <button type="button" class="btn primary" id="pulse-start">Start Simulation</button>
+       </div>
++      <section id="photonic-memory-chip" hidden aria-labelledby="pm-title"></section>
+       <section id="optical-logic-chip" hidden aria-labelledby="ol-title">
+         <div class="card ol-card">
+           <h2 id="ol-title">Chip 11 · Energy-Efficient Optical Logic</h2>
+diff --git a/dist/photonic-components.js b/dist/photonic-components.js
+index 2aa7fc5..61e14f4 100644
+--- a/dist/photonic-components.js
++++ b/dist/photonic-components.js
+@@ -264,7 +264,7 @@
+   function followHash() {
+     const [tab,id] = window.location.hash.slice(1).split('/');
+     if (tab==='photonic-component-library' && id) showEntry(id);
+-    if (tab==='photonic-circuit-lab' && (data.chipKeys.includes(id) || id==='optical-logic')) {
++    if (tab==='photonic-circuit-lab' && (data.chipKeys.includes(id) || ['optical-logic','photonic-memory'].includes(id))) {
+       const select=byId('pulse-design');
+       if (select.value!==id) {
+         select.value=id;
+diff --git a/dist/scalable-photonic.js b/dist/scalable-photonic.js
+index 63655d6..0fcfd1c 100644
+--- a/dist/scalable-photonic.js
++++ b/dist/scalable-photonic.js
+@@ -461,7 +461,7 @@
+   function selectChip() {
+     const selected=design.value==='scalable';
+     panel.hidden=!selected;
+-    document.getElementById('pulse-original').hidden=selected || ['multilayer','microring','optical-logic'].includes(design.value);
++    document.getElementById('pulse-original').hidden=selected || ['multilayer','microring','optical-logic','photonic-memory'].includes(design.value);
+     if(selected) reset();
+     else stop();
+   }

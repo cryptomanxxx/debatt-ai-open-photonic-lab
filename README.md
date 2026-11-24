@@ -52,6 +52,10 @@ independent-laser training proxy is a numerical reference, not a validated chip.
 
 [OPA-LOGIC methods and evidence](research/OPA-LOGIC.md) · [Chip 11 Site integration](web/chip11/README.md). The series probes passive add-drop resonance, receiver-assisted logic, two-stage power margins and energy accounting.
 
+## Photonic memory interconnect
+
+[OPA-MEM-001 methods and evidence](research/OPA-MEM.md) · [Chip 12 Site integration](web/chip12/README.md). A single-request decode model compares weight streaming over PCIe and WDM while tracking memory tiers, KV-cache traffic, compute time and link energy.
+
 ## OPA-CIR research phase
 
 [Final research report: CIR001–008](research/OPA-CIR-FINAL-REPORT.md) | [Permanent evidence archive](research/evidence/opa-cir) | [Archive provenance](research/cir_archive_manifest.json).

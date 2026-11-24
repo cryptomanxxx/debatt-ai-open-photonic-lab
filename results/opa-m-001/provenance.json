@@ -1,0 +1,41 @@
+{
+  "experiment": "OPA-M-001",
+  "evidence": "analytical sensitivity study",
+  "physical_measurement": false,
+  "workflow_run_id": 45399961474,
+  "job_id": 138465749969,
+  "artifact_id": 14923590333,
+  "artifact_sha256": "6f3112534e830926d4c62593ca004c663674eec3856566a0d100f59ce7be694b",
+  "artifact_bytes": 20486,
+  "head_sha": "473942646b620667b0c5785620386543b3618e25",
+  "pull_request": 257,
+  "source_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/45399961474/job/138465749969",
+  "artifact_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/45399961474/artifacts/14923590333",
+  "verification": "Download matched the published archive SHA-256, passed ZIP CRC checks and contained JSON and CSV identical to the local deterministic rerun. Archived outputs are exact artifact bytes.",
+  "files": {
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c",
+      "git_blob_sha1": "e0f73c62ff0fe442819a24eff4c391bc1d95e8d8",
+      "archived": false
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6",
+      "git_blob_sha1": "b78cc4b63c8815d1e064dec794040bbff4e2ffac",
+      "archived": false
+    },
+    "result.json": {
+      "bytes": 42490,
+      "sha256": "d1a70d53277d5e7885c78795ee17edf257020d4f2f82be5547e3a9e50e9daf61",
+      "git_blob_sha1": "c313bf5ccb6cffaed3c82c0cec4b051d2a322cd8",
+      "archived": true
+    },
+    "results.csv": {
+      "bytes": 7527,
+      "sha256": "49e982a424edb9ad38cf2cc5e0af3edc01ae2986dceea5f5eb6412da35e69372",
+      "git_blob_sha1": "d286670fc085882fc8a675f2ac83fa094b51aa53",
+      "archived": true
+    }
+  }
+}

@@ -1,0 +1,75 @@
+diff --git a/dist/index.html b/dist/index.html
+index 118ed78..aa61722 100644
+--- a/dist/index.html
++++ b/dist/index.html
+@@ -43,5 +43,5 @@
+   <script src="frequency-wdm.js?v=110" defer></script>
+   <link rel="stylesheet" href="photonic-memory.css">
+-  <script type="module" src="photonic-memory.js"></script>
++  <script type="module" src="photonic-memory.js?v=2"></script>
+   <link rel="stylesheet" href="optical-logic.css">
+   <script type="module" src="optical-logic.js"></script>
+@@ -240,4 +240,15 @@
+         <h1 lang="en">Debatt-AI's Open Photonic Accelerator (OPA) Ecosystem</h1>
+       </header>
++      <section class="card" id="opa-m-ecosystem" aria-labelledby="opa-m-title">
++        <h2 id="opa-m-title">OPA-M · Open Photonic Memory Interconnect</h2>
++        <p>OPA-M studies how digital weights could travel between electronic memory and an AI accelerator over a photonic link. The research compares PCIe and WDM with the same workload, and checks whether storage, memory channels, controllers or the accelerator can sustain the extra bandwidth.</p>
++        <p><strong>Active:</strong> OPA-M-001 has reproducible analytical results. <strong>Planned:</strong> parallel memory, optical links, layout, endpoint and software integration, and a physical prototype. <strong>Physical evidence:</strong> no OPA-M device has been measured.</p>
++        <ul>
++          <li><a href="#photonic-circuit-lab/microring">Chip 10 · Microring Frequency Comb Generator</a> explains how one source supplies multiple wavelengths.</li>
++          <li><a href="#photonic-circuit-lab/optical-logic">Chip 11 · Energy-Efficient Optical Logic</a> introduces detection, thresholds and conversion energy.</li>
++          <li><a href="#photonic-circuit-lab/photonic-memory">Chip 12 · Photonic Memory Interconnect</a> lets you compare electronic and optical transport bottlenecks.</li>
++        </ul>
++        <a class="btn" href="opa-roadmap.html#opa-m">Explore the OPA-M research plan</a>
++      </section>
+       <figure class="card opa-ecosystem-figure">
+         <img src="opa-ecosystem.jpg" width="1536" height="864" loading="lazy" alt="Concept overview showing USB-connected OPA Local, multiple processors coordinated by OPA Hub, and remote access through OPA Cloud. Wavelength-division multiplexing (WDM) is optional across all three systems.">
+@@ -352,4 +363,5 @@
+           <ul class="steps">
+             <li><strong>Passive filtering.</strong> A fixed ring routes existing light according to wavelength. Sweep the probe with zero drive to see the through notch and drop peak. Input power scales the output in this linear regime.</li>
++            <li><a href="opa-roadmap.html#opa-m">OPA-M research plan</a> applies receiver and conversion accounting to a digital memory link.</li>
+             <li><strong>Electro-optic logic.</strong> Chip 11 detects A and B electrically and assumes a silicon carrier-depletion resonance shift of 130 pm/V. Coupled-mode theory models intrinsic and coupling loss. The ideal symmetric combiner adds complex fields with matched external path phases by default. The phase-step control adds a relative phase ramp across the four paths. Its unused ports carry the rest of the selected power. Loss of phase match, electrical bandwidth and noise require separate characterization.</li>
+             <li><strong>All-optical nonlinear logic.</strong> An optical control can shift a resonance through Kerr, free-carrier or thermal effects. Each mechanism has its own dynamics and loss. This mode would need an optical control path, a calibrated nonlinear model and independent power, speed and regeneration tests.</li>
+@@ -799,4 +811,5 @@
+   <section class="card pulse-notes">
+     <h2 id="mc-roadmap-title">OPA-COMB · Optical Frequency Comb Generation</h2>
++    <p><a href="opa-roadmap.html#opa-m">OPA-M research plan</a> studies comb sources and separate lasers for wavelength-multiplexed memory links.</p>
+     <p>Research roadmap. These are planned experiments. Chip 10 is an educational starting point. No matching OPA-COMB artifacts were found in the reviewed repository snapshot.</p>
+     <div class="mc-table"><table class="data-table"><thead><tr><th scope="col">Experiment</th><th scope="col">Research objective</th><th scope="col">Status</th></tr></thead><tbody id="mc-roadmap"></tbody></table></div>
+diff --git a/dist/opa-roadmap.html b/dist/opa-roadmap.html
+index 09df5b0..ed9b06f 100644
+--- a/dist/opa-roadmap.html
++++ b/dist/opa-roadmap.html
+@@ -1,4 +1,20 @@
+ <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OPA hardware roadmap · Debatt-AI</title><style>body{margin:0;background:#081723;color:#dcecf2;font:16px/1.6 system-ui,sans-serif}main{max-width:960px;margin:auto;padding:32px 22px 72px}a{color:#79e3d1}h1{font-size:clamp(32px,6vw,49px);line-height:1.12}h2{margin-top:34px}.card{background:#112938;border:1px solid #345565;border-radius:16px;padding:20px;margin:20px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.stat{background:#0a202e;padding:14px;border-radius:10px}.stat strong{font-size:21px;display:block;color:#88e4d7}.tag{display:inline-block;border:1px solid #608487;color:#9adbd3;padding:4px 12px;border-radius:18px;font-size:13px}table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;vertical-align:top;padding:12px 8px;border-bottom:1px solid #345565}li{margin:8px 0}.warning{border-left:3px solid #e5b97a;padding-left:15px}.state{color:#ffc78d}code{color:#8de4d2}.flow{display:grid;gap:8px;text-align:center}.flow div{border:1px solid #3c6170;border-radius:9px;padding:12px;background:#0a2231}.flow span{font-size:24px;color:#8be9d7}.muted{color:#a8c0ca}</style></head><body><main><a href="./">← Back to the lab tabs</a><p><span class="tag">OPA 0.1 · System architecture feasibility study</span></p><h1>From photonic chip to practical accelerator</h1><p>Debatt-AI's long-term goal is an open photonic PCIe card. The first hardware milestone is a packaged chip that accepts defined optical inputs, performs a documented matrix operation, and returns measurable results to a computer. Server and PCIe hardware purchases are deferred until this milestone is met.</p>
+ <div class="grid"><div class="stat"><small>OPA 0.1</small><strong>Optical experiment</strong><small>USB or LAN control is sufficient</small></div><div class="stat"><small>OPA 0.2</small><strong>Digital API</strong><small>DAC/ADC + FPGA or MCU</small></div><div class="stat"><small>OPA 1.0</small><strong>PCIe accelerator</strong><small>After validation of a useful workload</small></div></div>
++<section class="card" id="opa-m" aria-labelledby="opa-m-roadmap-title">
++  <h2 id="opa-m-roadmap-title">OPA-M · Open Photonic Memory Interconnect</h2>
++  <p>The near-term question is where extra link bandwidth changes inference performance. The long-term goal is an open, fabricable digital link between electronic memory and an AI accelerator.</p>
++  <p><strong>Current evidence:</strong> Chip 12 is a teaching simulation. OPA-M-001 adds reproducible analytical comparisons with matched payload and an independent limit on how fast the accelerator can accept data. Electronic measurements for calibration remain open. Physical link validation is a later milestone.</p>
++  <ol>
++    <li><strong>OPA-M-001 · AI Inference and Memory Bottleneck Modeling</strong> — active, with analytical results for dense and sparse workloads.</li>
++    <li><strong>OPA-M-002 · Parallel Memory Bank Architecture</strong> — planned. Compare sustainable bandwidth from DDR, LPDDR, GDDR and HBM.</li>
++    <li><strong>OPA-M-003 · Single-Channel Optical Memory Link</strong> — planned. Check receiver margin, bit error rate, latency and energy.</li>
++    <li><strong>OPA-M-004 · WDM Photonic Memory Interconnect</strong> — planned. Evaluate 8, 16, 32, 64 and 128 wavelengths against a one-channel reference.</li>
++    <li><strong>OPA-M-005 · Photonic Physical Layout</strong> — planned. Select a process, check design rules and design passive and single-channel structures for testing.</li>
++    <li><strong>OPA-M-006 · Electronic and Photonic Integration</strong> — planned. Start with a memory-controller and FPGA loopback.</li>
++    <li><strong>OPA-M-007 · AI Inference Software Integration</strong> — planned. Measure prefetch, caching and expert traffic with matched workloads.</li>
++    <li><strong>OPA-M-008 · Physical Prototype and Experimental Validation</strong> — planned. Measure a one-lane prototype before testing WDM and inference.</li>
++  </ol>
++  <p><a href="./#opa-ecosystem">OPA Ecosystem</a> · <a href="./#photonic-circuit-lab/photonic-memory">Chip 12</a> · <a href="https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/blob/main/research/OPA-M-ROADMAP.md">Research dependencies and verification gates</a> · <a href="https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/blob/main/research/OPA-M-001.md">OPA-M-001 methods and sources</a></p>
++</section>
+ <section class="card"><h2>Physical signal path for OPA 0.1</h2><div class="flow"><div>Host computer · Python and test vector</div><span>↓</span><div>Driver electronics and DAC for settings and signal modulation</div><span>↓</span><div>1,550 nm light source and optical coupling → packaged TFLN PIC</div><span>↓</span><div>Detection with photodiodes, amplifiers, and ADC</div><span>↓</span><div>Calibration and comparison with a CPU-based reference</div></div><p class="warning">A standard photodiode measures intensity. Recovering the sign or complex amplitude requires a readout method such as balanced or coherent detection, or an encoding scheme that maps the quantity of interest to intensity.</p></section>
+ <section class="card"><h2>Fabrication and procurement</h2><table><thead><tr><th>Subsystem</th><th>Proposed approach</th><th>Requirements before ordering</th></tr></thead><tbody><tr><td>Photonic chip</td><td>Custom GDSFactory design with an MPW run at a European foundry</td><td class="state">DRC, optical I/O, test structures, and design acceptance</td></tr><tr><td>Optical laser and fiber network</td><td>Off-the-shelf C-band components for the lab prototype</td><td class="state">Wavelength, power, polarization, coupling type, and laser safety</td></tr><tr><td>Photonic packaging</td><td>Professional fiber attachment, die bonding, and wire bonding</td><td class="state">Quote and packaging rules before the chip layout is finalized</td></tr><tr><td>Detectors and analog electronics</td><td>Off-the-shelf photoreceivers, TIAs, and ADC/DAC evaluation boards</td><td class="state">Accuracy, dynamic range, bandwidth, and coherent readout</td></tr><tr><td>Digital control</td><td>MCU or FPGA with open Python software</td><td class="state">Interface selection and measurable performance</td></tr><tr><td>PCIe and server</td><td>Custom PCIe card and a standard Linux host in a later phase</td><td class="state">After OPA 0.2 demonstrates a useful workload</td></tr></tbody></table></section>
+diff --git a/dist/photonic-memory.js b/dist/photonic-memory.js
+index d4aa910..cc10403 100644
+--- a/dist/photonic-memory.js
++++ b/dist/photonic-memory.js
+@@ -105,5 +105,5 @@ panel.innerHTML = `
+     </details>
+     <p><a href="#photonic-circuit-lab/microring">Chip 10</a> explains where the carrier wavelengths come from. <a href="#photonic-circuit-lab/optical-logic">Chip 11</a> shows how receivers detect light and how conversion changes the energy budget. Chip 12 uses those ideas to move digital weights into an electronic accelerator.</p>
+-    <p class="muted">An OPA research hypothesis is that a WDM memory link can improve decode latency or energy when transport is limiting. Test it with matched payload and workload, measured receiver margin and bit error rate, and an electrical power budget that includes both endpoints and the memory controller.</p>
++    <p class="muted">The <a href="opa-roadmap.html#opa-m">OPA-M research plan</a> tests whether a WDM memory link can improve decode latency or energy when transport is limiting. Test it with matched payload and workload, measured receiver margin and bit error rate, and an electrical power budget that includes both endpoints and the memory controller.</p>
+   </section>
+ `;

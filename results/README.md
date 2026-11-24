@@ -56,6 +56,7 @@ Circuit (MZI) experiments use numpy from the same environment.
 | ID-004 | [Report](opa-id-004/README.md), [JSON](opa-id-004/result.json) | 92.70% continuous transmission, 0.3043% summed crosstalk vs 10.761% plain; 12/12 checks, 6/7 targets | Generic 2D; thresholded design unchanged from plain; no fabrication claim |
 
 | SYS-001 | [Report](opa-sys-001/README.md), [JSON](opa-sys-001/result.json), [CSV](opa-sys-001/sensitivity.csv) | 11/11 checks; fixed path loss 28.03 → 18.63 dB; 6/45 conditional scenarios exceed 3.5 TOPS/W; pump fanout double count isolated | Archived assumptions, fixed workload, no measured hardware or matched accuracy |
+| OPA-M-001 | [JSON](opa-m-001/result.json), [CSV](opa-m-001/results.csv), [provenance](opa-m-001/provenance.json) | 11 cases × 3 paths. Equal payload gives the same modeled decode time apart from optical propagation. The wider WDM link yields essentially no gain when storage, host RAM, controller or accelerator ingress already limits data delivery. | Analytical estimates with inherited illustrative inputs and no physical measurements |
 
 The 3D results from 007–010 and from 011 describe different polarizations
 (TM-like versus TE-like) and are normalized differently, so they should not be

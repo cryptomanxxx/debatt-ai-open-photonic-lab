@@ -36,7 +36,7 @@ node --test simulations/interconnect/memory-bottlenecks.test.mjs
 node simulations/interconnect/run_m_001.mjs
 ```
 
-The `opa-m-001` registry entry runs these and writes `results/opa-m-001/result.json` and `results.csv`. JSON contains settings, coefficients, blocked reasons, breakdowns and evidence status. CSV contains the cross-architecture comparison. The shared workflow records the runner and dependencies.
+The `opa-m-001` registry entry runs these and writes `results/opa-m-001/result.json` and `results.csv`. JSON contains settings, coefficients, blocked reasons, breakdowns and evidence status. CSV contains the cross-architecture comparison. The shared workflow records the runner and dependencies. The original [CI report](../results/opa-m-001/result.json), [comparison CSV](../results/opa-m-001/results.csv) and [provenance](../results/opa-m-001/provenance.json) are archived byte-for-byte.
 
 ## Literature review
 

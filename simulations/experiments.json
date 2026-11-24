@@ -1282,6 +1282,20 @@
         "simulations/logic/optical-logic-model.mjs"
       ],
       "run": "node simulations/logic/run_logic_004.mjs"
+    },
+    {
+      "id": "opa-mem-001",
+      "name": "Memory interconnect: dense and sparse decode across PCIe and WDM",
+      "script": "simulations/interconnect/run_mem_001.mjs",
+      "result_dir": "results/opa-mem-001",
+      "artifact": "opa-mem-001",
+      "timeout_minutes": 10,
+      "deps": [
+        "simulations/interconnect/photonic-memory-model.mjs",
+        "simulations/interconnect/photonic-memory.test.mjs",
+        "web/chip12/*"
+      ],
+      "run": "node --test simulations/interconnect/photonic-memory.test.mjs && node --input-type=module --check < web/chip12/photonic-memory.js && node simulations/interconnect/run_mem_001.mjs"
     }
   ]
 }

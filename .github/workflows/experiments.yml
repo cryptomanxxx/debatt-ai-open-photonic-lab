@@ -24,6 +24,7 @@ on:
   pull_request:
     paths:
       - "simulations/**"
+      - "web/chip12/**"
       - "results/**"
       - "layout/**"
       - ".github/workflows/experiments.yml"

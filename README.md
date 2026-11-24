@@ -58,6 +58,10 @@ independent-laser training proxy is a numerical reference, not a validated chip.
 
 [OPA-M research roadmap](research/OPA-M-ROADMAP.md) · [OPA-M-001 matched-baseline study](research/OPA-M-001.md). The active modeling phase adds a receive-side throughput ceiling and matched-payload transport comparison. Seven follow-on phases are planned.
 
+## Photonic weight memory and in-memory computing (planned)
+
+[OPA-W research roadmap](research/OPA-W-ROADMAP.md) investigates persistent optically accessible model weights and direct optical matrix computation. It is distinct from OPA-M transport and transient optical storage; all nine phases are planned, with no implemented OPA-W experiment or measured hardware. Existing priorities remain unchanged.
+
 ## OPA-CIR research phase
 
 [Final research report: CIR001–008](research/OPA-CIR-FINAL-REPORT.md) | [Permanent evidence archive](research/evidence/opa-cir) | [Archive provenance](research/cir_archive_manifest.json).

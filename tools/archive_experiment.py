@@ -16,6 +16,13 @@ MAX_FILE = 20 * 1024 * 1024
 C2_ORIGINAL = (45865605446, 15140012141, "sha256:8b0033363602a3fa6ce47c6ff5bf8c87244f6352aaba2c3795029738ed00c82a")
 C2_NODE_MAX = 95 * 1024 * 1024  # below GitHub's 100 MiB Git blob limit
 C2_TOTAL_MAX = 125 * 1024 * 1024
+# Bounded exception for the exact successful W-002G diagnostic artifact.
+W002G_ORIGINAL = (45907209371, 15158531611, "sha256:9c1a636b7346dc025ac33f449b0673729111b65e3dfd99ed8eca9ace6e686317")
+W002G_DIAGNOSTICS_MAX = 48 * 1024 * 1024
+W002G_TOTAL_MAX = 72 * 1024 * 1024
+W002G_FILES = {"result.json", "state_counts.csv", "diagnostics.csv", "state_summary.csv",
+               "confusion_summary.csv", "step_state_summary.csv", "environment-lock.txt",
+               "installed-packages.json"}
 ALLOWED = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]*\.(json|csv|txt)")
 ENV_FILES = {"environment-lock.txt", "installed-packages.json"}
 
@@ -148,7 +155,19 @@ def expansion_limits(experiment, artifact, selected):
                 "environment-lock.txt", "installed-packages.json"},
                 "C2 original requires exact reviewed profile")
         return C2_TOTAL_MAX, {"node-results.csv": C2_NODE_MAX}
+    if experiment == "opa-w-002g" and identity == W002G_ORIGINAL:
+        require(set(selected) == W002G_FILES, "W002G original requires exact reviewed profile")
+        return W002G_TOTAL_MAX, {"diagnostics.csv": W002G_DIAGNOSTICS_MAX}
     return MAX_TOTAL, {}
+
+
+def expansion_policy(experiment, artifact, selected):
+    _, limits = expansion_limits(experiment, artifact, selected)
+    if "diagnostics.csv" in limits:
+        return "w002g-original-bounded"
+    if "node-results.csv" in limits:
+        return "c2-original-bounded"
+    return "default"
 
 
 def unpack(data, artifact, selected, experiment=None):
@@ -281,7 +300,7 @@ def main():
         "artifact_name": artifact["name"], "artifact_sha256": sha(data),
         "artifact_bytes": len(data), "source_workflow": run["path"],
         "expanded_bytes": sum(map(len, files.values())),
-        "expansion_policy": "c2-original-bounded" if expansion_limits(experiment, artifact, selected)[1] else "default",
+        "expansion_policy": expansion_policy(experiment, artifact, selected),
         "verification": "GitHub metadata, historical checkout log and executed commit/tree, ZIP SHA-256 and CRC; exact extracted bytes; no rerun",
     })
     if recovery:

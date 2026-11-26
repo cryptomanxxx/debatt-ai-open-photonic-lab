@@ -1376,6 +1376,24 @@
         "simulations/graphics/photonic_side_v004.py",
         "research/OPA-G-003B.md"
       ]
+    },
+    {
+      "id": "opa-g-004a",
+      "name": "Graphics: frozen ray-box workload and electronic CPU baseline",
+      "script": "simulations/graphics/electronic_baseline_v006.py",
+      "result_dir": "results/opa-g-004a",
+      "artifact": "opa-g-004a",
+      "timeout_minutes": 15,
+      "deps": [
+        "simulations/graphics/ray_box_cpu_v006.c",
+        "simulations/graphics/ray_box_v001.py",
+        "simulations/graphics/side_test_v002.py",
+        "simulations/graphics/boundary_readout_v005.py",
+        "simulations/graphics/photonic_side_v004.py",
+        "simulations/circuit/mzi.py",
+        "research/OPA-G-004A.md"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/graphics/electronic_baseline_v006.py"
     }
   ]
 }

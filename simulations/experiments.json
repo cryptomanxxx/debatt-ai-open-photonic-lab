@@ -1347,6 +1347,20 @@
         "simulations/graphics/side_test_v002.py",
         "research/OPA-G-002-SOURCE-AUDIT.md"
       ]
+    },
+    {
+      "id": "opa-g-003",
+      "name": "Graphics: four-MZM signed coherent behavioral model",
+      "script": "simulations/graphics/photonic_side_v004.py",
+      "result_dir": "results/opa-g-003",
+      "artifact": "opa-g-003",
+      "timeout_minutes": 15,
+      "deps": [
+        "simulations/circuit/mzi.py",
+        "simulations/graphics/ray_box_v001.py",
+        "simulations/graphics/side_test_v002.py",
+        "research/OPA-G-003.md"
+      ]
     }
   ]
 }

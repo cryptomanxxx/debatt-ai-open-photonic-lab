@@ -1,0 +1,106 @@
+{
+  "experiment": "opa-g-004c1",
+  "checks": {
+    "topology_and_freeze": true,
+    "distributed_exact_bvh": true,
+    "distributed_accounting": true,
+    "clustered_exact_bvh": true,
+    "clustered_accounting": true,
+    "anisotropic_exact_bvh": true,
+    "anisotropic_accounting": true,
+    "boundary_controls_exact_bvh": true,
+    "boundary_controls_accounting": true,
+    "boundary_known_answers": true
+  },
+  "passed": true,
+  "scientific_gate": true,
+  "scenes": [
+    {
+      "scene": "distributed",
+      "rays": 80,
+      "excluded": 0,
+      "eligible": 80,
+      "exact_mismatches": 0,
+      "cpu_mismatches": 0,
+      "triangle_mismatches": 0,
+      "box_mismatches": 0,
+      "brute_triangle_tests": 3840,
+      "exact_nodes": 924,
+      "cpu_nodes": 924,
+      "exact_triangles": 375,
+      "cpu_triangles": 375
+    },
+    {
+      "scene": "clustered",
+      "rays": 80,
+      "excluded": 0,
+      "eligible": 80,
+      "exact_mismatches": 0,
+      "cpu_mismatches": 0,
+      "triangle_mismatches": 0,
+      "box_mismatches": 0,
+      "brute_triangle_tests": 3840,
+      "exact_nodes": 1416,
+      "cpu_nodes": 1416,
+      "exact_triangles": 897,
+      "cpu_triangles": 897
+    },
+    {
+      "scene": "anisotropic",
+      "rays": 80,
+      "excluded": 0,
+      "eligible": 80,
+      "exact_mismatches": 0,
+      "cpu_mismatches": 0,
+      "triangle_mismatches": 0,
+      "box_mismatches": 0,
+      "brute_triangle_tests": 3840,
+      "exact_nodes": 962,
+      "cpu_nodes": 962,
+      "exact_triangles": 564,
+      "cpu_triangles": 564
+    },
+    {
+      "scene": "boundary_controls",
+      "rays": 10,
+      "excluded": 1,
+      "eligible": 9,
+      "exact_mismatches": 0,
+      "cpu_mismatches": 0,
+      "triangle_mismatches": 0,
+      "box_mismatches": 0,
+      "brute_triangle_tests": 54,
+      "exact_nodes": 21,
+      "cpu_nodes": 21,
+      "exact_triangles": 33,
+      "cpu_triangles": 33
+    }
+  ],
+  "seed": 20261401,
+  "scene_sha256": "8a4acaf1ffb8c7dcec56c42f19f8f344cebcfe67ad7f7d8252cecb865073b70e",
+  "distance_tolerance": {
+    "abs": 1e-10,
+    "rel": 1e-10,
+    "quantity": "ray parameter t, not Euclidean distance"
+  },
+  "compiler": {
+    "flags": [
+      "-O3",
+      "-std=c11",
+      "-fPIC",
+      "-shared",
+      "-fno-fast-math",
+      "-ffp-contract=off"
+    ],
+    "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+  },
+  "energy": "not_measured",
+  "gpu": "not_run",
+  "limitations": [
+    "Synthetic scenes, no nearest-distance pruning",
+    "Coplanar nondegenerate ray/triangle pairs exclude whole ray from nearest-hit comparison",
+    "FP64 C kernels called via Python traversal; not compiled whole traversal or timing benchmark",
+    "All-node and all-triangle audit outside counted traversal work",
+    "No optical performance or physical hardware claims"
+  ]
+}

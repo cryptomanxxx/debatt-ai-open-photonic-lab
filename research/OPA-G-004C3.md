@@ -1,6 +1,6 @@
 # OPA-G-004C3 — Matched whole-BVH benchmark and conditional system budget
 
-Status: C3A stage 1 archive accounting executed and archived; stage 2 independent geometry executed, scientific gate passed with zero discrepancies, and archived in PR #301; stage 3 FP64 and operation audit implementation pending CI and review. Compiled benchmark and C3B remain prospective. [C2 archived analysis](../results/opa-g-004c2/README.md) passes both finite-sample gates with max_min_125, but physical acceleration remains unmeasured.
+Status: C3A stage 1 archive accounting executed and archived; stage 2 independent geometry executed, scientific gate passed with zero discrepancies, and archived in PR #301; stage 3 FP64 and operation audit executed with zero discrepancies and archived in PR #303; stage 4 whole compiled CPU benchmark pending CI and review. C3B remains prospective. [C2 archived analysis](../results/opa-g-004c2/README.md) passes both finite-sample gates with max_min_125, but physical acceleration remains unmeasured.
 
 ## C3A: archived accounting and compiled electronic reference
 
@@ -25,3 +25,7 @@ Independent standard-library rational Cramer's-rule triangle intersection and in
 ## C3A stage 3 implementation
 
 Recompile the frozen FP64 box and triangle kernels using the historical flags and compare each eligible ray/primitive and ray/node pair against the stage 2 independent rational reference. Derive electronic guard outcomes from exact forward intervals and side counts from the number of active axes. Replay raw, fallback and final decisions from archived minima and frozen thresholds, reconstruct traversal and compiled nearest-hit results, and compare operation counts and distance gates for every archived ray row. Write panel totals by scenario, repeat, scene and policy; preserve discrepancies separately from execution status. This is not a reconstruction of historical compiled binary bytes or optical signal generation. No timing or measured energy claims. Any unresolved scientific discrepancies block matched benchmarking.
+
+## C3A stage 4 implementation
+
+Whole native C traversal with fixed left-first DFS, reusable preallocated stack, contiguous node/ray/triangle arrays and separate primitive IDs. Reuse historical compiled kernels. Validate exact nearest ID/t and all archived electronic visited, accepted and tested IDs and counts across 249 eligible rays before timing; verify uninstrumented outputs against trace outputs before and after each timed sample. Prior geometry and FP64 gates must be archived and pass. Native CLOCK_MONOTONIC, single thread, warm resident data, adaptive batching targeting 20 ms per sample (cap 65536), 40 recorded samples per scene, p50/p95 of per-sample mean batch times. No host packing, allocation, Python dispatch, oracle or trace in timing; native local box packing and output writes included. Save raw timings, per-ray validation and discrepancies, compiler, CPU, OS and array sizes. Shared CI timings are descriptive and not isolated hardware guarantees. No physical photonic latency, energy or GPU measurement.

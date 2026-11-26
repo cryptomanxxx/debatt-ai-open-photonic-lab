@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "stage": "C3B.1 conditional energy budgets",
+  "energy": "not_measured",
+  "gpu": "not_run",
+  "matched_panels": 600,
+  "grid_rows": 28800,
+  "scenario_rows": 720,
+  "worst_fallback_fraction": 1.0,
+  "worst_panels": [
+    {
+      "scenario": "combined",
+      "repeat": 4,
+      "scene": "anisotropic",
+      "optical": 952,
+      "fallback": 952
+    },
+    {
+      "scenario": "drift_quantization",
+      "repeat": 7,
+      "scene": "anisotropic",
+      "optical": 952,
+      "fallback": 952
+    }
+  ],
+  "positive_panel_grid_rows": 7641,
+  "nonpositive_panel_grid_rows": 21159,
+  "equations": {
+    "cpu": "C_cpu + N_cpu*e_box",
+    "hybrid": "C_hybrid + F*e_box + N*e_pre + S*e_side + E_static + E_extra",
+    "remaining": "(N_cpu-F)*e_box - N*e_pre - S*e_side - E_static",
+    "condition": "(C_hybrid-C_cpu)+E_extra < remaining for strict savings"
+  },
+  "assumptions": {
+    "e_box_pj": [
+      10,
+      100,
+      1000
+    ],
+    "e_pre_pj": [
+      1,
+      10
+    ],
+    "e_side_pj": [
+      1,
+      10,
+      100
+    ],
+    "incremental_static_w": [
+      0.01,
+      0.1
+    ],
+    "side_rate_per_s": 1000000000.0,
+    "utilization": [
+      0.1,
+      1
+    ]
+  },
+  "boundaries": {
+    "optical_core": "unknown; MZM dynamic energy and optical path loss not measured",
+    "accelerator_card": "unknown; aggregate illustrative side cost includes four drives and readout; static service window only",
+    "host_inclusive": "unknown; common costs and extra memory, scheduling, transfer, calibration and source idle overhead not quantified"
+  },
+  "limitations": [
+    "All energy inputs hypothetical, not inferred from measured CPU time",
+    "Static service window S/(rate*utilization) is not measured latency; extra static time remains unknown",
+    "Positive budget is conditional, not a measured energy advantage; nonpositive budget cannot cover nonnegative extra overhead under the assumed costs",
+    "Raw optical policy excluded for failed quality gate",
+    "Shared costs not assumed equal; actual difference must fit remaining budget",
+    "No physical performance or VR power claims"
+  ]
+}

@@ -1,6 +1,6 @@
 # Chip 16 · Photonic Ray Tracing Accelerator
 
-Open [index.html](index.html) in a modern browser for the standalone, dependency-free teaching experiment. In the public Lab, choose **Chip 16** under **06 · Photonic Circuit Lab**. Chip 13–15 remain reserved for OPA-W.
+Open [index.html](index.html) in a modern browser for the standalone, dependency-free teaching experiment. In the public Lab, choose **Chip 16** under **06 · Photonic Circuit Lab**. Chips 13–15 cover [OPA-W weight memory](../opa-w/README.md).
 
 ## Methods and evidence
 

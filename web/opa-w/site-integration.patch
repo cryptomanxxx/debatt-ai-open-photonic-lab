@@ -1,0 +1,168 @@
+diff --git a/dist/index.html b/dist/index.html
+index d8b3352..ea7db6d 100644
+--- a/dist/index.html
++++ b/dist/index.html
+@@ -21,13 +21,13 @@
+   <link rel="stylesheet" href="scalable-photonic.css">
+   <script src="scalable-photonic-model.js" defer></script>
+   <script src="scalable-photonic-research.js" defer></script>
+-  <script src="scalable-photonic.js?v=83" defer></script>
++  <script src="scalable-photonic.js?v=84" defer></script>
+   <script src="opa-hub.js" defer></script>
+   <link rel="stylesheet" href="multilayer-photonic.css">
+   <link rel="stylesheet" href="photonic-components.css">
+   <script src="photonic-components-data.js?v=81" defer></script>
+   <script src="photonic-components-diagrams.js" defer></script>
+-  <script src="photonic-components.js?v=81" defer></script>
++  <script src="photonic-components.js?v=82" defer></script>
+   <script src="multilayer-photonic-model.js" defer></script>
+   <script src="multilayer-photonic.js" defer></script>
+   <link rel="stylesheet" href="photonic-benchmark.css">
+@@ -51,10 +51,14 @@
+   <link rel="stylesheet" href="chip16/experiment.css">
+   <script src="chip16/model.js" defer></script>
+   <script src="chip16/experiment.js" defer></script>
++  <link rel="stylesheet" href="opa-w/lab.css">
++  <script type="module" src="chip13/experiment.mjs"></script>
++  <script type="module" src="chip14/experiment.mjs"></script>
++  <script type="module" src="chip15/experiment.mjs"></script>
+ </head>
+ <body>
+   <main class="wrap">
+-    <header class="top"><div class="brand"><div class="mark" aria-hidden="true"></div>DEBATT-AI <span style="font-weight:400;color:#85a7b6">/ OPEN PHOTONIC LAB</span></div><span class="tag">Research prototype · v0.55</span></header>
++    <header class="top"><div class="brand"><div class="mark" aria-hidden="true"></div>DEBATT-AI <span style="font-weight:400;color:#85a7b6">/ OPEN PHOTONIC LAB</span></div><span class="tag">Research prototype · v0.56</span></header>
+     <nav class="tabs" role="tablist" aria-label="Lab sections"><button class="tab" role="tab" id="tab-simulator" aria-controls="panel-simulator" aria-selected="true" tabindex="0" data-tab="simulator">01 · Simulator</button><button class="tab" role="tab" id="tab-design" aria-controls="panel-design" aria-selected="false" tabindex="-1" data-tab="design">02 · Circuit Design</button><button class="tab" role="tab" id="tab-foundry" aria-controls="panel-foundry" aria-selected="false" tabindex="-1" data-tab="foundry">03 · Fabrication</button><button class="tab" role="tab" id="tab-opa-hub" aria-controls="panel-opa-hub" aria-selected="false" tabindex="-1" data-tab="opa-hub">04 · OPA Hub</button><button class="tab" role="tab" id="tab-opa-ecosystem" aria-controls="panel-opa-ecosystem" aria-selected="false" tabindex="-1" data-tab="opa-ecosystem">05 · OPA Ecosystem</button><button class="tab" role="tab" id="tab-photonic-circuit-lab" aria-controls="panel-photonic-circuit-lab" aria-selected="false" tabindex="-1" data-tab="photonic-circuit-lab">06 · Photonic Circuit Lab</button><button class="tab" role="tab" id="tab-photonic-component-library" aria-controls="panel-photonic-component-library" aria-selected="false" tabindex="-1" data-tab="photonic-component-library">Photonic Component Library</button><button class="tab" role="tab" id="tab-photonic-benchmark" aria-controls="panel-photonic-benchmark" aria-selected="false" tabindex="-1" data-tab="photonic-benchmark">Photonic Benchmark &amp; Leaderboard</button></nav>
+     <div id="panel-simulator" class="tabpanel" role="tabpanel" aria-labelledby="tab-simulator">
+     <section style="padding:37px 0 8px"><span class="eyebrow">Open photonic accelerator / experiment 001</span><h1>Compute with light.<br><span style="color:#69ddcf">Understand each step.</span></h1><p class="intro">Explore an idealized, programmable 2×2 optical transformation. Adjust the mixing angle and two coherent inputs to see the output amplitudes, intensities, and agreement with a mathematical reference.</p><div class="legend"><span><i class="dot"></i>Output 1</span><span><i class="dot v"></i>Output 2</span><span class="chip">Browser-based simulation · no physical hardware</span></div></section>
+@@ -255,9 +259,38 @@
+         <a class="btn" href="opa-roadmap.html#opa-m">Explore the OPA-M research plan</a>
+       </section>
+       <nav class="research-jump" aria-label="Research tracks">
++        <a class="btn" href="#opa-ecosystem/opa-w">OPA-W · Weight memory</a>
+         <a class="btn" href="#opa-ecosystem/opa-g">OPA-G · Graphics acceleration</a>
+         <a class="btn" href="#opa-ecosystem/opvr">OPVR · Open virtual reality</a>
+       </nav>
++      <section class="card research-track ow-roadmap" id="opa-w-ecosystem" aria-labelledby="opa-w-title" tabindex="-1">
++        <h2 id="opa-w-title">OPA-W · Open Photonic Weight Memory</h2>
++        <p>OPA-W asks whether photonic cells can hold AI weights and use them for computation without repeatedly moving those weights to a separate processor. The research will compare streamed digital weights, optical readout with separate compute, and calculation with stationary optical weights.</p>
++        <p>The three browser simulations illustrate those ideas. All nine research phases are planned and unregistered for execution.</p>
++        <ul>
++          <li><a href="#photonic-circuit-lab/weight-memory">Chip 13 · Photonic Weight Memory</a> programs and probes a model cell.</li>
++          <li><a href="#photonic-circuit-lab/in-memory-computing">Chip 14 · Photonic In-Memory Computing</a> multiplies inputs by stationary weights.</li>
++          <li><a href="#photonic-circuit-lab/stored-weight-network">Chip 15 · Photonic Neural Network</a> combines three stored-weight layers with electronic activations.</li>
++        </ul>
++        <div class="ow-table" tabindex="0" role="region" aria-label="OPA-W research phases">
++          <table class="data-table">
++            <caption>Nine research phases</caption>
++            <thead><tr><th scope="col">Phase</th><th scope="col">Deliverable and gate</th><th scope="col">Status</th></tr></thead>
++            <tbody>
++              <tr><th scope="row">OPA-W-001 · Materials and architecture evidence</th><td>Compare primary evidence and baselines. Trace assumptions and select candidates against matched requirements.</td><td>Planned</td></tr>
++              <tr><th scope="row">OPA-W-002 · Multilevel cell</th><td>Compare ideal and calibrated models against binary storage. Set an error target before claiming 16 usable states and report drift, retention, write energy and uncertainty.</td><td>Planned</td></tr>
++              <tr><th scope="row">OPA-W-003 · Addressable array</th><td>Model a 16 × 16 array with routing and write isolation. Quantify addressing failures, crosstalk, yield, footprint and peripheral overhead.</td><td>Planned</td></tr>
++              <tr><th scope="row">OPA-W-004 · Parallel optical readout</th><td>Compare spatial, wavelength and time multiplexing. Account for useful bandwidth, latency, error, energy and detector or ADC limits.</td><td>Planned</td></tr>
++              <tr><th scope="row">OPA-W-005 · Photonic in-memory MVM</th><td>Compare signed matrix–vector multiplication against NumPy/PyTorch and existing OPA models with paired inputs, numerical error and matched system metrics.</td><td>Planned</td></tr>
++              <tr><th scope="row">OPA-W-006 · 3D and modular architecture</th><td>Compare planar, free-space and stacked modules with independent access, realistic loss, crosstalk, packaging and heat removal.</td><td>Planned</td></tr>
++              <tr><th scope="row">OPA-W-007 · Million-weight scaling</th><td>Validate tiled multiplication on a small workload and separate modeled scale from extrapolation. Account for routing, programming and utilization.</td><td>Planned</td></tr>
++              <tr><th scope="row">OPA-W-008 · Billion-weight feasibility</th><td>Assess dense and MoE scenarios at 7B, 70B and 405B with activation and KV-cache traffic. Bound resources, quality, energy and cost.</td><td>Planned</td></tr>
++              <tr><th scope="row">OPA-W-009 · Physical validation</th><td>Confirm process and lab access for a small test array. Measure transmission, retention, endurance, disturbance, precision and computation error.</td><td>Planned</td></tr>
++            </tbody>
++          </table>
++        </div>
++        <p><a href="https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/blob/main/research/OPA-W-ROADMAP.md">Read the OPA-W research plan</a></p>
++      </section>
+       <section class="card research-track" id="opa-g-ecosystem" aria-labelledby="opa-g-title" tabindex="-1">
+         <p class="state">Proposed research · numerical demonstration available</p>
+         <h2 id="opa-g-title">OPA-G · Open Photonic Graphics Accelerator</h2>
+@@ -343,8 +376,8 @@
+     </section>
+     <section id="panel-photonic-circuit-lab" class="tabpanel" role="tabpanel" aria-labelledby="tab-photonic-circuit-lab" hidden>
+       <header class="pulse-heading">
+-        <h1>Photonic Circuit Lab <span class="pulse-version">v2.6 – Multilayer Photonic Neural Network</span></h1>
+-        <p class="intro">Explore light generation, communication and computation across thirteen interactive chips.</p>
++        <h1>Photonic Circuit Lab <span class="pulse-version">v2.7 · Photonic Weight Memory</span></h1>
++        <p class="intro">Explore light generation, communication and computation across sixteen interactive chips.</p>
+       </header>
+       <div class="pulse-controls">
+         <div><label for="pulse-design">Chip design</label>
+@@ -361,11 +394,17 @@
+             <option value="microring">Chip 10 · Interactive Frequency Comb &amp; WDM Laboratory</option>
+             <option value="optical-logic">Chip 11 · Energy-Efficient Optical Logic</option>
+             <option value="photonic-memory">Chip 12 · Photonic Memory Interconnect</option>
++            <option value="weight-memory">Chip 13 · Photonic Weight Memory</option>
++            <option value="in-memory-computing">Chip 14 · Photonic In-Memory Computing</option>
++            <option value="stored-weight-network">Chip 15 · Photonic Neural Network</option>
+             <option value="ray-tracing">Chip 16 · Photonic Ray Tracing Accelerator</option>
+           </select>
+         </div>
+         <button type="button" class="btn primary" id="pulse-start">Start Simulation</button>
+       </div>
++      <opa-weight-memory id="weight-memory-chip" hidden></opa-weight-memory>
++      <opa-in-memory id="in-memory-computing-chip" hidden></opa-in-memory>
++      <opa-stored-network id="stored-weight-network-chip" hidden></opa-stored-network>
+       <photonic-ray-lab id="ray-tracing-chip" hidden></photonic-ray-lab>
+       <section id="photonic-memory-chip" hidden aria-labelledby="pm-title"></section>
+       <section id="optical-logic-chip" hidden aria-labelledby="ol-title">
+@@ -1075,7 +1114,7 @@
+     <p id="bm-download" class="muted" role="status"></p>
+   </section>
+ </section>
+-    <footer class="foot">Debatt-AI Open Photonic Lab · Open research and reproducible experiments · <a style="color:#81dcce" href="https://www.debatt-ai.se/en" target="_blank" rel="noopener">debatt-ai.se</a><br><span>Version 0.4 · Experimental PDK-generated GDSII layout. Foundry approval and physical measurements remain pending.</span></footer>
++    <footer class="foot">Debatt-AI Open Photonic Lab · Open research and reproducible experiments · <a style="color:#81dcce" href="https://www.debatt-ai.se/en" target="_blank" rel="noopener">debatt-ai.se</a><br><span>Experimental PDK-generated GDSII layout. Foundry approval and physical measurements remain pending.</span></footer>
+   </main>
+   <script>
+     'use strict';
+@@ -1085,7 +1124,7 @@
+     document.querySelectorAll('[data-tab]').forEach((button,index)=>{button.addEventListener('click',()=>selectTab(button.dataset.tab));button.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const next=event.key==='Home'?0:event.key==='End'?tabNames.length-1:(index+(event.key==='ArrowRight'?1:-1)+tabNames.length)%tabNames.length;selectTab(tabNames[next]);$('tab-'+tabNames[next]).focus()})});
+     window.addEventListener('hashchange',()=>selectTab(location.hash.slice(1).split('/')[0],false));selectTab(location.hash.slice(1).split('/')[0],false);
+     function focusResearchTrack() {
+-      const track = {'#opa-ecosystem/opa-g':'opa-g-ecosystem','#opa-ecosystem/opvr':'opvr-ecosystem'}[location.hash];
++      const track = {'#opa-ecosystem/opa-w':'opa-w-ecosystem','#opa-ecosystem/opa-g':'opa-g-ecosystem','#opa-ecosystem/opvr':'opvr-ecosystem'}[location.hash];
+       if (!track) return;
+       $(track).focus({preventScroll:true});
+       $(track).scrollIntoView({block:'start'});
+@@ -1094,12 +1133,15 @@
+     window.addEventListener('DOMContentLoaded',focusResearchTrack);
+ 
+     const chipSelector = $('pulse-design');
++    const dedicatedChips = ['weight-memory','in-memory-computing','stored-weight-network','ray-tracing'];
+     chipSelector.addEventListener('change', () => {
+-      const selected = chipSelector.value === 'ray-tracing';
+-      $('ray-tracing-chip').hidden = !selected;
++      const selected = dedicatedChips.includes(chipSelector.value);
++      dedicatedChips.forEach(key => { $(key+'-chip').hidden = chipSelector.value !== key; });
+       $('pulse-start').hidden = selected;
+-      if (selected) history.replaceState(null,'','#photonic-circuit-lab/ray-tracing');
+-      else if (location.hash === '#photonic-circuit-lab/ray-tracing') history.replaceState(null,'','#photonic-circuit-lab');
++      const [tab, previousChip] = location.hash.slice(1).split('/');
++      if (tab !== 'photonic-circuit-lab') return;
++      if (selected) history.replaceState(null,'','#photonic-circuit-lab/'+chipSelector.value);
++      else if (dedicatedChips.includes(previousChip)) history.replaceState(null,'','#photonic-circuit-lab');
+     });
+     const fields=['theta','x1','x2'];
+     const allFields=[...fields,'loss','phaseError'];
+diff --git a/dist/photonic-components.js b/dist/photonic-components.js
+index f083fa5..1054735 100644
+--- a/dist/photonic-components.js
++++ b/dist/photonic-components.js
+@@ -264,7 +264,7 @@
+   function followHash() {
+     const [tab,id] = window.location.hash.slice(1).split('/');
+     if (tab==='photonic-component-library' && id) showEntry(id);
+-    if (tab==='photonic-circuit-lab' && (data.chipKeys.includes(id) || ['optical-logic','photonic-memory','ray-tracing'].includes(id))) {
++    if (tab==='photonic-circuit-lab' && (data.chipKeys.includes(id) || ['optical-logic','photonic-memory','weight-memory','in-memory-computing','stored-weight-network','ray-tracing'].includes(id))) {
+       const select=byId('pulse-design');
+       if (select.value!==id) {
+         select.value=id;
+diff --git a/dist/scalable-photonic.js b/dist/scalable-photonic.js
+index d40cbe1..2a56384 100644
+--- a/dist/scalable-photonic.js
++++ b/dist/scalable-photonic.js
+@@ -461,7 +461,7 @@
+   function selectChip() {
+     const selected=design.value==='scalable';
+     panel.hidden=!selected;
+-    document.getElementById('pulse-original').hidden=selected || ['multilayer','microring','optical-logic','photonic-memory','ray-tracing'].includes(design.value);
++    document.getElementById('pulse-original').hidden=selected || ['multilayer','microring','optical-logic','photonic-memory','weight-memory','in-memory-computing','stored-weight-network','ray-tracing'].includes(design.value);
+     if(selected) reset();
+     else stop();
+   }

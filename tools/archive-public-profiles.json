@@ -97,5 +97,13 @@
     "combinations.csv",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-w-002c": [
+    "result.json",
+    "baseline.csv",
+    "paired.csv",
+    "summary.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

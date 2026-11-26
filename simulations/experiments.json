@@ -1601,6 +1601,19 @@
         "results/ci-originals/opa-w-002a/45900743025-15156101360/*"
       ],
       "run": "python simulations/memory/test_audit_multilevel.py && python simulations/memory/audit_multilevel_v002.py results/ci-originals/opa-w-002a/45900743025-15156101360 --output results/opa-w-002b"
+    },
+    {
+      "id": "opa-w-002c",
+      "name": "Photonic memory: paired reference-assisted drift compensation",
+      "script": "simulations/memory/drift_compensation_v003.py",
+      "result_dir": "results/opa-w-002c",
+      "artifact": "opa-w-002c",
+      "timeout_minutes": 30,
+      "deps": [
+        "simulations/memory/multilevel_cell_v001.py",
+        "simulations/memory/test_drift_compensation.py"
+      ],
+      "run": "python simulations/memory/test_drift_compensation.py && python simulations/memory/drift_compensation_v003.py --output results/opa-w-002c"
     }
   ]
 }

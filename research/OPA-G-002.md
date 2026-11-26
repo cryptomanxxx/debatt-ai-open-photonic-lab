@@ -15,3 +15,7 @@ Run: `python simulations/graphics/side_test_v002.py`. Outputs result.json and re
 ## Remaining gate before OPA-G-003
 
 Obtain Supplementary Note 1, verify exact mapping, scaling and decision convention against the authors' derivation and document differences. The optical circuit stage must additionally model reference-field sign preservation, limited modulation range, bias and phase errors, loss and detector noise. No energy, bandwidth, hardware accuracy or VR rendering claims follow from this experiment.
+
+## Supplementary source audit (2026-11-26)
+
+The supplied supplement has been inspected. See [source audit](OPA-G-002-SOURCE-AUDIT.md) for the S5–S7 sign discrepancy relative to S1/S2, explicit orientation and guard conventions, and registered executable verification. CI and review pending; the corrected determinant is the proposed G-003 interface, not an author-confirmed erratum. Historical G-002 evidence is unchanged.

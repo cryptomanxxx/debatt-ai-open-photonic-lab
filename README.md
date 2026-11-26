@@ -64,7 +64,7 @@ independent-laser training proxy is a numerical reference, not a validated chip.
 
 ## Photonic graphics and open XR (planned)
 
-[OPA-G research roadmap](research/OPA-G-ROADMAP.md) · [OPVR research roadmap](research/OPVR-ROADMAP.md) · [Chip 16 educational prototype](web/chip16/README.md). OPA-G studies optical ray-box intersection acceleration; OPVR proposes a gated hybrid photonic XR architecture. Chip 13–15 retain their OPA-W reservations. Chip 16 is a standalone 2D numerical teaching prototype, not a physical optical model or published Site feature. [OPA-G-001](research/OPA-G-001.md) is implemented and registered; CI verification and archive pending. Later phases remain planned; existing priorities are unchanged.
+[OPA-G research roadmap](research/OPA-G-ROADMAP.md) · [OPVR research roadmap](research/OPVR-ROADMAP.md) · [Chip 16 educational prototype](web/chip16/README.md). OPA-G studies optical ray-box intersection acceleration; OPVR proposes a gated hybrid photonic XR architecture. Chip 13–15 retain their OPA-W reservations. Chip 16 is a standalone 2D numerical teaching prototype, not a physical optical model or published Site feature. [OPA-G-001](research/OPA-G-001.md) passed 30/30 numerical checks; [CI evidence archive](results/opa-g-001/provenance.json) includes exact JSON and CSV. Later phases remain planned; existing priorities are unchanged.
 
 ## OPA-CIR research phase
 

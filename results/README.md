@@ -66,6 +66,8 @@ Circuit (MZI) experiments use numpy from the same environment.
 | OPA-G-004A | [Analysis](opa-g-004a/README.md) | 99/99 checks; 23424 frozen pairs; zero FP64 errors; compiled CPU 118.9–174.2 million tests/s at full heldout batch | Shared CI, synthetic data, no GPU/power measurement |
 | OPA-G-004B | [Analysis](opa-g-004b/README.md), [original archive](ci-originals/opa-g-004b/45849783504-15132527500/archive-provenance.json) | 18/18 checks; combined max-min 0 FP/FN and 6605/9858 optical fallback; noise-only one FN | No common qualified nontrivial policy; partial hypothetical energy only |
 
+| OPA-G-004B2 | [Analysis](opa-g-004b2/README.md), [original archive](ci-originals/opa-g-004b2/45858488663-15136519355/archive-provenance.json) | 5/5 checks; prospective gate passed, max_min_125 zero observed errors over 492800 classifications; worst scenario fallback 71.10% | Repeated synthetic pairs, 100% worst-panel fallback, no hardware performance |
+
 The 3D results from 007–010 and from 011 describe different polarizations
 (TM-like versus TE-like) and are normalized differently, so they should not be
 compared number for number.

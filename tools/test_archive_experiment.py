@@ -114,6 +114,9 @@ class ArchiveTests(unittest.TestCase):
             "##[group]Run experiment",
         ])
         self.assertEqual(executed_checkout(log, "pull_request", head), merge)
+        self.assertEqual(executed_checkout(log, "pull_request", head, "267"), merge)
+        with self.assertRaises(ValueError):
+            executed_checkout(log, "pull_request", head, "278")
         for broken in (log.replace("+"+merge, "+"+head),
                        log.replace("refs/remotes/pull/267/merge", "main"),
                        log.replace("\n"+merge+"\n", "\nmissing\n"),

@@ -44,6 +44,12 @@ class DiscoveryTests(unittest.TestCase):
                        {"head_repository":{"full_name":"fork/repo"}}):
             self.assertEqual(self.discover(runs=[{**self.run,**change}]),[])
 
+    def test_empty_pr_association_requires_later_checkout_binding(self):
+        for association in ([], None):
+            self.assertEqual(self.discover(runs=[{**self.run,"pull_requests":association}]),self.discover())
+        without = {k:v for k,v in self.run.items() if k != "pull_requests"}
+        self.assertEqual(self.discover(runs=[without]),self.discover())
+
     def test_newest_failure_not_older_success(self):
         self.assertEqual(self.discover(runs=[self.run,{**self.run,"id":2,"conclusion":"failure"}]),[])
 

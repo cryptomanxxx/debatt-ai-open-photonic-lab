@@ -33,6 +33,15 @@ def api(repo, endpoint):
     return json.loads(subprocess.check_output(["gh", "api", f"repos/{repo}/{endpoint}"]))
 
 
+def download_job_log(repo, job_id):
+    # gh guards terminal output against escape sequences. Capture raw bytes
+    # privately for parsing and hashing; never print or execute the log.
+    return subprocess.check_output([
+        "gh", "api", "--allow-escape-sequences",
+        f"repos/{repo}/actions/jobs/{job_id}/logs",
+    ])
+
+
 def validate_metadata(repo, run, artifact, entry, run_id, artifact_id, head):
     require(run["id"] == run_id and run["status"] == "completed"
             and run["conclusion"] == "success", "Source run not successful")
@@ -162,7 +171,7 @@ def main():
     require(len(matched) == 1 and matched[0]["conclusion"] == "success",
             "No unique successful experiment job")
     job_id = matched[0]["id"]
-    log = subprocess.check_output(["gh", "api", f"repos/{repo}/actions/jobs/{job_id}/logs"])
+    log = download_job_log(repo, job_id)
     executed = executed_checkout(log.decode("utf-8"), run["event"], head)
     # Historical synthetic merge objects may not be in main's history.
     # GitHub's immutable commit endpoint supplies parents and tree by exact SHA.

@@ -1627,6 +1627,19 @@
         "results/ci-originals/opa-w-002c/45903062662-15156368734/*"
       ],
       "run": "python simulations/memory/test_audit_drift.py && python simulations/memory/audit_drift_v004.py results/ci-originals/opa-w-002c/45903062662-15156368734 --output results/opa-w-002d"
+    },
+    {
+      "id": "opa-w-002e",
+      "name": "Photonic memory: chronological held-out adaptive calibration",
+      "script": "simulations/memory/adaptive_calibration_v005.py",
+      "result_dir": "results/opa-w-002e",
+      "artifact": "opa-w-002e",
+      "timeout_minutes": 45,
+      "deps": [
+        "simulations/memory/multilevel_cell_v001.py",
+        "simulations/memory/test_adaptive_calibration.py"
+      ],
+      "run": "python simulations/memory/test_adaptive_calibration.py && python simulations/memory/adaptive_calibration_v005.py --output results/opa-w-002e"
     }
   ]
 }

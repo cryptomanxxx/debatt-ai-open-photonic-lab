@@ -115,5 +115,13 @@
     "cost.csv",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-w-002e": [
+    "result.json",
+    "development.csv",
+    "heldout.csv",
+    "summary.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

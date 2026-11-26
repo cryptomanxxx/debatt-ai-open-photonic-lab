@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "scientific_gate": true,
+  "counts": {
+    "triangle_pairs": 11574,
+    "box_pairs": 7467,
+    "excluded": 1,
+    "node_rows": 664870,
+    "ray_rows": 49800
+  },
+  "discrepancies": 0,
+  "stage": "C3A compiled FP64 and archived guard/operation audit",
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "flags": [
+    "-O3",
+    "-std=c11",
+    "-fPIC",
+    "-shared",
+    "-fno-fast-math",
+    "-ffp-contract=off"
+  ],
+  "compiled_benchmark": "not_run",
+  "energy": "not_measured",
+  "limitations": [
+    "Recompiled FP64 kernels, not historical binary identity",
+    "Archived minima and thresholds replayed, not regenerated optical signals",
+    "No timing or physical performance claims"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "experiment": "opa-g-004c3a-fp64",
+  "repository": "cryptomanxxx/debatt-ai-open-photonic-lab",
+  "source_head_sha": "3c2302ee44fba45531539f8738da24c48f72b346",
+  "executed_commit_sha": "68ad4f95fa98efd07110adfb98fdc04c8731884a",
+  "executed_tree_sha": "6701ed9622a1bc154580020c24452a6ba96e4372",
+  "source_event": "pull_request",
+  "checkout_log_sha256": "ea0f7d17b61006567bbe1b1b5931761255602f58ffaf6da94574837b1319a495",
+  "workflow_run_id": 45880072521,
+  "run_attempt": 1,
+  "job_id": 140117012254,
+  "artifact_id": 15146368733,
+  "artifact_name": "opa-g-004c3a-fp64",
+  "artifact_sha256": "5c73640286333ffc63e749143f72eca2b7717af5313996189d847646a5b32af3",
+  "artifact_bytes": 20429,
+  "source_workflow": ".github/workflows/experiments.yml",
+  "expanded_bytes": 156088,
+  "expansion_policy": "default",
+  "verification": "GitHub metadata, historical checkout log and executed commit/tree, ZIP SHA-256 and CRC; exact extracted bytes; no rerun",
+  "files": {
+    "discrepancies.csv": {
+      "bytes": 40,
+      "sha256": "b22441235fd09a6b6b6928085b33008e50405931fb31f9c2b5aeb92b96d739e0",
+      "git_blob_sha1": "fd00f71088b09a02f68b55a47ae1b8bf844948c0"
+    },
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c",
+      "git_blob_sha1": "e0f73c62ff0fe442819a24eff4c391bc1d95e8d8"
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6",
+      "git_blob_sha1": "b78cc4b63c8815d1e064dec794040bbff4e2ffac"
+    },
+    "panels.csv": {
+      "bytes": 77243,
+      "sha256": "712a071f1f19c79f2249ea8a79a9ac63d8cefd29ac8940a2b931b35a0c40f89f",
+      "git_blob_sha1": "967fe617420902bc2bb4eb16d94f0b57b1d1796b"
+    },
+    "result.json": {
+      "bytes": 730,
+      "sha256": "d76a571ecb0afae91faec26cd44c05fd28c9441025a30c1476de09de3b208eba",
+      "git_blob_sha1": "da788a89ea01f2fdca38b6fe68a3a4e12f6aaa2e"
+    }
+  }
+}

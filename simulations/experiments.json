@@ -1576,6 +1576,18 @@
         "results/ci-originals/opa-g-004c3b-energy/45882481991-15148585656/*"
       ],
       "run": "python simulations/graphics/test_latency_budget.py && python simulations/graphics/latency_budget_v016.py results/ci-originals/opa-g-004c2/45865605446-15140012141 results/ci-originals/opa-g-004c3a-fp64/45880072521-15146368733 results/ci-originals/opa-g-004c3a-cpu/45881149631-15147700133 results/ci-originals/opa-g-004c3b-energy/45882481991-15148585656 --output results/opa-g-004c3b-latency"
+    },
+    {
+      "id": "opa-w-002a",
+      "name": "Photonic memory: conditional binary and sixteen-state reliability",
+      "script": "simulations/memory/multilevel_cell_v001.py",
+      "result_dir": "results/opa-w-002a",
+      "artifact": "opa-w-002a",
+      "timeout_minutes": 15,
+      "deps": [
+        "simulations/memory/test_multilevel_cell.py"
+      ],
+      "run": "python simulations/memory/test_multilevel_cell.py && python simulations/memory/multilevel_cell_v001.py --output results/opa-w-002a"
     }
   ]
 }

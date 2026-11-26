@@ -1,6 +1,6 @@
 # OPA-G-004C3 — Matched whole-BVH benchmark and conditional system budget
 
-Status: prospective protocol, not executed. [C2 archived analysis](../results/opa-g-004c2/README.md) passes both finite-sample gates with max_min_125, but physical acceleration remains unmeasured.
+Status: C3A stage 1 archive accounting executed and archived; stage 2 independent geometry implementation pending CI and review. Compiled benchmark and C3B remain prospective. [C2 archived analysis](../results/opa-g-004c2/README.md) passes both finite-sample gates with max_min_125, but physical acceleration remains unmeasured.
 
 ## C3A: archived accounting and compiled electronic reference
 
@@ -17,3 +17,7 @@ Define E_cpu = common_cpu + N*e_box; E_hybrid = common_hybrid + F*e_box + N*e_pr
 ## Advancement
 
 C3A must pass independent data/quality verification; C3B can produce negative or inconclusive budgets. Neither constitutes a physical benchmark. Advance to G-005 only after reviewing process-specific feasibility, interfaces, existing component registry and measurement plan, not merely a positive illustrative budget. Preserve existing CIR/LIB priorities.
+
+## C3A stage 2 implementation
+
+Independent standard-library rational Cramer's-rule triangle intersection and interval-based AABB intersection use the immutable C2 represented binary64 geometry. Validate tree containment and coverage, recompute coplanarity and exact nearest hits (including tie ordering), compare all archived visited-node exact and CPU classifications, replay nearest hits on archived tested primitive IDs, and reconcile electronic traversal and extra/missing work. Archive discrepancies even when the scientific gate fails. This does not independently reproduce FP64 triangle kernel outputs or optical decisions; those and side/guard accounting remain separate validation work. No benchmark or measured energy claim.

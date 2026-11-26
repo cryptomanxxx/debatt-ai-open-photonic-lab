@@ -1482,7 +1482,8 @@
         "results/ci-originals/opa-g-004c1/45862577503-15137988857/archive-provenance.json",
         "results/ci-originals/opa-g-004c1/45862577503-15137988857/scenes.json"
       ],
-      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/graphics/hybrid_bvh_v010.py"    },
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/graphics/hybrid_bvh_v010.py"
+    },
     {
       "id": "opa-g-004c3a",
       "name": "Graphics: independent frozen archive integrity and traversal accounting",
@@ -1494,6 +1495,19 @@
         "results/ci-originals/opa-g-004c2/45865605446-15140012141/*"
       ],
       "run": "python simulations/graphics/audit_c2_archive_v011.py results/ci-originals/opa-g-004c2/45865605446-15140012141 --output results/opa-g-004c3a/result.json"
+    },
+    {
+      "id": "opa-g-004c3a-geometry",
+      "name": "Graphics: independent rational geometry and archived replay",
+      "script": "simulations/graphics/audit_c2_geometry_v012.py",
+      "result_dir": "results/opa-g-004c3a-geometry",
+      "artifact": "opa-g-004c3a-geometry",
+      "timeout_minutes": 20,
+      "deps": [
+        "simulations/graphics/test_audit_c2_geometry.py",
+        "results/ci-originals/opa-g-004c2/45865605446-15140012141/*"
+      ],
+      "run": "python simulations/graphics/test_audit_c2_geometry.py && python simulations/graphics/audit_c2_geometry_v012.py results/ci-originals/opa-g-004c2/45865605446-15140012141 --output results/opa-g-004c3a-geometry"
     }
   ]
 }

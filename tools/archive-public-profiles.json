@@ -47,5 +47,11 @@
     "result.json",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-g-004c3a-geometry": [
+    "result.json",
+    "discrepancies.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

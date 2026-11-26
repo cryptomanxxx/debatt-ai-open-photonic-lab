@@ -2,7 +2,7 @@
 
 G-004B [archived analysis](../results/opa-g-004b/README.md) shows a promising but not universally qualified geometry maximum-residual confidence window: combined stress zero observed errors with 6605/9858 optical fallbacks; noise-only one missed boundary hit. Boundary fallback under combined stress is 4988/4992. The old heldout panel has now been inspected and cannot serve as new validation.
 
-## Registered experiment (CI pending)
+## Registered experiment (executed and archived)
 
 Freeze a new, disjoint calibration/development/heldout geometry manifest using new seeds and exact represented-input oracle. Reject any exact overlap with G-004A across splits before use. Preserve uniform, translated, scene-like and dyadic boundary panels, and add explicit near-parallel and large dynamic-range stress panels. Report distribution and guard counts separately; do not treat repeated noise as independent geometry. Validate compiled FP64 fallback against exact labels before use; if it fails, do not credit it as a matched-quality reference on that panel. Maintain separate original G-004A/B archives. Reuse existing optics, CPU and exact geometry helpers, not new component layouts.
 
@@ -17,3 +17,7 @@ G-004C remains a downstream matched comparison, not a qualified optical accelera
 ## Implementation freeze
 
 `simulations/graphics/robustness_v008.py` uses integer seeds 20261301–20261303 (identifiers, not calendar dates), noise seed 20261304, ten repeats, original four panel generators plus 1024 near-parallel and 1024 anisotropic dynamic-range candidates per split. Near-parallel x direction magnitude 2^-12 to 2^-44; independent axis scaling 2^-20 to 2^20. Exact duplicates across all old and new splits are removed before evaluation. All original labels and guards checked with exact rational geometry. Fifth scenario inherits combined parameters with signed normalized 12-bit operand grid step 1/2047 and per-panel post-calibration static bias drift uniform ±0.002 rad. This models operand quantization, not raw coordinate rounding, separately comparing ideal quantized and unquantized decisions against original labels. Independent seeded readout streams per stage/panel; candidates share draws. Calibration side maximum uses any-side window. Development selection uses worst-scenario optical fallback fraction and fixed candidate order for ties; additionally requires useful optical decisions in every scenario. Selection JSON written before heldout optical evaluation. CPU mismatches are reported, disqualify matched candidates, and do not cause loss of negative results. Implementation success is separate from scientific gate. No energy ranking; no physical or GPU measurements. Seven-file opt-in archive profile includes exact workload and selection evidence.
+
+## Archived outcome
+
+[Original analysis](../results/opa-g-004b2/README.md): 5/5 checks; scientific gate passed with development-selected max_min_125, zero observed errors over 492800 heldout classifications, worst-scenario optical fallback 71.10%, worst panel 100%. Proceed to [G-004C](OPA-G-004C.md) as a numerical experiment, not physical integration.

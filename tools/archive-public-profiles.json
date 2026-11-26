@@ -141,5 +141,14 @@
     "step_state_summary.csv",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-w-002h": [
+    "result.json",
+    "development.csv",
+    "heldout.csv",
+    "summary.csv",
+    "state_summary.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

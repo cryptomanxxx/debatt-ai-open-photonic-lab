@@ -1,0 +1,352 @@
+[
+  {
+    "scenario": "scale_only",
+    "repeat": 0,
+    "gain": 1.004520378245364,
+    "offset": -4.5438314377520645e-06,
+    "threshold": 0.004270615037316461
+  },
+  {
+    "scenario": "scale_only",
+    "repeat": 1,
+    "gain": 1.0045155449975867,
+    "offset": 8.92132082539031e-07,
+    "threshold": 0.004281984304220082
+  },
+  {
+    "scenario": "scale_only",
+    "repeat": 2,
+    "gain": 1.0045054725994331,
+    "offset": -6.390830356217546e-06,
+    "threshold": 0.004282413383046718
+  },
+  {
+    "scenario": "scale_only",
+    "repeat": 3,
+    "gain": 1.0045087119248373,
+    "offset": 9.461685304548643e-06,
+    "threshold": 0.0042991632450722905
+  },
+  {
+    "scenario": "scale_only",
+    "repeat": 4,
+    "gain": 1.0045106148251746,
+    "offset": -4.0642724056663244e-07,
+    "threshold": 0.00428502714958659
+  },
+  {
+    "scenario": "scale_only",
+    "repeat": 5,
+    "gain": 1.0044874729496942,
+    "offset": -1.7127631311737437e-06,
+    "threshold": 0.004305296307835632
+  },
+  {
+    "scenario": "scale_only",
+    "repeat": 6,
+    "gain": 1.0044928498313337,
+    "offset": -5.246074493809541e-06,
+    "threshold": 0.004295790846779168
+  },
+  {
+    "scenario": "scale_only",
+    "repeat": 7,
+    "gain": 1.0044950335605014,
+    "offset": -1.0318805579878033e-05,
+    "threshold": 0.004287383194344213
+  },
+  {
+    "scenario": "scale_only",
+    "repeat": 8,
+    "gain": 1.0045152415378649,
+    "offset": 1.4197788246423652e-06,
+    "threshold": 0.004282931064889944
+  },
+  {
+    "scenario": "scale_only",
+    "repeat": 9,
+    "gain": 1.0044939157858452,
+    "offset": 1.6553522586714272e-06,
+    "threshold": 0.004303408782903306
+  },
+  {
+    "scenario": "large_scale",
+    "repeat": 0,
+    "gain": 1.0742432839274079,
+    "offset": -8.883330237846413e-05,
+    "threshold": 0.0693138065077005
+  },
+  {
+    "scenario": "large_scale",
+    "repeat": 1,
+    "gain": 1.0744475384923657,
+    "offset": 1.4208175080716747e-05,
+    "threshold": 0.06927423045049591
+  },
+  {
+    "scenario": "large_scale",
+    "repeat": 2,
+    "gain": 1.0746228196737415,
+    "offset": -5.478758004260299e-05,
+    "threshold": 0.06904349215400438
+  },
+  {
+    "scenario": "large_scale",
+    "repeat": 3,
+    "gain": 1.0746316608208153,
+    "offset": -2.4993878752923177e-05,
+    "threshold": 0.06907344605274368
+  },
+  {
+    "scenario": "large_scale",
+    "repeat": 4,
+    "gain": 1.074580689591013,
+    "offset": 7.77847920274307e-05,
+    "threshold": 0.06924393768756226
+  },
+  {
+    "scenario": "large_scale",
+    "repeat": 5,
+    "gain": 1.0744061784637415,
+    "offset": 2.875434691200643e-05,
+    "threshold": 0.06932650843719107
+  },
+  {
+    "scenario": "large_scale",
+    "repeat": 6,
+    "gain": 1.074049809219674,
+    "offset": -2.0029678753603223e-05,
+    "threshold": 0.0695593025314728
+  },
+  {
+    "scenario": "large_scale",
+    "repeat": 7,
+    "gain": 1.0735008975350737,
+    "offset": -8.536542797518666e-05,
+    "threshold": 0.0699301299481013
+  },
+  {
+    "scenario": "large_scale",
+    "repeat": 8,
+    "gain": 1.0746401970105823,
+    "offset": 0.00020342088378168927,
+    "threshold": 0.06935192767057022
+  },
+  {
+    "scenario": "large_scale",
+    "repeat": 9,
+    "gain": 1.0744504946891935,
+    "offset": 0.00010503593327830761,
+    "threshold": 0.06938532819793106
+  },
+  {
+    "scenario": "noise_only",
+    "repeat": 0,
+    "gain": 1.0043194955343688,
+    "offset": -8.273420612814146e-05,
+    "threshold": 0.02135779806063976
+  },
+  {
+    "scenario": "noise_only",
+    "repeat": 1,
+    "gain": 1.0044160927344192,
+    "offset": 1.3992464898704209e-05,
+    "threshold": 0.021853022530294273
+  },
+  {
+    "scenario": "noise_only",
+    "repeat": 2,
+    "gain": 1.0043577561387804,
+    "offset": -3.047571855692269e-05,
+    "threshold": 0.022272061567238755
+  },
+  {
+    "scenario": "noise_only",
+    "repeat": 3,
+    "gain": 1.0044155601629223,
+    "offset": 0.00010197153467624706,
+    "threshold": 0.026219068424508506
+  },
+  {
+    "scenario": "noise_only",
+    "repeat": 4,
+    "gain": 1.0043595700476957,
+    "offset": -6.90717735250117e-05,
+    "threshold": 0.02630946301071033
+  },
+  {
+    "scenario": "noise_only",
+    "repeat": 5,
+    "gain": 1.0044387451640577,
+    "offset": 6.907045211583346e-05,
+    "threshold": 0.02469994453711696
+  },
+  {
+    "scenario": "noise_only",
+    "repeat": 6,
+    "gain": 1.0043406613808377,
+    "offset": -1.3326403686990614e-05,
+    "threshold": 0.020916573956840795
+  },
+  {
+    "scenario": "noise_only",
+    "repeat": 7,
+    "gain": 1.0043002671121712,
+    "offset": 2.9121095379111254e-05,
+    "threshold": 0.025091023203804505
+  },
+  {
+    "scenario": "noise_only",
+    "repeat": 8,
+    "gain": 1.0045297250519856,
+    "offset": -4.958917466384504e-05,
+    "threshold": 0.024993620890066286
+  },
+  {
+    "scenario": "noise_only",
+    "repeat": 9,
+    "gain": 1.0042453429314977,
+    "offset": -3.878732113023713e-05,
+    "threshold": 0.02270573696911645
+  },
+  {
+    "scenario": "combined",
+    "repeat": 0,
+    "gain": 1.0526845088977868,
+    "offset": 0.003841837161685194,
+    "threshold": 0.2320163819035037
+  },
+  {
+    "scenario": "combined",
+    "repeat": 1,
+    "gain": 1.0559244806807482,
+    "offset": -0.0024578801657113005,
+    "threshold": 0.21919500744478532
+  },
+  {
+    "scenario": "combined",
+    "repeat": 2,
+    "gain": 1.0563558390569288,
+    "offset": -0.00032019255037949454,
+    "threshold": 0.14301922730785488
+  },
+  {
+    "scenario": "combined",
+    "repeat": 3,
+    "gain": 1.0522831157961976,
+    "offset": 0.000825845860056201,
+    "threshold": 0.1313293310257278
+  },
+  {
+    "scenario": "combined",
+    "repeat": 4,
+    "gain": 1.0515094613413443,
+    "offset": -0.0014526157990554325,
+    "threshold": 0.3185075562837264
+  },
+  {
+    "scenario": "combined",
+    "repeat": 5,
+    "gain": 1.0558750177321035,
+    "offset": -0.00032921408263732584,
+    "threshold": 0.18978405276484836
+  },
+  {
+    "scenario": "combined",
+    "repeat": 6,
+    "gain": 1.0583722547512038,
+    "offset": -0.0014527074647348551,
+    "threshold": 0.1146020591889263
+  },
+  {
+    "scenario": "combined",
+    "repeat": 7,
+    "gain": 1.0576847822378235,
+    "offset": -0.000698380162265121,
+    "threshold": 0.2481960132986921
+  },
+  {
+    "scenario": "combined",
+    "repeat": 8,
+    "gain": 1.056320355205288,
+    "offset": 0.0012405703761799796,
+    "threshold": 0.1837466787971119
+  },
+  {
+    "scenario": "combined",
+    "repeat": 9,
+    "gain": 1.0525526093110145,
+    "offset": 0.00242476070550744,
+    "threshold": 0.2166405228958336
+  },
+  {
+    "scenario": "drift_quantization",
+    "repeat": 0,
+    "gain": 1.0628055400216514,
+    "offset": -0.00014706339249208369,
+    "threshold": 0.10749902360261347
+  },
+  {
+    "scenario": "drift_quantization",
+    "repeat": 1,
+    "gain": 1.0509635280295835,
+    "offset": -0.003875426027282862,
+    "threshold": 0.18938545468117365
+  },
+  {
+    "scenario": "drift_quantization",
+    "repeat": 2,
+    "gain": 1.0461597143393815,
+    "offset": -0.003197756744436492,
+    "threshold": 0.23672901488440734
+  },
+  {
+    "scenario": "drift_quantization",
+    "repeat": 3,
+    "gain": 1.0604846607890213,
+    "offset": 0.0002102775505762679,
+    "threshold": 0.09539361532194063
+  },
+  {
+    "scenario": "drift_quantization",
+    "repeat": 4,
+    "gain": 1.0592803537223294,
+    "offset": -0.0008485714168332382,
+    "threshold": 0.1785152033919904
+  },
+  {
+    "scenario": "drift_quantization",
+    "repeat": 5,
+    "gain": 1.053182659732248,
+    "offset": 0.0009720685873917542,
+    "threshold": 0.15068869083694217
+  },
+  {
+    "scenario": "drift_quantization",
+    "repeat": 6,
+    "gain": 1.0551018840599886,
+    "offset": 0.002013520356951022,
+    "threshold": 0.2358558629523163
+  },
+  {
+    "scenario": "drift_quantization",
+    "repeat": 7,
+    "gain": 1.052550136933797,
+    "offset": -0.0006032427295558893,
+    "threshold": 0.3205975204761681
+  },
+  {
+    "scenario": "drift_quantization",
+    "repeat": 8,
+    "gain": 1.054039967838479,
+    "offset": -0.0008441028995791811,
+    "threshold": 0.12685891363691862
+  },
+  {
+    "scenario": "drift_quantization",
+    "repeat": 9,
+    "gain": 1.045873267629181,
+    "offset": -0.0026661413578858923,
+    "threshold": 0.20566876005414042
+  }
+]

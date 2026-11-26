@@ -1,0 +1,2006 @@
+[
+  {
+    "scene": "distributed",
+    "ray": 0,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 0,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 1,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 1,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 2,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 2,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 3,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 3,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 4,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 4,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 5,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 5,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 6,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 6,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 7,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 7,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 8,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 8,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 9,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 9,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 10,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 10,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 11,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 11,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 12,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 12,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 13,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 13,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 14,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 14,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 15,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 15,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 16,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 16,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 17,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 17,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 18,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 18,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 19,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 30,
+    "exact_t": "65848/66309"
+  },
+  {
+    "scene": "distributed",
+    "ray": 20,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 20,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 21,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 21,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 22,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 22,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 23,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 23,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 24,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 27,
+    "exact_t": "228/307"
+  },
+  {
+    "scene": "distributed",
+    "ray": 25,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 25,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 26,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 26,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 27,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 27,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 28,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 28,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 29,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 1,
+    "exact_t": "4814/8049"
+  },
+  {
+    "scene": "distributed",
+    "ray": 30,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 30,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 31,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 31,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 32,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 32,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 33,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 33,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 34,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 34,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 35,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 35,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 36,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 36,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 37,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 37,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 38,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 38,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 39,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 39,
+    "exact_t": "1"
+  },
+  {
+    "scene": "distributed",
+    "ray": 40,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 41,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 42,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 43,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 44,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 45,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 46,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 47,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 48,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 49,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 50,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 51,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 52,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 53,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 54,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 55,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 56,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 57,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 58,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 59,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 60,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 61,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 62,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 63,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 64,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 65,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 66,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 67,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 68,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 69,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 33,
+    "exact_t": "8763/509"
+  },
+  {
+    "scene": "distributed",
+    "ray": 70,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 71,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 72,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 73,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 74,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 75,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 76,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 77,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 78,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "distributed",
+    "ray": 79,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 0,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 0,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 1,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 1,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 2,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 38,
+    "exact_t": "27364/29797"
+  },
+  {
+    "scene": "clustered",
+    "ray": 3,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 3,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 4,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 38,
+    "exact_t": "6932/8923"
+  },
+  {
+    "scene": "clustered",
+    "ray": 5,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 5,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 6,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 6,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 7,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 7,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 8,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 40,
+    "exact_t": "238/317"
+  },
+  {
+    "scene": "clustered",
+    "ray": 9,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 9,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 10,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 10,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 11,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 11,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 12,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 12,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 13,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 13,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 14,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 14,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 15,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 15,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 16,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 16,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 17,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 17,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 18,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 18,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 19,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 19,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 20,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 20,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 21,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 21,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 22,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 22,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 23,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 23,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 24,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 14,
+    "exact_t": "2002/3019"
+  },
+  {
+    "scene": "clustered",
+    "ray": 25,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 25,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 26,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 26,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 27,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 21,
+    "exact_t": "11/14"
+  },
+  {
+    "scene": "clustered",
+    "ray": 28,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 28,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 29,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 29,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 30,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 15,
+    "exact_t": "910/1221"
+  },
+  {
+    "scene": "clustered",
+    "ray": 31,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 31,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 32,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 17,
+    "exact_t": "1256/5009"
+  },
+  {
+    "scene": "clustered",
+    "ray": 33,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 33,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 34,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 34,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 35,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 23,
+    "exact_t": "4064/4073"
+  },
+  {
+    "scene": "clustered",
+    "ray": 36,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 36,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 37,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 37,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 38,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 38,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 39,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 39,
+    "exact_t": "1"
+  },
+  {
+    "scene": "clustered",
+    "ray": 40,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 41,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 32,
+    "exact_t": "250/123"
+  },
+  {
+    "scene": "clustered",
+    "ray": 42,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 3,
+    "exact_t": "18/13"
+  },
+  {
+    "scene": "clustered",
+    "ray": 43,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 44,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 45,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 46,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 28,
+    "exact_t": "53/184"
+  },
+  {
+    "scene": "clustered",
+    "ray": 47,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 48,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 10,
+    "exact_t": "1103/702"
+  },
+  {
+    "scene": "clustered",
+    "ray": 49,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 50,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 51,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 52,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 53,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 54,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 55,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 7,
+    "exact_t": "1631/874"
+  },
+  {
+    "scene": "clustered",
+    "ray": 56,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 12,
+    "exact_t": "2193/626"
+  },
+  {
+    "scene": "clustered",
+    "ray": 57,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 58,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 59,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 60,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 38,
+    "exact_t": "5131/1943"
+  },
+  {
+    "scene": "clustered",
+    "ray": 61,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 62,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 63,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 2,
+    "exact_t": "1181/272"
+  },
+  {
+    "scene": "clustered",
+    "ray": 64,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 40,
+    "exact_t": "93/52"
+  },
+  {
+    "scene": "clustered",
+    "ray": 65,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 66,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 67,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 38,
+    "exact_t": "226/55"
+  },
+  {
+    "scene": "clustered",
+    "ray": 68,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 14,
+    "exact_t": "1115/532"
+  },
+  {
+    "scene": "clustered",
+    "ray": 69,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 70,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 45,
+    "exact_t": "675/443"
+  },
+  {
+    "scene": "clustered",
+    "ray": 71,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 22,
+    "exact_t": "176/57"
+  },
+  {
+    "scene": "clustered",
+    "ray": 72,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 73,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 74,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 45,
+    "exact_t": "75/133"
+  },
+  {
+    "scene": "clustered",
+    "ray": 75,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 45,
+    "exact_t": "587/250"
+  },
+  {
+    "scene": "clustered",
+    "ray": 76,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 19,
+    "exact_t": "527/265"
+  },
+  {
+    "scene": "clustered",
+    "ray": 77,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "clustered",
+    "ray": 78,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 14,
+    "exact_t": "1041/680"
+  },
+  {
+    "scene": "clustered",
+    "ray": 79,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 0,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 0,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 1,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 1,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 2,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 2,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 3,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 3,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 4,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 4,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 5,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 5,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 6,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 6,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 7,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 7,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 8,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 8,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 9,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 9,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 10,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 10,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 11,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 32,
+    "exact_t": "3260/6989"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 12,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 12,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 13,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 13,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 14,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 14,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 15,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 15,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 16,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 16,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 17,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 17,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 18,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 18,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 19,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 19,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 20,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 20,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 21,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 21,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 22,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 22,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 23,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 23,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 24,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 24,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 25,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 25,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 26,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 26,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 27,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 27,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 28,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 28,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 29,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 29,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 30,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 30,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 31,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 31,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 32,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 32,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 33,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 33,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 34,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 34,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 35,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 35,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 36,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 36,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 37,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 37,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 38,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 43,
+    "exact_t": "4888/10383"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 39,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 39,
+    "exact_t": "1"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 40,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 41,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 42,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 43,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 44,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 45,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 46,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 47,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 48,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 49,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 50,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 51,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 52,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 53,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 54,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 55,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 56,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 57,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 58,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 59,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 60,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 61,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 62,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 63,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 64,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 65,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 66,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 67,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 68,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 69,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 70,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 71,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 72,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 73,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 23,
+    "exact_t": "2407/223"
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 74,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 75,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 76,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 77,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 78,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "anisotropic",
+    "ray": 79,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "translated_boundary",
+    "ray": 0,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 0,
+    "exact_t": "1"
+  },
+  {
+    "scene": "translated_boundary",
+    "ray": 1,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 0,
+    "exact_t": "1"
+  },
+  {
+    "scene": "translated_boundary",
+    "ray": 2,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 1,
+    "exact_t": "1"
+  },
+  {
+    "scene": "translated_boundary",
+    "ray": 3,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "translated_boundary",
+    "ray": 4,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 0,
+    "exact_t": "0"
+  },
+  {
+    "scene": "translated_boundary",
+    "ray": 5,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 2,
+    "exact_t": "1099511627775/1099511627776"
+  },
+  {
+    "scene": "translated_boundary",
+    "ray": 6,
+    "excluded": true,
+    "coplanar": [
+      0,
+      1,
+      5
+    ],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "translated_boundary",
+    "ray": 7,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  },
+  {
+    "scene": "translated_boundary",
+    "ray": 8,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": 2,
+    "exact_t": "1/2199023255552"
+  },
+  {
+    "scene": "translated_boundary",
+    "ray": 9,
+    "excluded": false,
+    "coplanar": [],
+    "exact_id": -1,
+    "exact_t": null
+  }
+]

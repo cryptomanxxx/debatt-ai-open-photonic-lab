@@ -140,3 +140,16 @@ test('all three experiments fit phone, tablet and desktop widths', { timeout: 45
     for (const width of [360, 768, 1280]) await open(chip, width, async () => {});
   }
 });
+
+test('cross-chip links open the neighboring standalone demos and use the Lab for earlier chips', { timeout: 45000 }, () =>
+  open(13, 768, async page => {
+    await page.getByRole('link', { name: /Chip 14/ }).click();
+    await page.getByRole('heading', { name: /Chip 14/ }).waitFor();
+    assert.equal(new URL(page.url()).pathname, '/chip14/');
+    assert.match(await page.getByRole('link', { name: /Chip 12/ }).getAttribute('href'),
+      /^https:\/\/debatt-ai-open-photonic-lab\.[^/]+\/#photonic-circuit-lab\/photonic-memory$/);
+    await page.getByRole('link', { name: /Chip 15/ }).click();
+    await page.getByRole('heading', { name: /Chip 15/ }).waitFor();
+    assert.equal(new URL(page.url()).pathname, '/chip15/');
+    assert.match(await page.getByRole('link', { name: /Chip 9/ }).getAttribute('href'), /\/#photonic-circuit-lab\/multilayer$/);
+  }));

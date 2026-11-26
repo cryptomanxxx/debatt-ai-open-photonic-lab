@@ -1,14 +1,17 @@
-export const linked = {
-  network: ['stored-weight-network', 'Chip 15 · Photonic Neural Network'],
-  compute: ['in-memory-computing', 'Chip 14 · Photonic In-Memory Computing'],
-  memory: ['weight-memory', 'Chip 13 · Photonic Weight Memory'],
+const linked = {
+  network: ['stored-weight-network', 'Chip 15 · Photonic Neural Network', '../chip15/'],
+  compute: ['in-memory-computing', 'Chip 14 · Photonic In-Memory Computing', '../chip14/'],
+  memory: ['weight-memory', 'Chip 13 · Photonic Weight Memory', '../chip13/'],
   interconnect: ['photonic-memory', 'Chip 12 · Photonic Memory Interconnect'],
   multilayer: ['multilayer', 'Chip 9 · Multilayer Photonic Neural Network'],
 };
 
 export function chipLink(name) {
-  const [key, title] = linked[name];
-  return '<a href="#photonic-circuit-lab/' + key + '">' + title + '</a>';
+  const [key, title, standalone] = linked[name];
+  const hash = '#photonic-circuit-lab/' + key;
+  const site = 'https://debatt-ai-open-photonic-lab.mr-marcus-sweden.chatgpt.site/';
+  const href = document.getElementById('pulse-design') ? hash : standalone ?? site + hash;
+  return '<a href="' + href + '">' + title + '</a>';
 }
 
 export const fmt = value => Math.abs(value) < 0.00005 ? '0.0000' : value.toFixed(4);

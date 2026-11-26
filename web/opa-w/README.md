@@ -10,7 +10,7 @@ From the repository root:
 python3 -m http.server 8000 --bind 127.0.0.1 --directory web
 ```
 
-Visit `http://127.0.0.1:8000/chip13/`, `/chip14/` or `/chip15/`. The standalone pages use the same code and CSS as Sites. Their cross-chip and Ecosystem links target the main Site shell.
+Visit `http://127.0.0.1:8000/chip13/`, `/chip14/` or `/chip15/`. The standalone pages use the same code and CSS as Sites. Standalone links between Chips 13–15 open the neighboring pages. Links to earlier chips open the corresponding panel on the public Lab.
 
 Run the numerical suite with `node --test web/opa-w/model.test.mjs web/chip16/model.test.cjs`. The [GitHub Actions workflow](../../.github/workflows/photonic-circuit-lab.yml) also runs `node --test web/opa-w/browser.test.cjs` with Playwright 1.56.1 and its Chromium. The browser suite covers keyboard slider changes, all three simulations, presets, resets and 360, 768 and 1280 px widths. Playwright is a test-only dependency.
 

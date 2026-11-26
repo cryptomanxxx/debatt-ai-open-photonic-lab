@@ -1614,6 +1614,19 @@
         "simulations/memory/test_drift_compensation.py"
       ],
       "run": "python simulations/memory/test_drift_compensation.py && python simulations/memory/drift_compensation_v003.py --output results/opa-w-002c"
+    },
+    {
+      "id": "opa-w-002d",
+      "name": "Photonic memory: archived paired drift audit and conditional read costs",
+      "script": "simulations/memory/audit_drift_v004.py",
+      "result_dir": "results/opa-w-002d",
+      "artifact": "opa-w-002d",
+      "timeout_minutes": 10,
+      "deps": [
+        "simulations/memory/test_audit_drift.py",
+        "results/ci-originals/opa-w-002c/45903062662-15156368734/*"
+      ],
+      "run": "python simulations/memory/test_audit_drift.py && python simulations/memory/audit_drift_v004.py results/ci-originals/opa-w-002c/45903062662-15156368734 --output results/opa-w-002d"
     }
   ]
 }

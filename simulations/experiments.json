@@ -1542,6 +1542,21 @@
         "results/ci-originals/opa-g-004c3a-fp64/45880072521-15146368733/*"
       ],
       "run": "python simulations/graphics/benchmark_bvh_cpu_v014.py results/ci-originals/opa-g-004c2/45865605446-15140012141 --prior results/ci-originals/opa-g-004c3a-geometry/45878908141-15145538173 results/ci-originals/opa-g-004c3a-fp64/45880072521-15146368733 --output results/opa-g-004c3a-cpu"
+    },
+    {
+      "id": "opa-g-004c3b-energy",
+      "name": "Graphics: conditional matched energy break-even budgets",
+      "script": "simulations/graphics/energy_budget_v015.py",
+      "result_dir": "results/opa-g-004c3b-energy",
+      "artifact": "opa-g-004c3b-energy",
+      "timeout_minutes": 20,
+      "deps": [
+        "simulations/graphics/test_energy_budget.py",
+        "results/ci-originals/opa-g-004c2/45865605446-15140012141/*",
+        "results/ci-originals/opa-g-004c3a-fp64/45880072521-15146368733/*",
+        "results/ci-originals/opa-g-004c3a-cpu/45881149631-15147700133/*"
+      ],
+      "run": "python simulations/graphics/test_energy_budget.py && python simulations/graphics/energy_budget_v015.py results/ci-originals/opa-g-004c2/45865605446-15140012141 results/ci-originals/opa-g-004c3a-fp64/45880072521-15146368733 results/ci-originals/opa-g-004c3a-cpu/45881149631-15147700133 --output results/opa-g-004c3b-energy"
     }
   ]
 }

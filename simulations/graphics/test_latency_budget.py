@@ -1,5 +1,5 @@
 import unittest
-from latency_budget_v016 import schedule
+from latency_budget_v016 import schedule, PROFILES
 
 P=dict(memory=1,pre=1,drive=1,propagation=1,read=1,aggregate=1,
        fallback=5,triangle=5,stack=1,dispatch=0,output=1)
@@ -40,15 +40,10 @@ class LatencyTests(unittest.TestCase):
         self.assertEqual(b["memory"],20)
 
     def test_zero_work_does_not_delay_other_context(self):
-        # At t=1 the first ray has no aggregate/fallback or primitive
-        # work. The second ray starts a long memory request at t=1.
-        # The first context must become available immediately.
-        p=dict(P,memory=1,pre=0,stack=0,output=0)
-        traces=[[(0,0,0)],[(0,0,3)],[(0,0,0)]]
-        t,lb,b=schedule(traces,p,1,2)
-        self.assertEqual(t,20)
-        self.assertEqual(b["memory"],6)
-        self.assertEqual(b["cpu"],15)
+        # Exact reproducer from Codex: old scheduler returned 34 ns.
+        traces=[[(6,0,0)],[(0,0,4)],[(0,0,0)]]
+        t,lb,b=schedule(traces,PROFILES["optimistic"],4,3)
+        self.assertEqual(t,31)
         self.assertLessEqual(lb,t)
 
     def test_context_overlap(self):

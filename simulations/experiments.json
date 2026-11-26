@@ -1322,6 +1322,18 @@
       "deps": [
         "research/OPA-G-001.md"
       ]
+    },
+    {
+      "id": "opa-g-002",
+      "name": "Graphics: independent six-side geometric reconstruction",
+      "script": "simulations/graphics/side_test_v002.py",
+      "result_dir": "results/opa-g-002",
+      "artifact": "opa-g-002",
+      "timeout_minutes": 10,
+      "deps": [
+        "simulations/graphics/ray_box_v001.py",
+        "research/OPA-G-002.md"
+      ]
     }
   ]
 }

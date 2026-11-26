@@ -1394,6 +1394,30 @@
         "research/OPA-G-004A.md"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/graphics/electronic_baseline_v006.py"
+    },
+    {
+      "id": "opa-g-004b",
+      "name": "Graphics: matched optical readout and partial energy break-even",
+      "script": "simulations/graphics/matched_optical_v007.py",
+      "result_dir": "results/opa-g-004b",
+      "artifact": "opa-g-004b",
+      "timeout_minutes": 15,
+      "deps": [
+        "simulations/graphics/photonic_side_v004.py",
+        "simulations/graphics/boundary_readout_v005.py",
+        "simulations/graphics/electronic_baseline_v006.py",
+        "simulations/graphics/ray_box_cpu_v006.c",
+        "simulations/graphics/ray_box_v001.py",
+        "simulations/graphics/side_test_v002.py",
+        "simulations/circuit/mzi.py",
+        "research/OPA-G-004B.md",
+        "results/ci-originals/opa-g-004a/45841325612-15128251841/archive-provenance.json",
+        "results/ci-originals/opa-g-004a/45841325612-15128251841/workload.csv",
+        "results/ci-originals/opa-g-004a/45841325612-15128251841/workload-manifest.json",
+        "results/ci-originals/opa-g-004a/45841325612-15128251841/results.csv",
+        "results/ci-originals/opa-g-004a/45841325612-15128251841/result.json"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/graphics/matched_optical_v007.py"
     }
   ]
 }

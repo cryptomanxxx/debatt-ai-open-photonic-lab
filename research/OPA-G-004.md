@@ -1,6 +1,6 @@
 # OPA-G-004 — Matched electronic and conditional photonic ray-box benchmark
 
-Proposed protocol, not an executed benchmark or measured hardware result. G-003B [archived analysis](../results/opa-g-003b/README.md) closes the numerical stress experiment but does not establish a robust optical decision policy. Do not advance to physical integration on this evidence alone.
+Protocol with G-004A/B executed and archived; no measured optical hardware result. G-003B [archived analysis](../results/opa-g-003b/README.md) closes the numerical stress experiment but does not establish a robust optical decision policy. Do not advance to physical integration on this evidence alone.
 
 ## G-004A: electronic reference and workload freeze
 
@@ -22,4 +22,4 @@ Only after a matched pairwise baseline, freeze common BVH, rays, traversal order
 
 ## Next implementation
 
-G-004A is the next separate experiment: implement deterministic workload manifest, exact labels and electronic CPU baseline; GPU execution and conditional optical accounting follow as distinct evidence stages. This PR adds protocol and analysis only, no experiment registration or execution. No new PDK component is needed; consult existing registry for later device work.
+G-004A [CPU analysis](../results/opa-g-004a/README.md) and G-004B [optical analysis](../results/opa-g-004b/README.md) are archived. No common nontrivial optical policy meets all four stress scenarios. [G-004B2](OPA-G-004B2.md) is the next proposed prospective robustness experiment. GPU and physical energy remain unmeasured. No new PDK component is needed; consult existing registry for later device work.

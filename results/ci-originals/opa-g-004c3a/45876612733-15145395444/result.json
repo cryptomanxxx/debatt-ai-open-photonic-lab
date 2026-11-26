@@ -1,0 +1,28 @@
+{
+  "stage": "C3A archive accounting only",
+  "passed": true,
+  "files": 9,
+  "bytes": 59987288,
+  "rays": 49800,
+  "nodes": 664870,
+  "worst_fallback_fraction": "1",
+  "worst_panels": [
+    {
+      "scenario": "combined",
+      "repeat": 4,
+      "scene": "anisotropic",
+      "optical": 952,
+      "fallback": 952
+    },
+    {
+      "scenario": "drift_quantization",
+      "repeat": 7,
+      "scene": "anisotropic",
+      "optical": 952,
+      "fallback": 952
+    }
+  ],
+  "geometry_audit": "not_run",
+  "compiled_benchmark": "not_run",
+  "energy": "not_measured"
+}

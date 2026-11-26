@@ -5,6 +5,9 @@ on:
       - ".github/workflows/archive-scientific-ci.yml"
       - ".github/workflows/archive-scientific-experiment.yml"
       - "tools/archive_experiment.py"
+      - "tools/archive_discovery.py"
+      - "tools/archive-public-profiles.json"
+      - "tools/test_archive_discovery.py"
       - "tools/test_archive_experiment.py"
       - "results/ci-originals/**"
   workflow_dispatch:
@@ -25,4 +28,6 @@ jobs:
         with:
           python-version: "3.13"
       - name: Archive regression tests
-        run: python tools/test_archive_experiment.py
+        run: |
+          python tools/test_archive_experiment.py
+          python tools/test_archive_discovery.py

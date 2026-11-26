@@ -83,5 +83,13 @@
     "scenario-latency.csv",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-w-002a": [
+    "result.json",
+    "panels.csv",
+    "confusion.csv",
+    "calibration.json",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

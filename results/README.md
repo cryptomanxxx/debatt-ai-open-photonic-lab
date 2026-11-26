@@ -85,3 +85,8 @@ The following are analytical/numerical experiments, not measured devices.
 | SYS004 | [report](opa-sys-004/result.json) | 886 feasible; first 82 eight-bit independent-laser keys |
 | SYS005 | [report](opa-sys-005/result.json) | 2,758 feasible; first 152 six-bit comb keys |
 | SYS006 | [report](opa-sys-006/result.json) | Eight-bit selected numerical proxy passes; six-bit fails all-seed gate |
+
+
+## Exact CI artifact archive (manual dispatch)
+
+Use [Archive scientific experiment](../.github/workflows/archive-scientific-experiment.yml) for explicitly reviewed public artifacts from successful Experiments runs. See [operator instructions](CI-ARCHIVE.md). Original extracted files and per-file provenance are stored in a new run/artifact-specific directory under results/ci-originals; canonical experiment reports are never replaced. Review and merge separately.

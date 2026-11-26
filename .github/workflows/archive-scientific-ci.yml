@@ -1,0 +1,28 @@
+name: Scientific archive CI
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/archive-scientific-ci.yml"
+      - ".github/workflows/archive-scientific-experiment.yml"
+      - "tools/archive_experiment.py"
+      - "tools/test_archive_experiment.py"
+      - "results/ci-originals/**"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: scientific-archive-ci-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+jobs:
+  archive-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Archive regression tests
+        run: python tools/test_archive_experiment.py

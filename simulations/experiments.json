@@ -1524,6 +1524,24 @@
         "results/ci-originals/opa-g-004c2/45865605446-15140012141/*"
       ],
       "run": "python simulations/graphics/test_audit_c2_fp64.py && python simulations/graphics/audit_c2_fp64_v013.py results/ci-originals/opa-g-004c2/45865605446-15140012141 --output results/opa-g-004c3a-fp64"
+    },
+    {
+      "id": "opa-g-004c3a-cpu",
+      "name": "Graphics: matched resident compiled whole BVH CPU benchmark",
+      "script": "simulations/graphics/benchmark_bvh_cpu_v014.py",
+      "result_dir": "results/opa-g-004c3a-cpu",
+      "artifact": "opa-g-004c3a-cpu",
+      "timeout_minutes": 20,
+      "deps": [
+        "simulations/graphics/bvh_whole_cpu_v014.c",
+        "simulations/graphics/ray_box_cpu_v006.c",
+        "simulations/graphics/ray_triangle_cpu_v009.c",
+        "simulations/graphics/audit_c2_geometry_v012.py",
+        "results/ci-originals/opa-g-004c2/45865605446-15140012141/*",
+        "results/ci-originals/opa-g-004c3a-geometry/45878908141-15145538173/*",
+        "results/ci-originals/opa-g-004c3a-fp64/45880072521-15146368733/*"
+      ],
+      "run": "python simulations/graphics/benchmark_bvh_cpu_v014.py results/ci-originals/opa-g-004c2/45865605446-15140012141 --prior results/ci-originals/opa-g-004c3a-geometry/45878908141-15145538173 results/ci-originals/opa-g-004c3a-fp64/45880072521-15146368733 --output results/opa-g-004c3a-cpu"
     }
   ]
 }

@@ -60,5 +60,13 @@
     "panels.csv",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-g-004c3a-cpu": [
+    "result.json",
+    "timings.csv",
+    "validation.csv",
+    "discrepancies.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

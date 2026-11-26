@@ -1508,6 +1508,22 @@
         "results/ci-originals/opa-g-004c2/45865605446-15140012141/*"
       ],
       "run": "python simulations/graphics/test_audit_c2_geometry.py && python simulations/graphics/audit_c2_geometry_v012.py results/ci-originals/opa-g-004c2/45865605446-15140012141 --output results/opa-g-004c3a-geometry"
+    },
+    {
+      "id": "opa-g-004c3a-fp64",
+      "name": "Graphics: compiled FP64 and frozen guard/operation audit",
+      "script": "simulations/graphics/audit_c2_fp64_v013.py",
+      "result_dir": "results/opa-g-004c3a-fp64",
+      "artifact": "opa-g-004c3a-fp64",
+      "timeout_minutes": 20,
+      "deps": [
+        "simulations/graphics/test_audit_c2_fp64.py",
+        "simulations/graphics/audit_c2_geometry_v012.py",
+        "simulations/graphics/ray_box_cpu_v006.c",
+        "simulations/graphics/ray_triangle_cpu_v009.c",
+        "results/ci-originals/opa-g-004c2/45865605446-15140012141/*"
+      ],
+      "run": "python simulations/graphics/test_audit_c2_fp64.py && python simulations/graphics/audit_c2_fp64_v013.py results/ci-originals/opa-g-004c2/45865605446-15140012141 --output results/opa-g-004c3a-fp64"
     }
   ]
 }

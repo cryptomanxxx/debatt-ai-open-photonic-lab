@@ -29,6 +29,28 @@ class LatencyTests(unittest.TestCase):
         b,_,_=schedule([[(2,1,1)],[(2,0,0)]],P,16,1)
         self.assertEqual(b-a,1)
 
+    def test_zero_work_bypasses_memory_queue(self):
+        # Ray 0 needs no primitive fetch, while ray 1 occupies memory.
+        # All zero-cost stages must advance without reserving or waiting
+        # on a resource. Ray 0 finishes at 10 ns, ray 1 at 20 ns.
+        p=dict(P,memory=10,pre=0,stack=0,output=0)
+        t,lb,b=schedule([[(0,0,0)],[(0,0,0)]],p,1,1)
+        self.assertEqual(t,20)
+        self.assertEqual(lb,20)
+        self.assertEqual(b["memory"],20)
+
+    def test_zero_work_does_not_delay_other_context(self):
+        # At t=1 the first ray has no aggregate/fallback or primitive
+        # work. The second ray starts a long memory request at t=1.
+        # The first context must become available immediately.
+        p=dict(P,memory=1,pre=0,stack=0,output=0)
+        traces=[[(0,0,0)],[(0,0,3)],[(0,0,0)]]
+        t,lb,b=schedule(traces,p,1,2)
+        self.assertEqual(t,20)
+        self.assertEqual(b["memory"],6)
+        self.assertEqual(b["cpu"],15)
+        self.assertLessEqual(lb,t)
+
     def test_context_overlap(self):
         traces=[[(6,0,0)]]*8
         a,_,_=schedule(traces,P,8,1)

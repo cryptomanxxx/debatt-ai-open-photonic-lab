@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "experiment": "OPA-W-002G",
+  "diagnostic_replay": true,
+  "source_blobs": {
+    "adaptive_calibration_v005.py": "94508ac151f19103b70c8a694116327a0f416577",
+    "multilevel_cell_v001.py": "26b7ffb6172db8a1d0b4550c7f546fae0180ff7e"
+  },
+  "verified_archived_policy_rows": 62208,
+  "trajectories": 5184,
+  "state_rows": 67392,
+  "diagnostic_rows": 269568,
+  "configurations": 13,
+  "numpy_version": "2.4.6",
+  "physical_measurement": false,
+  "material_fit": false,
+  "limitations": [
+    "New replay outputs, not original historical observations",
+    "Aggregate agreement does not prove historical sample identity",
+    "Per-step state counts aggregated over trajectories; per-trajectory state counts retained",
+    "Detailed reference and step diagnostics limited to first fixed held-out seed",
+    "Reference acquisition diagnostics are model values, not measurements",
+    "No new gate selection, independent validation or physical time scale"
+  ]
+}

@@ -8,7 +8,7 @@ import unittest
 import zipfile
 import os
 
-from archive_experiment import sha, git_blob, unpack, write_archive, verify_staged, validate_metadata
+from archive_experiment import sha, git_blob, unpack, write_archive, verify_staged, validate_metadata, executed_checkout
 
 
 class ArchiveTests(unittest.TestCase):
@@ -87,6 +87,27 @@ class ArchiveTests(unittest.TestCase):
                     verify_staged(root)
             finally:
                 os.chdir(old)
+
+    def test_historical_checkout(self):
+        head, merge = "a"*40, "b"*40
+        log = "\n".join([
+            "2026-11-26T11:26:00.0000000Z ##[group]Run actions/checkout@v5",
+            "[command]/usr/bin/git fetch origin +" + merge + ":refs/remotes/pull/267/merge",
+            "[command]/usr/bin/git checkout --progress --force refs/remotes/pull/267/merge",
+            "[command]/usr/bin/git log -1 --format=%H", merge,
+            "##[group]Run experiment",
+        ])
+        self.assertEqual(executed_checkout(log, "pull_request", head), merge)
+        for broken in (log.replace("+"+merge, "+"+head),
+                       log.replace("refs/remotes/pull/267/merge", "main"),
+                       log.replace("\n"+merge+"\n", "\nmissing\n"),
+                       log.replace("[command]/usr/bin/git log -1", "##[group]Run other\n[command]/usr/bin/git log -1")):
+            with self.assertRaises(ValueError):
+                executed_checkout(broken, "pull_request", head)
+        dispatch = "##[group]Run actions/checkout@v5\n[command]/usr/bin/git log -1 --format=%H\n"+head
+        self.assertEqual(executed_checkout(dispatch, "workflow_dispatch", head), head)
+        with self.assertRaises(ValueError):
+            executed_checkout(dispatch, "workflow_dispatch", merge)
 
     def test_metadata(self):
         repo,head="owner/repo","a"*40

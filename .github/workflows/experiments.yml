@@ -34,6 +34,9 @@ on:
       - "tools/bundle_experiments.py"
       - "tools/test_bundle_experiments.py"
       - "tools/test_parallel_id003.py"
+      - "tools/archive_experiment.py"
+      - "tools/test_archive_experiment.py"
+      - ".github/workflows/archive-scientific-experiment.yml"
 
 permissions:
   contents: read
@@ -67,6 +70,8 @@ jobs:
         run: python tools/test_select_experiments.py
       - name: Bundle regression tests
         run: python tools/test_bundle_experiments.py
+      - name: Scientific archive regression tests
+        run: python tools/test_archive_experiment.py
       - name: Registry is complete and consistent
         run: python tools/select_experiments.py --check
       - name: Select experiments

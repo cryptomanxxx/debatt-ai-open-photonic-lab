@@ -105,5 +105,15 @@
     "summary.csv",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-w-002d": [
+    "result.json",
+    "summary.csv",
+    "strata.csv",
+    "combinations.csv",
+    "frontier.csv",
+    "cost.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

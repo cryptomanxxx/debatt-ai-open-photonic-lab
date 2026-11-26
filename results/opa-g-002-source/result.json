@@ -1,0 +1,72 @@
+{
+  "experiment": "opa-g-002-source",
+  "checks": {
+    "s7_counterexample": true,
+    "all_six_orientations": true,
+    "translated_equivalence": true,
+    "integer_grid_equivalence": true,
+    "uniform_equivalence": true,
+    "near_face_equivalence": true,
+    "oriented_edges_exercised": true,
+    "literal_plus_disagreement": true
+  },
+  "passed": true,
+  "rows": [
+    {
+      "workload": "translated",
+      "samples": 4096,
+      "fp": 0,
+      "fn": 0,
+      "margin_mismatches": 0,
+      "literal_plus_fp": 2,
+      "literal_plus_fn": 40,
+      "degenerate_edge_fallbacks": 4,
+      "oriented_edges": 4468
+    },
+    {
+      "workload": "integer_grid",
+      "samples": 3375,
+      "fp": 0,
+      "fn": 0,
+      "margin_mismatches": 0,
+      "literal_plus_fp": 0,
+      "literal_plus_fn": 420,
+      "degenerate_edge_fallbacks": 0,
+      "oriented_edges": 4224
+    },
+    {
+      "workload": "uniform",
+      "samples": 4096,
+      "fp": 0,
+      "fn": 0,
+      "margin_mismatches": 0,
+      "literal_plus_fp": 5,
+      "literal_plus_fn": 425,
+      "degenerate_edge_fallbacks": 0,
+      "oriented_edges": 7374
+    },
+    {
+      "workload": "near_face",
+      "samples": 4096,
+      "fp": 0,
+      "fn": 0,
+      "margin_mismatches": 0,
+      "literal_plus_fp": 0,
+      "literal_plus_fn": 0,
+      "degenerate_edge_fallbacks": 0,
+      "oriented_edges": 0
+    }
+  ],
+  "counterexample": {
+    "s2": -1,
+    "corrected": -1,
+    "printed": 1
+  },
+  "limitations": [
+    "Source S1/S2 audited; S5-S7 sign discrepancy not author-confirmed",
+    "Our explicit edge orientation and forward/parallel guards",
+    "Degenerate edges use limiting inequality, not zero-length S2",
+    "Literal-plus diagnostic only replaces x-parallel edge tests",
+    "No optical or measured hardware results"
+  ]
+}

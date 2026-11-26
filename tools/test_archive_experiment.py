@@ -9,7 +9,7 @@ from unittest.mock import patch
 import zipfile
 import os
 
-from archive_experiment import sha, git_blob, unpack, write_archive, verify_staged, validate_metadata, executed_checkout, download_job_log
+from archive_experiment import expansion_limits, C2_ORIGINAL, C2_TOTAL_MAX, C2_NODE_MAX, MAX_TOTAL, MAX_FILE, sha, git_blob, unpack, write_archive, verify_staged, validate_metadata, executed_checkout, download_job_log
 
 
 class ArchiveTests(unittest.TestCase):
@@ -32,6 +32,55 @@ class ArchiveTests(unittest.TestCase):
     def test_exact_bytes(self):
         data, a = self.zip()
         self.assertEqual(unpack(data, a, self.files), self.files)
+
+    def c2_profile(self):
+        return {**self.files, "node-results.csv": b"node\r\n1\r\n",
+                "audit.csv": b"scene\r\n", "workload.json": b"{}",
+                "labels.json": b"[]", "calibration.json": b"[]"}
+
+    def test_large_exception_requires_exact_identity_and_profile(self):
+        run, artifact, digest = C2_ORIGINAL
+        meta = {"id": artifact, "digest": digest, "workflow_run": {"id": run}}
+        selected = self.c2_profile()
+        self.assertEqual(expansion_limits("opa-g-004c2", meta, selected),
+                         (C2_TOTAL_MAX, {"node-results.csv": C2_NODE_MAX}))
+        for exp, m in (("opa-g-004c1", meta),
+                       ("opa-g-004c2", {**meta, "id": artifact+1}),
+                       ("opa-g-004c2", {**meta, "digest": "sha256:"+"0"*64}),
+                       ("opa-g-004c2", {**meta, "workflow_run":{"id":run+1}})):
+            self.assertEqual(expansion_limits(exp, m, selected), (MAX_TOTAL, {}))
+        with self.assertRaisesRegex(ValueError, "exact reviewed profile"):
+            expansion_limits("opa-g-004c2", meta, list(selected)+["extra.csv"])
+
+    def test_large_expansion_and_member_limits(self):
+        # Scale the limits down for a cheap synthetic ZIP test. Patch only the
+        # reviewed immutable identity to the synthetic artifact's real digest.
+        files = self.c2_profile()
+        files["node-results.csv"] = b"x"*100
+        data, a = self.zip(files)
+        run, artifact, _ = C2_ORIGINAL
+        a.update(id=artifact, workflow_run={"id":run})
+        identity = (run,artifact,a["digest"])
+        with patch("archive_experiment.C2_ORIGINAL",identity), patch(
+                "archive_experiment.MAX_TOTAL",80), patch(
+                "archive_experiment.MAX_FILE",32), patch(
+                "archive_experiment.C2_TOTAL_MAX",1024), patch(
+                "archive_experiment.C2_NODE_MAX",128):
+            self.assertEqual(unpack(data,a,files,"opa-g-004c2"),files)
+            with self.assertRaisesRegex(ValueError,"ZIP expansion limit"):
+                unpack(data,a,files,"opa-g-004c1")
+            with patch("archive_experiment.C2_NODE_MAX",99):
+                with self.assertRaisesRegex(ValueError,"Unsupported ZIP entry: node-results.csv"):
+                    unpack(data,a,files,"opa-g-004c2")
+            with patch("archive_experiment.C2_TOTAL_MAX",80):
+                with self.assertRaisesRegex(ValueError,"ZIP expansion limit"):
+                    unpack(data,a,files,"opa-g-004c2")
+            with patch("archive_experiment.MAX_FILE",1):
+                with self.assertRaisesRegex(ValueError,"Unsupported ZIP entry"):
+                    unpack(data,a,files,"opa-g-004c2")
+            bad={**a,"digest":"sha256:"+"0"*64}
+            with self.assertRaisesRegex(ValueError,"ZIP digest mismatch"):
+                unpack(data,bad,files,"opa-g-004c2")
 
     def test_digest(self):
         data, a = self.zip()

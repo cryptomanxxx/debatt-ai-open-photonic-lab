@@ -1,6 +1,6 @@
 # OPA-G-002 — Six-side algorithm reconstruction
 
-Status: implementation pending CI. This is an independent algebraic reconstruction of the two-product side test described in Zhang et al., Nature Communications 16, 5938 (2025), https://doi.org/10.1038/s41467-025-61234-x, Fig. 1b and main text. The main paper was accessible via https://d-nb.info/1375715399/34. Supplementary Note 1 could not be retrieved; exact author coordinate mapping, orientation, encoding and boundary handling remain unverified. This is not a complete reproduction of the supplementary algorithm. No figures or source code copied.
+Status: CI verified (23/23 checks); [archived evidence](../results/opa-g-002/provenance.json). Supplementary verification remains pending. This is an independent algebraic reconstruction of the two-product side test described in Zhang et al., Nature Communications 16, 5938 (2025), https://doi.org/10.1038/s41467-025-61234-x, Fig. 1b and main text. The main paper was accessible via https://d-nb.info/1375715399/34. Supplementary Note 1 could not be retrieved; exact author coordinate mapping, orientation, encoding and boundary handling remain unverified. This is not a complete reproduction of the supplementary algorithm. No figures or source code copied.
 
 ## Derivation
 

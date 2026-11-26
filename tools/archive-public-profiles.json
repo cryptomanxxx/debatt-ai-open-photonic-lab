@@ -53,5 +53,12 @@
     "discrepancies.csv",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-g-004c3a-fp64": [
+    "result.json",
+    "discrepancies.csv",
+    "panels.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

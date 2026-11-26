@@ -1,0 +1,33 @@
+{
+  "experiment": "opa-g-003",
+  "seed": 20261126,
+  "checks": {
+    "mzi_signed_field": true,
+    "signed_readout": true,
+    "integer_grid_ideal_geometry": true,
+    "translated_ideal_geometry": true,
+    "uniform_ideal_geometry": true,
+    "near_face_ideal_geometry": true,
+    "finite_calibration": true,
+    "fallback_never_adds_errors": true,
+    "count_bounds": true,
+    "noise_and_loss_sweeps": true
+  },
+  "passed": true,
+  "rows": 1224,
+  "scenarios": 17,
+  "repeats": 3,
+  "workload_samples": {
+    "integer_grid": 3375,
+    "translated": 4096,
+    "uniform": 4096,
+    "near_face": 4096
+  },
+  "limitations": [
+    "Illustrative normalized single-carrier model; no fitted device tolerances",
+    "Ideal balanced receiver and reference; no absolute optical power",
+    "Static scalar calibration, empirical residual coverage not a guaranteed bound",
+    "Hybrid confidence window requires extra comparator/readout and exact electronic fallback",
+    "No timing, energy, fabrication or measured hardware claims"
+  ]
+}

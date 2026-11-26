@@ -1,0 +1,37 @@
+{
+  "experiment": "OPA-G-003",
+  "workflow_run_id": 45810482156,
+  "job_id": 139876845002,
+  "artifact_id": 15111277146,
+  "artifact_sha256": "c9e3309a6acdd305b0709e5c7e9de147d7332996a13e0a678094e5e8d7c794bd",
+  "artifact_bytes": 22979,
+  "head_sha": "81a26a46b0ff6db1965a71665f87156f396b84fc",
+  "pull_request": 267,
+  "source_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/45810482156/job/139876845002",
+  "artifact_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/45810482156/artifacts/15111277146",
+  "verification": "Downloaded ZIP SHA-256 matched published digest; ZIP CRC test passed. Archived result.json Git blob matches original. CSV was inspected locally but not transferred to repository; this is a partial archive. Summary is derived from original CSV, not a substitute for original rows. No independent rerun.",
+  "files": {
+    "result.json": {
+      "bytes": 1029,
+      "sha256": "f52dee4532ed9f9221115c7729e4d64510324dfea2be987ac36f66e2434fef34",
+      "git_blob_sha1": "2de01770cef4b448eeef4b38bdbb56b4bb31da95",
+      "archived": true
+    },
+    "results.csv": {
+      "bytes": 202499,
+      "sha256": "b75c4dd96622640277e1f6a8adc10fd45dec2b52dee632736a83e4e8f26dbc58",
+      "git_blob_sha1": "af719f84b5724a82914fec309986ef4a2a10f171",
+      "archived": false
+    },
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c",
+      "archived": false
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6",
+      "archived": false
+    }
+  }
+}

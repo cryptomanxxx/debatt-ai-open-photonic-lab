@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "scientific_gate": true,
+  "counts": {
+    "rays": 250,
+    "triangle_pairs": 11580,
+    "box_pairs": 7467,
+    "excluded": 1,
+    "node_rows": 664870,
+    "ray_rows": 49800
+  },
+  "discrepancies": 0,
+  "stage": "C3A independent exact geometry and archived replay",
+  "compiled_benchmark": "not_run",
+  "energy": "not_measured",
+  "limitations": [
+    "Exact replay of archived tested IDs, not independent optical decisions",
+    "No timing or physical performance claims"
+  ]
+}

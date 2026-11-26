@@ -83,6 +83,44 @@ class ArchiveTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,"ZIP digest mismatch"):
                 unpack(data,bad,files,"opa-g-004c2")
 
+    def test_w002g_pinned_expansion(self):
+        run, artifact, digest = ae.W002G_ORIGINAL
+        meta = {"id": artifact, "digest": digest, "workflow_run": {"id": run}}
+        self.assertEqual(expansion_limits("opa-w-002g", meta, ae.W002G_FILES),
+                         (ae.W002G_TOTAL_MAX, {"diagnostics.csv": ae.W002G_DIAGNOSTICS_MAX}))
+        self.assertEqual(ae.expansion_policy("opa-w-002g", meta, ae.W002G_FILES),
+                         "w002g-original-bounded")
+        for exp, m in (("opa-w-002f", meta),
+                       ("opa-w-002g", {**meta, "id": artifact+1}),
+                       ("opa-w-002g", {**meta, "digest": "sha256:"+"0"*64}),
+                       ("opa-w-002g", {**meta, "workflow_run": {"id":run+1}})):
+            self.assertEqual(expansion_limits(exp, m, ae.W002G_FILES), (MAX_TOTAL, {}))
+        with self.assertRaisesRegex(ValueError, "exact reviewed profile"):
+            expansion_limits("opa-w-002g", meta, ae.W002G_FILES-{"state_counts.csv"})
+
+    def test_w002g_exact_bytes_and_bounds(self):
+        files = {n:b"x" for n in ae.W002G_FILES}
+        files["result.json"] = b'{"passed":true}'
+        files["diagnostics.csv"] = b"x"*100
+        data, a = self.zip(files)
+        run, artifact, _ = ae.W002G_ORIGINAL
+        a.update(id=artifact, workflow_run={"id":run})
+        with patch("archive_experiment.W002G_ORIGINAL",(run,artifact,a["digest"])), patch(
+                "archive_experiment.MAX_TOTAL",80), patch("archive_experiment.MAX_FILE",32), patch(
+                "archive_experiment.W002G_TOTAL_MAX",1024), patch("archive_experiment.W002G_DIAGNOSTICS_MAX",128):
+            self.assertEqual(unpack(data,a,files,"opa-w-002g"),files)
+            with self.assertRaisesRegex(ValueError,"ZIP expansion limit"):
+                unpack(data,a,files,"opa-w-002f")
+            with patch("archive_experiment.W002G_DIAGNOSTICS_MAX",99):
+                with self.assertRaisesRegex(ValueError,"Unsupported ZIP entry: diagnostics.csv"):
+                    unpack(data,a,files,"opa-w-002g")
+            with patch("archive_experiment.W002G_TOTAL_MAX",80):
+                with self.assertRaisesRegex(ValueError,"ZIP expansion limit"):
+                    unpack(data,a,files,"opa-w-002g")
+            with patch("archive_experiment.MAX_FILE",1):
+                with self.assertRaisesRegex(ValueError,"Unsupported ZIP entry"):
+                    unpack(data,a,files,"opa-w-002g")
+
     def test_digest(self):
         data, a = self.zip()
         a["digest"] = "sha256:"+"0"*64

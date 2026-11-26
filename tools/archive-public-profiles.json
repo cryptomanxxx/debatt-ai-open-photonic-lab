@@ -7,5 +7,12 @@
     "workload-manifest.json",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-g-004b": [
+    "result.json",
+    "results.csv",
+    "cost-sensitivity.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

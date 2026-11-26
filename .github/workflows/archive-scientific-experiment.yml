@@ -1,0 +1,78 @@
+name: Archive scientific experiment
+on:
+  workflow_dispatch:
+    inputs:
+      experiment:
+        description: Registered experiment ID
+        required: true
+        type: string
+      source_run:
+        description: Successful Experiments workflow run ID
+        required: true
+        type: string
+      source_artifact:
+        description: Exact source artifact ID
+        required: true
+        type: string
+      source_sha:
+        description: Full source head SHA (must be ancestor of main)
+        required: true
+        type: string
+      files:
+        description: Reviewed complete comma-separated ZIP file allowlist (public data only)
+        required: true
+        type: string
+        default: result.json,results.csv,environment-lock.txt,installed-packages.json
+      confirm_public_archive:
+        description: I reviewed the source files and authorize permanent public archival
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  archive:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_public_archive
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+      pull-requests: write
+    concurrency:
+      group: scientific-archive
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ARCHIVE_EXPERIMENT: ${{ inputs.experiment }}
+      SOURCE_RUN: ${{ inputs.source_run }}
+      SOURCE_ARTIFACT: ${{ inputs.source_artifact }}
+      SOURCE_SHA: ${{ inputs.source_sha }}
+      ARCHIVE_FILES: ${{ inputs.files }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify source and stage exact original files
+        run: python3 tools/archive_experiment.py
+      - name: Publish review branch and request review
+        run: |
+          set -euo pipefail
+          branch="archive/scientific/$ARCHIVE_EXPERIMENT-$SOURCE_RUN-$SOURCE_ARTIFACT"
+          git check-ref-format "refs/heads/$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git commit -m "Archive original $ARCHIVE_EXPERIMENT artifact $SOURCE_ARTIFACT"
+          gh auth setup-git
+          # Empty expected old ref: atomically refuse to update any existing branch.
+          git push --force-with-lease="refs/heads/$branch:" origin "HEAD:refs/heads/$branch"
+          if ! gh pr create --base main --head "$branch" \
+            --title "Archive original $ARCHIVE_EXPERIMENT CI evidence" \
+            --body "Original artifact $SOURCE_ARTIFACT from run $SOURCE_RUN. Review archive-provenance.json and public-data suitability. No rerun or automatic merge."; then
+            echo "::warning::Branch pushed. PR creation failed; check repository Actions PR permissions and open the PR manually."
+            echo "Open https://github.com/$GITHUB_REPOSITORY/compare/main...$branch?expand=1" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          echo "Archive review branch: $branch. Check PR and CI manually before merge." >> "$GITHUB_STEP_SUMMARY"

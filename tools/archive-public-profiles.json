@@ -68,5 +68,13 @@
     "discrepancies.csv",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-g-004c3b-energy": [
+    "result.json",
+    "counts.csv",
+    "panel-budgets.csv",
+    "scenario-budgets.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

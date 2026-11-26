@@ -1,0 +1,5 @@
+workload,samples,fp,fn,margin_mismatches,literal_plus_fp,literal_plus_fn,degenerate_edge_fallbacks,oriented_edges
+translated,4096,0,0,0,2,40,4,4468
+integer_grid,3375,0,0,0,0,420,0,4224
+uniform,4096,0,0,0,5,425,0,7374
+near_face,4096,0,0,0,0,0,0,0

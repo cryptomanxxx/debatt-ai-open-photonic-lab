@@ -70,6 +70,8 @@ Circuit (MZI) experiments use numpy from the same environment.
 
 | OPA-G-004C1 | [Analysis](opa-g-004c1/README.md), [original archive](ci-originals/opa-g-004c1/45862577503-15137988857/archive-provenance.json) | 10/10 checks; 249 eligible rays, zero observed discrepancies, 3323 BVH box tests, 1869 vs 11574 triangle tests | Synthetic scenes, compiled kernels via Python traversal; no speed or energy measurement |
 
+| OPA-G-004C2 | [Analysis](opa-g-004c2/README.md), [original archive](ci-originals/opa-g-004c2/45865605446-15140012141/archive-provenance.json) | 6/6 checks; both gates pass, 12450 repeated ray evaluations and 174850 node decisions with zero selected-policy errors; 73888 optical-only decisions | Synthetic scenes, repeated modeled noise, worst scenario fallback 74.08%, no physical speed/energy measurement |
+
 The 3D results from 007–010 and from 011 describe different polarizations
 (TM-like versus TE-like) and are normalized differently, so they should not be
 compared number for number.

@@ -20,7 +20,7 @@ Primary evidence: Shiji Zhang et al., *Thin-film lithium niobate photonic circui
 | OPA-G-006 | Bench measurement with calibrated electrical/optical planes, raw traces, uncertainty, drift, error counts and matched reference. |
 | OPA-G-007 | Hybrid GPU/FPGA integration and BVH traversal with conservative fallback for ambiguous tests. Measure scene-level image errors, frame timing and whole-system energy before OPVR integration. |
 
-[OPA-G-001](OPA-G-001.md) passed 30/30 numerical checks; [CI evidence archive](../results/opa-g-001/provenance.json) includes exact JSON and CSV. OPA-G-002–007 remain planned. Reuse CIR007/008 conversion accounting, EO001/002 and component library; no cross-process layout without explicit interface. See [OPVR](OPVR-ROADMAP.md) and [Chip 16](../web/chip16/README.md).
+[OPA-G-001](OPA-G-001.md) passed 30/30 numerical checks; [CI evidence archive](../results/opa-g-001/provenance.json) includes exact JSON and CSV. [OPA-G-002](OPA-G-002.md) implements an independent six-side reconstruction; CI and supplementary-coordinate verification remain pending. OPA-G-003–007 remain planned. Reuse CIR007/008 conversion accounting, EO001/002 and component library; no cross-process layout without explicit interface. See [OPVR](OPVR-ROADMAP.md) and [Chip 16](../web/chip16/README.md).
 
 ## Publication and access
 

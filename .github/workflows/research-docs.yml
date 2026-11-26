@@ -1,0 +1,40 @@
+name: Research documentation
+
+on:
+  pull_request:
+    paths:
+      - "research/**"
+      - "tools/check_research_docs.py"
+      - "tools/test_check_research_docs.py"
+      - ".github/workflows/research-docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: research-docs-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Regression tests
+        run: python tools/test_check_research_docs.py
+      - name: Check research documents
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [ -n "$BASE_SHA" ]; then
+            python tools/check_research_docs.py --base "$BASE_SHA"
+          else
+            python tools/check_research_docs.py
+          fi

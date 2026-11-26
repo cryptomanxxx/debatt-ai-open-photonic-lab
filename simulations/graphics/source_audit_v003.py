@@ -49,7 +49,7 @@ def source_edges(case):
         b[k]=hi[k]
         # S2 = -D dot ((A-O) cross (B-O)).
         # Orient edge so normalized S2 equals d_j*U_i-d_i*L_j.
-        if (i,j,k) in ((0,1,2),(1,2,0),(2,0,1)):
+        if (i,j,k) not in ((0,1,2),(1,2,0),(2,0,1)):
             a,b=b,a
         length=abs(b[k]-a[k])
         ri,rj=a[i]-o[i],a[j]-o[j]
@@ -92,6 +92,13 @@ def main():
     corrected=d[1]*(1-o[2])-d[2]*(1-o[1])
     printed=d[1]*(1-o[2])+d[2]*(1-o[1])
     checks={"s7_counterexample":raw==corrected==-1 and printed==1}
+    # Nonzero margins in all six ordered pairs: catches global orientation reversal.
+    control=((0,0,0),(1,2,3),(-1,-2,-3),(4,5,6))
+    pred,s2,red,_,deg=source_edges(control)
+    checks["all_six_orientations"] = (
+        pred and deg==0 and len(s2)==6 and all(x>0 for x in s2)
+        and tuple(s2)==tuple(red)==side_test(*control)[1]
+    )
     rows=[]
     for name,cases in [("translated",translated),("integer_grid",grid),*workloads()]:
         row=dict(workload=name,samples=len(cases),fp=0,fn=0,

@@ -60,7 +60,7 @@ def validate_metadata(repo, run, artifact, entry, run_id, artifact_id, head):
             "Missing artifact digest")
 
 
-def executed_checkout(log, event, head):
+def executed_checkout(log, event, head, expected_pr=None):
     """Read the historical checkout action output, not today's PR merge ref."""
     lines = [re.sub(r"^\d{4}-\d\d-\d\dT\S+Z ", "", l) for l in log.splitlines()]
     # Limit to the first checkout action, before any experiment code executes.
@@ -83,6 +83,7 @@ def executed_checkout(log, event, head):
         require(executed != head, "PR merge SHA unexpectedly equals head")
         # Checkout logs also record the full fetched commit mapped to the merge ref.
         ref = next(m.group(1) for m in refs if m)
+        require(expected_pr is None or ref == str(expected_pr), "Historical checkout PR number mismatch")
         require(any(re.search(r"\+" + executed + r":refs/remotes/pull/" + ref + r"/merge$", l)
                     for l in lines[start:i]), "Fetched merge SHA mismatch")
     else:
@@ -172,7 +173,11 @@ def main():
             "No unique successful experiment job")
     job_id = matched[0]["id"]
     log = download_job_log(repo, job_id)
-    executed = executed_checkout(log.decode("utf-8"), run["event"], head)
+    expected_pr = os.environ.get("ARCHIVE_PR") or None
+    if expected_pr is not None:
+        require(run["event"] == "pull_request" and re.fullmatch(r"[1-9][0-9]*", expected_pr),
+                "Invalid discovery PR context")
+    executed = executed_checkout(log.decode("utf-8"), run["event"], head, expected_pr)
     # Historical synthetic merge objects may not be in main's history.
     # GitHub's immutable commit endpoint supplies parents and tree by exact SHA.
     commit = api(repo, f"commits/{executed}")

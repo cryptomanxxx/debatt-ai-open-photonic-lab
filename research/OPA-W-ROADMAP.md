@@ -1,6 +1,6 @@
 # OPA-W · Open Photonic Weight Memory
 
-Date: 2026-11-24. Status: proposed research; no OPA-W experiment, fabricated device or measured result.
+Date: 2026-11-24. Status: initial W-001A evidence review started; no registered OPA-W experiment, fabricated device or measured result. See [W-001A](OPA-W-001.md).
 
 ## Research question and scope
 
@@ -24,11 +24,11 @@ For an intensity-encoded passive cell, P_out = T(w) P_in, with 0 <= T <= 1. A li
 
 ## Gated research phases
 
-All identifiers are provisional, planned and not registered for execution.
+W-001A evidence review is active; remaining gates are planned. No OPA-W phase is registered for execution.
 
 | Phase | Deliverable | Gate |
 | --- | --- | --- |
-| OPA-W-001 · Materials and architecture evidence | Primary-source comparison, requirements and reference baselines; reuse [component registry](../components/registry.json), MZI/CIR and OPA-M results. | Trace every parameter to a source or label it unknown/assumed; select a candidate on matched requirements, not density alone. |
+| [OPA-W-001](OPA-W-001.md) · Materials and architecture evidence (initial review) | Primary-source comparison, requirements and reference baselines; reuse [component registry](../components/registry.json), MZI/CIR and OPA-M results. | Trace every parameter to a source or label it unknown/assumed; select a candidate on matched requirements, not density alone. |
 | OPA-W-002 · Multilevel cell | Ideal and calibrated candidate transfer models; target 16 distinguishable states, with binary reference. | Report state distributions, read error, drift, write energy, retention and uncertainty; require a preregistered error target before claiming usable four-bit storage. |
 | OPA-W-003 · Addressable array | Model a 16 × 16 array with selection, routing, write isolation and full physical footprint. | Quantify addressing failures, thermal/optical crosstalk, yield and peripheral overhead; compare against isolated-cell results. |
 | OPA-W-004 · Parallel optical readout | Evaluate spatial, wavelength and time multiplexing with independent addressing. | Report sustained useful bandwidth, access latency, error rate, read energy and bottlenecks including detector/ADC capacity. |

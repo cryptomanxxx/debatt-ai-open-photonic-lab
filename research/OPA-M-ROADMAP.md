@@ -41,3 +41,7 @@ For the physical milestone use a stable or tunable source, optical power meter/O
 ## Starting evidence and calibration
 
 The [OPA-M-001 methods and literature review](OPA-M-001.md) records the Cornell/Princeton/NYU HBM study and distinguishes published simulations, company disclosures, external hardware demonstrations and OPA calculations. That study motivates independently limiting accelerator ingress. This track has no physical measurements; work on bank hardware, optical design, integration and fabrication remains planned.
+
+## OPA-W interface
+
+[OPA-W-001A](OPA-W-001.md) defines a common matched-service comparison of streamed electronic weights, optically read persistent storage, and stationary optical MVM. M-001's archived traffic and bottleneck assumptions are reference inputs, not measured hardware. No change to the M-002–008 gates or M-001 calibration requirements.

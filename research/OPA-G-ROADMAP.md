@@ -13,14 +13,14 @@ Primary evidence: Shiji Zhang et al., *Thin-film lithium niobate photonic circui
 | ID | Deliverable and acceptance gate |
 |---|---|
 | OPA-G-001 (CI verified; archive included) | Exact forward-ray/AABB slab reference, independent geometric cases and a reduced-precision comparator proxy. Cover parallel axes, inside origins, negative direction, tangency, behind-origin boxes, degeneracy and near-boundary errors. Publish seeded workloads, false negatives/positives separately, precision sweeps and CI provenance. No physical speed claim. |
-| OPA-G-002 | Reproduce the paper's side-function algorithm from its supplementary derivation; compare against G-001 including coordinate conventions and 3D edge cases. Separate ideal math from optical encoding. |
+| OPA-G-002 (CI verified; archive included) | Reproduce the paper's side-function algorithm from its supplementary derivation; compare against G-001 including coordinate conventions and 3D edge cases. Separate ideal math from optical encoding. |
 | OPA-G-003 | Model four MZMs and coherent readout; sweep bias, nonlinearity, loss, phase drift, noise and comparator threshold. Require calibrated uncertainty and report missed intersections separately. |
 | OPA-G-004 | Matched electronic CPU and GPU ray-box/BVH benchmarks with identical scene, rays and quality. Account for DMA, BVH memory, DAC, drivers, laser wall-plug, detector, TIA, comparator and idle power. Report throughput, p50/p95 latency and joules per delivered correct test; no assumed benefit. |
 | OPA-G-005 | Candidate process-specific test coupon with reference structures and RF/optical interfaces. Reuse lnoi400 models and OPA-LAYOUT-005 where applicable; check registry, access, model validity and foundry DRC before tape-out. |
 | OPA-G-006 | Bench measurement with calibrated electrical/optical planes, raw traces, uncertainty, drift, error counts and matched reference. |
 | OPA-G-007 | Hybrid GPU/FPGA integration and BVH traversal with conservative fallback for ambiguous tests. Measure scene-level image errors, frame timing and whole-system energy before OPVR integration. |
 
-[OPA-G-001](OPA-G-001.md) passed 30/30 numerical checks; [CI evidence archive](../results/opa-g-001/provenance.json) includes exact JSON and CSV. [OPA-G-002](OPA-G-002.md) implements an independent six-side reconstruction; 23/23 checks passed and [CI evidence](../results/opa-g-002/provenance.json) is archived; supplementary-coordinate verification remains pending. OPA-G-003–007 remain planned. Reuse CIR007/008 conversion accounting, EO001/002 and component library; no cross-process layout without explicit interface. See [OPVR](OPVR-ROADMAP.md) and [Chip 16](../web/chip16/README.md).
+[OPA-G-001](OPA-G-001.md) passed 30/30 numerical checks; [CI evidence archive](../results/opa-g-001/provenance.json) includes exact JSON and CSV. [OPA-G-002](OPA-G-002.md) implements an independent six-side reconstruction; 23/23 checks passed and [CI evidence](../results/opa-g-002/provenance.json) is archived; the [supplementary source audit](OPA-G-002-SOURCE-AUDIT.md) has passed its numerical gate with explicit coordinate and orientation conventions. OPA-G-003–007 remain planned. Reuse CIR007/008 conversion accounting, EO001/002 and component library; no cross-process layout without explicit interface. See [OPVR](OPVR-ROADMAP.md) and [Chip 16](../web/chip16/README.md).
 
 ## Publication and access
 
@@ -28,4 +28,4 @@ Publish reproducible code, inputs, limitations and negative findings under repos
 
 ## Supplementary source audit (2026-11-26)
 
-The supplied supplement has been inspected. See [source audit](OPA-G-002-SOURCE-AUDIT.md) for the S5–S7 sign discrepancy relative to S1/S2, explicit orientation and guard conventions, and registered executable verification. CI and review pending; the corrected determinant is the proposed G-003 interface, not an author-confirmed erratum. Historical G-002 evidence is unchanged.
+The supplied supplement has been inspected. See [source audit](OPA-G-002-SOURCE-AUDIT.md) for the S5–S7 sign discrepancy relative to S1/S2, explicit orientation and guard conventions, and registered executable verification. CI and review passed; [archived source audit](../results/opa-g-002-source/provenance.json) records 8/8 checks. The corrected determinant is the G-003 mathematical interface, not an author-confirmed erratum. Historical G-002 evidence is unchanged.

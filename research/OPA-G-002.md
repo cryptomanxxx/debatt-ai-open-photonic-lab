@@ -1,6 +1,6 @@
 # OPA-G-002 — Six-side algorithm reconstruction
 
-Status: CI verified (23/23 checks); [archived evidence](../results/opa-g-002/provenance.json). Supplementary verification remains pending. This is an independent algebraic reconstruction of the two-product side test described in Zhang et al., Nature Communications 16, 5938 (2025), https://doi.org/10.1038/s41467-025-61234-x, Fig. 1b and main text. The main paper was accessible via https://d-nb.info/1375715399/34. Supplementary Note 1 could not be retrieved; exact author coordinate mapping, orientation, encoding and boundary handling remain unverified. This is not a complete reproduction of the supplementary algorithm. No figures or source code copied.
+Status: CI verified (23/23 checks); [archived evidence](../results/opa-g-002/provenance.json). Supplementary mathematical audit passed; see below. This is an independent algebraic reconstruction of the two-product side test described in Zhang et al., Nature Communications 16, 5938 (2025), https://doi.org/10.1038/s41467-025-61234-x, Fig. 1b and main text. The main paper was accessible via https://d-nb.info/1375715399/34. At initial implementation, Supplementary Note 1 could not be retrieved; exact author coordinate mapping, orientation, encoding and boundary handling remain unverified. This is not a complete reproduction of the supplementary algorithm. No figures or source code copied.
 
 ## Derivation
 
@@ -14,8 +14,8 @@ Run: `python simulations/graphics/side_test_v002.py`. Outputs result.json and re
 
 ## Remaining gate before OPA-G-003
 
-Obtain Supplementary Note 1, verify exact mapping, scaling and decision convention against the authors' derivation and document differences. The optical circuit stage must additionally model reference-field sign preservation, limited modulation range, bias and phase errors, loss and detector noise. No energy, bandwidth, hardware accuracy or VR rendering claims follow from this experiment.
+Supplementary Note 1 has been obtained and its defining triple product verified against our explicit mapping; differences are documented below. Exact experimental author encoding is not established. The optical circuit stage must additionally model reference-field sign preservation, limited modulation range, bias and phase errors, loss and detector noise. No energy, bandwidth, hardware accuracy or VR rendering claims follow from this experiment.
 
 ## Supplementary source audit (2026-11-26)
 
-The supplied supplement has been inspected. See [source audit](OPA-G-002-SOURCE-AUDIT.md) for the S5–S7 sign discrepancy relative to S1/S2, explicit orientation and guard conventions, and registered executable verification. CI and review pending; the corrected determinant is the proposed G-003 interface, not an author-confirmed erratum. Historical G-002 evidence is unchanged.
+The supplied supplement has been inspected. See [source audit](OPA-G-002-SOURCE-AUDIT.md) for the S5–S7 sign discrepancy relative to S1/S2, explicit orientation and guard conventions, and registered executable verification. CI and review passed; [archived evidence](../results/opa-g-002-source/provenance.json) records 8/8 checks. The corrected determinant is the G-003 mathematical interface, not an author-confirmed erratum. Historical G-002 evidence is unchanged.

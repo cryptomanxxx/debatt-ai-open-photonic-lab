@@ -94,11 +94,21 @@ jobs:
 
           This bot does not approve or merge pull requests.
           EOF
-          if ! gh pr create --base main --head "$branch" \
+          if ! pr_url=$(gh pr create --base main --head "$branch" \
             --title "[Archive Bot] Automated Scientific Archive – $ARCHIVE_EXPERIMENT" \
-            --body-file "$body"; then
+            --body-file "$body"); then
             echo "::warning::Branch pushed. PR creation failed; check repository Actions PR permissions and open the PR manually."
             echo "Open https://github.com/$GITHUB_REPOSITORY/compare/main...$branch?expand=1" >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
-          echo "Archive review branch: $branch. Check PR and CI manually before merge." >> "$GITHUB_STEP_SUMMARY"
+          echo "Archive PR: $pr_url" >> "$GITHUB_STEP_SUMMARY"
+          # The PR exists even if the review request fails. Do not retry archival.
+          if [[ "$pr_url" == "https://github.com/$GITHUB_REPOSITORY/pull/"* ]] &&
+             [[ "${pr_url##*/}" =~ ^[0-9]+$ ]] && \
+             gh pr comment "$pr_url" --repo "$GITHUB_REPOSITORY" --body '@codex review'; then
+            echo "Codex request comment posted; actual review acceptance/completion is not verified." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::warning::Could not post Codex request. Request review manually on the archive PR."
+            echo "Request Codex review manually on the archive PR." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "Approve pending PR workflows if GitHub requires it. Verify CI and Codex before manual merge." >> "$GITHUB_STEP_SUMMARY"

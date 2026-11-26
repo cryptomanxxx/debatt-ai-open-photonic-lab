@@ -29,7 +29,9 @@ def candidates(repo, pr, runs, registry, profiles, artifacts_for):
                 and r.get("event") == "pull_request"
                 and r.get("head_repository", {}).get("full_name") == repo
                 and r.get("path", "").split("@")[0] == ".github/workflows/experiments.yml"
-                and any(p.get("number") == pr["number"] for p in r.get("pull_requests", []))]
+                and (not r.get("pull_requests") or
+                     any(p.get("number") == pr["number"] for p in r["pull_requests"]))]
+    print(f"Discovery: {len(runs)} workflow runs returned, {len(eligible)} matching source head/event/repository/PR metadata")
     if not eligible:
         return []
     # Never choose an older successful run if the latest run is failed/pending.
@@ -38,6 +40,7 @@ def candidates(repo, pr, runs, registry, profiles, artifacts_for):
         return []
     result = []
     artifacts = artifacts_for(run["id"])
+    print(f"Discovery: selected run {run['id']}, {len(artifacts)} artifacts, {len(profiles)} public profiles")
     for entry in registry["experiments"]:
         exp = entry["id"]
         if exp not in profiles:
@@ -88,6 +91,8 @@ def main():
             print(f"Existing review branch: {branch}; inspect it instead of creating duplicates")
             continue
         pending.append(item)
+    if not found and os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
+        raise ValueError("No matching public artifact for explicitly selected merged PR; inspect discovery diagnostics")
     require(len(pending) <= 1, "Multiple eligible artifacts; use explicit manual archival")
     with open(os.environ["GITHUB_OUTPUT"],"a") as out:
         print("found=" + ("true" if pending else "false"),file=out)

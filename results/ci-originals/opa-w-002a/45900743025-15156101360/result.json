@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "experiment": "OPA-W-002A",
+  "panel_count": 3600,
+  "confusion_rows": 468000,
+  "seeds": [
+    1027,
+    2039,
+    3049,
+    4057,
+    5069,
+    6073,
+    7087,
+    8093
+  ],
+  "writes_per_state": 512,
+  "reads_per_write": 8,
+  "codebook_interval": [
+    0.2,
+    0.8
+  ],
+  "program_read_sigmas": [
+    0.0,
+    0.002,
+    0.005,
+    0.01,
+    0.02
+  ],
+  "drift_sigmas": [
+    0.0,
+    0.005,
+    0.02
+  ],
+  "adc_bits": [
+    6,
+    8,
+    12
+  ],
+  "worst_state_ser_point_target": 0.001,
+  "summary": {
+    "1": {
+      "panels": 1800,
+      "valid": 1800,
+      "point_screen_pass": 1800,
+      "point_screen_fail": 0,
+      "invalid": 0
+    },
+    "4": {
+      "panels": 1800,
+      "valid": 1800,
+      "point_screen_pass": 275,
+      "point_screen_fail": 1525,
+      "invalid": 0
+    }
+  },
+  "physical_measurement": false,
+  "material_fit": false,
+  "write_energy_J": null,
+  "retention_seconds": null,
+  "endurance_cycles": null,
+  "limitations": [
+    "Hypothetical normalized transmission, not a GSSe fit",
+    "Calibration at zero drift, one shared Gaussian offset per validation panel",
+    "Natural binary state labels; no ECC or Gray mapping",
+    "Repeated reads and shared sweep draws are not independent trials",
+    "Hoeffding bound conditional on calibration and drift; no simultaneous coverage",
+    "Point target is not a statistical qualification or physical BER guarantee",
+    "No time-dependent drift law, measured write energy, retention or endurance"
+  ]
+}

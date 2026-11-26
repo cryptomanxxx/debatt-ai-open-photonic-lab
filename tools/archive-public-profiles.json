@@ -1,0 +1,11 @@
+{
+  "opa-g-004a": [
+    "result.json",
+    "results.csv",
+    "timings.csv",
+    "workload.csv",
+    "workload-manifest.json",
+    "environment-lock.txt",
+    "installed-packages.json"
+  ]
+}

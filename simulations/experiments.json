@@ -1334,6 +1334,19 @@
         "simulations/graphics/ray_box_v001.py",
         "research/OPA-G-002.md"
       ]
+    },
+    {
+      "id": "opa-g-002-source",
+      "name": "Graphics: supplementary oriented-edge sign audit",
+      "script": "simulations/graphics/source_audit_v003.py",
+      "result_dir": "results/opa-g-002-source",
+      "artifact": "opa-g-002-source",
+      "timeout_minutes": 10,
+      "deps": [
+        "simulations/graphics/ray_box_v001.py",
+        "simulations/graphics/side_test_v002.py",
+        "research/OPA-G-002-SOURCE-AUDIT.md"
+      ]
     }
   ]
 }

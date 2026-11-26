@@ -175,3 +175,8 @@ OPA-M studies digital links between electronic memory and AI accelerators. The i
 [Research track and phase gates](research/OPA-W-ROADMAP.md)
 
 OPA-W investigates persistent, optically accessible AI model weights and photonic in-memory computing. Its long-term hypothesis is that scalable stationary weights may reduce repeated weight movement by participating directly in optical matrix operations. This is distinct from transient OPA-DELAY-001 storage and OPA-M digital memory transport; electronic RAM remains the working-memory baseline. Nine gated phases cover materials, multilevel cells, addressable arrays, parallel readout, in-memory MVM, 3D/modular architectures, million- and billion-weight feasibility, and physical validation. All are planned; no experiment is registered or authorized here. Existing CIR, LIB, OPA-M and passive test-chip priorities remain in force. Proposed Chips 13–15 are educational concepts, not implemented devices.
+
+
+## Photonic graphics and open XR (planned)
+
+[OPA-G research roadmap](research/OPA-G-ROADMAP.md) · [OPVR research roadmap](research/OPVR-ROADMAP.md) · [Chip 16 educational prototype](web/chip16/README.md). OPA-G studies optical ray-box intersection acceleration; OPVR proposes a gated hybrid photonic XR architecture. Chip 13–15 retain their OPA-W reservations. Chip 16 is a standalone 2D numerical teaching prototype, not a physical optical model or published Site feature. All scientific experiment phases remain planned; existing priorities are unchanged.

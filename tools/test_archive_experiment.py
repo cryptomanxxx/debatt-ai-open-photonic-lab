@@ -5,10 +5,11 @@ import stat
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 import zipfile
 import os
 
-from archive_experiment import sha, git_blob, unpack, write_archive, verify_staged, validate_metadata, executed_checkout
+from archive_experiment import sha, git_blob, unpack, write_archive, verify_staged, validate_metadata, executed_checkout, download_job_log
 
 
 class ArchiveTests(unittest.TestCase):
@@ -87,6 +88,21 @@ class ArchiveTests(unittest.TestCase):
                     verify_staged(root)
             finally:
                 os.chdir(old)
+
+    def test_download_job_log_preserves_raw_bytes(self):
+        raw = b"checkout log\n\x1b[36mcolored output\x1b[0m\r\n"
+        with patch("archive_experiment.subprocess.check_output", return_value=raw) as call:
+            self.assertEqual(download_job_log("owner/repo", 123), raw)
+            call.assert_called_once_with([
+                "gh", "api", "--allow-escape-sequences",
+                "repos/owner/repo/actions/jobs/123/logs",
+            ])
+
+    def test_download_job_log_fails_closed(self):
+        with patch("archive_experiment.subprocess.check_output",
+                   side_effect=subprocess.CalledProcessError(1, ["gh", "api"])):
+            with self.assertRaises(subprocess.CalledProcessError):
+                download_job_log("owner/repo", 123)
 
     def test_historical_checkout(self):
         head, merge = "a"*40, "b"*40

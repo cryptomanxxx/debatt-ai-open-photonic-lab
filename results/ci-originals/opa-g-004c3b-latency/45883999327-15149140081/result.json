@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "stage": "C3B.2 dependency-aware conditional latency",
+  "panels": 400,
+  "grid_rows": 18000,
+  "scenario_rows": 450,
+  "positive_panel_grid_rows": 2497,
+  "nonpositive_panel_grid_rows": 15503,
+  "profiles_ns": {
+    "optimistic": {
+      "memory": 1,
+      "pre": 1,
+      "drive": 0.5,
+      "propagation": 0.5,
+      "read": 0.5,
+      "aggregate": 1,
+      "fallback": 5,
+      "triangle": 5,
+      "stack": 1,
+      "dispatch": 0,
+      "output": 1
+    },
+    "moderate": {
+      "memory": 5,
+      "pre": 5,
+      "drive": 2,
+      "propagation": 1,
+      "read": 2,
+      "aggregate": 3,
+      "fallback": 15,
+      "triangle": 15,
+      "stack": 2,
+      "dispatch": 50,
+      "output": 3
+    },
+    "conservative": {
+      "memory": 20,
+      "pre": 15,
+      "drive": 10,
+      "propagation": 2,
+      "read": 10,
+      "aggregate": 10,
+      "fallback": 40,
+      "triangle": 40,
+      "stack": 5,
+      "dispatch": 200,
+      "output": 10
+    }
+  },
+  "lanes": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "contexts": [
+    1,
+    8,
+    32
+  ],
+  "reference": "archived measured single-thread resident CPU p50 batch latency",
+  "model": "one electronic sequencer, one memory port, parallel non-pipelined complete side lanes, finite ray contexts, archived per-ray DFS order",
+  "energy": "not_measured",
+  "photonic_latency": "not_measured",
+  "gpu": "not_run",
+  "limitations": [
+    "All hybrid service times hypothetical, not derived from modulator bandwidth",
+    "Modeled batch times include assumed memory, electronic preprocessing, conversion, propagation, readout, aggregation, fallback, triangle and stack/output service",
+    "Unmodeled contention, interconnect, tuning, host transfer and system overhead must fit remaining budget",
+    "Dispatch sensitivity is illustrative; measured CPU reference excludes host dispatch and packing",
+    "Positive budget is conditional, not demonstrated speedup; no FPS or GPU claims",
+    "Raw optical policy excluded; frozen matched-quality decisions are not new physical measurements"
+  ]
+}

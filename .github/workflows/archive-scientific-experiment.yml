@@ -15,7 +15,7 @@ on:
         required: true
         type: string
       source_sha:
-        description: Full source head SHA (must be ancestor of main)
+        description: Full source run head SHA (PR head for pull_request; must be ancestor of main)
         required: true
         type: string
       files:
@@ -68,6 +68,9 @@ jobs:
           gh auth setup-git
           # Empty expected old ref: atomically refuse to update any existing branch.
           git push --force-with-lease="refs/heads/$branch:" origin "HEAD:refs/heads/$branch"
+          manifest="results/ci-originals/$ARCHIVE_EXPERIMENT/$SOURCE_RUN-$SOURCE_ARTIFACT/archive-provenance.json"
+          executed=$(jq -er .executed_commit_sha "$manifest")
+          tree=$(jq -er .executed_tree_sha "$manifest")
           body="$RUNNER_TEMP/archive-pr-body.md"
           cat > "$body" <<EOF
           ## Debatt-AI Scientific Archive Bot
@@ -79,7 +82,9 @@ jobs:
           | Experiment | $ARCHIVE_EXPERIMENT |
           | Source run | [$SOURCE_RUN](https://github.com/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN) |
           | Artifact ID | $SOURCE_ARTIFACT |
-          | Source commit | $SOURCE_SHA |
+          | Source run head SHA (PR head for PR runs) | $SOURCE_SHA |
+          | Executed checkout SHA | $executed |
+          | Executed tree SHA | $tree |
           | SHA-256 verification | Passed |
           | ZIP integrity (CRC) | Passed |
           | Original files modified | No |

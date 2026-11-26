@@ -1,0 +1,62 @@
+{
+  "experiment": "opa-w-002d",
+  "repository": "cryptomanxxx/debatt-ai-open-photonic-lab",
+  "source_head_sha": "f8551418ca557e4df700517a267a918442774c88",
+  "executed_commit_sha": "d8e3b4f5aea88c43fcaa256441b155afe651c4ec",
+  "executed_tree_sha": "7fecec543d5b459c3c9ce4e7e1b2216866632412",
+  "source_event": "pull_request",
+  "checkout_log_sha256": "ab8a60903933b4e74616b0f8c5973738e57aa644b130ef99b06d04c6a2162c00",
+  "workflow_run_id": 45904372717,
+  "run_attempt": 1,
+  "job_id": 140197522775,
+  "artifact_id": 15157980225,
+  "artifact_name": "opa-w-002d",
+  "artifact_sha256": "6b1d4a0327a2b5945c126fa066c0cc2bd2b128940fff56c1511612ea641435a9",
+  "artifact_bytes": 64999,
+  "source_workflow": ".github/workflows/experiments.yml",
+  "expanded_bytes": 306855,
+  "expansion_policy": "default",
+  "verification": "GitHub metadata, historical checkout log and executed commit/tree, ZIP SHA-256 and CRC; exact extracted bytes; no rerun",
+  "files": {
+    "combinations.csv": {
+      "bytes": 202921,
+      "sha256": "73c4467250d0fdf6a081876fbd4da46f867d115ab67bfda4993ec00e546d7b38",
+      "git_blob_sha1": "8cbad4e02072fc2f004a14b33548469ba35a40a5"
+    },
+    "cost.csv": {
+      "bytes": 2217,
+      "sha256": "3ba873396bd771c47b41adc5cd691eaff8f4ccb048ac95e24352cc81166b834d",
+      "git_blob_sha1": "4dd769ecc5fe4b57209e6c793c29a11dc664f0d2"
+    },
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c",
+      "git_blob_sha1": "e0f73c62ff0fe442819a24eff4c391bc1d95e8d8"
+    },
+    "frontier.csv": {
+      "bytes": 244,
+      "sha256": "4a6b7511a0b9b24f4e84a980e25024d1af3f3bd797aec9e8df697c733594c3ce",
+      "git_blob_sha1": "1c46b03b049a1c03b019730c7283b18c3dc11d32"
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6",
+      "git_blob_sha1": "b78cc4b63c8815d1e064dec794040bbff4e2ffac"
+    },
+    "result.json": {
+      "bytes": 5796,
+      "sha256": "b47098f542bdb0ca7a6dd85909b54888c69d6c5af6e43b68c6c0e6439b095ed6",
+      "git_blob_sha1": "fba5b2afdb2a899274529457fc98856f407df05c"
+    },
+    "strata.csv": {
+      "bytes": 16494,
+      "sha256": "04a6d93963fa6b9d083a5f7a14933bc0b5ea397ef250995ab311e2d71661d497",
+      "git_blob_sha1": "07b4ad55b5817dc2578ab3c1fd50391e241d06d7"
+    },
+    "summary.csv": {
+      "bytes": 1108,
+      "sha256": "b8c2adc16896af770d9e7407495cce2ccee92fa9da4e727188cc7312b298839f",
+      "git_blob_sha1": "cda6d5e58616941e0922d3e0ddc930183fd3e2c8"
+    }
+  }
+}

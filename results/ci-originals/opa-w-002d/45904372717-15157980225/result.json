@@ -1,0 +1,226 @@
+{
+  "passed": true,
+  "experiment": "OPA-W-002D",
+  "verified_files": 6,
+  "baseline_panels": 3600,
+  "paired_rows": 32400,
+  "summary": [
+    {
+      "references": 1,
+      "mismatch_sigma": 0.0,
+      "panels": 3600,
+      "both_pass": 477,
+      "rescued": 210,
+      "regressed": 77,
+      "both_fail": 2836,
+      "baseline_pass": 554,
+      "corrected_pass": 687,
+      "net_pass_gain": 133,
+      "mean_abs_residual": 0.004040434651423242,
+      "mean_abs_uncorrected": 0.008578777592547448,
+      "mean_ser_delta": -0.09950210995144314
+    },
+    {
+      "references": 1,
+      "mismatch_sigma": 0.005,
+      "panels": 3600,
+      "both_pass": 412,
+      "rescued": 159,
+      "regressed": 142,
+      "both_fail": 2887,
+      "baseline_pass": 554,
+      "corrected_pass": 571,
+      "net_pass_gain": 17,
+      "mean_abs_residual": 0.006208528828979953,
+      "mean_abs_uncorrected": 0.008578777592547448,
+      "mean_ser_delta": -0.08088336520724826
+    },
+    {
+      "references": 1,
+      "mismatch_sigma": 0.02,
+      "panels": 3600,
+      "both_pass": 172,
+      "rescued": 49,
+      "regressed": 382,
+      "both_fail": 2997,
+      "baseline_pass": 554,
+      "corrected_pass": 221,
+      "net_pass_gain": -333,
+      "mean_abs_residual": 0.018549607005090854,
+      "mean_abs_uncorrected": 0.008578777592547448,
+      "mean_ser_delta": 0.160015992058648
+    },
+    {
+      "references": 4,
+      "mismatch_sigma": 0.0,
+      "panels": 3600,
+      "both_pass": 531,
+      "rescued": 272,
+      "regressed": 23,
+      "both_fail": 2774,
+      "baseline_pass": 554,
+      "corrected_pass": 803,
+      "net_pass_gain": 249,
+      "mean_abs_residual": 0.0016483949310418559,
+      "mean_abs_uncorrected": 0.008578777592547448,
+      "mean_ser_delta": -0.11584783342149522
+    },
+    {
+      "references": 4,
+      "mismatch_sigma": 0.005,
+      "panels": 3600,
+      "both_pass": 475,
+      "rescued": 214,
+      "regressed": 79,
+      "both_fail": 2832,
+      "baseline_pass": 554,
+      "corrected_pass": 689,
+      "net_pass_gain": 135,
+      "mean_abs_residual": 0.002997818155775397,
+      "mean_abs_uncorrected": 0.008578777592547448,
+      "mean_ser_delta": -0.11231736924913194
+    },
+    {
+      "references": 4,
+      "mismatch_sigma": 0.02,
+      "panels": 3600,
+      "both_pass": 322,
+      "rescued": 97,
+      "regressed": 232,
+      "both_fail": 2949,
+      "baseline_pass": 554,
+      "corrected_pass": 419,
+      "net_pass_gain": -135,
+      "mean_abs_residual": 0.00902954705320036,
+      "mean_abs_uncorrected": 0.008578777592547448,
+      "mean_ser_delta": -0.03837606218126085
+    },
+    {
+      "references": 16,
+      "mismatch_sigma": 0.0,
+      "panels": 3600,
+      "both_pass": 537,
+      "rescued": 294,
+      "regressed": 17,
+      "both_fail": 2752,
+      "baseline_pass": 554,
+      "corrected_pass": 831,
+      "net_pass_gain": 277,
+      "mean_abs_residual": 0.0009891702230521056,
+      "mean_abs_uncorrected": 0.008578777592547448,
+      "mean_ser_delta": -0.11760451422797309
+    },
+    {
+      "references": 16,
+      "mismatch_sigma": 0.005,
+      "panels": 3600,
+      "both_pass": 514,
+      "rescued": 259,
+      "regressed": 40,
+      "both_fail": 2787,
+      "baseline_pass": 554,
+      "corrected_pass": 773,
+      "net_pass_gain": 219,
+      "mean_abs_residual": 0.0016987269336266396,
+      "mean_abs_uncorrected": 0.008578777592547448,
+      "mean_ser_delta": -0.11699545118543837
+    },
+    {
+      "references": 16,
+      "mismatch_sigma": 0.02,
+      "panels": 3600,
+      "both_pass": 422,
+      "rescued": 167,
+      "regressed": 132,
+      "both_fail": 2879,
+      "baseline_pass": 554,
+      "corrected_pass": 589,
+      "net_pass_gain": 35,
+      "mean_abs_residual": 0.004504585154306476,
+      "mean_abs_uncorrected": 0.008578777592547448,
+      "mean_ser_delta": -0.1041251203748915
+    }
+  ],
+  "frontier": [
+    {
+      "references": 0,
+      "mismatch_sigma": 0.0,
+      "corrected_pass": 554,
+      "regressed": 0,
+      "extra_reads": 0
+    },
+    {
+      "references": 1,
+      "mismatch_sigma": 0.0,
+      "corrected_pass": 687,
+      "regressed": 77,
+      "extra_reads": 8
+    },
+    {
+      "references": 4,
+      "mismatch_sigma": 0.0,
+      "corrected_pass": 803,
+      "regressed": 23,
+      "extra_reads": 32
+    },
+    {
+      "references": 16,
+      "mismatch_sigma": 0.0,
+      "corrected_pass": 831,
+      "regressed": 17,
+      "extra_reads": 128
+    },
+    {
+      "references": 0,
+      "mismatch_sigma": 0.005,
+      "corrected_pass": 554,
+      "regressed": 0,
+      "extra_reads": 0
+    },
+    {
+      "references": 1,
+      "mismatch_sigma": 0.005,
+      "corrected_pass": 571,
+      "regressed": 142,
+      "extra_reads": 8
+    },
+    {
+      "references": 4,
+      "mismatch_sigma": 0.005,
+      "corrected_pass": 689,
+      "regressed": 79,
+      "extra_reads": 32
+    },
+    {
+      "references": 16,
+      "mismatch_sigma": 0.005,
+      "corrected_pass": 773,
+      "regressed": 40,
+      "extra_reads": 128
+    },
+    {
+      "references": 0,
+      "mismatch_sigma": 0.02,
+      "corrected_pass": 554,
+      "regressed": 0,
+      "extra_reads": 0
+    },
+    {
+      "references": 16,
+      "mismatch_sigma": 0.02,
+      "corrected_pass": 589,
+      "regressed": 132,
+      "extra_reads": 128
+    }
+  ],
+  "combination_rows": 2025,
+  "cost_rows": 64,
+  "physical_measurement": false,
+  "material_fit": false,
+  "limitations": [
+    "Audit of archived aggregate counts, no raw state samples or confusion matrices",
+    "No new estimator fitted; no adaptive selection or held-out policy validation",
+    "Cadence sweep is count/conditional energy accounting only, not a drift-time simulation",
+    "No measured energy, area, latency or retention; no probability inference across shared seeds"
+  ]
+}

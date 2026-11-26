@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "experiment": "OPA-W-002B",
+  "source_run": 45900743025,
+  "artifact_id": 15156101360,
+  "verified_files": 6,
+  "panel_count": 3600,
+  "confusion_rows": 468000,
+  "summary": {
+    "1": {
+      "panels": 1800,
+      "passing_panels": 1800,
+      "combinations": 225,
+      "all_eight_pass": 225,
+      "zero_pass": 0,
+      "by_adc": {
+        "6": 600,
+        "8": 600,
+        "12": 600
+      },
+      "by_drift": {
+        "0.0": 600,
+        "0.005": 600,
+        "0.02": 600
+      }
+    },
+    "4": {
+      "panels": 1800,
+      "passing_panels": 275,
+      "combinations": 225,
+      "all_eight_pass": 15,
+      "zero_pass": 165,
+      "by_adc": {
+        "6": 59,
+        "8": 106,
+        "12": 110
+      },
+      "by_drift": {
+        "0.0": 146,
+        "0.005": 91,
+        "0.02": 38
+      }
+    }
+  },
+  "physical_measurement": false,
+  "material_fit": false,
+  "interpretation": "All-eight pass is descriptive over fixed seeds, not qualification or a reliability probability."
+}

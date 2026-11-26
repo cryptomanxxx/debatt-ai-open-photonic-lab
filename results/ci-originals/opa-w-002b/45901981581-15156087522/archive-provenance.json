@@ -1,0 +1,42 @@
+{
+  "experiment": "opa-w-002b",
+  "repository": "cryptomanxxx/debatt-ai-open-photonic-lab",
+  "source_head_sha": "1301c23e33388307dc3a001ea654a9c305134abd",
+  "executed_commit_sha": "3cd71e927cbe07bf73be9ab1cf230a46d308eb62",
+  "executed_tree_sha": "4411494a7f17132479ddbf83f5a5d599628fb07f",
+  "source_event": "pull_request",
+  "checkout_log_sha256": "10fe8a11f616065df2c875d9e875478c100456bee508becb93efd81d6049fb89",
+  "workflow_run_id": 45901981581,
+  "run_attempt": 1,
+  "job_id": 140189773919,
+  "artifact_id": 15156087522,
+  "artifact_name": "opa-w-002b",
+  "artifact_sha256": "581569c8598df097a61c7f6d6c332a7d7913037a6bc247d53f87456c941acbc8",
+  "artifact_bytes": 19674,
+  "source_workflow": ".github/workflows/experiments.yml",
+  "expanded_bytes": 103831,
+  "expansion_policy": "default",
+  "verification": "GitHub metadata, historical checkout log and executed commit/tree, ZIP SHA-256 and CRC; exact extracted bytes; no rerun",
+  "files": {
+    "combinations.csv": {
+      "bytes": 24741,
+      "sha256": "88c4297742cd646acebaf1f4ce0c9fb50d0c92687d91b3c9fe0ee6fe31772eb9",
+      "git_blob_sha1": "8e18e484af3267a16fa7a8ab22ed3749bd4a282e"
+    },
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c",
+      "git_blob_sha1": "e0f73c62ff0fe442819a24eff4c391bc1d95e8d8"
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6",
+      "git_blob_sha1": "b78cc4b63c8815d1e064dec794040bbff4e2ffac"
+    },
+    "result.json": {
+      "bytes": 1015,
+      "sha256": "64d27f0a30d7d354b0ed26347351fafc8c5512a5a189ae558079470933b2b7f0",
+      "git_blob_sha1": "a310fa402b98f14144872b45bf9680a678f0929c"
+    }
+  }
+}

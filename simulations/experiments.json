@@ -1669,6 +1669,22 @@
         "results/ci-originals/opa-w-002e/45905192736-15157223437/*"
       ],
       "run": "python simulations/memory/test_state_replay.py && python simulations/memory/state_replay_v007.py results/ci-originals/opa-w-002e/45905192736-15157223437 --output results/opa-w-002g"
+    },
+    {
+      "id": "opa-w-002h",
+      "name": "Photonic memory: fresh held-out tail-aware calibration",
+      "script": "simulations/memory/tail_calibration_v008.py",
+      "result_dir": "results/opa-w-002h",
+      "artifact": "opa-w-002h",
+      "timeout_minutes": 45,
+      "deps": [
+        "simulations/memory/adaptive_calibration_v005.py",
+        "simulations/memory/multilevel_cell_v001.py",
+        "simulations/memory/state_replay_v007.py",
+        "simulations/memory/audit_adaptive_v006.py",
+        "simulations/memory/test_tail_calibration.py"
+      ],
+      "run": "python simulations/memory/test_tail_calibration.py && python simulations/memory/tail_calibration_v008.py --output results/opa-w-002h"
     }
   ]
 }

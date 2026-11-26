@@ -1,0 +1,263 @@
+{
+  "experiment": "opa-g-004b2",
+  "checks": {
+    "frozen_disjoint_roundtrip": true,
+    "complete_rows": true,
+    "accounting": true,
+    "electronic_control": true,
+    "all_fallback_control": true
+  },
+  "passed": true,
+  "scientific_gate": true,
+  "confirmation": {
+    "policy": "max_min_125",
+    "zero_errors_and_cpu_matched": true,
+    "useful_every_scenario": true,
+    "eligible": true,
+    "worst_scenario_fallback": 0.7109717031500267,
+    "scenario_fallback": {
+      "scale_only": 0.42936465563267484,
+      "large_scale": 0.5696476241324079,
+      "noise_only": 0.5112920448478377,
+      "combined": 0.7109717031500267,
+      "drift_quantization": 0.6898558462359851
+    },
+    "worst_panel_fallback": 1.0
+  },
+  "selected": "max_min_125",
+  "development": [
+    {
+      "policy": "max_min",
+      "zero_errors_and_cpu_matched": false,
+      "useful_every_scenario": true,
+      "eligible": false,
+      "worst_scenario_fallback": 0.6678402522333158,
+      "scenario_fallback": {
+        "scale_only": 0.4153179190751445,
+        "large_scale": 0.5468996321597478,
+        "noise_only": 0.4866001050972149,
+        "combined": 0.6678402522333158,
+        "drift_quantization": 0.6444561219127694
+      },
+      "worst_panel_fallback": 1.0
+    },
+    {
+      "policy": "max_min_125",
+      "zero_errors_and_cpu_matched": true,
+      "useful_every_scenario": true,
+      "eligible": true,
+      "worst_scenario_fallback": 0.7010509721492381,
+      "scenario_fallback": {
+        "scale_only": 0.4183920126116658,
+        "large_scale": 0.5621650026274304,
+        "noise_only": 0.5016552811350499,
+        "combined": 0.7010509721492381,
+        "drift_quantization": 0.6783499737256963
+      },
+      "worst_panel_fallback": 1.0
+    },
+    {
+      "policy": "max_min_150",
+      "zero_errors_and_cpu_matched": true,
+      "useful_every_scenario": true,
+      "eligible": true,
+      "worst_scenario_fallback": 0.7330793483972675,
+      "scenario_fallback": {
+        "scale_only": 0.42099316868102993,
+        "large_scale": 0.578533893851813,
+        "noise_only": 0.5111403047819233,
+        "combined": 0.7330793483972675,
+        "drift_quantization": 0.71022070415134
+      },
+      "worst_panel_fallback": 1.0
+    },
+    {
+      "policy": "max_min_200",
+      "zero_errors_and_cpu_matched": true,
+      "useful_every_scenario": true,
+      "eligible": true,
+      "worst_scenario_fallback": 0.7883079348397267,
+      "scenario_fallback": {
+        "scale_only": 0.4237519705727798,
+        "large_scale": 0.5995533368365739,
+        "noise_only": 0.5260903836048345,
+        "combined": 0.7883079348397267,
+        "drift_quantization": 0.7674461376773516
+      },
+      "worst_panel_fallback": 1.0
+    },
+    {
+      "policy": "side_max",
+      "zero_errors_and_cpu_matched": true,
+      "useful_every_scenario": true,
+      "eligible": true,
+      "worst_scenario_fallback": 0.8873620599054125,
+      "scenario_fallback": {
+        "scale_only": 0.465580662112454,
+        "large_scale": 0.7838150289017342,
+        "noise_only": 0.6058066211245402,
+        "combined": 0.8873620599054125,
+        "drift_quantization": 0.8869416710457173
+      },
+      "worst_panel_fallback": 1.0
+    }
+  ],
+  "heldout_diagnostics": [
+    {
+      "policy": "max_min",
+      "zero_errors_and_cpu_matched": false,
+      "useful_every_scenario": true,
+      "eligible": false,
+      "worst_scenario_fallback": 0.6767485317672184,
+      "scenario_fallback": {
+        "scale_only": 0.4267218366257341,
+        "large_scale": 0.5552589428723972,
+        "noise_only": 0.4968499733048585,
+        "combined": 0.6767485317672184,
+        "drift_quantization": 0.6557928457020822
+      },
+      "worst_panel_fallback": 1.0
+    },
+    {
+      "policy": "max_min_125",
+      "zero_errors_and_cpu_matched": true,
+      "useful_every_scenario": true,
+      "eligible": true,
+      "worst_scenario_fallback": 0.7109717031500267,
+      "scenario_fallback": {
+        "scale_only": 0.42936465563267484,
+        "large_scale": 0.5696476241324079,
+        "noise_only": 0.5112920448478377,
+        "combined": 0.7109717031500267,
+        "drift_quantization": 0.6898558462359851
+      },
+      "worst_panel_fallback": 1.0
+    },
+    {
+      "policy": "max_min_150",
+      "zero_errors_and_cpu_matched": true,
+      "useful_every_scenario": true,
+      "eligible": true,
+      "worst_scenario_fallback": 0.7414041644420716,
+      "scenario_fallback": {
+        "scale_only": 0.43059263214095034,
+        "large_scale": 0.5844634276561665,
+        "noise_only": 0.5211692471970102,
+        "combined": 0.7414041644420716,
+        "drift_quantization": 0.7207154297917779
+      },
+      "worst_panel_fallback": 1.0
+    },
+    {
+      "policy": "max_min_200",
+      "zero_errors_and_cpu_matched": true,
+      "useful_every_scenario": true,
+      "eligible": true,
+      "worst_scenario_fallback": 0.7958355579284571,
+      "scenario_fallback": {
+        "scale_only": 0.4336358782701548,
+        "large_scale": 0.6098505072076882,
+        "noise_only": 0.535691404164442,
+        "combined": 0.7958355579284571,
+        "drift_quantization": 0.7776828617191671
+      },
+      "worst_panel_fallback": 1.0
+    },
+    {
+      "policy": "side_max",
+      "zero_errors_and_cpu_matched": false,
+      "useful_every_scenario": true,
+      "eligible": false,
+      "worst_scenario_fallback": 0.8913240790176188,
+      "scenario_fallback": {
+        "scale_only": 0.4730646022423919,
+        "large_scale": 0.7873198077949813,
+        "noise_only": 0.6055792845702083,
+        "combined": 0.888360918312867,
+        "drift_quantization": 0.8913240790176188
+      },
+      "worst_panel_fallback": 1.0
+    }
+  ],
+  "compiler": {
+    "status": "executed",
+    "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "flags": [
+      "-O3",
+      "-std=c11",
+      "-fPIC",
+      "-shared",
+      "-fno-fast-math",
+      "-ffp-contract=off"
+    ]
+  },
+  "calibration_cpu_errors": {
+    "uniform": {
+      "samples": 2048,
+      "hits": 281,
+      "misses": 1767,
+      "fp": 0,
+      "fn": 0,
+      "fpr": 0.0,
+      "fnr": 0.0
+    },
+    "translated": {
+      "samples": 2048,
+      "hits": 53,
+      "misses": 1995,
+      "fp": 0,
+      "fn": 0,
+      "fpr": 0.0,
+      "fnr": 0.0
+    },
+    "boundary": {
+      "samples": 1664,
+      "hits": 896,
+      "misses": 768,
+      "fp": 0,
+      "fn": 0,
+      "fpr": 0.0,
+      "fnr": 0.0
+    },
+    "scene_like": {
+      "samples": 2048,
+      "hits": 37,
+      "misses": 2011,
+      "fp": 0,
+      "fn": 0,
+      "fpr": 0.0,
+      "fnr": 0.0
+    },
+    "near_parallel": {
+      "samples": 1024,
+      "hits": 63,
+      "misses": 961,
+      "fp": 0,
+      "fn": 0,
+      "fpr": 0.0,
+      "fnr": 0.0
+    },
+    "dynamic_range": {
+      "samples": 1024,
+      "hits": 63,
+      "misses": 961,
+      "fp": 0,
+      "fn": 0,
+      "fpr": 0.0,
+      "fnr": 0.0
+    }
+  },
+  "repeats": 10,
+  "noise_seed": 20261304,
+  "rows": 4200,
+  "gpu": "not_run",
+  "energy": "not_measured",
+  "limitations": [
+    "Synthetic geometries, repeated noise is not independent geometry",
+    "Normalized 12-bit operand quantization, not raw coordinate quantization or actual DAC ENOB",
+    "Hypothetical per-panel bias drift \u00b1.002 rad after calibration",
+    "Compiled CPU mismatch disqualifies candidate on that panel; no oracle substitution",
+    "Calibration per modeled device/repeat, no scenario-dependent policy selector",
+    "No energy ranking, hybrid timing or physical measurements"
+  ]
+}

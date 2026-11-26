@@ -1,0 +1,87 @@
+{
+  "selected": "max_min_125",
+  "candidates": [
+    {
+      "policy": "max_min",
+      "zero_errors_and_cpu_matched": false,
+      "useful_every_scenario": true,
+      "eligible": false,
+      "worst_scenario_fallback": 0.6678402522333158,
+      "scenario_fallback": {
+        "scale_only": 0.4153179190751445,
+        "large_scale": 0.5468996321597478,
+        "noise_only": 0.4866001050972149,
+        "combined": 0.6678402522333158,
+        "drift_quantization": 0.6444561219127694
+      },
+      "worst_panel_fallback": 1.0
+    },
+    {
+      "policy": "max_min_125",
+      "zero_errors_and_cpu_matched": true,
+      "useful_every_scenario": true,
+      "eligible": true,
+      "worst_scenario_fallback": 0.7010509721492381,
+      "scenario_fallback": {
+        "scale_only": 0.4183920126116658,
+        "large_scale": 0.5621650026274304,
+        "noise_only": 0.5016552811350499,
+        "combined": 0.7010509721492381,
+        "drift_quantization": 0.6783499737256963
+      },
+      "worst_panel_fallback": 1.0
+    },
+    {
+      "policy": "max_min_150",
+      "zero_errors_and_cpu_matched": true,
+      "useful_every_scenario": true,
+      "eligible": true,
+      "worst_scenario_fallback": 0.7330793483972675,
+      "scenario_fallback": {
+        "scale_only": 0.42099316868102993,
+        "large_scale": 0.578533893851813,
+        "noise_only": 0.5111403047819233,
+        "combined": 0.7330793483972675,
+        "drift_quantization": 0.71022070415134
+      },
+      "worst_panel_fallback": 1.0
+    },
+    {
+      "policy": "max_min_200",
+      "zero_errors_and_cpu_matched": true,
+      "useful_every_scenario": true,
+      "eligible": true,
+      "worst_scenario_fallback": 0.7883079348397267,
+      "scenario_fallback": {
+        "scale_only": 0.4237519705727798,
+        "large_scale": 0.5995533368365739,
+        "noise_only": 0.5260903836048345,
+        "combined": 0.7883079348397267,
+        "drift_quantization": 0.7674461376773516
+      },
+      "worst_panel_fallback": 1.0
+    },
+    {
+      "policy": "side_max",
+      "zero_errors_and_cpu_matched": true,
+      "useful_every_scenario": true,
+      "eligible": true,
+      "worst_scenario_fallback": 0.8873620599054125,
+      "scenario_fallback": {
+        "scale_only": 0.465580662112454,
+        "large_scale": 0.7838150289017342,
+        "noise_only": 0.6058066211245402,
+        "combined": 0.8873620599054125,
+        "drift_quantization": 0.8869416710457173
+      },
+      "worst_panel_fallback": 1.0
+    }
+  ],
+  "tie_order": [
+    "max_min",
+    "max_min_125",
+    "max_min_150",
+    "max_min_200",
+    "side_max"
+  ]
+}

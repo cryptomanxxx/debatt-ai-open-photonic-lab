@@ -1,0 +1,57 @@
+{
+  "experiment": "opa-w-002h",
+  "repository": "cryptomanxxx/debatt-ai-open-photonic-lab",
+  "source_head_sha": "a7bdeed762237124d7b75d0720ba1aa577720106",
+  "executed_commit_sha": "eca0d3f153a69881c298cc618bc45bb34a919d64",
+  "executed_tree_sha": "e0f6ce39ecc8e3f962efa599e3e7c155cf58b6c4",
+  "source_event": "pull_request",
+  "checkout_log_sha256": "32bbb801d83af9511822aa5a7476849a16b889ca7bdb6af9328f26db72123720",
+  "workflow_run_id": 45908657025,
+  "run_attempt": 1,
+  "job_id": 140211528594,
+  "artifact_id": 15158857962,
+  "artifact_name": "opa-w-002h",
+  "artifact_sha256": "670411c03887f194052e21274640a2be8e7e82fba33a9f11918b3484a6a6a577",
+  "artifact_bytes": 1201857,
+  "source_workflow": ".github/workflows/experiments.yml",
+  "expanded_bytes": 6094278,
+  "expansion_policy": "default",
+  "verification": "GitHub metadata, historical checkout log and executed commit/tree, ZIP SHA-256 and CRC; exact extracted bytes; no rerun",
+  "files": {
+    "development.csv": {
+      "bytes": 3675,
+      "sha256": "a648a34345c17eb4e95af5409dedc7ee6384ccb361f88ef50f11db4a178b17bf",
+      "git_blob_sha1": "8a53a43d9a460018ba281bf975614d03402bf131"
+    },
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c",
+      "git_blob_sha1": "e0f73c62ff0fe442819a24eff4c391bc1d95e8d8"
+    },
+    "heldout.csv": {
+      "bytes": 5986357,
+      "sha256": "3b0eb6690e024e8b9d92b294b5cf93fa70cd7d9d2218715edfd65ac9324baac9",
+      "git_blob_sha1": "aea6ae9b04273c96991402d71e4b2e8340734ef9"
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6",
+      "git_blob_sha1": "b78cc4b63c8815d1e064dec794040bbff4e2ffac"
+    },
+    "result.json": {
+      "bytes": 8914,
+      "sha256": "536f4603b948201dc6ada8ac54abcfdbd53868dc31e9c5b54bc36b67f9e46132",
+      "git_blob_sha1": "d528776518de70beb3a938b7ae746096e5a4fa92"
+    },
+    "state_summary.csv": {
+      "bytes": 15343,
+      "sha256": "4679f403dd22c4fcd0af4f1e60c71456a2c50e7784d05850b6b29eb0443da37c",
+      "git_blob_sha1": "2e56ca18a6bc22948a1704cceb81a340891088e7"
+    },
+    "summary.csv": {
+      "bytes": 1914,
+      "sha256": "851e7cf47b07eac69c10da3fc856b3103a4e3b1c31fa0044a4feea91264bc5e0",
+      "git_blob_sha1": "064986d68401950754d25aacfdc2b72723fe419f"
+    }
+  }
+}

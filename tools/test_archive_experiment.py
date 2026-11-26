@@ -44,6 +44,11 @@ class ArchiveTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             unpack(data, a, ["result.json"])
 
+    def test_unexpected_readme_is_still_rejected(self):
+        data, a = self.zip(extra=("README.md", b"Derived analysis"))
+        with self.assertRaisesRegex(ValueError, "Unexpected ZIP path/type"):
+            unpack(data, a, self.files)
+
     def test_path_traversal(self):
         data, a = self.zip(extra=("../escape.txt", b"x"))
         with self.assertRaises(ValueError):

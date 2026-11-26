@@ -51,6 +51,36 @@ def validate_metadata(repo, run, artifact, entry, run_id, artifact_id, head):
             "Missing artifact digest")
 
 
+def executed_checkout(log, event, head):
+    """Read the historical checkout action output, not today's PR merge ref."""
+    lines = [re.sub(r"^\d{4}-\d\d-\d\dT\S+Z ", "", l) for l in log.splitlines()]
+    # Limit to the first checkout action, before any experiment code executes.
+    starts = [i for i, l in enumerate(lines) if l == "##[group]Run actions/checkout@v5"]
+    require(bool(starts), "Missing checkout action log")
+    start = starts[0]
+    commands = [i for i in range(start, len(lines))
+                if lines[i] == "[command]/usr/bin/git log -1 --format=%H"]
+    require(bool(commands), "Missing checkout SHA log")
+    i = commands[0]
+    require(i + 1 < len(lines) and re.fullmatch(r"[0-9a-f]{40}", lines[i+1]),
+            "Missing full executed SHA")
+    require(not any(l.startswith("##[group]Run ") for l in lines[start+1:i]),
+            "Checkout SHA not in first checkout action")
+    executed = lines[i+1]
+    if event == "pull_request":
+        refs = [re.fullmatch(r"\[command\]/usr/bin/git checkout --progress --force refs/remotes/pull/(\d+)/merge", l)
+                for l in lines[start:i]]
+        require(sum(bool(m) for m in refs) == 1, "Missing unique PR merge checkout")
+        require(executed != head, "PR merge SHA unexpectedly equals head")
+        # Checkout logs also record the full fetched commit mapped to the merge ref.
+        ref = next(m.group(1) for m in refs if m)
+        require(any(re.search(r"\+" + executed + r":refs/remotes/pull/" + ref + r"/merge$", l)
+                    for l in lines[start:i]), "Fetched merge SHA mismatch")
+    else:
+        require(executed == head, "Dispatch checkout SHA differs from run head")
+    return executed
+
+
 def unpack(data, artifact, selected):
     require(len(data) == artifact["size_in_bytes"] and len(data) <= MAX_ZIP,
             "ZIP size mismatch")
@@ -125,16 +155,28 @@ def main():
     run = api(repo, f"actions/runs/{run_id}")
     artifact = api(repo, f"actions/artifacts/{artifact_id}")
     validate_metadata(repo, run, artifact, entry, run_id, artifact_id, head)
-    # Check the exact source registry too (avoid changed artifact identity).
-    source_registry = json.loads(subprocess.check_output(
-        ["git", "show", head+":simulations/experiments.json"]))
-    require(entry in source_registry["experiments"], "Source registry entry differs")
     jobs = json.loads(subprocess.check_output([
         "gh", "api", "--paginate", "--slurp",
         f"repos/{repo}/actions/runs/{run_id}/attempts/{run['run_attempt']}/jobs?per_page=100"]))
     matched = [j for page in jobs for j in page["jobs"] if j["name"] == experiment]
     require(len(matched) == 1 and matched[0]["conclusion"] == "success",
             "No unique successful experiment job")
+    job_id = matched[0]["id"]
+    log = subprocess.check_output(["gh", "api", f"repos/{repo}/actions/jobs/{job_id}/logs"])
+    executed = executed_checkout(log.decode("utf-8"), run["event"], head)
+    # Historical synthetic merge objects may not be in main's history.
+    # GitHub's immutable commit endpoint supplies parents and tree by exact SHA.
+    commit = api(repo, f"commits/{executed}")
+    require(commit["sha"] == executed, "Executed commit identity mismatch")
+    if run["event"] == "pull_request":
+        parents = [p["sha"] for p in commit["parents"]]
+        require(len(parents) == 2 and parents[1] == head,
+                "Executed merge does not have expected PR head parent")
+    # Read the registry from the actual executed tree rather than the PR head.
+    source_registry = json.loads(subprocess.check_output([
+        "gh", "api", f"repos/{repo}/contents/simulations/experiments.json?ref={executed}",
+        "-H", "Accept: application/vnd.github.raw+json"]))
+    require(entry in source_registry["experiments"], "Executed registry entry differs")
     selected = [s.strip() for s in os.environ["ARCHIVE_FILES"].split(",")]
     require(all(ALLOWED.fullmatch(s) for s in selected) and len(set(selected)) == len(selected),
             "Invalid explicit file allowlist")
@@ -145,11 +187,13 @@ def main():
     require(not any(p.is_symlink() for p in root.parents), "Symlink ancestor")
     write_archive(root, files, {
         "experiment": experiment, "repository": repo, "source_head_sha": head,
+        "executed_commit_sha": executed, "executed_tree_sha": commit["commit"]["tree"]["sha"],
+        "source_event": run["event"], "checkout_log_sha256": sha(log),
         "workflow_run_id": run_id, "run_attempt": run["run_attempt"],
         "job_id": matched[0]["id"], "artifact_id": artifact_id,
         "artifact_name": artifact["name"], "artifact_sha256": sha(data),
         "artifact_bytes": len(data), "source_workflow": run["path"],
-        "verification": "GitHub metadata, ZIP SHA-256 and CRC; exact extracted bytes; no rerun",
+        "verification": "GitHub metadata, historical checkout log and executed commit/tree, ZIP SHA-256 and CRC; exact extracted bytes; no rerun",
     })
     subprocess.run(["git", "-c", "core.autocrlf=false", "add", "-f", "--", str(root)], check=True)
     verify_staged(root)

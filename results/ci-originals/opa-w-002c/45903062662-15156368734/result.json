@@ -1,0 +1,139 @@
+{
+  "passed": true,
+  "experiment": "OPA-W-002C",
+  "baseline_panels": 3600,
+  "paired_rows": 32400,
+  "seeds": [
+    11001,
+    11002,
+    11003,
+    11004,
+    11005,
+    11006,
+    11007,
+    11008,
+    11009,
+    11010,
+    11011,
+    11012,
+    11013,
+    11014,
+    11015,
+    11016
+  ],
+  "summary": [
+    {
+      "references": 1,
+      "mismatch_sigma": 0.0,
+      "both_pass": 477,
+      "rescued": 210,
+      "regressed": 77,
+      "both_fail": 2836,
+      "baseline_pass": 554,
+      "corrected_pass": 687,
+      "net_pass_gain": 133
+    },
+    {
+      "references": 1,
+      "mismatch_sigma": 0.005,
+      "both_pass": 412,
+      "rescued": 159,
+      "regressed": 142,
+      "both_fail": 2887,
+      "baseline_pass": 554,
+      "corrected_pass": 571,
+      "net_pass_gain": 17
+    },
+    {
+      "references": 1,
+      "mismatch_sigma": 0.02,
+      "both_pass": 172,
+      "rescued": 49,
+      "regressed": 382,
+      "both_fail": 2997,
+      "baseline_pass": 554,
+      "corrected_pass": 221,
+      "net_pass_gain": -333
+    },
+    {
+      "references": 4,
+      "mismatch_sigma": 0.0,
+      "both_pass": 531,
+      "rescued": 272,
+      "regressed": 23,
+      "both_fail": 2774,
+      "baseline_pass": 554,
+      "corrected_pass": 803,
+      "net_pass_gain": 249
+    },
+    {
+      "references": 4,
+      "mismatch_sigma": 0.005,
+      "both_pass": 475,
+      "rescued": 214,
+      "regressed": 79,
+      "both_fail": 2832,
+      "baseline_pass": 554,
+      "corrected_pass": 689,
+      "net_pass_gain": 135
+    },
+    {
+      "references": 4,
+      "mismatch_sigma": 0.02,
+      "both_pass": 322,
+      "rescued": 97,
+      "regressed": 232,
+      "both_fail": 2949,
+      "baseline_pass": 554,
+      "corrected_pass": 419,
+      "net_pass_gain": -135
+    },
+    {
+      "references": 16,
+      "mismatch_sigma": 0.0,
+      "both_pass": 537,
+      "rescued": 294,
+      "regressed": 17,
+      "both_fail": 2752,
+      "baseline_pass": 554,
+      "corrected_pass": 831,
+      "net_pass_gain": 277
+    },
+    {
+      "references": 16,
+      "mismatch_sigma": 0.005,
+      "both_pass": 514,
+      "rescued": 259,
+      "regressed": 40,
+      "both_fail": 2787,
+      "baseline_pass": 554,
+      "corrected_pass": 773,
+      "net_pass_gain": 219
+    },
+    {
+      "references": 16,
+      "mismatch_sigma": 0.02,
+      "both_pass": 422,
+      "rescued": 167,
+      "regressed": 132,
+      "both_fail": 2879,
+      "baseline_pass": 554,
+      "corrected_pass": 589,
+      "net_pass_gain": 35
+    }
+  ],
+  "point_target": 0.001,
+  "physical_measurement": false,
+  "material_fit": false,
+  "read_energy_J": null,
+  "reference_write_energy_J": null,
+  "retention_seconds": null,
+  "limitations": [
+    "One shared additive offset per validation panel",
+    "Reference mismatch is additive, not a measured material distribution",
+    "No data labels used for compensation; frozen calibration",
+    "Read overhead assumes one reference acquisition per complete panel",
+    "Calibration reads counted separately; no hardware latency or energy inferred",
+    "Shared draws across configurations; descriptive point screen only"
+  ]
+}

@@ -63,6 +63,9 @@ Circuit (MZI) experiments use numpy from the same environment.
 | OPA-G-003 | [Analysis](opa-g-003/README.md), [JSON](opa-g-003/result.json), [CSV](opa-g-003/results.csv), [provenance](opa-g-003/provenance.json) | 10/10 checks; combined scenario 959 to 4 errors with q99 fallback, 5477 of 9108 optical-stage rays fall back. Near-face rays bypass optics. | Normalized behavioral simulation; [All original outputs permanently archived](ci-originals/opa-g-003/45810482156-15111277146/archive-provenance.json); no hardware performance claim |
 | OPA-G-003B | [Analysis](opa-g-003b/README.md), [original archive](ci-originals/opa-g-003b/45833451176-15122739938/archive-provenance.json) | 47/47 checks; 1664 held-out optical rays; combined geometry min-window 2 FP, 15 FN, 4868/4992 fallback; uniform q99 4992/4992 fallback with zero errors. | Boundary stress, behavioral model; no robust policy or hardware performance demonstrated. |
 
+| OPA-G-004A | [Analysis](opa-g-004a/README.md) | 99/99 checks; 23424 frozen pairs; zero FP64 errors; compiled CPU 118.9–174.2 million tests/s at full heldout batch | Shared CI, synthetic data, no GPU/power measurement |
+| OPA-G-004B | [Analysis](opa-g-004b/README.md), [original archive](ci-originals/opa-g-004b/45849783504-15132527500/archive-provenance.json) | 18/18 checks; combined max-min 0 FP/FN and 6605/9858 optical fallback; noise-only one FN | No common qualified nontrivial policy; partial hypothetical energy only |
+
 The 3D results from 007–010 and from 011 describe different polarizations
 (TM-like versus TE-like) and are normalized differently, so they should not be
 compared number for number.

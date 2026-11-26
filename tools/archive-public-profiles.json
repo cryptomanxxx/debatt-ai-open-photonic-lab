@@ -123,5 +123,13 @@
     "summary.csv",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-w-002f": [
+    "result.json",
+    "policy_summary.csv",
+    "matched.csv",
+    "strata.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

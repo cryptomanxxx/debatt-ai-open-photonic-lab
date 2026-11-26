@@ -95,12 +95,8 @@ def checks():
     # Both error signs are possible under input rounding.
     for name, case, expected, proxy in [
         ("false_positive_control", ((-2,1+1/16,0),(1,0,0),lo,hi), False, True),
-        ("false_negative_control", ((-2,1+1/16,0),(1,-1/16,0),lo,hi), True, False),
+        ("false_negative_control", ((-2,0,0),(1/16,0,0),lo,hi), True, False),
     ]:
-        # The second control uses an off-grid origin beyond the rounded box;
-        # replace with a direction rounding to zero while origin stays outside.
-        if name == "false_negative_control":
-            case = ((-2,0,0),(1/16,0,0),lo,hi)
         report[name] = bool(face_oracle(*case) == expected and
                             face_oracle(*quantized(case,2)) == proxy)
     return report

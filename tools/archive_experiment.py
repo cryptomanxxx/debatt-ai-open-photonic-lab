@@ -12,6 +12,10 @@ import zipfile
 MAX_ZIP = 25 * 1024 * 1024
 MAX_TOTAL = 50 * 1024 * 1024
 MAX_FILE = 20 * 1024 * 1024
+# Reviewed exception for one immutable synthetic C2 original, not a global increase.
+C2_ORIGINAL = (45865605446, 15140012141, "sha256:8b0033363602a3fa6ce47c6ff5bf8c87244f6352aaba2c3795029738ed00c82a")
+C2_NODE_MAX = 95 * 1024 * 1024  # below GitHub's 100 MiB Git blob limit
+C2_TOTAL_MAX = 125 * 1024 * 1024
 ALLOWED = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]*\.(json|csv|txt)")
 ENV_FILES = {"environment-lock.txt", "installed-packages.json"}
 
@@ -91,15 +95,27 @@ def executed_checkout(log, event, head, expected_pr=None):
     return executed
 
 
-def unpack(data, artifact, selected):
+def expansion_limits(experiment, artifact, selected):
+    identity = (artifact.get("workflow_run", {}).get("id"), artifact.get("id"), artifact.get("digest"))
+    if experiment == "opa-g-004c2" and identity == C2_ORIGINAL:
+        require(set(selected) == {"result.json", "results.csv", "node-results.csv",
+                "audit.csv", "workload.json", "labels.json", "calibration.json",
+                "environment-lock.txt", "installed-packages.json"},
+                "C2 original requires exact reviewed profile")
+        return C2_TOTAL_MAX, {"node-results.csv": C2_NODE_MAX}
+    return MAX_TOTAL, {}
+
+
+def unpack(data, artifact, selected, experiment=None):
     require(len(data) == artifact["size_in_bytes"] and len(data) <= MAX_ZIP,
             "ZIP size mismatch")
     require("sha256:" + sha(data) == artifact["digest"], "ZIP digest mismatch")
+    total_limit, file_limits = expansion_limits(experiment, artifact, selected)
     files = {}
     seen = set()
     with zipfile.ZipFile(io.BytesIO(data)) as z:
         infos = z.infolist()
-        require(len(infos) <= 256 and sum(i.file_size for i in infos) <= MAX_TOTAL,
+        require(len(infos) <= 256 and sum(i.file_size for i in infos) <= total_limit,
                 "ZIP expansion limit")
         for i in infos:
             name = i.filename
@@ -108,7 +124,9 @@ def unpack(data, artifact, selected):
             seen.add(name.casefold())
             mode = (i.external_attr >> 16) & 0xffff
             require(stat.S_IFMT(mode) in (0, stat.S_IFREG), "Nonregular ZIP entry")
-            require(i.file_size <= MAX_FILE and not i.flag_bits & 1, "Unsupported ZIP entry")
+            require(i.file_size <= file_limits.get(name, MAX_FILE) and not i.flag_bits & 1, "Unsupported ZIP entry: " + name)
+        print("ZIP expanded bytes:", sum(i.file_size for i in infos),
+              "largest member bytes:", max((i.file_size for i in infos), default=0))
         require(set(selected) == {i.filename for i in infos},
                 "Explicit file allowlist must equal ZIP contents")
         require(z.testzip() is None, "ZIP CRC failed")
@@ -196,7 +214,7 @@ def main():
             "Invalid explicit file allowlist")
     require("archive-provenance.json" not in selected, "Reserved filename")
     data = subprocess.check_output(["gh", "api", f"repos/{repo}/actions/artifacts/{artifact_id}/zip"])
-    files = unpack(data, artifact, selected)
+    files = unpack(data, artifact, selected, experiment)
     root = Path("results") / "ci-originals" / experiment / f"{run_id}-{artifact_id}"
     require(not any(p.is_symlink() for p in root.parents), "Symlink ancestor")
     write_archive(root, files, {
@@ -207,6 +225,8 @@ def main():
         "job_id": matched[0]["id"], "artifact_id": artifact_id,
         "artifact_name": artifact["name"], "artifact_sha256": sha(data),
         "artifact_bytes": len(data), "source_workflow": run["path"],
+        "expanded_bytes": sum(map(len, files.values())),
+        "expansion_policy": "c2-original-bounded" if expansion_limits(experiment, artifact, selected)[1] else "default",
         "verification": "GitHub metadata, historical checkout log and executed commit/tree, ZIP SHA-256 and CRC; exact extracted bytes; no rerun",
     })
     subprocess.run(["git", "-c", "core.autocrlf=false", "add", "-f", "--", str(root)], check=True)

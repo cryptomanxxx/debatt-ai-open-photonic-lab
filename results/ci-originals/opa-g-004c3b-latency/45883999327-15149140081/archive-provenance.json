@@ -1,0 +1,47 @@
+{
+  "experiment": "opa-g-004c3b-latency",
+  "repository": "cryptomanxxx/debatt-ai-open-photonic-lab",
+  "source_head_sha": "26461032cc7e24de7bd249a6bb51c94915960ba4",
+  "executed_commit_sha": "139879b1d042e3188a34d159a6f05a2f50d7d18d",
+  "executed_tree_sha": "cd5aa09c6838cf3eb86d05ac9da6e396e08c2ec8",
+  "source_event": "pull_request",
+  "checkout_log_sha256": "a5125b07e30a787651b213203137e809ba32f1bd3bbfb3f38beea024cabf3535",
+  "workflow_run_id": 45883999327,
+  "run_attempt": 1,
+  "job_id": 140130199657,
+  "artifact_id": 15149140081,
+  "artifact_name": "opa-g-004c3b-latency",
+  "artifact_sha256": "463e1cb56ee5dc3c15730985e8b1b904dffa33fd1f8a4a903fd68398a2724045",
+  "artifact_bytes": 447069,
+  "source_workflow": ".github/workflows/experiments.yml",
+  "expanded_bytes": 3243264,
+  "expansion_policy": "default",
+  "verification": "GitHub metadata, historical checkout log and executed commit/tree, ZIP SHA-256 and CRC; exact extracted bytes; no rerun",
+  "files": {
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c",
+      "git_blob_sha1": "e0f73c62ff0fe442819a24eff4c391bc1d95e8d8"
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6",
+      "git_blob_sha1": "b78cc4b63c8815d1e064dec794040bbff4e2ffac"
+    },
+    "panel-latency.csv": {
+      "bytes": 3108130,
+      "sha256": "770a07224b9b158772649c90db3357c0910d0072bad27e671bf169f388c689ab",
+      "git_blob_sha1": "e4de93ce89aa193ed03fa2bdb82e3045c9a784c1"
+    },
+    "result.json": {
+      "bytes": 2073,
+      "sha256": "725c302ee31738f7c9dd1bd0c9ef817ca012a97bae7764a73e01d9af309999fd",
+      "git_blob_sha1": "20676713c01ddb1d8bafd0893745a217e694a354"
+    },
+    "scenario-latency.csv": {
+      "bytes": 54986,
+      "sha256": "7f75a3fa7892782da000995a3b8ec42e8933b54f1d2284be652a78e53db19cd0",
+      "git_blob_sha1": "2f1239d0f8d324e3e686a7da1ff920c40982dd90"
+    }
+  }
+}

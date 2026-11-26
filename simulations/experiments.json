@@ -1311,6 +1311,17 @@
         "research/OPA-M-001.md"
       ],
       "run": "node --test simulations/interconnect/memory-bottlenecks.test.mjs && node simulations/interconnect/run_m_001.mjs"
+    },
+    {
+      "id": "opa-g-001",
+      "name": "Graphics: ray-box reference and input precision",
+      "script": "simulations/graphics/ray_box_v001.py",
+      "result_dir": "results/opa-g-001",
+      "artifact": "opa-g-001",
+      "timeout_minutes": 10,
+      "deps": [
+        "research/OPA-G-001.md"
+      ]
     }
   ]
 }

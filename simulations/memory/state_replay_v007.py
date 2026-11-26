@@ -64,7 +64,7 @@ def run(root,out):
     matches=0;state_rows=0;diagnostic_rows=0
     fields=["seed",*PARAMS,"references","cadence","policy"]
     with ExitStack() as stack:
-        sw=writer(stack,out,"state_counts.csv",fields+["state","errors","baseline_errors","worst_tie","fails","new_failure","rescued_state"])
+        sw=writer(stack,out,"state_counts.csv",fields+[f"errors_{i}" for i in range(16)]+[f"baseline_errors_{i}" for i in range(16)])
         dw=writer(stack,out,"diagnostics.csv",fields+["step","actual_common_drift","applied_offset","enabled","acquired","reference_mean_change","reference_std_change","reference_clipped","symbol_errors"])
         for seed,params in itertools.product(TEST,GRID):
             k=(seed,*params)
@@ -92,16 +92,18 @@ def run(root,out):
                     worst & (worst.sum()==1) & (counts>0)))
                 confusion[config]+=conf
                 times[config]+=steps
-                for i in range(16):
-                    sw.writerow([*k,*config,i,int(counts[i]),int(bc[i]),int(worst[i]),int(fail[i]),int(new[i]),int(rescued[i])])
-                    state_rows+=1
+                sw.writerow([*k,*config,*map(int,counts),*map(int,bc)])
+                state_rows+=1
                 for t in range(STEPS):
                     acquired=p!="fixed" and t%c==0
                     ref=changes[t,:n] if acquired else None
-                    dw.writerow([*k,*config,t,float(common[t]),float(off[t]),int(on[t]),int(acquired),
-                        "" if ref is None else float(ref.mean()),"" if ref is None else float(ref.std(ddof=1)),
-                        "" if ref is None else int(clip[t,:n].sum()),int(steps[t].sum())])
-                    diagnostic_rows+=1
+                    # Aggregate time/state counts are retained for every trajectory;
+                    # detailed trace limited to a fixed representative seed.
+                    if seed==TEST[0]:
+                        dw.writerow([*k,*config,t,float(common[t]),float(off[t]),int(on[t]),int(acquired),
+                            "" if ref is None else float(ref.mean()),"" if ref is None else float(ref.std(ddof=1)),
+                            "" if ref is None else int(clip[t,:n].sum()),int(steps[t].sum())])
+                        diagnostic_rows+=1
         a=writer(stack,out,"state_summary.csv",["references","cadence","policy","state","reads","errors","failing_trajectories","new_failures","rescued_states","worst_ties","unique_nonzero_worst"])
         b=writer(stack,out,"confusion_summary.csv",["references","cadence","policy","true_state","predicted_state","count"])
         d=writer(stack,out,"step_state_summary.csv",["references","cadence","policy","step","state","reads","errors"])
@@ -114,7 +116,7 @@ def run(root,out):
                     b.writerow([*config,i,j,int(confusion[config][i,j])])
                 for t in range(STEPS):
                     d.writerow([*config,t,i,len(expected)*WRITES,int(times[config][t,i])])
-    require(matches==62208 and state_rows==len(expected)*13*16 and diagnostic_rows==len(expected)*13*64,"replay coverage")
+    require(matches==62208 and state_rows==len(expected)*13 and diagnostic_rows==len(GRID)*13*64,"replay coverage")
     return dict(passed=True,experiment="OPA-W-002G",diagnostic_replay=True,
                 source_blobs=SOURCE_BLOBS,verified_archived_policy_rows=matches,
                 trajectories=len(expected),state_rows=state_rows,diagnostic_rows=diagnostic_rows,
@@ -122,6 +124,7 @@ def run(root,out):
                 material_fit=False,limitations=["New replay outputs, not original historical observations",
                 "Aggregate agreement does not prove historical sample identity",
                 "Per-step state counts aggregated over trajectories; per-trajectory state counts retained",
+                "Detailed reference and step diagnostics limited to first fixed held-out seed",
                 "Reference acquisition diagnostics are model values, not measurements",
                 "No new gate selection, independent validation or physical time scale"])
 

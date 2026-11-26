@@ -1,0 +1,214 @@
+{
+  "experiment": "opa-g-004b",
+  "checks": {
+    "frozen_input_and_label_identity": true,
+    "cpu_calibration_uniform": true,
+    "cpu_calibration_translated": true,
+    "cpu_calibration_boundary": true,
+    "cpu_calibration_scene_like": true,
+    "cpu_development_uniform": true,
+    "cpu_development_translated": true,
+    "cpu_development_boundary": true,
+    "cpu_development_scene_like": true,
+    "cpu_heldout_uniform": true,
+    "cpu_heldout_translated": true,
+    "cpu_heldout_boundary": true,
+    "cpu_heldout_scene_like": true,
+    "accounting": true,
+    "all_fallback_control": true,
+    "electronic_control": true,
+    "finite_costs": true,
+    "cost_identity": true
+  },
+  "passed": true,
+  "seed": 20261204,
+  "repeats": 3,
+  "rows": 768,
+  "cost_rows": 27648,
+  "compiler": {
+    "status": "executed",
+    "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "flags": [
+      "-O3",
+      "-std=c11",
+      "-fPIC",
+      "-shared",
+      "-fno-fast-math",
+      "-ffp-contract=off"
+    ]
+  },
+  "quality_gate": [
+    {
+      "scenario": "combined",
+      "policy": "all_optical_fallback",
+      "eligible": true
+    },
+    {
+      "scenario": "combined",
+      "policy": "electronic_only",
+      "eligible": true
+    },
+    {
+      "scenario": "combined",
+      "policy": "geometry_max_min",
+      "eligible": true
+    },
+    {
+      "scenario": "combined",
+      "policy": "geometry_q99_any",
+      "eligible": false
+    },
+    {
+      "scenario": "combined",
+      "policy": "geometry_q99_min",
+      "eligible": false
+    },
+    {
+      "scenario": "combined",
+      "policy": "raw",
+      "eligible": false
+    },
+    {
+      "scenario": "combined",
+      "policy": "uniform_q99_any",
+      "eligible": false
+    },
+    {
+      "scenario": "combined",
+      "policy": "uniform_q99_min",
+      "eligible": false
+    },
+    {
+      "scenario": "large_scale",
+      "policy": "all_optical_fallback",
+      "eligible": true
+    },
+    {
+      "scenario": "large_scale",
+      "policy": "electronic_only",
+      "eligible": true
+    },
+    {
+      "scenario": "large_scale",
+      "policy": "geometry_max_min",
+      "eligible": true
+    },
+    {
+      "scenario": "large_scale",
+      "policy": "geometry_q99_any",
+      "eligible": true
+    },
+    {
+      "scenario": "large_scale",
+      "policy": "geometry_q99_min",
+      "eligible": true
+    },
+    {
+      "scenario": "large_scale",
+      "policy": "raw",
+      "eligible": false
+    },
+    {
+      "scenario": "large_scale",
+      "policy": "uniform_q99_any",
+      "eligible": true
+    },
+    {
+      "scenario": "large_scale",
+      "policy": "uniform_q99_min",
+      "eligible": true
+    },
+    {
+      "scenario": "noise_only",
+      "policy": "all_optical_fallback",
+      "eligible": true
+    },
+    {
+      "scenario": "noise_only",
+      "policy": "electronic_only",
+      "eligible": true
+    },
+    {
+      "scenario": "noise_only",
+      "policy": "geometry_max_min",
+      "eligible": false
+    },
+    {
+      "scenario": "noise_only",
+      "policy": "geometry_q99_any",
+      "eligible": false
+    },
+    {
+      "scenario": "noise_only",
+      "policy": "geometry_q99_min",
+      "eligible": false
+    },
+    {
+      "scenario": "noise_only",
+      "policy": "raw",
+      "eligible": false
+    },
+    {
+      "scenario": "noise_only",
+      "policy": "uniform_q99_any",
+      "eligible": false
+    },
+    {
+      "scenario": "noise_only",
+      "policy": "uniform_q99_min",
+      "eligible": false
+    },
+    {
+      "scenario": "scale_only",
+      "policy": "all_optical_fallback",
+      "eligible": true
+    },
+    {
+      "scenario": "scale_only",
+      "policy": "electronic_only",
+      "eligible": true
+    },
+    {
+      "scenario": "scale_only",
+      "policy": "geometry_max_min",
+      "eligible": true
+    },
+    {
+      "scenario": "scale_only",
+      "policy": "geometry_q99_any",
+      "eligible": true
+    },
+    {
+      "scenario": "scale_only",
+      "policy": "geometry_q99_min",
+      "eligible": true
+    },
+    {
+      "scenario": "scale_only",
+      "policy": "raw",
+      "eligible": false
+    },
+    {
+      "scenario": "scale_only",
+      "policy": "uniform_q99_any",
+      "eligible": true
+    },
+    {
+      "scenario": "scale_only",
+      "policy": "uniform_q99_min",
+      "eligible": true
+    }
+  ],
+  "workload_source": "results/ci-originals/opa-g-004a/45841325612-15128251841",
+  "gpu": "not_run",
+  "energy": "not_measured",
+  "limitations": [
+    "Normalized optical behavior; no physical tolerance or guaranteed confidence bound",
+    "Actual compiled CPU fallback validated on frozen workload; no measured hybrid timing",
+    "Partial illustrative energy sensitivity only; no measured CPU or optical power",
+    "Side cost lumps conversion/driver/receiver/comparators; no selected physical components",
+    "Static laser/LO and idle proxy; assumed rate and utilization, not measured",
+    "DMA/BVH memory, normalization beyond guard proxy, digital aggregation, calibration, tuning, host and cooling not accounted separately",
+    "No full-system ranking or claimed energy advantage"
+  ]
+}

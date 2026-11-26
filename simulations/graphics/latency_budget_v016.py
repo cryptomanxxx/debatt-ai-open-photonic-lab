@@ -129,12 +129,16 @@ def schedule(traces,p,lanes,contexts):
         admit(p["dispatch"])
     def cpu(t,d):
         nonlocal cpu_free
+        if d==0:
+            return t
         start=max(t,cpu_free)
         cpu_free=start+d
         busy["cpu"]+=d
         return cpu_free
     def mem(t,d):
         nonlocal mem_free
+        if d==0:
+            return t
         start=max(t,mem_free)
         mem_free=start+d
         busy["memory"]+=d

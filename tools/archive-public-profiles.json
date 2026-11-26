@@ -23,5 +23,13 @@
     "workload-manifest.json",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-g-004c1": [
+    "result.json",
+    "results.csv",
+    "discrepancies.csv",
+    "scenes.json",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

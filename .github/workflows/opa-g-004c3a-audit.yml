@@ -1,0 +1,29 @@
+name: OPA-G-004C3A archive accounting
+on:
+  pull_request:
+    paths:
+      - 'simulations/graphics/audit_c2_archive_v011.py'
+      - '.github/workflows/opa-g-004c3a-audit.yml'
+      - 'results/ci-originals/opa-g-004c2/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit immutable original files
+        run: python simulations/graphics/audit_c2_archive_v011.py results/ci-originals/opa-g-004c2/45865605446-15140012141 --output /tmp/opa-g-004c3a-audit/report.json
+      - name: Preserve audit report even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opa-g-004c3a-archive-audit
+          path: /tmp/opa-g-004c3a-audit/report.json
+          if-no-files-found: error
+          retention-days: 90

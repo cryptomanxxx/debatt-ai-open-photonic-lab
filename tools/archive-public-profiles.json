@@ -14,5 +14,14 @@
     "cost-sensitivity.csv",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-g-004b2": [
+    "result.json",
+    "results.csv",
+    "selection.json",
+    "workload.csv",
+    "workload-manifest.json",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

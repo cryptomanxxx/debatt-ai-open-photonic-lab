@@ -1,0 +1,131 @@
+{
+  "stage": "C3A whole compiled CPU BVH",
+  "passed": true,
+  "scientific_gate": true,
+  "energy": "not_measured",
+  "gpu": "not_run",
+  "timing_valid": true,
+  "discrepancies": 0,
+  "scenes": [
+    {
+      "scene": "distributed",
+      "rays": 80,
+      "repeats": 40,
+      "batches_per_sample": 4096,
+      "p50_batch_ns": 7244.3472900390625,
+      "p95_batch_ns": 7556.864978027344,
+      "rays_per_second": 11043092.882915698,
+      "nodes_per_second": 123130485.64451005,
+      "operations_per_batch": {
+        "nodes": 892,
+        "accepted": 509,
+        "leaves": 103,
+        "triangles": 309
+      },
+      "allocated_bytes": {
+        "nodes": 1984,
+        "primitive_ids": 192,
+        "triangles": 3456,
+        "rays": 3840,
+        "stack": 124,
+        "output": 1280
+      }
+    },
+    {
+      "scene": "clustered",
+      "rays": 80,
+      "repeats": 40,
+      "batches_per_sample": 2048,
+      "p50_batch_ns": 16074.14111328125,
+      "p95_batch_ns": 17056.72951660156,
+      "rays_per_second": 4976937.768320327,
+      "nodes_per_second": 97921250.59170243,
+      "operations_per_batch": {
+        "nodes": 1574,
+        "accepted": 1101,
+        "leaves": 354,
+        "triangles": 1062
+      },
+      "allocated_bytes": {
+        "nodes": 1984,
+        "primitive_ids": 192,
+        "triangles": 3456,
+        "rays": 3840,
+        "stack": 124,
+        "output": 1280
+      }
+    },
+    {
+      "scene": "anisotropic",
+      "rays": 80,
+      "repeats": 40,
+      "batches_per_sample": 2048,
+      "p50_batch_ns": 9910.766357421875,
+      "p95_batch_ns": 9966.601147460937,
+      "rays_per_second": 8072029.660964655,
+      "nodes_per_second": 101909374.46967876,
+      "operations_per_batch": {
+        "nodes": 1010,
+        "accepted": 661,
+        "leaves": 196,
+        "triangles": 588
+      },
+      "allocated_bytes": {
+        "nodes": 1984,
+        "primitive_ids": 192,
+        "triangles": 3456,
+        "rays": 3840,
+        "stack": 124,
+        "output": 1280
+      }
+    },
+    {
+      "scene": "translated_boundary",
+      "rays": 9,
+      "repeats": 40,
+      "batches_per_sample": 65536,
+      "p50_batch_ns": 353.1384811401367,
+      "p95_batch_ns": 357.2897041320801,
+      "rays_per_second": 25485752.702290494,
+      "nodes_per_second": 59466756.305344485,
+      "operations_per_batch": {
+        "nodes": 21,
+        "accepted": 17,
+        "leaves": 11,
+        "triangles": 33
+      },
+      "allocated_bytes": {
+        "nodes": 192,
+        "primitive_ids": 24,
+        "triangles": 432,
+        "rays": 432,
+        "stack": 12,
+        "output": 144
+      }
+    }
+  ],
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "flags": [
+    "-O3",
+    "-std=c11",
+    "-D_POSIX_C_SOURCE=200809L",
+    "-fPIC",
+    "-shared",
+    "-fno-fast-math",
+    "-ffp-contract=off"
+  ],
+  "cpu": "Intel(R) Xeon(R) 6975P-C",
+  "os": "Linux-7.0.0-1018-aws-x86_64-with-glibc2.39",
+  "architecture": "x86_64",
+  "threads": 1,
+  "timer": "native CLOCK_MONOTONIC",
+  "node_bytes": 64,
+  "hit_bytes": 16,
+  "layout": "contiguous AoS nodes/rays/triangles/hits, separate primitive IDs and reusable stack",
+  "timing_boundary": "resident native batch, includes output writes and local box packing; excludes host packing, allocation, Python dispatch, oracle and trace",
+  "limitations": [
+    "Shared CI CPU, no affinity or frequency control",
+    "Small synthetic scenes, warm resident data, no distance pruning",
+    "No GPU, optical latency, host-inclusive or energy measurement"
+  ]
+}

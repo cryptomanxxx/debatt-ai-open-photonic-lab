@@ -8,7 +8,8 @@ from pathlib import Path
 import re
 import subprocess
 
-from archive_experiment import api, require, validate_metadata
+from archive_experiment import (api, require, validate_metadata, verify_c3a_squash,
+                                C3A_RECOVERY_PR, C3A_RECOVERY_REPO)
 
 POLICY = Path("tools/archive-public-profiles.json")
 
@@ -69,10 +70,14 @@ def historical_base_registry(repo, pr, paths):
     require(re.fullmatch(r"[0-9a-f]{40}", merge), "Missing integrated merge SHA")
     commit = api(repo, f"commits/{merge}")
     parents = [p["sha"] for p in commit["parents"]]
-    require(commit["sha"] == merge and len(parents) == 2 and
-            parents[1] == pr["head"]["sha"], "Cannot bind historical registry base")
+    if repo == C3A_RECOVERY_REPO and pr.get("number") == C3A_RECOVERY_PR:
+        base = verify_c3a_squash(repo, pr)
+    else:
+        require(commit["sha"] == merge and len(parents) == 2 and
+                parents[1] == pr["head"]["sha"], "Cannot bind historical registry base")
+        base = parents[0]
     return json.loads(subprocess.check_output([
-        "gh", "api", f"repos/{repo}/contents/simulations/experiments.json?ref={parents[0]}",
+        "gh", "api", f"repos/{repo}/contents/simulations/experiments.json?ref={base}",
         "-H", "Accept: application/vnd.github.raw+json"]))
 
 

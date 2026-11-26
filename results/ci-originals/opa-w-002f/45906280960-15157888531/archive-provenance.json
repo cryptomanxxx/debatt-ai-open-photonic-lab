@@ -1,0 +1,52 @@
+{
+  "experiment": "opa-w-002f",
+  "repository": "cryptomanxxx/debatt-ai-open-photonic-lab",
+  "source_head_sha": "bed866022846db536cf37e487afd7eea6bcf4dd4",
+  "executed_commit_sha": "6843bf3eac78563da2148429f8cd55d5d1a5fff6",
+  "executed_tree_sha": "c247466bed6f895add66dbc66d6c0a22fc0330a8",
+  "source_event": "pull_request",
+  "checkout_log_sha256": "e50299bad4770cfd492ba919523b7ddc3c4293b49412f7fdfef179c4081cd3af",
+  "workflow_run_id": 45906280960,
+  "run_attempt": 1,
+  "job_id": 140203754146,
+  "artifact_id": 15157888531,
+  "artifact_name": "opa-w-002f",
+  "artifact_sha256": "92d406d1a035203470b440877bb1c39d637bf208401f5b4e3170f3b06a6f67fc",
+  "artifact_bytes": 21628,
+  "source_workflow": ".github/workflows/experiments.yml",
+  "expanded_bytes": 101567,
+  "expansion_policy": "default",
+  "verification": "GitHub metadata, historical checkout log and executed commit/tree, ZIP SHA-256 and CRC; exact extracted bytes; no rerun",
+  "files": {
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c",
+      "git_blob_sha1": "e0f73c62ff0fe442819a24eff4c391bc1d95e8d8"
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6",
+      "git_blob_sha1": "b78cc4b63c8815d1e064dec794040bbff4e2ffac"
+    },
+    "matched.csv": {
+      "bytes": 878,
+      "sha256": "5735197b8af345aed46ee34e2a48ff44cfb7bfbf3cac84cf346c153fe2f862ab",
+      "git_blob_sha1": "04b6a230414e1649a700be1b9b14ef251429ef28"
+    },
+    "policy_summary.csv": {
+      "bytes": 2038,
+      "sha256": "baa53a47481ecf21e3430c48231dc7ce9b20ae125588207348ad4e84c2304771",
+      "git_blob_sha1": "eee69664856fa5dc093231c3fdc811a0d00dc819"
+    },
+    "result.json": {
+      "bytes": 4297,
+      "sha256": "cec707d195fc8f20b65c682d3b1571271575bd57dad2564799c87668b8cbcce2",
+      "git_blob_sha1": "59969dccfc6ae40086a8beaa6ce55bf0ae636bd9"
+    },
+    "strata.csv": {
+      "bytes": 16279,
+      "sha256": "21763c6ccdcda25fd9202e2136aa998c93d5b609d448cd76e2bfcc62650a69dc",
+      "git_blob_sha1": "800627db7425b63c3c4e2d572057d38c6838365e"
+    }
+  }
+}

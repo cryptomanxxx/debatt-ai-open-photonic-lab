@@ -1,0 +1,159 @@
+{
+  "passed": true,
+  "experiment": "OPA-W-002F",
+  "verified_files": 6,
+  "trajectories": 5184,
+  "paired_policy_rows": 62208,
+  "matched_comparisons": 31104,
+  "selected_gates": [
+    {
+      "references": 4,
+      "cadence": 1,
+      "gate": 3.0
+    },
+    {
+      "references": 4,
+      "cadence": 4,
+      "gate": 2.0
+    },
+    {
+      "references": 4,
+      "cadence": 16,
+      "gate": 3.0
+    },
+    {
+      "references": 16,
+      "cadence": 1,
+      "gate": 3.0
+    },
+    {
+      "references": 16,
+      "cadence": 4,
+      "gate": 3.0
+    },
+    {
+      "references": 16,
+      "cadence": 16,
+      "gate": 3.0
+    }
+  ],
+  "matched": [
+    {
+      "references": 4,
+      "cadence": 1,
+      "trajectories": 5184,
+      "adaptive_pass": 611,
+      "always_pass": 635,
+      "adaptive_only_pass": 113,
+      "always_only_pass": 137,
+      "both_pass": 498,
+      "both_fail": 4436,
+      "adaptive_lower_ser": 2737,
+      "adaptive_higher_ser": 1910,
+      "adaptive_lower_ser_higher_worst": 251,
+      "adaptive_lower_ser_lost_pass": 1,
+      "mean_ser_delta": -0.012639310624864366,
+      "mean_worst_delta": -0.01348179946711034,
+      "read_overhead": 0.0625
+    },
+    {
+      "references": 4,
+      "cadence": 4,
+      "trajectories": 5184,
+      "adaptive_pass": 486,
+      "always_pass": 440,
+      "adaptive_only_pass": 70,
+      "always_only_pass": 24,
+      "both_pass": 416,
+      "both_fail": 4674,
+      "adaptive_lower_ser": 2862,
+      "adaptive_higher_ser": 1676,
+      "adaptive_lower_ser_higher_worst": 314,
+      "adaptive_lower_ser_lost_pass": 1,
+      "mean_ser_delta": -0.010497122635076076,
+      "mean_worst_delta": -0.011259950237509645,
+      "read_overhead": 0.015625
+    },
+    {
+      "references": 4,
+      "cadence": 16,
+      "trajectories": 5184,
+      "adaptive_pass": 654,
+      "always_pass": 464,
+      "adaptive_only_pass": 197,
+      "always_only_pass": 7,
+      "both_pass": 457,
+      "both_fail": 4523,
+      "adaptive_lower_ser": 3017,
+      "adaptive_higher_ser": 1351,
+      "adaptive_lower_ser_higher_worst": 301,
+      "adaptive_lower_ser_lost_pass": 0,
+      "mean_ser_delta": -0.011708347885696977,
+      "mean_worst_delta": -0.013022246184172455,
+      "read_overhead": 0.00390625
+    },
+    {
+      "references": 16,
+      "cadence": 1,
+      "trajectories": 5184,
+      "adaptive_pass": 698,
+      "always_pass": 798,
+      "adaptive_only_pass": 60,
+      "always_only_pass": 160,
+      "both_pass": 638,
+      "both_fail": 4326,
+      "adaptive_lower_ser": 2313,
+      "adaptive_higher_ser": 2189,
+      "adaptive_lower_ser_higher_worst": 309,
+      "adaptive_lower_ser_lost_pass": 0,
+      "mean_ser_delta": -0.0016513165132499036,
+      "mean_worst_delta": -0.0013909045560860339,
+      "read_overhead": 0.25
+    },
+    {
+      "references": 16,
+      "cadence": 4,
+      "trajectories": 5184,
+      "adaptive_pass": 588,
+      "always_pass": 549,
+      "adaptive_only_pass": 88,
+      "always_only_pass": 49,
+      "both_pass": 500,
+      "both_fail": 4547,
+      "adaptive_lower_ser": 2600,
+      "adaptive_higher_ser": 1925,
+      "adaptive_lower_ser_higher_worst": 363,
+      "adaptive_lower_ser_lost_pass": 0,
+      "mean_ser_delta": -0.0024248935558177807,
+      "mean_worst_delta": -0.002263292854214892,
+      "read_overhead": 0.0625
+    },
+    {
+      "references": 16,
+      "cadence": 16,
+      "trajectories": 5184,
+      "adaptive_pass": 650,
+      "always_pass": 538,
+      "adaptive_only_pass": 121,
+      "always_only_pass": 9,
+      "both_pass": 529,
+      "both_fail": 4525,
+      "adaptive_lower_ser": 2925,
+      "adaptive_higher_ser": 1301,
+      "adaptive_lower_ser_higher_worst": 324,
+      "adaptive_lower_ser_lost_pass": 1,
+      "mean_ser_delta": -0.0037851569093303914,
+      "mean_worst_delta": -0.004170264726803627,
+      "read_overhead": 0.015625
+    }
+  ],
+  "strata_rows": 132,
+  "physical_measurement": false,
+  "material_fit": false,
+  "limitations": [
+    "Aggregate archive audit only; no raw samples, per-state identities or estimator replay",
+    "Tail metric is worst state over a trajectory, not probability of future failure",
+    "Correlated mismatch strata are descriptive, not causal identification",
+    "No new policy selection or held-out tuning; no physical energy or time"
+  ]
+}

@@ -37,6 +37,51 @@ def api(repo, endpoint):
     return json.loads(subprocess.check_output(["gh", "api", f"repos/{repo}/{endpoint}"]))
 
 
+# One-time recovery of PR 297, squash merged after successful CI.
+C3A_RECOVERY_REPO = "cryptomanxxx/debatt-ai-open-photonic-lab"
+C3A_RECOVERY_PR = 297
+C3A_RECOVERY_HEAD = "86b24c4b55caae606420a8d25fb8fe3b49c013a0"
+C3A_RECOVERY_MERGE = "8464305db498b8c99a58fc9731b0ddf952551da5"
+C3A_RECOVERY_BASE = "46db79c01ae3f03a02eb7483d1c303d90aa3d3d2"
+C3A_RECOVERY_EXECUTED = "18e0229a0ca19a84c76b4313d5b65e7356de5217"
+C3A_RECOVERY_SOURCE = (45876612733, 15145395444)
+C3A_RECOVERY_DIGEST = "sha256:aa21052266621af0cee4307847c8b324ec23009765b3c2f8840ab5c7be5d39d3"
+
+
+def verify_c3a_squash(repo, pr):
+    """Prove exact tested tree equals the integrated squash tree."""
+    require(repo == C3A_RECOVERY_REPO and pr.get("number") == C3A_RECOVERY_PR
+            and pr.get("merged") is True and pr.get("state") == "closed"
+            and pr["base"]["ref"] == "main"
+            and pr["base"]["repo"]["full_name"] == repo
+            and pr["head"]["repo"]["full_name"] == repo
+            and pr["head"]["sha"] == C3A_RECOVERY_HEAD
+            and pr.get("merge_commit_sha") == C3A_RECOVERY_MERGE,
+            "Unexpected C3A recovery PR identity")
+    integrated = api(repo, f"commits/{C3A_RECOVERY_MERGE}")
+    tested = api(repo, f"commits/{C3A_RECOVERY_EXECUTED}")
+    require(integrated["sha"] == C3A_RECOVERY_MERGE
+            and tested["sha"] == C3A_RECOVERY_EXECUTED
+            and [p["sha"] for p in integrated["parents"]] == [C3A_RECOVERY_BASE]
+            and [p["sha"] for p in tested["parents"]] ==
+                [C3A_RECOVERY_BASE, C3A_RECOVERY_HEAD],
+            "Unexpected C3A recovery commit ancestry")
+    tree = tested["commit"]["tree"]["sha"]
+    require(re.fullmatch(r"[0-9a-f]{40}", tree)
+            and integrated["commit"]["tree"]["sha"] == tree,
+            "C3A squash and executed trees differ")
+    subprocess.run(["git", "merge-base", "--is-ancestor", C3A_RECOVERY_MERGE, "HEAD"],
+                   check=True)
+    return C3A_RECOVERY_BASE
+
+
+def is_c3a_recovery(repo, experiment, run_id, artifact_id, head, archive_pr):
+    return (repo == C3A_RECOVERY_REPO and experiment == "opa-g-004c3a"
+            and (run_id, artifact_id) == C3A_RECOVERY_SOURCE
+            and head == C3A_RECOVERY_HEAD
+            and archive_pr == str(C3A_RECOVERY_PR))
+
+
 def download_job_log(repo, job_id):
     # gh guards terminal output against escape sequences. Capture raw bytes
     # privately for parsing and hashing; never print or execute the log.
@@ -179,10 +224,18 @@ def main():
     require(len(matches) == 1, "Experiment not uniquely registered")
     entry = matches[0]
     # Require source commit integrated in current main before publication.
-    subprocess.run(["git", "merge-base", "--is-ancestor", head, "HEAD"], check=True)
+    recovery = is_c3a_recovery(repo, experiment, run_id, artifact_id, head,
+                              os.environ.get("ARCHIVE_PR"))
+    if recovery:
+        verify_c3a_squash(repo, api(repo, f"pulls/{C3A_RECOVERY_PR}"))
+    else:
+        subprocess.run(["git", "merge-base", "--is-ancestor", head, "HEAD"], check=True)
     run = api(repo, f"actions/runs/{run_id}")
     artifact = api(repo, f"actions/artifacts/{artifact_id}")
     validate_metadata(repo, run, artifact, entry, run_id, artifact_id, head)
+    if recovery:
+        require(artifact["digest"] == C3A_RECOVERY_DIGEST,
+                "Unexpected C3A original digest")
     jobs = json.loads(subprocess.check_output([
         "gh", "api", "--paginate", "--slurp",
         f"repos/{repo}/actions/runs/{run_id}/attempts/{run['run_attempt']}/jobs?per_page=100"]))
@@ -196,6 +249,8 @@ def main():
         require(run["event"] == "pull_request" and re.fullmatch(r"[1-9][0-9]*", expected_pr),
                 "Invalid discovery PR context")
     executed = executed_checkout(log.decode("utf-8"), run["event"], head, expected_pr)
+    if recovery:
+        require(executed == C3A_RECOVERY_EXECUTED, "Unexpected C3A executed checkout")
     # Historical synthetic merge objects may not be in main's history.
     # GitHub's immutable commit endpoint supplies parents and tree by exact SHA.
     commit = api(repo, f"commits/{executed}")
@@ -229,6 +284,13 @@ def main():
         "expansion_policy": "c2-original-bounded" if expansion_limits(experiment, artifact, selected)[1] else "default",
         "verification": "GitHub metadata, historical checkout log and executed commit/tree, ZIP SHA-256 and CRC; exact extracted bytes; no rerun",
     })
+    if recovery:
+        manifest = root / "archive-provenance.json"
+        report = json.loads(manifest.read_text())
+        report["integration"] = {"method": "squash", "pr": C3A_RECOVERY_PR,
+                                 "integrated_commit_sha": C3A_RECOVERY_MERGE,
+                                 "executed_tree_equals_integrated_tree": True}
+        manifest.write_text(json.dumps(report, indent=2) + "\n")
     subprocess.run(["git", "-c", "core.autocrlf=false", "add", "-f", "--", str(root)], check=True)
     verify_staged(root)
 

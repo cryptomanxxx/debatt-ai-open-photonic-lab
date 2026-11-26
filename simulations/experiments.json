@@ -1588,6 +1588,19 @@
         "simulations/memory/test_multilevel_cell.py"
       ],
       "run": "python simulations/memory/test_multilevel_cell.py && python simulations/memory/multilevel_cell_v001.py --output results/opa-w-002a"
+    },
+    {
+      "id": "opa-w-002b",
+      "name": "Photonic memory: archived multilevel sensitivity and confusion audit",
+      "script": "simulations/memory/audit_multilevel_v002.py",
+      "result_dir": "results/opa-w-002b",
+      "artifact": "opa-w-002b",
+      "timeout_minutes": 10,
+      "deps": [
+        "simulations/memory/test_audit_multilevel.py",
+        "results/ci-originals/opa-w-002a/45900743025-15156101360/*"
+      ],
+      "run": "python simulations/memory/test_audit_multilevel.py && python simulations/memory/audit_multilevel_v002.py results/ci-originals/opa-w-002a/45900743025-15156101360 --output results/opa-w-002b"
     }
   ]
 }

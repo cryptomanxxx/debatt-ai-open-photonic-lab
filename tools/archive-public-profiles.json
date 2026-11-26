@@ -91,5 +91,11 @@
     "calibration.json",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-w-002b": [
+    "result.json",
+    "combinations.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

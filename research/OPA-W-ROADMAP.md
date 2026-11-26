@@ -1,6 +1,6 @@
 # OPA-W · Open Photonic Weight Memory
 
-Date: 2026-11-24. Status: initial W-001A evidence review started; W-002A conditional experiment implementation pending CI; no fabricated device or measured result. See [W-001A](OPA-W-001.md).
+Date: 2026-11-24. Status: initial W-001A evidence review started; W-002A conditional experiment executed and archived; W-002B audit pending CI; no fabricated device or measured result. See [W-001A](OPA-W-001.md).
 
 ## Research question and scope
 
@@ -24,7 +24,7 @@ For an intensity-encoded passive cell, P_out = T(w) P_in, with 0 <= T <= 1. A li
 
 ## Gated research phases
 
-W-001A evidence review is active; W-002A is registered for conditional numerical screening, pending CI. Remaining gates are planned.
+W-001A evidence review is active; W-002A conditional numerical screen executed and archived; [W-002B analysis](OPA-W-002B.md) and independent audit pending CI. Remaining gates are planned.
 
 | Phase | Deliverable | Gate |
 | --- | --- | --- |
@@ -61,3 +61,7 @@ No new literature-derived numeric performance claims are adopted in this plannin
 Browser teaching implementations: [Chip 13 (Photonic Weight Memory)](../web/chip13/README.md), [Chip 14 (Photonic In-Memory Computing)](../web/chip14/README.md) and [Chip 15 (Photonic Neural Network)](../web/chip15/README.md). They use illustrative models. The nine research phases retain their existing planned status and validation gates. Connect Chip 10 comb/WDM, Chip 11 optical logic (distinct from analog MVM), and Chip 12 interconnect where relevant. Keep teaching, analytical models, electromagnetic simulation, layout/DRC, fabrication and measured evidence separate.
 
 Independent researchers can develop models, open benchmarks and reproducible layouts without owning a fabrication lab. Investigate shared infrastructure (Myfab, PIXEurope and suitable MPW services) and funding; eligibility, cost, material support and access are unverified. Preserve open documentation and do not redistribute restricted PDK data. Follow AGENTS.md, existing CI, provenance and archival conventions when a phase is explicitly authorized.
+
+## Conditional multilevel results
+
+[W-002B](OPA-W-002B.md) records the archived W-002A panel results and an independent confusion-matrix audit implementation. No empirical W-002 qualification or W-003 release is implied.

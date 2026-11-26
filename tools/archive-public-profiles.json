@@ -31,5 +31,16 @@
     "scenes.json",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-g-004c2": [
+    "result.json",
+    "results.csv",
+    "node-results.csv",
+    "audit.csv",
+    "workload.json",
+    "labels.json",
+    "calibration.json",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

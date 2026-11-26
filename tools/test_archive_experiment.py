@@ -8,6 +8,7 @@ import unittest
 from unittest.mock import patch
 import zipfile
 import os
+import archive_experiment as ae
 
 from archive_experiment import expansion_limits, C2_ORIGINAL, C2_TOTAL_MAX, C2_NODE_MAX, MAX_TOTAL, MAX_FILE, sha, git_blob, unpack, write_archive, verify_staged, validate_metadata, executed_checkout, download_job_log
 
@@ -181,6 +182,47 @@ class ArchiveTests(unittest.TestCase):
         self.assertEqual(executed_checkout(dispatch, "workflow_dispatch", head), head)
         with self.assertRaises(ValueError):
             executed_checkout(dispatch, "workflow_dispatch", merge)
+
+    def test_pinned_squash_recovery(self):
+        repo = ae.C3A_RECOVERY_REPO
+        head, base = ae.C3A_RECOVERY_HEAD, ae.C3A_RECOVERY_BASE
+        merged, executed = ae.C3A_RECOVERY_MERGE, ae.C3A_RECOVERY_EXECUTED
+        run, artifact = ae.C3A_RECOVERY_SOURCE
+        args = (repo, "opa-g-004c3a", run, artifact, head, "297")
+        self.assertTrue(ae.is_c3a_recovery(*args))
+        for index, value in enumerate(("fork/repo", "opa-g-004c2", run+1,
+                                       artifact+1, "a"*40, "298")):
+            wrong = list(args)
+            wrong[index] = value
+            self.assertFalse(ae.is_c3a_recovery(*wrong))
+        pr = {"number":297, "merged":True, "state":"closed",
+              "base":{"ref":"main","repo":{"full_name":repo}},
+              "head":{"sha":head,"repo":{"full_name":repo}},
+              "merge_commit_sha":merged}
+        tree = {"tree":{"sha":"a"*40}}
+        integrated = {"sha":merged,"parents":[{"sha":base}],"commit":tree}
+        tested = {"sha":executed,"parents":[{"sha":base},{"sha":head}],"commit":tree}
+        with patch("archive_experiment.api",side_effect=[integrated,tested]), patch(
+                "archive_experiment.subprocess.run") as ancestor:
+            self.assertEqual(ae.verify_c3a_squash(repo,pr),base)
+            ancestor.assert_called_once_with(
+                ["git","merge-base","--is-ancestor",merged,"HEAD"],check=True)
+        for bad in ({**tested,"commit":{"tree":{"sha":"b"*40}}},
+                    {**tested,"parents":[{"sha":base},{"sha":"b"*40}]}):
+            with patch("archive_experiment.api",side_effect=[integrated,bad]), patch(
+                    "archive_experiment.subprocess.run") as ancestor:
+                with self.assertRaises(ValueError):
+                    ae.verify_c3a_squash(repo,pr)
+                ancestor.assert_not_called()
+        with patch("archive_experiment.api") as api:
+            with self.assertRaises(ValueError):
+                ae.verify_c3a_squash(repo,{**pr,"merged":False})
+            api.assert_not_called()
+        with patch("archive_experiment.api",side_effect=[integrated,tested]), patch(
+                "archive_experiment.subprocess.run",
+                side_effect=subprocess.CalledProcessError(1,["git"])):
+            with self.assertRaises(subprocess.CalledProcessError):
+                ae.verify_c3a_squash(repo,pr)
 
     def test_metadata(self):
         repo,head="owner/repo","a"*40

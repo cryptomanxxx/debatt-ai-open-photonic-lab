@@ -1482,7 +1482,18 @@
         "results/ci-originals/opa-g-004c1/45862577503-15137988857/archive-provenance.json",
         "results/ci-originals/opa-g-004c1/45862577503-15137988857/scenes.json"
       ],
-      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/graphics/hybrid_bvh_v010.py"
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/graphics/hybrid_bvh_v010.py"    },
+    {
+      "id": "opa-g-004c3a",
+      "name": "Graphics: independent frozen archive integrity and traversal accounting",
+      "script": "simulations/graphics/audit_c2_archive_v011.py",
+      "result_dir": "results/opa-g-004c3a",
+      "artifact": "opa-g-004c3a",
+      "timeout_minutes": 15,
+      "deps": [
+        "results/ci-originals/opa-g-004c2/45865605446-15140012141/*"
+      ],
+      "run": "python simulations/graphics/audit_c2_archive_v011.py results/ci-originals/opa-g-004c2/45865605446-15140012141 --output results/opa-g-004c3a/result.json"
     }
   ]
 }

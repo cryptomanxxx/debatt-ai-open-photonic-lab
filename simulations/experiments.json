@@ -1439,6 +1439,21 @@
         "results/ci-originals/opa-g-004a/45841325612-15128251841/workload.csv",
         "results/ci-originals/opa-g-004a/45841325612-15128251841/archive-provenance.json"
       ]
+    },
+    {
+      "id": "opa-g-004c1",
+      "name": "Graphics: frozen electronic BVH and exact triangle oracle",
+      "script": "simulations/graphics/bvh_reference_v009.py",
+      "result_dir": "results/opa-g-004c1",
+      "artifact": "opa-g-004c1",
+      "timeout_minutes": 15,
+      "deps": [
+        "simulations/graphics/ray_box_v001.py",
+        "simulations/graphics/ray_box_cpu_v006.c",
+        "simulations/graphics/ray_triangle_cpu_v009.c",
+        "research/OPA-G-004C.md"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/graphics/bvh_reference_v009.py"
     }
   ]
 }

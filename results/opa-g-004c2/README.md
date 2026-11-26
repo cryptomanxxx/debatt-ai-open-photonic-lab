@@ -21,7 +21,7 @@ Electronic only, all-optical fallback and max_min_125 pass node and final gates;
 | drift_quantization | 3680 | 31290 | 23090 | 8200 | 73.79% | 23.45% |
 | Total | 18400 | 156450 | 82562 | 73888 | 52.77% | 42.26% |
 
-All optical-stage nodes incur optical work, including fallback: 181820 side tests and 727280 driven operands per scenario; total 909100 sides and 3636400 operands. Total triangle tests 99600. Worst scene/repeat fallback 935/952 (98.21%), large_scale anisotropic repeats 0 and 1, from 200 selected-policy scenario/repeat/scene groups. This worst group is not the pooled worst scenario.
+All optical-stage nodes incur optical work, including fallback: 181820 side tests and 727280 driven operands per scenario; total 909100 sides and 3636400 operands. Total triangle tests 99600. Worst scene/repeat fallback 952/952 (100%), in both combined repeat 4 and drift_quantization repeat 7 for the anisotropic scene, from 200 selected-policy scenario/repeat/scene groups. Both panels provide zero optical-only decisions; this panel-level maximum is distinct from the pooled worst scenario.
 
 | Raw scenario | Node FP | Node FN | Final FN | Wrong final ID | Nearest primitive not tested |
 |---|---:|---:|---:|---:|---:|

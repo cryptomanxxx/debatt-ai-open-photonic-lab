@@ -1,0 +1,179 @@
+diff --git a/dist/index.html b/dist/index.html
+index aa61722..d8b3352 100644
+--- a/dist/index.html
++++ b/dist/index.html
+@@ -21,13 +21,13 @@
+   <link rel="stylesheet" href="scalable-photonic.css">
+   <script src="scalable-photonic-model.js" defer></script>
+   <script src="scalable-photonic-research.js" defer></script>
+-  <script src="scalable-photonic.js?v=82" defer></script>
++  <script src="scalable-photonic.js?v=83" defer></script>
+   <script src="opa-hub.js" defer></script>
+   <link rel="stylesheet" href="multilayer-photonic.css">
+   <link rel="stylesheet" href="photonic-components.css">
+   <script src="photonic-components-data.js?v=81" defer></script>
+   <script src="photonic-components-diagrams.js" defer></script>
+-  <script src="photonic-components.js?v=80" defer></script>
++  <script src="photonic-components.js?v=81" defer></script>
+   <script src="multilayer-photonic-model.js" defer></script>
+   <script src="multilayer-photonic.js" defer></script>
+   <link rel="stylesheet" href="photonic-benchmark.css">
+@@ -47,6 +47,10 @@
+   <script type="module" src="optical-logic.js"></script>
+   <link rel="stylesheet" href="photonic-learning.css?v=85">
+   <script src="photonic-learning.js?v=108" defer></script>
++  <link rel="stylesheet" href="opa-graphics-xr.css">
++  <link rel="stylesheet" href="chip16/experiment.css">
++  <script src="chip16/model.js" defer></script>
++  <script src="chip16/experiment.js" defer></script>
+ </head>
+ <body>
+   <main class="wrap">
+@@ -250,6 +254,75 @@
+         </ul>
+         <a class="btn" href="opa-roadmap.html#opa-m">Explore the OPA-M research plan</a>
+       </section>
++      <nav class="research-jump" aria-label="Research tracks">
++        <a class="btn" href="#opa-ecosystem/opa-g">OPA-G · Graphics acceleration</a>
++        <a class="btn" href="#opa-ecosystem/opvr">OPVR · Open virtual reality</a>
++      </nav>
++      <section class="card research-track" id="opa-g-ecosystem" aria-labelledby="opa-g-title" tabindex="-1">
++        <p class="state">Proposed research · numerical demonstration available</p>
++        <h2 id="opa-g-title">OPA-G · Open Photonic Graphics Accelerator</h2>
++        <p>OPA-G investigates whether photonics can reduce the energy and latency of graphics workloads. The first target is the ray–box test in a bounding volume hierarchy (BVH). Over time, the research will examine hybrid ray tracing, stereoscopic VR and real-time rendering of AI-generated 3D worlds. The electronic renderer initially handles traversal, triangle tests, shading, textures and display.</p>
++        <p><a href="#photonic-circuit-lab/ray-tracing">Try Chip 16 · Photonic Ray Tracing Accelerator</a></p>
++        <table class="data-table">
++          <caption>Seven research phases</caption>
++          <thead><tr><th scope="col">Phase</th><th scope="col">Deliverable and validation</th></tr></thead>
++          <tbody>
++            <tr><th scope="row">OPA-G-001</th><td>Numerical baseline. Establish forward ray–AABB ground truth, test geometric edge cases independently and publish seeded precision sweeps with separate false-positive and false-negative counts.</td></tr>
++            <tr><th scope="row">OPA-G-002</th><td>Reconstruct the published side-function algorithm from its supplementary derivation and compare its 3D conventions and edge cases with G-001.</td></tr>
++            <tr><th scope="row">OPA-G-003</th><td>Model four Mach–Zehnder modulators and coherent readout. Sweep bias, nonlinearity, loss, phase drift, noise and comparator thresholds with calibrated uncertainty.</td></tr>
++            <tr><th scope="row">OPA-G-004</th><td>Compare matched CPU and GPU workloads. Report throughput, p50/p95 latency and energy per correct test, including memory and conversion overhead, laser power and idle power.</td></tr>
++            <tr><th scope="row">OPA-G-005</th><td>Design a process-specific test coupon with RF and optical interfaces and reference structures. Verify process access, model validity and foundry design rules before fabrication.</td></tr>
++            <tr><th scope="row">OPA-G-006</th><td>Measure the test chip at calibrated electrical and optical reference planes. Publish raw traces, uncertainty, drift and error counts against the same reference.</td></tr>
++            <tr><th scope="row">OPA-G-007</th><td>Integrate a hybrid GPU/FPGA path with conservative fallback. Measure image errors, frame timing and whole-system energy before OPVR integration.</td></tr>
++          </tbody>
++        </table>
++        <p><a href="https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/blob/main/research/OPA-G-ROADMAP.md">Read the OPA-G research plan</a></p>
++      </section>
++      <section class="card research-track" id="opvr-ecosystem" aria-labelledby="opvr-title" tabindex="-1">
++        <p class="state">Long-term research · concept architecture</p>
++        <h2 id="opvr-title">OPVR · Open Photonic Virtual Reality</h2>
++        <p>The long-term goal is a standalone virtual and mixed reality headset with open hardware, open software and integrated photonic accelerators. The first reference system uses conventional hardware and an open XR runtime. Each optional photonic module must demonstrate value at the system level before headset integration.</p>
++        <figure class="opvr-figure">
++          <img src="opvr-headset.webp" width="1500" height="844" loading="lazy" alt="Concept rendering of a modular graphite VR and mixed reality headset with a translucent panel showing a proposed photonic board and heat sink">
++          <figcaption class="muted">Illustration of a future headset concept. The photonic board and enclosure are conceptual design elements.</figcaption>
++        </figure>
++        <section class="opvr-stack" aria-labelledby="opvr-stack-title">
++          <h3 id="opvr-stack-title">How the system fits together</h3>
++          <div class="opvr-layer"><strong>Open game distribution</strong><p>People and AI agents can publish, modify and share free VR games in an open catalog with signed releases, license metadata and provenance. Games execute within the platform’s sandbox.</p></div>
++          <div class="opvr-link"><span aria-hidden="true">↓</span> Install a native game or open a web game</div>
++          <div class="opvr-lanes">
++            <div class="opvr-layer"><strong>Native path</strong><p>Linux hosts the application and device drivers. The game uses OpenXR, with Monado as the runtime for tracking and compositing.</p></div>
++            <div class="opvr-layer"><strong>Browser path</strong><p>WebXR provides immersive sessions, WebGPU submits graphics or compute work, and WebAssembly runs application code. Device and browser support must be verified.</p></div>
++          </div>
++          <div class="opvr-link"><span aria-hidden="true">↓</span> Submit work through runtime and device drivers</div>
++          <div class="opvr-layer"><strong>Electronic CPU, GPU and memory</strong><p>Handle tracking and application logic, geometry, shading, compositing and the stereo display. A host driver and explicit runtime integration would be needed to make a custom accelerator available to a browser.</p>
++            <dl class="opvr-modules">
++              <div><dt>OPA</dt><dd>Candidate accelerator for AI inference tasks, such as processing assets for generated worlds.</dd></div>
++              <div><dt>OPA-M</dt><dd>Candidate photonic data link between electronic memory and accelerator endpoints.</dd></div>
++              <div><dt>OPA-W</dt><dd>Candidate photonic weight storage for AI models, subject to retention, precision and readout validation.</dd></div>
++              <div><dt>OPA-G</dt><dd>Candidate graphics accelerator for BVH ray–box tests, with electronic fallback near ambiguous boundaries.</dd></div>
++            </dl>
++          </div>
++          <div class="opvr-link"><span aria-hidden="true">↓</span> Present completed stereo frames</div>
++          <div class="opvr-layer"><strong>Headset display and optics</strong><p>Measure frame times alongside motion-to-photon latency, thermal limits, mass and battery life on sustained workloads.</p></div>
++        </section>
++        <table class="data-table">
++          <caption>Nine development phases</caption>
++          <thead><tr><th scope="col">Phase</th><th scope="col">Deliverable and validation</th></tr></thead>
++          <tbody>
++            <tr><th scope="row">OPVR-001</th><td>Open system specification and electronic baseline. Set resolution, 72/90/120 Hz profiles, tracking measurements, thermal limits and battery budgets.</td></tr>
++            <tr><th scope="row">OPVR-002</th><td>Chip 16 teaching demo and OPA-G-001 numerical baseline with independently checked reference cases.</td></tr>
++            <tr><th scope="row">OPVR-003</th><td>OPA-G optical model and end-to-end accounting at matched graphics quality.</td></tr>
++            <tr><th scope="row">OPVR-004</th><td>Process-qualified external test chip and calibrated bench verification, subject to access and funding.</td></tr>
++            <tr><th scope="row">OPVR-005</th><td>GPU/FPGA integration with measurements of data movement and frame-time tails.</td></tr>
++            <tr><th scope="row">OPVR-006</th><td>Tethered headset with external accelerator. Compare identical scenes and render settings, dropped frames and motion-to-photon latency.</td></tr>
++            <tr><th scope="row">OPVR-007</th><td>Assess packaging, heat, mass, battery, electrical and optical safety, EMC and reliability. Obtain independent safety review before wearable laser prototyping.</td></tr>
++            <tr><th scope="row">OPVR-008</th><td>Standalone hybrid prototype after passing system energy, thermal, safety and latency gates.</td></tr>
++            <tr><th scope="row">OPVR-009</th><td>Open distribution prototype with documented APIs, optional agent integration, security review and a device compatibility matrix. This work can proceed independently of the optical hardware.</td></tr>
++          </tbody>
++        </table>
++        <p><a href="https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/blob/main/research/OPVR-ROADMAP.md">Read the OPVR research plan</a></p>
++      </section>
+       <figure class="card opa-ecosystem-figure">
+         <img src="opa-ecosystem.jpg" width="1536" height="864" loading="lazy" alt="Concept overview showing USB-connected OPA Local, multiple processors coordinated by OPA Hub, and remote access through OPA Cloud. Wavelength-division multiplexing (WDM) is optional across all three systems.">
+         <figcaption class="muted">Concept illustration of the proposed OPA Local, OPA Hub, and OPA Cloud architecture.</figcaption>
+@@ -271,7 +344,7 @@
+     <section id="panel-photonic-circuit-lab" class="tabpanel" role="tabpanel" aria-labelledby="tab-photonic-circuit-lab" hidden>
+       <header class="pulse-heading">
+         <h1>Photonic Circuit Lab <span class="pulse-version">v2.6 – Multilayer Photonic Neural Network</span></h1>
+-        <p class="intro">Explore light generation, communication and computation across twelve interactive chips.</p>
++        <p class="intro">Explore light generation, communication and computation across thirteen interactive chips.</p>
+       </header>
+       <div class="pulse-controls">
+         <div><label for="pulse-design">Chip design</label>
+@@ -288,10 +361,12 @@
+             <option value="microring">Chip 10 · Interactive Frequency Comb &amp; WDM Laboratory</option>
+             <option value="optical-logic">Chip 11 · Energy-Efficient Optical Logic</option>
+             <option value="photonic-memory">Chip 12 · Photonic Memory Interconnect</option>
++            <option value="ray-tracing">Chip 16 · Photonic Ray Tracing Accelerator</option>
+           </select>
+         </div>
+         <button type="button" class="btn primary" id="pulse-start">Start Simulation</button>
+       </div>
++      <photonic-ray-lab id="ray-tracing-chip" hidden></photonic-ray-lab>
+       <section id="photonic-memory-chip" hidden aria-labelledby="pm-title"></section>
+       <section id="optical-logic-chip" hidden aria-labelledby="ol-title">
+         <div class="card ol-card">
+@@ -1009,6 +1084,23 @@
+     function selectTab(name,updateHash=true){if(!tabNames.includes(name))name='simulator';tabNames.forEach(n=>{const active=n===name,button=$('tab-'+n);button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;$('panel-'+n).hidden=!active});if(updateHash)history.replaceState(null,'','#'+name)}
+     document.querySelectorAll('[data-tab]').forEach((button,index)=>{button.addEventListener('click',()=>selectTab(button.dataset.tab));button.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const next=event.key==='Home'?0:event.key==='End'?tabNames.length-1:(index+(event.key==='ArrowRight'?1:-1)+tabNames.length)%tabNames.length;selectTab(tabNames[next]);$('tab-'+tabNames[next]).focus()})});
+     window.addEventListener('hashchange',()=>selectTab(location.hash.slice(1).split('/')[0],false));selectTab(location.hash.slice(1).split('/')[0],false);
++    function focusResearchTrack() {
++      const track = {'#opa-ecosystem/opa-g':'opa-g-ecosystem','#opa-ecosystem/opvr':'opvr-ecosystem'}[location.hash];
++      if (!track) return;
++      $(track).focus({preventScroll:true});
++      $(track).scrollIntoView({block:'start'});
++    }
++    window.addEventListener('hashchange',focusResearchTrack);
++    window.addEventListener('DOMContentLoaded',focusResearchTrack);
++
++    const chipSelector = $('pulse-design');
++    chipSelector.addEventListener('change', () => {
++      const selected = chipSelector.value === 'ray-tracing';
++      $('ray-tracing-chip').hidden = !selected;
++      $('pulse-start').hidden = selected;
++      if (selected) history.replaceState(null,'','#photonic-circuit-lab/ray-tracing');
++      else if (location.hash === '#photonic-circuit-lab/ray-tracing') history.replaceState(null,'','#photonic-circuit-lab');
++    });
+     const fields=['theta','x1','x2'];
+     const allFields=[...fields,'loss','phaseError'];
+     const fmt=n=>Math.abs(n)<0.00005?'0.0000':n.toFixed(4);
+diff --git a/dist/photonic-components.js b/dist/photonic-components.js
+index 61e14f4..f083fa5 100644
+--- a/dist/photonic-components.js
++++ b/dist/photonic-components.js
+@@ -264,7 +264,7 @@
+   function followHash() {
+     const [tab,id] = window.location.hash.slice(1).split('/');
+     if (tab==='photonic-component-library' && id) showEntry(id);
+-    if (tab==='photonic-circuit-lab' && (data.chipKeys.includes(id) || ['optical-logic','photonic-memory'].includes(id))) {
++    if (tab==='photonic-circuit-lab' && (data.chipKeys.includes(id) || ['optical-logic','photonic-memory','ray-tracing'].includes(id))) {
+       const select=byId('pulse-design');
+       if (select.value!==id) {
+         select.value=id;
+diff --git a/dist/scalable-photonic.js b/dist/scalable-photonic.js
+index 0fcfd1c..d40cbe1 100644
+--- a/dist/scalable-photonic.js
++++ b/dist/scalable-photonic.js
+@@ -461,7 +461,7 @@
+   function selectChip() {
+     const selected=design.value==='scalable';
+     panel.hidden=!selected;
+-    document.getElementById('pulse-original').hidden=selected || ['multilayer','microring','optical-logic','photonic-memory'].includes(design.value);
++    document.getElementById('pulse-original').hidden=selected || ['multilayer','microring','optical-logic','photonic-memory','ray-tracing'].includes(design.value);
+     if(selected) reset();
+     else stop();
+   }

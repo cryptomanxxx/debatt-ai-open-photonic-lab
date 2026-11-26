@@ -1361,6 +1361,21 @@
         "simulations/graphics/side_test_v002.py",
         "research/OPA-G-003.md"
       ]
+    },
+    {
+      "id": "opa-g-003b",
+      "name": "Graphics: optical boundary precision and robust confidence readout",
+      "script": "simulations/graphics/boundary_readout_v005.py",
+      "result_dir": "results/opa-g-003b",
+      "artifact": "opa-g-003b",
+      "timeout_minutes": 15,
+      "deps": [
+        "simulations/circuit/mzi.py",
+        "simulations/graphics/ray_box_v001.py",
+        "simulations/graphics/side_test_v002.py",
+        "simulations/graphics/photonic_side_v004.py",
+        "research/OPA-G-003B.md"
+      ]
     }
   ]
 }

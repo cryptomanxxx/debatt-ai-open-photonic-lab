@@ -1418,6 +1418,27 @@
         "results/ci-originals/opa-g-004a/45841325612-15128251841/result.json"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/graphics/matched_optical_v007.py"
+    },
+    {
+      "id": "opa-g-004b2",
+      "name": "Graphics: independent robustness and prospective confidence selection",
+      "script": "simulations/graphics/robustness_v008.py",
+      "result_dir": "results/opa-g-004b2",
+      "artifact": "opa-g-004b2",
+      "timeout_minutes": 20,
+      "deps": [
+        "simulations/graphics/electronic_baseline_v006.py",
+        "simulations/graphics/ray_box_cpu_v006.c",
+        "simulations/graphics/boundary_readout_v005.py",
+        "simulations/graphics/photonic_side_v004.py",
+        "simulations/graphics/matched_optical_v007.py",
+        "simulations/graphics/ray_box_v001.py",
+        "simulations/graphics/side_test_v002.py",
+        "simulations/circuit/mzi.py",
+        "research/OPA-G-004B2.md",
+        "results/ci-originals/opa-g-004a/45841325612-15128251841/workload.csv",
+        "results/ci-originals/opa-g-004a/45841325612-15128251841/archive-provenance.json"
+      ]
     }
   ]
 }

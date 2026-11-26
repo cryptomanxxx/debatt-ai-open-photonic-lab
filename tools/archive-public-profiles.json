@@ -131,5 +131,15 @@
     "strata.csv",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-w-002g": [
+    "result.json",
+    "state_counts.csv",
+    "diagnostics.csv",
+    "state_summary.csv",
+    "confusion_summary.csv",
+    "step_state_summary.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

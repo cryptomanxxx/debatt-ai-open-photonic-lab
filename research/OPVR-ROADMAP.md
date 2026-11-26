@@ -4,7 +4,7 @@
 
 ## Architecture
 
-Electronic CPU/GPU and memory provide tracking, application logic, shading, compositor and display. A detachable OPA-G accelerator may offload ray-box tests; OPA-M optical transport and OPA AI acceleration are optional independently validated future interfaces. Start with an existing open XR runtime and conventional headset. Linux/Monado/OpenXR are candidate native stack; WebXR/WebGPU/WebAssembly are candidate web stack, subject to actual device and browser support. A browser does not automatically expose a custom accelerator: require a host driver/runtime and explicit secure integration. Use an open distribution catalog with signed releases, provenance, sandboxing and license metadata; free distribution is a goal, not a claim of zero operating cost.
+Electronic CPU/GPU and memory provide tracking, application logic, shading, compositor and display. A detachable OPA-G accelerator may offload ray-box tests; OPA AI acceleration, OPA-M optical transport and OPA-W photonic model-weight storage are optional future interfaces, each requiring independent validation before integration. Start with an existing open XR runtime and conventional headset. Linux/Monado/OpenXR are candidate native stack; WebXR/WebGPU/WebAssembly are candidate web stack, subject to actual device and browser support. A browser does not automatically expose a custom accelerator: require a host driver/runtime and explicit secure integration. Use an open distribution catalog with signed releases, provenance, sandboxing and license metadata; free distribution is a goal, not a claim of zero operating cost.
 
 | Phase | Deliverable and gate |
 |---|---|
@@ -22,4 +22,4 @@ The frame budgets at 72/90/120 Hz are approximately 13.89/11.11/8.33 ms; these a
 
 Candidate open projects: https://monado.freedesktop.org/ , https://github.com/relativty/Relativty , https://github.com/HadesVR/HadesVR . Verify licenses, maintenance and device support before reuse. PIXEurope and Myfab are possible research access routes, not approved collaborations. Existing OPA roadmap priorities remain unchanged.
 
-See [OPA-G](OPA-G-ROADMAP.md), [OPA-M](OPA-M-ROADMAP.md), [main roadmap](../PHOTONIC_RESEARCH_ROADMAP.md).
+See [OPA-G](OPA-G-ROADMAP.md), [OPA-M](OPA-M-ROADMAP.md), [OPA-W](OPA-W-ROADMAP.md), [main roadmap](../PHOTONIC_RESEARCH_ROADMAP.md).

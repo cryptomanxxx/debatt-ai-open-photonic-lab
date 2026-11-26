@@ -1,0 +1,49 @@
+photonic-ray-lab { display:block; min-width:0; }
+photonic-ray-lab[hidden] { display:none; }
+.rt-card { margin: 0 0 16px; }
+.rt-card p, .rt-card dd { line-height:1.55; }
+.rt-card a { color:#85edde; }
+.rt-presets { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+.rt-presets .btn { min-height:44px; font-size:.9rem; }
+.rt-controls, .rt-views, .rt-evidence { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.rt-controls fieldset { min-width:0; margin:0; border:1px solid #315060; border-radius:12px; padding:10px 14px; }
+.rt-controls legend { color:#9be8de; font-weight:650; padding:0 6px; }
+.rt-controls label { display:block; margin:6px 0; font-size:.9rem; }
+.rt-range > div { display:flex; justify-content:space-between; gap:6px; }
+.rt-controls output { color:#9be8de; font-variant-numeric:tabular-nums; }
+.rt-controls input { display:block; margin:0; width:100%; min-height:32px; accent-color:#65e4d6; }
+.rt-card select { max-width:100%; color:#edf7fb; background:#132e3e; border:1px solid #457082; border-radius:7px; padding:7px; min-height:44px; font:inherit; }
+.rt-card summary { cursor:pointer; color:#a6ece4; }
+.rt-summary, .rt-side { padding:10px 12px; border:1px solid #315060; border-radius:8px; background:#102936; }
+.rt-views figure, .rt-circuit { margin:0; min-width:0; }
+.rt-views figcaption { color:#c5e4ed; font-weight:650; margin-bottom:6px; }
+.rt-views svg, .rt-circuit svg { width:100%; height:auto; display:block; border:1px solid #294b5c; border-radius:10px; background:#091a26; }
+.rt-grid { stroke:#233e50; stroke-width:1; }
+.rt-box-active { fill:#194d51; stroke:#a6ece4; stroke-width:2; }
+.rt-box-context { fill:#142a39; stroke:#566d80; stroke-dasharray:5 4; }
+.rt-scene text { fill:#e2edf4; font-size:18px; }
+.rt-beam { stroke:var(--rt-ray-color); stroke-width:2; }
+.rt-dash { stroke-dasharray:6 4; }
+.rt-tail { opacity:.4; stroke-dasharray:3 5; }
+.rt-scene circle[data-status] { fill:var(--rt-ray-color); }
+.rt-origin { fill:#f4fbff; }
+.rt-point { fill:none; stroke:#f4fbff; stroke-width:2; }
+.rt-card [data-status="hit"] { --rt-ray-color:#74ead7; }
+.rt-card [data-status="miss"] { --rt-ray-color:#acc3d1; }
+.rt-card [data-status="fp"] { --rt-ray-color:#ffd282; }
+.rt-card [data-status="fn"] { --rt-ray-color:#ffa5cc; }
+.rt-results { table-layout:fixed; overflow-wrap:anywhere; }
+.rt-results caption { text-align:left; font-weight:650; margin:0 0 6px; }
+.rt-results td[data-status] { color:var(--rt-ray-color); }
+.rt-circuit { max-width:700px; margin:16px auto; }
+.rt-circuit figcaption { margin-top:8px; }
+.rt-optical-lines { fill:none; stroke:#68e4d8; stroke-width:3; }
+.rt-components { fill:#173747; stroke:#4e9b9a; stroke-width:1.5; }
+.rt-diagram-labels { fill:#e9f7fb; font-size:17px; }
+.rt-formula { color:#a6e8e0; overflow-wrap:anywhere; }
+.rt-corner { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
+.rt-evidence { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.rt-evidence div { background:#122e3e; border:1px solid #2e5263; border-radius:8px; padding:12px; }
+.rt-evidence dt { font-weight:700; color:#9be8de; }
+.rt-evidence dd { margin:6px 0 0; }
+@media(max-width:650px) { .rt-controls,.rt-views,.rt-evidence { grid-template-columns:minmax(0,1fr); } .rt-diagram-labels { font-size:19px; } }

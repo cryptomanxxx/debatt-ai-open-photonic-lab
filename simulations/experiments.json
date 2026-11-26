@@ -1454,6 +1454,35 @@
         "research/OPA-G-004C.md"
       ],
       "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/graphics/bvh_reference_v009.py"
+    },
+    {
+      "id": "opa-g-004c2",
+      "name": "Graphics: frozen hybrid BVH traversal and optical confidence",
+      "script": "simulations/graphics/hybrid_bvh_v010.py",
+      "result_dir": "results/opa-g-004c2",
+      "artifact": "opa-g-004c2",
+      "timeout_minutes": 25,
+      "deps": [
+        "simulations/graphics/bvh_reference_v009.py",
+        "simulations/graphics/ray_triangle_cpu_v009.c",
+        "simulations/graphics/ray_box_cpu_v006.c",
+        "simulations/graphics/robustness_v008.py",
+        "simulations/graphics/electronic_baseline_v006.py",
+        "simulations/graphics/matched_optical_v007.py",
+        "simulations/graphics/boundary_readout_v005.py",
+        "simulations/graphics/photonic_side_v004.py",
+        "simulations/graphics/ray_box_v001.py",
+        "simulations/graphics/side_test_v002.py",
+        "simulations/circuit/mzi.py",
+        "research/OPA-G-004C.md",
+        "results/ci-originals/opa-g-004a/45841325612-15128251841/archive-provenance.json",
+        "results/ci-originals/opa-g-004a/45841325612-15128251841/workload.csv",
+        "results/ci-originals/opa-g-004b2/45858488663-15136519355/archive-provenance.json",
+        "results/ci-originals/opa-g-004b2/45858488663-15136519355/workload.csv",
+        "results/ci-originals/opa-g-004c1/45862577503-15137988857/archive-provenance.json",
+        "results/ci-originals/opa-g-004c1/45862577503-15137988857/scenes.json"
+      ],
+      "run": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python simulations/graphics/hybrid_bvh_v010.py"
     }
   ]
 }

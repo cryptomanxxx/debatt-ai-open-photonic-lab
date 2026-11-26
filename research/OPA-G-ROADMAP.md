@@ -25,3 +25,7 @@ Primary evidence: Shiji Zhang et al., *Thin-film lithium niobate photonic circui
 ## Publication and access
 
 Publish reproducible code, inputs, limitations and negative findings under repository policy. PIXEurope/Myfab are prospective access routes, not confirmed partners or funding. Validate packaging, RF and process feasibility before any physical commitment.
+
+## Supplementary source audit (2026-11-26)
+
+The supplied supplement has been inspected. See [source audit](OPA-G-002-SOURCE-AUDIT.md) for the S5–S7 sign discrepancy relative to S1/S2, explicit orientation and guard conventions, and registered executable verification. CI and review pending; the corrected determinant is the proposed G-003 interface, not an author-confirmed erratum. Historical G-002 evidence is unchanged.

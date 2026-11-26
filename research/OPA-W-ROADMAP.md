@@ -1,6 +1,6 @@
 # OPA-W · Open Photonic Weight Memory
 
-Date: 2026-11-24. Status: initial W-001A evidence review started; W-002A conditional experiment executed and archived; W-002B audit executed and archived; W-002C executed and archived; W-002D audit executed and archived; W-002E executed and archived; W-002F audit pending CI; no fabricated device or measured result. See [W-001A](OPA-W-001.md).
+Date: 2026-11-24. Status: initial W-001A evidence review started; W-002A conditional experiment executed and archived; W-002B audit executed and archived; W-002C executed and archived; W-002D audit executed and archived; W-002E executed and archived; W-002F audit executed and archived; W-002G diagnostic replay pending CI; no fabricated device or measured result. See [W-001A](OPA-W-001.md).
 
 ## Research question and scope
 
@@ -24,7 +24,7 @@ For an intensity-encoded passive cell, P_out = T(w) P_in, with 0 <= T <= 1. A li
 
 ## Gated research phases
 
-W-001A evidence review is active; W-002A conditional numerical screen executed and archived; [W-002B analysis](OPA-W-002B.md) and independent audit executed and archived; W-002C executed and archived; W-002D audit executed and archived; W-002E executed and archived; W-002F audit pending CI. Remaining gates are planned.
+W-001A evidence review is active; W-002A conditional numerical screen executed and archived; [W-002B analysis](OPA-W-002B.md) and independent audit executed and archived; W-002C executed and archived; W-002D audit executed and archived; W-002E executed and archived; W-002F audit executed and archived; W-002G diagnostic replay pending CI. Remaining gates are planned.
 
 | Phase | Deliverable | Gate |
 | --- | --- | --- |
@@ -71,3 +71,5 @@ Independent researchers can develop models, open benchmarks and reproducible lay
 [W-002E](OPA-W-002E.md) registers chronological adaptive calibration with disjoint development and held-out trajectories, including correlated reference mismatch. W-002D is permanently archived. No empirical qualification or W-003 release.
 
 [W-002F](OPA-W-002F.md) records archived W-002E outcomes and registers an independent aggregate audit of mean-error versus worst-state trade-offs. Original W-002E results are permanently archived. No empirical qualification or W-003 release.
+
+[W-002G](OPA-W-002G.md) registers state-resolved diagnostic replay of W-002E with source identity and aggregate agreement gates. W-002F is permanently archived. No new held-out validation or W-003 release.

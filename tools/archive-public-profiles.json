@@ -76,5 +76,12 @@
     "scenario-budgets.csv",
     "environment-lock.txt",
     "installed-packages.json"
+  ],
+  "opa-g-004c3b-latency": [
+    "result.json",
+    "panel-latency.csv",
+    "scenario-latency.csv",
+    "environment-lock.txt",
+    "installed-packages.json"
   ]
 }

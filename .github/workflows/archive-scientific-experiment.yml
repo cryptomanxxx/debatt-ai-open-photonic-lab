@@ -1,26 +1,33 @@
 name: Archive scientific experiment
 on:
+  pull_request_target:
+    types: [closed]
+    branches: [main]
   workflow_dispatch:
     inputs:
+      merged_pr:
+        description: Merged PR number for automatic discovery (leave other fields blank)
+        required: false
+        type: string
       experiment:
         description: Registered experiment ID
-        required: true
+        required: false
         type: string
       source_run:
         description: Successful Experiments workflow run ID
-        required: true
+        required: false
         type: string
       source_artifact:
         description: Exact source artifact ID
-        required: true
+        required: false
         type: string
       source_sha:
         description: Full source run head SHA (PR head for pull_request; must be ancestor of main)
-        required: true
+        required: false
         type: string
       files:
-        description: Reviewed complete comma-separated ZIP file allowlist (public data only)
-        required: true
+        description: Manual mode only — reviewed complete ZIP file allowlist
+        required: false
         type: string
         default: result.json,results.csv,environment-lock.txt,installed-packages.json
       confirm_public_archive:
@@ -31,7 +38,11 @@ permissions:
   contents: read
 jobs:
   archive:
-    if: github.ref == 'refs/heads/main' && inputs.confirm_public_archive
+    if: >-
+      (github.event_name == 'pull_request_target' && github.event.pull_request.merged == true &&
+       github.event.pull_request.head.repo.full_name == github.repository &&
+       !startsWith(github.event.pull_request.head.ref, 'archive/scientific/')) ||
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.confirm_public_archive)
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -43,6 +54,7 @@ jobs:
       cancel-in-progress: false
     env:
       GH_TOKEN: ${{ github.token }}
+      ARCHIVE_PR: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.number || inputs.merged_pr }}
       ARCHIVE_EXPERIMENT: ${{ inputs.experiment }}
       SOURCE_RUN: ${{ inputs.source_run }}
       SOURCE_ARTIFACT: ${{ inputs.source_artifact }}
@@ -54,9 +66,15 @@ jobs:
           ref: main
           fetch-depth: 0
           persist-credentials: false
+      - name: Discover approved public experiment artifact
+        id: discover
+        if: env.ARCHIVE_PR != ''
+        run: python3 tools/archive_discovery.py
       - name: Verify source and stage exact original files
+        if: env.ARCHIVE_PR == '' || steps.discover.outputs.found == 'true'
         run: python3 tools/archive_experiment.py
       - name: Publish review branch and request review
+        if: env.ARCHIVE_PR == '' || steps.discover.outputs.found == 'true'
         run: |
           set -euo pipefail
           branch="archive/scientific/$ARCHIVE_EXPERIMENT-$SOURCE_RUN-$SOURCE_ARTIFACT"

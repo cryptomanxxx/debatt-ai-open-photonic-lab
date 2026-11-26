@@ -1653,6 +1653,22 @@
         "results/ci-originals/opa-w-002e/45905192736-15157223437/*"
       ],
       "run": "python simulations/memory/test_audit_adaptive.py && python simulations/memory/audit_adaptive_v006.py results/ci-originals/opa-w-002e/45905192736-15157223437 --output results/opa-w-002f"
+    },
+    {
+      "id": "opa-w-002g",
+      "name": "Photonic memory: pinned state-resolved chronological diagnostic replay",
+      "script": "simulations/memory/state_replay_v007.py",
+      "result_dir": "results/opa-w-002g",
+      "artifact": "opa-w-002g",
+      "timeout_minutes": 45,
+      "deps": [
+        "simulations/memory/adaptive_calibration_v005.py",
+        "simulations/memory/multilevel_cell_v001.py",
+        "simulations/memory/audit_adaptive_v006.py",
+        "simulations/memory/test_state_replay.py",
+        "results/ci-originals/opa-w-002e/45905192736-15157223437/*"
+      ],
+      "run": "python simulations/memory/test_state_replay.py && python simulations/memory/state_replay_v007.py results/ci-originals/opa-w-002e/45905192736-15157223437 --output results/opa-w-002g"
     }
   ]
 }

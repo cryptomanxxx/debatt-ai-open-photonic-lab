@@ -1,0 +1,52 @@
+{
+  "experiment": "opa-g-004c3b-energy",
+  "repository": "cryptomanxxx/debatt-ai-open-photonic-lab",
+  "source_head_sha": "ca0f52a5929de6e2fbe96ba47fa79ed05b56e974",
+  "executed_commit_sha": "37964815eb7dcc8b2fff210a3d64bf12cee4b659",
+  "executed_tree_sha": "cfda30b6bd8e73f65fcbd4e9c53f837248578832",
+  "source_event": "pull_request",
+  "checkout_log_sha256": "df5bbe950fc15b498690f84430f94831a46d1bcea6ce87382ee16bfd166ef480",
+  "workflow_run_id": 45882481991,
+  "run_attempt": 1,
+  "job_id": 140125083471,
+  "artifact_id": 15148585656,
+  "artifact_name": "opa-g-004c3b-energy",
+  "artifact_sha256": "86d5dba4f8b73b2528083a84bedfc3414b6db711e2f31914c9ddffea25741ba7",
+  "artifact_bytes": 439546,
+  "source_workflow": ".github/workflows/experiments.yml",
+  "expanded_bytes": 4512053,
+  "expansion_policy": "default",
+  "verification": "GitHub metadata, historical checkout log and executed commit/tree, ZIP SHA-256 and CRC; exact extracted bytes; no rerun",
+  "files": {
+    "counts.csv": {
+      "bytes": 83112,
+      "sha256": "22037986e7860ca778f522f453736ba5ee390b44d53306c00fe354b846cb5b87",
+      "git_blob_sha1": "7d69ca0c9e14649e7179edcc7fb39c4d1d21a702"
+    },
+    "environment-lock.txt": {
+      "bytes": 9532,
+      "sha256": "a413f375d4a3097d7cb7c9922da7288e15ad77026afdcb11d8f6945375ee8c4c",
+      "git_blob_sha1": "e0f73c62ff0fe442819a24eff4c391bc1d95e8d8"
+    },
+    "installed-packages.json": {
+      "bytes": 68543,
+      "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6",
+      "git_blob_sha1": "b78cc4b63c8815d1e064dec794040bbff4e2ffac"
+    },
+    "panel-budgets.csv": {
+      "bytes": 4265995,
+      "sha256": "96cc3f31a805948f7103cbdc5257e33f8fe47ee868ad2c1249957cd6cfee2932",
+      "git_blob_sha1": "d983b5e2b51c1d7c6996c8019ce10bfd8458ede4"
+    },
+    "result.json": {
+      "bytes": 2132,
+      "sha256": "9a8ae80691a274fa4163f097876d2bdf9dea4b44d324ad9c237c9462db114470",
+      "git_blob_sha1": "a258b2466ca40d6972279101beebc3d8aba99e4b"
+    },
+    "scenario-budgets.csv": {
+      "bytes": 82739,
+      "sha256": "e8623412efb9a2b2618690b718e11d98d249c02ec2347317a033b0a8ee2e6dac",
+      "git_blob_sha1": "08f9d3bc2cf83e6000053034b86e056fd7218015"
+    }
+  }
+}

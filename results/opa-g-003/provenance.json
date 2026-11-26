@@ -9,7 +9,7 @@
   "pull_request": 267,
   "source_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/45810482156/job/139876845002",
   "artifact_url": "https://github.com/cryptomanxxx/debatt-ai-open-photonic-lab/actions/runs/45810482156/artifacts/15111277146",
-  "verification": "Downloaded ZIP SHA-256 matched published digest; ZIP CRC test passed. Archived result.json Git blob matches original. CSV was inspected locally but not transferred to repository; this is a partial archive. Summary is derived from original CSV, not a substitute for original rows. No independent rerun.",
+  "verification": "Original ZIP SHA-256 and CRC verification recorded at initial archive. Both original result.json and results.csv are now archived; their Git blob IDs were rechecked in main against the recorded original IDs after PR #269. Environment files remain in CI artifact with recorded checksums. No independent rerun.",
   "files": {
     "result.json": {
       "bytes": 1029,
@@ -21,7 +21,7 @@
       "bytes": 202499,
       "sha256": "b75c4dd96622640277e1f6a8adc10fd45dec2b52dee632736a83e4e8f26dbc58",
       "git_blob_sha1": "af719f84b5724a82914fec309986ef4a2a10f171",
-      "archived": false
+      "archived": true
     },
     "environment-lock.txt": {
       "bytes": 9532,
@@ -33,5 +33,12 @@
       "sha256": "f8bf20346f3dcd14fac94e7b91949ca983197c352d906a00e6b8152b0acf60f6",
       "archived": false
     }
+  },
+  "archive_completion": {
+    "pull_request": 269,
+    "merge_commit": "6679ee2b46ab638dfe328c4fe4d4f1c0ed9da55a",
+    "verified_git_blob_sha1": "af719f84b5724a82914fec309986ef4a2a10f171",
+    "verified_rows": 1224,
+    "verification": "CSV and JSON blob IDs fetched from main match the previously recorded original artifact blob IDs. No new independent rerun or ZIP digest calculation in this step."
   }
 }

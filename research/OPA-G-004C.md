@@ -1,6 +1,6 @@
 # OPA-G-004C — Matched BVH traversal protocol
 
-Proposed, not executed. [G-004B2 evidence](../results/opa-g-004b2/README.md) qualifies max_min_125 for a fresh numerical BVH investigation, not hardware acceleration. Preserve G-004A/B/B2 original archives. No change to physical integration gates or CIR/LIB priorities.
+C1 registered; CI pending. C2/C3 proposed, not executed. [G-004B2 evidence](../results/opa-g-004b2/README.md) qualifies max_min_125 for a fresh numerical BVH investigation, not hardware acceleration. Preserve G-004A/B/B2 original archives. No change to physical integration gates or CIR/LIB priorities.
 
 ## C1: electronic scene and independent oracle
 
@@ -13,3 +13,7 @@ Use new disjoint scene/ray evaluation and separate calibration geometry. Freeze 
 ## C3: costs and measurement
 
 First report workload counts and conditional cost equations, not photonic wall time from Python simulation. Count electronic traversal/stack, triangle work, memory traffic, node operand normalization, four MZM inputs per side, conversion, laser/LO, detection, aggregation, calibration, fallback and scheduling. Matched CPU timing must use a realizable compiled whole traversal with the same scene/order/output, separate allocation/transfer and resident timing; exact oracle excluded from performance timing. GPU only if actually executed. Unknown energy terms remain unknown; no FPS, headset power, GPU superiority or physical energy claim. Advance to device coupon only after separate process and measurement feasibility assessment.
+
+## C1 implementation freeze
+
+`simulations/graphics/bvh_reference_v009.py` and `ray_triangle_cpu_v009.c` implement seed 20261401, three synthetic 48-triangle scenes with 80 rays each and a six-triangle boundary scene with ten rays. Binary median split along longest box axis; centroid ties by primitive ID; maximum four primitives per leaf; deterministic left-first DFS with no distance pruning. Exact rational plane/edge test is independent of compiled FP64 Moller–Trumbore; compiled slab kernel reused from G-004A. Distance comparison uses ray parameter t (not Euclidean length), absolute and relative tolerances 1e-10, exact nearest primitive ID with smallest-ID ties. Any nondegenerate coplanar ray/triangle pair excludes the entire ray from nearest-hit comparisons; exclusions listed. All triangles and nodes audited outside traversal work counts; preserve discrepancies, visited and accepted node IDs and tested primitive IDs. C kernels are called via Python reference traversal, not compiled whole-traversal timing. Exact BVH correctness is implementation gate; compiled discrepancies are scientific gate failures, not discarded evidence. No GPU or energy measurement. Six-file archive profile includes scenes and discrepancy CSV, including header-only CSV if no discrepancies.

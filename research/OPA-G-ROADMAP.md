@@ -12,7 +12,7 @@ Primary evidence: Shiji Zhang et al., *Thin-film lithium niobate photonic circui
 
 | ID | Deliverable and acceptance gate |
 |---|---|
-| OPA-G-001 | Exact forward-ray/AABB slab reference, independent geometric cases and a reduced-precision comparator proxy. Cover parallel axes, inside origins, negative direction, tangency, behind-origin boxes, degeneracy and near-boundary errors. Publish seeded workloads, false negatives/positives separately, precision sweeps and CI provenance. No physical speed claim. |
+| OPA-G-001 (implemented; CI pending) | Exact forward-ray/AABB slab reference, independent geometric cases and a reduced-precision comparator proxy. Cover parallel axes, inside origins, negative direction, tangency, behind-origin boxes, degeneracy and near-boundary errors. Publish seeded workloads, false negatives/positives separately, precision sweeps and CI provenance. No physical speed claim. |
 | OPA-G-002 | Reproduce the paper's side-function algorithm from its supplementary derivation; compare against G-001 including coordinate conventions and 3D edge cases. Separate ideal math from optical encoding. |
 | OPA-G-003 | Model four MZMs and coherent readout; sweep bias, nonlinearity, loss, phase drift, noise and comparator threshold. Require calibrated uncertainty and report missed intersections separately. |
 | OPA-G-004 | Matched electronic CPU and GPU ray-box/BVH benchmarks with identical scene, rays and quality. Account for DMA, BVH memory, DAC, drivers, laser wall-plug, detector, TIA, comparator and idle power. Report throughput, p50/p95 latency and joules per delivered correct test; no assumed benefit. |
@@ -20,7 +20,7 @@ Primary evidence: Shiji Zhang et al., *Thin-film lithium niobate photonic circui
 | OPA-G-006 | Bench measurement with calibrated electrical/optical planes, raw traces, uncertainty, drift, error counts and matched reference. |
 | OPA-G-007 | Hybrid GPU/FPGA integration and BVH traversal with conservative fallback for ambiguous tests. Measure scene-level image errors, frame timing and whole-system energy before OPVR integration. |
 
-All phases planned; no registry entry is implied by this document. Reuse CIR007/008 conversion accounting, EO001/002 and component library; no cross-process layout without explicit interface. See [OPVR](OPVR-ROADMAP.md) and [Chip 16](../web/chip16/README.md).
+[OPA-G-001](OPA-G-001.md) is implemented and registered; numerical CI verification and evidence archive pending. OPA-G-002–007 remain planned. Reuse CIR007/008 conversion accounting, EO001/002 and component library; no cross-process layout without explicit interface. See [OPVR](OPVR-ROADMAP.md) and [Chip 16](../web/chip16/README.md).
 
 ## Publication and access
 

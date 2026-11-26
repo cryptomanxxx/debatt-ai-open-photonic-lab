@@ -73,7 +73,7 @@ jobs:
       - name: Verify source and stage exact original files
         if: env.ARCHIVE_PR == '' || steps.discover.outputs.found == 'true'
         run: python3 tools/archive_experiment.py
-      - name: Publish review branch and request review
+      - name: Publish review branch and create PR
         if: env.ARCHIVE_PR == '' || steps.discover.outputs.found == 'true'
         run: |
           set -euo pipefail
@@ -120,13 +120,7 @@ jobs:
             exit 1
           fi
           echo "Archive PR: $pr_url" >> "$GITHUB_STEP_SUMMARY"
-          # The PR exists even if the review request fails. Do not retry archival.
-          if [[ "$pr_url" == "https://github.com/$GITHUB_REPOSITORY/pull/"* ]] &&
-             [[ "${pr_url##*/}" =~ ^[0-9]+$ ]] && \
-             gh pr comment "$pr_url" --repo "$GITHUB_REPOSITORY" --body '@codex review'; then
-            echo "Codex request comment posted; actual review acceptance/completion is not verified." >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "::warning::Could not post Codex request. Request review manually on the archive PR."
-            echo "Request Codex review manually on the archive PR." >> "$GITHUB_STEP_SUMMARY"
-          fi
+          # GITHUB_TOKEN bot comments are rejected by Codex account authorization.
+          # An authenticated owner must request review from Repo Autopilot or GitHub.
+          echo "Request Codex review with your connected GitHub account in Repo Autopilot or on the PR." >> "$GITHUB_STEP_SUMMARY"
           echo "Approve pending PR workflows if GitHub requires it. Verify CI and Codex before manual merge." >> "$GITHUB_STEP_SUMMARY"

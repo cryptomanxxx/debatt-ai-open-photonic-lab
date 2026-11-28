@@ -104,13 +104,3 @@ class EvidenceGate:
         task.leased = True
         return True
 
-    def finish_correction(self, task_id):
-        """Release synthetic lease, invalidate checks until re-observed."""
-        task = self.engine.tasks[task_id]
-        if not task.leased:
-            return False
-        task.leased = False
-        task.ci = task.review = "unknown"
-        task.ci_head = task.review_head = ""
-        task.threads = -1
-        return True

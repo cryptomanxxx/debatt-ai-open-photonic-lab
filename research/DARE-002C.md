@@ -1,6 +1,6 @@
 # DARE-002C · Evidence and execution gates
 
-Date: 2026-11-28. Status: 35/35 existing tests passed in isolated local execution; new evidence-gate implementation and 16 fixtures submitted, execution pending. No live readiness release.
+Date: 2026-11-28. Status: 35/35 existing tests passed in isolated local execution; new evidence-gate implementation and 16 fixtures submitted, all 51 tests subsequently passed in [DARE-002D](DARE-002D.md). No live readiness release.
 
 ## Verified baseline
 
@@ -17,6 +17,8 @@ Correction reservation increments a bounded counter and sets a single-writer lea
 [16 new fixtures](../dare/test_evidence_gate.py) cover current-head and fresh evidence, future timestamps, incomplete or skipped checks, open threads, archive identity mismatch and tampering, ignoring legacy archive flags, correction reservation, persisted counters and the retry ceiling. Run all 51 tests with `python -m unittest discover -s dare -p 'test_*.py' -v` in an authorized offline environment. Archive original output and source identities before claiming a pass.
 
 ## Limits
+
+[DARE-002D](DARE-002D.md) records the verified 51-test baseline and initial guarded recovery implementation.
 
 Trusted synthetic inputs only. The wrapper is not a mandatory enforcement boundary: the legacy engine remains callable separately. The clock, check inventory, archive policy and evidence inputs are not authenticated provider data; freshness alone does not establish authenticity or prevent rollback. Archive checks inherit DARE-002B static-directory and single-writer limitations. No transitive dependency revalidation, automatic recovery supervisor, explicit non-applicable-check policy, actual scoped file verification, provider billing verification or live adapter. The 300-second window is a test-design assumption, not a validated production threshold. Leases have no expiry; fail closed until explicit reconciliation. No DARE-003 release. Zero Additional Cost Policy unchanged.
 

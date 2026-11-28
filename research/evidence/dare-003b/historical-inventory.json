@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "source": "Historical Repo Autopilot status responses already present in the conversation, immediately before human-requested merges; manually transcribed metadata index, not original raw bytes.",
+  "repository": "cryptomanxxx/debatt-ai-open-photonic-lab",
+  "inventory_date": "2026-11-28",
+  "candidates": [
+    {
+      "number": 335,
+      "head": "ea2bd8af70c72dcb2dabae2173260d2d6fdff276",
+      "updatedAt": "2026-11-28T04:38:11Z",
+      "reviewedAt": "2026-11-28T04:38:13.000Z",
+      "reported_state": "open",
+      "reported_ci": "success",
+      "reported_codex": "clear",
+      "reported_readiness": "ready",
+      "eligibility": "pending original capture, exact CI head and observation time verification, and blinded reference label"
+    },
+    {
+      "number": 336,
+      "head": "f536e5f0ffe0180ca7997a8e63f240d471c98c81",
+      "updatedAt": "2026-11-28T04:53:10Z",
+      "reviewedAt": "2026-11-28T04:53:13.000Z",
+      "reported_state": "open",
+      "reported_ci": "success",
+      "reported_codex": "clear",
+      "reported_readiness": "ready",
+      "eligibility": "pending original capture, exact CI head and observation time verification, and blinded reference label"
+    },
+    {
+      "number": 337,
+      "head": "aabab588ccab4be6c8aecc1f6401ddb892c65308",
+      "updatedAt": "2026-11-28T05:00:16Z",
+      "reviewedAt": "2026-11-28T05:00:17.000Z",
+      "reported_state": "open",
+      "reported_ci": "success",
+      "reported_codex": "clear",
+      "reported_readiness": "ready",
+      "eligibility": "pending original capture, exact CI head and observation time verification, and blinded reference label"
+    },
+    {
+      "number": 338,
+      "head": "bc7f1a5930f7168cfc8cda73627eb0e2bcaa80a3",
+      "updatedAt": "2026-11-28T05:04:22Z",
+      "reviewedAt": "2026-11-28T05:04:25.000Z",
+      "reported_state": "open",
+      "reported_ci": "success",
+      "reported_codex": "clear",
+      "reported_readiness": "ready",
+      "eligibility": "pending original capture, exact CI head and observation time verification, and blinded reference label"
+    },
+    {
+      "number": 339,
+      "head": "1a0a519d48fbf2f7cd64d13eca434bdb83e1c808",
+      "updatedAt": "2026-11-28T05:12:46Z",
+      "reviewedAt": "2026-11-28T05:12:48.000Z",
+      "reported_state": "open",
+      "reported_ci": "success",
+      "reported_codex": "clear",
+      "reported_readiness": "ready",
+      "eligibility": "pending original capture, exact CI head and observation time verification, and blinded reference label"
+    },
+    {
+      "number": 340,
+      "head": "63b0cc977ae40efa0bb9f20ae0c53322d6557b44",
+      "updatedAt": "2026-11-28T05:17:50Z",
+      "reviewedAt": "2026-11-28T05:17:52.000Z",
+      "reported_state": "open",
+      "reported_ci": "success",
+      "reported_codex": "clear",
+      "reported_readiness": "ready",
+      "eligibility": "pending original capture, exact CI head and observation time verification, and blinded reference label"
+    }
+  ],
+  "eligible_real_observations": 0,
+  "planned_strata": {
+    "clean_ready": 6,
+    "ci_pending": 6,
+    "ci_failure": 6,
+    "review_findings": 6,
+    "incomplete_stale_conflicting": 6
+  },
+  "candidate_strata": {
+    "clean_ready": 6,
+    "ci_pending": 0,
+    "ci_failure": 0,
+    "review_findings": 0,
+    "incomplete_stale_conflicting": 0
+  },
+  "limitations": [
+    "Source updatedAt is not capture time; do not infer missing CI head from current PR head.",
+    "Human merge requests precede these status checks and are not blinded labels.",
+    "No real-study outputs generated. No live retrieval performed for this inventory."
+  ]
+}

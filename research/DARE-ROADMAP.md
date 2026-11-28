@@ -73,6 +73,12 @@ State model: proposed → authorized → ready → leased → implementing → P
 
 DARE-001 initial read-only assessment is documented; remaining gates are planned. Passing a gate requires recorded evidence and explicit approval of subsequent live capability or scope expansion.
 
+## Repo Autopilot observability (proposed parallel track)
+
+The [Autonomous Research roadmap](https://github.com/cryptomanxxx/repo-autopilot/blob/main/docs/AUTONOMOUS-RESEARCH-ROADMAP.md) defines a proposed third tab in Repo Autopilot. DARE remains the research policy/dependency layer, Symphony an optional execution orchestrator, GitHub the PR/check authority, and Repo Autopilot the separate read-only observability layer. Existing explicit manual Dashboard actions remain unchanged; the proposed tab does not dispatch, merge or resume agents.
+
+Parallel phases RA-S01 historical PR statistics, RA-S02 DARE status, RA-S03 optional Symphony status, RA-S04 cost/safety monitoring and RA-S05 multi-repo observability. These do not replace DARE gates. RA-S01 can be developed offline without Symphony, using known denominators and separate PR-head/main CI. Human interventions, agent activity, costs and scientific acceptance require explicit evidence; absent data are unknown, not zero. No PR throughput metric alone establishes scientific progress. Verify pinned Symphony interfaces, account access, free quota, authentication and isolation before any live integration. No new paid service, permissions, background polling or deployment authorized; Zero Additional Cost Policy applies.
+
 ## Evaluation protocol
 
 Compare manual coordination, AI-assisted PR lifecycle and bounded roadmap execution on matched task classes, using a preregistered evaluation protocol. Record human active minutes and interventions per accepted task, elapsed time, PR/CI/review cycles, compute and model costs, correctness defects, reopened tasks, false-ready decisions, scope violations, archival completeness and reproducibility. Report denominators, distributions, failure cases and uncertainty; do not equate PR count or throughput with scientific progress. Include negative results and tasks requiring expert judgment. Define quantitative acceptance thresholds and sample size before running a pilot; zero observed violations is not proof of zero risk.

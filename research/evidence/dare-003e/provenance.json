@@ -1,0 +1,95 @@
+{
+  "source_commit": "7e9df3b0a8d5e86e94e2370b1472faaf831dd6f7",
+  "execution": "local container, connector text transcribed and verified against Git blob identities before execution",
+  "python": "3.13.5",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "dare",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "sources": {
+    "dare/capture_integrity.py": {
+      "git_blob_sha1": "f6a9faf277c17bba5c16813b253348f144ac0f84",
+      "sha256": "74f9fd737262f4a4ff2a382ce8ea79c58df5e5648ca7ca68ab26826c4ff0844a"
+    },
+    "dare/checkpoint.py": {
+      "git_blob_sha1": "175565cc93428b1ceaf19fcfbf6a8bae96e74c3e",
+      "sha256": "ac384d702346a2ed8c049cfa8f1ffcfa8e225405f45e9e505d112ea402c114ff"
+    },
+    "dare/evidence_gate.py": {
+      "git_blob_sha1": "3131c6c6a7b0c78f2f215cf3785290a94f9dd869",
+      "sha256": "75238ee551cf5a3e372a1eb60f1b1ad13f14ac1f7b6cc6142e1c8b1fd299cf3a"
+    },
+    "dare/guarded_gate.py": {
+      "git_blob_sha1": "27b4095286dd2e833e6aa918ec6fba7eda36a016",
+      "sha256": "0ddc5063408dd95aee9a45f52031675e7df25e5ffb1218c2387f82d082796d1c"
+    },
+    "dare/persistence.py": {
+      "git_blob_sha1": "4f5ef691fb94006ded203aa3ef70c1da945d6465",
+      "sha256": "620aefa7253119835d3e53dbf8b41720203fca32e8ed0564caa1fbb542144d38"
+    },
+    "dare/prospective_capture.py": {
+      "git_blob_sha1": "6a1a8f4071fbfedc13176d955286342d29294812",
+      "sha256": "193778ee14ea6f712177c41c81566ed32b19c0c695ca1089804377c846a5aee9"
+    },
+    "dare/replay_dataset.py": {
+      "git_blob_sha1": "8f8100f79ef4e4b28bc3049a8822ad104ccac016",
+      "sha256": "14fc7e5e17dee88680e28d677d39492beff5a3d271feec8a5880b1e15eabbc7c"
+    },
+    "dare/shadow_advisor.py": {
+      "git_blob_sha1": "aee51030553692d7d3c5d91d46cf538f88b72fdd",
+      "sha256": "37341c3badc9999a8754ff6192d41c489d9d9ff400ea56fb3907c032601f6af7"
+    },
+    "dare/state_machine.py": {
+      "git_blob_sha1": "19cd1b05dc962de95c677a8d72ee0c9d25a7a5db",
+      "sha256": "5f9ac1d36b8298bd864451d5e00a0cf266f2ec6d40d24090ad1245e1f17bf88e"
+    },
+    "dare/test_capture_integrity.py": {
+      "git_blob_sha1": "fd78481a05dd6abfedbc23aaa7262040ec6ce1f6",
+      "sha256": "d3f4e58b28b9f898ae431312146ed0cba4a2394f26dbf7c20ca3314aa163b12f"
+    },
+    "dare/test_checkpoint.py": {
+      "git_blob_sha1": "b9ddeef1da866710cb862fe65818332299bae599",
+      "sha256": "29aff2268f65d59ec264733a4aedc5ef77d8d013402ecf974e1e598f9fb21594"
+    },
+    "dare/test_evidence_gate.py": {
+      "git_blob_sha1": "94cf9a84f8b89a60fd290386d8c200d51ab1fcbb",
+      "sha256": "4dd03ba49716b4e46da1b6bd686a976b428948b7c0f6ac49d003f33c1c427538"
+    },
+    "dare/test_guarded_gate.py": {
+      "git_blob_sha1": "b4e052cd425546d8e1d310de0b921c941471ad27",
+      "sha256": "c9f8da7a71d590b92a82a6fc73e66470580440b586e18c93c15cff85da0c3a23"
+    },
+    "dare/test_persistence.py": {
+      "git_blob_sha1": "d1d70b084610fe851a82922ade70d52e6f921a13",
+      "sha256": "4238183f2c3ec6c0174af5263e5c38098710eac003ccc60e7c52f011ca2b573f"
+    },
+    "dare/test_prospective_capture.py": {
+      "git_blob_sha1": "cb14c705a86b01ce6afd8ae32171a2ec74956f49",
+      "sha256": "e1489e11c0362b2b8b1b42a9bd57387fee24a817dcbb6c610e7959d56a060945"
+    },
+    "dare/test_replay_dataset.py": {
+      "git_blob_sha1": "912a136311cd2276c8e41a9d0b189900b48f3b87",
+      "sha256": "6ce6746644f8afa1da9ceda2344d8f9cbb6588c24ecbd36706f5f96b7877f9c4"
+    },
+    "dare/test_shadow_advisor.py": {
+      "git_blob_sha1": "43c6ce30135e362c4b5b0cd0d4c1b2aa3776d58c",
+      "sha256": "ef2fa32c4966b8a430885856a2b139a3d60af9f0ed7731c20f923e5b00736db9"
+    },
+    "dare/test_state_machine.py": {
+      "git_blob_sha1": "d46ee646341924d8fedd60a8d08684e69404e5f5",
+      "sha256": "e910750ccb41ad1d0bd6d549400a60871454bb0837b0ca468afaf875f1e878f8"
+    }
+  },
+  "log": "full-100.log",
+  "log_sha256": "e72caf5fa71e6e8eaa2bf26c8659ad89a0f08125511fae6eca776f2e383ce12e",
+  "log_git_blob_sha1": "579e1c5871fccacb50dbd3a918aa3a9a9979b8f3"
+}

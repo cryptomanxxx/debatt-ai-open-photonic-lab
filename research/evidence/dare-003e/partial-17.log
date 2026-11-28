@@ -1,0 +1,22 @@
+test_bad_time (test_prospective_capture.ProspectiveTests.test_bad_time) ... ok
+test_candidate (test_prospective_capture.ProspectiveTests.test_candidate) ... ok
+test_cost_and_scope (test_prospective_capture.ProspectiveTests.test_cost_and_scope) ... ok
+test_deterministic (test_prospective_capture.ProspectiveTests.test_deterministic) ... ok
+test_secret_not_retained (test_prospective_capture.ProspectiveTests.test_secret_not_retained) ... ok
+test_unknown_preserved (test_prospective_capture.ProspectiveTests.test_unknown_preserved) ... ok
+test_wrong_repository (test_prospective_capture.ProspectiveTests.test_wrong_repository) ... ok
+test_block_cases (test_shadow_advisor.ShadowTests.test_block_cases) ... ok
+test_closed (test_shadow_advisor.ShadowTests.test_closed) ... ok
+test_failed_ci (test_shadow_advisor.ShadowTests.test_failed_ci) ... ok
+test_findings (test_shadow_advisor.ShadowTests.test_findings) ... ok
+test_missing_field (test_shadow_advisor.ShadowTests.test_missing_field) ... ok
+test_pending_ci (test_shadow_advisor.ShadowTests.test_pending_ci) ... ok
+test_pending_review (test_shadow_advisor.ShadowTests.test_pending_review) ... ok
+test_ready (test_shadow_advisor.ShadowTests.test_ready) ... ok
+test_replay (test_shadow_advisor.ShadowTests.test_replay) ... ok
+test_time (test_shadow_advisor.ShadowTests.test_time) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.002s
+
+OK

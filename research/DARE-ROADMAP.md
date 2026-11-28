@@ -1,5 +1,7 @@
 # DARE · Debatt-AI Autonomous Research Engine
 
+**Evidence status:** [Integrity notice](EVIDENCE-INTEGRITY-NOTICE.md) supersedes previous local execution claims; offline qualification suspended pending reproducible verification. [DARE-003D](DARE-003D.md) prepares offline candidate capture only.
+
 Date: 2026-11-28. Status: initial [DARE-001 audit](DARE-001.md) recorded; live readiness gate remains blocked; no autonomous execution, deployment, paid service or change to repository permissions authorized by this document.
 
 ## Motivation and research question

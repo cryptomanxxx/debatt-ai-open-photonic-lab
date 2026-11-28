@@ -30,3 +30,5 @@ No new live status retrieval was performed for this inventory. Do not reconstruc
 ## Next step
 
 Verify software tests, implement raw-byte integrity validation against a local manifest, establish actual capture timestamps and field mappings, and freeze eligible records and independent reference labels before evaluation. No live reader, polling, agent launch, mutations or paid services. Stage B remains separately authorized only. Zero Additional Cost Policy unchanged.
+
+[DARE-003C](DARE-003C.md) records the verified 85-test baseline, 93-test candidate run and seven-candidate inventory. Real evaluation remains pending.

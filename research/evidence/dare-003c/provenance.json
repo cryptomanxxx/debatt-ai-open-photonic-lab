@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-28",
+  "execution": "isolated local Linux container",
+  "python": "3.13.5",
+  "command": "python -m unittest discover -v",
+  "working_directory": "isolated /tmp/dare003c containing the Python source and test files",
+  "baseline": {
+    "source_commit": "63e82fa859aff0ce85544ef077ba809d261b5512",
+    "source_git_blob_sha1": {
+      "dare/checkpoint.py": "175565cc93428b1ceaf19fcfbf6a8bae96e74c3e",
+      "dare/evidence_gate.py": "3131c6c6a7b0c78f2f215cf3785290a94f9dd869",
+      "dare/guarded_gate.py": "27b4095286dd2e833e6aa918ec6fba7eda36a016",
+      "dare/persistence.py": "4f5ef691fb94006ded203aa3ef70c1da945d6465",
+      "dare/replay_dataset.py": "8f8100f79ef4e4b28bc3049a8822ad104ccac016",
+      "dare/shadow_advisor.py": "aee51030553692d7d3c5d91d46cf538f88b72fdd",
+      "dare/state_machine.py": "19cd1b05dc962de95c677a8d72ee0c9d25a7a5db",
+      "dare/test_checkpoint.py": "b9ddeef1da866710cb862fe65818332299bae599",
+      "dare/test_evidence_gate.py": "94cf9a84f8b89a60fd290386d8c200d51ab1fcbb",
+      "dare/test_guarded_gate.py": "b4e052cd425546d8e1d310de0b921c941471ad27",
+      "dare/test_persistence.py": "d1d70b084610fe851a82922ade70d52e6f921a13",
+      "dare/test_replay_dataset.py": "912a136311cd2276c8e41a9d0b189900b48f3b87",
+      "dare/test_shadow_advisor.py": "43c6ce30135e362c4b5b0cd0d4c1b2aa3776d58c",
+      "dare/test_state_machine.py": "d46ee646341924d8fedd60a8d08684e69404e5f5"
+    },
+    "tests": 85,
+    "passed": 85,
+    "exit_code": 0,
+    "elapsed_seconds": 0.095,
+    "log": "baseline-85.log",
+    "log_sha256": "55f4f75abdc0dacf58783fa01cc594ecc894c24e75b5d6caa00e8a67c6a99e76",
+    "log_git_blob_sha1": "69d40a35200538e9f3d1c567422b4b1322ef808d"
+  },
+  "candidate": {
+    "source_commit": "331c9e089cc12b451334cfb25bea909f00f426d8",
+    "additional_source_git_blob_sha1": {
+      "dare/capture_integrity.py": "f6a9faf277c17bba5c16813b253348f144ac0f84",
+      "dare/test_capture_integrity.py": "fd78481a05dd6abfedbc23aaa7262040ec6ce1f6"
+    },
+    "tests": 93,
+    "passed": 93,
+    "exit_code": 0,
+    "elapsed_seconds": 0.085,
+    "log": "candidate-93.log",
+    "log_sha256": "66bdb8a71b7d98ec516d440281999cc42aba9fdc40dcb4dbe49e03f7ded30952",
+    "log_git_blob_sha1": "3add31a4306640adbb901962287db7b89352c95c"
+  },
+  "verification": "Local git hash-object matched twelve archived DARE-003A source hashes, both fetched DARE-003B source hashes and both new DARE-003C branch hashes. Archived log Git blob hashes checked against actual local log files.",
+  "limitations": "Synthetic software tests only; neither historical study nor live integration was executed."
+}

@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "repository": "cryptomanxxx/debatt-ai-open-photonic-lab",
+  "roadmap": "research/DARE-ROADMAP.md",
+  "asOf": "2026-11-28",
+  "basisRevision": "18ca96775fada1f24d0f467ca58269392a171433",
+  "kind": "maintainer_status_snapshot",
+  "liveExecution": "not_authorized",
+  "incrementalBudget": {
+    "currency": "SEK",
+    "maximum": 0,
+    "actual": null
+  },
+  "phases": [
+    {
+      "id": "DARE-001",
+      "title": "Baseline and capability audit",
+      "dependsOn": [],
+      "development": "documented",
+      "gate": "blocked",
+      "scientificAcceptance": "not_assessed",
+      "evidence": [
+        {
+          "path": "research/DARE-001.md",
+          "kind": "audit",
+          "status": "documented"
+        }
+      ],
+      "blockers": [
+        "Account-specific permissions, included capacity, hosting and billing not verified."
+      ]
+    },
+    {
+      "id": "DARE-002",
+      "title": "Offline state machine",
+      "dependsOn": [],
+      "development": "implemented",
+      "gate": "review_required",
+      "scientificAcceptance": "not_assessed",
+      "evidence": [
+        {
+          "path": "research/DARE-002-QUALIFICATION.md",
+          "kind": "qualification",
+          "status": "superseded"
+        },
+        {
+          "path": "research/DARE-003E.md",
+          "kind": "offline_test_report",
+          "status": "reported"
+        },
+        {
+          "path": "research/EVIDENCE-INTEGRITY-NOTICE.md",
+          "kind": "integrity_notice",
+          "status": "documented"
+        }
+      ],
+      "blockers": [
+        "Scoped offline requalification requires explicit recorded acceptance; independent reproduction outstanding."
+      ]
+    },
+    {
+      "id": "DARE-003",
+      "title": "Read-only shadow orchestration",
+      "dependsOn": [
+        "DARE-001",
+        "DARE-002"
+      ],
+      "development": "in_progress",
+      "gate": "blocked",
+      "scientificAcceptance": "not_assessed",
+      "evidence": [
+        {
+          "path": "research/DARE-003-PROTOCOL.md",
+          "kind": "protocol",
+          "status": "documented"
+        },
+        {
+          "path": "research/DARE-003D.md",
+          "kind": "offline_candidate_capture",
+          "status": "documented"
+        },
+        {
+          "path": "research/DARE-003E.md",
+          "kind": "offline_test_report",
+          "status": "reported"
+        }
+      ],
+      "blockers": [
+        "Qualified real observations: zero in the documented inventory; independent reference labels missing.",
+        "Live collection requires separate approval and verified included capacity."
+      ]
+    },
+    {
+      "id": "DARE-004",
+      "title": "Human-gated PR lifecycle",
+      "dependsOn": [
+        "DARE-003"
+      ],
+      "development": "planned",
+      "gate": "not_evaluated",
+      "scientificAcceptance": "not_assessed",
+      "evidence": [],
+      "blockers": [
+        "Prior phase gate and separate scope approval required."
+      ]
+    },
+    {
+      "id": "DARE-005",
+      "title": "Bounded autonomous merge pilot",
+      "dependsOn": [
+        "DARE-004"
+      ],
+      "development": "planned",
+      "gate": "not_evaluated",
+      "scientificAcceptance": "not_assessed",
+      "evidence": [],
+      "blockers": [
+        "Prior phase gate and separate scope approval required."
+      ]
+    },
+    {
+      "id": "DARE-006",
+      "title": "Roadmap execution",
+      "dependsOn": [
+        "DARE-005"
+      ],
+      "development": "planned",
+      "gate": "not_evaluated",
+      "scientificAcceptance": "not_assessed",
+      "evidence": [],
+      "blockers": [
+        "Prior phase gate and separate scope approval required."
+      ]
+    },
+    {
+      "id": "DARE-007",
+      "title": "Scientific audit and expansion",
+      "dependsOn": [
+        "DARE-006"
+      ],
+      "development": "planned",
+      "gate": "not_evaluated",
+      "scientificAcceptance": "not_assessed",
+      "evidence": [],
+      "blockers": [
+        "Prior phase gate and separate scope approval required."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+test_archive_gate (test_state_machine.PolicyTests.test_archive_gate) ... ok
+test_correction (test_state_machine.PolicyTests.test_correction) ... ok
+test_cost_restart (test_state_machine.PolicyTests.test_cost_restart) ... ok
+test_cycle (test_state_machine.PolicyTests.test_cycle) ... ok
+test_dispatch (test_state_machine.PolicyTests.test_dispatch) ... ok
+test_exhausted (test_state_machine.PolicyTests.test_exhausted) ... ok
+test_human_merge_only (test_state_machine.PolicyTests.test_human_merge_only) ... ok
+test_lease (test_state_machine.PolicyTests.test_lease) ... ok
+test_missing_dependency (test_state_machine.PolicyTests.test_missing_dependency) ... ok
+test_new_head (test_state_machine.PolicyTests.test_new_head) ... ok
+test_paid_fallback (test_state_machine.PolicyTests.test_paid_fallback) ... ok
+test_replay (test_state_machine.PolicyTests.test_replay) ... ok
+test_retry_limit (test_state_machine.PolicyTests.test_retry_limit) ... ok
+test_scope (test_state_machine.PolicyTests.test_scope) ... ok
+test_skipped_ci (test_state_machine.PolicyTests.test_skipped_ci) ... ok
+test_stale_review (test_state_machine.PolicyTests.test_stale_review) ... ok
+test_stop_restart (test_state_machine.PolicyTests.test_stop_restart) ... ok
+test_unknown_cost (test_state_machine.PolicyTests.test_unknown_cost) ... ok
+test_unresolved_threads (test_state_machine.PolicyTests.test_unresolved_threads) ... ok
+test_unverified_cost (test_state_machine.PolicyTests.test_unverified_cost) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.001s
+
+OK

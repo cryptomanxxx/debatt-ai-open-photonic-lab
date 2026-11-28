@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-28",
+  "execution": "isolated local Linux Python container",
+  "source_commit": "ea94673f72941d70f2510fdf0b34162362d1f8ab",
+  "source_git_blob_sha1": {
+    "dare/evidence_gate.py": "3131c6c6a7b0c78f2f215cf3785290a94f9dd869",
+    "dare/persistence.py": "4f5ef691fb94006ded203aa3ef70c1da945d6465",
+    "dare/state_machine.py": "19cd1b05dc962de95c677a8d72ee0c9d25a7a5db",
+    "dare/test_evidence_gate.py": "94cf9a84f8b89a60fd290386d8c200d51ab1fcbb",
+    "dare/test_persistence.py": "d1d70b084610fe851a82922ade70d52e6f921a13",
+    "dare/test_state_machine.py": "d46ee646341924d8fedd60a8d08684e69404e5f5"
+  },
+  "source_verification": "All six local sources matched fetched Git blob SHA using git hash-object.",
+  "python": "3.13.5",
+  "command": "python -m unittest discover -v",
+  "working_directory": "isolated directory containing six sources",
+  "exit_code": 0,
+  "tests": 51,
+  "passed": 51,
+  "log": "baseline-51.log",
+  "limitations": "Synthetic tests only, not a live safety or cost validation."
+}

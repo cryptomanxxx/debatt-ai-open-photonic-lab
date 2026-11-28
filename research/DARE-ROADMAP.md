@@ -22,6 +22,27 @@ DARE is cross-cutting infrastructure for OPA-W, OPA-M, OPA-G, OPVR, PFA and othe
 
 The current interaction pattern is predominantly level 2 with elements of level 3; this is a qualitative assessment, not an instrumented benchmark. Target level 4 within explicit boundaries. Level 5 is exploratory, not a commitment or prediction of scientific capability.
 
+## Zero Additional Cost Policy (mandatory)
+
+DARE must initially operate with a hard incremental monetary budget of SEK 0 beyond the existing ChatGPT Plus subscription. This policy applies to every phase, including implementation, review, CI, orchestration, storage and recovery. Existing hardware and electricity are not economically free: report resource use separately and do not assume additional local runtime or infrastructure is authorized.
+
+| Resource | Initial policy |
+| --- | --- |
+| ChatGPT Plus / Codex | Existing subscription only, within included usage limits; verify account eligibility and supported authentication before live use. |
+| OpenAI Symphony | Open-source candidate; no paid hosting or paid dependencies; verify version, license and operational requirements. |
+| OpenAI API | No billable API calls, API-key fallback, purchased credits or automatic top-ups. |
+| GitHub | Existing repository, Issues and Actions only where the actual account, runner, storage and artifact usage incur no additional charge. |
+| Codex review / Repo Autopilot | Existing included capabilities only; verify applicable quotas and dependencies. |
+| Hosting and external services | No new paid server, subscription, hardware purchase, paid tracker or trial that can convert to paid service. |
+
+Initial live pilot, if separately authorized: one implementation agent at a time; human-controlled merge; explicit runtime and retry limits; no paid fallback. Use supported subscription authentication only, without exporting credentials, circumventing quotas or assuming that Plus includes persistent hosting or unlimited Codex access. Symphony compatibility with the actual Plus account and repository is an open DARE-001 question, not a demonstrated capability.
+
+Before any live action, confirm that its execution path is included or free, that applicable limits are known, and that no automatic overage, top-up or paid fallback can occur. Unknown pricing, entitlement, remaining allowance or billing behavior blocks that action. Where supported, disable billing/overages and paid fallback at the provider level; a local budget variable alone is not sufficient. Record the evidence and date of verification without storing secrets.
+
+If included capacity is exhausted or unavailable, persist state and partial evidence safely, mark the task cost-blocked, and pause new execution and retries. Resume only when included capacity is confirmed available and existing authorization still applies; never switch accounts, providers, plans or billing modes to bypass limits. If no zero-additional-cost execution environment is available, retain offline/read-only research rather than deploy.
+
+DARE-001 must produce a dated capability, quota and cost matrix, including hosting, authentication, review and archival requirements; DARE-002 must test quota exhaustion, unknown billing state, disabled fallback and safe restart using mocks. Every later live gate must demonstrate enforcement of this policy and record incremental monetary cost separately from subscription, runtime and resource consumption. No agent may relax this policy. Any future nonzero budget requires an explicit human-approved roadmap amendment before expenditure; the present roadmap authorizes neither live execution nor paid services.
+
 ## Proposed architecture
 
 Human-approved roadmap → task registry / dependency graph → orchestrator → isolated implementation agent → GitHub PR → CI and separate review agent (e.g. Codex) → bounded correction loop → policy gate → authorized merge → evidence archive → next eligible task.
@@ -40,8 +61,8 @@ State model: proposed → authorized → ready → leased → implementing → P
 
 | Phase | Deliverable | Gate |
 | --- | --- | --- |
-| DARE-001 · Baseline and capability audit | Inventory existing GitHub Actions, repository rules, Codex review and Repo Autopilot capabilities; map current manual workflow and measure coordination effort. Compare external orchestration candidates including Symphony. | Confirm actual permissions, costs, event interfaces and gaps; no live writes or new paid calls. |
-| DARE-002 · Offline state machine | Mock PR/CI/review/archive events, task dependencies and bounded retry policy; define schema and threat model. | Deterministic replay; test duplicate/stale events, failures, restart, dependency cycles and stop behavior. No live credentials. |
+| DARE-001 · Baseline and capability audit | Inventory existing GitHub Actions, repository rules, Codex review and Repo Autopilot capabilities; map current manual workflow and measure coordination effort. Compare external orchestration candidates including Symphony. | Confirm actual permissions, costs, event interfaces and gaps; produce the Zero Additional Cost capability and quota matrix; no live writes or new paid calls. |
+| DARE-002 · Offline state machine | Mock PR/CI/review/archive events, task dependencies and bounded retry policy; define schema and threat model. | Deterministic replay; test duplicate/stale events, failures, restart, dependency cycles, quota exhaustion, unknown billing, disabled paid fallback and stop behavior. No live credentials. |
 | DARE-003 · Read-only shadow orchestration | Produce next-action recommendations on real or archived metadata, without mutations. | Compare recommendations with human decisions; no unauthorized actions; record false-ready and missed-blocker rates. |
 | DARE-004 · Human-gated PR lifecycle | Isolated pilot for explicitly approved low-risk tasks; implementation and correction proposals with human merge. | All required checks and independent review satisfied; recover from failures; archive original evidence; no bypass. |
 | DARE-005 · Bounded autonomous merge pilot | Separate opt-in policy for low-risk task classes, protected branch and explicit limits. | Verify latest-head checks, review and permissions; demonstrate stop, rollback/revert procedure and budget enforcement; zero unauthorized merges in pilot. |

@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-28",
+  "execution": "isolated local Linux Python container",
+  "source_commit": "899a825ada66a6b80f5a0d9251223f02c013266b",
+  "source_git_blob_sha1": {
+    "dare/persistence.py": "4f5ef691fb94006ded203aa3ef70c1da945d6465",
+    "dare/state_machine.py": "19cd1b05dc962de95c677a8d72ee0c9d25a7a5db",
+    "dare/test_persistence.py": "d1d70b084610fe851a82922ade70d52e6f921a13",
+    "dare/test_state_machine.py": "d46ee646341924d8fedd60a8d08684e69404e5f5"
+  },
+  "source_verification": "Reconstructed all four fetched sources locally; git hash-object matched each fetched blob SHA before execution.",
+  "python": "3.13.5",
+  "command": "python -m unittest discover -v",
+  "working_directory": "isolated directory containing four Python sources",
+  "exit_code": 0,
+  "tests": 35,
+  "passed": 35,
+  "log": "baseline-35.log",
+  "limitations": "Synthetic software tests only; no provider, concurrent execution, or live readiness validation."
+}

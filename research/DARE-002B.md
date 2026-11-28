@@ -1,6 +1,6 @@
 # DARE-002B · Validation and persistence
 
-Date: 2026-11-28. Initial baseline executed: 20/20 tests passed. New persistence and archive fixtures submitted; their execution evidence is pending. No live readiness release.
+Date: 2026-11-28. Initial baseline executed: 20/20 tests passed. New persistence and archive fixtures submitted; all 35 baseline and persistence tests subsequently passed in [DARE-002C](DARE-002C.md). No live readiness release.
 
 ## Original baseline evidence
 
@@ -13,5 +13,7 @@ Date: 2026-11-28. Initial baseline executed: 20/20 tests passed. New persistence
 [15 additional fixtures](../dare/test_persistence.py) cover round-trip, persistent stop/quota, corrupt/missing state, malformed type, duplicate key, failed replacement, inconsistent archive state and integrity checks. Run `python -m unittest discover -s dare -p 'test_*.py' -v` in an authorized offline environment; archive output and revision before claiming their results.
 
 ## Limits and next step
+
+[DARE-002C](DARE-002C.md) records the verified 35-test run and initial evidence gate.
 
 Single trusted writer and static trusted fixture directory only; no concurrent lock, rollback protection, external event authenticity, actual recovery supervisor or cryptographic manifest authentication. The helper does not enumerate unexpected files in the directory, and does not verify ancestor symlinks or prevent filesystem races. It checks declared required files only. It is not yet wired to the decision engine's archive flag. A directory fsync failure after replacement may leave the new snapshot visible; stop on ambiguous persistence outcomes. Linux/POSIX local filesystem semantics assumed; no cross-platform crash guarantee. No proof of power-loss recovery. Next: execute and archive new tests, bind archive evidence to task/run/head, enforce freshness and complete required checks, and implement lease/retry accounting. Full DARE-002 gate remains open; no DARE-003/live authorization. Zero Additional Cost Policy unchanged.

@@ -1,6 +1,6 @@
 # DARE-002D · Adversarial audit and recovery
 
-Date: 2026-11-28. Status: 51/51 baseline tests passed; nine additional fixtures submitted, execution pending. No live authorization.
+Date: 2026-11-28. Status: 51/51 baseline tests passed; nine additional fixtures submitted, all 60 tests subsequently passed in [DARE-002E](DARE-002E.md). No live authorization.
 
 ## Baseline evidence
 

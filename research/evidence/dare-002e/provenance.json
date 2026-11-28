@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-28",
+  "execution": "isolated local Linux container",
+  "source_commit": "5f9f796f5143ca036d8361374657c57067738dd5",
+  "source_git_blob_sha1": {
+    "dare/checkpoint.py": "175565cc93428b1ceaf19fcfbf6a8bae96e74c3e",
+    "dare/evidence_gate.py": "3131c6c6a7b0c78f2f215cf3785290a94f9dd869",
+    "dare/guarded_gate.py": "27b4095286dd2e833e6aa918ec6fba7eda36a016",
+    "dare/persistence.py": "4f5ef691fb94006ded203aa3ef70c1da945d6465",
+    "dare/state_machine.py": "19cd1b05dc962de95c677a8d72ee0c9d25a7a5db",
+    "dare/test_checkpoint.py": "b9ddeef1da866710cb862fe65818332299bae599",
+    "dare/test_evidence_gate.py": "94cf9a84f8b89a60fd290386d8c200d51ab1fcbb",
+    "dare/test_guarded_gate.py": "b4e052cd425546d8e1d310de0b921c941471ad27",
+    "dare/test_persistence.py": "d1d70b084610fe851a82922ade70d52e6f921a13",
+    "dare/test_state_machine.py": "d46ee646341924d8fedd60a8d08684e69404e5f5"
+  },
+  "source_verification": "All ten local files matched fetched Git blob hashes using git hash-object.",
+  "python": "3.13.5",
+  "command": "python -m unittest discover -v",
+  "working_directory": "isolated directory containing ten Python sources",
+  "exit_code": 0,
+  "tests": 66,
+  "passed": 66,
+  "elapsed_seconds": 0.094,
+  "log": "baseline-66.log",
+  "limitations": "Offline synthetic tests only; no live cost or safety validation."
+}

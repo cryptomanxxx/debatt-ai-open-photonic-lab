@@ -72,6 +72,10 @@ independent-laser training proxy is a numerical reference, not a validated chip.
 
 Eight numerical experiments connect complex scattering, pinned PDK models, a 4×4 SVD core, coherent I/Q interface and partial system accounting. The frozen single-carrier reference passes a provisional error screen; multi-carrier WDM does not. No fabricated chip, measured speed or energy advantage is established. Physical component and geometry validation are the next proposed priorities.
 
+## Autonomous research infrastructure (planned)
+
+[DARE research roadmap](research/DARE-ROADMAP.md) investigates bounded AI execution of human-approved research plans through GitHub PRs, CI, independent review and permanent evidence archival. Existing scientific gates and repository permissions remain unchanged; no autonomous execution or merge is authorized.
+
 ## Roadmap
 
 See the [prioritized photonic computing research backlog](PHOTONIC_RESEARCH_ROADMAP.md)

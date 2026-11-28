@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-28",
+  "execution": "isolated local Linux container",
+  "source_commit": "bcce3383657ad4b0bad74a6984fc5663b7c9b5cc",
+  "base_commit": "ecce0da179a0333b8134898c5390537e65264494",
+  "source_git_blob_sha1": {
+    "dare/checkpoint.py": "175565cc93428b1ceaf19fcfbf6a8bae96e74c3e",
+    "dare/evidence_gate.py": "3131c6c6a7b0c78f2f215cf3785290a94f9dd869",
+    "dare/guarded_gate.py": "27b4095286dd2e833e6aa918ec6fba7eda36a016",
+    "dare/persistence.py": "4f5ef691fb94006ded203aa3ef70c1da945d6465",
+    "dare/shadow_advisor.py": "aee51030553692d7d3c5d91d46cf538f88b72fdd",
+    "dare/state_machine.py": "19cd1b05dc962de95c677a8d72ee0c9d25a7a5db",
+    "dare/test_checkpoint.py": "b9ddeef1da866710cb862fe65818332299bae599",
+    "dare/test_evidence_gate.py": "94cf9a84f8b89a60fd290386d8c200d51ab1fcbb",
+    "dare/test_guarded_gate.py": "b4e052cd425546d8e1d310de0b921c941471ad27",
+    "dare/test_persistence.py": "d1d70b084610fe851a82922ade70d52e6f921a13",
+    "dare/test_shadow_advisor.py": "43c6ce30135e362c4b5b0cd0d4c1b2aa3776d58c",
+    "dare/test_state_machine.py": "d46ee646341924d8fedd60a8d08684e69404e5f5"
+  },
+  "source_verification": "git hash-object matched all ten prior baseline hashes and both new fetched branch blob hashes",
+  "python": "3.13.5",
+  "command": "python -m unittest discover -v",
+  "working_directory": "isolated directory containing twelve Python sources",
+  "exit_code": 0,
+  "tests": 76,
+  "passed": 76,
+  "elapsed_seconds": 0.087,
+  "log": "shadow-76.log",
+  "limitations": "Synthetic software tests only; no real PR evaluation, provider adapter or live qualification."
+}

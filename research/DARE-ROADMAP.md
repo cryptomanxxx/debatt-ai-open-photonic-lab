@@ -100,6 +100,6 @@ These are research leads, not verified compatibility or performance claims for t
 
 ## Next proposed step
 
-[DARE-001](DARE-001.md) records the initial read-only audit, descriptive baseline, cost/permission matrix and unresolved live-readiness blockers. Next proposed step: DARE-002 mock-only deterministic state machine, subject to explicit approval; no live deployment or experiment dispatch. The roadmap alone authorizes neither execution of experiments nor autonomous merges.
+[DARE-001](DARE-001.md) records the initial read-only audit, descriptive baseline, cost/permission matrix and unresolved live-readiness blockers. [DARE-002](DARE-002.md) initial mock-only implementation and regression fixtures submitted; test evidence and full offline gate pending. No live deployment or experiment dispatch. The roadmap alone authorizes neither execution of experiments nor autonomous merges.
 
 Long-term objective: humans steer the science rather than every pull request, while agents execute approved work with transparent evidence and bounded authority.

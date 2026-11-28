@@ -1,6 +1,6 @@
 # DARE-002E · Recovery integrity and offline qualification
 
-Date: 2026-11-28. Status: 60/60 existing tests verified; checkpoint implementation and six new fixtures pending execution. Offline exit gate remains open.
+Date: 2026-11-28. Status: 60/60 existing tests verified; checkpoint implementation and all 66 fixtures subsequently verified in [DARE-002 qualification](DARE-002-QUALIFICATION.md). Operational readiness remains blocked.
 
 ## Baseline evidence
 

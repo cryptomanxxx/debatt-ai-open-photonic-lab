@@ -1,6 +1,6 @@
 # DARE · Debatt-AI Autonomous Research Engine
 
-Date: 2026-11-28. Status: proposed research infrastructure roadmap; no autonomous execution, deployment, paid service or change to repository permissions authorized by this document.
+Date: 2026-11-28. Status: initial [DARE-001 audit](DARE-001.md) recorded; live readiness gate remains blocked; no autonomous execution, deployment, paid service or change to repository permissions authorized by this document.
 
 ## Motivation and research question
 
@@ -69,7 +69,7 @@ State model: proposed → authorized → ready → leased → implementing → P
 | DARE-006 · Roadmap execution | Execute a bounded approved dependency chain across tasks; daily or run-level research report. | Compare against manual baseline, verify all archives and scientific gates; stop on ambiguity, new hypotheses outside scope or exhausted budgets. |
 | DARE-007 · Scientific audit and expansion | Independent replication, adversarial tests and controlled evaluation across photonic research workflows. | Human acceptance of scientific methodology and claims; demonstrate reproducibility and document limitations before expanding autonomy. |
 
-All phases are planned. Passing a gate requires recorded evidence and explicit approval of subsequent live capability or scope expansion.
+DARE-001 initial read-only assessment is documented; remaining gates are planned. Passing a gate requires recorded evidence and explicit approval of subsequent live capability or scope expansion.
 
 ## Evaluation protocol
 
@@ -100,6 +100,6 @@ These are research leads, not verified compatibility or performance claims for t
 
 ## Next proposed step
 
-DARE-001: read-only audit and baseline of the existing workflow, with a capability/permission matrix and a minimal offline pilot proposal. The roadmap alone authorizes neither execution of experiments nor autonomous merges.
+[DARE-001](DARE-001.md) records the initial read-only audit, descriptive baseline, cost/permission matrix and unresolved live-readiness blockers. Next proposed step: DARE-002 mock-only deterministic state machine, subject to explicit approval; no live deployment or experiment dispatch. The roadmap alone authorizes neither execution of experiments nor autonomous merges.
 
 Long-term objective: humans steer the science rather than every pull request, while agents execute approved work with transparent evidence and bounded authority.

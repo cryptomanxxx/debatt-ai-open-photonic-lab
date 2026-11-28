@@ -1,6 +1,6 @@
 # DARE-002 · Offline state machine (initial prototype)
 
-Date: 2026-11-28. Status: initial implementation and 20 synthetic regression tests submitted for review; execution evidence pending. Live readiness remains blocked per [DARE-001](DARE-001.md).
+Date: 2026-11-28. Status: initial implementation and 20 synthetic regression tests submitted for review; original 20-test execution evidence now archived in [DARE-002B](DARE-002B.md); new persistence fixtures pending execution. Live readiness remains blocked per [DARE-001](DARE-001.md).
 
 ## Scope
 
@@ -20,6 +20,8 @@ Task observations are synthetic trusted snapshots with monotonically increasing 
 JSON snapshot/restore demonstrates preservation of modeled state across a simulated restart; it is not durable atomic storage, a trusted external event log or a concurrency lock. Archive verification is a synthetic Boolean, not a byte-level manifest validator. Scope approval and cost verification are synthetic inputs, not verified permissions, freshness, or provider billing controls. No action may be inferred authorized by these labels. The initial prototype deliberately treats skipped CI as not passed; applicability, complete check inventory, evidence freshness, event authenticity, typed schema, atomic persistence and recovery require further implementation and tests. No real-time runtime limits, lease expiry, actual file scope verification or orchestration integration yet.
 
 ## Acceptance and follow-up
+
+[DARE-002B](DARE-002B.md) records the verified original baseline and initial offline persistence and archive integrity implementation.
 
 Require deterministic replay and all specified tests passing before claiming the initial software screen. The full DARE-002 gate remains open: add explicit CI applicability/completeness and trusted evidence freshness, lease lifecycle and retry accounting, strict schema validation, archive manifest checks, durable state and more adversarial fixtures. Preserve original test evidence. DARE-003 and all live execution remain unauthorized by this document.
 

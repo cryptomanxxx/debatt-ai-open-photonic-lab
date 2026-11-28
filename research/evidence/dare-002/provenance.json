@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-28",
+  "execution": "local isolated Python container, not GitHub Actions",
+  "source_commit": "6b81d858b8e3c95e5566aac47f98b5a0732527a1",
+  "source_git_blob_sha1": {
+    "dare/state_machine.py": "19cd1b05dc962de95c677a8d72ee0c9d25a7a5db",
+    "dare/test_state_machine.py": "d46ee646341924d8fedd60a8d08684e69404e5f5"
+  },
+  "source_verification": "Locally reconstructed files matched both Git blob hashes before execution",
+  "python": "Python 3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "command": "python -m unittest discover -v",
+  "working_directory": "isolated directory containing exactly the two baseline Python sources",
+  "tests": 20,
+  "passed": 20,
+  "log": "baseline.log",
+  "limitations": "Only baseline fixtures executed; new persistence tests not yet executed. No provider or live readiness validation."
+}
